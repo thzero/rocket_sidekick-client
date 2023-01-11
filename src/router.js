@@ -60,6 +60,27 @@ const routes = [
 		]
 	},
 	{
+		path: '/content/info/highPower',
+		component: () => import(/* webpackPrefetch: true */ /* webpackChunkName: "group-layouts" */ './layouts/MainLayout.vue'),
+		children: [
+			{
+				// path: '',
+				// name: 'content_info_highPower',
+				// component: () => import(/* webpackPrefetch: true */ /* webpackChunkName: "group-layouts" */ './layouts/ContentLayout.vue'),
+				// children: [
+				// 	{
+						path: '',
+						name: 'content_info_highPower',
+						component: () => import(/* webpackPrefetch: true */ /* webpackChunkName: "group-content-info" */ './components/content/info/HighPower.vue'),
+						meta: {
+							requiresAuth: false
+						}
+				// 	}
+				// ]
+			}
+		]
+	},
+	{
 		path: '/content/links',
 		component: () => import(/* webpackPrefetch: true */ /* webpackChunkName: "group-layouts" */ './layouts/MainLayout.vue'),
 		children: [
