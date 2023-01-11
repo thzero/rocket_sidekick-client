@@ -44,12 +44,12 @@ const routes = [
 		children: [
 			{
 				// path: '',
-				// name: 'epoxy',
+				// name: 'content_info_epoxy',
 				// component: () => import(/* webpackPrefetch: true */ /* webpackChunkName: "group-layouts" */ './layouts/ContentLayout.vue'),
 				// children: [
 				// 	{
 						path: '',
-						name: 'content_epoxy',
+						name: 'content_info_epoxy',
 						component: () => import(/* webpackPrefetch: true */ /* webpackChunkName: "group-content-info" */ './components/content/info/Epoxy.vue'),
 						meta: {
 							requiresAuth: false
@@ -65,12 +65,12 @@ const routes = [
 		children: [
 			{
 				// path: '',
-				// name: 'epoxy',
+				// name: 'content_links',
 				// component: () => import(/* webpackPrefetch: true */ /* webpackChunkName: "group-layouts" */ './layouts/ContentLayout.vue'),
 				// children: [
 				// 	{
 						path: '',
-						name: 'content_epoxy',
+						name: 'content_links',
 						component: () => import(/* webpackPrefetch: true */ /* webpackChunkName: "group-content-info" */ './components/content/Links.vue'),
 						meta: {
 							requiresAuth: false
