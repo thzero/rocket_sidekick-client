@@ -18,7 +18,7 @@
 				>
 					<template v-slot:default>
 						<v-row dense>
-							<v-col cols="12" sm="6" >
+							<v-col cols="12" sm="6">
 								<table style="width: 100%">
 									<tr><td>
 										<VNumberFieldWithValidation
@@ -42,7 +42,7 @@
 									</td></tr>
 								</table>
 							</v-col>
-							<v-col cols="12" sm="6" >
+							<v-col cols="12" sm="6">
 								<VNumberFieldWithValidation
 									ref="maxLaunchRodTimeRef"
 									vid="maxLaunchRodTime"
@@ -67,7 +67,7 @@
 									</v-col>
 								</v-row>
 								<v-row dense>
-									<v-col cols="12" sm="6">
+									<v-col cols="12" md="6">
 										<VNumberFieldWithValidation
 											ref="thrustInitial1Ref"
 											vid="thrustInitial1"
@@ -77,7 +77,7 @@
 											:placeholder="$t('forms.content.tools.thrust2Weight.thrust_initial_hint')"
 										/>
 									</v-col>
-									<v-col cols="12" sm="6">
+									<v-col cols="12" md="6">
 										<VNumberFieldWithValidation
 											ref="thrustPeak1Ref"
 											vid="thrustPeak1"
@@ -87,7 +87,7 @@
 											:placeholder="$t('forms.content.tools.thrust2Weight.thrust_peak_hint')"
 										/>
 									</v-col>
-									<v-col cols="12" sm="6">
+									<v-col cols="12" md="6">
 										<VNumberFieldWithValidation
 											ref="thrustAverage1Ref"
 											vid="thrustAverage1"
@@ -97,15 +97,26 @@
 											:placeholder="$t('forms.content.tools.thrust2Weight.thrust_average_hint')"
 										/>
 									</v-col>
-									<v-col cols="12" sm="6">
-										<VTextField
-											ref="motorRef"
-											vid="motor"
-											v-model="motor"
-											:readonly="true"
-											:label="$t('forms.content.tools.thrust2Weight.motor')"
-											:placeholder="$t('forms.content.tools.thrust2Weight.motor_hint')"
-										/>
+									<v-col cols="12" lg="6">
+										<table><tr><td style="width: 100%;">
+											<VTextField
+												ref="motorLookup1Ref"
+												vid="motorLookup1"
+												v-model="motorLookup1"
+												:readonly="true"
+												:label="$t('forms.content.tools.thrust2Weight.motor')"
+												:placeholder="$t('forms.content.tools.thrust2Weight.motor_hint')"
+											/>
+										</td>
+										<td>
+											<v-btn
+												class="ml-2"
+												color="primary"
+												@click="clickMotorSearch(1)"
+											>
+												{{ $t('buttons.search') }}
+											</v-btn>
+										</td></tr></table>
 									</v-col>
 								</v-row>
 							</v-col>
@@ -123,7 +134,7 @@
 									</v-col>
 								</v-row>
 								<v-row dense>
-									<v-col cols="12" sm="6">
+									<v-col cols="12" md="6">
 										<VNumberFieldWithValidation
 											ref="thrustInitial2Ref"
 											vid="thrustInitial2"
@@ -134,7 +145,7 @@
 											:placeholder="$t('forms.content.tools.thrust2Weight.thrust_initial_hint')"
 										/>
 									</v-col>
-									<v-col cols="12" sm="6">
+									<v-col cols="12" md="6">
 										<VNumberFieldWithValidation
 											ref="thrustPeak2Ref"
 											vid="thrustPeak2"
@@ -145,7 +156,7 @@
 											:placeholder="$t('forms.content.tools.thrust2Weight.thrust_peak_hint')"
 										/>
 									</v-col>
-									<v-col cols="12" sm="6">
+									<v-col cols="12" md="6">
 										<VNumberFieldWithValidation
 											ref="thrustAverage2Ref"
 											vid="thrustAverage2"
@@ -156,16 +167,27 @@
 											:placeholder="$t('forms.content.tools.thrust2Weight.thrust_average_hint')"
 										/>
 									</v-col>
-									<!-- <v-col cols="12" sm="6">
-										<VTextField
-											ref="motorRef"
-											vid="motor"
-											v-model="motor"
-											:readonly="true"
-											:label="$t('forms.content.tools.thrust2Weight.motor')"
-											:placeholder="$t('forms.content.tools.thrust2Weight.motor_hint')"
-										/>
-									</v-col> -->
+									<v-col cols="12" lg="6">
+										<table><tr><td style="width: 100%;">
+											<VTextField
+												ref="motorLookup2Ref"
+												vid="motorLookup2"
+												v-model="motorLookup2"
+												:readonly="true"
+												:label="$t('forms.content.tools.thrust2Weight.motor')"
+												:placeholder="$t('forms.content.tools.thrust2Weight.motor_hint')"
+											/>
+										</td>
+										<td>
+											<v-btn
+												class="ml-2"
+												color="primary"
+												@click="clickMotorSearch(2)"
+											>
+												{{ $t('buttons.search') }}
+											</v-btn>
+										</td></tr></table>
+									</v-col>
 								</v-row>
 							</v-col>
 							<v-col cols="6">
@@ -182,7 +204,7 @@
 									</v-col>
 								</v-row>
 								<v-row dense>
-									<v-col cols="12" sm="6">
+									<v-col cols="12" md="6">
 										<VNumberFieldWithValidation
 											ref="thrustInitial3Ref"
 											vid="thrustInitial3"
@@ -193,7 +215,7 @@
 											:placeholder="$t('forms.content.tools.thrust2Weight.thrust_initial_hint')"
 										/>
 									</v-col>
-									<v-col cols="12" sm="6">
+									<v-col cols="12" md="6">
 										<VNumberFieldWithValidation
 											ref="thrustPeak3Ref"
 											vid="thrustPeak3"
@@ -204,7 +226,7 @@
 											:placeholder="$t('forms.content.tools.thrust2Weight.thrust_peak_hint')"
 										/>
 									</v-col>
-									<v-col cols="12" sm="6">
+									<v-col cols="12" md="6">
 										<VNumberFieldWithValidation
 											ref="thrustAverage3Ref"
 											vid="thrustAverage3"
@@ -215,16 +237,27 @@
 											:placeholder="$t('forms.content.tools.thrust2Weight.thrust_average_hint')"
 										/>
 									</v-col>
-									<!-- <v-col cols="12" sm="6">
-										<VTextField
-											ref="motorRef"
-											vid="motor"
-											v-model="motor"
-											:readonly="true"
-											:label="$t('forms.content.tools.thrust2Weight.motor')"
-											:placeholder="$t('forms.content.tools.thrust2Weight.motor_hint')"
-										/>
-									</v-col> -->
+									<v-col cols="12" lg="6">
+										<table><tr><td style="width: 100%;">
+											<VTextField
+												ref="motorLookup3Ref"
+												vid="motorLookup3"
+												v-model="motorLookup3"
+												:readonly="true"
+												:label="$t('forms.content.tools.thrust2Weight.motor')"
+												:placeholder="$t('forms.content.tools.thrust2Weight.motor_hint')"
+											/>
+										</td>
+										<td>
+											<v-btn
+												class="ml-2"
+												color="primary"
+												@click="clickMotorSearch(3)"
+											>
+												{{ $t('buttons.search') }}
+											</v-btn>
+										</td></tr></table>
+									</v-col>
 								</v-row>
 							</v-col>
 							<v-col cols="6">
@@ -241,7 +274,7 @@
 									</v-col>
 								</v-row>
 								<v-row dense>
-									<v-col cols="12" sm="6">
+									<v-col cols="12" md="6">
 										<VNumberFieldWithValidation
 											ref="thrustInitial4Ref"
 											vid="thrustInitial4"
@@ -252,7 +285,7 @@
 											:placeholder="$t('forms.content.tools.thrust2Weight.thrust_initial_hint')"
 										/>
 									</v-col>
-									<v-col cols="12" sm="6">
+									<v-col cols="12" md="6">
 										<VNumberFieldWithValidation
 											ref="thrustPeak4Ref"
 											vid="thrustPeak4"
@@ -263,7 +296,7 @@
 											:placeholder="$t('forms.content.tools.thrust2Weight.thrust_peak_hint')"
 										/>
 									</v-col>
-									<v-col cols="12" sm="6">
+									<v-col cols="12" md="6">
 										<VNumberFieldWithValidation
 											ref="thrustAverage4Ref"
 											vid="thrustAverage4"
@@ -274,21 +307,32 @@
 											:placeholder="$t('forms.content.tools.thrust2Weight.thrust_average_hint')"
 										/>
 									</v-col>
-									<!-- <v-col cols="12" sm="6">
-										<VTextField
-											ref="motorRef"
-											vid="motor"
-											v-model="motor"
-											:readonly="true"
-											:label="$t('forms.content.tools.thrust2Weight.motor')"
-											:placeholder="$t('forms.content.tools.thrust2Weight.motor_hint')"
-										/>
-									</v-col> -->
+									<v-col cols="12" lg="6">
+										<table><tr><td style="width: 100%;">
+											<VTextField
+												ref="motorLookup4Ref"
+												vid="motorLookup4"
+												v-model="motorLookup4"
+												:readonly="true"
+												:label="$t('forms.content.tools.thrust2Weight.motor')"
+												:placeholder="$t('forms.content.tools.thrust2Weight.motor_hint')"
+											/>
+										</td>
+										<td>
+											<v-btn
+												class="ml-2"
+												color="primary"
+												@click="clickMotorSearch(4)"
+											>
+												{{ $t('buttons.search') }}
+											</v-btn>
+										</td></tr></table>
+									</v-col>
 								</v-row>
 							</v-col>
 						</v-row>
 					</template>
-					<template v-slot:buttons_pre>
+					<!-- <template v-slot:buttons_pre>
 						<v-btn
 							class="mr-2"
 							color="primary"
@@ -296,7 +340,7 @@
 						>
 							{{ $t('buttons.search') }}
 						</v-btn>
-					</template>
+					</template> -->
 				</VFormControl>
 			</v-col>
 		</v-row>
@@ -449,12 +493,19 @@ export default {
 		const maxLaunchRodTime = ref(null);
 		const maxLaunchRodTimeDefault = ref(0.3);
 		const measurementUnitsWeightType = ref(Constants.MeasurementUnits.types.weight);
-		const motor = ref(null);
 		const motorData1 = ref(true);
 		const motorData2 = ref(false);
 		const motorData3 = ref(false);
 		const motorData4 = ref(false);
-		const motorId = ref(null);
+		const motorLookup1 = ref(null);
+		const motorLookup2 = ref(null);
+		const motorLookup3 = ref(null);
+		const motorLookup4 = ref(null);
+		const motorLookup1Id = ref(null);
+		const motorLookup2Id = ref(null);
+		const motorLookup3Id = ref(null);
+		const motorLookup4Id = ref(null);
+		const motorLookupSelection = ref(null);
 		const thrustAverage1 = ref(null);
 		const thrustAverage2 = ref(null);
 		const thrustAverage3 = ref(null);
@@ -530,7 +581,8 @@ export default {
 				return true;
 			});
 		};
-		const clickMotorSearch = async () => {
+		const clickMotorSearch = async (selection) => {
+			motorLookupSelection.value = selection;
 			await dialogMotorSearchRef.value.reset(correlationId());
 			dialogMotorSearchManager.value.open();
 		};
@@ -577,9 +629,19 @@ export default {
 		const resetForm = (correlationId) => {
 			resetFormI(correlationId, calculationResults, (correlationId) => {
 				mass.value = null;
+				// motorData1.value = false;
 				motorData2.value = false;
 				motorData3.value = false;
 				motorData4.value = false;
+				motorLookup1.value = null;
+				motorLookup2.value = null;
+				motorLookup3.value = null;
+				motorLookup4.value = null;
+				motorLookup1Id .value = null;
+				motorLookup2Id .value = null;
+				motorLookup3Id .value = null;
+				motorLookup4Id .value = null;
+				motorLookupSelection.value = null;
 				thrustAverage1.value = null;
 				thrustAverage2.value = null;
 				thrustAverage3.value = null;
@@ -593,27 +655,46 @@ export default {
 				thrustPeak3.value = null;
 				thrustPeak4.value = null;
 				maxLaunchRodTime.value = maxLaunchRodTimeDefault.value;
-				motor.value = null;
-				motorId .value= null;
 			});
 		};
 		const selectMotor = async (item)=> {
 			const correlationIdI = correlationId();
-
-			setNotify(correlationId, 'messages.thrust2Weight.motor.selected');
+			if (!motorLookupSelection.value)
+				return;
 
 			const response = await serviceStore.dispatcher.requestMotor(correlationIdI, item.motorId);
 			if (hasSucceeded(response)) {
 				initCalculationData(correlationIdI);
 				const response2 = await serviceToolsThrust2Weight.update(correlationIdI, response, calculationData);
 				if (hasSucceeded(response2)) {
-					motor.value = item.designation;
-					motorId.value = item.motorId;
+					let temp = motorLookup1;
+					let tempId = motorLookup1Id;
+					if (motorLookupSelection.value === 1) {
+						temp = motorLookup2.value;
+						tempId = motorLookup2Id.value;
+					}
+					else if (motorLookupSelection.value === 1) {
+						temp = motorLookup2.value;
+						tempId = motorLookup2Id.value;
+					}
+					else if (motorLookupSelection.value === 1) {
+						temp = motorLookup3.value;
+						tempId = motorLookup3Id.value;
+					}
+
+					temp.value = item.designation;
+					tempId.value = item.motorId;
+
 					calculationData.value = response2.results;
 					thrustAverage1.value = calculationData.value.thrustAverage;
 					thrustInitial1.value = calculationData.value.thrustInitial1;
 					thrustPeak.value = calculationData.value.thrustPeak;
+
+					setNotify(correlationId, 'messages.thrust2Weight.motor.selected');
+					return;
 				}
+
+				setNotify(correlationId, 'messages.thrust2Weight.motor.selected');
 			}
 			dialogMotorSearchManager.value.ok();
 		}
@@ -704,12 +785,19 @@ export default {
 			maxLaunchRodTime,
 			maxLaunchRodTimeDefault,
 			measurementUnitsWeightType,
-			motor,
 			motorData1,
 			motorData2,
 			motorData3,
 			motorData4,
-			motorId,
+			motorLookup1,
+			motorLookup2,
+			motorLookup3,
+			motorLookup4,
+			motorLookup1Id,
+			motorLookup2Id,
+			motorLookup3Id,
+			motorLookup4Id,
+			motorLookupSelection,
 			thrustAverage1,
 			thrustAverage2,
 			thrustAverage3,

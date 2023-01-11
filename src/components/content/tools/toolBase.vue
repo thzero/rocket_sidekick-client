@@ -1,8 +1,6 @@
 <script>
 import { computed, onMounted, ref } from 'vue';
 
-import LibraryConstants from '@thzero/library_client/constants';
-
 import AppUtility from '@/utility/app';
 import GlobalUtility from '@thzero/library_client/utility/global';
 import Utility from '@thzero/library_common/utility';

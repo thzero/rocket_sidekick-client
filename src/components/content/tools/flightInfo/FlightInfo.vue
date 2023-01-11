@@ -192,6 +192,26 @@
 													/>
 												</v-col>
 											</v-row>
+											<v-row dense>
+												<v-col cols="12">
+													<div style="float: right;">
+														<v-btn
+															class="ml-2"
+															color="primary"
+															@click="clickStylesReset"
+														>
+															{{ $t('buttons.reset') }}
+														</v-btn>
+														<!-- <v-btn
+															class="ml-2"
+															color="green"
+															@click="saveStyles"
+														>
+															{{ $t('buttons.save') }}
+														</v-btn> -->
+														</div>
+												</v-col>
+											</v-row>
 										</v-expansion-panel-text>
 									</v-expansion-panel>
 								</v-expansion-panels>
@@ -426,7 +446,7 @@ import VuetifyUtility from '@/library_vue_vuetify/utility/index';
 import flightInfoData from '@/components/content/tools/flightInfo/FlightInfoData';
 import flightInfoChart from '@/components/content/tools/flightInfo/charts/FlightInfo';
 
-import { useToolsBaseComponent } from '@/components/content/tools/toolBase';
+import { useFlightToolsBaseComponent } from '@/components/content/tools/flightToolBase';
 
 import VColorWithValidation from '@/library_vue_vuetify/components/form/VColorWithValidation';
 import VDateTimeField from '@/library_vue_vuetify/components/form/VDateTimeFieldTemp';
@@ -450,8 +470,7 @@ export default {
 		VTextFieldWithValidation
 	},
 	setup(props, context) {
-		const {
-			correlationId,
+		const {	correlationId,
 			error,
 			hasFailed,
 			hasSucceeded,
@@ -460,14 +479,18 @@ export default {
 			noBreakingSpaces,
 			notImplementedError,
 			success,
+			serviceStore,
 			calculationOutput,
 			dateFormat,
 			dateFormatMask,
 			errorMessage,
 			errors,
 			errorTimer,
+			calculateI,
 			formatNumber,
 			handleListener,
+			initCalculationOutput,
+			initCalculationResults,
 			measurementUnitsId,
 			measurementUnitsAccelerationDefaultId,
 			measurementUnitsAreaDefaultId,
@@ -481,12 +504,13 @@ export default {
 			notifyMessage,
 			notifySignal,
 			notifyTimeout,
-			serviceStore,
+			resetFormI,
 			setErrorMessage,
 			setErrorTimer,
 			setNotify,
+			toFixed,
 			settings
-		} = useToolsBaseComponent(
+		} = useFlightToolsBaseComponent(
 			props, 
 			context
 		);
@@ -532,46 +556,6 @@ export default {
 		const processing = ref(false);
 		const resolution = ref(Constants.FlightInfo.Resolution);
 		const styles = ref(false);
-
-		watch(() => flightInfoDataTypeActual.value,
-			(value) => {
-				checkFlightInfoDataTypeUse();
-			}
-		);
-		watch(() => flightInfoDataTypeFiltered.value,
-			(value) => {
-				checkFlightInfoDataTypeUse();
-			}
-		);
-		watch(() => flightInfoProcessor.value,
-			(value) => {
-				if (!value)
-					return;
-
-				flightInfoStyleLoad(correlationId(), value);
-			}
-		);
-
-		onMounted(async () => {
-			const correlationIdI = correlationId();
-			reset(correlationIdI);
-
-			flightInfoStyleReset(correlationIdI, false);
-
-			flightDate.value = serviceStore.getters.getFlightDate();
-			flightLocation.value = serviceStore.getters.getFlightLocation();
-			flightInfoDataTypeUse.value = serviceStore.getters.getFlightInfoDataTypeUse();
-			flightInfoMeasurementUnitsId.value = serviceStore.getters.getFlightMeasurementUnits();
-			if (String.isNullOrEmpty(flightInfoMeasurementUnitsId.value))
-				flightInfoMeasurementUnitsId.value = AppUtility.measurementUnitsId(correlationId, settings.value);
-			flightInfoProcessor.value = serviceStore.getters.getFlightInfoProcessor();
-			flightTitle.value = serviceStore.getters.getFlightTitle();
-
-			flightInfoProcessors.value = VuetifyUtility.selectOptions(serviceFlightInfo.serviceProcessors, GlobalUtility.$trans.t, 'forms.content.tools.flightInfo.processors', (l) => { return l.id; }, null, (l) => { return l.id; });
-			flightInfoMeasurementUnitsOptions.value = VuetifyUtility.selectOptions(AppUtility.measurementUnitsOptions(), GlobalUtility.$trans.t, 'measurementUnits');
-
-			resolution.value = serviceStore.getters.getFlightInfoResolution(correlationIdI) ?? Constants.FlightInfo.Resolution;
-		});
 		
 		const checkFlightInfoDataTypeUse = () => {
 			flightInfoDataTypeUseDisabled.value = true;
@@ -590,6 +574,9 @@ export default {
 
 			if (processing.value )
 				flightInfoProcess(correlationIdI);
+		};
+		const clickStylesReset = () => {
+			flightInfoStyleReset(correlationId(), false);
 		};
 		const flightInfoInputChange = () => {
 			document.getElementById('top').scrollIntoView({behavior: 'smooth'});
@@ -626,7 +613,7 @@ export default {
 			flightInfoStyleVelocityFColor.value = serviceFlightInfo.styleDefault.velocityF.color;
 
 			if (notify)
-				setNotify(correlationId(), 'messages.reset');
+				setNotify(correlationId, 'messages.reset');
 		};
 		const flightInfoStyleSave = (correlationIdI) => {
 			// const correlationIdI = correlationId();
@@ -885,8 +872,47 @@ export default {
 			setNotify(correlationIdI, 'messages.reset');
 		};
 
-		return {
-			correlationId,
+		watch(() => flightInfoDataTypeActual.value,
+			(value) => {
+				checkFlightInfoDataTypeUse();
+			}
+		);
+		watch(() => flightInfoDataTypeFiltered.value,
+			(value) => {
+				checkFlightInfoDataTypeUse();
+			}
+		);
+		watch(() => flightInfoProcessor.value,
+			(value) => {
+				if (!value)
+					return;
+
+				flightInfoStyleLoad(correlationId(), value);
+			}
+		);
+
+		onMounted(async () => {
+			const correlationIdI = correlationId();
+			reset(correlationIdI);
+
+			flightInfoStyleReset(correlationIdI, false);
+
+			flightDate.value = serviceStore.getters.getFlightDate();
+			flightLocation.value = serviceStore.getters.getFlightLocation();
+			flightInfoDataTypeUse.value = serviceStore.getters.getFlightInfoDataTypeUse();
+			flightInfoMeasurementUnitsId.value = serviceStore.getters.getFlightMeasurementUnits();
+			if (String.isNullOrEmpty(flightInfoMeasurementUnitsId.value))
+				flightInfoMeasurementUnitsId.value = AppUtility.measurementUnitsId(correlationId, settings.value);
+			flightInfoProcessor.value = serviceStore.getters.getFlightInfoProcessor();
+			flightTitle.value = serviceStore.getters.getFlightTitle();
+
+			flightInfoProcessors.value = VuetifyUtility.selectOptions(serviceFlightInfo.serviceProcessors, GlobalUtility.$trans.t, 'forms.content.tools.flightInfo.processors', (l) => { return l.id; }, null, (l) => { return l.id; });
+			flightInfoMeasurementUnitsOptions.value = VuetifyUtility.selectOptions(AppUtility.measurementUnitsOptions(), GlobalUtility.$trans.t, 'measurementUnits');
+
+			resolution.value = serviceStore.getters.getFlightInfoResolution(correlationIdI) ?? Constants.FlightInfo.Resolution;
+		});
+
+		return {	correlationId,
 			error,
 			hasFailed,
 			hasSucceeded,
@@ -895,14 +921,18 @@ export default {
 			noBreakingSpaces,
 			notImplementedError,
 			success,
+			serviceStore,
 			calculationOutput,
 			dateFormat,
 			dateFormatMask,
 			errorMessage,
 			errors,
 			errorTimer,
+			calculateI,
 			formatNumber,
 			handleListener,
+			initCalculationOutput,
+			initCalculationResults,
 			measurementUnitsId,
 			measurementUnitsAccelerationDefaultId,
 			measurementUnitsAreaDefaultId,
@@ -916,10 +946,11 @@ export default {
 			notifyMessage,
 			notifySignal,
 			notifyTimeout,
-			serviceStore,
+			resetFormI,
 			setErrorMessage,
 			setErrorTimer,
 			setNotify,
+			toFixed,
 			settings,
 			serviceDownload,
 			serviceFlightInfo,
@@ -956,6 +987,7 @@ export default {
 			styles,
 			checkFlightInfoDataTypeUse,
 			clickResolution,
+			clickStylesReset,
 			flightInfoInputChange,
 			flightInfoStyleLoad,
 			flightInfoStyleReset,

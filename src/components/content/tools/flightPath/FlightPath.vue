@@ -220,6 +220,26 @@
 													/>
 												</v-col>
 											</v-row>
+											<v-row dense>
+												<v-col cols="12">
+													<div style="float: right;">
+														<v-btn
+															class="ml-2"
+															color="primary"
+															@click="clickStylesReset"
+														>
+															{{ $t('buttons.reset') }}
+														</v-btn>
+														<!-- <v-btn
+															class="ml-2"
+															color="green"
+															@click="saveStyles"
+														>
+															{{ $t('buttons.save') }}
+														</v-btn> -->
+														</div>
+												</v-col>
+											</v-row>
 										</v-expansion-panel-text>
 									</v-expansion-panel>
 								</v-expansion-panels>
@@ -344,7 +364,7 @@ import CommonUtility from '@thzero/library_common/utility/index';
 import GlobalUtility from '@thzero/library_client/utility/global';
 import VuetifyUtility from '@/library_vue_vuetify/utility/index';
 
-import { useToolsBaseComponent } from '@/components/content/tools/toolBase';
+import { useFlightToolsBaseComponent } from '@/components/content/tools/flightToolBase';
 
 import VColorWithValidation from '@/library_vue_vuetify/components/form/VColorWithValidation';
 import VDateTimeField from '@/library_vue_vuetify/components/form/VDateTimeFieldTemp';
@@ -376,14 +396,18 @@ export default {
 			noBreakingSpaces,
 			notImplementedError,
 			success,
+			serviceStore,
 			calculationOutput,
 			dateFormat,
 			dateFormatMask,
 			errorMessage,
 			errors,
 			errorTimer,
+			calculateI,
 			formatNumber,
 			handleListener,
+			initCalculationOutput,
+			initCalculationResults,
 			measurementUnitsId,
 			measurementUnitsAccelerationDefaultId,
 			measurementUnitsAreaDefaultId,
@@ -397,12 +421,13 @@ export default {
 			notifyMessage,
 			notifySignal,
 			notifyTimeout,
-			serviceStore,
+			resetFormI,
 			setErrorMessage,
 			setErrorTimer,
 			setNotify,
+			toFixed,
 			settings
-		} = useToolsBaseComponent(
+		} = useFlightToolsBaseComponent(
 			props, 
 			context
 		);
@@ -450,6 +475,9 @@ export default {
 		const templatePinsAdditional = ref('');
 		const templatePinTouchdown = ref(serviceFlightPath.defaultTemplatePinTouchdown);
 
+		const clickStylesReset = () => {
+			flightPathStyleReset(correlationId(), false);
+		};
 		const flightPathMeasurementUnitsOptionsDistance = computed(() => {
 			if (String.isNullOrEmpty(flightPathMeasurementUnitsId.value))
 				return [];
@@ -490,7 +518,7 @@ export default {
 			flightPathStylePinTouchdownColor.value = serviceFlightPath.styleDefault.pin.touchdown.color;
 
 			if (notify)
-				setNotify(correlationId(), 'messages.reset');
+				setNotify(correlationId, 'messages.reset');
 		};
 		const flightPathStyleSave = (correlationIdI) => {
 			// const correlationIdI = correlationId();
@@ -685,7 +713,7 @@ export default {
 			const correlationIdI = correlationId();
 			reset(correlationIdI);
 
-			flightPathStyleReset(correlationIdI, false);
+			flightPathStyleReset(correlationIdI, true);
 
 			flightDate.value = serviceStore.getters.getFlightDate();
 			flightLocation.value = serviceStore.getters.getFlightLocation();
@@ -743,8 +771,7 @@ export default {
 			}
 		);
 
-		return {
-			correlationId,
+		return {	correlationId,
 			error,
 			hasFailed,
 			hasSucceeded,
@@ -753,23 +780,36 @@ export default {
 			noBreakingSpaces,
 			notImplementedError,
 			success,
+			serviceStore,
 			calculationOutput,
 			dateFormat,
 			dateFormatMask,
 			errorMessage,
 			errors,
 			errorTimer,
+			calculateI,
 			formatNumber,
 			handleListener,
-			measurementUnits,
+			initCalculationOutput,
+			initCalculationResults,
+			measurementUnitsId,
+			measurementUnitsAccelerationDefaultId,
+			measurementUnitsAreaDefaultId,
+			measurementUnitsFluidDefaultId,
+			measurementUnitsDistanceDefaultId,
+			measurementUnitsLengthDefaultId,
+			measurementUnitsVelocityDefaultId,
+			measurementUnitsVolumeDefaultId,
+			measurementUnitsWeightDefaultId,
 			notifyColor,
 			notifyMessage,
 			notifySignal,
 			notifyTimeout,
-			serviceStore,
+			resetFormI,
 			setErrorMessage,
 			setErrorTimer,
 			setNotify,
+			toFixed,
 			settings,
 			serviceDownload,
 			serviceFlightPath,
@@ -788,6 +828,7 @@ export default {
 			flightPathMeasurementUnitsDistanceOutputId,
 			flightPathMeasurementUnitsVelocityOutputId,
 			flightPathMeasurementUnitsOptions,
+			clickStylesReset,
 			flightPathMeasurementUnitsOptionsDistance,
 			flightPathMeasurementUnitsOptionsVelocity,
 			flightPathProcessor,
