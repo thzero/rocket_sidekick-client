@@ -176,7 +176,7 @@ const routes = [
 					{
 						path: '',
 						name: 'content_tools_thrust2Weight',
-						component: () => import(/* webpackPrefetch: true */ /* webpackChunkName: "group-content-tools" */ './components/content/tools/thrust2weight/Thrust2Weight.vue'),
+						component: () => import(/* webpackPrefetch: true */ /* webpackChunkName: "group-content-tools" */ './components/content/tools/Thrust2Weight.vue'),
 						meta: {
 							requiresAuth: false
 						}
