@@ -381,13 +381,13 @@
 										<span>{{ index+1 }}</span>
 									</v-col>
 									<v-col cols="3">
-										<span>{{ (calculationResults['initial' + item.key]) + ' '  + $t('strings.content.tools.thrust2Weight.to') }}</span>
+										<span>{{ (item.initial) + ' '  + $t('strings.content.tools.thrust2Weight.to') }}</span>
 									</v-col>
 									<v-col cols="3">
-										<span v-if="calculationResults['peak' + item.key]">{{ (calculationResults.peak) + ' ' + $t('strings.content.tools.thrust2Weight.to') }}</span>
+										<span v-if="item.peak">{{ item.peak + ' ' + $t('strings.content.tools.thrust2Weight.to') }}</span>
 									</v-col>
 									<v-col cols="3">
-										<span v-if="calculationResults['average' + item.key]">{{ (calculationResults.average) + ' ' + $t('strings.content.tools.thrust2Weight.to') }}</span>
+										<span v-if="item.average">{{ item.average + ' ' + $t('strings.content.tools.thrust2Weight.to') }}</span>
 									</v-col>
 								</v-row>
 							</v-col>
@@ -395,7 +395,7 @@
 						<v-row dense class="pb-4">
 							<v-col>
 								{{ $t('strings.content.tools.thrust2Weight.guidance') }} <a class="external" href="https://www.thrustcurve.org" target="_blank">{{ $t('menu.thrustcurve') }}</a>.
-								<div v-if="hassResults">
+								<div v-if="hasResults">
 									<br>
 									{{ $t('strings.content.tools.thrust2Weight.guidance2') }}
 								</div>
@@ -483,10 +483,6 @@ export default {
 
 		const serviceToolsThrust2Weight = GlobalUtility.$injector.getService(Constants.InjectorKeys.SERVICE_TOOLS_THRUST2WEIGHT);
 
-		const calculationData1 = ref(null);
-		const calculationData2 = ref(null);
-		const calculationData3 = ref(null);
-		const calculationData4 = ref(null);
 		const calculationResults = initCalculationResults(correlationId(), ref({}));
 		const dialogMotorSearchRef = ref(null);
 		const dialogMotorSearchManager = ref(new DialogSupport());
@@ -496,15 +492,19 @@ export default {
 		const maxLaunchRodTime = ref(null);
 		const maxLaunchRodTimeDefault = ref(0.3);
 		const measurementUnitsWeightType = ref(Constants.MeasurementUnits.types.weight);
-		const motorSelected1 = ref(true);
-		const motorSelected2 = ref(false);
-		const motorSelected3 = ref(false);
-		const motorSelected4 = ref(false);
 		const motorLookup1 = ref(null);
 		const motorLookup2 = ref(null);
 		const motorLookup3 = ref(null);
 		const motorLookup4 = ref(null);
 		const motorLookupSelection = ref(null);
+		const motorSelected1 = ref(true);
+		const motorSelected2 = ref(false);
+		const motorSelected3 = ref(false);
+		const motorSelected4 = ref(false);
+		const motorLookupUrl1 = ref(null);
+		const motorLookupUrl2 = ref(null);
+		const motorLookupUrl3 = ref(null);
+		const motorLookupUrl4 = ref(null);
 		const thrustAverage1 = ref(null);
 		const thrustAverage2 = ref(null);
 		const thrustAverage3 = ref(null);
@@ -517,65 +517,72 @@ export default {
 		const thrustPeak2 = ref(null);
 		const thrustPeak3 = ref(null);
 		const thrustPeak4 = ref(null);
+
+		const motorRef = [];
+		motorRef.push({
+			key: 1,
+			calculationData: serviceToolsThrust2Weight.initialize(correlationId()),
+			motorLookup: motorLookup1,
+			motorLookupUrl: motorLookupUrl1,
+			motorSelected: motorSelected1,
+			thrustAverage: thrustAverage1,
+			thrustInitial: thrustInitial1,
+			thrustPeak: thrustPeak1
+		});
+		motorRef.push({
+			key: 2,
+			calculationData: serviceToolsThrust2Weight.initialize(correlationId()),
+			motorLookup: motorLookup2,
+			motorLookupUrl: motorLookupUrl2,
+			motorSelected: motorSelected2,
+			thrustAverage: thrustAverage2,
+			thrustInitial: thrustInitial2,
+			thrustPeak: thrustPeak2
+		});
+		motorRef.push({
+			key: 3,
+			calculationData: serviceToolsThrust2Weight.initialize(correlationId()),
+			motorLookup: motorLookup3,
+			motorLookupUrl: motorLookupUrl3,
+			motorSelected: motorSelected3,
+			thrustAverage: thrustAverage3,
+			thrustInitial: thrustInitial3,
+			thrustPeak: thrustPeak3
+		});
+		motorRef.push({
+			key: 4,
+			calculationData: serviceToolsThrust2Weight.initialize(correlationId()),
+			motorLookup: motorLookup4,
+			motorLookupUrl: motorLookupUrl4,
+			motorSelected: motorSelected4,
+			thrustAverage: thrustAverage4,
+			thrustInitial: thrustInitial4,
+			thrustPeak: thrustPeak4
+		});
 		
 		const calculationOk = async () => {
 			calculateI(correlationId(), calculationResults, async (correlationIdI, calculationResultsI) => {
 				initCalculationData(correlationIdI);
 
-				// const response = await serviceToolsThrust2Weight.initializeCalculation(correlationIdI, calculationData1.value, measurementUnitsId.value, settings);
-				// if (!hasSucceeded(response))
-				// 	return false; // TODO
-
-				// response.results.instance.addListener(correlationIdI, handleListener);
-				// const responseCalc = response.results.instance.calculate(correlationIdI, response.results.steps);
-				// if (!hasSucceeded(responseCalc))
-				// 	return false; // TODO
-
-				// calculationResultsI.value = responseCalc.results;
-				// return true;
-
-				calculationResultsI.value.data = [ { key: '', data: calculationData1 } ];
-				if (motorSelected2.value)
-					calculationResultsI.value.data.push({ key: '2', data: calculationData2 });
-				if (motorSelected3.value)
-					calculationResultsI.value.data.push({ key: '3', data: calculationData3 });
-				if (motorSelected4.value)
-					calculationResultsI.value.data.push({ key: '4', data: calculationData4 });
+				calculationResultsI.value.data = [];
 
 				let responseCalc;
-				for(let item of calculationResultsI.value.data) {
-					responseCalc = await executeCalculation(correlationIdI, item.data);
+				// for (let item of calculationResultsI.value.data) {
+				let temp;
+				for (let item of motorRef) {
+					if (!item.motorSelected.value)
+						continue;
+
+					responseCalc = await executeCalculation(correlationIdI, item.calculationData, item.key);
 					if (hasSucceeded(responseCalc)) {
-						calculationResultsI.value['average' + item.key] = responseCalc.results.average;
-						calculationResultsI.value['initial' + item.key] = responseCalc.results.initial;
-						calculationResultsI.value['peak' + item.key] = responseCalc.results.peak;
+						temp = {};
+						temp.key = item.key;
+						temp.average = responseCalc.results.average;
+						temp.initial = responseCalc.results.initial;
+						temp.peak = responseCalc.results.peak;
+						calculationResults.value.data.push(temp);
 					}
 				}
-
-				// if (motorSelected2.value) {
-				// 	responseCalc = await executeCalculation(correlationIdI, calculationData2);
-				// 	if (hasSucceeded(responseCalc)) {
-				// 		calculationResultsI.value.average2 = responseCalc.results.average;
-				// 		calculationResultsI.value.initial2 = responseCalc.results.initial;
-				// 		calculationResultsI.value.peak2 = responseCalc.results.peak;
-				// 	}
-				// }
-				// if (motorSelected3.value ){
-				// 	responseCalc = await executeCalculation(correlationIdI, calculationData3);
-				// 	if (hasSucceeded(responseCalc)) {
-				// 		calculationResultsI.value.average3 = responseCalc.results.average;
-				// 		calculationResultsI.value.initial3 = responseCalc.results.initial;
-				// 		calculationResultsI.value.peak3 = responseCalc.results.peak;
-				// 	}
-				// }
-				// if (motorSelected4.value) {
-				// 	responseCalc = await executeCalculation(correlationIdI, calculationData4);
-				// 	if (hasSucceeded(responseCalc)) {
-				// 		calculationResultsI.value.average4 = responseCalc.results.average;
-				// 		calculationResultsI.value.initial4 = responseCalc.results.initial;
-				// 		calculationResultsI.value.peak4 = responseCalc.results.peak;
-				// 	}
-				// }
 
 				return true;
 			});
@@ -585,45 +592,26 @@ export default {
 			await dialogMotorSearchRef.value.reset(correlationId());
 			dialogMotorSearchManager.value.open();
 		};
-		const executeCalculation = async (correlationId, calculationData) => {
+		const executeCalculation = async (correlationId, calculationData, key) => {
 			const response = await serviceToolsThrust2Weight.initializeCalculation(correlationId, calculationData, measurementUnitsId.value, settings);
 			if (!hasSucceeded(response))
 				return error();
 
 			response.results.instance.addListener(correlationId, handleListener);
-			return response.results.instance.calculate(correlationId, response.results.steps);
+			return response.results.instance.calculate(correlationId, response.results.steps, 'motor' + key);
 		};
-		const hassResults = () => {
+		const hasResults = () => {
 			return motorLookup1.value || motorLookup2.value || motorLookup3.value || motorLookup4.value;
 		};
 		const initCalculationData = (correlationId) => {
-			calculationData1.value.mass = mass.value;
-			calculationData1.value.units = massMeasurementUnitId.value;
-			calculationData1.value.maxLaunchRodTime = maxLaunchRodTime.value;
-			calculationData1.value.thrustAverage = thrustAverage1.value;
-			calculationData1.value.thrustInitial = thrustInitial1.value;
-			calculationData1.value.thrustPeak = thrustPeak1.value;
-			
-			calculationData2.value.mass = mass.value;
-			calculationData2.value.units = massMeasurementUnitId.value;
-			calculationData2.value.maxLaunchRodTime = maxLaunchRodTime.value;
-			calculationData2.value.thrustAverage = thrustAverage2.value;
-			calculationData2.value.thrustInitial = thrustInitial2.value;
-			calculationData2.value.thrustPeak = thrustPeak2.value;
-
-			calculationData3.value.mass = mass.value;
-			calculationData3.value.units = massMeasurementUnitId.value;
-			calculationData3.value.maxLaunchRodTime = maxLaunchRodTime.value;
-			calculationData3.value.thrustAverage = thrustAverage3.value;
-			calculationData3.value.thrustInitial = thrustInitial3.value;
-			calculationData3.value.thrustPeak = thrustPeak3.value;
-
-			calculationData4.value.mass = mass.value;
-			calculationData4.value.units = massMeasurementUnitId.value;
-			calculationData4.value.maxLaunchRodTime = maxLaunchRodTime.value;
-			calculationData4.value.thrustAverage = thrustAverage4.value;
-			calculationData4.value.thrustInitial = thrustInitial4.value;
-			calculationData4.value.thrustPeak = thrustPeak4.value;
+			for (let item of motorRef) {
+				item.calculationData.mass = mass.value;
+				item.calculationData.units = massMeasurementUnitId.value;
+				item.calculationData.maxLaunchRodTime = maxLaunchRodTime.value;
+				item.calculationData.thrustAverage = item.thrustAverage.value;
+				item.calculationData.thrustInitial =item. thrustInitial.value;
+				item.calculationData.thrustPeak = item.thrustPeak.value;
+			}
 		};
 		const reset = async (correlationId) => {
 			await formThrust2WeightRef.value.reset(correlationId, false);
@@ -631,27 +619,18 @@ export default {
 		const resetForm = (correlationId) => {
 			resetFormI(correlationId, calculationResults, (correlationId) => {
 				mass.value = null;
-				// motorSelected1.value = false;
-				motorSelected2.value = false;
-				motorSelected3.value = false;
-				motorSelected4.value = false;
-				motorLookup1.value = null;
-				motorLookup2.value = null;
-				motorLookup3.value = null;
-				motorLookup4.value = null;
+				
 				motorLookupSelection.value = null;
-				thrustAverage1.value = null;
-				thrustAverage2.value = null;
-				thrustAverage3.value = null;
-				thrustAverage4.value = null;
-				thrustInitial1.value = null;
-				thrustInitial2.value = null;
-				thrustInitial3.value = null;
-				thrustInitial4.value = null;
-				thrustPeak1.value = null;
-				thrustPeak2.value = null;
-				thrustPeak3.value = null;
-				thrustPeak4.value = null;
+				for (let item of motorRef) {
+					item.motorLookup.value = null;
+					if (item.key !== 1)
+						item.motorSelected.value = false;
+					item.motorLookupUrl.value = null;
+					item.thrustAverage.value = null;
+					item.thrustInitial.value = null;
+					item.thrustPeak.value = null;
+				}
+
 				maxLaunchRodTime.value = maxLaunchRodTimeDefault.value;
 			});
 		};
@@ -663,42 +642,17 @@ export default {
 			const response = await serviceStore.dispatcher.requestMotor(correlationIdI, item.motorId);
 			if (hasSucceeded(response)) {
 				initCalculationData(correlationIdI);
+				
+				const reference = motorRef.find(l => l.key == motorLookupSelection.value)
 
-				let temp = motorLookup1;
-				let calculationData = calculationData1;
-				let thrustAverage = thrustAverage1;
-				let thrustInitial = thrustInitial1;
-				let thrustPeak = thrustPeak1;
-				if (motorLookupSelection.value === 2) {
-					temp = motorLookup2;
-					calculationData = calculationData2;
-					thrustAverage = thrustAverage2;
-					thrustInitial = thrustInitial2;
-					thrustPeak = thrustPeak2;
-				}
-				else if (motorLookupSelection.value === 3) {
-					temp = motorLookup3;
-					calculationData = calculationData3;
-					thrustAverage = thrustAverage3;
-					thrustInitial = thrustInitial3;
-					thrustPeak = thrustPeak3;
-				}
-				else if (motorLookupSelection.value === 4) {
-					temp = motorLookup4;
-					calculationData = calculationData4;
-					thrustAverage = thrustAverage4;
-					thrustInitial = thrustInitial4;
-					thrustPeak = thrustPeak4;
-				}
-
-				const response2 = await serviceToolsThrust2Weight.update(correlationIdI, response.results, calculationData.value);
+				const response2 = await serviceToolsThrust2Weight.update(correlationIdI, response.results, reference.calculationData);
 				if (hasSucceeded(response2)) {
-					temp.value = item.designation;
+					reference.motor.value = item.designation;
 
-					calculationData.value = response2.results;
-					thrustAverage.value = calculationData.value.thrustAverage;
-					thrustInitial.value = calculationData.value.thrustInitial;
-					thrustPeak.value = calculationData.value.thrustPeak;
+					reference.calculationData = response2.results;
+					reference.thrustAverage.value = calculationData.thrustAverage;
+					reference.thrustInitial.value = calculationData.thrustInitial;
+					reference.thrustPeak.value = calculationData.thrustPeak;
 
 					setNotify(correlationId, 'messages.thrust2Weight.motor.selected');
 					dialogMotorSearchManager.value.ok();
@@ -712,15 +666,11 @@ export default {
 
 		onMounted(async () => {
 			reset(false);
-
-			calculationData1.value = serviceToolsThrust2Weight.initialize(correlationId());
-			calculationData2.value = serviceToolsThrust2Weight.initialize(correlationId());
-			calculationData3.value = serviceToolsThrust2Weight.initialize(correlationId());
-			calculationData4.value = serviceToolsThrust2Weight.initialize(correlationId());
+			
 			massMeasurementUnitId.value = measurementUnitsWeightDefaultId.value;
 		});
 
-		watch(() => motorSelected1,
+		watch(() => motorSelected1.value,
 			(value) => {
 				if (value)
 					return;
@@ -729,7 +679,7 @@ export default {
 				thrustPeak1.value = null;
 			}
 		);
-		watch(() => motorSelected2,
+		watch(() => motorSelected2.value,
 			(value) => {
 				if (value)
 					return;
@@ -738,7 +688,7 @@ export default {
 				thrustPeak2.value = null;
 			}
 		);
-		watch(() => motorSelected3,
+		watch(() => motorSelected3.value,
 			(value) => {
 				if (value)
 					return;
@@ -747,7 +697,7 @@ export default {
 				thrustPeak3.value = null;
 			}
 		);
-		watch(() => motorSelected4,
+		watch(() => motorSelected4.value,
 			(value) => {
 				if (value)
 					return;
@@ -783,10 +733,6 @@ export default {
 			toFixed,
 			settings,
 			serviceToolsThrust2Weight,
-			calculationData1,
-			calculationData2,
-			calculationData3,
-			calculationData4,
 			calculationResults,
 			dialogMotorSearchRef,
 			dialogMotorSearchManager,
@@ -796,15 +742,19 @@ export default {
 			maxLaunchRodTime,
 			maxLaunchRodTimeDefault,
 			measurementUnitsWeightType,
-			motorSelected1,
-			motorSelected2,
-			motorSelected3,
-			motorSelected4,
 			motorLookup1,
 			motorLookup2,
 			motorLookup3,
 			motorLookup4,
 			motorLookupSelection,
+			motorSelected1,
+			motorSelected2,
+			motorSelected3,
+			motorSelected4,
+			motorLookupUrl1,
+			motorLookupUrl2,
+			motorLookupUrl3,
+			motorLookupUrl4,
 			thrustAverage1,
 			thrustAverage2,
 			thrustAverage3,
@@ -819,8 +769,7 @@ export default {
 			thrustPeak4,
 			calculationOk,
 			clickMotorSearch,
-			executeCalculation,
-			hassResults,
+			hasResults,
 			reset,
 			resetForm,
 			selectMotor,
@@ -834,6 +783,10 @@ export default {
 			mass: { required, decimal, between: between(0, 9999), $autoDirty: true },
 			massMeasurementUnitId: { $autoDirty: true },
 			maxLaunchRodTime: { required, decimal, between: between(0, 5), $autoDirty: true },
+			motorSelected1: { $autoDirty: true },
+			motorSelected2: { $autoDirty: true },
+			motorSelected3: { $autoDirty: true },
+			motorSelected4: { $autoDirty: true },
 			thrustAverage1: {
 				decimal, between: between(0, 40960), 
 				thrustAverageInitial1: helpers.withMessage(GlobalUtility.$trans.t('errors.content.tools.thrust2Weight.thrustAverageInitial'), thrustAverageInitial1), 
