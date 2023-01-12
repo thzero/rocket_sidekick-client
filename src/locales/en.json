@@ -84,8 +84,8 @@
 				"thrust2Weight": {
 					"thrustAverageInitial": "Less than or equal Thrust Initial",
 					"thrustAveragePeak": "Greater than or equal Thrust Peak",
-					"thrustInitialAverage": "Less than or equal Thrust Average",
-					"thrustInitialPeak": "Less than or equal Thrust Peak",
+					"thrustInitialAverage": "Greater than or equal Thrust Average",
+					"thrustInitialPeak": "Greater than or equal Thrust Peak",
 					"thrustPeakAverage": "Less than or equal Thrust Average",
 					"thrustPeakInitial": "Less than or equal Thrust Initial"
 				}

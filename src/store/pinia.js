@@ -86,7 +86,8 @@ class AppStore extends BaseStore {
 					this.$logger.debug('store', 'requestMotor', 'response', response, correlationId);
 					if (Response.hasSucceeded(response)) {
 						this.motorSearchResults = response.results.data;
-						return response.results.motor;
+						// return response.results.motor;
+						return Response.success(correlationId, response.results.motor);
 					}
 
 					return null;

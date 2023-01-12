@@ -56,9 +56,9 @@
 								<v-row dense>
 									<v-col cols="12">
 										<VCheckboxWithValidation
-											ref="motorData1Ref"
-											vid="motorData1"
-											v-model="motorData1"
+											ref="motorSelected1Ref"
+											vid="motorSelected1"
+											v-model="motorSelected1"
 											:validation="validation"
 											:hide-details="true"
 											:readonly="true"
@@ -124,9 +124,9 @@
 								<v-row dense>
 									<v-col cols="12">
 										<VCheckboxWithValidation
-											ref="motorData2Ref"
-											vid="motorData2"
-											v-model="motorData2"
+											ref="motorSelected2Ref"
+											vid="motorSelected2"
+											v-model="motorSelected2"
 											:validation="validation"
 											:hide-details="true"
 											:label="$t('forms.content.tools.thrust2Weight.specifications') + ' 2'"
@@ -140,7 +140,7 @@
 											vid="thrustInitial2"
 											v-model="thrustInitial2"
 											:validation="validation"
-											:readonly="!motorData2"
+											:readonly="!motorSelected2"
 											:label="$t('forms.content.tools.thrust2Weight.thrust_initial') + ' ' + $t('forms.content.tools.thrust2Weight.thrust')"
 											:placeholder="$t('forms.content.tools.thrust2Weight.thrust_initial_hint')"
 										/>
@@ -151,7 +151,7 @@
 											vid="thrustPeak2"
 											v-model="thrustPeak2"
 											:validation="validation"
-											:readonly="!motorData2"
+											:readonly="!motorSelected2"
 											:label="$t('forms.content.tools.thrust2Weight.thrust_peak') + ' ' + $t('forms.content.tools.thrust2Weight.thrust')"
 											:placeholder="$t('forms.content.tools.thrust2Weight.thrust_peak_hint')"
 										/>
@@ -162,7 +162,7 @@
 											vid="thrustAverage2"
 											v-model="thrustAverage2"
 											:validation="validation"
-											:readonly="!motorData2"
+											:readonly="!motorSelected2"
 											:label="$t('forms.content.tools.thrust2Weight.thrust_average') + ' ' + $t('forms.content.tools.thrust2Weight.thrust')"
 											:placeholder="$t('forms.content.tools.thrust2Weight.thrust_average_hint')"
 										/>
@@ -182,6 +182,7 @@
 											<v-btn
 												class="ml-2"
 												color="primary"
+												:disabled="!motorSelected2"
 												@click="clickMotorSearch(2)"
 											>
 												{{ $t('buttons.search') }}
@@ -194,9 +195,9 @@
 								<v-row dense>
 									<v-col cols="12">
 										<VCheckboxWithValidation
-											ref="motorData3Ref"
-											vid="motorData3"
-											v-model="motorData3"
+											ref="motorSelected3Ref"
+											vid="motorSelected3"
+											v-model="motorSelected3"
 											:validation="validation"
 											:hide-details="true"
 											:label="$t('forms.content.tools.thrust2Weight.specifications') + ' 3'"
@@ -210,7 +211,7 @@
 											vid="thrustInitial3"
 											v-model="thrustInitial3"
 											:validation="validation"
-											:readonly="!motorData3"
+											:readonly="!motorSelected3"
 											:label="$t('forms.content.tools.thrust2Weight.thrust_initial') + ' ' + $t('forms.content.tools.thrust2Weight.thrust')"
 											:placeholder="$t('forms.content.tools.thrust2Weight.thrust_initial_hint')"
 										/>
@@ -221,7 +222,7 @@
 											vid="thrustPeak3"
 											v-model="thrustPeak3"
 											:validation="validation"
-											:readonly="!motorData3"
+											:readonly="!motorSelected3"
 											:label="$t('forms.content.tools.thrust2Weight.thrust_peak') + ' ' + $t('forms.content.tools.thrust2Weight.thrust')"
 											:placeholder="$t('forms.content.tools.thrust2Weight.thrust_peak_hint')"
 										/>
@@ -232,7 +233,7 @@
 											vid="thrustAverage3"
 											v-model="thrustAverage3"
 											:validation="validation"
-											:readonly="!motorData3"
+											:readonly="!motorSelected3"
 											:label="$t('forms.content.tools.thrust2Weight.thrust_average') + ' ' + $t('forms.content.tools.thrust2Weight.thrust')"
 											:placeholder="$t('forms.content.tools.thrust2Weight.thrust_average_hint')"
 										/>
@@ -252,6 +253,7 @@
 											<v-btn
 												class="ml-2"
 												color="primary"
+												:disabled="!motorSelected3"
 												@click="clickMotorSearch(3)"
 											>
 												{{ $t('buttons.search') }}
@@ -264,9 +266,9 @@
 								<v-row dense>
 									<v-col cols="12">
 										<VCheckboxWithValidation
-											ref="motorData4Ref"
-											vid="motorData4"
-											v-model="motorData4"
+											ref="motorSelected4Ref"
+											vid="motorSelected4"
+											v-model="motorSelected4"
 											:validation="validation"
 											:hide-details="true"
 											:label="$t('forms.content.tools.thrust2Weight.specifications') + ' 4'"
@@ -280,7 +282,7 @@
 											vid="thrustInitial4"
 											v-model="thrustInitial4"
 											:validation="validation"
-											:readonly="!motorData4"
+											:readonly="!motorSelected4"
 											:label="$t('forms.content.tools.thrust2Weight.thrust_initial') + ' ' + $t('forms.content.tools.thrust2Weight.thrust')"
 											:placeholder="$t('forms.content.tools.thrust2Weight.thrust_initial_hint')"
 										/>
@@ -291,7 +293,7 @@
 											vid="thrustPeak4"
 											v-model="thrustPeak4"
 											:validation="validation"
-											:readonly="!motorData4"
+											:readonly="!motorSelected4"
 											:label="$t('forms.content.tools.thrust2Weight.thrust_peak') + ' ' + $t('forms.content.tools.thrust2Weight.thrust')"
 											:placeholder="$t('forms.content.tools.thrust2Weight.thrust_peak_hint')"
 										/>
@@ -302,7 +304,7 @@
 											vid="thrustAverage4"
 											v-model="thrustAverage4"
 											:validation="validation"
-											:readonly="!motorData4"
+											:readonly="!motorSelected4"
 											:label="$t('forms.content.tools.thrust2Weight.thrust_average') + ' ' + $t('forms.content.tools.thrust2Weight.thrust')"
 											:placeholder="$t('forms.content.tools.thrust2Weight.thrust_average_hint')"
 										/>
@@ -322,6 +324,7 @@
 											<v-btn
 												class="ml-2"
 												color="primary"
+												:disabled="!motorSelected4"
 												@click="clickMotorSearch(4)"
 											>
 												{{ $t('buttons.search') }}
@@ -392,7 +395,7 @@
 						<v-row dense class="pb-4">
 							<v-col>
 								{{ $t('strings.content.tools.thrust2Weight.guidance') }} <a class="external" href="https://www.thrustcurve.org" target="_blank">{{ $t('menu.thrustcurve') }}</a>.
-								<div v-if="motor">
+								<div v-if="hassResults">
 									<br>
 									{{ $t('strings.content.tools.thrust2Weight.guidance2') }}
 								</div>
@@ -493,18 +496,14 @@ export default {
 		const maxLaunchRodTime = ref(null);
 		const maxLaunchRodTimeDefault = ref(0.3);
 		const measurementUnitsWeightType = ref(Constants.MeasurementUnits.types.weight);
-		const motorData1 = ref(true);
-		const motorData2 = ref(false);
-		const motorData3 = ref(false);
-		const motorData4 = ref(false);
+		const motorSelected1 = ref(true);
+		const motorSelected2 = ref(false);
+		const motorSelected3 = ref(false);
+		const motorSelected4 = ref(false);
 		const motorLookup1 = ref(null);
 		const motorLookup2 = ref(null);
 		const motorLookup3 = ref(null);
 		const motorLookup4 = ref(null);
-		const motorLookup1Id = ref(null);
-		const motorLookup2Id = ref(null);
-		const motorLookup3Id = ref(null);
-		const motorLookup4Id = ref(null);
 		const motorLookupSelection = ref(null);
 		const thrustAverage1 = ref(null);
 		const thrustAverage2 = ref(null);
@@ -536,11 +535,11 @@ export default {
 				// return true;
 
 				calculationResultsI.value.data = [ { key: '', data: calculationData1 } ];
-				if (motorData2.value)
+				if (motorSelected2.value)
 					calculationResultsI.value.data.push({ key: '2', data: calculationData2 });
-				if (motorData3.value)
+				if (motorSelected3.value)
 					calculationResultsI.value.data.push({ key: '3', data: calculationData3 });
-				if (motorData4.value)
+				if (motorSelected4.value)
 					calculationResultsI.value.data.push({ key: '4', data: calculationData4 });
 
 				let responseCalc;
@@ -553,7 +552,7 @@ export default {
 					}
 				}
 
-				// if (motorData2.value) {
+				// if (motorSelected2.value) {
 				// 	responseCalc = await executeCalculation(correlationIdI, calculationData2);
 				// 	if (hasSucceeded(responseCalc)) {
 				// 		calculationResultsI.value.average2 = responseCalc.results.average;
@@ -561,7 +560,7 @@ export default {
 				// 		calculationResultsI.value.peak2 = responseCalc.results.peak;
 				// 	}
 				// }
-				// if (motorData3.value ){
+				// if (motorSelected3.value ){
 				// 	responseCalc = await executeCalculation(correlationIdI, calculationData3);
 				// 	if (hasSucceeded(responseCalc)) {
 				// 		calculationResultsI.value.average3 = responseCalc.results.average;
@@ -569,7 +568,7 @@ export default {
 				// 		calculationResultsI.value.peak3 = responseCalc.results.peak;
 				// 	}
 				// }
-				// if (motorData4.value) {
+				// if (motorSelected4.value) {
 				// 	responseCalc = await executeCalculation(correlationIdI, calculationData4);
 				// 	if (hasSucceeded(responseCalc)) {
 				// 		calculationResultsI.value.average4 = responseCalc.results.average;
@@ -593,6 +592,9 @@ export default {
 
 			response.results.instance.addListener(correlationId, handleListener);
 			return response.results.instance.calculate(correlationId, response.results.steps);
+		};
+		const hassResults = () => {
+			return motorLookup1.value || motorLookup2.value || motorLookup3.value || motorLookup4.value;
 		};
 		const initCalculationData = (correlationId) => {
 			calculationData1.value.mass = mass.value;
@@ -629,18 +631,14 @@ export default {
 		const resetForm = (correlationId) => {
 			resetFormI(correlationId, calculationResults, (correlationId) => {
 				mass.value = null;
-				// motorData1.value = false;
-				motorData2.value = false;
-				motorData3.value = false;
-				motorData4.value = false;
+				// motorSelected1.value = false;
+				motorSelected2.value = false;
+				motorSelected3.value = false;
+				motorSelected4.value = false;
 				motorLookup1.value = null;
 				motorLookup2.value = null;
 				motorLookup3.value = null;
 				motorLookup4.value = null;
-				motorLookup1Id .value = null;
-				motorLookup2Id .value = null;
-				motorLookup3Id .value = null;
-				motorLookup4Id .value = null;
 				motorLookupSelection.value = null;
 				thrustAverage1.value = null;
 				thrustAverage2.value = null;
@@ -657,7 +655,7 @@ export default {
 				maxLaunchRodTime.value = maxLaunchRodTimeDefault.value;
 			});
 		};
-		const selectMotor = async (item)=> {
+		const selectMotor = async (item) => {
 			const correlationIdI = correlationId();
 			if (!motorLookupSelection.value)
 				return;
@@ -665,32 +663,45 @@ export default {
 			const response = await serviceStore.dispatcher.requestMotor(correlationIdI, item.motorId);
 			if (hasSucceeded(response)) {
 				initCalculationData(correlationIdI);
-				const response2 = await serviceToolsThrust2Weight.update(correlationIdI, response, calculationData);
-				if (hasSucceeded(response2)) {
-					let temp = motorLookup1;
-					let tempId = motorLookup1Id;
-					if (motorLookupSelection.value === 1) {
-						temp = motorLookup2.value;
-						tempId = motorLookup2Id.value;
-					}
-					else if (motorLookupSelection.value === 1) {
-						temp = motorLookup2.value;
-						tempId = motorLookup2Id.value;
-					}
-					else if (motorLookupSelection.value === 1) {
-						temp = motorLookup3.value;
-						tempId = motorLookup3Id.value;
-					}
 
+				let temp = motorLookup1;
+				let calculationData = calculationData1;
+				let thrustAverage = thrustAverage1;
+				let thrustInitial = thrustInitial1;
+				let thrustPeak = thrustPeak1;
+				if (motorLookupSelection.value === 2) {
+					temp = motorLookup2;
+					calculationData = calculationData2;
+					thrustAverage = thrustAverage2;
+					thrustInitial = thrustInitial2;
+					thrustPeak = thrustPeak2;
+				}
+				else if (motorLookupSelection.value === 3) {
+					temp = motorLookup3;
+					calculationData = calculationData3;
+					thrustAverage = thrustAverage3;
+					thrustInitial = thrustInitial3;
+					thrustPeak = thrustPeak3;
+				}
+				else if (motorLookupSelection.value === 4) {
+					temp = motorLookup4;
+					calculationData = calculationData4;
+					thrustAverage = thrustAverage4;
+					thrustInitial = thrustInitial4;
+					thrustPeak = thrustPeak4;
+				}
+
+				const response2 = await serviceToolsThrust2Weight.update(correlationIdI, response.results, calculationData.value);
+				if (hasSucceeded(response2)) {
 					temp.value = item.designation;
-					tempId.value = item.motorId;
 
 					calculationData.value = response2.results;
-					thrustAverage1.value = calculationData.value.thrustAverage;
-					thrustInitial1.value = calculationData.value.thrustInitial1;
+					thrustAverage.value = calculationData.value.thrustAverage;
+					thrustInitial.value = calculationData.value.thrustInitial;
 					thrustPeak.value = calculationData.value.thrustPeak;
 
 					setNotify(correlationId, 'messages.thrust2Weight.motor.selected');
+					dialogMotorSearchManager.value.ok();
 					return;
 				}
 
@@ -709,7 +720,7 @@ export default {
 			massMeasurementUnitId.value = measurementUnitsWeightDefaultId.value;
 		});
 
-		watch(() => motorData1,
+		watch(() => motorSelected1,
 			(value) => {
 				if (value)
 					return;
@@ -718,7 +729,7 @@ export default {
 				thrustPeak1.value = null;
 			}
 		);
-		watch(() => motorData2,
+		watch(() => motorSelected2,
 			(value) => {
 				if (value)
 					return;
@@ -727,7 +738,7 @@ export default {
 				thrustPeak2.value = null;
 			}
 		);
-		watch(() => motorData3,
+		watch(() => motorSelected3,
 			(value) => {
 				if (value)
 					return;
@@ -736,7 +747,7 @@ export default {
 				thrustPeak3.value = null;
 			}
 		);
-		watch(() => motorData4,
+		watch(() => motorSelected4,
 			(value) => {
 				if (value)
 					return;
@@ -785,18 +796,14 @@ export default {
 			maxLaunchRodTime,
 			maxLaunchRodTimeDefault,
 			measurementUnitsWeightType,
-			motorData1,
-			motorData2,
-			motorData3,
-			motorData4,
+			motorSelected1,
+			motorSelected2,
+			motorSelected3,
+			motorSelected4,
 			motorLookup1,
 			motorLookup2,
 			motorLookup3,
 			motorLookup4,
-			motorLookup1Id,
-			motorLookup2Id,
-			motorLookup3Id,
-			motorLookup4Id,
 			motorLookupSelection,
 			thrustAverage1,
 			thrustAverage2,
@@ -813,6 +820,7 @@ export default {
 			calculationOk,
 			clickMotorSearch,
 			executeCalculation,
+			hassResults,
 			reset,
 			resetForm,
 			selectMotor,
@@ -905,13 +913,34 @@ export default {
 };
 
 const thrustInitialtRequired2 = (value, siblings, vm) => {
-	return siblings.motorData2 ? !String.isNullOrEmpty(value) && siblings.motorData2 && siblings.thrustInitial2 : true;
+	return siblings.motorSelected2 ? !String.isNullOrEmpty(value) && siblings.motorSelected2 && siblings.thrustInitial2 : true;
 }
 const thrustInitialtRequired3 = (value, siblings, vm) => {
-	return siblings.motorData3 ? !String.isNullOrEmpty(value) && siblings.motorData3 && siblings.thrustInitial3 : true;
+	return siblings.motorSelected3 ? !String.isNullOrEmpty(value) && siblings.motorSelected3 && siblings.thrustInitial3 : true;
 }
 const thrustInitialtRequired4 = (value, siblings, vm) => {
-	return siblings.motorData4 ? !String.isNullOrEmpty(value) && siblings.motorData4 && siblings.thrustInitial4: true;
+	return siblings.motorSelected4 ? !String.isNullOrEmpty(value) && siblings.motorSelected4 && siblings.thrustInitial4: true;
+}
+
+const thrustAverageInitialI = (value, initial) => {
+	if (!value)
+		return true;
+	if (String.isNullOrEmpty(initial))
+		return true;
+	// return (value > Number(initial));
+	return true;
+}
+const thrustAverageInitial1 = (value, siblings, vm) => {
+	return thrustAverageInitialI(Number(value), siblings.thrustInitial1);
+}
+const thrustAverageInitial2 = (value, siblings, vm) => {
+	return thrustAverageInitialI(Number(value), siblings.thrustInitial2);
+}
+const thrustAverageInitial3 = (value, siblings, vm) => {
+	return thrustAverageInitialI(Number(value), siblings.thrustInitial3);
+}
+const thrustAverageInitial4 = (value, siblings, vm) => {
+	return thrustAverageInitialI(Number(value), siblings.thrustInitial4);
 }
 
 const thrustInitialAverageI = (value, average) => {
@@ -919,7 +948,8 @@ const thrustInitialAverageI = (value, average) => {
 		return true;
 	if (String.isNullOrEmpty(average))
 		return true;
-	return (value <= Number(average));
+	// return (value <= Number(average));
+	return true;
 }
 const thrustInitialAverage1 = (value, siblings, vm) => {
 	return thrustInitialAverageI(Number(value), siblings.thrustAverage1);
@@ -952,26 +982,6 @@ const thrustInitialPeak3 = (value, siblings, vm) => {
 }
 const thrustInitialPeak4 = (value, siblings, vm) => {
 	return thrustInitialPeakI(Number(value), siblings.thrustPeak4);
-}
-
-const thrustAverageInitialI = (value, initial) => {
-	if (!value)
-		return true;
-	if (String.isNullOrEmpty(initial))
-		return true;
-	return (value > Number(initial));
-}
-const thrustAverageInitial1 = (value, siblings, vm) => {
-	return thrustAverageInitialI(Number(value), siblings.thrustInitial1);
-}
-const thrustAverageInitial2 = (value, siblings, vm) => {
-	return thrustAverageInitialI(Number(value), siblings.thrustInitial2);
-}
-const thrustAverageInitial3 = (value, siblings, vm) => {
-	return thrustAverageInitialI(Number(value), siblings.thrustInitial3);
-}
-const thrustAverageInitial4 = (value, siblings, vm) => {
-	return thrustAverageInitialI(Number(value), siblings.thrustInitial4);
 }
 
 const thrustAveragePeakI = (value, peak, vm) => {
@@ -1019,7 +1029,7 @@ const thrustPeakInitialI = (value, initial) => {
 		return true;
 	if (String.isNullOrEmpty(initial))
 		return true;
-	return (value > Number(initial));
+	return (value >= Number(initial));
 }
 const thrustPeakInitial1 = (value, siblings, vm) => {
 	return thrustPeakInitialI(Number(value), siblings.thrustInitial1);
