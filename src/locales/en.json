@@ -84,8 +84,8 @@
 				"thrust2Weight": {
 					"thrustAverageInitial": "Less than or equal Thrust Initial",
 					"thrustAveragePeak": "Greater than or equal Thrust Peak",
-					"thrustInitialAverage": "Less than or equal Thrust Average",
-					"thrustInitialPeak": "Less than or equal Thrust Peak",
+					"thrustInitialAverage": "Greater than or equal Thrust Average",
+					"thrustInitialPeak": "Greater than or equal Thrust Peak",
 					"thrustPeakAverage": "Less than or equal Thrust Average",
 					"thrustPeakInitial": "Less than or equal Thrust Initial"
 				}
@@ -185,6 +185,12 @@
 						"launch": {
 							"color": "Launch Pin Color"
 						},
+						"maxAltitude": {
+							"color": "Max. Altitude Pin Color"
+						},
+						"maxVelocity": {
+							"color": "Max. Velocity Pin Color"
+						},
 						"touchdown": {
 							"color": "Touchdown Pin Color"
 						}
@@ -195,7 +201,15 @@
 					"groundPath": "Ground Path",
 					"launch": "Launch",
 					"location": "Flight Location",
-					"measurementUnits": "Altitude Measurement Units",
+					"maxAltitude": "Max. Altitude",
+					"maxVelocity": "Max. Velocity",
+					"measurementUnits": {
+						"input": "Input Measurement Units",
+						"output": "Output Measurement Units",
+						"gps": "GPS",
+						"altitude": "Altitude",
+						"velocity": "Velocity"
+					},
 					"processors": {
 						"title": "Flight Data Type",
 						"eggtimer": "Eggtimer",
@@ -206,6 +220,8 @@
 						"pins": {
 							"additional": "Additional Pins Template",
 							"launch": "Launch Pin Template",
+							"maxAltitude": "Max. Altitude",
+							"maxVelocity": "Max. Velocity",
 							"touchdown": "Touchdown Pin Template"
 						}
 					},
@@ -234,6 +250,7 @@
 					"max_launch_rod_timespan_hint": "Max. time spent accelerating on the launch rod.",
 					"motor": "Motor",
 					"motor_hint": "Select rocket motor.",
+					"specifications": "Motor Specifications",
 					"thrust": "Thrust (Newtons)",
 					"thrust_average": "Average",
 					"thrust_average_hint": "Average thrust of the engine.",
@@ -444,8 +461,9 @@
 				"thrust2Weight": "Thrust 2 Weight"
 			},
 			"info": {
+				"title": "Info",
 				"epoxy": "Epoxy",
-				"title": "Info"
+				"highPower": "High Power"
 			},
 			"links": {
 				"title": "Links",
@@ -482,7 +500,8 @@
 		"saved": "Saved",
 		"thrust2Weight": {
 			"motor": {
-				"selected": "Selected Motor"
+				"selected": "Selected Motor",
+				"unselected": "Unable to select the motor, try again."
 			}
 		}
 	},
@@ -596,6 +615,13 @@
 					"additionalLinks": "Additional Links",
 					"desc": "Chart comparing specifications of some common epoxies, plus some additional links about epoxies and model rocketry.",
 					"chart": "Chart"
+				},
+				"highPower": {
+					"additionalLinks": "Additional Links",
+					"desc": "Information about High Power Rocketry!",
+					"welcome1": "High power rocketry is a subset of model rocketry that deals with higher power, thus the name, rocket motors.",
+					"welcome1NAR": "Rocket motors which exceed model rocketry motor definitions and the models that use these motors are collectively referred to as High Power Rocketry (HPR). HPR is similar to model rocketry with differences that include the propulsion power and weight increase of the model. They use motors in ranges over “G” power and/or weigh more than laws and regulations allow for unrestricted model rockets.",
+					"welcome2": "This section provides a collection of links to various content, information and tools about high power rocketry!"
 				}
 			},
 			"links": {
@@ -648,13 +674,14 @@
 					"thrust": "Thrust (Newtons)",
 					"to": " : 1",
 					"guidance": "Initial thrust is more important during the initial boost phase off the launch pad.  Average thrust is the average of the thrust across the burn timespan.  The peak thrust does not always occur during launch or initial boost phase; consult the thrust curves at ",
-					"guidance2": "When using a ThrustCuve motor profile, the initial thrust is a approximate value and is determined from the sample data included with the motor profile.  The largest thrust (N) sample that falls below the Max. Launch Rod Time specified is used."
+					"guidance2": "When using a ThrustCuve motor profile, the initial thrust is a approximate value and is determined from the sample data included with the motor profile.  The largest thrust (N) sample that falls below the Max. Launch Rod Time specified is used.  If there is a discrepancy between the thrust curve data during this time period and the max thrust, then the thrust curve data is used."
 				}
 			},
-			"welcome": "RocketSidekick hosts a variety of tools in once place.  Some of the tools are custom build, others are based on formulas found in variety of rocketry forums and sites, as well as some sections having links or information.",
+			"welcome": "RocketSidekick hosts a variety of tools in once place for model rocketry.  Some of the tools are custom build, others are based on formulas found in variety of rocketry forums and sites, as well as some sections having links or information.",
 			"welcome1a": "Contributions for additional tools are welcome via Pull Requests on the site's GitHub repo (",
 			"welcome1b": ").  See the documentation on the repo.",
-			"welcome2": "The following is the selection of tools currently available."
+			"welcome2": "The following is the selection of tools and information currently available.",
+			"welcome3": "A high level primer on what the exciting world of model rocketry is!"
 		},
 		"copyright": "Copyright",
 		"copyright2": "Copyright © ",
@@ -680,7 +707,8 @@
 		"content": {
 			"info": {
 				"title": "Information", 
-				"epoxy": "Epoxy"
+				"epoxy": "Epoxy", 
+				"highPower": "High Power Rocketry"
 			},
 			"links": {
 				"title": "Links",
@@ -691,6 +719,7 @@
 				"guidance": "Guidance",
 				"manufacturers": "Manufacturers",
 				"organizations": "Organizations",
+				"study": "Study Guides",
 				"vendors": "Vendors"
 			},
 			"tools": {

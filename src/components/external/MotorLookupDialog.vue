@@ -382,6 +382,7 @@ export default {
 			const response = await serviceStore.dispatcher.requestMotorSearchResults(correlationId, request);
 			results.value = response || [];
 			ttl.value = serviceStore.state.motorSearchResults ? serviceStore.state.motorSearchResults.ttl : 0;
+			return success(correlationId);
 		};
 		// eslint-disable-next-line
 		const resetDialog = async (correlationId, ignoreSettings) => {

@@ -219,7 +219,7 @@
 					<v-list-item-title>{{ $t('menu.checklists.title') }}</v-list-item-title>
 				</v-list-item>
 				<v-list-item>
-					{{ $t('menu.info.title') }}
+					{{ $t('menu.content.info.title') }}
 					<v-list density="compact">
 						<v-list-item
 							v-for="item in info"

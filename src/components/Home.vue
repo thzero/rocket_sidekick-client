@@ -56,12 +56,13 @@
 								cols="12"
 							>
 								<p>
-									{{ $t('strings.content.welcome') }}
-								</p><br/>
+									{{ $t('strings.content.welcome') }}<br><br>
+								</p>
 								<p>
 									{{ $t('strings.content.welcome2') }}
-								</p><br/>
-							</v-col><v-col
+								</p>
+							</v-col>
+							<v-col
 								cols="12"
 								class="text-center"
 							>
@@ -115,6 +116,27 @@
 									</v-card-text>
 								</v-card>
 							</v-col>
+							<v-col
+								cols="12"
+								class="text-center"
+							>
+								<hr />
+							</v-col>
+							<v-col
+								cols="12"
+								class="mt-4 mb-4"
+							>
+								<p>
+									{{ $t('strings.content.welcome3') }}
+								</p>
+							</v-col>
+							<v-col
+								cols="12"
+							>
+								<div class="slideshow">
+									<iframe id="slideshow" frameborder="0" class="slideshowFrame"></iframe>
+								</div>
+							</v-col>
 							<!-- 
 							<v-col
 								cols="12"
@@ -163,7 +185,7 @@
 </template>
 
 <script>
-import { computed, ref } from 'vue';
+import { computed, onMounted, ref } from 'vue';
 
 import Constants from '@/constants';
 import LibraryConstants from '@thzero/library_client/constants';
@@ -239,6 +261,19 @@ export default {
 			initializeCompleted.value = value;
 		});
 
+		onMounted(async () => {
+			// // Selecting the iframe element
+			const iframe = document.getElementById('slideshow');
+			// // Adjusting the iframe height onload event
+			// // frame.onload = function()
+			// // function execute while load the iframe
+			// iframe.addEventListener('load', function() {
+			// 	iframe.style.height = (Number(iframe.style.width.replace('%')) * 0.75) + 'px';
+			// 	// iframe.style.width = iframe.contentWindow.body.scrollWidth + 'px';
+			// });	
+			iframe.src = 'https://docs.google.com/presentation/d/e/2PACX-1vRrKdGwne8BdKJMwMtVG1NZxVtmVOQ_ps5FBnFY85xeRX50vCJGkJQ74Pn7D46f4tqPXk287QhHwype/embed?start=true&loop=false&delayms=3000';
+		});
+
 		return {
 			correlationId,
 			error,
@@ -294,5 +329,20 @@ export default {
 };
 </script>
 
-<style scoped>
+<style>
+.slideshow {
+    width: 100%;
+    height: 0;
+    padding-bottom: 56%; /* Change this till it fits the dimensions of your video */
+    position: relative;
+}
+
+.slideshowFrame {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    display: block;
+    top: 0;
+    left: 0;
+}
 </style>

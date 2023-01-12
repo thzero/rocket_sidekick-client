@@ -191,24 +191,6 @@ class FoamToolsService extends BaseService {
 			instance: this._serviceCalculationEngine.initialize(correlationId)
 		}, correlationId);
 	}
-
-	update(correlationId, motor, data) {
-		if (!motor || !motor.samples || (motor.samples.length <= 0) || !data)
-            return;
-
-        let initialThrust = 0;
-        for (const sample of motor.samples) {
-            if (sample.time > data.maxLaunchRodTime)
-                break;
-
-			if (sample.thrust > initialThrust)
-			initialThrust = sample.thrust;
-        }
-        data.thrustAverage = motor.avgThrustN;
-        data.thrustInitial = initialThrust;
-        data.thrustPeak = motor.maxThrustN;
-		return this._successResponse(data, correlationId);
-	}
 }
 
 export default FoamToolsService;

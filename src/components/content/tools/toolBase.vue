@@ -1,8 +1,6 @@
 <script>
 import { computed, onMounted, ref } from 'vue';
 
-import LibraryConstants from '@thzero/library_client/constants';
-
 import AppUtility from '@/utility/app';
 import GlobalUtility from '@thzero/library_client/utility/global';
 import Utility from '@thzero/library_common/utility';
@@ -28,14 +26,14 @@ export function useToolsBaseComponent(props, context, options) {
 	const errorMessage = ref(null);
 	const errorTimer = ref(null);
 	const measurementUnitsId = ref(null);
-	const measurementUnitsAcceleration = ref(null);
-	const measurementUnitsArea = ref(null);
-	const measurementUnitsFluid = ref(null);
-	const measurementUnitsDistance = ref(null);
-	const measurementUnitsLength = ref(null);
-	const measurementUnitsVelocity = ref(null);
-	const measurementUnitsVolume = ref(null);
-	const measurementUnitsWeight = ref(null);
+	const measurementUnitsAccelerationDefaultId = ref(null);
+	const measurementUnitsAreaDefaultId = ref(null);
+	const measurementUnitsFluidDefaultId = ref(null);
+	const measurementUnitsDistanceDefaultId = ref(null);
+	const measurementUnitsLengthDefaultId = ref(null);
+	const measurementUnitsVelocityDefaultId = ref(null);
+	const measurementUnitsVolumeDefaultId = ref(null);
+	const measurementUnitsWeightDefaultId = ref(null);
 	const notifyColor = ref(null);
 	const notifyMessage = ref(null);
 	const notifySignal = ref(false);
@@ -133,14 +131,14 @@ export function useToolsBaseComponent(props, context, options) {
 	onMounted(async () => {
 		settings.value = serviceStore.getters.user.getUserSettings();
 		measurementUnitsId.value = AppUtility.measurementUnitsId(correlationId, settings.value);
-		measurementUnitsAcceleration.value = AppUtility.measurementUnitsAcceleration(correlationId, settings.value);
-		measurementUnitsArea.value = AppUtility.measurementUnitArea(correlationId, settings.value);
-		measurementUnitsDistance.value = AppUtility.measurementUnitDistance(correlationId, settings.value);
-		measurementUnitsFluid.value = AppUtility.measurementUnitFluid(correlationId, settings.value);
-		measurementUnitsLength.value = AppUtility.measurementUnitLength(correlationId, settings.value);
-		measurementUnitsVelocity.value = AppUtility.measurementUnitVelocity(correlationId, settings.value);
-		measurementUnitsVolume.value = AppUtility.measurementUnitVolume(correlationId, settings.value);
-		measurementUnitsWeight.value = AppUtility.measurementUnitWeight(correlationId, settings.value);
+		measurementUnitsAccelerationDefaultId.value = AppUtility.measurementUnitsAccelerationId(correlationId, settings.value);
+		measurementUnitsAreaDefaultId.value = AppUtility.measurementUnitAreaId(correlationId, settings.value);
+		measurementUnitsDistanceDefaultId.value = AppUtility.measurementUnitDistanceId(correlationId, settings.value);
+		measurementUnitsFluidDefaultId.value = AppUtility.measurementUnitFluidId(correlationId, settings.value);
+		measurementUnitsLengthDefaultId.value = AppUtility.measurementUnitLengthId(correlationId, settings.value);
+		measurementUnitsVelocityDefaultId.value = AppUtility.measurementUnitVelocityId(correlationId, settings.value);
+		measurementUnitsVolumeDefaultId.value = AppUtility.measurementUnitVolumeId(correlationId, settings.value);
+		measurementUnitsWeightDefaultId.value = AppUtility.measurementUnitWeightId(correlationId, settings.value);
 	});
 
 	return {
@@ -166,14 +164,14 @@ export function useToolsBaseComponent(props, context, options) {
 		initCalculationOutput,
 		initCalculationResults,
 		measurementUnitsId,
-		measurementUnitsAcceleration,
-		measurementUnitsArea,
-		measurementUnitsFluid,
-		measurementUnitsDistance,
-		measurementUnitsLength,
-		measurementUnitsVelocity,
-		measurementUnitsVolume,
-		measurementUnitsWeight,
+		measurementUnitsAccelerationDefaultId,
+		measurementUnitsAreaDefaultId,
+		measurementUnitsFluidDefaultId,
+		measurementUnitsDistanceDefaultId,
+		measurementUnitsLengthDefaultId,
+		measurementUnitsVelocityDefaultId,
+		measurementUnitsVolumeDefaultId,
+		measurementUnitsWeightDefaultId,
 		notifyColor,
 		notifyMessage,
 		notifySignal,

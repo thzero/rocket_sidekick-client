@@ -1,5 +1,3 @@
-import Handlebars from 'handlebars';
-
 import Constants from '@/constants';
 
 import GlobalUtility from '@thzero/library_client/utility/global';
@@ -7,14 +5,28 @@ import LibraryUtility from '@thzero/library_common/utility';
 
 import BaseService from '@thzero/library_client/service/index';
 
+import configureMeasurements, { length, speed } from 'convert-units';
+
 class FlightPathProcessorService extends BaseService {
 	constructor() {
 		super();
 
-		this._templateMain = null;
-		this._templatePinLaunch = null;
-		this._templatePinsAdditional = null;
-		this._templatePinTouchdown = null;
+		this._serviceCalculationEngine = null;
+		this._serviceFlightPathOutput = null;
+		this._serviceFlightPathOutputTemplate = null;
+
+		this._convert = configureMeasurements({
+			length,
+			speed
+		});
+	}
+
+	init(injector) {
+		super.init(injector);
+
+		this._serviceCalculationEngine = injector.getService(Constants.InjectorKeys.SERVICE_TOOLS_CALCULATION_ENGINE);
+		this._serviceFlightPathOutput = injector.getService(Constants.InjectorKeys.SERVICE_TOOLS_FLIGHT_PATH_OUTPUT_KML);
+		this._serviceFlightPathOutputTemplate = injector.getService(Constants.InjectorKeys.SERVICE_TOOLS_FLIGHT_PATH_OUTPUT_TEMPLATE_HANDLEBARS);
 	}
 
 	get id() {
@@ -29,20 +41,16 @@ class FlightPathProcessorService extends BaseService {
 		this._enforceNotNull('FlightPathProcessorService', 'process', engine, 'engine', correlationId);
 		this._enforceNotNull('FlightPathProcessorService', 'process', results, 'results', correlationId);
 		this._enforceNotNull('FlightPathProcessorService', 'process', data, 'data', correlationId);
-		this._enforceNotEmpty('FlightPathProcessorService', 'process', measurementUnits, 'measurementUnits', correlationId);
-		
-		let response = this._setTemplateMain(correlationId, engine, templateMain);
-		if (this._hasFailed(response))
-			return response;
-		response = this._setTemplatePinLaunch(correlationId, engine, templatePinLaunch);
-		if (this._hasFailed(response))
-			return response;
-		response = this._setTemplatePinTouchdown(correlationId, engine, templatePinTouchdown);
-		if (this._hasFailed(response))
-			return response;
-		this._setTemplatePinsAdditional(correlationId, engine, templatePinsAdditional);
-		if (this._hasFailed(response))
-			return response;
+		this._enforceNotNull('FlightPathProcessorService', 'process', measurementUnits, 'measurementUnits', correlationId);
+		this._enforceNotEmpty('FlightPathProcessorService', 'process', measurementUnits.measurementUnitsId, 'measurementUnitsId', correlationId);
+		this._enforceNotEmpty('FlightPathProcessorService', 'process', measurementUnits.measurementUnitsDistanceId, 'measurementUnitsDistanceId', correlationId);
+		this._enforceNotEmpty('FlightPathProcessorService', 'process', measurementUnits.measurementUnitsVelocityId, 'measurementUnitsVelocityId', correlationId);
+		this._enforceNotEmpty('FlightPathProcessorService', 'process', measurementUnits.measurementUnitsOutputId, 'measurementUnitsOutputId', correlationId);
+		this._enforceNotEmpty('FlightPathProcessorService', 'process', measurementUnits.measurementUnitsDistanceOutputId, 'measurementUnitsDistanceOutputId', correlationId);
+		this._enforceNotEmpty('FlightPathProcessorService', 'process', measurementUnits.measurementUnitsVelocityOutputId, 'measurementUnitsVelocityOutputId', correlationId);
+
+		this._serviceFlightPathOutput.initialize(correlationId);
+		this._serviceFlightPathOutputTemplate.initialize(correlationId, templateMain, templatePinLaunch, templatePinTouchdown, templatePinsAdditional);
 
 		this._data = new FlightPath();
 
@@ -61,148 +69,69 @@ class FlightPathProcessorService extends BaseService {
 		if (this._hasFailed(responseProcessDataPost))
 			return responseProcessDataPost;
 
+		// const divisor = (measurementUnits.measurementUnitsId === Constants.MeasurementUnits.english.id ? 3.281 : 1);
+		const divisor = this._convert(1).from(measurementUnits.measurementUnitsDistanceId).to('m');
+		let coords;
 		const path = [];
-		const divisor = (measurementUnits === Constants.MeasurementUnits.english.id ? 3.281 : 1);
 		let previous = null;
 		let temp = this._data.rows.shift();
-		results.launch = `${temp.longitude},${temp.latitude}`;
+		results.maxAltitude = 0;
+		results.maxVelocity = 0;
+		results.launchCoords = `${temp.longitude},${temp.latitude}`;
 		while (temp) {
 			previous = temp;
-			path.push(`${temp.longitude},${temp.latitude},${this._round(temp.altitude / divisor)}`);
+			coords = `${temp.longitude},${temp.latitude},${this._round(temp.altitude * divisor)}`
+			
+			// add coords to the path...
+			path.push(coords);
+
+			// is this the max altitude?
+			if (temp && temp.altitude && (temp.altitude > 0) && (temp.altitude > results.maxAltitude)) {
+				results.maxAltitude = this._round(temp.altitude);
+				results.maxAltitudeCoords = coords;
+			}
+
+			// is this the max velocity?
+			if (temp && temp.velocityV && (temp.velocityV > 0) && (temp.velocityV > results.maxVelocity)) {
+				results.maxVelocity = this._round(temp.velocityV);
+				results.maxVelocityCoords = coords;
+			}
+
 			temp = this._data.rows.shift();
 			if (!temp)
-				results.touchdown = `${previous.longitude},${previous.latitude}`;
+				results.touchdownCoords = `${previous.longitude},${previous.latitude}`;
 		}
 
-		results.coords = path;
-		results.flightPath = this._kml(correlationId, results, path.join('\n'));
+		// results.maxAltitude = Number(responseCalc2.results.maxAltitude.value).toLocaleString();
+		// results.maxVelocity = Number(responseCalc2.results.maxVelocity.value).toLocaleString();
+		results.maxAltitude = this._convert(results.maxAltitude)
+			.from(Constants.MeasurementUnits[measurementUnits.measurementUnitsId].distance[measurementUnits.measurementUnitsDistanceId])
+			.to(Constants.MeasurementUnits[measurementUnits.measurementUnitsOutputId].distance[measurementUnits.measurementUnitsDistanceOutputId]);
+		results.maxVelocity = this._convert(results.maxVelocity)
+			.from(Constants.MeasurementUnits[measurementUnits.measurementUnitsId].velocity[measurementUnits.measurementUnitsVelocityId])
+			.to(Constants.MeasurementUnits[measurementUnits.measurementUnitsOutputId].velocity[measurementUnits.measurementUnitsVelocityOutputId]);
+		results.maxAltitude = Number(results.maxAltitude).toLocaleString();
+		results.maxVelocity = Number(results.maxVelocity).toLocaleString();
+
+		results.translations = {};
+		results.translations.launch = GlobalUtility.$trans.t('forms.content.tools.flightPath.launch');
+		results.translations.maxAltitude = GlobalUtility.$trans.t('forms.content.tools.flightPath.maxAltitude');
+		results.translations.maxVelocity = GlobalUtility.$trans.t('forms.content.tools.flightPath.maxVelocity');
+		results.translations.touchdown = GlobalUtility.$trans.t('forms.content.tools.flightPath.touchdown');
+		results.translations.flightPath = GlobalUtility.$trans.t('forms.content.tools.flightPath.flightPath');
+		results.translations.groundPath = GlobalUtility.$trans.t('forms.content.tools.flightPath.groundPath');
+		results.translations.measurementUnits = {};
+		results.translations.measurementUnits.distance = Constants.MeasurementUnits[measurementUnits.measurementUnitsOutputId].distance[measurementUnits.measurementUnitsDistanceOutputId];
+		results.translations.measurementUnits.velocity = Constants.MeasurementUnits[measurementUnits.measurementUnitsOutputId].velocity[measurementUnits.measurementUnitsVelocityOutputId];
+
+		results.flightPathCoords = path;
+		// results.flightPath = this._kml(correlationId, results, path.join('\n'));
+		const responseFlightPath = this._serviceFlightPathOutput.output(correlationId, results, path.join('\n'), this._serviceFlightPathOutputTemplate);
+		if (this._hasFailed(responseFlightPath))
+			return responseFlightPath;
+		results.flightPath = responseFlightPath.results;
 
 		return this._successResponse(results, correlationId);
-	}
-
-	_kml(correlationId, flightInfo, data) {
-		this._enforceNotNull('FlightPathProcessorService', '_kml', flightInfo, 'flightInfo', correlationId);
-		this._enforceNotNull('FlightPathProcessorService', '_kml', data, 'data', correlationId);
-
-		flightInfo.style.path.flight.color = this._reverseRgb(flightInfo.style.path.flight.color);
-		flightInfo.style.path.ground.color = this._reverseRgb(flightInfo.style.path.ground.color);
-		flightInfo.style.pin.launch.color = this._reverseRgb(flightInfo.style.pin.launch.color);
-		flightInfo.style.pin.touchdown.color = this._reverseRgb(flightInfo.style.pin.touchdown.color);
-
-		flightInfo.translations = {};
-		flightInfo.translations.launch = GlobalUtility.$trans.t('forms.content.tools.flightPath.launch');
-		flightInfo.translations.touchdown = GlobalUtility.$trans.t('forms.content.tools.flightPath.touchdown');
-		flightInfo.translations.flightPath = GlobalUtility.$trans.t('forms.content.tools.flightPath.flightPath');
-		flightInfo.translations.groundPath = GlobalUtility.$trans.t('forms.content.tools.flightPath.groundPath');
-
-		flightInfo.description = '';
-		if (flightInfo.date || flightInfo.location) {
-			const temp2 = [];
-			if (flightInfo.date)
-				temp2.push(flightInfo.date.toLocaleString());
-			if (flightInfo.location) {
-				temp2.push('@');
-				temp2.push(flightInfo.location);
-			}
-			flightInfo.description = `<description><![CDATA[${temp2.join(' ')}]]></description>`;
-		}
-
-		flightInfo.titleFull = flightInfo.title;
-		if (String.isNullOrEmpty(flightInfo.title))
-			flightInfo.titleFull = '';
-		if (!String.isNullOrEmpty(flightInfo.titleFull))
-			flightInfo.titleFull += ' ';
-		flightInfo.titleFull += flightInfo.translations.flightPath;
-
-		flightInfo.pins = '';
-		if (flightInfo.launch) {
-// 			pins += `
-// 			<Placemark>
-// 				<name><![CDATA[${flightInfo.translations.launch}]]></name>
-// 				<Style id="normalPlacemark">
-// 					<IconStyle>
-// 						<color>ff${flightInfo.style.pin.launch.color}</color>
-// 					</IconStyle>
-// 				</Style>
-// 				<Point>
-// 					<coordinates>
-// ${flightInfo.launch}
-// 					</coordinates>
-// 				</Point>
-// 			</Placemark>`;
-			flightInfo.pins += this._templatePinLaunch({ flightInfo: flightInfo });
-		}
-		if (flightInfo.touchdown) {
-// 			pins += `
-// 			<Placemark>
-// 				<name><![CDATA[${flightInfo.translations.touchdown}]]></name>
-// 				<Style id="normalPlacemark">
-// 					<IconStyle>
-// 						<color>ff${flightInfo.style.pin.touchdown.color}</color>
-// 					</IconStyle>
-// 				</Style>
-// 				<Point>
-// 					<coordinates>
-// ${flightInfo.touchdown}
-// 					</coordinates>
-// 				</Point>
-// 			</Placemark>`;
-			flightInfo.pins += this._templatePinTouchdown({ flightInfo: flightInfo });
-		}
-		if (this._templatePinsAdditional)
-			flightInfo.pins += this._templatePinsAdditional({ flightInfo: flightInfo });
-
-// 		return `<?xml version="1.0" encoding="UTF-8"?>
-// <kml xmlns="http://www.opengis.net/kml/2.2">
-// 	<Document>
-// 		<name><![CDATA[${flightInfo.titleFull}]]></name>
-// 		${flightInfo.description}
-// 		<visibility>1</visibility>
-// 		<open>1</open>
-// 		<Folder id="Tracks">
-// 			<name>Tracks</name>
-// 			<visibility>1</visibility>
-// 			<open>0</open>${pins}
-// 			<Placemark>
-// 				<name><![CDATA[${flightInfo.translations.flightPath}]]></name>
-// 				<Style>
-// 					<LineStyle>
-// 						<color>ff${flightInfo.style.path.flight.color}</color>
-// 						<width>4</width>
-// 					</LineStyle>
-// 				</Style>
-// 				<MultiGeometry>
-// 					<LineString>
-// 						<tessellate>0</tessellate>
-// 						<altitudeMode>absolute</altitudeMode>
-// 						<coordinates>
-// ${flightInfo.coords}
-// 						</coordinates>
-// 					</LineString>
-// 				</MultiGeometry>
-// 			</Placemark>
-// 			<Placemark>
-// 				<name><![CDATA[${flightInfo.translations.groundPath}]]></name>
-// 				<Style>
-// 					<LineStyle>
-// 						<color>ff${flightInfo.style.path.ground.color}</color>
-// 						<width>4</width>
-// 					</LineStyle>
-// 				</Style>
-// 				<MultiGeometry>
-// 					<LineString>
-// 						<tessellate>0</tessellate>
-// 						<altitudeMode>clampToGround</altitudeMode>
-// 						<coordinates>
-// ${flightInfo.coords}
-// 						</coordinates>
-// 					</LineString>
-// 				</MultiGeometry>
-// 			</Placemark>
-// 		</Folder>
-// 	</Document>
-// </kml>`;
-		return this._templateMain({ flightInfo: flightInfo });
 	}
 
 	_processData(correlationId, input) {
@@ -224,140 +153,6 @@ class FlightPathProcessorService extends BaseService {
 
 	_round(value, places = 2) {
 		return Number(value.toFixed(places));
-	}
-
-	_reverseRgb(str) {
-		return str.replace('#', '').split('').reverse().join('');
-	}
-
-	_setTemplate(correlationId, template, defaultTemplate) {
-		try {
-			template = !String.isNullOrEmpty(template) ? template : defaultTemplate;
-			template = Handlebars.compile(template);
-			return this._successResponse(template, correlationId);
-		}
-		catch(err) {
-			return this._error('FlightPathProcessorService', '_setTemplate', null, err, null, null, correlationId);
-		}
-	}
-
-	_setTemplateMain(correlationId, engine, template) {
-		// const response = this._setTemplate(correlationId, template, `<?xml version="1.0" encoding="UTF-8"?>
-		// <kml xmlns="http://www.opengis.net/kml/2.2">
-		// 	<Document>
-		// 		<name><![CDATA[{{flightInfo.titleFull}}]]></name>
-		// 		{{flightInfo.description}}
-		// 		<visibility>1</visibility>
-		// 		<open>1</open>
-		// 		<Folder id="Tracks">
-		// 			<name>Tracks</name>
-		// 			<visibility>1</visibility>
-		// 			<open>0</open>{{{flightInfo.pins}}}
-		// 			<Placemark>
-		// 				<name><![CDATA[{{flightInfo.translations.flightPath}}]]></name>
-		// 				<Style>
-		// 					<LineStyle>
-		// 						<color>ff{{flightInfo.style.path.flight.color}}</color>
-		// 						<width>4</width>
-		// 					</LineStyle>
-		// 				</Style>
-		// 				<MultiGeometry>
-		// 					<LineString>
-		// 						<tessellate>0</tessellate>
-		// 						<altitudeMode>absolute</altitudeMode>
-		// 						<coordinates>
-		// {{flightInfo.coords}}
-		// 						</coordinates>
-		// 					</LineString>
-		// 				</MultiGeometry>
-		// 			</Placemark>
-		// 			<Placemark>
-		// 				<name><![CDATA[{{flightInfo.translations.groundPath}}]]></name>
-		// 				<Style>
-		// 					<LineStyle>
-		// 						<color>ff{{flightInfo.style.path.ground.color}}</color>
-		// 						<width>4</width>
-		// 					</LineStyle>
-		// 				</Style>
-		// 				<MultiGeometry>
-		// 					<LineString>
-		// 						<tessellate>0</tessellate>
-		// 						<altitudeMode>clampToGround</altitudeMode>
-		// 						<coordinates>
-		// {{flightInfo.coords}}
-		// 						</coordinates>
-		// 					</LineString>
-		// 				</MultiGeometry>
-		// 			</Placemark>
-		// 		</Folder>
-		// 	</Document>
-		// </kml>`);
-		const response = this._setTemplate(correlationId, template, engine.defaultTemplateMain);
-		if (this._hasFailed(response))
-			return response;
-
-		this._templateMain = response.results;
-		return this._success(correlationId);
-	}
-
-	_setTemplatePinLaunch(correlationId, engine, template) {
-// 		const response = this._setTemplate(correlationId, template, `
-// 		<Placemark>
-// 			<name><![CDATA[{{flightInfo.translations.touchdown}}]]></name>
-// 			<Style id="normalPlacemark">
-// 				<IconStyle>
-// 					<color>ff{{flightInfo.style.pin.touchdown.color}}</color>
-// 				</IconStyle>
-// 			</Style>
-// 			<Point>
-// 				<coordinates>
-// {{flightInfo.touchdown}}
-// 				</coordinates>
-// 			</Point>
-// 		</Placemark>`);
-		const response = this._setTemplate(correlationId, template, engine.defaultTemplatePinLaunch);
-		if (this._hasFailed(response))
-			return response;
-
-		this._templatePinLaunch = response.results;
-		return this._success(correlationId);
-	}
-
-	_setTemplatePinsAdditional(correlationId, engine, template) {
-		if (String.isNullOrEmpty(template)) {
-			this._templatePinsAdditional = null;
-			return this._success(correlationId);
-		}
-
-		const response = this._setTemplate(correlationId, template, ``);
-		if (this._hasFailed(response))
-			return response;
-
-		this._templatePinsAdditional = response.results;
-		return this._success(correlationId);
-	}
-
-	_setTemplatePinTouchdown(correlationId, engine, template) {
-// 		const response = this._setTemplate(correlationId, template, `
-// 		<Placemark>
-// 			<name><![CDATA[{{flightInfo.translations.touchdown}}]]></name>
-// 			<Style id="normalPlacemark">
-// 				<IconStyle>
-// 					<color>ff{{flightInfo.style.pin.touchdown.color}}</color>
-// 				</IconStyle>
-// 			</Style>
-// 			<Point>
-// 				<coordinates>
-// {{flightInfo.touchdown}}
-// 				</coordinates>
-// 			</Point>
-// 		</Placemark>`);
-		const response = this._setTemplate(correlationId, template, engine.defaultTemplatePinTouchdown);
-		if (this._hasFailed(response))
-			return response;
-
-		this._templatePinTouchdown = response.results;
-		return this._success(correlationId);
 	}
 
 	_sort(correlationId, func) {

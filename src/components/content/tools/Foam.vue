@@ -209,14 +209,14 @@ export default {
 			handleListener,
 			initCalculationResults,
 			measurementUnitsId,
-			measurementUnitsAcceleration,
-			measurementUnitsArea,
-			measurementUnitsFluid,
-			measurementUnitsDistance,
-			measurementUnitsLength,
-			measurementUnitsVelocity,
-			measurementUnitsVolume,
-			measurementUnitsWeight,
+			measurementUnitsAccelerationDefaultId,
+			measurementUnitsAreaDefaultId,
+			measurementUnitsFluidDefaultId,
+			measurementUnitsDistanceDefaultId,
+			measurementUnitsLengthDefaultId,
+			measurementUnitsVelocityDefaultId,
+			measurementUnitsVolumeDefaultId,
+			measurementUnitsWeightDefaultId,
 			resetFormI,
 			serviceStore,
 			toFixed,
@@ -311,7 +311,7 @@ export default {
 			reset(false);
 
 			calculationData.value = serviceToolsFoam.initialize(correlationId());
-			lengthMeasurementUnitId.value = measurementUnitsLength.value;
+			lengthMeasurementUnitId.value = measurementUnitsLengthDefaultId.value;
 		});
 
 		return {
@@ -327,14 +327,14 @@ export default {
 			handleListener,
 			initCalculationResults,
 			measurementUnitsId,
-			measurementUnitsAcceleration,
-			measurementUnitsArea,
-			measurementUnitsFluid,
-			measurementUnitsDistance,
-			measurementUnitsLength,
-			measurementUnitsVelocity,
-			measurementUnitsVolume,
-			measurementUnitsWeight,
+			measurementUnitsAccelerationDefaultId,
+			measurementUnitsAreaDefaultId,
+			measurementUnitsFluidDefaultId,
+			measurementUnitsDistanceDefaultId,
+			measurementUnitsLengthDefaultId,
+			measurementUnitsVelocityDefaultId,
+			measurementUnitsVolumeDefaultId,
+			measurementUnitsWeightDefaultId,
 			resetFormI,
 			serviceStore,
 			toFixed,

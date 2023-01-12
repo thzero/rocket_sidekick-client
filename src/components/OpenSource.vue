@@ -32,6 +32,13 @@ export default {
 					licenseName: 'MIT',
 					licenseUrl: 'https://github.com/chartjs/Chart.js/blob/master/LICENSE.md'
 				},
+				{
+					category: 'client',
+					name: 'convert-units',
+					url: 'https://github.com/convert-units/convert-units',
+					licenseName: 'MIT',
+					licenseUrl: 'https://github.com/convert-units/convert-units/blob/main/LICENSE'
+				},
 				// {
 				//	 category: 'client',
 				//	 name: 'decimal.js',

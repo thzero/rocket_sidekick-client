@@ -50,44 +50,52 @@ class AppUtility {
 		return Constants.MeasurementUnits[AppUtility.measurementUnitsId(correlationId, settings)];
 	}
 
-	static measurementUnitsAcceleration(correlationId, settings) {
+	static measurementUnitsAccelerationId(correlationId, settings, measurementUnitsId) {
+		measurementUnitsId = !String.isNullOrEmpty(measurementUnitsId) ? measurementUnitsId : AppUtility.measurementUnitsId(correlationId, settings);
 		return settings && settings.measurementUnits && settings.measurementUnits.acceleration ? settings.measurementUnits.acceleration : 
-		Constants.MeasurementUnits[AppUtility.measurementUnitsId(correlationId, settings)].acceleration.default;
+		Constants.MeasurementUnits[measurementUnitsId].acceleration.default;
 	}
 
-	static measurementUnitArea(correlationId, settings) {
+	static measurementUnitAreaId(correlationId, settings, measurementUnitsId) {
+		measurementUnitsId = !String.isNullOrEmpty(measurementUnitsId) ? measurementUnitsId : AppUtility.measurementUnitsId(correlationId, settings);
 		return settings && settings.measurementUnits && settings.measurementUnits.area ? settings.measurementUnits.area : 
-		Constants.MeasurementUnits[AppUtility.measurementUnitsId(correlationId, settings)].area.default;
+		Constants.MeasurementUnits[measurementUnitsId].area.default;
 	}
 
-	static measurementUnitDistance(correlationId, settings) {
+	static measurementUnitDistanceId(correlationId, settings, measurementUnitsId) {
+		measurementUnitsId = !String.isNullOrEmpty(measurementUnitsId) ? measurementUnitsId : AppUtility.measurementUnitsId(correlationId, settings);
 		return settings && settings.measurementUnits && settings.measurementUnits.distance ? settings.measurementUnits.distance : 
-		Constants.MeasurementUnits[AppUtility.measurementUnitsId(correlationId, settings)].distance.default;
+		Constants.MeasurementUnits[measurementUnitsId].distance.default;
 	}
 
-	static measurementUnitFluid(correlationId, settings) {
+	static measurementUnitFluidId(correlationId, settings, measurementUnitsId) {
+		measurementUnitsId = !String.isNullOrEmpty(measurementUnitsId) ? measurementUnitsId : AppUtility.measurementUnitsId(correlationId, settings);
 		return settings && settings.measurementUnits && settings.measurementUnits.fluid ? settings.measurementUnits.fluid : 
-		Constants.MeasurementUnits[AppUtility.measurementUnitsId(correlationId, settings)].distance.default;
+		Constants.MeasurementUnits[measurementUnitsId].distance.default;
 	}
 
-	static measurementUnitLength(correlationId, settings) {
+	static measurementUnitLengthId(correlationId, settings, measurementUnitsId) {
+		measurementUnitsId = !String.isNullOrEmpty(measurementUnitsId) ? measurementUnitsId : AppUtility.measurementUnitsId(correlationId, settings);
 		return settings && settings.measurementUnits && settings.measurementUnits.length ? settings.measurementUnits.length : 
-		Constants.MeasurementUnits[AppUtility.measurementUnitsId(correlationId, settings)].length.default;
+		Constants.MeasurementUnits[measurementUnitsId].length.default;
 	}
 
-	static measurementUnitVelocity(correlationId, settings) {
+	static measurementUnitVelocityId(correlationId, settings, measurementUnitsId) {
+		measurementUnitsId = !String.isNullOrEmpty(measurementUnitsId) ? measurementUnitsId : AppUtility.measurementUnitsId(correlationId, settings);
 		return settings && settings.measurementUnits && settings.measurementUnits.velocity ? settings.measurementUnits.velocity : 
-		Constants.MeasurementUnits[AppUtility.measurementUnitsId(correlationId, settings)].velocity.default;
+		Constants.MeasurementUnits[measurementUnitsId].velocity.default;
 	}
 
-	static measurementUnitVolume(correlationId, settings) {
+	static measurementUnitVolumeId(correlationId, settings, measurementUnitsId) {
+		measurementUnitsId = !String.isNullOrEmpty(measurementUnitsId) ? measurementUnitsId : AppUtility.measurementUnitsId(correlationId, settings);
 		return settings && settings.measurementUnits && settings.measurementUnits.volume ? settings.measurementUnits.volume : 
-		Constants.MeasurementUnits[AppUtility.measurementUnitsId(correlationId, settings)].volume.default;
+		Constants.MeasurementUnits[measurementUnitsId].volume.default;
 	}
 
-	static measurementUnitWeight(correlationId, settings) {
+	static measurementUnitWeightId(correlationId, settings, measurementUnitsId) {
+		measurementUnitsId = !String.isNullOrEmpty(measurementUnitsId) ? measurementUnitsId : AppUtility.measurementUnitsId(correlationId, settings);
 		return settings && settings.measurementUnits && settings.measurementUnits.weight ? settings.measurementUnits.weight : 
-		Constants.MeasurementUnits[AppUtility.measurementUnitsId(correlationId, settings)].weight.default;
+		Constants.MeasurementUnits[measurementUnitsId].weight.default;
 	}
 
 	static measurementUnitsOptions() {

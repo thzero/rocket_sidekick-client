@@ -64,14 +64,88 @@
 											/>
 										</v-col>
 										<v-col cols="12">
-											<VSelectWithValidation
-												ref="flightPathMeasurementUnitsIdRef"
-												v-model="flightPathMeasurementUnitsId"
-												vid="flightPathMeasurementUnitsId"
-												:items="flightPathMeasurementUnitsOptions"
-												:validation="validation"
-												:label="$t('forms.content.tools.flightPath.measurementUnits')"
-											/>
+											<v-card
+												variant="outlined"
+											>
+												<v-card-text>
+											<v-row dense>
+												<v-col cols="12">
+													<VSelectWithValidation
+														ref="flightPathMeasurementUnitsIdRef"
+														v-model="flightPathMeasurementUnitsId"
+														vid="flightPathMeasurementUnitsId"
+														:items="flightPathMeasurementUnitsOptions"
+														:validation="validation"
+														:label="$t('forms.content.tools.flightPath.measurementUnits.gps')"
+													/>
+											</v-col>
+											</v-row>
+											<v-row dense>
+												<v-col cols="6">
+													<VSelectWithValidation
+														ref="flightPathMeasurementUnitsDistanceIdRef"
+														v-model="flightPathMeasurementUnitsDistanceId"
+														vid="flightPathMeasurementUnitsDistanceId"
+														:items="flightPathMeasurementUnitsOptionsDistance"
+														:validation="validation"
+														:label="$t('forms.content.tools.flightPath.measurementUnits.altitude')"
+													/>
+												</v-col>
+												<v-col cols="6">
+													<VSelectWithValidation
+														ref="flightPathMeasurementUnitsVelocityIdRef"
+														v-model="flightPathMeasurementUnitsVelocityId"
+														vid="flightPathMeasurementUnitsVelocityId"
+														:items="flightPathMeasurementUnitsOptionsVelocity"
+														:validation="validation"
+														:label="$t('forms.content.tools.flightPath.measurementUnits.velocity')"
+													/>
+												</v-col>
+											</v-row>
+												</v-card-text>
+											</v-card>
+										</v-col>
+										<v-col cols="12">
+											<v-card
+												variant="outlined"
+											>
+												<v-card-text>
+													<v-row dense>
+														<v-col cols="12">
+															<VSelectWithValidation
+																ref="flightPathMeasurementUnitsOutputIdRef"
+																v-model="flightPathMeasurementUnitsOutputId"
+																vid="flightPathMeasurementUnitsOutputId"
+																:items="flightPathMeasurementUnitsOptions"
+																:validation="validation"
+																:label="$t('forms.content.tools.flightPath.measurementUnits.output')"
+															/>
+														</v-col>
+													</v-row>
+													<v-row dense>
+														<v-col cols="6">
+															<VSelectWithValidation
+																ref="flightPathMeasurementUnitsDistanceOutputIdRef"
+																v-model="flightPathMeasurementUnitsDistanceOutputId"
+																vid="flightPathMeasurementUnitsDistanceOutputId"
+																:items="flightPathMeasurementUnitsOptionsDistance"
+																:validation="validation"
+																:label="$t('forms.content.tools.flightPath.measurementUnits.altitude')"
+															/>
+														</v-col>
+														<v-col cols="6">
+															<VSelectWithValidation
+																ref="flightPathMeasurementUnitsVelocityOutputIdRef"
+																v-model="flightPathMeasurementUnitsVelocityOutputId"
+																vid="flightPathMeasurementUnitsVelocityOutputId"
+																:items="flightPathMeasurementUnitsOptionsVelocity"
+																:validation="validation"
+																:label="$t('forms.content.tools.flightPath.measurementUnits.velocity')"
+															/>
+														</v-col>
+													</v-row>
+												</v-card-text>
+											</v-card>
 										</v-col>
 										<v-col cols="12">
 											<VSelectWithValidation
@@ -109,6 +183,13 @@
 													/>
 													<VColorWithValidation
 													 	class="mb-2"
+														v-model="flightPathStylePathGroundColor"
+														vid="flightPathStylePathGroundColor"
+														:validation="validation"
+														:label="$t('forms.content.tools.flightPath.style.ground.color')"
+													/>
+													<VColorWithValidation
+													 	class="mb-2"
 														v-model="flightPathStylePathFlightColor"
 														vid="flightPathStylePathFlightColor"
 														:validation="validation"
@@ -118,10 +199,17 @@
 												<v-col cols="12" lg="6">
 													<VColorWithValidation
 													 	class="mb-2"
-														v-model="flightPathStylePathGroundColor"
-														vid="flightPathStylePathGroundColor"
+														v-model="flightPathStylePinMaxAltitudeColor"
+														vid="flightPathStylePinMaxAltitudeColor"
 														:validation="validation"
-														:label="$t('forms.content.tools.flightPath.style.ground.color')"
+														:label="$t('forms.content.tools.flightPath.style.maxAltitude.color')"
+													/>
+													<VColorWithValidation
+													 	class="mb-2"
+														v-model="flightPathStylePinMaxVelocityColor"
+														vid="flightPathStylePinMaxVelocityColor"
+														:validation="validation"
+														:label="$t('forms.content.tools.flightPath.style.maxVelocity.color')"
 													/>
 													<VColorWithValidation
 													 	class="mb-2"
@@ -130,6 +218,26 @@
 														:validation="validation"
 														:label="$t('forms.content.tools.flightPath.style.touchdown.color')"
 													/>
+												</v-col>
+											</v-row>
+											<v-row dense>
+												<v-col cols="12">
+													<div style="float: right;">
+														<v-btn
+															class="ml-2"
+															color="primary"
+															@click="clickStylesReset"
+														>
+															{{ $t('buttons.reset') }}
+														</v-btn>
+														<!-- <v-btn
+															class="ml-2"
+															color="green"
+															@click="saveStyles"
+														>
+															{{ $t('buttons.save') }}
+														</v-btn> -->
+														</div>
 												</v-col>
 											</v-row>
 										</v-expansion-panel-text>
@@ -242,7 +350,7 @@
 </template>
 
 <script>
-import { nextTick, onMounted, ref, watch } from 'vue';
+import { computed, nextTick, onMounted, ref, watch } from 'vue';
 
 import useVuelidate from '@vuelidate/core';
 import { required } from '@vuelidate/validators';
@@ -256,7 +364,7 @@ import CommonUtility from '@thzero/library_common/utility/index';
 import GlobalUtility from '@thzero/library_client/utility/global';
 import VuetifyUtility from '@/library_vue_vuetify/utility/index';
 
-import { useToolsBaseComponent } from '@/components/content/tools/toolBase';
+import { useFlightToolsBaseComponent } from '@/components/content/tools/flightToolBase';
 
 import VColorWithValidation from '@/library_vue_vuetify/components/form/VColorWithValidation';
 import VDateTimeField from '@/library_vue_vuetify/components/form/VDateTimeFieldTemp';
@@ -288,25 +396,38 @@ export default {
 			noBreakingSpaces,
 			notImplementedError,
 			success,
+			serviceStore,
 			calculationOutput,
 			dateFormat,
 			dateFormatMask,
 			errorMessage,
 			errors,
 			errorTimer,
+			calculateI,
 			formatNumber,
 			handleListener,
-			measurementUnits,
+			initCalculationOutput,
+			initCalculationResults,
+			measurementUnitsId,
+			measurementUnitsAccelerationDefaultId,
+			measurementUnitsAreaDefaultId,
+			measurementUnitsFluidDefaultId,
+			measurementUnitsDistanceDefaultId,
+			measurementUnitsLengthDefaultId,
+			measurementUnitsVelocityDefaultId,
+			measurementUnitsVolumeDefaultId,
+			measurementUnitsWeightDefaultId,
 			notifyColor,
 			notifyMessage,
 			notifySignal,
 			notifyTimeout,
-			serviceStore,
+			resetFormI,
 			setErrorMessage,
 			setErrorTimer,
 			setNotify,
+			toFixed,
 			settings
-		} = useToolsBaseComponent(
+		} = useFlightToolsBaseComponent(
 			props, 
 			context
 		);
@@ -330,14 +451,22 @@ export default {
 		const flightPathInput = ref(null);
 		const flightLocation = ref(null);
 		const flightPathMeasurementUnitsId = ref(null);
+		const flightPathMeasurementUnitsDistanceId = ref(null);
+		const flightPathMeasurementUnitsVelocityId = ref(null);
+		const flightPathMeasurementUnitsOutputId = ref(null)
+		const flightPathMeasurementUnitsDistanceOutputId = ref(null);
+		const flightPathMeasurementUnitsVelocityOutputId = ref(null);
 		const flightPathMeasurementUnitsOptions = ref([]);
 		const flightPathProcessor = ref(null);
 		const flightPathProcessors = ref([]);
 		const flightPathStylePathFlightColor = ref(null);
 		const flightPathStylePathGroundColor = ref(null);
 		const flightPathStylePinLaunchColor = ref(null);
+		const flightPathStylePinMaxAltitudeColor = ref(null);
+		const flightPathStylePinMaxVelocityColor = ref(null);
 		const flightPathStylePinTouchdownColor = ref(null);
 		const flightTitle = ref(null);
+		const initialized = ref(false);
 		const output = ref(null);
 		const processing = ref(false);
 		const styles = ref(false);
@@ -345,6 +474,22 @@ export default {
 		const templatePinLaunch = ref(serviceFlightPath.defaultTemplatePinLaunch);
 		const templatePinsAdditional = ref('');
 		const templatePinTouchdown = ref(serviceFlightPath.defaultTemplatePinTouchdown);
+
+		const clickStylesReset = () => {
+			flightPathStyleReset(correlationId(), false);
+		};
+		const flightPathMeasurementUnitsOptionsDistance = computed(() => {
+			if (String.isNullOrEmpty(flightPathMeasurementUnitsId.value))
+				return [];
+			const object = Constants.MeasurementUnits[flightPathMeasurementUnitsId.value].distance;
+			return Object.getOwnPropertyNames(object).filter(l => l !== 'default').map((item) => { return { id: item, name: GlobalUtility.$trans.t('measurementUnits.' + flightPathMeasurementUnitsId.value + '.distance.' + item + 'Abbr') }; });
+		});
+		const flightPathMeasurementUnitsOptionsVelocity = computed(() => {
+			if (String.isNullOrEmpty(flightPathMeasurementUnitsId.value))
+				return [];
+			const object = Constants.MeasurementUnits[flightPathMeasurementUnitsId.value].velocity;
+			return Object.getOwnPropertyNames(object).filter(l => l !== 'default').map((item) => { return { id: item, name: GlobalUtility.$trans.t('measurementUnits.' + flightPathMeasurementUnitsId.value + '.velocity.' + item + 'Abbr') }; });
+		});
 		
 		const flightPathInputChange = () => {
 			document.getElementById('top').scrollIntoView({behavior: 'smooth'});
@@ -357,22 +502,26 @@ export default {
 			if (!style)
 				return;
 
-			flightPathStylePathFlightColor.value = style.path.flight.color.value;
-			flightPathStylePathGroundColor.value = style.path.ground.color.value;
-			flightPathStylePinLaunchColor.value = style.pin.launch.color.value;
-			flightPathStylePinTouchdownColor.value = style.pin.touchdown.color.value;
+			flightPathStylePathFlightColor.value = style.path.flight.color;
+			flightPathStylePathGroundColor.value = style.path.ground.color;
+			flightPathStylePinLaunchColor.value = style.pin.launch.color;
+			flightPathStylePinMaxAltitudeColor.value = style.pin.maxAltitude.color;
+			flightPathStylePinMaxVelocityColor.value = style.pin.maxVelocity.color;
+			flightPathStylePinTouchdownColor.value = style.pin.touchdown.color;
 		};
 		const flightPathStyleReset = (correlationId, notify) => {
 			flightPathStylePathFlightColor.value = serviceFlightPath.styleDefault.path.flight.color;
 			flightPathStylePathGroundColor.value = serviceFlightPath.styleDefault.path.ground.color;
 			flightPathStylePinLaunchColor.value = serviceFlightPath.styleDefault.pin.launch.color;
+			flightPathStylePinMaxAltitudeColor.value = serviceFlightPath.styleDefault.pin.maxAltitude.color;
+			flightPathStylePinMaxVelocityColor.value = serviceFlightPath.styleDefault.pin.maxVelocity.color;
 			flightPathStylePinTouchdownColor.value = serviceFlightPath.styleDefault.pin.touchdown.color;
 
 			if (notify)
-				setNotify(correlationId(), 'messages.reset');
+				setNotify(correlationId, 'messages.reset');
 		};
-		const flightPathStyleSave = () => {
-			const correlationIdI = correlationId();
+		const flightPathStyleSave = (correlationIdI) => {
+			// const correlationIdI = correlationId();
 			if (String.isNullOrEmpty(flightPathProcessor.value))
 				return;
 
@@ -390,15 +539,21 @@ export default {
 					launch: {
 						color: flightPathStylePinLaunchColor.value
 					},
+					maxAltitude: {
+						color: flightPathStylePinMaxAltitudeColor.value
+					},
+					maxVelocity: {
+						color: flightPathStylePinMaxVelocityColor.value
+					},
 					touchdown: {
 						color: flightPathStylePinTouchdownColor.value
 					}
 				}
 			};
 
-			serviceStore.dispatcher.setFlightPathStyle(coorrelationIdI, style);
+			serviceStore.dispatcher.setFlightPathStyle(correlationIdI, style);
 
-			setNotify(correlationIdI, 'messages.saved');
+			// setNotify(correlationIdI, 'messages.saved');
 		};
 		const flightPathExport = () => {
 			try {
@@ -472,6 +627,12 @@ export default {
 							launch: {
 								color: flightPathStylePinLaunchColor.value ?? serviceFlightPath.value.styleDefault.pin.launch.color
 							},
+							maxAltitude: {
+								color: flightPathStylePinMaxAltitudeColor.value ?? serviceFlightPath.value.styleDefault.pin.maxAltitude.color
+							},
+							maxVelocity: {
+								color: flightPathStylePinMaxVelocityColor.value ?? serviceFlightPath.value.styleDefault.pin.maxVelocity.color
+							},
 							touchdown: {
 								color: flightPathStylePinTouchdownColor.value ?? serviceFlightPath.value.styleDefault.pin.touchdown.color
 							}
@@ -482,7 +643,15 @@ export default {
 				};
 
 				const flightPathResponse = serviceFlightPath.process(correlationIdI, data, flightPathProcessor.value, 
-					flightPath, flightPathMeasurementUnitsId.value,
+					flightPath,
+					{
+						measurementUnitsId: flightPathMeasurementUnitsId.value,
+						measurementUnitsDistanceId: flightPathMeasurementUnitsDistanceId.value,
+						measurementUnitsVelocityId: flightPathMeasurementUnitsVelocityId.value,
+						measurementUnitsOutputId: flightPathMeasurementUnitsOutputId.value,
+						measurementUnitsDistanceOutputId: flightPathMeasurementUnitsDistanceOutputId.value,
+						measurementUnitsVelocityOutputId: flightPathMeasurementUnitsVelocityOutputId.value,
+					},
 					templateMain.value, templatePinLaunch.value, templatePinTouchdown.value, templatePinsAdditional.value);
 				if (hasFailed(flightPathResponse))
 					return; // TODO: error...
@@ -491,9 +660,16 @@ export default {
 				// this.output = JSON.stringify(flightPathResponse.results, null, 2);
 				output.value = flightPathResponse.results.flightPath;
 
+				flightPathStyleSave(correlationIdI);
+
 				serviceStore.dispatcher.setFlightDate(correlationIdI, flightDate.value);
 				serviceStore.dispatcher.setFlightLocation(correlationIdI, flightLocation.value);
 				serviceStore.dispatcher.setFlightMeasurementUnits(correlationIdI, flightPathMeasurementUnitsId.value);
+				serviceStore.dispatcher.setFlightMeasurementUnitsDistance(correlationIdI, flightPathMeasurementUnitsDistanceId.value);
+				serviceStore.dispatcher.setFlightMeasurementUnitsVelocity(correlationIdI, flightPathMeasurementUnitsVelocityId.value);
+				serviceStore.dispatcher.setFlightMeasurementUnitsOutput(correlationIdI, flightPathMeasurementUnitsOutputId.value);
+				serviceStore.dispatcher.setFlightMeasurementUnitsOutputDistance(correlationIdI, flightPathMeasurementUnitsDistanceOutputId.value);
+				serviceStore.dispatcher.setFlightMeasurementUnitsOutputVelocity(correlationIdI, flightPathMeasurementUnitsVelocityOutputId.value);
 				serviceStore.dispatcher.setFlightTitle(correlationIdI, flightTitle.value);
 
 				serviceStore.dispatcher.setFlightPathProcessor(correlationIdI, flightPathProcessor.value);
@@ -537,19 +713,35 @@ export default {
 			const correlationIdI = correlationId();
 			reset(correlationIdI);
 
-			flightPathStyleReset(correlationIdI, false);
+			flightPathStyleReset(correlationIdI, true);
 
 			flightDate.value = serviceStore.getters.getFlightDate();
 			flightLocation.value = serviceStore.getters.getFlightLocation();
+
 			flightPathMeasurementUnitsId.value = serviceStore.getters.getFlightMeasurementUnits();
-			if (String.isNullOrEmpty(flightPathMeasurementUnitsId.value))
-				flightPathMeasurementUnitsId.value = AppUtility.measurementUnitsId(correlationId, settings.value);
+			flightPathMeasurementUnitsDistanceId.value = serviceStore.getters.getFlightMeasurementUnitsDistance();
+			flightPathMeasurementUnitsVelocityId.value = serviceStore.getters.getFlightMeasurementUnitsVelocity();
+
+			flightPathMeasurementUnitsOutputId.value = serviceStore.getters.getFlightMeasurementUnits();
+			if (String.isNullOrEmpty(flightPathMeasurementUnitsOutputId.value))
+				flightPathMeasurementUnitsOutputId.value = AppUtility.measurementUnitsId(correlationId, settings.value);
+			flightPathMeasurementUnitsDistanceOutputId.value = serviceStore.getters.getFlightMeasurementUnitsDistance();
+			if (String.isNullOrEmpty(flightPathMeasurementUnitsDistanceOutputId.value))
+				flightPathMeasurementUnitsDistanceOutputId.value = AppUtility.measurementUnitDistanceId(correlationId, settings.value);
+			flightPathMeasurementUnitsVelocityOutputId.value = serviceStore.getters.getFlightMeasurementUnitsVelocity();
+			if (String.isNullOrEmpty(flightPathMeasurementUnitsVelocityOutputId.value))
+				flightPathMeasurementUnitsVelocityOutputId.value = AppUtility.measurementUnitVelocityId(correlationId, settings.value);
+
 			flightTitle.value = serviceStore.getters.getFlightTitle();
 
 			flightPathProcessor.value = serviceStore.getters.getFlightPathProcessor();
 
 			flightPathProcessors.value = VuetifyUtility.selectOptions(serviceFlightPath.serviceProcessors, GlobalUtility.$trans.t, 'forms.content.tools.flightPath.processors', (l) => { return l.id; }, null, (l) => { return l.id; });
 			flightPathMeasurementUnitsOptions.value = VuetifyUtility.selectOptions(AppUtility.measurementUnitsOptions(), GlobalUtility.$trans.t, 'measurementUnits');
+
+			setTimeout(() => {
+				initialized.value = true;
+			}, 50);
 		});
 		
 		watch(() => flightPathProcessor.value,
@@ -560,9 +752,26 @@ export default {
 				flightPathStyleLoad(correlationId(), value);
 			}
 		);
+		
+		watch(() => flightPathMeasurementUnitsId.value,
+			(value) => {
+				if (!initialized.value)
+					return;
+				flightPathMeasurementUnitsDistanceId.value = null;
+				flightPathMeasurementUnitsVelocityId.value = null;
+			}
+		);
+		
+		watch(() => flightPathMeasurementUnitsOutputId.value,
+			(value) => {
+				if (!initialized.value)
+					return;
+				flightPathMeasurementUnitsDistanceOutputId.value = AppUtility.measurementUnitDistanceId(correlationId, settings.value, value);
+				flightPathMeasurementUnitsVelocityOutputId.value = AppUtility.measurementUnitVelocityId(correlationId, settings.value, value);
+			}
+		);
 
-		return {
-			correlationId,
+		return {	correlationId,
 			error,
 			hasFailed,
 			hasSucceeded,
@@ -571,23 +780,36 @@ export default {
 			noBreakingSpaces,
 			notImplementedError,
 			success,
+			serviceStore,
 			calculationOutput,
 			dateFormat,
 			dateFormatMask,
 			errorMessage,
 			errors,
 			errorTimer,
+			calculateI,
 			formatNumber,
 			handleListener,
-			measurementUnits,
+			initCalculationOutput,
+			initCalculationResults,
+			measurementUnitsId,
+			measurementUnitsAccelerationDefaultId,
+			measurementUnitsAreaDefaultId,
+			measurementUnitsFluidDefaultId,
+			measurementUnitsDistanceDefaultId,
+			measurementUnitsLengthDefaultId,
+			measurementUnitsVelocityDefaultId,
+			measurementUnitsVolumeDefaultId,
+			measurementUnitsWeightDefaultId,
 			notifyColor,
 			notifyMessage,
 			notifySignal,
 			notifyTimeout,
-			serviceStore,
+			resetFormI,
 			setErrorMessage,
 			setErrorTimer,
 			setNotify,
+			toFixed,
 			settings,
 			serviceDownload,
 			serviceFlightPath,
@@ -600,14 +822,25 @@ export default {
 			flightPathInput,
 			flightLocation,
 			flightPathMeasurementUnitsId,
+			flightPathMeasurementUnitsDistanceId,
+			flightPathMeasurementUnitsVelocityId,
+			flightPathMeasurementUnitsOutputId,
+			flightPathMeasurementUnitsDistanceOutputId,
+			flightPathMeasurementUnitsVelocityOutputId,
 			flightPathMeasurementUnitsOptions,
+			clickStylesReset,
+			flightPathMeasurementUnitsOptionsDistance,
+			flightPathMeasurementUnitsOptionsVelocity,
 			flightPathProcessor,
 			flightPathProcessors,
 			flightPathStylePathFlightColor,
 			flightPathStylePathGroundColor,
 			flightPathStylePinLaunchColor,
+			flightPathStylePinMaxAltitudeColor,
+			flightPathStylePinMaxVelocityColor,
 			flightPathStylePinTouchdownColor,
 			flightTitle,
+			initialized,
 			output,
 			processing,
 			styles,
@@ -632,6 +865,11 @@ export default {
 			flightDate: { $autoDirty: true },
 			flightLocation: { $autoDirty: true },
 			flightPathMeasurementUnitsId: { required, $autoDirty: true },
+			flightPathMeasurementUnitsDistanceId: { required, $autoDirty: true },
+			flightPathMeasurementUnitsVelocityId: { required, $autoDirty: true },
+			flightPathMeasurementUnitsOutputId: { required, $autoDirty: true },
+			flightPathMeasurementUnitsDistanceOutputId: { required, $autoDirty: true },
+			flightPathMeasurementUnitsVelocityOutputId: { required, $autoDirty: true },
 			flightPathProcessor: { required, $autoDirty: true },
 			flightPathInput: { required, $autoDirty: true },
 			flightTitle: { $autoDirty: true }

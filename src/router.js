@@ -44,13 +44,34 @@ const routes = [
 		children: [
 			{
 				// path: '',
-				// name: 'epoxy',
+				// name: 'content_info_epoxy',
 				// component: () => import(/* webpackPrefetch: true */ /* webpackChunkName: "group-layouts" */ './layouts/ContentLayout.vue'),
 				// children: [
 				// 	{
 						path: '',
-						name: 'content_epoxy',
+						name: 'content_info_epoxy',
 						component: () => import(/* webpackPrefetch: true */ /* webpackChunkName: "group-content-info" */ './components/content/info/Epoxy.vue'),
+						meta: {
+							requiresAuth: false
+						}
+				// 	}
+				// ]
+			}
+		]
+	},
+	{
+		path: '/content/info/highPower',
+		component: () => import(/* webpackPrefetch: true */ /* webpackChunkName: "group-layouts" */ './layouts/MainLayout.vue'),
+		children: [
+			{
+				// path: '',
+				// name: 'content_info_highPower',
+				// component: () => import(/* webpackPrefetch: true */ /* webpackChunkName: "group-layouts" */ './layouts/ContentLayout.vue'),
+				// children: [
+				// 	{
+						path: '',
+						name: 'content_info_highPower',
+						component: () => import(/* webpackPrefetch: true */ /* webpackChunkName: "group-content-info" */ './components/content/info/HighPower.vue'),
 						meta: {
 							requiresAuth: false
 						}
@@ -65,12 +86,12 @@ const routes = [
 		children: [
 			{
 				// path: '',
-				// name: 'epoxy',
+				// name: 'content_links',
 				// component: () => import(/* webpackPrefetch: true */ /* webpackChunkName: "group-layouts" */ './layouts/ContentLayout.vue'),
 				// children: [
 				// 	{
 						path: '',
-						name: 'content_epoxy',
+						name: 'content_links',
 						component: () => import(/* webpackPrefetch: true */ /* webpackChunkName: "group-content-info" */ './components/content/Links.vue'),
 						meta: {
 							requiresAuth: false
@@ -155,7 +176,7 @@ const routes = [
 					{
 						path: '',
 						name: 'content_tools_thrust2Weight',
-						component: () => import(/* webpackPrefetch: true */ /* webpackChunkName: "group-content-tools" */ './components/content/tools/thrust2weight/Thrust2Weight.vue'),
+						component: () => import(/* webpackPrefetch: true */ /* webpackChunkName: "group-content-tools" */ './components/content/tools/Thrust2Weight.vue'),
 						meta: {
 							requiresAuth: false
 						}

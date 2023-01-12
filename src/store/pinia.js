@@ -23,6 +23,11 @@ class AppStore extends BaseStore {
 					'flightInfoResolution',
 					'flightInfoStyle',
 					'flightMeasurementUnits',
+					'flightMeasurementUnitsDistance',
+					'flightMeasurementUnitsVelocity',
+					'flightMeasurementUnitsOutput',
+					'flightMeasurementUnitsOutputDistance',
+					'flightMeasurementUnitsOutputVelocity',
 					'flightPathProcessor',
 					'flightPathStyle',
 					'motorManufacturers',
@@ -56,7 +61,12 @@ class AppStore extends BaseStore {
 				flightInfoResolution: Constants.FlightInfo.Resolution,
 				flightInfoStyle: [],
 				flightLocation: '',
-				flightMeasurementUnits: null,
+				flightMeasurementUnits: Constants.MeasurementUnits.english.id,
+				flightMeasurementUnitsDistance: Constants.MeasurementUnits.english.distance.ft,
+				flightMeasurementUnitsVelocity: Constants.MeasurementUnits.english.velocity.fts,
+				flightMeasurementUnitsOutput: null,
+				flightMeasurementUnitsOutputDistance: null,
+				flightMeasurementUnitsOutputVelocity: null,
 				flightPathProcessor: null,
 				flightPathStyle: [],
 				flightTitle: '',
@@ -76,7 +86,8 @@ class AppStore extends BaseStore {
 					this.$logger.debug('store', 'requestMotor', 'response', response, correlationId);
 					if (Response.hasSucceeded(response)) {
 						this.motorSearchResults = response.results.data;
-						return response.results.motor;
+						// return response.results.motor;
+						return Response.success(correlationId, response.results.motor);
 					}
 
 					return null;
@@ -134,6 +145,21 @@ class AppStore extends BaseStore {
 				async setFlightMeasurementUnits(correlationId, value) {
 					this.flightMeasurementUnits = value;
 				},
+				async setFlightMeasurementUnitsDistance(correlationId, value) {
+					this.flightMeasurementUnitsDistance = value;
+				},
+				async setFlightMeasurementUnitsVelocity(correlationId, value) {
+					this.flightMeasurementUnitsVelocity = value;
+				},
+				async setFlightMeasurementUnitsOutput(correlationId, value) {
+					this.flightMeasurementUnits = value;
+				},
+				async setFlightMeasurementUnitsOutputDistance(correlationId, value) {
+					this.flightMeasurementUnitsOutputDistance = value;
+				},
+				async setFlightMeasurementUnitsOutputVelocity(correlationId, value) {
+					this.flightMeasurementUnitsOutputVelocity = value;
+				},
 				async setFlightPathProcessor(correlationId, value) {
 					this.flightPathProcessor = value;
 				},
@@ -184,6 +210,21 @@ class AppStore extends BaseStore {
 				},
 				getFlightMeasurementUnits() {
 					return GlobalUtility.$store.flightMeasurementUnits;
+				},
+				getFlightMeasurementUnitsDistance() {
+					return GlobalUtility.$store.flightMeasurementUnitsDistance;
+				},
+				getFlightMeasurementUnitsVelocity() {
+					return GlobalUtility.$store.flightMeasurementUnitsVelocity;
+				},
+				getFlightMeasurementUnitsOutput() {
+					return GlobalUtility.$store.flightMeasurementUnitsOutput;
+				},
+				getFlightMeasurementUnitsOutputDistance() {
+					return GlobalUtility.$store.flightMeasurementUnitsOutputDistance;
+				},
+				getFlightMeasurementUnitsOutputVelocity() {
+					return GlobalUtility.$store.flightMeasurementUnitsOutputVelocity;
 				},
 				getFlightPathProcessor() {
 					return GlobalUtility.$store.flightPathProcessor;
@@ -236,6 +277,21 @@ class AppStore extends BaseStore {
 				},
 				async setFlightMeasurementUnits(correlationId, value) {
 					await GlobalUtility.$store.setFlightMeasurementUnits(correlationId, value);
+				},
+				async setFlightMeasurementUnitsDistance(correlationId, value) {
+					await GlobalUtility.$store.setFlightMeasurementUnitsDistance(correlationId, value);
+				},
+				async setFlightMeasurementUnitsVelocity(correlationId, value) {
+					await GlobalUtility.$store.setFlightMeasurementUnitsVelocity(correlationId, value);
+				},
+				async setFlightMeasurementUnitsOutput(correlationId, value) {
+					await GlobalUtility.$store.setFlightMeasurementUnitsOutput(correlationId, value);
+				},
+				async setFlightMeasurementUnitsOutputDistance(correlationId, value) {
+					await GlobalUtility.$store.setFlightMeasurementUnitsOutputDistance(correlationId, value);
+				},
+				async setFlightMeasurementUnitsOutputVelocity(correlationId, value) {
+					await GlobalUtility.$store.setFlightMeasurementUnitsOutputVelocity(correlationId, value);
 				},
 				async setFlightPathProcessor(correlationId, value) {
 					await GlobalUtility.$store.setFlightPathProcessor(correlationId, value);

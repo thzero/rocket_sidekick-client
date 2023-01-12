@@ -5,6 +5,10 @@ import authService from '@thzero/library_client_firebase/service';
 import downloadService from '@/service/download';
 import flightInfoProcessorToolsService from '@/service/tools/flightInfo/index';
 import flightInfoProcessorEggtimerToolsService from '@/service/tools/flightInfo/processors/eggtimer';
+import flightPathOutputToolsService from '@/service/tools/flightPath/output/index';
+import flightPathOutputKmlToolsService from '@/service/tools/flightPath/output/kml';
+import flightPathOutputTemplateToolsService from '@/service/tools/flightPath/output/template/index';
+import flightPathOutputTemplateHandlebarsToolsService from '@/service/tools/flightPath/output/template/handlebars';
 import flightPathProcessorToolsService from '@/service/tools/flightPath/index';
 import flightPathProcessorFeatherweightToolsService from '@/service/tools/flightPath/processors/featherweight';
 import foamToolsService from '@/service/tools/foam';
@@ -37,6 +41,10 @@ class Services extends BaseServices {
 
 		this._injectService(Constants.InjectorKeys.SERVICE_TOOLS_FLIGHT_INFO_PROCESSOR, new flightInfoProcessorToolsService());
 		this._injectService(Constants.InjectorKeys.SERVICE_TOOLS_FLIGHT_INFO_PROCESSOR_EGGTIMER, new flightInfoProcessorEggtimerToolsService());
+		this._injectService(Constants.InjectorKeys.SERVICE_TOOLS_FLIGHT_PATH_OUTPUT, new flightPathOutputToolsService());
+		this._injectService(Constants.InjectorKeys.SERVICE_TOOLS_FLIGHT_PATH_OUTPUT_KML, new flightPathOutputKmlToolsService());
+		this._injectService(Constants.InjectorKeys.SERVICE_TOOLS_FLIGHT_PATH_OUTPUT_TEMPLATE, new flightPathOutputTemplateToolsService());
+		this._injectService(Constants.InjectorKeys.SERVICE_TOOLS_FLIGHT_PATH_OUTPUT_TEMPLATE_HANDLEBARS, new flightPathOutputTemplateHandlebarsToolsService());
 		this._injectService(Constants.InjectorKeys.SERVICE_TOOLS_FLIGHT_PATH_PROCESSOR, new flightPathProcessorToolsService());
 		this._injectService(Constants.InjectorKeys.SERVICE_TOOLS_FLIGHT_PATH_PROCESSOR_FEATHERWEIGHT, new flightPathProcessorFeatherweightToolsService());
 

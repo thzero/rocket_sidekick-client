@@ -4,7 +4,7 @@
 			<v-col cols="12">
 				<v-card>
 					<v-card-title>
-	<p class="text-h6 text-center">{{ $t('titles.content.links.title') }}</p>
+	<p class="text-h6 text-center">{{ $t('titles.content.info.highPower') }}</p>
 					</v-card-title>
 				</v-card>
 			</v-col>
@@ -16,17 +16,13 @@
 	<p class="text-h6 text-center">{{ $t('titles.content.links.general') }}</p>
 					</v-card-title>
 					<v-card-text>
-		<v-list density="compact">
-			<v-list-item
-				v-for="item in linksGeneral"
-				:key="item.name"
-				:href="item.link"
-				:target="target(item)"
-				class="link"
-			>
-				<v-list-item-title>{{ $t(item.title) }}</v-list-item-title>
-			</v-list-item>
-		</v-list>
+<p>{{ $t('strings.content.info.highPower.welcome1') }}<br><br></p>
+
+		<q class="font-italic" cite="https://www.nar.org/high-power-rocketry-info">{{ $t('strings.content.info.highPower.welcome1NAR') }}.</q> -- <a href="https://www.nar.org" target="_blank">National Association of Rocketry (NAR)</a>
+<br><br>
+		
+<p>{{ $t('strings.content.info.highPower.welcome2') }}<br><br></p>
+
 					</v-card-text>
 				</v-card>
 			</v-col>
@@ -39,6 +35,24 @@
 		<v-list density="compact">
 			<v-list-item
 				v-for="item in linksGuidance"
+				:key="item.name"
+				:href="item.link"
+				:target="target(item)"
+				class="link"
+			>
+				<v-list-item-title>{{ $t(item.title) }}</v-list-item-title>
+			</v-list-item>
+		</v-list>
+					</v-card-text>
+				</v-card>
+				<v-card class="mt-2">
+					<v-card-title>
+	<p class="text-h6 text-center">{{ $t('titles.content.links.study') }}</p>
+					</v-card-title>
+					<v-card-text>
+		<v-list density="compact">
+			<v-list-item
+				v-for="item in linksStudyGuides"
 				:key="item.name"
 				:href="item.link"
 				:target="target(item)"
@@ -93,46 +107,6 @@
 			<v-col cols="12" md="6">
 				<v-card>
 					<v-card-title>
-	<p class="text-h6 text-center">{{ $t('titles.content.links.events') }}</p>
-					</v-card-title>
-					<v-card-text>
-		<v-list density="compact">
-			<v-list-item
-				v-for="item in linksEvents"
-				:key="item.name"
-				:href="item.link"
-				:target="target(item)"
-				class="link"
-			>
-				<v-list-item-title>{{ $t(item.title) }}</v-list-item-title>
-			</v-list-item>
-		</v-list>
-					</v-card-text>
-				</v-card>
-			</v-col>
-			<v-col cols="12" md="6">
-				<v-card>
-					<v-card-title>
-	<p class="text-h6 text-center">{{ $t('titles.content.links.competitions') }}</p>
-					</v-card-title>
-					<v-card-text>
-		<v-list density="compact">
-			<v-list-item
-				v-for="item in linksCompetitions"
-				:key="item.name"
-				:href="item.link"
-				:target="target(item)"
-				class="link"
-			>
-				<v-list-item-title>{{ $t(item.title) }}</v-list-item-title>
-			</v-list-item>
-		</v-list>
-					</v-card-text>
-				</v-card>
-			</v-col>
-			<v-col cols="12" md="6">
-				<v-card>
-					<v-card-title>
 	<p class="text-h6 text-center">{{ $t('titles.content.links.manufacturers') }}</p>
 					</v-card-title>
 					<v-card-text>
@@ -170,6 +144,26 @@
 					</v-card-text>
 				</v-card>
 			</v-col>
+			<v-col cols="12" md="6">
+				<v-card>
+					<v-card-title>
+	<p class="text-h6 text-center">{{ $t('titles.content.links.events') }}</p>
+					</v-card-title>
+					<v-card-text>
+		<v-list density="compact">
+			<v-list-item
+				v-for="item in linksEvents"
+				:key="item.name"
+				:href="item.link"
+				:target="target(item)"
+				class="link"
+			>
+				<v-list-item-title>{{ $t(item.title) }}</v-list-item-title>
+			</v-list-item>
+		</v-list>
+					</v-card-text>
+				</v-card>
+			</v-col>
 		</v-row>
 	</div>
 </template>
@@ -195,53 +189,60 @@ export default {
 		serviceStore
 	} = useContentBaseComponent(props, context);
 
+		const highPower = computed(() => {
+			let temp = serviceStore.state.content;
+			if (!temp)
+				return {};
+			if (!temp.info)
+				return {};
+			return temp.info.find(l => l.id === 'highPower');
+		});
 		const links = computed(() => {
 			let temp = serviceStore.state.content;
 			if (!temp)
 				return [];
 			if (!temp.links)
 				return [];
-			return temp.links.filter(l => l.enabled);
-		});
-		const linksGeneral = computed(() => {
-			if (!links.value)
-				return [];
-			return links.value.filter(l => String.isNullOrEmpty(l.category));
-		});
-		const linksCompetitions = computed(() => {
-			if (!links.value)
-				return [];
-			return links.value.filter(l => l.category === 'competition');
+			return temp.links;
 		});
 		const linksEvents = computed(() => {
 			if (!links.value)
 				return [];
-			return links.value.filter(l => l.category === 'event');
+			return links.value.filter(l => l.category === 'event' && l.highPower);
+		});
+		const linksGuidance = computed(() => {
+			if (!highPower.value)
+				return [];
+			if (!highPower.value.links)
+				return [];
+			return highPower.value.links.filter(l => l.category === 'guidance');
 		});
 		const linksForums = computed(() => {
 			if (!links.value)
 				return [];
-			return links.value.filter(l => l.category === 'forum');
-		});
-		const linksGuidance = computed(() => {
-			if (!links.value)
-				return [];
-			return links.value.filter(l => l.category === 'guidance');
+			return links.value.filter(l => l.category === 'forum' && l.highPower);
 		});
 		const linksManufacturers = computed(() => {
 			if (!links.value)
 				return [];
-			return links.value.filter(l => l.category === 'manufacturer');
+			return links.value.filter(l => l.category === 'manufacturer' && l.highPower);
 		});
 		const linksOrganizations = computed(() => {
 			if (!links.value)
 				return [];
-			return links.value.filter(l => l.category === 'organization');
+			return links.value.filter(l => l.category === 'organization' && l.highPower);
+		});
+		const linksStudyGuides = computed(() => {
+			if (!highPower.value)
+				return [];
+			if (!highPower.value.links)
+				return [];
+			return highPower.value.links.filter(l => l.category === 'study');
 		});
 		const linksVendors = computed(() => {
 			if (!links.value)
 				return [];
-			return links.value.filter(l => l.category === 'vendor');
+			return links.value.filter(l => l.category === 'vendor' && l.highPower);
 		});
 		
 		const target = (item) => {
@@ -262,14 +263,14 @@ export default {
 			noBreakingSpaces,
 			notImplementedError,
 			success,
+			highPower,
 			links,
-			linksCompetitions,
 			linksEvents,
 			linksForums,
-			linksGeneral,
 			linksGuidance,
 			linksManufacturers,
 			linksOrganizations,
+			linksStudyGuides,
 			linksVendors,
 			sort,
 			target
