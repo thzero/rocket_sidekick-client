@@ -43,6 +43,7 @@ const Constants = {
 		Text: 'text'
 	},
 	Features: {
+		Auth: false,
 		Checklists: false,
 		Launches: false,
 		MobileApp: false,
