@@ -45,6 +45,26 @@
 		</v-list>
 					</v-card-text>
 				</v-card>
+			</v-col>
+			<v-col cols="12" md="6">
+				<v-card>
+					<v-card-title>
+	<p class="text-h6 text-center">{{ $t('titles.content.links.books') }}</p>
+					</v-card-title>
+					<v-card-text>
+		<v-list density="compact">
+			<v-list-item
+				v-for="item in linksBooks"
+				:key="item.name"
+				:href="item.link"
+				:target="target(item)"
+				class="link"
+			>
+				<v-list-item-title>{{ $t(item.title) }}</v-list-item-title>
+			</v-list-item>
+		</v-list>
+					</v-card-text>
+				</v-card>
 				<v-card class="mt-2">
 					<v-card-title>
 	<p class="text-h6 text-center">{{ $t('titles.content.links.study') }}</p>
@@ -205,10 +225,22 @@ export default {
 				return [];
 			return temp.links;
 		});
+		const linksBooks = computed(() => {
+			if (!highPower.value)
+				return [];
+			if (!highPower.value.links)
+				return [];
+			return highPower.value.links.filter(l => l.category === 'guidance');
+		});
 		const linksEvents = computed(() => {
 			if (!links.value)
 				return [];
 			return links.value.filter(l => l.category === 'event' && l.highPower);
+		});
+		const linksForums = computed(() => {
+			if (!links.value)
+				return [];
+			return links.value.filter(l => l.category === 'forum' && l.highPower);
 		});
 		const linksGuidance = computed(() => {
 			if (!highPower.value)
@@ -216,11 +248,6 @@ export default {
 			if (!highPower.value.links)
 				return [];
 			return highPower.value.links.filter(l => l.category === 'guidance');
-		});
-		const linksForums = computed(() => {
-			if (!links.value)
-				return [];
-			return links.value.filter(l => l.category === 'forum' && l.highPower);
 		});
 		const linksManufacturers = computed(() => {
 			if (!links.value)
@@ -265,6 +292,7 @@ export default {
 			success,
 			highPower,
 			links,
+			linksBooks,
 			linksEvents,
 			linksForums,
 			linksGuidance,
