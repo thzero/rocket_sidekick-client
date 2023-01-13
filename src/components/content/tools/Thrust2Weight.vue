@@ -60,7 +60,6 @@
 											vid="motorSelected1"
 											v-model="motorSelected1"
 											:validation="validation"
-											:hide-details="true"
 											:readonly="true"
 											:label="$t('forms.content.tools.thrust2Weight.specifications') + ' 1'"
 										/>
@@ -128,7 +127,6 @@
 											vid="motorSelected2"
 											v-model="motorSelected2"
 											:validation="validation"
-											:hide-details="true"
 											:label="$t('forms.content.tools.thrust2Weight.specifications') + ' 2'"
 										/>
 									</v-col>
@@ -199,7 +197,6 @@
 											vid="motorSelected3"
 											v-model="motorSelected3"
 											:validation="validation"
-											:hide-details="true"
 											:label="$t('forms.content.tools.thrust2Weight.specifications') + ' 3'"
 										/>
 									</v-col>
@@ -270,7 +267,6 @@
 											vid="motorSelected4"
 											v-model="motorSelected4"
 											:validation="validation"
-											:hide-details="true"
 											:label="$t('forms.content.tools.thrust2Weight.specifications') + ' 4'"
 										/>
 									</v-col>
