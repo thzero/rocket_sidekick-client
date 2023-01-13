@@ -37,19 +37,19 @@ class KmlFlightPathOutputService extends FlightPathOutputService {
 		flightInfo.titleFull += flightInfo.translations.flightPath;
 
 		flightInfo.pins = '';
-		if (flightInfo.launchCoords)
+		if (flightInfo.style.pin.launch.selected && flightInfo.launchCoords)
 			flightInfo.pins += serviceTemplate.templatePinLaunch(correlationId, flightInfo);
 		// if (flightInfo.maxAccelerationCoords)
 		// 	flightInfo.pins += serviceTemplate.templatePinsMaxAcceleration(correlationId, flightInfo);
-		if (flightInfo.maxAltitudeCoords)
+		if (flightInfo.style.pin.maxAltitude.selected && flightInfo.maxAltitudeCoords)
 			flightInfo.pins += serviceTemplate.templatePinsMaxAltitude(correlationId, flightInfo);
-		if (flightInfo.maxVelocityCoords)
+		if (flightInfo.style.pin.maxVelocity.selected && flightInfo.maxVelocityCoords)
 			flightInfo.pins += serviceTemplate.templatePinsMaxVelocity(correlationId, flightInfo);
 		// if (flightInfo.recoveryDrogueCoords)
 		// 	flightInfo.pins += serviceTemplate.templatePinsRecoveryDrogue(correlationId, flightInfo);
 		// if (flightInfo.recoveryMainCoords)
 		// 	flightInfo.pins += serviceTemplate.templatePinsRecoveryMain(correlationId, flightInfo);
-		if (flightInfo.touchdownCoords)
+		if (flightInfo.style.pin.touchdown.selected && flightInfo.touchdownCoords)
 			flightInfo.pins += serviceTemplate.templatePinTouchdown(correlationId, flightInfo);
 		if (this._templatePinsAdditional)
 			flightInfo.pins += serviceTemplate.templatePinsAdditional(correlationId, flightInfo);

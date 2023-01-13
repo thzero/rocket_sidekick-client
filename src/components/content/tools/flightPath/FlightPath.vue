@@ -219,6 +219,38 @@
 														:label="$t('forms.content.tools.flightPath.style.touchdown.color')"
 													/>
 												</v-col>
+												<v-col cols="12" lg="6">
+													<VCheckboxWithValidation
+														ref="flightPathStylePinMaxVelocitySelectedRef"
+														vid="flightPathStylePinLaunchSelected"
+														v-model="flightPathStylePinLaunchSelected"
+														:validation="validation"
+														:label="$t('forms.content.tools.flightPath.style.launch.color')"
+													/>
+													<VCheckboxWithValidation
+														ref="flightPathStylePinMaxAltitudeSelectedRef"
+														vid="flightPathStylePinMaxAltitudeSelected"
+														v-model="flightPathStylePinMaxAltitudeSelected"
+														:validation="validation"
+														:label="$t('forms.content.tools.flightPath.style.maxAltitude.color')"
+													/>
+												</v-col>
+												<v-col cols="12" lg="6">
+													<VCheckboxWithValidation
+														ref="flightPathStylePinMaxVelocitySelectedRef"
+														vid="flightPathStylePinMaxVelocitySelected"
+														v-model="flightPathStylePinMaxVelocitySelected"
+														:validation="validation"
+														:label="$t('forms.content.tools.flightPath.style.maxVelocity.color')"
+													/>
+													<VCheckboxWithValidation
+														ref="flightPathStylePinTouchdownSelectedRef"
+														vid="flightPathStylePinTouchdownSelected"
+														v-model="flightPathStylePinTouchdownSelected"
+														:validation="validation"
+														:label="$t('forms.content.tools.flightPath.style.touchdown.color')"
+													/>
+												</v-col>
 											</v-row>
 											<v-row dense>
 												<v-col cols="12">
@@ -226,7 +258,7 @@
 														<v-btn
 															class="ml-2"
 															color="primary"
-															@click="clickStylesReset"
+															@click="clickFlightPathStylesReset"
 														>
 															{{ $t('buttons.reset') }}
 														</v-btn>
@@ -366,6 +398,7 @@ import VuetifyUtility from '@/library_vue_vuetify/utility/index';
 
 import { useFlightToolsBaseComponent } from '@/components/content/tools/flightToolBase';
 
+import VCheckboxWithValidation from '@/library_vue_vuetify/components/form//VCheckboxWithValidation';
 import VColorWithValidation from '@/library_vue_vuetify/components/form/VColorWithValidation';
 import VDateTimeField from '@/library_vue_vuetify/components/form/VDateTimeFieldTemp';
 import VFormControl from '@/library_vue_vuetify/components/form/VFormControl';
@@ -377,6 +410,7 @@ import VTextFieldWithValidation from '@/library_vue_vuetify/components/form/VTex
 export default {
 	name: 'FlightPath',
 	components: {
+		VCheckboxWithValidation,
 		VColorWithValidation,
 		VDateTimeField,
 		VFormControl,
@@ -462,9 +496,13 @@ export default {
 		const flightPathStylePathFlightColor = ref(null);
 		const flightPathStylePathGroundColor = ref(null);
 		const flightPathStylePinLaunchColor = ref(null);
+		const flightPathStylePinLaunchSelected = ref(true);
 		const flightPathStylePinMaxAltitudeColor = ref(null);
+		const flightPathStylePinMaxAltitudeSelected = ref(true);
 		const flightPathStylePinMaxVelocityColor = ref(null);
+		const flightPathStylePinMaxVelocitySelected = ref(true);
 		const flightPathStylePinTouchdownColor = ref(null);
+		const flightPathStylePinTouchdownSelected = ref(true);
 		const flightTitle = ref(null);
 		const initialized = ref(false);
 		const output = ref(null);
@@ -475,7 +513,7 @@ export default {
 		const templatePinsAdditional = ref('');
 		const templatePinTouchdown = ref(serviceFlightPath.defaultTemplatePinTouchdown);
 
-		const clickStylesReset = () => {
+		const clickFlightPathStylesReset = () => {
 			flightPathStyleReset(correlationId(), false);
 		};
 		const flightPathMeasurementUnitsOptionsDistance = computed(() => {
@@ -502,6 +540,11 @@ export default {
 			if (!style)
 				return;
 
+			flightPathStylePinLaunchSelected.value = style.pin.launch.selected;
+			flightPathStylePinMaxAltitudeSelected.value = style.pin.maxAltitude.selected;
+			flightPathStylePinMaxVelocitySelected.value = style.pin.maxVelocity.selected;
+			flightPathStylePinTouchdownSelected.value = style.pin.touchdown.selected;
+
 			flightPathStylePathFlightColor.value = style.path.flight.color;
 			flightPathStylePathGroundColor.value = style.path.ground.color;
 			flightPathStylePinLaunchColor.value = style.pin.launch.color;
@@ -510,6 +553,11 @@ export default {
 			flightPathStylePinTouchdownColor.value = style.pin.touchdown.color;
 		};
 		const flightPathStyleReset = (correlationId, notify) => {
+			flightPathStylePinLaunchSelected.value = true;
+			flightPathStylePinMaxAltitudeSelected.value = true;
+			flightPathStylePinMaxVelocitySelected.value = true;
+			flightPathStylePinTouchdownSelected.value = true;
+
 			flightPathStylePathFlightColor.value = serviceFlightPath.styleDefault.path.flight.color;
 			flightPathStylePathGroundColor.value = serviceFlightPath.styleDefault.path.ground.color;
 			flightPathStylePinLaunchColor.value = serviceFlightPath.styleDefault.pin.launch.color;
@@ -537,16 +585,20 @@ export default {
 				},
 				pin: {
 					launch: {
-						color: flightPathStylePinLaunchColor.value
+						color: flightPathStylePinLaunchColor.value,
+						selected: flightPathStylePinLaunchSelected.value
 					},
 					maxAltitude: {
-						color: flightPathStylePinMaxAltitudeColor.value
+						color: flightPathStylePinMaxAltitudeColor.value,
+						selected: flightPathStylePinMaxAltitudeSelected.value
 					},
 					maxVelocity: {
-						color: flightPathStylePinMaxVelocityColor.value
+						color: flightPathStylePinMaxVelocityColor.value,
+						selected: flightPathStylePinMaxVelocitySelected.value
 					},
 					touchdown: {
-						color: flightPathStylePinTouchdownColor.value
+						color: flightPathStylePinTouchdownColor.value,
+						selected: flightPathStylePinTouchdownSelected.value
 					}
 				}
 			};
@@ -625,16 +677,20 @@ export default {
 						},
 						pin: {
 							launch: {
-								color: flightPathStylePinLaunchColor.value ?? serviceFlightPath.value.styleDefault.pin.launch.color
+								color: flightPathStylePinLaunchColor.value ?? serviceFlightPath.value.styleDefault.pin.launch.color,
+								selected: flightPathStylePinLaunchSelected.value ?? true
 							},
 							maxAltitude: {
-								color: flightPathStylePinMaxAltitudeColor.value ?? serviceFlightPath.value.styleDefault.pin.maxAltitude.color
+								color: flightPathStylePinMaxAltitudeColor.value ?? serviceFlightPath.value.styleDefault.pin.maxAltitude.color,
+								selected: flightPathStylePinMaxAltitudeSelected.value ?? true
 							},
 							maxVelocity: {
-								color: flightPathStylePinMaxVelocityColor.value ?? serviceFlightPath.value.styleDefault.pin.maxVelocity.color
+								color: flightPathStylePinMaxVelocityColor.value ?? serviceFlightPath.value.styleDefault.pin.maxVelocity.color,
+								selected: flightPathStylePinMaxVelocitySelected.value ?? true
 							},
 							touchdown: {
-								color: flightPathStylePinTouchdownColor.value ?? serviceFlightPath.value.styleDefault.pin.touchdown.color
+								color: flightPathStylePinTouchdownColor.value ?? serviceFlightPath.value.styleDefault.pin.touchdown.color,
+								selected: flightPathStylePinTouchdownSelected.value ?? true
 							}
 						}
 					},
@@ -828,7 +884,7 @@ export default {
 			flightPathMeasurementUnitsDistanceOutputId,
 			flightPathMeasurementUnitsVelocityOutputId,
 			flightPathMeasurementUnitsOptions,
-			clickStylesReset,
+			clickFlightPathStylesReset,
 			flightPathMeasurementUnitsOptionsDistance,
 			flightPathMeasurementUnitsOptionsVelocity,
 			flightPathProcessor,
@@ -836,9 +892,13 @@ export default {
 			flightPathStylePathFlightColor,
 			flightPathStylePathGroundColor,
 			flightPathStylePinLaunchColor,
+			flightPathStylePinLaunchSelected,
 			flightPathStylePinMaxAltitudeColor,
+			flightPathStylePinMaxAltitudeSelected,
 			flightPathStylePinMaxVelocityColor,
+			flightPathStylePinMaxVelocitySelected,
 			flightPathStylePinTouchdownColor,
+			flightPathStylePinTouchdownSelected,
 			flightTitle,
 			initialized,
 			output,
@@ -864,6 +924,7 @@ export default {
 		return {
 			flightDate: { $autoDirty: true },
 			flightLocation: { $autoDirty: true },
+			flightPathInput: { required, $autoDirty: true },
 			flightPathMeasurementUnitsId: { required, $autoDirty: true },
 			flightPathMeasurementUnitsDistanceId: { required, $autoDirty: true },
 			flightPathMeasurementUnitsVelocityId: { required, $autoDirty: true },
@@ -871,7 +932,14 @@ export default {
 			flightPathMeasurementUnitsDistanceOutputId: { required, $autoDirty: true },
 			flightPathMeasurementUnitsVelocityOutputId: { required, $autoDirty: true },
 			flightPathProcessor: { required, $autoDirty: true },
-			flightPathInput: { required, $autoDirty: true },
+			flightPathStylePinLaunchColor: { required, $autoDirty: true },
+			flightPathStylePinLaunchSelected: { required, $autoDirty: true },
+			flightPathStylePinMaxAltitudeColor: { required, $autoDirty: true },
+			flightPathStylePinMaxAltitudeSelected: { required, $autoDirty: true },
+			flightPathStylePinMaxVelocityColor: { required, $autoDirty: true },
+			flightPathStylePinMaxVelocitySelected: { required, $autoDirty: true },
+			flightPathStylePinTouchdownColor: { required, $autoDirty: true },
+			flightPathStylePinTouchdownSelected: { required, $autoDirty: true },
 			flightTitle: { $autoDirty: true }
 		};
 	}

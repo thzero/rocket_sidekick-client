@@ -183,16 +183,20 @@
 							"color": "Ground Path Color"
 						},
 						"launch": {
-							"color": "Launch Pin Color"
+							"color": "Launch Pin Color",
+							"selected": "Display Launch Pin"
 						},
 						"maxAltitude": {
-							"color": "Max. Altitude Pin Color"
+							"color": "Max. Altitude Pin Color",
+							"selected": "Display Max. Altitude Pin"
 						},
 						"maxVelocity": {
-							"color": "Max. Velocity Pin Color"
+							"color": "Max. Velocity Pin Color",
+							"selected": "Display Max. Velocity Pin"
 						},
 						"touchdown": {
-							"color": "Touchdown Pin Color"
+							"color": "Touchdown Pin Color",
+							"selected": "Display Touchdown Pin"
 						}
 					},
 					"csv": "CSV GPS Flight Data",

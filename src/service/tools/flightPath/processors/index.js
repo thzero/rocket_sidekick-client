@@ -102,8 +102,6 @@ class FlightPathProcessorService extends BaseService {
 				results.touchdownCoords = `${previous.longitude},${previous.latitude}`;
 		}
 
-		// results.maxAltitude = Number(responseCalc2.results.maxAltitude.value).toLocaleString();
-		// results.maxVelocity = Number(responseCalc2.results.maxVelocity.value).toLocaleString();
 		results.maxAltitude = this._convert(results.maxAltitude)
 			.from(Constants.MeasurementUnits[measurementUnits.measurementUnitsId].distance[measurementUnits.measurementUnitsDistanceId])
 			.to(Constants.MeasurementUnits[measurementUnits.measurementUnitsOutputId].distance[measurementUnits.measurementUnitsDistanceOutputId]);
