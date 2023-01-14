@@ -38,27 +38,27 @@
 									<v-row dense>
 										<v-col cols="12">
 											<VTextFieldWithValidation
-												ref="flightTitleRef"
-												vid="flightTitle"
-												v-model="flightTitle"
+												ref="flightDataTitleRef"
+												vid="flightDataTitle"
+												v-model="flightDataTitle"
 												:validation="validation"
 												:label="$t('forms.content.tools.flightPath.title')"
 											/>
 										</v-col>
 										<v-col cols="12">
 											<VTextFieldWithValidation
-												ref="flightLocationRef"
-												vid="flightLocation"
-												v-model="flightLocation"
+												ref="flightDataLocationRef"
+												vid="flightDataLocation"
+												v-model="flightDataLocation"
 												:validation="validation"
 												:label="$t('forms.content.tools.flightPath.location')"
 											/>
 										</v-col>
 										<v-col cols="12">
 											<VDateTimeField
-												ref="flightDateRef"
-												vid="flightDate"
-												v-model="flightDate"
+												ref="flightDataDateRef"
+												vid="flightDataDate"
+												v-model="flightDataDate"
 												:validation="validation"
 												:label="$t('forms.content.tools.flightPath.date')"
 											/>
@@ -71,10 +71,10 @@
 											<v-row dense>
 												<v-col cols="12">
 													<VSelectWithValidation
-														ref="flightPathMeasurementUnitsIdRef"
-														v-model="flightPathMeasurementUnitsId"
-														vid="flightPathMeasurementUnitsId"
-														:items="flightPathMeasurementUnitsOptions"
+														ref="flightMeasurementUnitsIdRef"
+														v-model="flightMeasurementUnitsId"
+														vid="flightMeasurementUnitsId"
+														:items="flightMeasurementUnitsOptions"
 														:validation="validation"
 														:label="$t('forms.content.tools.flightPath.measurementUnits.gps')"
 													/>
@@ -83,20 +83,20 @@
 											<v-row dense>
 												<v-col cols="6">
 													<VSelectWithValidation
-														ref="flightPathMeasurementUnitsDistanceIdRef"
-														v-model="flightPathMeasurementUnitsDistanceId"
-														vid="flightPathMeasurementUnitsDistanceId"
-														:items="flightPathMeasurementUnitsOptionsDistance"
+														ref="flightMeasurementUnitsDistanceIdRef"
+														v-model="flightMeasurementUnitsDistanceId"
+														vid="flightMeasurementUnitsDistanceId"
+														:items="flightMeasurementUnitsOptionsDistance"
 														:validation="validation"
 														:label="$t('forms.content.tools.flightPath.measurementUnits.altitude')"
 													/>
 												</v-col>
 												<v-col cols="6">
 													<VSelectWithValidation
-														ref="flightPathMeasurementUnitsVelocityIdRef"
-														v-model="flightPathMeasurementUnitsVelocityId"
-														vid="flightPathMeasurementUnitsVelocityId"
-														:items="flightPathMeasurementUnitsOptionsVelocity"
+														ref="flightMeasurementUnitsVelocityIdRef"
+														v-model="flightMeasurementUnitsVelocityId"
+														vid="flightMeasurementUnitsVelocityId"
+														:items="flightMeasurementUnitsOptionsVelocity"
 														:validation="validation"
 														:label="$t('forms.content.tools.flightPath.measurementUnits.velocity')"
 													/>
@@ -113,10 +113,10 @@
 													<v-row dense>
 														<v-col cols="12">
 															<VSelectWithValidation
-																ref="flightPathMeasurementUnitsOutputIdRef"
-																v-model="flightPathMeasurementUnitsOutputId"
-																vid="flightPathMeasurementUnitsOutputId"
-																:items="flightPathMeasurementUnitsOptions"
+																ref="flightMeasurementUnitsOutputIdRef"
+																v-model="flightMeasurementUnitsOutputId"
+																vid="flightMeasurementUnitsOutputId"
+																:items="flightMeasurementUnitsOptions"
 																:validation="validation"
 																:label="$t('forms.content.tools.flightPath.measurementUnits.output')"
 															/>
@@ -125,20 +125,20 @@
 													<v-row dense>
 														<v-col cols="6">
 															<VSelectWithValidation
-																ref="flightPathMeasurementUnitsDistanceOutputIdRef"
-																v-model="flightPathMeasurementUnitsDistanceOutputId"
-																vid="flightPathMeasurementUnitsDistanceOutputId"
-																:items="flightPathMeasurementUnitsOptionsDistance"
+																ref="flightMeasurementUnitsDistanceOutputIdRef"
+																v-model="flightMeasurementUnitsDistanceOutputId"
+																vid="flightMeasurementUnitsDistanceOutputId"
+																:items="flightMeasurementUnitsOptionsDistance"
 																:validation="validation"
 																:label="$t('forms.content.tools.flightPath.measurementUnits.altitude')"
 															/>
 														</v-col>
 														<v-col cols="6">
 															<VSelectWithValidation
-																ref="flightPathMeasurementUnitsVelocityOutputIdRef"
-																v-model="flightPathMeasurementUnitsVelocityOutputId"
-																vid="flightPathMeasurementUnitsVelocityOutputId"
-																:items="flightPathMeasurementUnitsOptionsVelocity"
+																ref="flightMeasurementUnitsVelocityOutputIdRef"
+																v-model="flightMeasurementUnitsVelocityOutputId"
+																vid="flightMeasurementUnitsVelocityOutputId"
+																:items="flightMeasurementUnitsOptionsVelocity"
 																:validation="validation"
 																:label="$t('forms.content.tools.flightPath.measurementUnits.velocity')"
 															/>
@@ -149,10 +149,10 @@
 										</v-col>
 										<v-col cols="12">
 											<VSelectWithValidation
-												ref="flightPathProcessorRef"
-												v-model="flightPathProcessor"
-												vid="flightPathProcessor"
-												:items="flightPathProcessors"
+												ref="flightProcessorRef"
+												v-model="flightProcessor"
+												vid="flightProcessor"
+												:items="flightProcessors"
 												:validation="validation"
 												:label="$t('forms.content.tools.flightPath.processors.title')"
 											/>
@@ -382,7 +382,7 @@
 </template>
 
 <script>
-import { computed, nextTick, onMounted, ref, watch } from 'vue';
+import { nextTick, onMounted, ref, watch } from 'vue';
 
 import useVuelidate from '@vuelidate/core';
 import { required } from '@vuelidate/validators';
@@ -420,8 +420,7 @@ export default {
 		VTextFieldWithValidation
 	},
 	setup(props, context) {
-		const {
-			correlationId,
+		const {correlationId,
 			error,
 			hasFailed,
 			hasSucceeded,
@@ -460,11 +459,44 @@ export default {
 			setErrorTimer,
 			setNotify,
 			toFixed,
-			settings
-		} = useFlightToolsBaseComponent(
-			props, 
-			context
-		);
+			settings,
+			flightDataDate,
+			flightDataLocation,
+			flightDataTitle,
+			flightMeasurementUnitsId,
+			flightMeasurementUnitsDistanceId,
+			flightMeasurementUnitsVelocityId,
+			flightMeasurementUnitsOutputId,
+			flightMeasurementUnitsDistanceOutputId,
+			flightMeasurementUnitsVelocityOutputId,
+			flightMeasurementUnitsOptions,
+			flightProcessor,
+			flightProcessors,
+			processing,
+			styles,
+			initialized,
+			flightMeasurementUnitsOptionsDistance,
+			flightMeasurementUnitsOptionsVelocity,
+			flightDataLoad,
+			flightDataReset,
+			flightDataSave,
+			flightMeasurementUnitsLoad,
+			flightMeasurementUnitsLoadOptions,
+			flightMeasurementUnitsReset,
+			flightMeasurementUnitsSave
+		} = useFlightToolsBaseComponent(props, context, {
+			onMounted: async (correlationIdI) => {
+				reset(correlationIdI);
+
+				flightProcessor.value = serviceStore.getters.getFlightPathProcessor();
+
+				flightPathStyleReset(correlationIdI, true);
+				flightDataLoad(correlationIdI);
+				flightMeasurementUnitsLoad(correlationIdI, flightProcessor.value);
+
+				flightProcessors.value = VuetifyUtility.selectOptions(serviceFlightPath.serviceProcessors, GlobalUtility.$trans.t, 'forms.content.tools.flightPath.processors', (l) => { return l.id; }, null, (l) => { return l.id; });
+			}
+		});
 
 		const serviceDownload = GlobalUtility.$injector.getService(Constants.InjectorKeys.SERVICE_DOWNLOAD);
 		const serviceFlightPath = GlobalUtility.$injector.getService(Constants.InjectorKeys.SERVICE_TOOLS_FLIGHT_PATH_PROCESSOR);
@@ -479,20 +511,9 @@ export default {
 		});
 		const downloadProgress = ref(false);
 		const expanded = ref(false);
-		const flightDate = ref(null);
 		const flightPath = ref(null);
 		const flightPathData = ref(null);
 		const flightPathInput = ref(null);
-		const flightLocation = ref(null);
-		const flightPathMeasurementUnitsId = ref(null);
-		const flightPathMeasurementUnitsDistanceId = ref(null);
-		const flightPathMeasurementUnitsVelocityId = ref(null);
-		const flightPathMeasurementUnitsOutputId = ref(null)
-		const flightPathMeasurementUnitsDistanceOutputId = ref(null);
-		const flightPathMeasurementUnitsVelocityOutputId = ref(null);
-		const flightPathMeasurementUnitsOptions = ref([]);
-		const flightPathProcessor = ref(null);
-		const flightPathProcessors = ref([]);
 		const flightPathStylePathFlightColor = ref(null);
 		const flightPathStylePathGroundColor = ref(null);
 		const flightPathStylePinLaunchColor = ref(null);
@@ -503,11 +524,7 @@ export default {
 		const flightPathStylePinMaxVelocitySelected = ref(true);
 		const flightPathStylePinTouchdownColor = ref(null);
 		const flightPathStylePinTouchdownSelected = ref(true);
-		const flightTitle = ref(null);
-		const initialized = ref(false);
 		const output = ref(null);
-		const processing = ref(false);
-		const styles = ref(false);
 		const templateMain = ref(serviceFlightPath.defaultTemplateMain);
 		const templatePinLaunch = ref(serviceFlightPath.defaultTemplatePinLaunch);
 		const templatePinsAdditional = ref('');
@@ -516,27 +533,15 @@ export default {
 		const clickFlightPathStylesReset = () => {
 			flightPathStyleReset(correlationId(), false);
 		};
-		const flightPathMeasurementUnitsOptionsDistance = computed(() => {
-			if (String.isNullOrEmpty(flightPathMeasurementUnitsId.value))
-				return [];
-			const object = Constants.MeasurementUnits[flightPathMeasurementUnitsId.value].distance;
-			return Object.getOwnPropertyNames(object).filter(l => l !== 'default').map((item) => { return { id: item, name: GlobalUtility.$trans.t('measurementUnits.' + flightPathMeasurementUnitsId.value + '.distance.' + item + 'Abbr') }; });
-		});
-		const flightPathMeasurementUnitsOptionsVelocity = computed(() => {
-			if (String.isNullOrEmpty(flightPathMeasurementUnitsId.value))
-				return [];
-			const object = Constants.MeasurementUnits[flightPathMeasurementUnitsId.value].velocity;
-			return Object.getOwnPropertyNames(object).filter(l => l !== 'default').map((item) => { return { id: item, name: GlobalUtility.$trans.t('measurementUnits.' + flightPathMeasurementUnitsId.value + '.velocity.' + item + 'Abbr') }; });
-		});
 		
 		const flightPathInputChange = () => {
 			document.getElementById('top').scrollIntoView({behavior: 'smooth'});
 		};
 		const flightPathStyleLoad = (coorrelationId) => {
-			if (String.isNullOrEmpty(flightPathProcessor.value))
+			if (String.isNullOrEmpty(flightProcessor.value))
 				return;
 
-			const style = serviceStore.getters.getFlightPathStyle(flightPathProcessor.value);
+			const style = serviceStore.getters.getFlightPathStyle(flightProcessor.value);
 			if (!style)
 				return;
 
@@ -570,11 +575,11 @@ export default {
 		};
 		const flightPathStyleSave = (correlationIdI) => {
 			// const correlationIdI = correlationId();
-			if (String.isNullOrEmpty(flightPathProcessor.value))
+			if (String.isNullOrEmpty(flightProcessor.value))
 				return;
 
 			const style = {
-				id: flightPathProcessor.value,
+				id: flightProcessor.value,
 				path: {
 					flight: {
 						color: flightPathStylePathFlightColor.value
@@ -615,7 +620,7 @@ export default {
 
 				downloadProgress.value = true;
 
-				const currentDate = flightDate.value ? new Date(flightDate.value) : new Date();
+				const currentDate = flightDataDate.value ? new Date(flightDataDate.value) : new Date();
 				const day = currentDate.getDate();
 				const month = currentDate.getMonth() + 1;
 				const year = currentDate.getFullYear();
@@ -644,6 +649,9 @@ export default {
 			}
 		};
 		const flightPathProcess = () => {
+			if (String.isNullOrEmpty(flightProcessor.value))
+				return;
+
 			const correlationIdI = correlationId();
 			reset(correlationIdI);
 			output.value = '';
@@ -665,7 +673,7 @@ export default {
 				}
 
 				const flightPath = {
-					date: flightDate.value,
+					date: flightDataDate.value,
 					style: {
 						path: {
 							flight: {
@@ -694,19 +702,19 @@ export default {
 							}
 						}
 					},
-					location: flightLocation.value,
-					title: flightTitle.value
+					location: flightDataLocation.value,
+					title: flightDataTitle.value
 				};
 
-				const flightPathResponse = serviceFlightPath.process(correlationIdI, data, flightPathProcessor.value, 
+				const flightPathResponse = serviceFlightPath.process(correlationIdI, data, flightProcessor.value, 
 					flightPath,
 					{
-						measurementUnitsId: flightPathMeasurementUnitsId.value,
-						measurementUnitsDistanceId: flightPathMeasurementUnitsDistanceId.value,
-						measurementUnitsVelocityId: flightPathMeasurementUnitsVelocityId.value,
-						measurementUnitsOutputId: flightPathMeasurementUnitsOutputId.value,
-						measurementUnitsDistanceOutputId: flightPathMeasurementUnitsDistanceOutputId.value,
-						measurementUnitsVelocityOutputId: flightPathMeasurementUnitsVelocityOutputId.value,
+						measurementUnitsId: flightMeasurementUnitsId.value,
+						measurementUnitsDistanceId: flightMeasurementUnitsDistanceId.value,
+						measurementUnitsVelocityId: flightMeasurementUnitsVelocityId.value,
+						measurementUnitsOutputId: flightMeasurementUnitsOutputId.value,
+						measurementUnitsDistanceOutputId: flightMeasurementUnitsDistanceOutputId.value,
+						measurementUnitsVelocityOutputId: flightMeasurementUnitsVelocityOutputId.value,
 					},
 					templateMain.value, templatePinLaunch.value, templatePinTouchdown.value, templatePinsAdditional.value);
 				if (hasFailed(flightPathResponse))
@@ -716,19 +724,11 @@ export default {
 				// this.output = JSON.stringify(flightPathResponse.results, null, 2);
 				output.value = flightPathResponse.results.flightPath;
 
+				serviceStore.dispatcher.setFlightPathProcessor(correlationIdI, flightProcessor.value);
+
 				flightPathStyleSave(correlationIdI);
-
-				serviceStore.dispatcher.setFlightDate(correlationIdI, flightDate.value);
-				serviceStore.dispatcher.setFlightLocation(correlationIdI, flightLocation.value);
-				serviceStore.dispatcher.setFlightMeasurementUnits(correlationIdI, flightPathMeasurementUnitsId.value);
-				serviceStore.dispatcher.setFlightMeasurementUnitsDistance(correlationIdI, flightPathMeasurementUnitsDistanceId.value);
-				serviceStore.dispatcher.setFlightMeasurementUnitsVelocity(correlationIdI, flightPathMeasurementUnitsVelocityId.value);
-				serviceStore.dispatcher.setFlightMeasurementUnitsOutput(correlationIdI, flightPathMeasurementUnitsOutputId.value);
-				serviceStore.dispatcher.setFlightMeasurementUnitsOutputDistance(correlationIdI, flightPathMeasurementUnitsDistanceOutputId.value);
-				serviceStore.dispatcher.setFlightMeasurementUnitsOutputVelocity(correlationIdI, flightPathMeasurementUnitsVelocityOutputId.value);
-				serviceStore.dispatcher.setFlightTitle(correlationIdI, flightTitle.value);
-
-				serviceStore.dispatcher.setFlightPathProcessor(correlationIdI, flightPathProcessor.value);
+				flightDataSave(correlationIdI);
+				flightMeasurementUnitsSave(correlationIdI, flightProcessor.value);
 
 				setNotify(correlationIdI, 'messages.processed');
 
@@ -755,79 +755,29 @@ export default {
 		const resetInput = () => {
 			const correlationIdI = correlationId();
 			reset(correlationIdI);
-			flightDate.value = null;
-			flightPathProcessor.value = null;
+			flightDataReset(correlationIdI);
+			flightMeasurementUnitsReset(correlationIdI);
+
 			flightPathInput.value = null;
-			flightLocation.value = null;
-			flightTitle.value = null;
+			flightDataTitle.value = null;
 			buttons.value.process.disabled = true;
 
 			setNotify(correlationIdI, 'messages.reset');
 		}
-
-		onMounted(async () => {
-			const correlationIdI = correlationId();
-			reset(correlationIdI);
-
-			flightPathStyleReset(correlationIdI, true);
-
-			flightDate.value = serviceStore.getters.getFlightDate();
-			flightLocation.value = serviceStore.getters.getFlightLocation();
-
-			flightPathMeasurementUnitsId.value = serviceStore.getters.getFlightMeasurementUnits();
-			flightPathMeasurementUnitsDistanceId.value = serviceStore.getters.getFlightMeasurementUnitsDistance();
-			flightPathMeasurementUnitsVelocityId.value = serviceStore.getters.getFlightMeasurementUnitsVelocity();
-
-			flightPathMeasurementUnitsOutputId.value = serviceStore.getters.getFlightMeasurementUnits();
-			if (String.isNullOrEmpty(flightPathMeasurementUnitsOutputId.value))
-				flightPathMeasurementUnitsOutputId.value = AppUtility.measurementUnitsId(correlationId, settings.value);
-			flightPathMeasurementUnitsDistanceOutputId.value = serviceStore.getters.getFlightMeasurementUnitsDistance();
-			if (String.isNullOrEmpty(flightPathMeasurementUnitsDistanceOutputId.value))
-				flightPathMeasurementUnitsDistanceOutputId.value = AppUtility.measurementUnitDistanceId(correlationId, settings.value);
-			flightPathMeasurementUnitsVelocityOutputId.value = serviceStore.getters.getFlightMeasurementUnitsVelocity();
-			if (String.isNullOrEmpty(flightPathMeasurementUnitsVelocityOutputId.value))
-				flightPathMeasurementUnitsVelocityOutputId.value = AppUtility.measurementUnitVelocityId(correlationId, settings.value);
-
-			flightTitle.value = serviceStore.getters.getFlightTitle();
-
-			flightPathProcessor.value = serviceStore.getters.getFlightPathProcessor();
-
-			flightPathProcessors.value = VuetifyUtility.selectOptions(serviceFlightPath.serviceProcessors, GlobalUtility.$trans.t, 'forms.content.tools.flightPath.processors', (l) => { return l.id; }, null, (l) => { return l.id; });
-			flightPathMeasurementUnitsOptions.value = VuetifyUtility.selectOptions(AppUtility.measurementUnitsOptions(), GlobalUtility.$trans.t, 'measurementUnits');
-
-			setTimeout(() => {
-				initialized.value = true;
-			}, 50);
-		});
 		
-		watch(() => flightPathProcessor.value,
+		watch(() => flightProcessor.value,
 			(value) => {
 				if (!value)
 					return;
 
-				flightPathStyleLoad(correlationId(), value);
-			}
-		);
-		
-		watch(() => flightPathMeasurementUnitsId.value,
-			(value) => {
-				if (!initialized.value)
-					return;
-				flightPathMeasurementUnitsDistanceId.value = null;
-				flightPathMeasurementUnitsVelocityId.value = null;
-			}
-		);
-		
-		watch(() => flightPathMeasurementUnitsOutputId.value,
-			(value) => {
-				if (!initialized.value)
-					return;
-				flightPathMeasurementUnitsDistanceOutputId.value = AppUtility.measurementUnitDistanceId(correlationId, settings.value, value);
-				flightPathMeasurementUnitsVelocityOutputId.value = AppUtility.measurementUnitVelocityId(correlationId, settings.value, value);
+				const correlationIdI = correlationId();
+				flightPathStyleLoad(correlationIdI, value);
+				flightMeasurementUnitsLoad(correlationIdI, value);
 			}
 		);
 
-		return {	correlationId,
+		return {
+			correlationId,
 			error,
 			hasFailed,
 			hasSucceeded,
@@ -867,28 +817,39 @@ export default {
 			setNotify,
 			toFixed,
 			settings,
+			flightDataDate,
+			flightDataLocation,
+			flightDataTitle,
+			flightMeasurementUnitsId,
+			flightMeasurementUnitsDistanceId,
+			flightMeasurementUnitsVelocityId,
+			flightMeasurementUnitsOutputId,
+			flightMeasurementUnitsDistanceOutputId,
+			flightMeasurementUnitsVelocityOutputId,
+			flightMeasurementUnitsOptions,
+			flightProcessor,
+			flightProcessors,
+			processing,
+			styles,
+			initialized,
+			flightMeasurementUnitsOptionsDistance,
+			flightMeasurementUnitsOptionsVelocity,
+			flightDataLoad,
+			flightDataReset,
+			flightDataSave,
+			flightMeasurementUnitsLoad,
+			flightMeasurementUnitsLoadOptions,
+			flightMeasurementUnitsReset,
+			flightMeasurementUnitsSave,
 			serviceDownload,
 			serviceFlightPath,
 			buttons,
 			downloadProgress,
 			expanded,
-			flightDate,
 			flightPath,
 			flightPathData,
 			flightPathInput,
-			flightLocation,
-			flightPathMeasurementUnitsId,
-			flightPathMeasurementUnitsDistanceId,
-			flightPathMeasurementUnitsVelocityId,
-			flightPathMeasurementUnitsOutputId,
-			flightPathMeasurementUnitsDistanceOutputId,
-			flightPathMeasurementUnitsVelocityOutputId,
-			flightPathMeasurementUnitsOptions,
 			clickFlightPathStylesReset,
-			flightPathMeasurementUnitsOptionsDistance,
-			flightPathMeasurementUnitsOptionsVelocity,
-			flightPathProcessor,
-			flightPathProcessors,
 			flightPathStylePathFlightColor,
 			flightPathStylePathGroundColor,
 			flightPathStylePinLaunchColor,
@@ -899,8 +860,7 @@ export default {
 			flightPathStylePinMaxVelocitySelected,
 			flightPathStylePinTouchdownColor,
 			flightPathStylePinTouchdownSelected,
-			flightTitle,
-			initialized,
+			// initialized,
 			output,
 			processing,
 			styles,
@@ -922,16 +882,17 @@ export default {
 	},
 	validations () {
 		return {
-			flightDate: { $autoDirty: true },
-			flightLocation: { $autoDirty: true },
+			flightDataDate: { $autoDirty: true },
+			flightDataLocation: { $autoDirty: true },
+			flightDataTitle: { $autoDirty: true },
 			flightPathInput: { required, $autoDirty: true },
-			flightPathMeasurementUnitsId: { required, $autoDirty: true },
-			flightPathMeasurementUnitsDistanceId: { required, $autoDirty: true },
-			flightPathMeasurementUnitsVelocityId: { required, $autoDirty: true },
-			flightPathMeasurementUnitsOutputId: { required, $autoDirty: true },
-			flightPathMeasurementUnitsDistanceOutputId: { required, $autoDirty: true },
-			flightPathMeasurementUnitsVelocityOutputId: { required, $autoDirty: true },
-			flightPathProcessor: { required, $autoDirty: true },
+			flightMeasurementUnitsId: { required, $autoDirty: true },
+			flightMeasurementUnitsDistanceId: { required, $autoDirty: true },
+			flightMeasurementUnitsVelocityId: { required, $autoDirty: true },
+			flightMeasurementUnitsOutputId: { required, $autoDirty: true },
+			flightMeasurementUnitsDistanceOutputId: { required, $autoDirty: true },
+			flightMeasurementUnitsVelocityOutputId: { required, $autoDirty: true },
+			flightProcessor: { required, $autoDirty: true },
 			flightPathStylePinLaunchColor: { required, $autoDirty: true },
 			flightPathStylePinLaunchSelected: { required, $autoDirty: true },
 			flightPathStylePinMaxAltitudeColor: { required, $autoDirty: true },
@@ -939,8 +900,7 @@ export default {
 			flightPathStylePinMaxVelocityColor: { required, $autoDirty: true },
 			flightPathStylePinMaxVelocitySelected: { required, $autoDirty: true },
 			flightPathStylePinTouchdownColor: { required, $autoDirty: true },
-			flightPathStylePinTouchdownSelected: { required, $autoDirty: true },
-			flightTitle: { $autoDirty: true }
+			flightPathStylePinTouchdownSelected: { required, $autoDirty: true }
 		};
 	}
 };

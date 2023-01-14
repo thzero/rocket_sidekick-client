@@ -38,47 +38,48 @@
 									<v-row dense>
 										<v-col cols="12">
 											<VTextFieldWithValidation
-												ref="flightTitleRef"
-												vid="flightTitle"
-												v-model="flightTitle"
+												ref="flightDataTitleRef"
+												vid="flightDataTitle"
+												v-model="flightDataTitle"
 												:validation="validation"
 												:label="$t('forms.content.tools.flightInfo.title')"
 											/>
 										</v-col>
 										<v-col cols="12">
 											<VTextFieldWithValidation
-												ref="flightLocationRef"
-												vid="flightLocation"
-												v-model="flightLocation"
+												ref="flightDataLocationRef"
+												vid="flightDataLocation"
+												v-model="flightDataLocation"
 												:validation="validation"
 												:label="$t('forms.content.tools.flightInfo.location')"
 											/>
 										</v-col>
 										<v-col cols="12">
 											<VDateTimeField
-												ref="flightDateRef"
-												vid="flightDate"
-												v-model="flightDate"
+												ref="flightDataDateRef"
+												vid="flightDataDate"
+												v-model="flightDataDate"
 												:validation="validation"
 												:label="$t('forms.content.tools.flightInfo.date')"
 											/>
 										</v-col>
 										<v-col cols="12">
 											<VSelectWithValidation
-												ref="flightInfoMeasurementUnitsIdRef"
-												v-model="flightInfoMeasurementUnitsId"
-												vid="flightInfoMeasurementUnitsId"
-												:items="flightInfoMeasurementUnitsOptions"
+												ref="flightMeasurementsIdRef"
+												v-model="flightMeasurementUnitsId"
+												vid="flightMeasurementUnitsId"
+												:items="flightMeasurementUnitsOptions"
+												:readonly="!flightProcessor"
 												:validation="validation"
 												:label="$t('forms.content.tools.flightInfo.measurementUnits')"
 											/>
 										</v-col>
 										<v-col cols="12">
 											<VSelectWithValidation
-												ref="flightInfoProcessorRef"
-												v-model="flightInfoProcessor"
-												vid="flightInfoProcessor"
-												:items="flightInfoProcessors"
+												ref="flightProcessorRef"
+												v-model="flightProcessor"
+												vid="flightProcessor"
+												:items="flightProcessors"
 												:validation="validation"
 												:label="$t('forms.content.tools.flightInfo.processors.title')"
 											/>
@@ -470,7 +471,8 @@ export default {
 		VTextFieldWithValidation
 	},
 	setup(props, context) {
-		const {	correlationId,
+		const {
+			correlationId,
 			error,
 			hasFailed,
 			hasSucceeded,
@@ -509,11 +511,49 @@ export default {
 			setErrorTimer,
 			setNotify,
 			toFixed,
-			settings
-		} = useFlightToolsBaseComponent(
-			props, 
-			context
-		);
+			settings,
+			flightDataDate,
+			flightDataLocation,
+			flightDataTitle,
+			flightMeasurementUnitsId,
+			flightMeasurementUnitsDistanceId,
+			flightMeasurementUnitsVelocityId,
+			flightMeasurementUnitsOutputId,
+			flightMeasurementUnitsDistanceOutputId,
+			flightMeasurementUnitsVelocityOutputId,
+			flightMeasurementUnitsOptions,
+			flightProcessor,
+			flightProcessors,
+			processing,
+			styles,
+			initialized,
+			flightMeasurementUnitsOptionsDistance,
+			flightMeasurementUnitsOptionsVelocity,
+			flightDataLoad,
+			flightDataReset,
+			flightDataSave,
+			flightMeasurementUnitsLoad,
+			flightMeasurementUnitsLoadOptions,
+			flightMeasurementUnitsReset,
+			flightMeasurementUnitsSave
+		} = useFlightToolsBaseComponent(props, context, {
+			onMounted: async (correlationIdI) => {
+				reset(correlationIdI);
+
+				flightProcessor.value = serviceStore.getters.getFlightInfoProcessor();
+
+				flightInfoStyleReset(correlationIdI, false);
+
+				flightDataLoad(correlationIdI);
+				flightMeasurementUnitsLoad(correlationIdI, flightProcessor.value);
+
+				flightInfoDataTypeUse.value = serviceStore.getters.getFlightInfoDataTypeUse();
+
+				flightProcessors.value = VuetifyUtility.selectOptions(serviceFlightInfo.serviceProcessors, GlobalUtility.$trans.t, 'forms.content.tools.flightInfo.processors', (l) => { return l.id; }, null, (l) => { return l.id; });
+
+				resolution.value = serviceStore.getters.getFlightInfoResolution(correlationIdI) ?? Constants.FlightInfo.Resolution;
+			}
+		});
 
 		const serviceDownload = GlobalUtility.$injector.getService(Constants.InjectorKeys.SERVICE_DOWNLOAD);
 		const serviceFlightInfo = GlobalUtility.$injector.getService(Constants.InjectorKeys.SERVICE_TOOLS_FLIGHT_INFO_PROCESSOR);
@@ -535,12 +575,7 @@ export default {
 		const flightInfoDataTypeFiltered = ref(true);
 		const flightInfoDataTypeUse = ref(true);
 		const flightInfoDataTypeUseDisabled = ref(false);
-		const flightDate = ref(null);
 		const flightInfoInput = ref(null);
-		const flightInfoMeasurementUnitsId = ref(null);
-		const flightInfoMeasurementUnitsOptions = ref([]);
-		const flightInfoProcessor = ref(null);
-		const flightInfoProcessors = ref([]);
 		const flightInfoStyleAltitudeColor = ref(null);
 		const flightInfoStyleAltitudeFColor = ref(null);
 		const flightInfoStyleEventApogeeColor = ref(null);
@@ -551,11 +586,7 @@ export default {
 		const flightInfoStyleEventMainBorderColor = ref(null);
 		const flightInfoStyleVelocityColor = ref(null);
 		const flightInfoStyleVelocityFColor = ref(null);
-		const flightLocation = ref(null);
-		const flightTitle = ref(null);
-		const processing = ref(false);
 		const resolution = ref(Constants.FlightInfo.Resolution);
-		const styles = ref(false);
 		
 		const checkFlightInfoDataTypeUse = () => {
 			flightInfoDataTypeUseDisabled.value = true;
@@ -572,7 +603,7 @@ export default {
 			const correlationIdI = correlationId();
 			serviceStore.dispatcher.setFlightInfoResolution(correlationIdI, resolution2);
 
-			if (processing.value )
+			if (!processing.value)
 				flightInfoProcess(correlationIdI);
 		};
 		const clickStylesReset = () => {
@@ -582,10 +613,10 @@ export default {
 			document.getElementById('top').scrollIntoView({behavior: 'smooth'});
 		};
 		const flightInfoStyleLoad = (correlationId) => {
-			if (String.isNullOrEmpty(flightInfoProcessor.value ))
+			if (String.isNullOrEmpty(flightProcessor.value ))
 				return;
 
-			const style = serviceStore.getters.getFlightInfoStyle(flightInfoProcessor.value);
+			const style = serviceStore.getters.getFlightInfoStyle(flightProcessor.value);
 			if (!style)
 				return;
 
@@ -617,11 +648,11 @@ export default {
 		};
 		const flightInfoStyleSave = (correlationIdI) => {
 			// const correlationIdI = correlationId();
-			if (String.isNullOrEmpty(flightInfoProcessor.value))
+			if (String.isNullOrEmpty(flightProcessor.value))
 				return;
 
 			const style = {
-				id: flightInfoProcessor.value,
+				id: flightProcessor.value,
 				altitude: {
 					color: flightInfoStyleAltitudeColor.value
 				},
@@ -657,8 +688,6 @@ export default {
 			};
 
 			serviceStore.dispatcher.setFlightInfoStyle(correlationIdI, style);
-
-			// setNotify(correlationIdI, 'messages.saved');
 		};
 		const flightInfoExport = (correlationId) => {
 			try {
@@ -729,7 +758,7 @@ export default {
 		const flightInfoExportName = (correlationId, extension) => {
 			extension = !String.isNullOrEmpty(extension) ? extension : 'png';
 
-			const currentDate = flightDate.value ? new Date(flightDate.value) : new Date();
+			const currentDate = flightDataDate.value ? new Date(flightDataDate.value) : new Date();
 			const day = currentDate.getDate();
 			const month = currentDate.getMonth() + 1;
 			const year = currentDate.getFullYear();
@@ -769,7 +798,7 @@ export default {
 						use: flightInfoDataTypeUse.value
 					};
 
-					const flightInfoResults = serviceFlightInfo.process(correlationIdI, data, flightInfoProcessor.value, flightInfoMeasurementUnitsId.value, flightInfoDataTypes);
+					const flightInfoResults = serviceFlightInfo.process(correlationIdI, data, flightProcessor.value, flightMeasurementUnitsId.value, flightInfoDataTypes);
 					AppUtility.debug2('flightInfoResults', flightInfoResults);
 					if (flightInfoResults.errors && data.errors.length > 0) {
 						const errors = flightInfoResults.errors.map(e => GlobalUtility.$trans.t(e) + '<br/>');
@@ -779,14 +808,14 @@ export default {
 					}
 
 					flightInfoResults.info.title = GlobalUtility.$trans.t('charts.flightInfo.title');
-					if (!String.isNullOrEmpty(flightDate.value))
-						flightInfoResults.info.date = flightDate.value;
-					if (!String.isNullOrEmpty(flightInfoMeasurementUnitsId.value))
-						flightInfoResults.info.measurementUnits = flightInfoMeasurementUnitsId.value;
-					if (!String.isNullOrEmpty(flightLocation.value))
-						flightInfoResults.info.location = flightLocation.value;
-					if (!String.isNullOrEmpty(flightTitle.value && flightTitle.value))
-						flightInfoResults.info.title = flightTitle.value;
+					if (!String.isNullOrEmpty(flightDataDate.value))
+						flightInfoResults.info.date = flightDataDate.value;
+					if (!String.isNullOrEmpty(flightMeasurementUnitsId.value))
+						flightInfoResults.info.measurementUnits = flightMeasurementUnitsId.value;
+					if (!String.isNullOrEmpty(flightDataLocation.value))
+						flightInfoResults.info.location = flightDataLocation.value;
+					if (!String.isNullOrEmpty(flightDataTitle.value && flightDataTitle.value))
+						flightInfoResults.info.title = flightDataTitle.value;
 
 					flightInfoChartData.value = flightInfoResults.info;
 					flightInfo.value = flightInfoResults.info;
@@ -802,16 +831,13 @@ export default {
 					flightInfoResults.info.style.velocity = flightInfoStyleVelocityColor.value;
 					flightInfoResults.info.style.velocityF = flightInfoStyleVelocityFColor.value;
 
-					flightTitle.value = serviceStore.getters.getFlightTitle();
-
-					serviceStore.dispatcher.setFlightDate(correlationIdI, flightDate.value);
 					serviceStore.dispatcher.setFlightInfoDataTypeUse(correlationIdI, flightInfoDataTypeUse.value);
-					serviceStore.dispatcher.setFlightInfoProcessor(correlationIdI, flightInfoProcessor.value);
-					serviceStore.dispatcher.setFlightLocation(correlationIdI, flightLocation.value);
-					serviceStore.dispatcher.setFlightMeasurementUnits(correlationIdI, flightInfoMeasurementUnitsId.value);
-					serviceStore.dispatcher.setFlightTitle(correlationIdI, flightTitle.value);
+
+					serviceStore.dispatcher.setFlightInfoProcessor(correlationIdI, flightProcessor.value);
 
 					flightInfoStyleSave(correlationIdI);
+					flightDataSave(correlationIdI);
+					flightMeasurementUnitsSave(correlationIdI, flightProcessor.value);
 
 					setNotify(correlationIdI, 'messages.processed');
 
@@ -858,15 +884,15 @@ export default {
 		const resetInput = () => {
 			const correlationIdI = correlationId();
 			reset(correlationIdI);
+			flightDataReset(correlationIdI);
+			flightMeasurementUnitsReset(correlationIdI);
+
 			flightInfoDataTypeActual.value = true;
 			flightInfoDataTypeFiltered.value = true;
 			flightInfoDataTypeUse.value = true;
 			flightInfoDataTypeUseDisabled.value = false;
-			flightDate.value = null;
 			flightInfoInput.value = null;
-			flightLocation.value = null;
-			flightInfoProcessor.value = null;
-			flightTitle.value = null;
+			flightProcessor.value = null;
 			buttons.value.process.disabled = true;
 
 			setNotify(correlationIdI, 'messages.reset');
@@ -882,37 +908,19 @@ export default {
 				checkFlightInfoDataTypeUse();
 			}
 		);
-		watch(() => flightInfoProcessor.value,
+		watch(() => flightProcessor.value,
 			(value) => {
 				if (!value)
 					return;
 
-				flightInfoStyleLoad(correlationId(), value);
+				const correlationIdI = correlationId();
+				flightInfoStyleLoad(correlationIdI, value);
+				flightMeasurementUnitsLoad(correlationIdI, value);
 			}
 		);
 
-		onMounted(async () => {
-			const correlationIdI = correlationId();
-			reset(correlationIdI);
-
-			flightInfoStyleReset(correlationIdI, false);
-
-			flightDate.value = serviceStore.getters.getFlightDate();
-			flightLocation.value = serviceStore.getters.getFlightLocation();
-			flightInfoDataTypeUse.value = serviceStore.getters.getFlightInfoDataTypeUse();
-			flightInfoMeasurementUnitsId.value = serviceStore.getters.getFlightMeasurementUnits();
-			if (String.isNullOrEmpty(flightInfoMeasurementUnitsId.value))
-				flightInfoMeasurementUnitsId.value = AppUtility.measurementUnitsId(correlationId, settings.value);
-			flightInfoProcessor.value = serviceStore.getters.getFlightInfoProcessor();
-			flightTitle.value = serviceStore.getters.getFlightTitle();
-
-			flightInfoProcessors.value = VuetifyUtility.selectOptions(serviceFlightInfo.serviceProcessors, GlobalUtility.$trans.t, 'forms.content.tools.flightInfo.processors', (l) => { return l.id; }, null, (l) => { return l.id; });
-			flightInfoMeasurementUnitsOptions.value = VuetifyUtility.selectOptions(AppUtility.measurementUnitsOptions(), GlobalUtility.$trans.t, 'measurementUnits');
-
-			resolution.value = serviceStore.getters.getFlightInfoResolution(correlationIdI) ?? Constants.FlightInfo.Resolution;
-		});
-
-		return {	correlationId,
+		return {
+			correlationId,
 			error,
 			hasFailed,
 			hasSucceeded,
@@ -952,6 +960,30 @@ export default {
 			setNotify,
 			toFixed,
 			settings,
+			flightDataDate,
+			flightDataLocation,
+			flightDataTitle,
+			flightMeasurementUnitsId,
+			flightMeasurementUnitsDistanceId,
+			flightMeasurementUnitsVelocityId,
+			flightMeasurementUnitsOutputId,
+			flightMeasurementUnitsDistanceOutputId,
+			flightMeasurementUnitsVelocityOutputId,
+			flightMeasurementUnitsOptions,
+			flightProcessor,
+			flightProcessors,
+			processing,
+			styles,
+			initialized,
+			flightMeasurementUnitsOptionsDistance,
+			flightMeasurementUnitsOptionsVelocity,
+			flightDataLoad,
+			flightDataReset,
+			flightDataSave,
+			flightMeasurementUnitsLoad,
+			flightMeasurementUnitsLoadOptions,
+			flightMeasurementUnitsReset,
+			flightMeasurementUnitsSave,
 			serviceDownload,
 			serviceFlightInfo,
 			buttons,
@@ -964,12 +996,7 @@ export default {
 			flightInfoDataTypeFiltered,
 			flightInfoDataTypeUse,
 			flightInfoDataTypeUseDisabled,
-			flightDate,
 			flightInfoInput,
-			flightInfoMeasurementUnitsId,
-			flightInfoMeasurementUnitsOptions,
-			flightInfoProcessor,
-			flightInfoProcessors,
 			flightInfoStyleAltitudeColor,
 			flightInfoStyleAltitudeFColor,
 			flightInfoStyleEventApogeeColor,
@@ -980,8 +1007,6 @@ export default {
 			flightInfoStyleEventMainBorderColor,
 			flightInfoStyleVelocityColor,
 			flightInfoStyleVelocityFColor,
-			flightLocation,
-			flightTitle,
 			processing,
 			resolution,
 			styles,
@@ -1008,15 +1033,15 @@ export default {
 	},
 	validations () {
 		return {
-			flightDate: { $autoDirty: true },
-			flightInfoMeasurementUnitsId: { required, $autoDirty: true },
-			flightInfoProcessor: { required, $autoDirty: true },
+			flightDataDate: { $autoDirty: true },
+			flightDataLocation: { $autoDirty: true },
+			flightDataTitle: { $autoDirty: true },
 			flightInfoInput: { required, $autoDirty: true },
 			flightInfoDataTypeActual: { requiredIfFiltered: requiredUnless(this.flightInfoDataTypeFiltered), $autoDirty: true },
 			flightInfoDataTypeFiltered: { requiredIfActual: requiredUnless(this.flightInfoDataTypeActual), $autoDirty: true },
 			flightInfoDataTypeUse: { required, $autoDirty: true },
-			flightLocation: { $autoDirty: true },
-			flightTitle: { $autoDirty: true }
+			flightMeasurementUnitsId: { required, $autoDirty: true },
+			flightProcessor: { required, $autoDirty: true },
 		};
 	}
 };
