@@ -425,7 +425,7 @@ import GlobalUtility from '@thzero/library_client/utility/global';
 
 import DialogSupport from '@/library_vue/components/support/dialog';
 
-import { useToolsBaseComponent } from '@/components/content/tools/toolBase';
+import { useToolsBaseComponent } from '@/components/content/tools/toolsBase';
 
 import CalculatedOuput from '@/components/content/tools/CalculatedOuput';
 import MeasurementSelect from '@/components/content/tools/MeasurementSelect';
