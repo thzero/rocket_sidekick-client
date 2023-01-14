@@ -723,6 +723,7 @@
 			},
 			"links": {
 				"title": "Links",
+				"construction": "Construction",
 				"books": "Books",
 				"competitions": "Competitions",
 				"events": "Events",
@@ -732,6 +733,7 @@
 				"manufacturers": "Manufacturers",
 				"organizations": "Organizations",
 				"study": "Study Guides",
+				"tools": "Tools",
 				"vendors": "Vendors"
 			},
 			"tools": {
