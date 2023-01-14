@@ -64,44 +64,54 @@
 											/>
 										</v-col>
 										<v-col cols="12">
+											<VSelectWithValidation
+												ref="flightProcessorRef"
+												v-model="flightProcessor"
+												vid="flightProcessor"
+												:items="flightProcessors"
+												:validation="validation"
+												:label="$t('forms.content.tools.flightPath.processors.title')"
+											/>
+										</v-col>
+										<v-col cols="12">
 											<v-card
 												variant="outlined"
 											>
 												<v-card-text>
-											<v-row dense>
-												<v-col cols="12">
-													<VSelectWithValidation
-														ref="flightMeasurementUnitsIdRef"
-														v-model="flightMeasurementUnitsId"
-														vid="flightMeasurementUnitsId"
-														:items="flightMeasurementUnitsOptions"
-														:validation="validation"
-														:label="$t('forms.content.tools.flightPath.measurementUnits.gps')"
-													/>
-											</v-col>
-											</v-row>
-											<v-row dense>
-												<v-col cols="6">
-													<VSelectWithValidation
-														ref="flightMeasurementUnitsDistanceIdRef"
-														v-model="flightMeasurementUnitsDistanceId"
-														vid="flightMeasurementUnitsDistanceId"
-														:items="flightMeasurementUnitsOptionsDistance"
-														:validation="validation"
-														:label="$t('forms.content.tools.flightPath.measurementUnits.altitude')"
-													/>
-												</v-col>
-												<v-col cols="6">
-													<VSelectWithValidation
-														ref="flightMeasurementUnitsVelocityIdRef"
-														v-model="flightMeasurementUnitsVelocityId"
-														vid="flightMeasurementUnitsVelocityId"
-														:items="flightMeasurementUnitsOptionsVelocity"
-														:validation="validation"
-														:label="$t('forms.content.tools.flightPath.measurementUnits.velocity')"
-													/>
-												</v-col>
-											</v-row>
+													<v-row dense>
+														<v-col cols="12">
+															<VSelectWithValidation
+																ref="flightMeasurementUnitsIdRef"
+																v-model="flightMeasurementUnitsId"
+																vid="flightMeasurementUnitsId"
+																:items="flightMeasurementUnitsOptions"
+																:validation="validation"
+																:label="$t('forms.content.tools.flightPath.measurementUnits.gps')"
+															/>
+														</v-col>
+													</v-row>
+													<v-row dense>
+														<v-col cols="6">
+															<VSelectWithValidation
+																ref="flightMeasurementUnitsDistanceIdRef"
+																v-model="flightMeasurementUnitsDistanceId"
+																vid="flightMeasurementUnitsDistanceId"
+																:items="flightMeasurementUnitsOptionsDistance"
+																:validation="validation"
+																:label="$t('forms.content.tools.flightPath.measurementUnits.altitude')"
+															/>
+														</v-col>
+														<v-col cols="6">
+															<VSelectWithValidation
+																ref="flightMeasurementUnitsVelocityIdRef"
+																v-model="flightMeasurementUnitsVelocityId"
+																vid="flightMeasurementUnitsVelocityId"
+																:items="flightMeasurementUnitsOptionsVelocity"
+																:validation="validation"
+																:label="$t('forms.content.tools.flightPath.measurementUnits.velocity')"
+															/>
+														</v-col>
+													</v-row>
 												</v-card-text>
 											</v-card>
 										</v-col>
@@ -146,16 +156,6 @@
 													</v-row>
 												</v-card-text>
 											</v-card>
-										</v-col>
-										<v-col cols="12">
-											<VSelectWithValidation
-												ref="flightProcessorRef"
-												v-model="flightProcessor"
-												vid="flightProcessor"
-												:items="flightProcessors"
-												:validation="validation"
-												:label="$t('forms.content.tools.flightPath.processors.title')"
-											/>
 										</v-col>
 									</v-row>
 								</v-card-item>
@@ -475,6 +475,7 @@ export default {
 			processing,
 			styles,
 			initialized,
+			flightMeasurementUnitsOptionsAcceleration,
 			flightMeasurementUnitsOptionsDistance,
 			flightMeasurementUnitsOptionsVelocity,
 			flightDataLoad,
@@ -832,6 +833,7 @@ export default {
 			processing,
 			styles,
 			initialized,
+			flightMeasurementUnitsOptionsAcceleration,
 			flightMeasurementUnitsOptionsDistance,
 			flightMeasurementUnitsOptionsVelocity,
 			flightDataLoad,

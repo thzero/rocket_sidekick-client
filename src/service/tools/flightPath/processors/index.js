@@ -1,3 +1,5 @@
+import configureMeasurements, { length, speed } from 'convert-units';
+
 import Constants from '@/constants';
 
 import GlobalUtility from '@thzero/library_client/utility/global';
@@ -5,13 +7,10 @@ import LibraryUtility from '@thzero/library_common/utility';
 
 import BaseService from '@thzero/library_client/service/index';
 
-import configureMeasurements, { length, speed } from 'convert-units';
-
 class FlightPathProcessorService extends BaseService {
 	constructor() {
 		super();
 
-		this._serviceCalculationEngine = null;
 		this._serviceFlightPathOutput = null;
 		this._serviceFlightPathOutputTemplate = null;
 
@@ -24,7 +23,6 @@ class FlightPathProcessorService extends BaseService {
 	init(injector) {
 		super.init(injector);
 
-		this._serviceCalculationEngine = injector.getService(Constants.InjectorKeys.SERVICE_TOOLS_CALCULATION_ENGINE);
 		this._serviceFlightPathOutput = injector.getService(Constants.InjectorKeys.SERVICE_TOOLS_FLIGHT_PATH_OUTPUT_KML);
 		this._serviceFlightPathOutputTemplate = injector.getService(Constants.InjectorKeys.SERVICE_TOOLS_FLIGHT_PATH_OUTPUT_TEMPLATE_HANDLEBARS);
 	}
@@ -69,7 +67,6 @@ class FlightPathProcessorService extends BaseService {
 		if (this._hasFailed(responseProcessDataPost))
 			return responseProcessDataPost;
 
-		// const divisor = (measurementUnits.measurementUnitsId === Constants.MeasurementUnits.english.id ? 3.281 : 1);
 		const divisor = this._convert(1).from(measurementUnits.measurementUnitsDistanceId).to('m');
 		let coords;
 		const path = [];

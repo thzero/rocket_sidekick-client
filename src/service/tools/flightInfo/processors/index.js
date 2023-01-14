@@ -1,8 +1,21 @@
-import AppUtility from '@/utility/app';
+import configureMeasurements, { length, speed } from 'convert-units';
+
+import Constants from '@/constants';
+
+// import AppUtility from '@/utility/app';
 
 import BaseService from '@thzero/library_client/service/index';
 
 class FlightInfoProcessorService extends BaseService {
+	constructor() {
+		super();
+
+		this._convert = configureMeasurements({
+			length,
+			speed
+		});
+	}
+
 	get id() {
 		throw Error('Not Implemented');
 	}
@@ -10,7 +23,15 @@ class FlightInfoProcessorService extends BaseService {
 	process(correlationId, results, data, measurementUnits) {
 		this._enforceNotNull('FlightInfoProcessorService', 'process', results, 'results', correlationId);
 		this._enforceNotNull('FlightInfoProcessorService', 'process', data, 'data', correlationId);
-		this._enforceNotEmpty('FlightInfoProcessorService', 'process', measurementUnits, 'measurementUnits', correlationId);
+		this._enforceNotNull('FlightInfoProcessorService', 'process', measurementUnits, 'measurementUnits', correlationId);
+		this._enforceNotEmpty('FlightInfoProcessorService', 'process', measurementUnits.id, 'measurementUnits.id', correlationId);
+		this._enforceNotEmpty('FlightInfoProcessorService', 'process', measurementUnits.accelerationId, 'measurementUnits.accelerationId', correlationId);
+		this._enforceNotEmpty('FlightInfoProcessorService', 'process', measurementUnits.distanceId, 'measurementUnits.distanceId', correlationId);
+		this._enforceNotEmpty('FlightInfoProcessorService', 'process', measurementUnits.velocityId, 'measurementUnits.velocityId', correlationId);
+		this._enforceNotEmpty('FlightInfoProcessorService', 'process', measurementUnits.outputId, 'measurementUnits.outputId', correlationId);
+		this._enforceNotEmpty('FlightInfoProcessorService', 'process', measurementUnits.accelerationtId, 'measurementUnits.accelerationtId', correlationId);
+		this._enforceNotEmpty('FlightInfoProcessorService', 'process', measurementUnits.distanceOutputId, 'measurementUnits.distanceOutputId', correlationId);
+		this._enforceNotEmpty('FlightInfoProcessorService', 'process', measurementUnits.velocityOutputId, 'measurementUnits.velocityOutputId', correlationId);
 
 		this._data = new FlightData();
 
@@ -435,10 +456,15 @@ class FlightInfoProcessorService extends BaseService {
 		if (!value)
 			return value;
 
-		if (measurementUnits === AppUtility.measurementUnitEnglish)
-			return value;
+		// if (measurementUnits === AppUtility.measurementUnitEnglish)
+		// 	return value;
 
-		value = this._round(value * 0.3048);
+		// value = this._round(value * 0.3048);
+		// return value;
+		
+		value = this._convert(value)
+			.from(Constants.MeasurementUnits[measurementUnits.id].cceleration[measurementUnits.acceleration])
+			.to(Constants.MeasurementUnits[measurementUnits.outputId].acceleration[measurementUnits.accelerationOutputId]);
 		return value;
 	}
 
@@ -446,10 +472,15 @@ class FlightInfoProcessorService extends BaseService {
 		if (!value)
 			return value;
 
-		if (measurementUnits === AppUtility.measurementUnitEnglish)
-			return value;
+		// if (measurementUnits === AppUtility.measurementUnitEnglish)
+		// 	return value;
 
-		value = this._round(value * 0.3048);
+		// value = this._round(value * 0.3048);
+		// return value;
+		
+		value = this._convert(value)
+			.from(Constants.MeasurementUnits[measurementUnits.id].distance[measurementUnits.distanceId])
+			.to(Constants.MeasurementUnits[measurementUnits.outputId].distance[measurementUnits.distanceOutputId]);
 		return value;
 	}
 
@@ -457,10 +488,15 @@ class FlightInfoProcessorService extends BaseService {
 		if (!value)
 			return value;
 
-		if (measurementUnits === AppUtility.measurementUnitEnglish)
-			return value;
+		// if (measurementUnits === AppUtility.measurementUnitEnglish)
+		// 	return value;
 
-		value = this._round(value * 0.3048);
+		// value = this._round(value * 0.3048);
+		// return value;
+		
+		value = this._convert(value)
+			.from(Constants.MeasurementUnits[measurementUnits.id].velocity[measurementUnits.velocityId])
+			.to(Constants.MeasurementUnits[measurementUnits.outputId].velocity[measurementUnits.velocityOutputId]);
 		return value;
 	}
 

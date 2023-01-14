@@ -58,9 +58,11 @@ export function useFlightToolsBaseComponent(props, context, options) {
 	const flightDataLocation = ref(null);
 	const flightDataTitle = ref(null);
 	const flightMeasurementUnitsId = ref(null);
+	const flightMeasurementUnitsAccelerationId = ref(null);
 	const flightMeasurementUnitsDistanceId = ref(null);
 	const flightMeasurementUnitsVelocityId = ref(null);
-	const flightMeasurementUnitsOutputId = ref(null)
+	const flightMeasurementUnitsOutputId = ref(null);
+	const flightMeasurementUnitsAccelerationOutputId = ref(null);
 	const flightMeasurementUnitsDistanceOutputId = ref(null);
 	const flightMeasurementUnitsVelocityOutputId = ref(null);
 	const flightMeasurementUnitsOptions = ref([]);
@@ -73,6 +75,12 @@ export function useFlightToolsBaseComponent(props, context, options) {
 
 	const keyword = 'Default'.toLowerCase(); // otherwise gives a '_sfc_main is not defined' error as Vite is looking for lower case version of the keyword
 
+	const flightMeasurementUnitsOptionsAcceleration = computed(() => {
+		if (String.isNullOrEmpty(flightMeasurementUnitsId.value))
+			return [];
+		const object = Constants.MeasurementUnits[flightMeasurementUnitsId.value].acceleration;
+		return Object.getOwnPropertyNames(object).filter(l => l !== keyword).map((item) => { return { id: item, name: GlobalUtility.$trans.t('measurementUnits.' + flightMeasurementUnitsId.value + '.acceleration.' + item + 'Abbr') }; });
+	});
 	const flightMeasurementUnitsOptionsDistance = computed(() => {
 		if (String.isNullOrEmpty(flightMeasurementUnitsId.value))
 			return [];
@@ -118,12 +126,17 @@ export function useFlightToolsBaseComponent(props, context, options) {
 
 		const input = measurementUnits && measurementUnits.input ? measurementUnits.input.find(l => l.id === processor) : null;
 		flightMeasurementUnitsId.value = input ? input.unitsId : null;
+		flightMeasurementUnitsAccelerationId.value = input ? input.accelerationId : null;
 		flightMeasurementUnitsDistanceId.value = input ? input.distanceId : null;
 		flightMeasurementUnitsVelocityId.value = input ? input.velocityId : null;
 
 		flightMeasurementUnitsOutputId.value = measurementUnits && measurementUnits.output ? measurementUnits.output.units : null;
 		if (String.isNullOrEmpty(flightMeasurementUnitsOutputId.value))
 			flightMeasurementUnitsOutputId.value = AppUtility.measurementUnitsId(correlationId, settings.value);
+
+		flightMeasurementUnitsAccelerationOutputId.value = measurementUnits && measurementUnits.output ? measurementUnits.output.accelerationId : null;
+		if (String.isNullOrEmpty(flightMeasurementUnitsAccelerationOutputId.value))
+			flightMeasurementUnitsAccelerationOutputId.value = AppUtility.measurementUnitsAccelerationId(correlationId, settings.value);
 		flightMeasurementUnitsDistanceOutputId.value = measurementUnits && measurementUnits.output ? measurementUnits.output.distanceId : null;
 		if (String.isNullOrEmpty(flightMeasurementUnitsDistanceOutputId.value))
 			flightMeasurementUnitsDistanceOutputId.value = AppUtility.measurementUnitDistanceId(correlationId, settings.value);
@@ -135,10 +148,12 @@ export function useFlightToolsBaseComponent(props, context, options) {
 		flightMeasurementUnitsOptions.value = VuetifyUtility.selectOptions(AppUtility.measurementUnitsOptions(), GlobalUtility.$trans.t, 'measurementUnits');
 	};
 	const flightMeasurementUnitsReset = (correlationId) => {
+		flightMeasurementUnitsAccelerationId.value = AppUtility.measurementUnitsAccelerationId(correlationId, settings.value, flightMeasurementUnitsId.value);
 		flightMeasurementUnitsDistanceId.value = AppUtility.measurementUnitDistanceId(correlationId, settings.value, flightMeasurementUnitsId.value);
 		flightMeasurementUnitsVelocityId.value = AppUtility.measurementUnitVelocityId(correlationId, settings.value, flightMeasurementUnitsId.value);
 
 		flightMeasurementUnitsOutputId.value = AppUtility.measurementUnitsId(correlationId, settings.value);
+		flightMeasurementUnitsAccelerationOutputId.value = AppUtility.measurementUnitsAccelerationId(correlationId, settings.value);
 		flightMeasurementUnitsDistanceOutputId.value = AppUtility.measurementUnitDistanceId(correlationId, settings.value);
 		flightMeasurementUnitsVelocityOutputId.value = AppUtility.measurementUnitVelocityId(correlationId, settings.value);
 	};
@@ -151,6 +166,7 @@ export function useFlightToolsBaseComponent(props, context, options) {
 		const input = {
 			id: processor,
 			unitsId: flightMeasurementUnitsId.value,
+			accelerationId: flightMeasurementUnitsAccelerationId.value,
 			distanceId: flightMeasurementUnitsDistanceId.value,
 			velocityId: flightMeasurementUnitsVelocityId.value,
 		};
@@ -158,6 +174,7 @@ export function useFlightToolsBaseComponent(props, context, options) {
 		measurementUnits.input = CommonUtility.updateArrayByObject(measurementUnits.input, input);
 		measurementUnits.output = {
 			unitsId: flightMeasurementUnitsOutputId.value,
+			accelerationId: flightMeasurementUnitsAccelerationOutputId.value,
 			distanceId: flightMeasurementUnitsDistanceOutputId.value,
 			velocityId: flightMeasurementUnitsVelocityOutputId.value,
 		};
@@ -179,6 +196,7 @@ export function useFlightToolsBaseComponent(props, context, options) {
 		(value) => {
 			if (!initialized.value)
 				return;
+			flightMeasurementUnitsAccelerationId.value = null;
 			flightMeasurementUnitsDistanceId.value = null;
 			flightMeasurementUnitsVelocityId.value = null;
 		}
@@ -237,9 +255,11 @@ export function useFlightToolsBaseComponent(props, context, options) {
 		flightDataLocation,
 		flightDataTitle,
 		flightMeasurementUnitsId,
+		flightMeasurementUnitsAccelerationId,
 		flightMeasurementUnitsDistanceId,
 		flightMeasurementUnitsVelocityId,
 		flightMeasurementUnitsOutputId,
+		flightMeasurementUnitsAccelerationOutputId,
 		flightMeasurementUnitsDistanceOutputId,
 		flightMeasurementUnitsVelocityOutputId,
 		flightMeasurementUnitsOptions,
@@ -248,6 +268,7 @@ export function useFlightToolsBaseComponent(props, context, options) {
 		processing,
 		styles,
 		initialized,
+		flightMeasurementUnitsOptionsAcceleration,
 		flightMeasurementUnitsOptionsDistance,
 		flightMeasurementUnitsOptionsVelocity,
 		flightDataLoad,

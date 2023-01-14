@@ -65,17 +65,6 @@
 										</v-col>
 										<v-col cols="12">
 											<VSelectWithValidation
-												ref="flightMeasurementsIdRef"
-												v-model="flightMeasurementUnitsId"
-												vid="flightMeasurementUnitsId"
-												:items="flightMeasurementUnitsOptions"
-												:readonly="!flightProcessor"
-												:validation="validation"
-												:label="$t('forms.content.tools.flightInfo.measurementUnits')"
-											/>
-										</v-col>
-										<v-col cols="12">
-											<VSelectWithValidation
 												ref="flightProcessorRef"
 												v-model="flightProcessor"
 												vid="flightProcessor"
@@ -83,6 +72,106 @@
 												:validation="validation"
 												:label="$t('forms.content.tools.flightInfo.processors.title')"
 											/>
+										</v-col>
+										<v-col cols="12">
+											<v-card
+												variant="outlined"
+											>
+												<v-card-text>
+													<v-row dense>
+														<v-col cols="6">
+															<VSelectWithValidation
+																ref="flightMeasurementUnitsIdRef"
+																v-model="flightMeasurementUnitsId"
+																vid="flightMeasurementUnitsId"
+																:items="flightMeasurementUnitsOptions"
+																:validation="validation"
+																:label="$t('forms.content.tools.flightInfo.measurementUnits.altimeter')"
+															/>
+														</v-col>
+														<v-col cols="6">
+															<VSelectWithValidation
+																ref="flightMeasurementUnitsAccelerationIdRef"
+																v-model="flightMeasurementUnitsAccelerationId"
+																vid="flightMeasurementUnitsAccelerationId"
+																:items="flightMeasurementUnitsOptionsAcceleration"
+																:validation="validation"
+																:label="$t('forms.content.tools.flightInfo.measurementUnits.acceleration')"
+															/>
+														</v-col>
+														<v-col cols="6">
+															<VSelectWithValidation
+																ref="flightMeasurementUnitsDistanceIdRef"
+																v-model="flightMeasurementUnitsDistanceId"
+																vid="flightMeasurementUnitsDistanceId"
+																:items="flightMeasurementUnitsOptionsDistance"
+																:validation="validation"
+																:label="$t('forms.content.tools.flightInfo.measurementUnits.altitude')"
+															/>
+														</v-col>
+														<v-col cols="6">
+															<VSelectWithValidation
+																ref="flightMeasurementUnitsVelocityIdRef"
+																v-model="flightMeasurementUnitsVelocityId"
+																vid="flightMeasurementUnitsVelocityId"
+																:items="flightMeasurementUnitsOptionsVelocity"
+																:validation="validation"
+																:label="$t('forms.content.tools.flightInfo.measurementUnits.velocity')"
+															/>
+														</v-col>
+													</v-row>
+												</v-card-text>
+											</v-card>
+										</v-col>
+										<v-col cols="12">
+											<v-card
+												variant="outlined"
+											>
+												<v-card-text>
+													<v-row dense>
+														<v-col cols="6">
+															<VSelectWithValidation
+																ref="flightMeasurementUnitsOutputIdRef"
+																v-model="flightMeasurementUnitsOutputId"
+																vid="flightMeasurementUnitsOutputId"
+																:items="flightMeasurementUnitsOptions"
+																:validation="validation"
+																:label="$t('forms.content.tools.flightInfo.measurementUnits.output')"
+															/>
+														</v-col>
+														<v-col cols="6">
+															<VSelectWithValidation
+																ref="flightMeasurementUnitsAccelerationOutputIdRef"
+																v-model="flightMeasurementUnitsAccelerationOutputId"
+																vid="flightMeasurementUnitsAccelerationOutputId"
+																:items="flightMeasurementUnitsOptionsAcceleration"
+																:validation="validation"
+																:label="$t('forms.content.tools.flightInfo.measurementUnits.acceleration')"
+															/>
+														</v-col>
+														<v-col cols="6">
+															<VSelectWithValidation
+																ref="flightMeasurementUnitsDistanceOutputIdRef"
+																v-model="flightMeasurementUnitsDistanceOutputId"
+																vid="flightMeasurementUnitsDistanceOutputId"
+																:items="flightMeasurementUnitsOptionsDistance"
+																:validation="validation"
+																:label="$t('forms.content.tools.flightInfo.measurementUnits.altitude')"
+															/>
+														</v-col>
+														<v-col cols="6">
+															<VSelectWithValidation
+																ref="flightMeasurementUnitsVelocityOutputIdRef"
+																v-model="flightMeasurementUnitsVelocityOutputId"
+																vid="flightMeasurementUnitsVelocityOutputId"
+																:items="flightMeasurementUnitsOptionsVelocity"
+																:validation="validation"
+																:label="$t('forms.content.tools.flightInfo.measurementUnits.velocity')"
+															/>
+														</v-col>
+													</v-row>
+												</v-card-text>
+											</v-card>
 										</v-col>
 										<v-col cols="12">
 											<v-row dense>
@@ -516,9 +605,11 @@ export default {
 			flightDataLocation,
 			flightDataTitle,
 			flightMeasurementUnitsId,
+			flightMeasurementUnitsAccelerationId,
 			flightMeasurementUnitsDistanceId,
 			flightMeasurementUnitsVelocityId,
 			flightMeasurementUnitsOutputId,
+			flightMeasurementUnitsAccelerationOutputId,
 			flightMeasurementUnitsDistanceOutputId,
 			flightMeasurementUnitsVelocityOutputId,
 			flightMeasurementUnitsOptions,
@@ -527,6 +618,7 @@ export default {
 			processing,
 			styles,
 			initialized,
+			flightMeasurementUnitsOptionsAcceleration,
 			flightMeasurementUnitsOptionsDistance,
 			flightMeasurementUnitsOptionsVelocity,
 			flightDataLoad,
@@ -798,7 +890,17 @@ export default {
 						use: flightInfoDataTypeUse.value
 					};
 
-					const flightInfoResults = serviceFlightInfo.process(correlationIdI, data, flightProcessor.value, flightMeasurementUnitsId.value, flightInfoDataTypes);
+					const flightInfoResults = serviceFlightInfo.process(correlationIdI, data, flightProcessor.value, {
+							id: flightMeasurementUnitsId.value,
+							accelerationId: flightMeasurementUnitsAccelerationId.value,
+							distanceId: flightMeasurementUnitsDistanceId.value,
+							velocityId: flightMeasurementUnitsVelocityId.value,
+							outputId: flightMeasurementUnitsOutputId.value,
+							accelerationtId: flightMeasurementUnitsAccelerationId.value,
+							distanceOutputId: flightMeasurementUnitsDistanceOutputId.value,
+							velocityOutputId: flightMeasurementUnitsVelocityOutputId.value,
+						}, 
+						flightInfoDataTypes);
 					AppUtility.debug2('flightInfoResults', flightInfoResults);
 					if (flightInfoResults.errors && data.errors.length > 0) {
 						const errors = flightInfoResults.errors.map(e => GlobalUtility.$trans.t(e) + '<br/>');
@@ -964,9 +1066,11 @@ export default {
 			flightDataLocation,
 			flightDataTitle,
 			flightMeasurementUnitsId,
+			flightMeasurementUnitsAccelerationId,
 			flightMeasurementUnitsDistanceId,
 			flightMeasurementUnitsVelocityId,
 			flightMeasurementUnitsOutputId,
+			flightMeasurementUnitsAccelerationOutputId,
 			flightMeasurementUnitsDistanceOutputId,
 			flightMeasurementUnitsVelocityOutputId,
 			flightMeasurementUnitsOptions,
@@ -975,6 +1079,7 @@ export default {
 			processing,
 			styles,
 			initialized,
+			flightMeasurementUnitsOptionsAcceleration,
 			flightMeasurementUnitsOptionsDistance,
 			flightMeasurementUnitsOptionsVelocity,
 			flightDataLoad,
@@ -1041,6 +1146,13 @@ export default {
 			flightInfoDataTypeFiltered: { requiredIfActual: requiredUnless(this.flightInfoDataTypeActual), $autoDirty: true },
 			flightInfoDataTypeUse: { required, $autoDirty: true },
 			flightMeasurementUnitsId: { required, $autoDirty: true },
+			flightMeasurementUnitsAccelerationId: { required, $autoDirty: true },
+			flightMeasurementUnitsDistanceId: { required, $autoDirty: true },
+			flightMeasurementUnitsVelocityId: { required, $autoDirty: true },
+			flightMeasurementUnitsOutputId: { required, $autoDirty: true },
+			flightMeasurementUnitsAccelerationOutputId: { required, $autoDirty: true },
+			flightMeasurementUnitsDistanceOutputId: { required, $autoDirty: true },
+			flightMeasurementUnitsVelocityOutputId: { required, $autoDirty: true },
 			flightProcessor: { required, $autoDirty: true },
 		};
 	}

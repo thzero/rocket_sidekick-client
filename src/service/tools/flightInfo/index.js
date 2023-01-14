@@ -64,7 +64,15 @@ class FlightInfoProcessorService extends BaseService {
 	process(correlationId, data, processorId, measurementUnits, dataTypes) {
 		this._enforceNotNull('FlightInfoProcessorService', 'process', data, 'data', correlationId);
 		this._enforceNotEmpty('FlightInfoProcessorService', 'process', processorId, 'processorId', correlationId);
-		this._enforceNotEmpty('FlightInfoProcessorService', 'process', measurementUnits, 'measurementUnits', correlationId);
+		this._enforceNotNull('FlightInfoProcessorService', 'process', measurementUnits, 'measurementUnits', correlationId);
+		this._enforceNotEmpty('FlightInfoProcessorService', 'process', measurementUnits.id, 'measurementUnits.id', correlationId);
+		this._enforceNotEmpty('FlightInfoProcessorService', 'process', measurementUnits.accelerationId, 'measurementUnits.accelerationId', correlationId);
+		this._enforceNotEmpty('FlightInfoProcessorService', 'process', measurementUnits.distanceId, 'measurementUnits.distanceId', correlationId);
+		this._enforceNotEmpty('FlightInfoProcessorService', 'process', measurementUnits.velocityId, 'measurementUnits.velocityId', correlationId);
+		this._enforceNotEmpty('FlightInfoProcessorService', 'process', measurementUnits.outputId, 'measurementUnits.outputId', correlationId);
+		this._enforceNotEmpty('FlightInfoProcessorService', 'process', measurementUnits.accelerationtId, 'measurementUnits.accelerationtId', correlationId);
+		this._enforceNotEmpty('FlightInfoProcessorService', 'process', measurementUnits.distanceOutputId, 'measurementUnits.distanceOutputId', correlationId);
+		this._enforceNotEmpty('FlightInfoProcessorService', 'process', measurementUnits.velocityOutputId, 'measurementUnits.velocityOutputId', correlationId);
 		this._enforceNotEmpty('FlightInfoProcessorService', 'process', dataTypes, 'dataTypes', correlationId);
 
 		const results = new Results();

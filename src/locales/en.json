@@ -139,7 +139,14 @@
 						"text": "text"
 					},
 					"location": "Flight Location",
-					"measurementUnits": "Flight Measurement Units",
+					"measurementUnits": {
+						"acceleration": "Acceleration",
+						"altimeter": "Altimeter",
+						"altitude": "Altitude",
+						"input": "Input Measurement Units",
+						"output": "Output Measurement Units",
+						"velocity": "Velocity"
+					},
 					"processors": {
 						"title": "Flight Data Type",
 						"eggtimer": "Eggtimer"
@@ -174,6 +181,26 @@
 				},
 				"flightPath": {
 					"title": "Flight Title",
+					"csv": "CSV GPS Flight Data",
+					"date": "Flight Date",
+					"flightPath": "Flight Path",
+					"groundPath": "Ground Path",
+					"launch": "Launch",
+					"location": "Flight Location",
+					"maxAltitude": "Max. Altitude",
+					"maxVelocity": "Max. Velocity",
+					"measurementUnits": {
+						"altitude": "Altitude",
+						"gps": "GPS",
+						"input": "Input Measurement Units",
+						"output": "Output Measurement Units",
+						"velocity": "Velocity"
+					},
+					"processors": {
+						"title": "Flight Data Type",
+						"eggtimer": "Eggtimer",
+						"featherweight": "Featherweight"
+					},
 					"style": {
 						"title": "Flight Path Styles",
 						"flight": {
@@ -198,26 +225,6 @@
 							"color": "Touchdown Pin Color",
 							"selected": "Display Touchdown Pin"
 						}
-					},
-					"csv": "CSV GPS Flight Data",
-					"date": "Flight Date",
-					"flightPath": "Flight Path",
-					"groundPath": "Ground Path",
-					"launch": "Launch",
-					"location": "Flight Location",
-					"maxAltitude": "Max. Altitude",
-					"maxVelocity": "Max. Velocity",
-					"measurementUnits": {
-						"input": "Input Measurement Units",
-						"output": "Output Measurement Units",
-						"gps": "GPS",
-						"altitude": "Altitude",
-						"velocity": "Velocity"
-					},
-					"processors": {
-						"title": "Flight Data Type",
-						"eggtimer": "Eggtimer",
-						"featherweight": "Featherweight"
 					},
 					"templates": {
 						"main": "Main Template",
