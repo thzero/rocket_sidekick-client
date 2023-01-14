@@ -227,11 +227,10 @@ import Constants from '@/constants';
 
 import GlobalUtility from '@thzero/library_client/utility/global';
 
-// import toolBase from '@/components/content/tools/toolBase';
-import { useToolsBaseComponent } from '@/components/content/tools/toolBase';
+import { useToolsBaseComponent } from '@/components/content/tools/toolsBase';
 
 export default {
-	name: 'flightInfo',
+	name: 'flightInfoData',
 	props: {
 		modelValue: {
 			type: Object,
