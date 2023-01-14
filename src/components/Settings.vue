@@ -400,7 +400,6 @@ export default {
 				measurementUnitWeightId.value = Constants.MeasurementUnits[units].weight.default;
 			}
 		);
-		
 		watch(() => user.value,
 			(value, newValue) => {
 				if (value !== newValue)
