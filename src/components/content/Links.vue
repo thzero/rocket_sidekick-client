@@ -53,6 +53,26 @@
 			<v-col cols="12" md="6">
 				<v-card>
 					<v-card-title>
+	<p class="text-h6 text-center">{{ $t('titles.content.links.books') }}</p>
+					</v-card-title>
+					<v-card-text>
+		<v-list density="compact">
+			<v-list-item
+				v-for="item in linksBooks"
+				:key="item.name"
+				:href="item.link"
+				:target="target(item)"
+				class="link"
+			>
+				<v-list-item-title>{{ $t(item.title) }}</v-list-item-title>
+			</v-list-item>
+		</v-list>
+					</v-card-text>
+				</v-card>
+			</v-col>
+			<v-col cols="12" md="6">
+				<v-card>
+					<v-card-title>
 	<p class="text-h6 text-center">{{ $t('titles.content.links.organizations') }}</p>
 					</v-card-title>
 					<v-card-text>
@@ -130,6 +150,10 @@
 					</v-card-text>
 				</v-card>
 			</v-col>
+			<v-col 
+				v-if="$vuetify.display.mdAndUp"
+			cols="6">
+			</v-col>
 			<v-col cols="12" md="6">
 				<v-card>
 					<v-card-title>
@@ -203,10 +227,10 @@ export default {
 				return [];
 			return temp.links.filter(l => l.enabled);
 		});
-		const linksGeneral = computed(() => {
+		const linksBooks = computed(() => {
 			if (!links.value)
 				return [];
-			return links.value.filter(l => String.isNullOrEmpty(l.category));
+			return links.value.filter(l => l.category === 'book');
 		});
 		const linksCompetitions = computed(() => {
 			if (!links.value)
@@ -222,6 +246,11 @@ export default {
 			if (!links.value)
 				return [];
 			return links.value.filter(l => l.category === 'forum');
+		});
+		const linksGeneral = computed(() => {
+			if (!links.value)
+				return [];
+			return links.value.filter(l => String.isNullOrEmpty(l.category));
 		});
 		const linksGuidance = computed(() => {
 			if (!links.value)
@@ -263,6 +292,7 @@ export default {
 			notImplementedError,
 			success,
 			links,
+			linksBooks,
 			linksCompetitions,
 			linksEvents,
 			linksForums,

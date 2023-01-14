@@ -181,7 +181,7 @@
 							<v-list-item-title>{{ $t('titles.openSource') }}</v-list-item-title>
 						</v-list-item>
 						<v-list-item
-							v-if="!isLoggedIn"
+							v-if="displaySignIn"
 							@click="clickSignIn"
 						>
 							<template v-slot:prepend>
@@ -449,6 +449,9 @@ export default {
 			// },
 		];
 
+		const displaySignIn = computed(() => {
+			return !isLoggedIn && Constants.Features.Auth;
+		});
 		const info = computed(() => {
 			let temp = serviceStore.state.content;
 			if (!temp)
@@ -528,6 +531,7 @@ export default {
 			displayMarkupValue,
 			dialogNewCharacter,
 			info,
+			displaySignIn,
 			// links,
 			markup,
 			preferences,

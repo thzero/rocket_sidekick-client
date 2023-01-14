@@ -139,7 +139,14 @@
 						"text": "text"
 					},
 					"location": "Flight Location",
-					"measurementUnits": "Flight Measurement Units",
+					"measurementUnits": {
+						"acceleration": "Acceleration",
+						"altimeter": "Altimeter",
+						"altitude": "Altitude",
+						"input": "Input Measurement Units",
+						"output": "Output Measurement Units",
+						"velocity": "Velocity"
+					},
 					"processors": {
 						"title": "Flight Data Type",
 						"eggtimer": "Eggtimer"
@@ -174,27 +181,6 @@
 				},
 				"flightPath": {
 					"title": "Flight Title",
-					"style": {
-						"title": "Flight Path Styles",
-						"flight": {
-							"color": "Flight Path Color"
-						},
-						"ground": {
-							"color": "Ground Path Color"
-						},
-						"launch": {
-							"color": "Launch Pin Color"
-						},
-						"maxAltitude": {
-							"color": "Max. Altitude Pin Color"
-						},
-						"maxVelocity": {
-							"color": "Max. Velocity Pin Color"
-						},
-						"touchdown": {
-							"color": "Touchdown Pin Color"
-						}
-					},
 					"csv": "CSV GPS Flight Data",
 					"date": "Flight Date",
 					"flightPath": "Flight Path",
@@ -204,16 +190,41 @@
 					"maxAltitude": "Max. Altitude",
 					"maxVelocity": "Max. Velocity",
 					"measurementUnits": {
+						"altitude": "Altitude",
+						"gps": "GPS",
 						"input": "Input Measurement Units",
 						"output": "Output Measurement Units",
-						"gps": "GPS",
-						"altitude": "Altitude",
 						"velocity": "Velocity"
 					},
 					"processors": {
 						"title": "Flight Data Type",
 						"eggtimer": "Eggtimer",
 						"featherweight": "Featherweight"
+					},
+					"style": {
+						"title": "Flight Path Styles",
+						"flight": {
+							"color": "Flight Path Color"
+						},
+						"ground": {
+							"color": "Ground Path Color"
+						},
+						"launch": {
+							"color": "Launch Pin Color",
+							"selected": "Display Launch Pin"
+						},
+						"maxAltitude": {
+							"color": "Max. Altitude Pin Color",
+							"selected": "Display Max. Altitude Pin"
+						},
+						"maxVelocity": {
+							"color": "Max. Velocity Pin Color",
+							"selected": "Display Max. Velocity Pin"
+						},
+						"touchdown": {
+							"color": "Touchdown Pin Color",
+							"selected": "Display Touchdown Pin"
+						}
 					},
 					"templates": {
 						"main": "Main Template",
@@ -712,6 +723,8 @@
 			},
 			"links": {
 				"title": "Links",
+				"construction": "Construction",
+				"books": "Books",
 				"competitions": "Competitions",
 				"events": "Events",
 				"forums": "Forums",
@@ -720,6 +733,7 @@
 				"manufacturers": "Manufacturers",
 				"organizations": "Organizations",
 				"study": "Study Guides",
+				"tools": "Tools",
 				"vendors": "Vendors"
 			},
 			"tools": {

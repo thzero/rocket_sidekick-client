@@ -45,6 +45,68 @@
 		</v-list>
 					</v-card-text>
 				</v-card>
+			</v-col>
+			<v-col cols="12" md="6">
+				<v-card>
+					<v-card-title>
+	<p class="text-h6 text-center">{{ $t('titles.content.links.construction') }}</p>
+					</v-card-title>
+					<v-card-text>
+		<v-list density="compact">
+			<v-list-item
+				v-for="item in linksConstruction"
+				:key="item.name"
+				:href="item.link"
+				:target="target(item)"
+				class="link"
+			>
+				<v-list-item-title>{{ $t(item.title) }}</v-list-item-title>
+			</v-list-item>
+		</v-list>
+					</v-card-text>
+				</v-card>
+			</v-col>
+			<v-col cols="12" md="6">
+				<v-card>
+					<v-card-title>
+	<p class="text-h6 text-center">{{ $t('titles.content.links.tools') }}</p>
+					</v-card-title>
+					<v-card-text>
+		<v-list density="compact">
+			<v-list-item
+				v-for="item in linksTools"
+				:key="item.name"
+				:href="item.link"
+				:target="target(item)"
+				class="link"
+			>
+				<v-list-item-title>{{ $t(item.title) }}</v-list-item-title>
+			</v-list-item>
+		</v-list>
+					</v-card-text>
+				</v-card>
+			</v-col>
+			<v-col cols="12" md="6">
+				<v-card>
+					<v-card-title>
+	<p class="text-h6 text-center">{{ $t('titles.content.links.books') }}</p>
+					</v-card-title>
+					<v-card-text>
+		<v-list density="compact">
+			<v-list-item
+				v-for="item in linksBooks"
+				:key="item.name"
+				:href="item.link"
+				:target="target(item)"
+				class="link"
+			>
+				<v-list-item-title>{{ $t(item.title) }}</v-list-item-title>
+			</v-list-item>
+		</v-list>
+					</v-card-text>
+				</v-card>
+			</v-col>
+			<v-col cols="12" md="6">
 				<v-card class="mt-2">
 					<v-card-title>
 	<p class="text-h6 text-center">{{ $t('titles.content.links.study') }}</p>
@@ -197,6 +259,13 @@ export default {
 				return {};
 			return temp.info.find(l => l.id === 'highPower');
 		});
+		const highPowerLinks = computed(() => {
+			if (!highPower.value)
+				return [];
+			if (!highPower.value.links)
+				return [];
+			return highPower.value.links.filter(l => l.enabled);
+		});
 		const links = computed(() => {
 			let temp = serviceStore.state.content;
 			if (!temp)
@@ -205,22 +274,30 @@ export default {
 				return [];
 			return temp.links;
 		});
+		const linksBooks = computed(() => {
+			if (!highPowerLinks.value)
+				return [];
+			return highPowerLinks.value.filter(l => l.category === 'guidance');
+		});
+		const linksConstruction = computed(() => {
+			if (!highPowerLinks.value)
+				return [];
+			return highPowerLinks.value.filter(l => l.category === 'construction');
+		});
 		const linksEvents = computed(() => {
 			if (!links.value)
 				return [];
 			return links.value.filter(l => l.category === 'event' && l.highPower);
 		});
-		const linksGuidance = computed(() => {
-			if (!highPower.value)
-				return [];
-			if (!highPower.value.links)
-				return [];
-			return highPower.value.links.filter(l => l.category === 'guidance');
-		});
 		const linksForums = computed(() => {
 			if (!links.value)
 				return [];
 			return links.value.filter(l => l.category === 'forum' && l.highPower);
+		});
+		const linksGuidance = computed(() => {
+			if (!highPowerLinks.value)
+				return [];
+			return highPowerLinks.value.filter(l => l.category === 'guidance');
 		});
 		const linksManufacturers = computed(() => {
 			if (!links.value)
@@ -233,11 +310,14 @@ export default {
 			return links.value.filter(l => l.category === 'organization' && l.highPower);
 		});
 		const linksStudyGuides = computed(() => {
-			if (!highPower.value)
+			if (!highPowerLinks.value)
 				return [];
-			if (!highPower.value.links)
+			return highPowerLinks.value.filter(l => l.category === 'study');
+		});
+		const linksTools = computed(() => {
+			if (!highPowerLinks.value)
 				return [];
-			return highPower.value.links.filter(l => l.category === 'study');
+			return highPowerLinks.value.filter(l => l.category === 'tools');
 		});
 		const linksVendors = computed(() => {
 			if (!links.value)
@@ -264,13 +344,17 @@ export default {
 			notImplementedError,
 			success,
 			highPower,
+			highPowerLinks,
 			links,
+			linksBooks,
+			linksConstruction,
 			linksEvents,
 			linksForums,
 			linksGuidance,
 			linksManufacturers,
 			linksOrganizations,
 			linksStudyGuides,
+			linksTools,
 			linksVendors,
 			sort,
 			target

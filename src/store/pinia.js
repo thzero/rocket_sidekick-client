@@ -23,11 +23,11 @@ class AppStore extends BaseStore {
 					'flightInfoResolution',
 					'flightInfoStyle',
 					'flightMeasurementUnits',
-					'flightMeasurementUnitsDistance',
-					'flightMeasurementUnitsVelocity',
-					'flightMeasurementUnitsOutput',
-					'flightMeasurementUnitsOutputDistance',
-					'flightMeasurementUnitsOutputVelocity',
+					// 'flightMeasurementUnitsDistance',
+					// 'flightMeasurementUnitsVelocity',
+					// 'flightMeasurementUnitsOutput',
+					// 'flightMeasurementUnitsOutputDistance',
+					// 'flightMeasurementUnitsOutputVelocity',
 					'flightPathProcessor',
 					'flightPathStyle',
 					'motorManufacturers',
@@ -56,17 +56,26 @@ class AppStore extends BaseStore {
 				checksumLastUpdate: [],
 				content: [],
 				flightInfoDataTypeUse: null,
+				flightData: {},
 				flightDate: '',
 				flightInfoProcessor: null,
 				flightInfoResolution: Constants.FlightInfo.Resolution,
 				flightInfoStyle: [],
 				flightLocation: '',
-				flightMeasurementUnits: Constants.MeasurementUnits.english.id,
-				flightMeasurementUnitsDistance: Constants.MeasurementUnits.english.distance.ft,
-				flightMeasurementUnitsVelocity: Constants.MeasurementUnits.english.velocity.fts,
-				flightMeasurementUnitsOutput: null,
-				flightMeasurementUnitsOutputDistance: null,
-				flightMeasurementUnitsOutputVelocity: null,
+				flightMeasurementUnits: {
+					input: [],
+					output: {
+						id: null,
+						distance: null,
+						velocity: null
+					}
+				},
+				// flightMeasurementUnits: Constants.MeasurementUnits.english.id,
+				// flightMeasurementUnitsDistance: Constants.MeasurementUnits.english.distance.ft,
+				// flightMeasurementUnitsVelocity: Constants.MeasurementUnits.english.velocity.fts,
+				// flightMeasurementUnitsOutput: null,
+				// flightMeasurementUnitsOutputDistance: null,
+				// flightMeasurementUnitsOutputVelocity: null,
 				flightPathProcessor: null,
 				flightPathStyle: [],
 				flightTitle: '',
@@ -122,6 +131,9 @@ class AppStore extends BaseStore {
 				},
 				async setFlightInfoDataTypeUse(correlationId, value) {
 					this.flightInfoDataTypeUse = value;
+				},
+				async setFlightData(correlationId, value) {
+					this.flightData = value;
 				},
 				async setFlightDate(correlationId, value) {
 					this.flightDate = value;
@@ -187,6 +199,9 @@ class AppStore extends BaseStore {
 				}
 			},
 			getters: {
+				getFlightData() {
+					return GlobalUtility.$store.flightData;
+				},
 				getFlightDate() {
 					return GlobalUtility.$store.flightDate;
 				},
@@ -259,6 +274,9 @@ class AppStore extends BaseStore {
 				},
 				async setFlightInfoDataTypeUse(correlationId, value) {
 					await GlobalUtility.$store.setFlightInfoDataTypeUse(correlationId, value);
+				},
+				async setFlightData(correlationId, value) {
+					await GlobalUtility.$store.setFlightData(correlationId, value);
 				},
 				async setFlightDate(correlationId, value) {
 					await GlobalUtility.$store.setFlightDate(correlationId, value);
