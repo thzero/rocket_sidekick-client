@@ -20,6 +20,7 @@ import settingsService from '@/service/settings';
 import storeService from '@thzero/library_client_vue3_store_pinia/service/store/index'; // STORE TYPE
 // import storeService from '@thzero/library_client_vue3/service/store/vuex'; // STORE TYPE
 import userService from '@/service/user';
+import utilityService from '@/service/utility';
 import versionService from '@/service/version';
 
 import BaseServices from '@thzero/library_client_vue3/boot/baseServices';
@@ -69,6 +70,10 @@ class Services extends BaseServices {
 
 	_initializeUser() {
 		return new userService();
+	}
+
+	_initializeUtility() {
+		return new utilityService();
 	}
 
 	_initializeVersion() {

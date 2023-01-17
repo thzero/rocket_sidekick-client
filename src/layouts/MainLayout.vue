@@ -45,7 +45,7 @@
 						:key="item.name"
 						:to="item.link"
 					>
-						<v-list-item-title>{{ $t(item.title) }}</v-list-item-title>
+						<v-list-item-title>{{ contentTitle(item) }}</v-list-item-title>
 					</v-list-item>
 				</v-list>
 			</v-menu>
@@ -485,6 +485,9 @@ export default {
 			return temp.tools.sort((a, b) => a.order >= b.order);
 		});
 
+		const contentTitle = (item,) => {
+			return (item.markup ? item.title : GlobalUtility.$trans.t(item.title));
+		}
 		const dialogDisplayMarkupCancel = async () => {
 			dialogDisplayMarkupSignal.value.cancel();
 		};
@@ -525,6 +528,7 @@ export default {
 			serviceAuth,
 			serviceStore,
 			toggleDrawer,
+			contentTitle,
 			dialogDisplayMarkupCancel,
 			dialogDisplayMarkupOk,
 			dialogDisplayMarkupSignal,

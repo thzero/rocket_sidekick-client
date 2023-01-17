@@ -81,11 +81,11 @@
 										<v-btn variant="flat" block class="mr-2" color="primary"
 											:to="item.link"
 										>
-											{{ $t(item.title) }}
+											{{ contentTitle(item) }}
 										</v-btn>
 									</v-card-item>
 									<v-card-text class="text-left">
-										{{ $t(item.description) }}
+										{{ contentDescription(item) }}
 									</v-card-text>
 								</v-card>
 							</v-col>
@@ -108,11 +108,11 @@
 										<v-btn variant="flat" block class="mr-2" color="primary"
 											:to="item.link"
 										>
-											{{ $t(item.title) }}
+											{{ contentTitle(item) }}
 										</v-btn>
 									</v-card-item>
 									<v-card-text class="text-left">
-										{{ $t(item.description) }}
+										{{ contentDescription(item) }}
 									</v-card-text>
 								</v-card>
 							</v-col>
@@ -224,6 +224,13 @@ export default {
 		const externalGithub = ref(Constants.External.github);
 		const initializeCompleted = ref(false);
 
+		const contentDescription = (item,) => {
+			return (item.markup ? item.description : GlobalUtility.$trans.t(item.description));
+		}
+		const contentTitle = (item,) => {
+			return (item.markup ? item.title : GlobalUtility.$trans.t(item.title));
+		}
+
 		const info = computed(() => {
 			let temp = serviceStore.state.content;
 			if (!temp)
@@ -285,6 +292,8 @@ export default {
 			notImplementedError,
 			success,
 			externalGithub,
+			contentDescription,
+			contentTitle,
 			info,
 			initializeCompleted,
 			isLoggedIn,

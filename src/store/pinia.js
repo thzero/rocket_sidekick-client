@@ -1,4 +1,5 @@
 import Constants from '@/constants';
+import LibraryConstants from '@thzero/library_client/constants.js';
 
 import GlobalUtility from '@thzero/library_client/utility/global';
 import CommonUtility from '@thzero/library_common/utility';
@@ -87,7 +88,12 @@ class AppStore extends BaseStore {
 			}),
 			actions: {
 				async _initialize(correlationId, results) {
-					await this.setContent(correlationId, results.content);
+					// await this.setContent(correlationId, results.content);
+					const service = GlobalUtility.$injector.getService(LibraryConstants.InjectorKeys.SERVICE_UTILITY);
+					const response = await service.content(correlationId);
+					if (Response.hasSucceeded(response)) {
+						await this.setContent(correlationId, response.results);
+					}
 				},
 				async requestMotor(correlationId, motorId) {
 					const service = GlobalUtility.$injector.getService(Constants.InjectorKeys.SERVICE_EXTERNAL_MOTOR_SEARCH);
@@ -128,6 +134,12 @@ class AppStore extends BaseStore {
 					}
 
 					return [];
+				},
+				async setContent(correlationId, content) {
+					this.$logger.debug('store', 'setContent', 'content.a', content, correlationId);
+					this.$logger.debug('store', 'setContent', 'content.b', this.content, correlationId);
+					this.content = content;
+					this.$logger.debug('store', 'setContent', 'content.c', this.content, correlationId);
 				},
 				async setFlightInfoDataTypeUse(correlationId, value) {
 					this.flightInfoDataTypeUse = value;
@@ -190,12 +202,6 @@ class AppStore extends BaseStore {
 				},
 				async setMotorSearchResults(correlationId, value) {
 					this.motorSearchResults = value;
-				},
-				async setContent(correlationId, content) {
-					this.$logger.debug('store', 'setContent', 'content.a', content, correlationId);
-					this.$logger.debug('store', 'setContent', 'content.b', this.content, correlationId);
-					this.content = content;
-					this.$logger.debug('store', 'setContent', 'content.c', this.content, correlationId);
 				}
 			},
 			getters: {
