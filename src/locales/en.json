@@ -691,7 +691,7 @@
 			"welcome": "RocketSidekick hosts a variety of tools in once place for model rocketry.  Some of the tools are custom build, others are based on formulas found in variety of rocketry forums and sites, as well as some sections having links or information.",
 			"welcome1a": "Contributions for additional tools are welcome via Pull Requests on the site's GitHub repo (",
 			"welcome1b": ").  See the documentation on the repo.",
-			"welcome2": "The following is the selection of tools and information currently available.",
+			"welcomeTools": "The following is the selection of tools and information currently available.",
 			"welcome3": "A high level primer on what the exciting world of model rocketry is!"
 		},
 		"copyright": "Copyright",

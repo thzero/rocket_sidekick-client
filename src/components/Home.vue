@@ -58,17 +58,21 @@
 								<p>
 									{{ $t('strings.content.welcome') }}<br><br>
 								</p>
-								<p>
-									{{ $t('strings.content.welcome2') }}
+								<p
+									v-if="hasContent"
+								>
+									{{ $t('strings.content.welcomeTools') }}
 								</p>
 							</v-col>
 							<v-col
+								v-if="hasContent"
 								cols="12"
 								class="text-center"
 							>
 								<hr />
 							</v-col>
 							<v-col
+								v-if="hasContent"
 								v-for="item in tools"
 								:key="item.name"
 								cols="12"
@@ -90,6 +94,7 @@
 								</v-card>
 							</v-col>
 							<v-col
+								v-if="hasContent"
 								cols="12"
 								class="text-center"
 							>
@@ -231,6 +236,9 @@ export default {
 			return (item.markup ? item.title : GlobalUtility.$trans.t(item.title));
 		}
 
+		const hasContent = computed(() => {
+			return serviceStore.state.content !== null;
+		});
 		const info = computed(() => {
 			let temp = serviceStore.state.content;
 			if (!temp)
@@ -294,6 +302,7 @@ export default {
 			externalGithub,
 			contentDescription,
 			contentTitle,
+			hasContent,
 			info,
 			initializeCompleted,
 			isLoggedIn,
