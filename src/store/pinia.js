@@ -83,7 +83,6 @@ class AppStore extends BaseStore {
 			}),
 			actions: {
 				async _initialize(correlationId, results) {
-					// await this.setContent(correlationId, results.content);
 					const service = GlobalUtility.$injector.getService(LibraryConstants.InjectorKeys.SERVICE_UTILITY);
 					const response = await service.content(correlationId);
 					if (Response.hasSucceeded(response))
