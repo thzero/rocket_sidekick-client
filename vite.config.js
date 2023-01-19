@@ -226,51 +226,51 @@ export default defineConfig({
           //   return 'tools';
           // }
 
-          if (id.includes('/@vue')) {
-            // 176.94 kB
-            // 15.13 kB css
-            // return '@vue';
-            // return 'vue';
-            return 'vue';
-          }
-          if (id.includes('/@intlify')) {
-            // 29.75 kB
-            // return 'intlify';
-            // return 'vue';
-            return 'vue';
-          }
-          if (id.includes('/pinia')) {
-            // 6.91 kB
-            // return 'pinia';
-            // return 'vue';
-            return 'vue';
-          }
-          if (id.includes('/vue')) {
-            // 176.94 kB
-            // 15.13 kB css
-            // return 'vue';
-            return 'vue';
-          }
+          // if (id.includes('/@vue')) {
+          //   // 176.94 kB
+          //   // 15.13 kB css
+          //   // return '@vue';
+          //   // return 'vue';
+          //   return 'vue';
+          // }
+          // if (id.includes('/@intlify')) {
+          //   // 29.75 kB
+          //   // return 'intlify';
+          //   // return 'vue';
+          //   return 'vue';
+          // }
+          // if (id.includes('/pinia')) {
+          //   // 6.91 kB
+          //   // return 'pinia';
+          //   // return 'vue';
+          //   return 'vue';
+          // }
+          // if (id.includes('/vue')) {
+          //   // 176.94 kB
+          //   // 15.13 kB css
+          //   // return 'vue';
+          //   return 'vue';
+          // }
 
-          if (id.includes('/vuetify')) {
-            // 196.51 kB
-            // 363.40 kB css
-            // return 'vuetify';
-            // return 'vuetify';
-            return 'vue';
-          }
-          if (id.includes('date-fns')) {
-            // 122.38 kB
-            // return 'date-fns';
-            // because its used by the date picker componente
-            // return 'vuetify';
-            return 'vue';
-          }
+          // if (id.includes('/vuetify')) {
+          //   // 196.51 kB
+          //   // 363.40 kB css
+          //   // return 'vuetify';
+          //   // return 'vuetify';
+          //   return 'vue';
+          // }
+          // if (id.includes('date-fns')) {
+          //   // 122.38 kB
+          //   // return 'date-fns';
+          //   // because its used by the date picker componente
+          //   // return 'vuetify';
+          //   return 'vue';
+          // }
 
-          console.log(id);
-          if (id.includes('node_modules')) {
-            return 'vendor';
-          }
+          // console.log(id);
+          // if (id.includes('node_modules')) {
+          //   return 'vendor';
+          // }
         }
       },
     },
