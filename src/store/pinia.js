@@ -7,6 +7,7 @@ import CommonUtility from '@thzero/library_common/utility';
 import Response from '@thzero/library_common/response';
 
 import BaseStore from '@thzero/library_client_vue3_store_pinia/store/index';
+import Utility from '@thzero/library_common/utility';
 
 class AppStore extends BaseStore {
 	_initModules() {
@@ -56,6 +57,11 @@ class AppStore extends BaseStore {
 			state: () => ({
 				checksumLastUpdate: [],
 				content: [],
+				contentTtl: 0,
+				contentTtlDiff: 1000 * 60 * 30,
+				contentMarkup: [],
+				contentMarkupTtl: 0,
+				contentMarkupTtlDiff: 1000 * 60 * 30,
 				flightInfoDataTypeUse: null,
 				flightData: {},
 				flightDate: '',
@@ -91,9 +97,46 @@ class AppStore extends BaseStore {
 					// await this.setContent(correlationId, results.content);
 					const service = GlobalUtility.$injector.getService(LibraryConstants.InjectorKeys.SERVICE_UTILITY);
 					const response = await service.content(correlationId);
-					if (Response.hasSucceeded(response)) {
+					if (Response.hasSucceeded(response))
 						await this.setContent(correlationId, response.results);
+				},
+				async requestContent(correlationId) {
+					const now = Utility.getTimestamp();
+					const ttlContent = this.contentTtl ? this.contentTtl : 0;
+					const delta = now - ttlContent;
+					if (this.content && (delta <= this.contentTtlDiff))
+						return Response.success(correlationId, this.content);
+
+					const service = GlobalUtility.$injector.getService(LibraryConstants.InjectorKeys.SERVICE_UTILITY);
+					const response = await service.content(correlationId);
+					this.$logger.debug('store', 'requestContent', 'response', response, correlationId);
+					if (Response.hasSucceeded(response))
+						await this.setContent(correlationId, response.results);
+
+					return Response.error('store', 'requestContent', null, null, null, null, correlationId);
+				},
+				async requestContentMarkup(correlationId, contentId) {
+					if (String.isNullOrEmpty(contentId))
+						return Response.error('store', 'requestContentMarkup', 'contentId', null, null, null, correlationId);
+
+					const now = Utility.getTimestamp();
+					const ttlContent = this.contentMarkupTtl ? this.contentMarkupTtl : 0;
+					const delta = now - ttlContent;
+					if (this.contentMarkup && (delta <= this.contentMarkupTtlDiff)) {
+						const content = GlobalUtility.$store.contentMarkup.find(l => l.id.toLowerCase() === contentId.toLowerCase());
+						if (!String.isNullOrEmpty(content))
+							return Response.success(correlationId, content);
 					}
+
+					const service = GlobalUtility.$injector.getService(LibraryConstants.InjectorKeys.SERVICE_UTILITY);
+					const response = await service.contentMarkup(correlationId, contentId);
+					this.$logger.debug('store', 'requestContentMarkup', 'response', response, correlationId);
+					if (Response.hasSucceeded(response)) {
+						this.setContentMarkup(correlationId, response.results);
+						return Response.success(correlationId, response.results);
+					}
+
+					return Response.error('store', 'requestContentMarkup', null, null, null, null, correlationId);
 				},
 				async requestMotor(correlationId, motorId) {
 					const service = GlobalUtility.$injector.getService(Constants.InjectorKeys.SERVICE_EXTERNAL_MOTOR_SEARCH);
@@ -105,7 +148,7 @@ class AppStore extends BaseStore {
 						return Response.success(correlationId, response.results.motor);
 					}
 
-					return null;
+					return Response.error('store', 'requestMotor', null, null, null, null, correlationId);
 				},
 				async requestMotorManufacturers(correlationId) {
 					const service = GlobalUtility.$injector.getService(Constants.InjectorKeys.SERVICE_EXTERNAL_MOTOR_SEARCH);
@@ -139,7 +182,17 @@ class AppStore extends BaseStore {
 					this.$logger.debug('store', 'setContent', 'content.a', content, correlationId);
 					this.$logger.debug('store', 'setContent', 'content.b', this.content, correlationId);
 					this.content = content;
+					this.contentTtl = Utility.getTimestamp();
 					this.$logger.debug('store', 'setContent', 'content.c', this.content, correlationId);
+				},
+				async setContentMarkup(correlationId, content) {
+					this.$logger.debug('store', 'setContent', 'contentMarkup.a', content, correlationId);
+					this.$logger.debug('store', 'setContent', 'contentMarkup.b', this.contentMarkup, correlationId);
+					if (content && !String.isNullOrEmpty(content)) {
+						this.contentMarkupTtl = Utility.getTimestamp();
+						Utility.updateArrayByObject(this.contentMarkup, content);
+					}
+					this.$logger.debug('store', 'setContent', 'contentMarkup.c', this.contentMarkup, correlationId);
 				},
 				async setFlightInfoDataTypeUse(correlationId, value) {
 					this.flightInfoDataTypeUse = value;
@@ -205,6 +258,9 @@ class AppStore extends BaseStore {
 				}
 			},
 			getters: {
+				getContent() {
+					return GlobalUtility.$store.content;
+				},
 				getFlightData() {
 					return GlobalUtility.$store.flightData;
 				},
@@ -266,6 +322,12 @@ class AppStore extends BaseStore {
 				}
 			},
 			dispatcher: {
+				async requestContent(correlationId) {
+					return await GlobalUtility.$store.requestContent(correlationId);
+				},
+				async requestContentMarkup(correlationId, contentId) {
+					return await GlobalUtility.$store.requestContentMarkup(correlationId, contentId);
+				},
 				async requestMotor(correlationId, motorId) {
 					return await GlobalUtility.$store.requestMotor(correlationId, motorId);
 				},

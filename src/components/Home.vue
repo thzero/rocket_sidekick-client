@@ -83,7 +83,7 @@
 								<v-card class="mb-2" variant="outlined">
 									<v-card-item>
 										<v-btn variant="flat" block class="mr-2" color="primary"
-											:to="item.link"
+											:to="contentLink(item)"
 										>
 											{{ contentTitle(item) }}
 										</v-btn>
@@ -111,7 +111,7 @@
 								<v-card class="mb-2" variant="outlined">
 									<v-card-item>
 										<v-btn variant="flat" block class="mr-2" color="primary"
-											:to="item.link"
+											:to="contentLink(item)"
 										>
 											{{ contentTitle(item) }}
 										</v-btn>
@@ -231,16 +231,22 @@ export default {
 
 		const contentDescription = (item,) => {
 			return (item.markup ? item.description : GlobalUtility.$trans.t(item.description));
-		}
+		};
+		const contentLink = (item,) => {
+			if (item.markup)
+				return `/content/info/${item.id}`;
+			
+			return item.link;
+		};
 		const contentTitle = (item,) => {
 			return (item.markup ? item.title : GlobalUtility.$trans.t(item.title));
-		}
+		};
 
 		const hasContent = computed(() => {
-			return serviceStore.state.content !== null;
+			return serviceStore.getters.getContent() !== null;
 		});
 		const info = computed(() => {
-			let temp = serviceStore.state.content;
+			let temp = serviceStore.getters.getContent();
 			if (!temp)
 				return [];
 			if (!temp.info)
@@ -248,7 +254,7 @@ export default {
 			return temp.info.sort((a, b) => a.order >= b.order);
 		});
 		const tools = computed(() => {
-			let temp = serviceStore.state.content;
+			let temp = serviceStore.getters.getContent();
 			if (!temp)
 				return [];
 			if (!temp.tools)
@@ -277,6 +283,8 @@ export default {
 		});
 
 		onMounted(async () => {
+			await serviceStore.dispatcher.requestContent(correlationId());
+
 			// // Selecting the iframe element
 			const iframe = document.getElementById('slideshow');
 			// // Adjusting the iframe height onload event
@@ -301,6 +309,7 @@ export default {
 			success,
 			externalGithub,
 			contentDescription,
+			contentLink,
 			contentTitle,
 			hasContent,
 			info,

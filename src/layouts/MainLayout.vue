@@ -43,7 +43,7 @@
 					<v-list-item
 						v-for="item in info"
 						:key="item.name"
-						:to="item.link"
+						:to="contentLink(item)"
 					>
 						<v-list-item-title>{{ contentTitle(item) }}</v-list-item-title>
 					</v-list-item>
@@ -93,9 +93,9 @@
 					<v-list-item
 						v-for="item in tools"
 						:key="item.name"
-						:to="item.link"
+						:to="contentLink(item)"
 					>
-						<v-list-item-title>{{ $t(item.title) }}</v-list-item-title>
+						<v-list-item-title>{{ contentTitle(item) }}</v-list-item-title>
 					</v-list-item>
 				</v-list>
 				<!-- 
@@ -224,9 +224,9 @@
 						<v-list-item
 							v-for="item in info"
 							:key="item.name"
-							:to="item.link"
+							:to="contentLink(item)"
 						>
-							<v-list-item-title>{{ $t(item.title) }}</v-list-item-title>
+							<v-list-item-title>{{ contentTitle(item) }}</v-list-item-title>
 						</v-list-item>
 					</v-list>
 				</v-list-item>
@@ -264,9 +264,9 @@
 						<v-list-item
 							v-for="item in tools"
 							:key="item.name"
-							:to="item.link"
+							:to="contentLink(item)"
 						>
-							<v-list-item-title>{{ $t(item.title) }}</v-list-item-title>
+							<v-list-item-title>{{ contentTitle(item) }}</v-list-item-title>
 						</v-list-item>
 					</v-list>
 				</v-list-item>
@@ -340,7 +340,7 @@
 </template>
 
 <script>
-import { computed, ref } from 'vue';
+import { computed, onMounted, ref } from 'vue';
 
 import Constants from '@/constants';
 import LibraryConstants from '@thzero/library_client/constants';
@@ -453,7 +453,7 @@ export default {
 			return !isLoggedIn && Constants.Features.Auth;
 		});
 		const info = computed(() => {
-			let temp = serviceStore.state.content;
+			let temp = serviceStore.getters.getContent();
 			if (!temp)
 				return [];
 			if (!temp.info)
@@ -461,7 +461,7 @@ export default {
 			return temp.info.sort((a, b) => a.order >= b.order);
 		});
 		// const links = computed(() => {
-		// 	let temp = serviceStore.state.content;
+		// 	let temp = serviceStore.getters.getContent();
 		// 	if (!temp)
 		// 		return [];
 		// 	if (!temp.links)
@@ -477,7 +477,7 @@ export default {
 		// 	return links.sort((a, b) => a.order >= b.order);
 		// });
 		const tools = computed(() => {
-			let temp = serviceStore.state.content;
+			let temp = serviceStore.getters.getContent();
 			if (!temp)
 				return [];
 			if (!temp.tools)
@@ -485,9 +485,15 @@ export default {
 			return temp.tools.sort((a, b) => a.order >= b.order);
 		});
 
+		const contentLink = (item,) => {
+			if (item.markup)
+				return `/content/info/${item.id}`;
+			
+			return item.link;
+		};
 		const contentTitle = (item,) => {
 			return (item.markup ? item.title : GlobalUtility.$trans.t(item.title));
-		}
+		};
 		const dialogDisplayMarkupCancel = async () => {
 			dialogDisplayMarkupSignal.value.cancel();
 		};
@@ -501,6 +507,10 @@ export default {
 		GlobalUtility.$EventBus.on('display-markup', (value) => {
 			markup(correlationId(), value);
 			dialogDisplayMarkupSignal.value.open();
+		});
+
+		onMounted(async () => {
+			await serviceStore.dispatcher.requestContent(correlationId());
 		});
 
 		return {
@@ -528,6 +538,7 @@ export default {
 			serviceAuth,
 			serviceStore,
 			toggleDrawer,
+			contentLink,
 			contentTitle,
 			dialogDisplayMarkupCancel,
 			dialogDisplayMarkupOk,

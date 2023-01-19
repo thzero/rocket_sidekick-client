@@ -181,7 +181,7 @@ export default {
 		const links = ref(null);
 
 		onMounted(async () => {
-			let temp = serviceStore.state.content;
+			let temp = serviceStore.getters.getContent();
 			if (!temp)
 				return [];
 			if (!temp.info)

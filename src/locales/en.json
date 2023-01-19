@@ -595,8 +595,21 @@
 					"title": "Licensing",
 					"text1": "Any contributions will need to be under a specific license; content copyright will remain with the author of the material.",
 					"text2": "The following license types:",
-					"public": "Material is declared as Public Domain",
-					"free": "Material has an open license such as Creative Commons or if source code then licences like MIT, Apache, BSD.  GPL and variants are not accepted."
+					"public": "Material is declared as Public Domain (CC0)",
+					"public2": "https://creativecommons.org/about/cclicenses",
+					"public-cco": "Creative Commons Zero v1.0 Universal cc0-1.0",
+					"free": "Material has an open license such as Creative Commons or if source code then licences like MIT, Apache, BSD.  GPL and variants are not accepted.",
+					"free2": "Material has an open license such as Creative Commons or if source code then licences like MIT, Apache, BSD.  GPL and variants are not accepted.",
+					"free3": "https://creativecommons.org/about/cclicenses",
+					"free4": "https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/licensing-a-repository",
+					"free-cc-by": "Creative Commons Attribution 4.0 cc-by-4.0",
+					"free-cc-by-sa": "Creative Commons Attribution Share Alike 4.0 cc-by-sa-4.0",
+					"free-cc-by-nc": "Creative Commons Attribution Share Alike 4.0 cc-by-sa-4.0",
+					"free-apache-2.0": "Apache license 2.0",
+					"free-bsd-2-clause": "BSD 2-clause \"Simplified\" license",
+					"free-bsd-3-clause": "BSD 3-clause \"New\" or \"Revised\" license",
+					"free-mit": "MIT"
+					
 				}
 			}
 		},

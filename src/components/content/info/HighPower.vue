@@ -252,7 +252,7 @@ export default {
 	} = useContentBaseComponent(props, context);
 
 		const highPower = computed(() => {
-			let temp = serviceStore.state.content;
+			let temp = serviceStore.getters.getContent();
 			if (!temp)
 				return {};
 			if (!temp.info)
@@ -267,7 +267,7 @@ export default {
 			return highPower.value.links.filter(l => l.enabled);
 		});
 		const links = computed(() => {
-			let temp = serviceStore.state.content;
+			let temp = serviceStore.getters.getContent();
 			if (!temp)
 				return [];
 			if (!temp.links)

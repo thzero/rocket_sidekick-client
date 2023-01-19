@@ -81,23 +81,23 @@ const routes = [
 		]
 	},
 	{
-		path: '/content/info',
+		path: '/content/info/:id',
 		component: () => import(/* webpackPrefetch: true */ /* webpackChunkName: "group-layouts" */ './layouts/MainLayout.vue'),
 		children: [
 			{
-				// path: '',
-				// name: 'content_info',
-				// component: () => import(/* webpackPrefetch: true */ /* webpackChunkName: "group-layouts" */ './layouts/ContentLayout.vue'),
-				// children: [
-				// 	{
+				path: '',
+				name: 'content_info',
+				component: () => import(/* webpackPrefetch: true */ /* webpackChunkName: "group-layouts" */ './layouts/ContentLayout.vue'),
+				children: [
+					{
 						path: '',
 						name: 'content_info',
 						component: () => import(/* webpackPrefetch: true */ /* webpackChunkName: "group-content-info" */ './components/content/info/Info.vue'),
 						meta: {
 							requiresAuth: false
 						}
-				// 	}
-				// ]
+					}
+				]
 			}
 		]
 	},
