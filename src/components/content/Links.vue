@@ -220,7 +220,7 @@ export default {
 	} = useContentBaseComponent(props, context);
 
 		const links = computed(() => {
-			let temp = serviceStore.state.content;
+			let temp = serviceStore.getters.getContent();
 			if (!temp)
 				return [];
 			if (!temp.links)

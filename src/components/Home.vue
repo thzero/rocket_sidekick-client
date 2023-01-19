@@ -58,17 +58,21 @@
 								<p>
 									{{ $t('strings.content.welcome') }}<br><br>
 								</p>
-								<p>
-									{{ $t('strings.content.welcome2') }}
+								<p
+									v-if="hasContent"
+								>
+									{{ $t('strings.content.welcomeTools') }}
 								</p>
 							</v-col>
 							<v-col
+								v-if="hasContent"
 								cols="12"
 								class="text-center"
 							>
 								<hr />
 							</v-col>
 							<v-col
+								v-if="hasContent"
 								v-for="item in tools"
 								:key="item.name"
 								cols="12"
@@ -79,17 +83,18 @@
 								<v-card class="mb-2" variant="outlined">
 									<v-card-item>
 										<v-btn variant="flat" block class="mr-2" color="primary"
-											:to="item.link"
+											:to="contentLink(item)"
 										>
-											{{ $t(item.title) }}
+											{{ contentTitle(item) }}
 										</v-btn>
 									</v-card-item>
 									<v-card-text class="text-left">
-										{{ $t(item.description) }}
+										{{ contentDescription(item) }}
 									</v-card-text>
 								</v-card>
 							</v-col>
 							<v-col
+								v-if="hasContent"
 								cols="12"
 								class="text-center"
 							>
@@ -106,13 +111,13 @@
 								<v-card class="mb-2" variant="outlined">
 									<v-card-item>
 										<v-btn variant="flat" block class="mr-2" color="primary"
-											:to="item.link"
+											:to="contentLink(item)"
 										>
-											{{ $t(item.title) }}
+											{{ contentTitle(item) }}
 										</v-btn>
 									</v-card-item>
 									<v-card-text class="text-left">
-										{{ $t(item.description) }}
+										{{ contentDescription(item) }}
 									</v-card-text>
 								</v-card>
 							</v-col>
@@ -224,8 +229,24 @@ export default {
 		const externalGithub = ref(Constants.External.github);
 		const initializeCompleted = ref(false);
 
+		const contentDescription = (item,) => {
+			return (item.markup ? item.description : GlobalUtility.$trans.t(item.description));
+		};
+		const contentLink = (item,) => {
+			if (item.markup)
+				return `/content/info/${item.id}`;
+			
+			return item.link;
+		};
+		const contentTitle = (item,) => {
+			return (item.markup ? item.title : GlobalUtility.$trans.t(item.title));
+		};
+
+		const hasContent = computed(() => {
+			return serviceStore.getters.getContent() !== null;
+		});
 		const info = computed(() => {
-			let temp = serviceStore.state.content;
+			let temp = serviceStore.getters.getContent();
 			if (!temp)
 				return [];
 			if (!temp.info)
@@ -233,7 +254,7 @@ export default {
 			return temp.info.sort((a, b) => a.order >= b.order);
 		});
 		const tools = computed(() => {
-			let temp = serviceStore.state.content;
+			let temp = serviceStore.getters.getContent();
 			if (!temp)
 				return [];
 			if (!temp.tools)
@@ -262,6 +283,8 @@ export default {
 		});
 
 		onMounted(async () => {
+			await serviceStore.dispatcher.requestContent(correlationId());
+
 			// // Selecting the iframe element
 			const iframe = document.getElementById('slideshow');
 			// // Adjusting the iframe height onload event
@@ -285,6 +308,10 @@ export default {
 			notImplementedError,
 			success,
 			externalGithub,
+			contentDescription,
+			contentLink,
+			contentTitle,
+			hasContent,
 			info,
 			initializeCompleted,
 			isLoggedIn,
