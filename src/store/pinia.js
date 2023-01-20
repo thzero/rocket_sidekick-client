@@ -10,13 +10,13 @@ import BaseStore from '@thzero/library_client_vue3_store_pinia/store/index';
 import Utility from '@thzero/library_common/utility';
 
 class AppStore extends BaseStore {
-	_initModules() {
-		// Admin Update
-	}
+	// _initModules() {
+	// 	// Admin Update
+	// }
 
 	_initPluginPersistConfig() {
 		return {
-			root: {
+			persist: {
 				key: 'rocketsidekick',
 				storage: localStorage,
 				paths: [
@@ -25,20 +25,18 @@ class AppStore extends BaseStore {
 					'flightInfoResolution',
 					'flightInfoStyle',
 					'flightMeasurementUnits',
-					// 'flightMeasurementUnitsDistance',
-					// 'flightMeasurementUnitsVelocity',
-					// 'flightMeasurementUnitsOutput',
-					// 'flightMeasurementUnitsOutputDistance',
-					// 'flightMeasurementUnitsOutputVelocity',
 					'flightPathProcessor',
 					'flightPathStyle',
 					'motorManufacturers',
 					'motorSearchCriteria',
-					'motorSearchResults'
+					'motorSearchResults',
+					// 'openSource',
+					// 'plans',
+					// 'user',
+					// 'version'
 				]
 			}
-			// pinia2
-			// root: {
+			// persist2: {
 			// 	key: 'rocket_sidekick',
 			// 	includePaths: [
 			// 		'flightInfoResolution',
@@ -77,12 +75,6 @@ class AppStore extends BaseStore {
 						velocity: null
 					}
 				},
-				// flightMeasurementUnits: Constants.MeasurementUnits.english.id,
-				// flightMeasurementUnitsDistance: Constants.MeasurementUnits.english.distance.ft,
-				// flightMeasurementUnitsVelocity: Constants.MeasurementUnits.english.velocity.fts,
-				// flightMeasurementUnitsOutput: null,
-				// flightMeasurementUnitsOutputDistance: null,
-				// flightMeasurementUnitsOutputVelocity: null,
 				flightPathProcessor: null,
 				flightPathStyle: [],
 				flightTitle: '',
@@ -94,7 +86,6 @@ class AppStore extends BaseStore {
 			}),
 			actions: {
 				async _initialize(correlationId, results) {
-					// await this.setContent(correlationId, results.content);
 					const service = GlobalUtility.$injector.getService(LibraryConstants.InjectorKeys.SERVICE_UTILITY);
 					const response = await service.content(correlationId);
 					if (Response.hasSucceeded(response))
@@ -222,21 +213,6 @@ class AppStore extends BaseStore {
 				async setFlightMeasurementUnits(correlationId, value) {
 					this.flightMeasurementUnits = value;
 				},
-				async setFlightMeasurementUnitsDistance(correlationId, value) {
-					this.flightMeasurementUnitsDistance = value;
-				},
-				async setFlightMeasurementUnitsVelocity(correlationId, value) {
-					this.flightMeasurementUnitsVelocity = value;
-				},
-				async setFlightMeasurementUnitsOutput(correlationId, value) {
-					this.flightMeasurementUnits = value;
-				},
-				async setFlightMeasurementUnitsOutputDistance(correlationId, value) {
-					this.flightMeasurementUnitsOutputDistance = value;
-				},
-				async setFlightMeasurementUnitsOutputVelocity(correlationId, value) {
-					this.flightMeasurementUnitsOutputVelocity = value;
-				},
 				async setFlightPathProcessor(correlationId, value) {
 					this.flightPathProcessor = value;
 				},
@@ -287,21 +263,6 @@ class AppStore extends BaseStore {
 				},
 				getFlightMeasurementUnits() {
 					return GlobalUtility.$store.flightMeasurementUnits;
-				},
-				getFlightMeasurementUnitsDistance() {
-					return GlobalUtility.$store.flightMeasurementUnitsDistance;
-				},
-				getFlightMeasurementUnitsVelocity() {
-					return GlobalUtility.$store.flightMeasurementUnitsVelocity;
-				},
-				getFlightMeasurementUnitsOutput() {
-					return GlobalUtility.$store.flightMeasurementUnitsOutput;
-				},
-				getFlightMeasurementUnitsOutputDistance() {
-					return GlobalUtility.$store.flightMeasurementUnitsOutputDistance;
-				},
-				getFlightMeasurementUnitsOutputVelocity() {
-					return GlobalUtility.$store.flightMeasurementUnitsOutputVelocity;
 				},
 				getFlightPathProcessor() {
 					return GlobalUtility.$store.flightPathProcessor;
@@ -363,21 +324,6 @@ class AppStore extends BaseStore {
 				},
 				async setFlightMeasurementUnits(correlationId, value) {
 					await GlobalUtility.$store.setFlightMeasurementUnits(correlationId, value);
-				},
-				async setFlightMeasurementUnitsDistance(correlationId, value) {
-					await GlobalUtility.$store.setFlightMeasurementUnitsDistance(correlationId, value);
-				},
-				async setFlightMeasurementUnitsVelocity(correlationId, value) {
-					await GlobalUtility.$store.setFlightMeasurementUnitsVelocity(correlationId, value);
-				},
-				async setFlightMeasurementUnitsOutput(correlationId, value) {
-					await GlobalUtility.$store.setFlightMeasurementUnitsOutput(correlationId, value);
-				},
-				async setFlightMeasurementUnitsOutputDistance(correlationId, value) {
-					await GlobalUtility.$store.setFlightMeasurementUnitsOutputDistance(correlationId, value);
-				},
-				async setFlightMeasurementUnitsOutputVelocity(correlationId, value) {
-					await GlobalUtility.$store.setFlightMeasurementUnitsOutputVelocity(correlationId, value);
 				},
 				async setFlightPathProcessor(correlationId, value) {
 					await GlobalUtility.$store.setFlightPathProcessor(correlationId, value);

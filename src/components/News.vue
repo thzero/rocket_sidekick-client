@@ -71,10 +71,10 @@ export default {
 			return LibraryUtility.getDateHuman(date);
 		});
 		const news = computed(() => {
-			if (!serviceStore.state.news.latest)
+			if (!serviceStore.news.latest)
 				return [];
-			const newsS = CommonUtility.sortByTimestamp(serviceStore.state.news.latest.filter(l => l.sticky));
-			const news = CommonUtility.sortByTimestamp(serviceStore.state.news.latest.filter(l => !l.sticky));
+			const newsS = CommonUtility.sortByTimestamp(serviceStore.news.latest.filter(l => l.sticky));
+			const news = CommonUtility.sortByTimestamp(serviceStore.news.latest.filter(l => !l.sticky));
 			return newsS.concat(news);
 		});
 		
