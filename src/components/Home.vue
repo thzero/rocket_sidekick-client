@@ -265,10 +265,10 @@ export default {
 			return serviceStore.user && serviceStore.userAuthIsLoggedIn;
 		});
 		const newsCount = computed(() => {
-			if (!serviceStore.state.news.latest)
+			if (!serviceStore.news.latest)
 				return 0;
 
-			const news = serviceStore.state.news.latest.slice(0);
+			const news = serviceStore.news.latest.slice(0);
 			return news.length;
 		});
 		const user = computed(() => {

@@ -10,13 +10,13 @@ import BaseStore from '@thzero/library_client_vue3_store_pinia/store/index';
 import Utility from '@thzero/library_common/utility';
 
 class AppStore extends BaseStore {
-	_initModules() {
-		// Admin Update
-	}
+	// _initModules() {
+	// 	// Admin Update
+	// }
 
 	_initPluginPersistConfig() {
 		return {
-			root: {
+			persist: {
 				key: 'rocketsidekick',
 				storage: localStorage,
 				paths: [
@@ -29,11 +29,14 @@ class AppStore extends BaseStore {
 					'flightPathStyle',
 					'motorManufacturers',
 					'motorSearchCriteria',
-					'motorSearchResults'
+					'motorSearchResults',
+					// 'openSource',
+					// 'plans',
+					// 'user',
+					// 'version'
 				]
 			}
-			// pinia2
-			// root: {
+			// persist2: {
 			// 	key: 'rocket_sidekick',
 			// 	includePaths: [
 			// 		'flightInfoResolution',
