@@ -16,7 +16,7 @@ Information that you enter into the various tools are stored locally on your bro
 The site does not capture any personal information.
 
 # Accounts
-The site is free to use without having an account on Rocketsidekick.  Having an account allows you to update customized settings, store rockets, alimeters, and parachutes, create checklists as well as syncing data with compannion mobile application.
+The site is free to use without having an account on Rocketsidekick.  Having an account allows you to update customized settings, store rockets, alimeters, and parachutes, create checklists as well as syncing data with compannion mobile application (forthcoming).
 
 ## Authentication
 All authentication for the accounts will be through social providers; this site will keep and store no passwords.
@@ -32,4 +32,4 @@ In addition to the above, having an account does mean certain data is stored on 
   * Checklists
   * Settings
 
-The information is stored for later retrieval during use of the Rocksidekick site, as well as syncing with the companion mobile application.   This data is not shared with other sites or 3rd parties.
+The information is stored for later retrieval during use of the Rocksidekick site, as well as syncing with the companion mobile application (forthcoming).   This data is not shared with other sites or 3rd parties.
