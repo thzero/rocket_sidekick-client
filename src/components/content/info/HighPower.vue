@@ -373,7 +373,7 @@
 </template>
 
 <script>
-import { useAppHighPowerComponent } from '@/components/content/info/appHighPower';
+import { useHighPowerBaseComponent } from '@/components/content/info/highPowerBase';
 
 export default {
 	name: 'Links',
@@ -405,7 +405,7 @@ export default {
 			linksVideos,
 			sort,
 			target
-		} = useAppHighPowerComponent(props, context);
+		} = useHighPowerBaseComponent(props, context);
 
 		return {
 			correlationId,

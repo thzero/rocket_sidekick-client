@@ -7,7 +7,7 @@ import GlobalUtility from '@thzero/library_client/utility/global';
 
 import { useContentBaseComponent } from '@/components/content/contentBase';
 
-export function useAppEpoxyComponent(props, context, options) {
+export function useEpoxyBaseComponent(props, context, options) {
 	const {
 		correlationId,
 		error,

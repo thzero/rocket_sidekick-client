@@ -221,13 +221,13 @@
 </template>
 
 <script>
-import { useAppFlightInfoDataComponent } from '@/components/content/tools/flightInfo/appFlightInfoData';
-import { useAppFlightInfoDataProps } from '@/components/content/tools/flightInfo/appFlightInfoDataProps';
+import { useFlightInfoDataBaseComponent } from '@/components/content/tools/flightInfo/flightInfoDataBase';
+import { useFlightInfoDataBaseProps } from '@/components/content/tools/flightInfo/flightInfoDataBaseProps';
 
 export default {
 	name: 'flightInfoData',
 	props: {
-		...useAppFlightInfoDataProps
+		...useFlightInfoDataBaseProps
 	},
 	// extends: toolBase,
 	setup(props, context) {
@@ -261,7 +261,7 @@ export default {
 			measurementTime,
 			measurementVelocity,
 			valueType
-		} = useAppFlightInfoDataComponent(props, context);
+		} = useFlightInfoDataBaseComponent(props, context);
 
 		return {
 			correlationId,

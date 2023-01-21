@@ -3,7 +3,7 @@ import { computed } from 'vue';
 
 import { useContentBaseComponent } from '@/components/content/contentBase';
 
-export function useAppLinksComponent(props, context, options) {
+export function useLinksBaseComponent(props, context, options) {
 	const {
 		correlationId,
 		error,

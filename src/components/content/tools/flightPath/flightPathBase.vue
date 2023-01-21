@@ -14,7 +14,7 @@ import VuetifyUtility from '@/library_vue_vuetify/utility/index';
 
 import { useFlightToolsBaseComponent } from '@/components/content/tools/flightToolBase';
 
-export function useAppFlightPathComponent(props, context) {
+export function useFlightPathBaseComponent(props, context, options) {
 	const {
 		correlationId,
 		error,
@@ -81,7 +81,7 @@ export function useAppFlightPathComponent(props, context) {
 		flightMeasurementUnitsLoadOptions,
 		flightMeasurementUnitsReset,
 		flightMeasurementUnitsSave
-	} = useFlightToolsBaseComponent(props, context, {
+	} = useFlightToolsBaseComponent(props, context, Object.assign({
 		onMounted: async (correlationIdI) => {
 			reset(correlationIdI);
 
@@ -93,7 +93,7 @@ export function useAppFlightPathComponent(props, context) {
 
 			flightProcessors.value = VuetifyUtility.selectOptions(serviceFlightPath.serviceProcessors, GlobalUtility.$trans.t, 'forms.content.tools.flightPath.processors', (l) => { return l.id; }, null, (l) => { return l.id; });
 		}
-	});
+	}, {}));
 
 	const serviceDownload = GlobalUtility.$injector.getService(Constants.InjectorKeys.SERVICE_DOWNLOAD);
 	const serviceFlightPath = GlobalUtility.$injector.getService(Constants.InjectorKeys.SERVICE_TOOLS_FLIGHT_PATH_PROCESSOR);
@@ -457,6 +457,7 @@ export function useAppFlightPathComponent(props, context) {
 		flightPathStylePinTouchdownSelected,
 		output,
 		styles,
+		initialized,
 		flightPathInputChange,
 		flightPathStyleLoad,
 		templateMain,

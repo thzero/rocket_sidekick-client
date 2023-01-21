@@ -9,7 +9,7 @@ import { useBaseComponent } from '@/library_vue/components/base';
 
 Chart.register(...registerables);
 
-export function useAppFlightInfoChartComponent(props, context, options) {
+export function useFlightInfoChartCBaseomponent(props, context, options) {
 	const {
 		correlationId,
 		error,

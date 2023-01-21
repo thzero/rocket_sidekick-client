@@ -14,7 +14,7 @@ import VuetifyUtility from '@/library_vue_vuetify/utility/index';
 
 import { useFlightToolsBaseComponent } from '@/components/content/tools/flightToolBase';
 
-export function useAppFlightInfoComponent(props, context) {
+export function useFlightInfoBaseComponent(props, context, options) {
 	const {
 		correlationId,
 		error,
@@ -83,7 +83,7 @@ export function useAppFlightInfoComponent(props, context) {
 		flightMeasurementUnitsLoadOptions,
 		flightMeasurementUnitsReset,
 		flightMeasurementUnitsSave
-	} = useFlightToolsBaseComponent(props, context, {
+	} = useFlightToolsBaseComponent(props, context, Object.assign({
 		onMounted: async (correlationIdI) => {
 			reset(correlationIdI);
 
@@ -100,7 +100,7 @@ export function useAppFlightInfoComponent(props, context) {
 
 			resolution.value = serviceStore.getters.getFlightInfoResolution(correlationIdI) ?? Constants.FlightInfo.Resolution;
 		}
-	});
+	}, {}));
 
 	const serviceDownload = GlobalUtility.$injector.getService(Constants.InjectorKeys.SERVICE_DOWNLOAD);
 	const serviceFlightInfo = GlobalUtility.$injector.getService(Constants.InjectorKeys.SERVICE_TOOLS_FLIGHT_INFO_PROCESSOR);

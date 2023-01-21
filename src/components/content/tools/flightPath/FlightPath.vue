@@ -383,7 +383,7 @@
 <script>
 import { required } from '@vuelidate/validators';
 
-import { useAppFlightPathComponent } from '@/components/content/tools/flightPath/appFlightPath';
+import { useFlightPathBaseComponent } from '@/components/content/tools/flightPath/flightPathBase';
 
 import VCheckboxWithValidation from '@/library_vue_vuetify/components/form//VCheckboxWithValidation';
 import VColorWithValidation from '@/library_vue_vuetify/components/form/VColorWithValidation';
@@ -491,6 +491,7 @@ export default {
 			flightPathStylePinTouchdownSelected,
 			output,
 			styles,
+			initialized,
 			flightPathInputChange,
 			flightPathStyleLoad,
 			templateMain,
@@ -505,7 +506,7 @@ export default {
 			resetInput,
 			scope,
 			validation
-		} = useAppFlightPathComponent(props, context);
+		} = useFlightPathBaseComponent(props, context);
 
 		return {
 			correlationId,
@@ -591,6 +592,7 @@ export default {
 			flightPathStylePinTouchdownSelected,
 			output,
 			styles,
+			initialized,
 			flightPathInputChange,
 			flightPathStyleLoad,
 			templateMain,

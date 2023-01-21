@@ -175,7 +175,7 @@ import { between, decimal, integer, helpers, required } from '@vuelidate/validat
 
 import GlobalUtility from '@thzero/library_client/utility/global';
 
-import { useAppFoamComponent } from '@/components/content/tools/appFoam';
+import { useFoamBaseComponent } from '@/components/content/tools/foamBase';
 
 import CalculatedOuput from '@/components/content/tools//CalculatedOuput';
 import VFormControl from '@/library_vue_vuetify/components/form/VFormControl';
@@ -234,7 +234,7 @@ export default {
 			resetForm,
 			scope,
 			validation
-		} = useAppFoamComponent(props, context);
+		} = useFoamBaseComponent(props, context);
 
 		return {correlationId,
 			error,

@@ -7,7 +7,7 @@ import GlobalUtility from '@thzero/library_client/utility/global';
 
 import { useBaseControlEditComponent } from '@/library_vue/components/baseControlEdit';
 
-export function useAppMeasurementSelectComponent(props, context, options) {
+export function useMeasurementSelectBaseComponent(props, context, options) {
 	const {
 		correlationId,
 		error,

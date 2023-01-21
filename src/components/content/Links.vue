@@ -219,7 +219,7 @@
 </template>
 
 <script>
-import { useAppLinksComponent } from '@/components/content/appLinks';
+import { useLinksBaseComponent } from '@/components/content/linksBase';
 
 export default {
 	name: 'Links',
@@ -247,7 +247,7 @@ export default {
 			linksVideos,
 			sort,
 			target
-		} = useAppLinksComponent(props, context);
+		} = useLinksBaseComponent(props, context);
 
 		return {
 			correlationId,

@@ -7,7 +7,7 @@ import GlobalUtility from '@thzero/library_client/utility/global';
 
 import { useToolsBaseComponent } from '@/components/content/tools/toolsBase';
 
-export function useAppFlightInfoDataComponent(props, context, options) {
+export function useFlightInfoDataBaseComponent(props, context, options) {
 	const {
 		correlationId,
 		error,

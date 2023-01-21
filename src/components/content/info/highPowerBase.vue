@@ -5,7 +5,7 @@ import Constants from '@/constants';
 
 import { useContentBaseComponent } from '@/components/content/contentBase';
 
-export function useAppHighPowerComponent(props, context, options) {
+export function useHighPowerBaseComponent(props, context, options) {
 	const {
 		correlationId,
 		error,

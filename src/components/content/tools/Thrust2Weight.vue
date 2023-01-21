@@ -416,6 +416,8 @@
 <script>
 import { between, decimal, helpers, required } from '@vuelidate/validators';
 
+import { useThrust2WeightBaseComponent } from '@/components/content/tools/thrust2WeightBase';
+
 import CalculatedOuput from '@/components/content/tools/CalculatedOuput';
 import MeasurementSelect from '@/components/content/tools/MeasurementSelect';
 import MotorLookupDialog from '@/components/external/MotorLookupDialog';
@@ -506,7 +508,7 @@ export default {
 			selectMotor,
 			scope,
 			validation
-		} = useAppThrust2WeightComponent(props, context);
+		} = useThrust2WeightBaseComponent(props, context);
 
 		return {
 			correlationId,

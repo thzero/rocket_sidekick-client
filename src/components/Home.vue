@@ -192,7 +192,7 @@
 <script>
 import GlobalUtility from '@thzero/library_client/utility/global';
 
-import { useAppHomeComponent } from '@/components/appHome';
+import { useHomeBaseComponent } from '@/components/homeBase';
 
 import News from '@/components/News';
 import VLoadingOverlay from '@/library_vue_vuetify/components/VLoadingOverlay';
@@ -229,7 +229,7 @@ export default {
 			tools,
 			user,
 			userDisplayName
-		} = useAppHomeComponent(props, context);
+		} = useHomeBaseComponent(props, context);
 
 		return {
 			correlationId,
