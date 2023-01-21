@@ -27,7 +27,7 @@
 				</v-card>
 				<v-card
 					v-if="$vuetify.display.lgAndUp"
-					class="mt-4"
+					class="mt-2"
 				>
 					<v-card-title>
 	<p class="text-h6 text-center">{{ $t('titles.content.links.guidance') }}</p>
@@ -48,7 +48,7 @@
 				</v-card>
 				<v-card
 					v-if="$vuetify.display.lgAndUp"
-					class="mt-4"
+					class="mt-2"
 				>
 					<v-card-title>
 	<p class="text-h6 text-center">{{ $t('titles.content.links.construction') }}</p>
@@ -69,7 +69,7 @@
 				</v-card>
 				<v-card
 					v-if="$vuetify.display.lgAndUp"
-					class="mt-4"
+					class="mt-2"
 				>
 					<v-card-title>
 	<p class="text-h6 text-center">{{ $t('titles.content.links.tools') }}</p>
@@ -92,7 +92,50 @@
 			<v-col cols="12" md="6" class="text-center">
 				<v-card>
 					<v-card-text>
-	<img :src="highpowerImage" style="height: 850px;" />
+						<!-- <v-carousel show-arrows="hover">
+							<v-carousel-item
+								cycle
+								height="800"
+								cover
+							>
+								<v-carousel-item
+									v-for="(slide, i) in slides"
+									:key="i"
+								>
+								sdfasdfasdf
+									<v-sheet
+										height="100%"
+									>
+										<div class="d-flex fill-height justify-center align-center">
+											<img :src="item.url" v-if="item.type==='index'" />
+											<div v-if="item.type==='video'" v-html="item.embed"></div>
+									{{item}}
+								sadfasdfasdfdfgsdfgsdfg	
+										</div>
+									</v-sheet>
+								</v-carousel-item>
+							</v-carousel-item>
+						</v-carousel> -->
+						<v-carousel
+							cycle
+							height="800"
+							hide-delimiter-background
+							show-arrows="hover"
+						>
+							<v-carousel-item
+								v-for="(slide, i) in slides"
+									:key="i"
+								>
+								<v-sheet
+									height="100%"
+								>
+									<div class="d-flex fill-height justify-center align-center">
+										<img :src="slide.url" v-if="slide.type==='image'" style="height: 800px" />
+										<div v-if="slide.type==='video'" v-html="slide.embed"></div>
+									</div>
+							</v-sheet>
+							</v-carousel-item>
+						</v-carousel>
 					</v-card-text>
 				</v-card>
 			</v-col>
@@ -288,6 +331,26 @@
 			<v-col cols="12" md="6">
 				<v-card>
 					<v-card-title>
+	<p class="text-h6 text-center">{{ $t('titles.content.links.videos') }}</p>
+					</v-card-title>
+					<v-card-text>
+		<v-list density="compact">
+			<v-list-item
+				v-for="item in linksVideos"
+				:key="item.name"
+				:href="item.link"
+				:target="target(item)"
+				class="link"
+			>
+				<v-list-item-title>{{ $t(item.title) }}</v-list-item-title>
+			</v-list-item>
+		</v-list>
+					</v-card-text>
+				</v-card>
+			</v-col>
+			<v-col cols="12" md="6">
+				<v-card>
+					<v-card-title>
 	<p class="text-h6 text-center">{{ $t('titles.content.links.events') }}</p>
 					</v-card-title>
 					<v-card-text>
@@ -325,7 +388,7 @@ export default {
 			noBreakingSpaces,
 			notImplementedError,
 			success,
-			highpowerImage,
+			slides,
 			highPower,
 			highPowerLinks,
 			links,
@@ -339,6 +402,7 @@ export default {
 			linksStudyGuides,
 			linksTools,
 			linksVendors,
+			linksVideos,
 			sort,
 			target
 		} = useAppHighPowerComponent(props, context);
@@ -353,7 +417,7 @@ export default {
 			noBreakingSpaces,
 			notImplementedError,
 			success,
-			highpowerImage,
+			slides,
 			highPower,
 			highPowerLinks,
 			links,
@@ -367,6 +431,7 @@ export default {
 			linksStudyGuides,
 			linksTools,
 			linksVendors,
+			linksVideos,
 			sort,
 			target
 		};
