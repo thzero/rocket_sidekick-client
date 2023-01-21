@@ -167,6 +167,13 @@
 							</template>
 							<v-list-item-title>{{ $t('titles.about') }}</v-list-item-title>
 						</v-list-item>
+						<v-list-item @click="clickPrivcy">
+							<!-- to="/privacy" -->
+							<template v-slot:prepend>
+								<v-icon>mdi-information</v-icon>
+							</template>
+							<v-list-item-title>{{ $t('titles.privacy') }}</v-list-item-title>
+						</v-list-item>
 						<!-- <v-list-item @click="clickSupport">
 							<template v-slot:prepend>
 								<v-icon>mdi-help</v-icon>
@@ -381,6 +388,7 @@ export default {
 			closeOnContentClick,
 			clickAbout,
 			clickOpenSource,
+			clickPrivcy,
 			clickSignIn,
 			clickSignOut,
 			clickSupport,
@@ -527,6 +535,7 @@ export default {
 			closeOnContentClick,
 			clickAbout,
 			clickOpenSource,
+			clickPrivcy,
 			clickSignIn,
 			clickSignOut,
 			clickSupport,
