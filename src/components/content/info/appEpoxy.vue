@@ -18,7 +18,7 @@ export function useAppEpoxyComponent(props, context, options) {
 		noBreakingSpaces,
 		notImplementedError,
 		success
-	} = useContentBaseComponent(props, context);
+	} = useContentBaseComponent(props, context, options);
 
 	const serviceStore = GlobalUtility.$injector.getService(LibraryConstants.InjectorKeys.SERVICE_STORE);
 	
