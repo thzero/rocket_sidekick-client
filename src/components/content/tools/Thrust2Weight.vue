@@ -416,6 +416,8 @@
 <script>
 import { between, decimal, helpers, required } from '@vuelidate/validators';
 
+import GlobalUtility from '@thzero/library_client/utility/global';
+
 import { useThrust2WeightBaseComponent } from '@/components/content/tools/thrust2WeightBase';
 
 import CalculatedOuput from '@/components/content/tools/CalculatedOuput';
