@@ -206,18 +206,18 @@ import { useContentBaseComponent } from '@/components/content/contentBase';
 export default {
 	name: 'Links',
 	setup(props, context) {
-	const {
-		correlationId,
-		error,
-		hasFailed,
-		hasSucceeded,
-		initialize,
-		logger,
-		noBreakingSpaces,
-		notImplementedError,
-		success,
-		serviceStore
-	} = useContentBaseComponent(props, context);
+		const {
+			correlationId,
+			error,
+			hasFailed,
+			hasSucceeded,
+			initialize,
+			logger,
+			noBreakingSpaces,
+			notImplementedError,
+			success,
+			serviceStore
+		} = useContentBaseComponent(props, context);
 
 		const links = computed(() => {
 			let temp = serviceStore.getters.getContent();
