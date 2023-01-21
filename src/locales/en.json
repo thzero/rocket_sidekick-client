@@ -1,0 +1,804 @@
+{
+	"admin": {
+		"news": "News",
+		"users": "Users"
+	},
+	"auth": {
+		"google": "Google",
+		"rememberMe": "Rembmer Me"
+	},
+	"buttons": {
+		"calculate": "Calculate",
+		"cancel": "Cancel",
+		"clear": "Clear",
+		"collapseAll": "Collapse",
+		"close": "Close",
+		"delete": "Delete",
+		"edit": "Edit",
+		"expandAll": "Expand",
+		"export": "Export",
+		"ok": "Ok",
+		"process": "Process",
+		"reset": "Reset",
+		"save": "Save",
+		"search": "Search",
+		"select": "Select",
+		"submit": "Submit",
+		"top": "Top",
+		"use": "Use"
+	},
+	"charts": {
+		"flightInfo": {
+			"title": "Flight Info",
+			"acceleration": "Acceleration",
+			"altitude": {
+				"title": "Altitude",
+				"titleF": "Altitude (F)",
+				"max": "Max. Altitude",
+				"min": "Min. Altitude"
+			},
+			"ascent": "Ascent",
+			"avg": {
+				"title": "Average",
+				"abbr": "Avg."
+			},
+			"descent": "Descent",
+			"events": {
+				"title": "Events",
+				"apogee": "Apogee",
+				"drogue": "Drogue/Freefall",
+				"notDetected": "Event not detected",
+				"noseOver": "Nose Over",
+				"main": "Main"
+			},
+			"flightTime": "Flight Time",
+			"max": {
+				"title": "Maximum",
+				"abbr": "Max."
+			},
+			"min": {
+				"title": "Minimum",
+				"abbr": "Min."
+			},
+			"velocity": {
+				"title": "Velocity",
+				"titleF": "Velocity (F)"
+			}
+		}
+	},
+	"errors": {
+		"adminNews": {
+			"article": {
+				"string": {
+					"empty": "Article content is required."
+				}
+			}
+		},
+		"content": {
+			"tools": {
+				"foam": {
+					"finTabFinRoot": "Greater than or equal Fin Root Length",
+					"finWidth": "Greater than 50% Motor Tube Outside Diameter",
+					"motorTubeBodyTube": "Greater than Body Tube ID"
+				},
+				"thrust2Weight": {
+					"thrustAverageInitial": "Less than or equal Thrust Initial",
+					"thrustAveragePeak": "Greater than or equal Thrust Peak",
+					"thrustInitialAverage": "Greater than or equal Thrust Average",
+					"thrustInitialPeak": "Greater than or equal Thrust Peak",
+					"thrustPeakAverage": "Less than or equal Thrust Average",
+					"thrustPeakInitial": "Less than or equal Thrust Initial"
+				}
+			}
+		},
+		"copyToClipboard": "Failed to copy to the clipboard.",
+		"description": "Invalid value, must be of the following ! @ # $ % ^ & * ( ) _ - + = [ ] { } | : ; \" \\' < > , . ? a-z A-Z 0-9",
+		"duplicateName": "There is already a {objectType} with the name of \\'{name}\\'.",
+		"duplicateNumber": "There is already a {objectType} with the number of \\'{number}\\'.",
+		"duplicateOrder": "There is already a {objectType} with order \\'{order}\\'.",
+		"error": "An error occured, plesae try again.",
+		"invalidPermissions": "You do not have permission to perform the requested action.",
+		"invalidRequest": "Invalid request.",
+		"notFound": "You have been led astray.",
+		"objectChanged": "The \\'{objectType}\\' has changed, please refresh and try again.",
+		"params": {
+			"news": "news"
+		},
+		"process": {
+			"noInput": "No CSV provided for processor.",
+			"noProcessor": "No processor available.",
+			"required": "Required fields missing.",
+			"unableToConvert": "Unable to convert the CSV data."
+		},
+		"quotaExceeded": "You have reached your quota of {quota} \\'{quotaType}\\'.",
+		"type": "Type is required."
+	},
+	"extracts": {
+		"csv": "CSV",
+		"text": "Text"
+	},
+	"file": {
+		"title": "File",
+		"csv": "CSV"
+	},
+	"forms": {
+		"content": {
+			"tools": {
+				"flightInfo": {
+					"actual": "Actual",
+					"filtered": "Filtered",
+					"title": "Flight Title",
+					"csv": "CSV Flight Data",
+					"dataTypes": {
+						"showActual": "Show Actual"
+					},
+					"date": "Flight Date",
+					"export": {
+						"image": "image",
+						"json": "json",
+						"text": "text"
+					},
+					"location": "Flight Location",
+					"measurementUnits": {
+						"acceleration": "Acceleration",
+						"altimeter": "Altimeter",
+						"altitude": "Altitude",
+						"input": "Input Measurement Units",
+						"output": "Output Measurement Units",
+						"velocity": "Velocity"
+					},
+					"processors": {
+						"title": "Flight Data Type",
+						"eggtimer": "Eggtimer"
+					},
+					"set": "Set",
+					"style": {
+						"title": "Chart Styles",
+						"altitude": {
+							"title": "Altitude",
+							"filtered": "Altitude (Filtered)"
+						},
+						"event": {
+							"apogee": {
+								"title": "Apogee",
+								"border": "Apogee Border"
+							},
+							"drogue": {
+								"title": "Drogue/Freefall",
+								"border": "Drogue/Freefall Border"
+							},
+							"main": {
+								"title": "Main",
+								"border": "Main Border"
+							}
+						},
+						"velocity": {
+							"title": "Velocity",
+							"filtered": "Velocity (Filtered)"
+						}
+					},
+					"resolution": "Resolution"
+				},
+				"flightPath": {
+					"title": "Flight Title",
+					"csv": "CSV GPS Flight Data",
+					"date": "Flight Date",
+					"flightPath": "Flight Path",
+					"groundPath": "Ground Path",
+					"launch": "Launch",
+					"location": "Flight Location",
+					"maxAltitude": "Max. Altitude",
+					"maxVelocity": "Max. Velocity",
+					"measurementUnits": {
+						"altitude": "Altitude",
+						"gps": "GPS",
+						"input": "Input Measurement Units",
+						"output": "Output Measurement Units",
+						"velocity": "Velocity"
+					},
+					"processors": {
+						"title": "Flight Data Type",
+						"eggtimer": "Eggtimer",
+						"featherweight": "Featherweight"
+					},
+					"style": {
+						"title": "Flight Path Styles",
+						"flight": {
+							"color": "Flight Path Color"
+						},
+						"ground": {
+							"color": "Ground Path Color"
+						},
+						"launch": {
+							"color": "Launch Pin Color",
+							"selected": "Display Launch Pin"
+						},
+						"maxAltitude": {
+							"color": "Max. Altitude Pin Color",
+							"selected": "Display Max. Altitude Pin"
+						},
+						"maxVelocity": {
+							"color": "Max. Velocity Pin Color",
+							"selected": "Display Max. Velocity Pin"
+						},
+						"touchdown": {
+							"color": "Touchdown Pin Color",
+							"selected": "Display Touchdown Pin"
+						}
+					},
+					"templates": {
+						"main": "Main Template",
+						"pins": {
+							"additional": "Additional Pins Template",
+							"launch": "Launch Pin Template",
+							"maxAltitude": "Max. Altitude",
+							"maxVelocity": "Max. Velocity",
+							"touchdown": "Touchdown Pin Template"
+						}
+					},
+					"touchdown": "Touchdown"
+				},
+				"foam": {
+					"bodyTubeID": "Body Tube ID",
+					"bodyTubeID_hint": "Inside diameter of the body tube.",
+					"motorTubeOD": "Motor Tube OD",
+					"motorTubeOD_hint": "Outside diameter of the motor tube.",
+					"finRootLength": "Fin Root Length",
+					"finRootLength_hint": "Length of the fin root.",
+					"finTabLength": "Fin Tab Length",
+					"finTabLength_hint": "Length of the fin tab if diffent than the fin root length.",
+					"finWidth": "Fin Width",
+					"finWidth_hint": "Width of the fin.",
+					"numberFins": "Number of Fins",
+					"numberFins_hint": "",
+					"totalVolume": "Total Volume",
+					"totalVolume_hint": "Total volume of left over space in the fin can."
+				},
+				"thrust2Weight": {
+					"mass": "Rocket Weight",
+					"mass_hint": "Weight of the rocket fully loaded including engines.",
+					"max_launch_rod_timespan": "Max. Launch Rod Time",
+					"max_launch_rod_timespan_hint": "Max. time spent accelerating on the launch rod.",
+					"motor": "Motor",
+					"motor_hint": "Select rocket motor.",
+					"specifications": "Motor Specifications",
+					"thrust": "Thrust (Newtons)",
+					"thrust_average": "Average",
+					"thrust_average_hint": "Average thrust of the engine.",
+					"thrust_initial": "Initial",
+					"thrust_initial_hint": "Initial thrust of the engine.",
+					"thrust_peak": "Peak",
+					"thrust_peak_hint": "Peak thrust of the engine."
+				}	
+			}
+		},
+		"external": {
+			"motorSearch": {
+				"diameter": "Diameter",
+				"impulseClass": "Impulse Class",
+				"manufacturer": "Manufacturer",
+				"manufacturer_hint": "Max. two selections",
+				"motor": "Motor",
+				"motor_hint": "A motor to lookup by designation",
+				"singleUse": "Single Use",
+				"sparky": "Sparky"
+			}
+		},
+		"externalId": "External Id",
+		"gamerTag": "Gamer Tag",
+		"id": "Id",
+		"link": "Link",
+		"listing": "Listing",
+		"minAbbr": "Min.",
+		"maxAbbr": "Max.",
+		"measurementUnits": "Measurement Units",
+		"name": "Name",
+		"news": {
+			"article": "Article",
+			"publishDate": "Publish Date",
+			"requiresAuth": "Requires Authentication",
+			"sticky": "Sticky"
+		},
+		"not": "Not",
+		"number": "Number",
+		"role": "Role",
+		"roles": "Roles",
+		"settings": {
+			"measurementUnits": {
+				"title": "Measurement Units",
+				"acceleration": "Acceleration",
+				"area": "Area",
+				"distance": "Distance",
+				"length": "Length",
+				"velocity": "Velocity",
+				"volume": "Volume",
+				"weight": "Weight"
+			}
+		},
+		"sorting": {
+			"ascending": "Ascending",
+			"ascendingAbbr": "Asc",
+			"descending": "Descending",
+			"descendingAbbr": "Desc",
+			"name": "Sorting",
+			"nameShort": "Sort"
+		},
+		"tagLine": "Tag Line",
+		"title": "Title"
+	},
+	"home": {
+		"welcome": "Hello {msg}!"
+	},
+	"measurements":{
+		"english":{
+		"acceleration":{
+			"abbr":"ft/s^s"
+		},
+		"altitude":{
+			"abbr":"ft",
+			"name":"Feet"
+		},
+		"time":{
+			"abbr":"s"
+		},
+		"velocity":{
+			"abbr":"ft/s"
+		}
+		},
+		"metric":{
+		"acceleration":{
+			"abbr":"m/s^s"
+		},
+		"altitude":{
+			"abbr":"m",
+			"name":"Meters"
+		},
+		"time":{
+			"abbr":"s"
+		},
+		"velocity":{
+			"abbr":"m/s"
+		}
+		}
+	},
+	"measurementUnits": {
+		"english": {
+			"title": "English",
+			"acceleration": {
+				"fts2": "Feet Per Second",
+				"fts2Abbr": "ft/s^2"
+			},
+			"area": {
+				"in2": "Inches Squared",
+				"in2Abbr": "in^2",
+				"ft2": "Feet Squared",
+				"ft2Abbr": "ft^2"
+			},
+			"distance": {
+				"ft": "Feet",
+				"ftAbbr": "ft",
+				"mi": "Miles",
+				"miAbbr": "mi"
+			},
+			"length": {
+				"in": "Inches",
+				"inAbbr": "in",
+				"ft": "Feet",
+				"ftAbbr": "ft"
+			},
+			"velocity": {
+				"fts": "Feet Per Second",
+				"ftsAbbr": "ft/s",
+				"mph": "Miles Per Hour",
+				"mphAbbr": "mph"
+			},
+			"volume": {
+				"in3": "Cubic Inches",
+				"in3Abbr": "in^3",
+				"ft3": "Cubic Feet",
+				"ft3Abbr": "ft^3"
+			},
+			"weight": {
+				"oz": "Ounces",
+				"ozAbbr": "oz",
+				"lb": "Pounds",
+				"lbAbbr": "lbs"
+			}
+		},
+		"metrics": {
+			"title": "Metric",
+			"acceleration": {
+				"ms2": "Meters Per Second",
+				"ms2Abbr": "m/s^2"
+			},
+			"area": {
+				"cm2": "Centimeters Squared",
+				"cm2Abbr": "cm^2",
+				"m2": "Meters Squared",
+				"m2Abbr": "m^2",
+				"mm2": "Millimeters Squared",
+				"mm2Abbr": "mm^2"
+			},
+			"distance": {
+				"m": "Meters",
+				"mAbbr": "m",
+				"km": "Kilometers",
+				"kmAbbr": "km"
+			},
+			"length": {
+				"cm": "Centimeters",
+				"cmAbbr": "cm",
+				"m": "Meters",
+				"mAbbr": "m",
+				"mm": "Millimeters",
+				"mmAbbr": "mm"
+			},
+			"velocity": {
+				"ms": "Meters Per Second",
+				"msAbbr": "m/s",
+				"kph": "Kilometers Per Hour",
+				"kphAbbr": "kph"
+			},
+			"volume": {
+				"cm3": "Cubic Centimeters",
+				"cm3Abbr": "cm^2",
+				"m3": "Cubic Meters",
+				"m3Abbr": "m^2",
+				"mm3": "Cubic Millimeters",
+				"mm3Abbr": "mm^2"
+			},
+			"weight": {
+				"g": "Grams",
+				"gAbbr": "g",
+				"kg": "Kilograms",
+				"kgAbbr": "kg"
+			}
+		}
+	},
+	"menu": {
+		"checklists": {
+			"title": "Checklists"
+		},
+		"content": {
+			"app": "Mobile App",
+			"title": "Content",
+			"tools": {
+				"ejectionCharges": "Ejection Charges",
+				"flightInfo": "Flight Info",
+				"flightPath": "Flight Path",
+				"foam": "Fin Can Foam Calculator",
+				"staticPortHoles": "Static Port Holes",
+				"title": "Tools", 
+				"thrust2Weight": "Thrust 2 Weight"
+			},
+			"info": {
+				"title": "Info",
+				"epoxy": "Epoxy",
+				"highPower": "High Power"
+			},
+			"links": {
+				"title": "Links",
+				"simulators": "Simulators"
+			}
+		},
+		"launches": {
+			"title": "Launches"
+		},
+		"rockets": {
+			"altimeters": "Altimeters",
+			"checklists": "checklists",
+			"parachutes": "Parachutes",
+			"rockets": "Rockets",
+			"title": "Rockets"
+		},
+		"settings": {
+			"title": "Settings"
+		},
+		"thrustcurve": "ThrustCurve.org"
+	},
+	"messages": {
+		"calculated": "Calculated",
+		"clickOrHover": {
+			"description": "Click or hover to see description..."
+		},
+		"dev": "DEV",
+		"failed": "Action failed",
+		"loading": "Loading...",
+		"success": "Action was successful",
+		"processed": "Processed",
+		"processing": "Processing",
+		"reset": "Reset",
+		"saved": "Saved",
+		"thrust2Weight": {
+			"motor": {
+				"selected": "Selected Motor",
+				"unselected": "Unable to select the motor, try again."
+			}
+		}
+	},
+	"mobileApp": {
+		"notYetAvailable": "Coming Soon!",
+		"text1": "The RocketSidekick mobile application (for Android, and eventually iOS) provides additional capabilities that \nprovides some additional capabilities that are focused in the field usage.  Not all of the capabilities will be available on both\napplications.\n\nThe mobile applications capabilities are:\n\n* Ability to calculate Thrust to Weight ratios\n* Ability to search motors via ThrurstCurve.org's applications\n* Search results are cached on the mobile device\n\t* Create and maintain <sup>1</sup>\n\t* Launch preparation checklists\n\t* Rocket inventory\n\t* Parachute inventory\n\t* Altimeter inventory\n\t* GPS Tracker inventory\n* Execute a preparation checklist for a launch\n* Track launches and success or failure of the launch <sup>1</sup>\n\n<sup>1</sup> Items marked with an asterik will also sync with the web application and may also be available to maintain within the web application."
+	},
+	"motorSearch": {
+		"title": "Motor Search",
+		"guidance": "Search for thrust curves from ",
+		"guidance3": ".",
+		"motor": "Motor Info",
+		"motor_burnTimeS": "Burn Time (S)",
+		"motor_caseInfo": "Case",
+		"motor_commonName": "Common Name",
+		"motor_diameter": "Diameter",
+		"motor_diameter_measurement": "mm",
+		"motor_designation": "Designation",
+		"motor_propInfo": "Propellant",
+		"motor_sparky": "Sparky",
+		"motor_thrust_average": "Average Thrust",
+		"motor_thrust_max": "Max Thrust",
+		"motor_thrust_newtons": "Newtons",
+		"motor_thrust_newtons_abbr": "N",
+		"motor_type": "Motor Type",
+		"motor_type_hybrid": "Hybrid",
+		"motor_type_reload": "Reload",
+		"motor_type_singleuse": "Single Use",
+		"motor_reset_days": "days",
+		"motor_reset_hours": "hours",
+		"motor_reset_message": "Reset the internal motor cache.",
+		"motor_reset_message_confirm": "Are you sure?",
+		"motor_reset_message_time_duration": "{duration} {type}",
+		"motor_reset_message_time_hour_less": "less than an hour",
+		"motor_reset_message_warning": "It has been {timespan} since you last reset the cache.",
+		"motor_reset_message_warning2": "Please be courteous of ThrustCurve's resources; preference is no more than weekly.",
+		"search": "Motor Search",
+		"sparky": "Sparky"
+	},
+	"news": {
+		"actions": "Actions",
+		"article": "Article",
+		"name": "Name",
+		"new": "News",
+		"noData": "No news available...",
+		"publishDate": "Publish Date",
+		"requiresAuth": "Authenticated",
+		"status": {
+			"active": "Active"
+		},
+		"statusName": "Status",
+		"sticky": "Sticky"
+	},
+	"openSource": {
+		"client": "Client",
+		"name": "Name",
+		"license": "License",
+		"resource": "Resource",
+		"server": "Server"
+	},
+	"questions": {
+		"areYouSure": "Are you sure?",
+		"formDirty": "You made changes, are you sure you wish to leave?"
+	},
+	"strings": {
+		"about": {
+			"text1": "This site is supported and maintained by thZero Labs as a resource for the model rocketry community.",
+			"text2": "Any comments, questions or issues then please feel free to reach out to",
+			"contributing": {
+				"title": "Contributing",
+				"text1": "is open to contributions from the community.  If you wish to contribute, feel free to contact",
+				"text2": "We are accepting contributions for the following",
+				"contributions": {
+					"link": "New link suggestions",
+					"info": "Suggestions for new information topics",
+					"tool": "Suggestions to improvements for existing tools",
+					"tool2": "New tool suggestions"
+				},
+				"licensing": {
+					"title": "Licensing",
+					"text1": "Any contributions will need to be under a specific license; content copyright will remain with the author of the material.",
+					"text2": "The following license types:",
+					"public": "Material is declared as Public Domain (CC0)",
+					"public2": "https://creativecommons.org/about/cclicenses",
+					"public-cco": "Creative Commons Zero v1.0 Universal cc0-1.0",
+					"free": "Material has an open license such as Creative Commons or if source code then licences like MIT, Apache, BSD.  GPL and variants are not accepted.",
+					"free2": "Material has an open license such as Creative Commons or if source code then licences like MIT, Apache, BSD.  GPL and variants are not accepted.",
+					"free3": "https://creativecommons.org/about/cclicenses",
+					"free4": "https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/licensing-a-repository",
+					"free-cc-by": "Creative Commons Attribution 4.0 cc-by-4.0",
+					"free-cc-by-sa": "Creative Commons Attribution Share Alike 4.0 cc-by-sa-4.0",
+					"free-cc-by-nc": "Creative Commons Attribution Share Alike 4.0 cc-by-sa-4.0",
+					"free-apache-2.0": "Apache license 2.0",
+					"free-bsd-2-clause": "BSD 2-clause \"Simplified\" license",
+					"free-bsd-3-clause": "BSD 3-clause \"New\" or \"Revised\" license",
+					"free-mit": "MIT"
+				}
+			}
+		},
+		"add": "Add",
+		"clear": "Clear",
+		"cookieCompliance": {
+			"analytics": {
+				"title": "Analytics",
+				"description": "These are used for analytics purposes, i.e. determining who is using the site, how often the site is being used, etc.  These tracking is anonymized."
+			},
+			"session": {
+				"title": "Session token (necessary)",
+				"description": "This cookie contains a token. With the help of the token, your current session can be continued when using the website. This cookie is valid for 2 hours after creation and is renewed each time you change pages within this website."
+			},
+			"performance": {
+				"title": "Performance",
+				"description": "No performance oriented cookies are used by this site at this time."
+			},
+			"xsrf": {
+				"title": "XSRF Token (necessary)",
+				"description": "This cookie contains a token. The token prevents a third party from submitting forms on the website on your behalf. This cookie is valid for 2 hours and is renewed at every page change within the website."
+			}
+		},
+		"content": {
+			"info": {
+				"epoxy": {
+					"additionalLinks": "Additional Links",
+					"desc": "Chart comparing specifications of some common epoxies, plus some additional links about epoxies and model rocketry.",
+					"chart": "Chart"
+				},
+				"highPower": {
+					"additionalLinks": "Additional Links",
+					"desc": "Information about High Power Rocketry!",
+					"welcome1": "High power rocketry is a subset of model rocketry that deals with higher power, thus the name, rocket motors.",
+					"welcome1NAR": "Rocket motors which exceed model rocketry motor definitions and the models that use these motors are collectively referred to as High Power Rocketry (HPR). HPR is similar to model rocketry with differences that include the propulsion power and weight increase of the model. They use motors in ranges over “G” power and/or weigh more than laws and regulations allow for unrestricted model rockets.",
+					"welcome2": "This section provides a collection of links to various content, information and tools about high power rocketry!"
+				}
+			},
+			"links": {
+				"simulators": {
+					"desc": "A nice article about simulators for model rocketry by ThrustCurve.org."
+				}
+			},
+			"tools": {
+				"ejectionCharges": {
+					"desc": ""
+				},
+				"flightInfo": {
+					"desc": "Utility to create a graphical flight chart with flight information from altimeters for use in posting to websites, in videos, etc. Currently only Eggtimer output is supported."
+				},
+				"flightPath": {
+					"desc": "Utility to create a KML file based on GPS tracker output that can be imported into Google Earth.  Currently only the Featherweight GPS tracker is supported."
+				},
+				"foam": {
+					"title": "Foam Volume for Fin Cans",
+					"desc": "Calculations of required volume of expanding foam for a given fin can dimensions.",
+					"brand": "Brand",
+					"calculated": "Calculated Foam Volumes",
+					"density": "Density",
+					"expansion": "Expsansion",
+					"foamWeight": "Foam Weight",
+					"requiredAmount": "Required Amount"
+
+				},
+				"staticPortHoles": {
+					"desc": ""
+				},
+				"thrust2Weight": {
+					"title": "Thrust to Weight",
+					"desc": "Utility to determine thrust to weight ratios for rockets and different motors, either manually entered or from ThrustCurve.org.",
+					"motorData1": "Motor One",
+					"motorData2": "Motor Two",
+					"motorData3": "Motor Three",
+					"motorData4": "Motor Four",
+					"calculated": "Calculated Thrust to Weight Ratio",
+					"mass": "Rocket Weight",
+					"mass_hint": "Weight of the rocket fully loaded including engines.",
+					"mass_english": "Pounds",
+					"mass_english_abbr": "lb",
+					"mass_metric": "Kilograms",
+					"mass_metric_abbr": "kg",
+					"motor": "Motor",
+					"newtons": "Newtons",
+					"newtons_abbr": "N",
+					"results": "Results",
+					"thrust": "Thrust (Newtons)",
+					"to": " : 1",
+					"guidance": "Initial thrust is more important during the initial boost phase off the launch pad.  Average thrust is the average of the thrust across the burn timespan.  The peak thrust does not always occur during launch or initial boost phase; consult the thrust curves at ",
+					"guidance2": "When using a ThrustCuve motor profile, the initial thrust is a approximate value and is determined from the sample data included with the motor profile.  The largest thrust (N) sample that falls below the Max. Launch Rod Time specified is used.  If there is a discrepancy between the thrust curve data during this time period and the max thrust, then the thrust curve data is used."
+				}
+			},
+			"welcome": "RocketSidekick hosts a variety of tools in once place for model rocketry.  Some of the tools are custom build, others are based on formulas found in variety of rocketry forums and sites, as well as some sections having links or information.",
+			"welcome1a": "Contributions for additional tools are welcome via Pull Requests on the site's GitHub repo (",
+			"welcome1b": ").  See the documentation on the repo.",
+			"welcomeTools": "The following is the selection of tools and information currently available.",
+			"welcome3": "A high level primer on what the exciting world of model rocketry is!"
+		},
+		"copyright": "Copyright",
+		"copyright2": "Copyright © ",
+		"copyright3": "2022-2023. All rights under copyright reserved.",
+		"copyToClipboard": "Copied to the clipboard!",
+		"delete": "Delete",
+		"edit": "Edit",
+		"load": "Load",
+		"new": "New",
+		"no": "No",
+		"poweredBy": "Powered by",
+		"privacy": {
+			"text1": "# General Privacy\n## Emails\nThis site does not send emails.\n<br/>\n## Ads\nAt this time, this site does not show ads.\n<br/>\n## Cookies\nLimited cookies for Google Analytics only.\n<br/>\n## Storage\nInformation that you enter into the various tools are stored locally on your browser and not transmitted to any server.\n<br/>\n## Personal Information\nThe site does not capture any personal information.\n<br/>\n# Accounts\nThe site is free to use without having an account on Rocketsidekick.  Having an account allows you to update customized settings, store rockets, alimeters, and parachutes, create checklists as well as syncing data with compannion mobile application.\n<br/>\n## Authentication\nAll authentication for the accounts will be through social providers; this site will keep and store no passwords.\n<br/>\n## Storage\nIn addition to the above, having an account does mean certain data is stored on the Rocketsidekick's server.\n<br/>\n* Authentication provider id, email and photo.\n* Information that you enttered into the site about in the following sections:\n  * Rockets\n  * Parachutes\n  * Altimeters\n  * Checklists\n  * Settings\n<br/>\nThe information is stored for later retrieval during use of the Rocksidekick site, as well as syncing with the companion mobile application.   This data is not shared with other sites or 3rd parties.\n"
+		},
+		"save": "Save",
+		"share": "Share",
+		"yes": "Yes",
+		"welcome": "Welcome to"
+	},
+	"tagLine": {
+		"max": "Maximum of {max} tags."
+	},
+	"titles": {
+		"about": "About",
+		"application": "Rocket Sidekick",
+		"content": {
+			"info": {
+				"title": "Information", 
+				"epoxy": "Epoxy", 
+				"highPower": "High Power Rocketry"
+			},
+			"links": {
+				"title": "Links",
+				"construction": "Construction",
+				"books": "Books",
+				"competitions": "Competitions",
+				"events": "Events",
+				"forums": "Forums",
+				"general": "General",
+				"guidance": "Guidance",
+				"manufacturers": "Manufacturers",
+				"organizations": "Organizations",
+				"study": "Study Guides",
+				"tools": "Tools",
+				"vendors": "Vendors"
+			},
+			"tools": {
+				"flightInfo": "Flight Info",
+				"flightPath": "Flight Path",
+				"foam": "Fin Can Foam Calculator",
+				"thrust2Weight": "Thrust 2 Weight"
+			}
+		},
+		"edit": "Edit",
+		"editType": "Edit {type}",
+		"external": {
+		 	"motorSearch": "Motor Search"
+		},
+		"help": "Help",
+		"home": "Home",
+		"issues": "Issues",
+		"measurementUnits": "Measurement Units",
+		"new": "New",
+		"newType": "New {type}",
+		"news": "News",
+		"newsLatest": "Latest News",
+		"openSource": "Open Source",
+		"privacy": "Privacy Policy",
+		"profile": "Profile",
+		"settings": "Settings",
+		"signIn": "Sign In",
+		"signOut": "Sign Out",
+		"statistics": "Stats",
+		"support": "Support",
+		"users": "Users"
+	},
+	"tooltips": {
+		"clear": "Clear filters",
+		"extract": "Extract list",
+		"share": "Share the list"
+	},
+	"users": {
+		"actions": "Actions",
+		"externalId": "External Id",
+		"id": "Id",
+		"name": "Name",
+		"role": "Role",
+		"roles": "Roles"
+	},
+	"validation": {
+		"required": "Field is required."
+	},
+	"version": {
+		"majorMinorDate": "{major}.{minor}.{patch} {date}",
+		"label": "Version"
+	}
+ }

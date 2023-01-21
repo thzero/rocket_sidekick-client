@@ -1,4 +1,12 @@
 const Constants = {
+	External: {
+		github: 'https://github.com/thzero/rocket_sidekick-client',
+		store: {
+			android: null,
+			ios: null,
+		},
+		thrustCurve: 'https://thrustcurve.org'
+	},
 	ExternalKeys: {
 		MotorSearch: 'motorSearch'
 	},
@@ -8,12 +16,18 @@ const Constants = {
 	InjectorKeys: {
 		SERVICE_API: 'serviceApi',
 		SERVICE_DOWNLOAD: 'serviceDownload',
-		SERVICE_FLIGHT_INFO_PROCESSOR: 'serviceFlightInfoProcessor',
-		SERVICE_FLIGHT_INFO_PROCESSOR_EGGTIMER: 'serviceFlightInfoProcessorEggtimer',
-		SERVICE_FLIGHT_PATH_PROCESSOR: 'serviceFlightPathProcessor',
-		SERVICE_FLIGHT_PATH_PROCESSOR_FEATHERWEIGHT: 'serviceFlightPathProcessorFeatherweight',
-		SERVICE_TOOLS_THRUST2WEIGHT: 'serviceToolsThrust2Weight',
-		SERVICE_EXTERNAL_MOTOR_SEARCH: 'serviceExternalMotorSearch'
+		SERVICE_EXTERNAL_MOTOR_SEARCH: 'serviceExternalMotorSearch',
+		SERVICE_TOOLS_CALCULATION_ENGINE: 'serviceToolsCalculationEngine',
+		SERVICE_TOOLS_FOAM: 'serviceToolsFoam',
+		SERVICE_TOOLS_FLIGHT_INFO_PROCESSOR: 'serviceToolsFlightInfoProcessor',
+		SERVICE_TOOLS_FLIGHT_INFO_PROCESSOR_EGGTIMER: 'serviceToolsFlightInfoProcessorEggtimer',
+		SERVICE_TOOLS_FLIGHT_PATH_OUTPUT: 'serviceToolsFlightPathOutput',
+		SERVICE_TOOLS_FLIGHT_PATH_OUTPUT_KML: 'serviceToolsFlightPathOutputKml',
+		SERVICE_TOOLS_FLIGHT_PATH_OUTPUT_TEMPLATE: 'serviceToolsFlightPathOutputTemplate',
+		SERVICE_TOOLS_FLIGHT_PATH_OUTPUT_TEMPLATE_HANDLEBARS: 'serviceToolsFlightPathOutputTemplateHandlebars',
+		SERVICE_TOOLS_FLIGHT_PATH_PROCESSOR: 'serviceToolsFlightPathProcessor',
+		SERVICE_TOOLS_FLIGHT_PATH_PROCESSOR_FEATHERWEIGHT: 'serviceToolsFlightPathProcessorFeatherweight',
+		SERVICE_TOOLS_THRUST2WEIGHT: 'serviceToolsThrust2Weight'
 	},
 	DateTime: {
 		DEFAULT_DATE_FORMAT: 'MM/DD/YYYY',
@@ -29,6 +43,11 @@ const Constants = {
 		Text: 'text'
 	},
 	Features: {
+		Auth: false,
+		Checklists: false,
+		Launches: false,
+		MobileApp: false,
+		Rockets: false,
 		Favorites: true,
 		RememberMe: false,
 		Statistics: false
@@ -45,11 +64,19 @@ const Constants = {
 				in2: 'in^2',
 				ft2: 'ft^2'
 			},
+			fluid: {
+				default: 'floz',
+				floz: 'floz'
+			},
 			distance: {
-				default: 'in',
-				in: 'in',
+				default: 'ft',
 				ft: 'ft',
 				mi: 'mi'
+			},
+			length: {
+				default: 'in',
+				in: 'in',
+				ft: 'ft'
 			},
 			velocity: {
 				default: 'fts',
@@ -80,16 +107,24 @@ const Constants = {
 				mm2: 'mm^2'
 			},
 			distance: {
+				default: 'm',
+				m: 'm',
+				km: 'km'
+			},
+			length: {
 				default: 'mm',
 				mm: 'mm',
 				cm: 'cm',
-				m: 'm',
-				km: 'km'
+				m: 'm'
+			},
+			fluid: {
+				default: 'ml',
+				ml: 'ml'
 			},
 			velocity: {
 				default: 'ms',
 				ms: 'm/s',
-				kmh: 'km/h'
+				kph: 'km/h'
 			},
 			volume: {
 				default: 'mm3',
@@ -102,6 +137,16 @@ const Constants = {
 				g: 'g',
 				kg: 'kg'
 			}
+		},
+		types: {
+			acceleration: 'acceleration',
+			area: 'area',
+			fluid: 'fluid',
+			distance: 'distance',
+			length: 'length',
+			velocity: 'velocity',
+			volume: 'volume',
+			weight: 'weight'
 		}
 	}
 };

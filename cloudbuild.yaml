@@ -5,9 +5,9 @@ steps:
     args:
     - '-c'
     - |
-      git config -f .gitmodules submodule."src/common".url https://source.developers.google.com/p/rocket-tools-299da/r/github_thzero_rocket_tools-common
+      git config -f .gitmodules submodule."src/common".url https://source.developers.google.com/p/rocketsidekick/r/github_thzero_rocket_sidekick-common
       git submodule init
-      git submodule update
+      git submodule update --remote
       echo "one up..."
       ls -a ../
       echo "current..."
@@ -16,6 +16,8 @@ steps:
       ls -a ./src
       echo "src/common..."
       ls -a ./src/common
+      echo "recursive"
+      ls -R
   # Firebase
 #   - name: 'gcr.io/cloud-builders/git'
 #     entrypoint: 'bash'

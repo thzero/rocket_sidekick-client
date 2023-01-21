@@ -1,12 +1,11 @@
 <script>
-import baseAuth from '@/library_vue_quasar/components/qBaseAuth';
+import vAuth from '@/library_vue_vuetify/components/VAuth';
 
 export default {
-	name: 'AppAuth',
-	extends: baseAuth,
-	setup(props) {
-		return Object.assign(baseAuth.setup(props), {
-		});
+	name: 'Auth',
+	extends: vAuth,
+	setup(props, context) {
+		return vAuth.setup(props, context);
 	}
 };
 </script>

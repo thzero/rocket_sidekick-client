@@ -11,12 +11,11 @@ class DownloadService extends RestExternalService {
 		}
 		catch (err) {
 			this._logger.exception('DownloadService', 'download', err, correlationId);
+			return this._error('DownloadService', 'download', null, err, null, null, correlationId);
 		}
 		finally {
 			completed();
 		}
-
-		return this._error('DownloadService', 'download', null, null, null, null, correlationId);
 	}
 
 	async downloadUrl(correlationId, output, name, completed, canncelled, progress) {
@@ -27,12 +26,11 @@ class DownloadService extends RestExternalService {
 		}
 		catch (err) {
 			this._logger.exception('DownloadService', 'downloadUrl', err, correlationId);
+			return this._error('DownloadService', 'downloadUrl', null, err, null, null, correlationId);
 		}
 		finally {
 			completed();
 		}
-
-		return this._error('DownloadService', 'downloadUrl', null, null, null, null, correlationId);
 	}
 
 	_download(path, filename) {

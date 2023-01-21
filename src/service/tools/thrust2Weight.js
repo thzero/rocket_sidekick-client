@@ -1,3 +1,5 @@
+import Constants from '@/constants';
+
 import BaseService from '@thzero/library_client/service/index';
 
 class Thrust2WeightToolsService extends BaseService {
@@ -6,29 +8,8 @@ class Thrust2WeightToolsService extends BaseService {
 	}
 
     init(injector) {
+		this._serviceCalculationEngine = injector.getService(Constants.InjectorKeys.SERVICE_TOOLS_CALCULATION_ENGINE);
     }
-
-	async calculate(correlationId, data) {
-		// eslint-disable-next-line prefer-const
-		let isMetric = false;
-		let massInKg = Number(data.mass);
-		if (massInKg <= 0)
-			return { success: false };
-
-		if (!isMetric)
-			massInKg = Number(data.mass) / 2.2;
-
-		const results = {
-			success: true,
-			calcuated: true
-		};
-
-		const mass = (massInKg * 9.8);
-		results.initial = data.thrustInitial != null ? Number(data.thrustInitial) / mass : null;
-		results.peak = data.thrustPeak != null ? Number(data.thrustPeak) / mass : null;
-		results.average = data.thrustAverage != null ? Number(data.thrustAverage) / mass : null;
-		return this._successResponse(results, correlationId);
-	}
 
 	initialize() {
 		return {
@@ -41,21 +22,96 @@ class Thrust2WeightToolsService extends BaseService {
 		};
 	}
 
+	async initializeCalculation(correlationId, data, measurementUnits) {
+		this._enforceNotNull('Thrust2WeightToolsService', 'initializeCalculation', data, 'data', correlationId);
+		this._enforceNotEmpty('Thrust2WeightToolsService', 'initializeCalculation', measurementUnits, 'measurementUnits', correlationId);
+
+		const calculationSteps = [
+			{
+				type: this._serviceCalculationEngine.symTypeSet,
+				var: 'gravity',
+				value: 9.8,
+				unit: Constants.MeasurementUnits.metrics.acceleration.ms2
+			},
+			{
+				type: this._serviceCalculationEngine.symTypeSet,
+				var: 'massInKg',
+				value: data.mass,
+				units: {
+					from: data.units,
+					to: Constants.MeasurementUnits.metrics.weight.kg
+				}
+			},
+			{
+				type: this._serviceCalculationEngine.symTypeSet,
+				data: {
+					thrustInitial: data.thrustInitial,
+					thrustPeak: data.thrustPeak,
+					thrustAverage: data.thrustAverage
+				},
+				unit: 'N'
+			},
+			{
+				type: this._serviceCalculationEngine.symTypeEvaluate,
+				var: 'massInNewtons',
+				evaluate: 'massInKg * gravity',
+			},
+			{
+				type: this._serviceCalculationEngine.symTypeEvaluate,
+				var: 'initial',
+				evaluate: 'thrustInitial / massInNewtons',
+				result: true,
+				format: this._serviceCalculationEngine.formatFixed()
+			},
+			{
+				type: this._serviceCalculationEngine.symTypeSet,
+				var: 'peak',
+				value: '0'
+			},
+			{
+				type: this._serviceCalculationEngine.symTypeEvaluate,
+				var: 'peak',
+				evaluate: 'thrustPeak != null ? thrustPeak / massInNewtons : null',
+				result: true,
+				format: this._serviceCalculationEngine.formatFixed()
+			},
+			{
+				type: this._serviceCalculationEngine.symTypeSet,
+				var: 'average',
+				value: '0'
+			},
+			{
+				type: this._serviceCalculationEngine.symTypeEvaluate,
+				var: 'average',
+				evaluate: 'thrustAverage != null ? thrustAverage / massInNewtons : null',
+				result: true,
+				format: this._serviceCalculationEngine.formatFixed()
+			}
+		];
+		
+		return this._successResponse({
+			steps: calculationSteps,
+			instance: this._serviceCalculationEngine.initialize(correlationId)
+		}, correlationId);
+	}
+
 	update(correlationId, motor, data) {
 		if (!motor || !motor.samples || (motor.samples.length <= 0) || !data)
             return;
 
-        let initialThrust = 0;
+		data.thrustAverage = motor.avgThrustN;
+        data.thrustPeak = motor.maxThrustN;
+        data.thrustInitial = 0;
         for (const sample of motor.samples) {
             if (sample.time > data.maxLaunchRodTime)
                 break;
 
-			if (sample.thrust > initialThrust)
-			initialThrust = sample.thrust;
+			if (sample.thrust > data.thrustInitial)
+			data.thrustInitial = sample.thrust;
+			if (sample.thrust > data.thrustPeak)
+				data.thrustPeak = sample.thrust;
         }
-        data.thrustAverage = motor.avgThrustN;
-        data.thrustInitial = initialThrust;
-        data.thrustPeak = motor.maxThrustN;
+
 		return this._successResponse(data, correlationId);
 	}
 }

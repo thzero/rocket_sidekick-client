@@ -1,5 +1,5 @@
-![GitHub package.json version](https://img.shields.io/github/package-json/v/thzero/rocket-tools-client)
-![David](https://img.shields.io/david/thzero/rocket-tools-client)
+![GitHub package.json version](https://img.shields.io/github/package-json/v/thzero/rocket_sidekick_-client)
+![David](https://img.shields.io/david/thzero/rocket_sidekick_-client)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 # RocketTools
@@ -10,7 +10,7 @@ A web application with some tools for rocketry.  The following features are avai
 
 ## Project setup
 
-The client application is a VueJS single page application.   It requires the companion server application (https://github.com/thzero/rocket-tools-server) installed and running first.  The server application provides the API for use by the SPA.
+The client application is a VueJS single page application.   It requires the companion server application (https://github.com/thzero/rocket_sidekick-server) installed and running first.  The server application provides the API for use by the SPA.
 
 ### Requirements
 
@@ -62,9 +62,9 @@ npm install
 Install the submodule dependencies for the client.
 
 ```
-git submodule add https://github.com/thzero/rocket_tools-common "src/common" 
+git submodule add https://github.com/thzero/rocket_sidekick-common "src/common" 
 git submodule add https://github.com/thzero/library_client_vue3_components "src/library_vue" 
-git submodule add https://github.com/thzero/library_client_vue3_quasar_components "src/library_vue_quasar" 
+git submodule add https://github.com/thzero/library_client_vue3_vuetify3_components "src/library_vue_vuetify" 
 ```
 
 ### Compiles and hot-reloads for development
@@ -93,6 +93,13 @@ Enable the following APIs
 * Firebase Management API
 * Firebase Hosting API
 * Cloud Resource Manager API
+
+#### Cloud Build Account
+
+* Open the IAM page
+* Select your project and click Open.
+* In the permissions table, locate the email ending with @cloudbuild.gserviceaccount.com, and click on the pencil icon. This is the Cloud Build service account.
+* Add, if missiong, the Cloud Build Service Account, Firebase Admin and API Keys Admin roles.
 
 #### Cloud Build Trigger
 

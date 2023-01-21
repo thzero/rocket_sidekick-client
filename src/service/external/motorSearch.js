@@ -50,7 +50,7 @@ class MotorSearchExternalService extends BaseService {
 			}, correlationId);
 		}
 		catch (err) {
-			this._logger.exception('MotorSearchExternalService', 'manufacturers', err, correlationId);
+			return this._error('MotorSearchExternalService', 'manufacturers', null, err, null, null, correlationId);
 		}
 	}
 
@@ -85,7 +85,7 @@ class MotorSearchExternalService extends BaseService {
 			}, correlationId);
 		}
 		catch (err) {
-			this._logger.exception('MotorSearchExternalService', 'motor', err, correlationId);
+			return this._error('MotorSearchExternalService', 'motor', null, err, null, correlationId);
 		}
 	}
 
@@ -138,7 +138,7 @@ class MotorSearchExternalService extends BaseService {
 			}, correlationId);
 		}
 		catch (err) {
-			this._logger.exception('MotorSearchExternalService', 'search', err, correlationId);
+			return this._error('MotorSearchExternalService', 'search', null, err, null, correlationId);
 		}
 	}
 
@@ -168,8 +168,24 @@ class MotorSearchExternalService extends BaseService {
 	_searchFilter(correlationId, criteria, data) {
 		let total = 0;
 		const output = [];
+
+		if (!data || !Array.isArray(data)) {
+			return this._successResponse({ output: [], total: 0 }, correlationId);
+		}
+
 		for (const item of data) {
-			if (item.impulseClass !== criteria.impulseClass)
+			if (!String.isNullOrEmpty(criteria.motor)) {
+				if (String.isNullOrEmpty(item.commonName) || item.commonName.toLowerCase().indexOf(criteria.motor.toLowerCase()) < 0) {
+					if (String.isNullOrEmpty(item.designation) || item.designation.toLowerCase().indexOf(criteria.motor.toLowerCase()) < 0)
+						continue;
+				}
+
+				total++;
+				output.push(item);
+				continue;
+			}
+
+			if (!String.isNullOrEmpty(criteria.impulseClass) && (item.impulseClass.toLowerCase() !== criteria.impulseClass.toLowerCase()))
 				continue;
 
 			total++;
@@ -208,6 +224,10 @@ class MotorSearchExternalService extends BaseService {
 	_searchUpdateData(correlationId, results, data, cached) {
 		let result;
 		let item;
+		if (!results) {
+			return this._successResponse(correlationId, []);
+		}
+
 		const length = results.length;
 		const lengthCached = cached.length;
 		let difference = [ ...cached ];
@@ -235,60 +255,6 @@ class MotorSearchExternalService extends BaseService {
 	}
 
 	_urlKey() {
-	}
-
-	select(item, maxLaunchRodTime, callback) {
-		this._selectCallback = callback;
-
-		this._calculationData.thrustInitial = null;
-		this._calculationData.thrustAverage = item.avgThrustN;
-		this._calculationData.thrustPeak = item.maxThrustN;
-		this._calculationData.motor = `${item.manufacturer} ${item.designation} (${item.commonName})`;
-		this._selectCallback(this._calculationData);
-
-		if (!item.dataFiles) {
-			// TODO: notification - toast?
-			return;
-		}
-
-		(async () => {
-			this._thrust2WeightBackendService.requestMotorsMotorSearch({ motorId: item.motorId, maxLaunchRodTime: maxLaunchRodTime }, this._requestMotorsMotorSearchResults);
-		})();
-	}
-
-	_requestMotorsMotorSearchResults = (request, response) => {
-		if (response.data && response.data.samples) {
-			this._updateCalc(response.data, request.maxLaunchRodTime);
-			return;
-		}
-
-		(async () => {
-			const results = await this._thrustSearchExternalService.searchMotor({ motorId: request.motorId, maxLaunchRodTime: request.maxLaunchRodTime });
-			this._updateCalc(results, request.maxLaunchRodTime);
-			this._thrust2WeightBackendService.requestMotorsMotorSearchUpdate({
-				motorId: results.motorId,
-				samples: results.samples
-			});
-		})();
-	}
-
-	_updateCalc(motor, maxLaunchRodTime) {
-		if (!motor || !motor.samples || (motor.samples.length <= 0))
-            return;
-
-        console.debug('_updateCalc.maxLaunchRodTime', maxLaunchRodTime);
-        console.debug('_updateCalc.motor.samples', motor.samples);
-        let maxThrust = 0;
-        for (const sample of motor.samples) {
-            if (sample.time > maxLaunchRodTime)
-                break;
-
-            if (sample.thrust > maxThrust)
-                maxThrust = sample.thrust;
-        }
-        console.debug('_updateCalc.motor.maxThrust', maxThrust);
-        this._calculationData.thrustInitial = maxThrust;
-        this._selectCallback(this._calculationData);
 	}
 }
 

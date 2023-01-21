@@ -1,49 +1,150 @@
 import Constants from '@/constants';
-import LibraryConstants from '@thzero/library_client/constants';
+import LibraryConstants from '@thzero/library_client/constants.js';
 
-import AppUtility from '@/utility/app';
 import GlobalUtility from '@thzero/library_client/utility/global';
 import CommonUtility from '@thzero/library_common/utility';
 
 import Response from '@thzero/library_common/response';
 
 import BaseStore from '@thzero/library_client_vue3_store_pinia/store/index';
+import Utility from '@thzero/library_common/utility';
 
 class AppStore extends BaseStore {
-	_init() {
+	// _initModules() {
+	// 	// Admin Update
+	// }
+
+	_initPluginPersistConfig() {
+		return {
+			persist: {
+				key: 'rocketsidekick',
+				storage: localStorage,
+				paths: [
+					'flightInfoDataTypeUse',
+					'flightInfoProcessor',
+					'flightInfoResolution',
+					'flightInfoStyle',
+					'flightMeasurementUnits',
+					'flightPathProcessor',
+					'flightPathStyle',
+					'motorManufacturers',
+					'motorSearchCriteria',
+					'motorSearchResults',
+					// 'openSource',
+					// 'plans',
+					// 'user',
+					// 'version'
+				]
+			}
+			// persist2: {
+			// 	key: 'rocket_sidekick',
+			// 	includePaths: [
+			// 		'flightInfoResolution',
+			// 		'flightInfoStyle',
+			// 		'flightPathStyle',
+			// 		'motorManufacturers',
+			// 		'motorSearchCriteria',
+			// 		'motorSearchResults',
+			// 	]
+			// }
+		};
+	}
+
+	_initStoreConfig() {
 		return {
 			state: () => ({
 				checksumLastUpdate: [],
+				content: [],
+				contentTtl: 0,
+				contentTtlDiff: 1000 * 60 * 30,
+				contentMarkup: [],
+				contentMarkupTtl: 0,
+				contentMarkupTtlDiff: 1000 * 60 * 30,
+				flightInfoDataTypeUse: null,
+				flightData: {},
 				flightDate: '',
+				flightInfoProcessor: null,
 				flightInfoResolution: Constants.FlightInfo.Resolution,
 				flightInfoStyle: [],
 				flightLocation: '',
+				flightMeasurementUnits: {
+					input: [],
+					output: {
+						id: null,
+						distance: null,
+						velocity: null
+					}
+				},
+				flightPathProcessor: null,
 				flightPathStyle: [],
 				flightTitle: '',
 				motorManufacturers: [],
 				motorSearchCriteria: {},
 				motorSearchResults: {},
-				plans: [],
-				settings: AppUtility.initializeSettingsUser(),
 				thrust2weight: {},
-				version: null
+				toolSettings: []
 			}),
 			actions: {
-				async getMotor(correlationId, motorId) {
-					const service = GlobalUtility.$injector.getService(Constants.InjectorKeys.SERVICE_EXTERNAL_MOTOR_SEARCH);
-					const response = await service.motor(correlationId, motorId, this.motorSearchResults);
-					this.$logger.debug('store', 'getMotor', 'response', response, correlationId);
-					if (Response.hasSucceeded(response)) {
-						this.motorSearchResults = response.results.data;
-						return response.results.motor;
+				async _initialize(correlationId, results) {
+					const service = GlobalUtility.$injector.getService(LibraryConstants.InjectorKeys.SERVICE_UTILITY);
+					const response = await service.content(correlationId);
+					if (Response.hasSucceeded(response))
+						await this.setContent(correlationId, response.results);
+				},
+				async requestContent(correlationId) {
+					const now = Utility.getTimestamp();
+					const ttlContent = this.contentTtl ? this.contentTtl : 0;
+					const delta = now - ttlContent;
+					if (this.content && (delta <= this.contentTtlDiff))
+						return Response.success(correlationId, this.content);
+
+					const service = GlobalUtility.$injector.getService(LibraryConstants.InjectorKeys.SERVICE_UTILITY);
+					const response = await service.content(correlationId);
+					this.$logger.debug('store', 'requestContent', 'response', response, correlationId);
+					if (Response.hasSucceeded(response))
+						await this.setContent(correlationId, response.results);
+
+					return Response.error('store', 'requestContent', null, null, null, null, correlationId);
+				},
+				async requestContentMarkup(correlationId, contentId) {
+					if (String.isNullOrEmpty(contentId))
+						return Response.error('store', 'requestContentMarkup', 'contentId', null, null, null, correlationId);
+
+					const now = Utility.getTimestamp();
+					const ttlContent = this.contentMarkupTtl ? this.contentMarkupTtl : 0;
+					const delta = now - ttlContent;
+					if (this.contentMarkup && (delta <= this.contentMarkupTtlDiff)) {
+						const content = GlobalUtility.$store.contentMarkup.find(l => l.id.toLowerCase() === contentId.toLowerCase());
+						if (!String.isNullOrEmpty(content))
+							return Response.success(correlationId, content);
 					}
 
-					return null;
+					const service = GlobalUtility.$injector.getService(LibraryConstants.InjectorKeys.SERVICE_UTILITY);
+					const response = await service.contentMarkup(correlationId, contentId);
+					this.$logger.debug('store', 'requestContentMarkup', 'response', response, correlationId);
+					if (Response.hasSucceeded(response)) {
+						this.setContentMarkup(correlationId, response.results);
+						return Response.success(correlationId, response.results);
+					}
+
+					return Response.error('store', 'requestContentMarkup', null, null, null, null, correlationId);
 				},
-				async getMotorManufacturers(correlationId) {
+				async requestMotor(correlationId, motorId) {
+					const service = GlobalUtility.$injector.getService(Constants.InjectorKeys.SERVICE_EXTERNAL_MOTOR_SEARCH);
+					const response = await service.motor(correlationId, motorId, this.motorSearchResults);
+					this.$logger.debug('store', 'requestMotor', 'response', response, correlationId);
+					if (Response.hasSucceeded(response)) {
+						this.motorSearchResults = response.results.data;
+						// return response.results.motor;
+						return Response.success(correlationId, response.results.motor);
+					}
+
+					return Response.error('store', 'requestMotor', null, null, null, null, correlationId);
+				},
+				async requestMotorManufacturers(correlationId) {
 					const service = GlobalUtility.$injector.getService(Constants.InjectorKeys.SERVICE_EXTERNAL_MOTOR_SEARCH);
 					const response = await service.manufacturers(correlationId, this.motorManufacturers);
-					this.$logger.debug('store', 'getMotorManufacturers', 'response', response, correlationId);
+					this.$logger.debug('store', 'requestMotorManufacturers', 'response', response, correlationId);
 					if (Response.hasSucceeded(response)) {
 						this.motorManufacturers = response.results;
 						return this.motorManufacturers.manufacturers;
@@ -51,16 +152,16 @@ class AppStore extends BaseStore {
 
 					return [];
 				},
-				async getMotorSearchReset(correlationId) {
+				async requestMotorSearchReset(correlationId) {
 					this.motorManufacturers.ttl = null;
 					this.motorManufacturers.last = null;
 					this.motorSearchResults.ttl = null;
 					this.motorSearchResults.last = null;
 				},
-				async getMotorSearchResults(correlationId, criteria) {
+				async requestMotorSearchResults(correlationId, criteria) {
 					const service = GlobalUtility.$injector.getService(Constants.InjectorKeys.SERVICE_EXTERNAL_MOTOR_SEARCH);
 					const response = await service.search(correlationId, criteria, this.motorSearchResults);
-					this.$logger.debug('store', 'getMotorSearchResults', 'response', response, correlationId);
+					this.$logger.debug('store', 'requestMotorSearchResults', 'response', response, correlationId);
 					if (Response.hasSucceeded(response)) {
 						this.motorSearchResults = response.results.data;
 						return response.results.filtered;
@@ -68,29 +169,33 @@ class AppStore extends BaseStore {
 
 					return [];
 				},
-				async getPlans(correlationId) {
-					const service = GlobalUtility.$injector.getService(LibraryConstants.InjectorKeys.SERVICE_PLANS);
-					const response = await service.plans(correlationId);
-					this.$logger.debug('store', 'getPlans', 'response', response, correlationId);
-					if (Response.hasSucceeded(response)) {
-						this.setPlans(correlationId, response.results ? response.results.data : []);
-					}
+				async setContent(correlationId, content) {
+					this.$logger.debug('store', 'setContent', 'content.a', content, correlationId);
+					this.$logger.debug('store', 'setContent', 'content.b', this.content, correlationId);
+					this.content = content;
+					this.contentTtl = Utility.getTimestamp();
+					this.$logger.debug('store', 'setContent', 'content.c', this.content, correlationId);
 				},
-				async getVersion(correlationId) {
-					const service = GlobalUtility.$injector.getService(LibraryConstants.InjectorKeys.SERVICE_VERSION);
-					const version = await service.version(correlationId);
-					this.setVersion(correlationId, version);
-				},
-				async initialize(correlationId) {
-					const service = GlobalUtility.$injector.getService(Constants.InjectorKeys.SERVICE_API);
-					const response = await service.initialize(correlationId);
-					if (Response.hasSucceeded(response)) {
-						this.setPlans(correlationId, response.results.plans);
-						this.setVersion(correlationId, response.results.version);
+				async setContentMarkup(correlationId, content) {
+					this.$logger.debug('store', 'setContent', 'contentMarkup.a', content, correlationId);
+					this.$logger.debug('store', 'setContent', 'contentMarkup.b', this.contentMarkup, correlationId);
+					if (content && !String.isNullOrEmpty(content)) {
+						this.contentMarkupTtl = Utility.getTimestamp();
+						Utility.updateArrayByObject(this.contentMarkup, content);
 					}
+					this.$logger.debug('store', 'setContent', 'contentMarkup.c', this.contentMarkup, correlationId);
+				},
+				async setFlightInfoDataTypeUse(correlationId, value) {
+					this.flightInfoDataTypeUse = value;
+				},
+				async setFlightData(correlationId, value) {
+					this.flightData = value;
 				},
 				async setFlightDate(correlationId, value) {
 					this.flightDate = value;
+				},
+				async setFlightInfoProcessor(correlationId, value) {
+					this.flightInfoProcessor = value;
 				},
 				async setFlightInfoResolution(correlationId, value) {
 					this.flightInfoResolution = value;
@@ -104,6 +209,12 @@ class AppStore extends BaseStore {
 				},
 				async setFlightLocation(correlationId, value) {
 					this.flightLocation = value;
+				},
+				async setFlightMeasurementUnits(correlationId, value) {
+					this.flightMeasurementUnits = value;
+				},
+				async setFlightPathProcessor(correlationId, value) {
+					this.flightPathProcessor = value;
 				},
 				async setFlightPathStyle(correlationId, value) {
 					if (String.isNullOrEmpty(value.id))
@@ -120,80 +231,87 @@ class AppStore extends BaseStore {
 				},
 				async setMotorSearchResults(correlationId, value) {
 					this.motorSearchResults = value;
-				},
-				async setPlans(correlationId, plans) {
-					this.$logger.debug('store', 'setPlans', 'plans.a', plans, correlationId);
-					this.$logger.debug('store', 'setPlans', 'plans.b', this.plans, correlationId);
-					this.plans = plans;
-					this.$logger.debug('store', 'setPlans', 'plans.c', this.plans, correlationId);
-				},
-				async setSettings(correlationId, settings) {
-					// commit('setSettings', params);
-					this.settings = CommonUtility.merge3({}, this.settings, settings);
-				},
-				async setVersion(correlationId, version) {
-					// this.$logger.debug('store', 'getVersion', 'version', version, correlationId);
-					// commit('setVersion', { correlationId: correlationId, version: version });
-					this.$logger.debug('store', 'setVersion', 'version', version, correlationId);
-					this.version = version;
 				}
 			},
 			getters: {
-				getFlightDate: (state) => () => {
-					return state.flightDate;
+				getContent() {
+					return GlobalUtility.$store.content;
 				},
-				getFlightInfoStyle: (state) => (id) => {
-					if (!state.flightInfoStyle)
+				getFlightData() {
+					return GlobalUtility.$store.flightData;
+				},
+				getFlightDate() {
+					return GlobalUtility.$store.flightDate;
+				},
+				getFlightInfoDataTypeUse() {
+					const value = GlobalUtility.$store.flightInfoDataTypeUse;
+					return value !== null ? value : true;
+				},
+				getFlightInfoProcessor() {
+					return GlobalUtility.$store.flightInfoProcessor;
+				},
+				getFlightInfoResolution() {
+					return GlobalUtility.$store.flightInfoResolution;
+				},
+				getFlightInfoStyle() {
+					if (!GlobalUtility.$store.flightInfoStyle)
 						return null;
-					return state.flightInfoStyle.find(l => l.id);
+					return GlobalUtility.$store.flightInfoStyle.find(l => l.id);
 				},
-				getFlightLocation: (state) => () => {
-					return state.flightLocation;
+				getFlightLocation() {
+					return GlobalUtility.$store.flightLocation;
 				},
-				getFlightPathStyle: (state) => (id) => {
-					if (!state.flightPathStyle)
+				getFlightMeasurementUnits() {
+					return GlobalUtility.$store.flightMeasurementUnits;
+				},
+				getFlightPathProcessor() {
+					return GlobalUtility.$store.flightPathProcessor;
+				},
+				getFlightPathStyle() {
+					if (!GlobalUtility.$store.flightPathStyle)
 						return null;
-					return state.flightPathStyle.find(l => l.id);
+					return GlobalUtility.$store.flightPathStyle.find(l => l.id);
 				},
-				getFlightTitle: (state) => () => {
-					return state.flightTitle;
+				getFlightTitle() {
+					return GlobalUtility.$store.flightTitle;
 				},
-				getMotorSearchCriteria: (state) => () => {
-					return state.motorSearchCriteria;
+				getsetMotorSearchCriteria() {
+					return GlobalUtility.$store.motorSearchCriteria;
 				},
-				getPlan: (state) => (id) => {
-					if (state.plans == null)
-						return null;
-					return state.plans.find(plan => plan.id === id);
-				},
-				getSettings: (state) => (id) => {
-					return state.settings ? state.settings : AppUtility.initializeSettingsUser();
+				async getMotorSearchCriteria() {
+					return GlobalUtility.$store.motorSearchCriteria;
 				}
 			},
 			dispatcher: {
-				async getMotor(correlationId, motorId) {
-					return await GlobalUtility.$store.getMotor(correlationId, motorId);
+				async requestContent(correlationId) {
+					return await GlobalUtility.$store.requestContent(correlationId);
 				},
-				async getMotorManufacturers(correlationId, results) {
-					return await GlobalUtility.$store.getMotorManufacturers(correlationId, results);
+				async requestContentMarkup(correlationId, contentId) {
+					return await GlobalUtility.$store.requestContentMarkup(correlationId, contentId);
 				},
-				async getMotorSearchReset(correlationId) {
-					return await GlobalUtility.$store.getMotorSearchReset(correlationId);
+				async requestMotor(correlationId, motorId) {
+					return await GlobalUtility.$store.requestMotor(correlationId, motorId);
 				},
-				async getMotorSearchResults(correlationId, criteria) {
-					return await GlobalUtility.$store.getMotorSearchResults(correlationId, criteria);
+				async requestMotorManufacturers(correlationId, results) {
+					return await GlobalUtility.$store.requestMotorManufacturers(correlationId, results);
 				},
-				async getPlans(correlationId) {
-					await GlobalUtility.$store.getPlans(correlationId);
+				async requestMotorSearchReset(correlationId) {
+					return await GlobalUtility.$store.requestMotorSearchReset(correlationId);
 				},
-				async getVersion(correlationId) {
-					await GlobalUtility.$store.getVersion(correlationId);
+				async requestMotorSearchResults(correlationId, criteria) {
+					return await GlobalUtility.$store.requestMotorSearchResults(correlationId, criteria);
 				},
-				async initialize(correlationId) {
-					await GlobalUtility.$store.initialize(correlationId);
+				async setFlightInfoDataTypeUse(correlationId, value) {
+					await GlobalUtility.$store.setFlightInfoDataTypeUse(correlationId, value);
+				},
+				async setFlightData(correlationId, value) {
+					await GlobalUtility.$store.setFlightData(correlationId, value);
 				},
 				async setFlightDate(correlationId, value) {
 					await GlobalUtility.$store.setFlightDate(correlationId, value);
+				},
+				async setFlightInfoProcessor(correlationId, value) {
+					await GlobalUtility.$store.setFlightInfoProcessor(correlationId, value);
 				},
 				async setFlightInfoResolution(correlationId, value) {
 					await GlobalUtility.$store.setFlightInfoResolution(correlationId, value);
@@ -204,6 +322,12 @@ class AppStore extends BaseStore {
 				async setFlightLocation(correlationId, value) {
 					await GlobalUtility.$store.setFlightLocation(correlationId, value);
 				},
+				async setFlightMeasurementUnits(correlationId, value) {
+					await GlobalUtility.$store.setFlightMeasurementUnits(correlationId, value);
+				},
+				async setFlightPathProcessor(correlationId, value) {
+					await GlobalUtility.$store.setFlightPathProcessor(correlationId, value);
+				},
 				async setFlightPathStyle(correlationId, value) {
 					await GlobalUtility.$store.setFlightPathStyle(correlationId, value);
 				},
@@ -212,50 +336,8 @@ class AppStore extends BaseStore {
 				},
 				async setMotorSearchCriteria(correlationId, value) {
 					await GlobalUtility.$store.setMotorSearchCriteria(correlationId, value);
-				},
-				async setSettings(correlationId, settings) {
-					await GlobalUtility.$store.setSettings(correlationId, settings);
 				}
 			}
-		};
-	}
-
-	_initModules() {
-		// Admin Update
-	}
-
-	_initPluginPersistConfig() {
-		return {
-			root: {
-				key: 'rocket_tools',
-				storage: localStorage,
-				paths: [
-					'flightInfoResolution',
-					'flightInfoStyle',
-					'flightPathStyle',
-					'motorManufacturers',
-					'motorSearchCriteria',
-					'motorSearchResults',
-					'plans',
-					'settings',
-					'version'
-				]
-			}
-			// pinia2
-			// root: {
-			// 	key: 'rocket_tools',
-			// 	includePaths: [
-			// 		'flightInfoResolution',
-			// 		'flightInfoStyle',
-			// 		'flightPathStyle',
-			// 		'motorManufacturers',
-			// 		'motorSearchCriteria',
-			// 		'motorSearchResults',
-			// 		'plans',
-			// 		'settings',
-			// 		'version'
-			// 	]
-			// }
 		};
 	}
 }

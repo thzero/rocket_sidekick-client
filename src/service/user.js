@@ -1,5 +1,7 @@
 import LibraryConstants from '@thzero/library_client/constants';
 
+import AppUtility from '@/utility/app';
+
 import VueBaseUserService from '@thzero/library_client_vue3/service/baseUser';
 
 class UserService extends VueBaseUserService {
@@ -13,8 +15,8 @@ class UserService extends VueBaseUserService {
 	async init(injector) {
 		await super.init(injector);
 
-		this._serviceCommunicationRest = this._injector.getService(LibraryConstants.InjectorKeys.SERVICE_COMMUNICATION_REST);
-		this._serviceStore = this._injector.getService(LibraryConstants.InjectorKeys.SERVICE_STORE);
+		this._serviceCommunicationRest = injector.getService(LibraryConstants.InjectorKeys.SERVICE_COMMUNICATION_REST);
+		this._serviceStore = injector.getService(LibraryConstants.InjectorKeys.SERVICE_STORE);
 	}
 
 	async fetchFavoritesByGamerId(correlationId, user) {
@@ -69,6 +71,10 @@ class UserService extends VueBaseUserService {
 		}
 
 		return this._error('UserService', 'fetchByGamerTag', null, null, null, null, correlationId);
+	}
+
+	initializeSettings(correlationId) {
+		return AppUtility.initializeSettingsUser();
 	}
 }
 

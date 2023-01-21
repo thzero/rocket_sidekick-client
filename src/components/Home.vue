@@ -1,126 +1,260 @@
 <template>
-	<div class="row">
-		<div class="col-3">
-			<div class="q-pb-md">
-				<q-card class="latest-newsxxx-card">
-					<q-card-section>
-						<div class="col-12 text-center text-h5 q-pb-sm text-capitalize">
-							{{ $t('titles.newsLatest') }}
-						</div>
-					</q-card-section>
-					<q-card-section>
-						<News/>
-					</q-card-section>
-				</q-card>
-			</div>
-		</div>
-		<div class="col-9">
-			<div class="col-12 text-center text-h5 q-pb-sm">
-				{{ $t('titles.welcome') }} {{ $t('titles.application') }}
-			</div>
-		</div>
+	<div>
+		<v-row
+			dense
+			:pt-4="$vuetify.display.smAndDown && newsCount > 0"
+			:pt-2="$vuetify.display.mdAndUp || newsCount === 0"
+		>
+			<v-col
+				md="6"
+				lg="4"
+				xl="4"
+				class="pb-4"
+				v-if="$vuetify.display.mdAndUp"
+			>
+				<v-card
+					class="mb-2"
+				>
+					<v-card-item>
+						<v-badge :content="newsCount" inline>
+ 							<p class="text-h5">
+								{{ $t('titles.newsLatest') }}&nbsp;&nbsp;
+							</p>
+						</v-badge>
+					</v-card-item>
+				</v-card>
+				<News />
+			</v-col>
+			<v-col
+				col="12"
+				md="6"
+				lg="8"
+				xl="8"
+				:pl-2="$vuetify.display.mdAndUp"
+			>
+				<v-card
+					class="mb-2"
+				>	
+					<v-card-item>
+						<v-row dense>
+							<v-col
+								cols="12"
+							>
+								<div class="text-center text-h5">
+									{{ $t('strings.welcome') }} {{ $t('titles.application') }} {{ userDisplayName }}
+									<!-- <v-chip
+										class="float-right"
+										color="success"
+										outlined
+										label
+									>
+										{{ userDisplayName }}
+									</v-chip> -->
+								</div>
+							</v-col>
+							<v-col
+								cols="12"
+							>
+								<p>
+									{{ $t('strings.content.welcome') }}<br><br>
+								</p>
+								<p
+									v-if="hasContent"
+								>
+									{{ $t('strings.content.welcomeTools') }}
+								</p>
+							</v-col>
+							<v-col
+								v-if="hasContent"
+								cols="12"
+								class="text-center"
+							>
+								<hr />
+							</v-col>
+							<v-col
+								v-if="hasContent"
+								v-for="item in tools"
+								:key="item.name"
+								cols="12"
+								md="6"
+								lg="4"
+								class="text-center"
+							>
+								<v-card class="mb-2" variant="outlined">
+									<v-card-item>
+										<v-btn variant="flat" block class="mr-2" color="primary"
+											:to="contentLink(item)"
+										>
+											{{ contentTitle(item) }}
+										</v-btn>
+									</v-card-item>
+									<v-card-text class="text-left">
+										{{ contentDescription(item) }}
+									</v-card-text>
+								</v-card>
+							</v-col>
+							<v-col
+								v-if="hasContent"
+								cols="12"
+								class="text-center"
+							>
+								<hr />
+							</v-col>
+							<v-col
+								v-for="item in info"
+								:key="item.name"
+								cols="12"
+								md="6"
+								lg="4"
+								class="text-center"
+							>
+								<v-card class="mb-2" variant="outlined">
+									<v-card-item>
+										<v-btn variant="flat" block class="mr-2" color="primary"
+											:to="contentLink(item)"
+										>
+											{{ contentTitle(item) }}
+										</v-btn>
+									</v-card-item>
+									<v-card-text class="text-left">
+										{{ contentDescription(item) }}
+									</v-card-text>
+								</v-card>
+							</v-col>
+							<v-col
+								cols="12"
+								class="text-center"
+							>
+								<hr />
+							</v-col>
+							<v-col
+								cols="12"
+								class="mt-4 mb-4"
+							>
+								<p>
+									{{ $t('strings.content.welcome3') }}
+								</p>
+							</v-col>
+							<v-col
+								cols="12"
+							>
+								<div class="slideshow">
+									<iframe id="slideshow" frameborder="0" class="slideshowFrame"></iframe>
+								</div>
+							</v-col>
+							<!-- 
+							<v-col
+								cols="12"
+								class="text-center"
+							>
+								<hr />
+							</v-col>
+							<v-col
+								cols="12"
+							>
+								<p>
+									{{ $t('strings.content.welcome1a') }}
+									<a :href="externalGithub" target="_blank">{{ externalGithub }}</a>
+									{{ $t('strings.content.welcome1b') }}
+								</p>
+							</v-col> 
+							-->
+						</v-row>
+					</v-card-item>
+				</v-card>
+			</v-col>
+			<v-col
+				v-if="$vuetify.display.smAndDown"
+				id="element"
+				cols="12"
+				class="pb-4"
+			>
+				<v-card
+					class="mb-2"
+				>
+					<v-card-text>
+						<v-badge :content="newsCount" inline>
+ 							<p class="text-h5">
+								{{ $t('titles.newsLatest') }}&nbsp;&nbsp;
+							</p>
+						</v-badge>
+					</v-card-text>
+				</v-card>
+				<News />
+			</v-col>
+		</v-row>
+		<VLoadingOverlay
+			:signal="initializeCompleted"
+		/>
 	</div>
 </template>
 
 <script>
-import LibraryConstants from '@thzero/library_client/constants';
-
-import AppUtility from '@/utility/app';
 import GlobalUtility from '@thzero/library_client/utility/global';
-import CommonUtility from '@thzero/library_common/utility';
 
-import base from '@/library_vue/components/base';
+import { useAppHomeComponent } from '@/components/appHome';
 
 import News from '@/components/News';
+import VLoadingOverlay from '@/library_vue_vuetify/components/VLoadingOverlay';
 
 const DelayMs = 0; // 250
 
 export default {
 	name: 'AppHome',
-	setup(props) {
-		return Object.assign(base.setup(props), {
-		});
-	},
 	components: {
-		News
+		News,
+		VLoadingOverlay
 	},
-	extends: base,
-	data: () => ({
-		initializeCompleted: false,
-		sortKeys: [
-			{ id: 'name', name: 'Name' },
-			{ id: 'faction', name: 'Faction' }
-		],
-		serviceStore: null
-	}),
-	computed: {
-		isLoggedIn() {
-			return this.serviceStore.state.user && this.serviceStore.user.isLoggedIn;
-		},
-		newsCount() {
-			if (!this.serviceStore.state.news.latest)
-				return 0;
+	setup(props, context) {
+		const {
+			correlationId,
+			error,
+			hasFailed,
+			hasSucceeded,
+			initialize,
+			logger,
+			noBreakingSpaces,
+			notImplementedError,
+			success,
+			externalGithub,
+			contentDescription,
+			contentLink,
+			contentTitle,
+			hasContent,
+			info,
+			initializeCompleted,
+			isLoggedIn,
+			newsCount,
+			serviceStore,
+			tools,
+			user,
+			userDisplayName
+		} = useAppHomeComponent(props, context);
 
-			const news = this.serviceStore.state.news.latest.slice(0);
-			return news.length;
-		},
-		user() {
-			return this.serviceStore.state.user;
-		},
-		userDisplayName() {
-			const user = this.serviceStore.state.user;
-			const settings = user.settings ? user.settings : AppUtility.initializeSettingsUser();
-			const userName = settings && settings.gamerTag ? settings.gamerTag : user.external && user.external.name ? user.external.name : '******';
-			return userName;
-		}
-	},
-	created() {
-		this.serviceStore = GlobalUtility.$injector.getService(LibraryConstants.InjectorKeys.SERVICE_STORE);
-		const self = this;
-		GlobalUtility.$EventBus.on('initialize-completed', (value) => {
-			self.initializeCompleted = value;
-		});
-	},
-	methods: {
-		getSettingsUserTab(correlationId, user, funcAttribute) {
-			if (!user || !user.settings)
-				return null;
-
-			const settings = user.settings ? user.settings : AppUtility.initializeSettingsUser();
-			return funcAttribute(settings.home);
-		},
-		updateSettingsUserTab(correlationId, user, newVal, func) {
-			const settings = user.settings ? user.settings : AppUtility.initializeSettingsUser();
-			func(settings.home, newVal);
-			GlobalUtility.$store.dispatcher.user.setUserSettings(correlationId, settings);
-		}
-	},
-	// eslint-disable-next-line
-	async beforeRouteEnter (to, from, next) {
-		// called before the route that renders this component is confirmed.
-		// does NOT have access to `this` component instance,
-		// because it has not been created yet when this guard is called!
-		(async () => {
-			try {
-				GlobalUtility.$EventBus.emit('initialize-completed', false);
-
-				const correlationId = CommonUtility.generateId();
-
-				await Promise.all([
-					GlobalUtility.$store.dispatcher.news.getLatest(correlationId)
-				]);
-			}
-			finally {
-				const timeout = setTimeout(function () {
-					GlobalUtility.$EventBus.emit('initialize-completed', true);
-					clearTimeout(timeout);
-				}, DelayMs);
-			}
-		})().catch(err => {
-			// eslint-disable-next-line
-			console.error(err);
-		});
-		next();
+		return {
+			correlationId,
+			error,
+			hasFailed,
+			hasSucceeded,
+			initialize,
+			logger,
+			noBreakingSpaces,
+			notImplementedError,
+			success,
+			externalGithub,
+			contentDescription,
+			contentLink,
+			contentTitle,
+			hasContent,
+			info,
+			initializeCompleted,
+			isLoggedIn,
+			newsCount,
+			serviceStore,
+			tools,
+			user,
+			userDisplayName
+		};
 	},
 	// eslint-disable-next-line
 	async beforeRouteUpdate (to, from, next) {
@@ -156,5 +290,20 @@ export default {
 };
 </script>
 
-<style scoped>
+<style>
+.slideshow {
+    width: 100%;
+    height: 0;
+    padding-bottom: 56%; /* Change this till it fits the dimensions of your video */
+    position: relative;
+}
+
+.slideshowFrame {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    display: block;
+    top: 0;
+    left: 0;
+}
 </style>

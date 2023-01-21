@@ -1,57 +1,86 @@
 <template>
-	<div id="app">
-		<router-view />
-	</div>
+	<router-view />
 </template>
 
 <script>
-// import AppUtility from '@/utility/app';
+import { useTheme } from 'vuetify';
+
+import LibraryConstants from '@thzero/library_client/constants';
+
 import GlobalUtility from '@thzero/library_client/utility/global';
 
-import baseApp from '@/library_vue/components/baseApp';
+import { useBaseAppComponent } from '@/library_vue/components/baseApp';
 
 export default {
 	name: 'App',
-	extends: baseApp,
-	setup(props) {
-		return Object.assign(baseApp.setup(props), {
-		});
-	},
-	created: function () {
-		window.addEventListener('beforeunload', function (event) {
-			GlobalUtility.$EventBus.emit('beforeunload');
-		}, false);
-	},
-	methods: {
-		initialize(correlationId) {
-			return [
-				GlobalUtility.$store.dispatcher.initialize(correlationId)
-			];
+	setup(props, context) {
+		const {
+			correlationId,
+			error,
+			hasFailed,
+			hasSucceeded,
+			initialize,
+			logger,
+			noBreakingSpaces,
+			notImplementedError,
+			success
+		} = useBaseAppComponent(
+			props, 
+			context,
+			{
+				initializeI: async () => {
+					return [
+						serviceStore.dispatcher.initialize(correlationId())
+					];
+				}
+			}
+		);
+
+		const serviceStore = GlobalUtility.$injector.getService(LibraryConstants.InjectorKeys.SERVICE_STORE);
+
+		// const initialize = async () => {
+		// 	return [
+		// 		serviceStore.dispatcher.initialize(correlationId())
+		// 	];
+		// };
+
+		const theme = useTheme();
+		const userTheme = () => {
+			return !String.isNullOrEmpty(serviceStore.userTheme) ? serviceStore.userTheme : 'defaultTheme';
+		};
+
+		theme.global.name.value = userTheme;
+		if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+			theme.global.name.value = userTheme() + 'Dark';
 		}
+		// theme.global.current.dark = darkMode;
+
+		window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', event => {
+			const themeRequested = userTheme() + (event.matches ? 'Dark' : '');
+			theme.global.name.value = themeRequested;
+		});
+
+		return {
+			correlationId,
+			error,
+			hasFailed,
+			hasSucceeded,
+			initialize,
+			logger,
+			noBreakingSpaces,
+			notImplementedError,
+			success,
+			initialize,
+			serviceStore
+		};
 	}
 };
 </script>
 
+<style scoped>
+</style>
+
 <style>
-	#app {
-		font-family: Avenir, Helvetica, Arial, sans-serif;
-		-webkit-font-smoothing: antialiased;
-		-moz-osx-font-smoothing: grayscale;
-		color: #2c3e50;
-	}
-
-	#nav {
-		padding: 30px;
-	}
-
-	#nav a {
-		font-weight: bold;
-		color: #2c3e50;
-	}
-
-	#nav a.router-link-exact-active {
-		color: #42b983;
-	}
 	/* .bg {
 			width: 100%;
 			height: 100%;
@@ -66,9 +95,5 @@ export default {
 	.displayLink {
 		cursor: pointer;
 		text-decoration: underline;
-	}
-
-	.q-section-with-actions {
-		padding-bottom: 4px !important;
 	}
 </style>

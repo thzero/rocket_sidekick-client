@@ -1,7 +1,4 @@
-import LibraryConstants from '@thzero/library_client/constants';
 import Constants from '@/constants';
-
-import GlobalUtility from '@thzero/library_client/utility/global';
 
 import SettingsUser from '@/common/data/settingsUser';
 
@@ -38,36 +35,78 @@ class AppUtility {
 		settings.measurementUnits.acceleration = Constants.MeasurementUnits.english.acceleration.default;
 		settings.measurementUnits.area = Constants.MeasurementUnits.english.area.default;
 		settings.measurementUnits.distance = Constants.MeasurementUnits.english.distance.default;
+		settings.measurementUnits.length = Constants.MeasurementUnits.english.length.default;
 		settings.measurementUnits.velocity = Constants.MeasurementUnits.english.velocity.default;
 		settings.measurementUnits.volume = Constants.MeasurementUnits.english.volume.default;
 		settings.measurementUnits.weight = Constants.MeasurementUnits.english.weight.default;
 		return settings;
 	}
 
-	static measurementUnits() {
-		const serviceStore = GlobalUtility.$injector.getService(LibraryConstants.InjectorKeys.SERVICE_STORE);
-		const settings = serviceStore.getters.getSettings();
-		return settings && settings.measurementUnits && settings.measurementUnits.id ? settings.measurementUnits.id : Constants.MeasurementUnits.english;
+	static measurementUnitsId(correlationId, settings) {
+		return settings && settings.measurementUnits && settings.measurementUnits.id ? settings.measurementUnits.id : Constants.MeasurementUnits.english.id;
+	}
+
+	static measurementUnits(correlationId, settings) {
+		return Constants.MeasurementUnits[AppUtility.measurementUnitsId(correlationId, settings)];
+	}
+
+	static measurementUnitsAccelerationId(correlationId, settings, measurementUnitsId) {
+		measurementUnitsId = !String.isNullOrEmpty(measurementUnitsId) ? measurementUnitsId : AppUtility.measurementUnitsId(correlationId, settings);
+		return settings && settings.measurementUnits && settings.measurementUnits.acceleration ? settings.measurementUnits.acceleration : 
+		Constants.MeasurementUnits[measurementUnitsId].acceleration.default;
+	}
+
+	static measurementUnitAreaId(correlationId, settings, measurementUnitsId) {
+		measurementUnitsId = !String.isNullOrEmpty(measurementUnitsId) ? measurementUnitsId : AppUtility.measurementUnitsId(correlationId, settings);
+		return settings && settings.measurementUnits && settings.measurementUnits.area ? settings.measurementUnits.area : 
+		Constants.MeasurementUnits[measurementUnitsId].area.default;
+	}
+
+	static measurementUnitDistanceId(correlationId, settings, measurementUnitsId) {
+		measurementUnitsId = !String.isNullOrEmpty(measurementUnitsId) ? measurementUnitsId : AppUtility.measurementUnitsId(correlationId, settings);
+		return settings && settings.measurementUnits && settings.measurementUnits.distance ? settings.measurementUnits.distance : 
+		Constants.MeasurementUnits[measurementUnitsId].distance.default;
+	}
+
+	static measurementUnitFluidId(correlationId, settings, measurementUnitsId) {
+		measurementUnitsId = !String.isNullOrEmpty(measurementUnitsId) ? measurementUnitsId : AppUtility.measurementUnitsId(correlationId, settings);
+		return settings && settings.measurementUnits && settings.measurementUnits.fluid ? settings.measurementUnits.fluid : 
+		Constants.MeasurementUnits[measurementUnitsId].distance.default;
+	}
+
+	static measurementUnitLengthId(correlationId, settings, measurementUnitsId) {
+		measurementUnitsId = !String.isNullOrEmpty(measurementUnitsId) ? measurementUnitsId : AppUtility.measurementUnitsId(correlationId, settings);
+		return settings && settings.measurementUnits && settings.measurementUnits.length ? settings.measurementUnits.length : 
+		Constants.MeasurementUnits[measurementUnitsId].length.default;
+	}
+
+	static measurementUnitVelocityId(correlationId, settings, measurementUnitsId) {
+		measurementUnitsId = !String.isNullOrEmpty(measurementUnitsId) ? measurementUnitsId : AppUtility.measurementUnitsId(correlationId, settings);
+		return settings && settings.measurementUnits && settings.measurementUnits.velocity ? settings.measurementUnits.velocity : 
+		Constants.MeasurementUnits[measurementUnitsId].velocity.default;
+	}
+
+	static measurementUnitVolumeId(correlationId, settings, measurementUnitsId) {
+		measurementUnitsId = !String.isNullOrEmpty(measurementUnitsId) ? measurementUnitsId : AppUtility.measurementUnitsId(correlationId, settings);
+		return settings && settings.measurementUnits && settings.measurementUnits.volume ? settings.measurementUnits.volume : 
+		Constants.MeasurementUnits[measurementUnitsId].volume.default;
+	}
+
+	static measurementUnitWeightId(correlationId, settings, measurementUnitsId) {
+		measurementUnitsId = !String.isNullOrEmpty(measurementUnitsId) ? measurementUnitsId : AppUtility.measurementUnitsId(correlationId, settings);
+		return settings && settings.measurementUnits && settings.measurementUnits.weight ? settings.measurementUnits.weight : 
+		Constants.MeasurementUnits[measurementUnitsId].weight.default;
 	}
 
 	static measurementUnitsOptions() {
 		return [ Constants.MeasurementUnits.english.id, Constants.MeasurementUnits.metrics.id ];
 	}
 
-	static measurementUnitsWeightPoundsDisplay(settings) {
-		const measurementUnits = settings && settings.measurementUnits && settings.measurementUnits.id ? settings.measurementUnits.id : Constants.MeasurementUnits.english;
-		return GlobalUtility.$trans.t('measurementUnits.' + measurementUnits + '.weight.pounds');
-	}
-
-	static settings() {
-		return GlobalUtility.$injector.getService(LibraryConstants.InjectorKeys.SERVICE_SETTINGS);
-	}
-
-	static userDisplayName(user) {
+	static userDisplayName(correlationId, user) {
 		if (!user || !user.settings)
 			return '';
 
-		const settings = user.settings ? user.settings : AppUtility.initializeSettingsUser();
+		const settings = user.settings ? user.settings : null;
 		const userName = settings && settings.gamerTag ? settings.gamerTag : user.external && user.external.name ? user.external.name : '******';
 		return userName;
 	}

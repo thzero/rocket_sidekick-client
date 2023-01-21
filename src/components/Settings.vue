@@ -1,254 +1,378 @@
 <template>
-	<div>
-		<div class="row">
-			<div class="col-12 text-center text-h5 q-pb-sm">
-				{{ $t('titles.settings') }}
-			</div>
-			<div class="col-12">
-				<QFormWrapper
-					ref="frm"
-					:validation="validation"
-					:resetForm="resetForm"
-					buttonClearName="buttons.reset"
-					buttonOkName="buttons.save"
-					@ok="ok"
+	<v-row dense>
+		<v-col cols="12" lg="2" />
+		<v-col cols="12" lg="8">
+			<v-row dense>
+				<v-col
+					cols="12"
 				>
-					<template v-slot:default>
-						<div class="row">
-							<div class="col-xs-12 col-sm-6 col-md-4">
-								<q-card>
-									<q-card-section class="text-center text-h6">
-										{{ $t('titles.measurementUnits') }}
-									</q-card-section>
-									<q-card-section>
-										<QSelectWithValidation
-											class="q-mr-sm full"
-											ref="measurementUnit"
-											v-model="measurementUnitsId"
-											vid="measurementUnit"
-											:items="measurementUnitsSelect"
+					<v-toolbar
+						density="compact"
+					>
+						<v-toolbar-title class="text-center text-h5">
+							<span>{{ $t('titles.settings') }}</span>
+						</v-toolbar-title>
+					</v-toolbar>
+					<!-- <div class="text-center text-h5">
+						<span>{{ $t('titles.settings') }}</span>
+					</div> -->
+				</v-col>
+				<v-col
+					cols="12"
+				>
+					<VFormControl
+						ref="formSettingsRef"
+						:validation="validation"
+						:resetForm="resetForm"
+						buttonClearName="buttons.reset"
+						buttonOkName="buttons.save"
+						:pre-complete-ok="preCompleteOk"
+						:dirtyCheck="dirtyCheck"
+					>
+						<v-row dense>
+							<v-col
+								cols="12"
+								sm="6"
+								:class="'pl-0 pr-' + ($vuetify.display.mdAndUp ? '2' : '0')"
+							>
+								<v-card>
+									<v-card-text>
+										<v-row
+											align="center"
+											dense
+										>
+											<v-col
+												cols="9"
+												class="text-h4 mb-1 pt-1"
+											>
+												{{ name }}
+											</v-col>
+											<v-col
+												cols="3"
+												style="text-align: right;"
+											>
+												<v-avatar
+													tile
+													size="80"
+													color="grey"
+												>
+													<img
+														v-if="hasPicture"
+														:src="picture"
+														class="responsive"
+													>
+												</v-avatar>
+											</v-col>
+										</v-row>
+									</v-card-text>
+								</v-card>
+							</v-col>
+							<v-col
+								cols="12"
+								sm="6"
+								class="pl-0 pr-0"
+							>
+								<v-card>
+									<v-card-text>
+										<VTextFieldWithValidation
+											ref="gamerTagRef"
+											vid="gamerTag"
+											v-model="gamerTag"
+											:counter="30"
 											:validation="validation"
-											:dense="true"
-											:label="$t('forms.settings.measurementUnits')"
+											:label="$t('forms.gamerTag')"
 										/>
-										<QSelectWithValidation
-											class="q-mr-sm"
-											ref="measurementUnitAcceleration"
-											v-model="measurementUnitAccelerationId"
-											vid="measurementUnitAcceleration"
-											:items="measurementUnitsAcceleration"
-											:validation="validation"
-											:dense="true"
-											:label="$t('forms.settings.measurementUnitAcceleration')"
-										/>
-										<QSelectWithValidation
-											class="q-mr-sm"
-											ref="measurementUnitArea"
-											v-model="measurementUnitAreaId"
-											vid="measurementUnitArea"
-											:items="measurementUnitsArea"
-											:validation="validation"
-											:dense="true"
-											:label="$t('forms.settings.measurementUnitArea')"
-										/>
-										<QSelectWithValidation
-											class="q-mr-sm"
-											ref="measurementUnitDistance"
-											v-model="measurementUnitDistanceId"
-											vid="measurementUnitDistance"
-											:items="measurementUnitsDistance"
-											:validation="validation"
-											:dense="true"
-											:label="$t('forms.settings.measurementUnitsDistance')"
-										/>
-										<QSelectWithValidation
-											class="q-mr-sm"
-											ref="measurementUnitVelocity"
-											v-model="measurementUnitVelocityId"
-											vid="measurementUnitDistance"
-											:items="measurementUnitsVelocity"
-											:validation="validation"
-											:dense="true"
-											:label="$t('forms.settings.measurementUnitsVelocity')"
-										/>
-										<QSelectWithValidation
-											class="q-mr-sm"
-											ref="measurementUnitVolume"
-											v-model="measurementUnitVolumeId"
-											vid="measurementUnitVolume"
-											:items="measurementUnitsVolume"
-											:validation="validation"
-											:dense="true"
-											:label="$t('forms.settings.measurementUnitVolume')"
-										/>
-										<QSelectWithValidation
-											class="q-mr-sm"
-											ref="measurementUnitWeight"
-											v-model="measurementUnitWeightId"
-											vid="measurementUnitWeight"
-											:items="measurementUnitsWeight"
-											:validation="validation"
-											:dense="true"
-											:label="$t('forms.settings.measurementUnitWeight')"
-										/>
-									</q-card-section>
-								</q-card>
-							</div>
-						</div>
-					</template>
-				</QFormWrapper>
-			</div>
-		</div>
-	</div>
+									</v-card-text>
+								</v-card>
+							</v-col>
+							<v-col
+								cols="12"
+								class="pl-0 pr-0"
+							>
+								<v-card>
+									<v-card-item>
+										<v-card-title class="text-center text-h6">{{ $t('titles.measurementUnits') }}</v-card-title>
+									</v-card-item>
+									<v-card-text>
+										<v-row dense>
+											<v-col
+												cols="12"
+												sm="6"
+												md="3"
+											>
+												<VSelectWithValidation
+													ref="measurementUnitRef"
+													vid="measurementUnitsId"
+													v-model="measurementUnitsId"
+													:items="measurementUnitsSelect"
+													:validation="validation"
+													:label="$t('forms.settings.measurementUnits.title')"
+												/>
+											</v-col>
+											<v-col
+												cols="12"
+												sm="6"
+												md="3"
+											>
+												<VSelectWithValidation
+													ref="measurementUnitAccelerationRef"
+													vid="measurementUnitAccelerationId"
+													v-model="measurementUnitAccelerationId"
+													:items="measurementUnitsAcceleration"
+													:validation="validation"
+													:label="$t('forms.settings.measurementUnits.acceleration')"
+												/>
+											</v-col>
+											<v-col
+												cols="12"
+												sm="6"
+												md="3"
+											>
+												<VSelectWithValidation
+													ref="measurementUnitAreaRef"
+													vid="measurementUnitAreaId"
+													v-model="measurementUnitAreaId"
+													:items="measurementUnitsArea"
+													:validation="validation"
+													:label="$t('forms.settings.measurementUnits.area')"
+												/>
+											</v-col>
+											<v-col
+												cols="12"
+												sm="6"
+												md="3"
+											>
+												<VSelectWithValidation
+													ref="measurementUnitDistanceRef"
+													vid="measurementUnitDistanceId"
+													v-model="measurementUnitDistanceId"
+													:items="measurementUnitsDistance"
+													:validation="validation"
+													:label="$t('forms.settings.measurementUnits.distance')"
+												/>
+											</v-col>
+											<v-col
+												cols="12"
+												sm="6"
+												md="3"
+											>
+												<VSelectWithValidation
+													ref="measurementUnitLengthRef"
+													vid="measurementUnitLengthId"
+													v-model="measurementUnitLengthId"
+													:items="measurementUnitsLength"
+													:validation="validation"
+													:label="$t('forms.settings.measurementUnits.length')"
+												/>
+											</v-col>
+											<v-col
+												cols="12"
+												sm="6"
+												md="3"
+											>
+												<VSelectWithValidation
+													ref="measurementUnitVelocityRef"
+													vid="measurementUnitVelocityId"
+													v-model="measurementUnitVelocityId"
+													:items="measurementUnitsVelocity"
+													:validation="validation"
+													:label="$t('forms.settings.measurementUnits.velocity')"
+												/>
+											</v-col>
+											<v-col
+												cols="12"
+												sm="6"
+												md="3"
+											>
+												<VSelectWithValidation
+													ref="measurementUnitVolumeRef"
+													vid="measurementUnitVolumeId"
+													v-model="measurementUnitVolumeId"
+													:items="measurementUnitsVolume"
+													:validation="validation"
+													:label="$t('forms.settings.measurementUnits.volume')"
+												/>
+											</v-col>
+											<v-col
+												cols="12"
+												sm="6"
+												md="3"
+											>
+												<VSelectWithValidation
+													ref="measurementUnitWeightRef"
+													vid="measurementUnitWeightId"
+													v-model="measurementUnitWeightId"
+													:items="measurementUnitsVolume"
+													:validation="validation"
+													:label="$t('forms.settings.measurementUnits.weight')"
+												/>
+											</v-col>
+										</v-row>
+									</v-card-text>
+								</v-card>
+							</v-col>
+						</v-row>
+					</VFormControl>
+				</v-col>
+			</v-row>
+		</v-col>
+	</v-row>
 </template>
 
 <script>
-import useVuelidate from '@vuelidate/core';
+import { ref } from 'vue';
 
-import Constants from '@/constants';
-import LibraryConstants from '@thzero/library_client/constants';
+import VFormControl from '@/library_vue_vuetify/components/form/VFormControl';
+import VSelectWithValidation from '@/library_vue_vuetify/components/form//VSelectWithValidation';
+import VTextFieldWithValidation from '@/library_vue_vuetify/components/form/VTextFieldWithValidation';
 
-import AppUtility from '@/utility/app';
-import GlobalUtility from '@thzero/library_client/utility/global';
+import { useAppSettingsComponent } from '@/components/appSettings';
 
-import QFormWrapper from '@/library_vue_quasar/components/form/QFormWrapper';
-import QSelectWithValidation from '@/library_vue_quasar/components/form/QSelectWithValidation';
-// import QTextFieldWithValidation from '@/library_vue_quasar/components/form/QTextFieldWithValidation';
-
-import baseSettings from '@/library_vue/components/base';
+import { minLength, maxLength, required } from '@vuelidate/validators';
 
 export default {
 	name: 'AppSettings',
 	components: {
-		QFormWrapper,
-		QSelectWithValidation //,
-		// QTextFieldWithValidation
+		VFormControl,
+		VSelectWithValidation,
+		VTextFieldWithValidation
 	},
-	extends: baseSettings,
-	setup(props) {
-		return Object.assign(baseSettings.setup(props), {
-			scope: 'AppSettings',
-			validation: useVuelidate({ $scope: 'AppSettings' })
-		});
-	},
-	data: () => ({
-		measurementUnitsId: null,
-		measurementUnitAccelerationId: null,
-		measurementUnitAreaId: null,
-		measurementUnitDistanceId: null,
-		measurementUnitVelocityId: null,
-		measurementUnitVolumeId: null,
-		measurementUnitWeightId: null,
-		serviceStore: null,
-		settings: null
-	}),
-	watch: {
-		measurementUnitsId: function (value, prev) {
-			if ((prev != null) && (value !== prev)) {
-				this.measurementUnitAccelerationId = Constants.MeasurementUnits[value].acceleration.default;
-				this.measurementUnitAreaId = Constants.MeasurementUnits[value].area.default;
-				this.measurementUnitDistanceId = Constants.MeasurementUnits[value].distance.default;
-				this.measurementUnitVelocityId = Constants.MeasurementUnits[value].velocity.default;
-				this.measurementUnitVolumeId = Constants.MeasurementUnits[value].volume.default;
-				this.measurementUnitWeightId = Constants.MeasurementUnits[value].weight.default;
-			}
-		}
-	},
-	computed: {
-		measurementUnits() {
-			return AppUtility.measurementUnits();
-		},
-		measurementUnitsSelect() {
-			return [Constants.MeasurementUnits.english.id, Constants.MeasurementUnits.metrics.id].map((item) => { return { id: item, name: GlobalUtility.$trans.t('measurementUnits.' + item + '.title') }; });
-		},
-		measurementUnitsArea() {
-			if (this.measurementUnits === Constants.MeasurementUnits.english.id)
-				return this.measurementUnitTrans(Constants.MeasurementUnits.english.area, 'english', 'area');
-			return this.measurementUnitTrans(Constants.MeasurementUnits.metrics.area, 'metrics', 'area');
-		},
-		measurementUnitsAcceleration() {
-			if (this.measurementUnits === Constants.MeasurementUnits.english.id)
-				return this.measurementUnitTrans(Constants.MeasurementUnits.english.acceleration, 'english', 'acceleration');
-			return this.measurementUnitTrans(Constants.MeasurementUnits.metrics.acceleration, 'metrics', 'acceleration');
-		},
-		measurementUnitsDistance() {
-			if (this.measurementUnits === Constants.MeasurementUnits.english.id)
-				return this.measurementUnitTrans(Constants.MeasurementUnits.english.distance, 'english', 'distance');
-			return this.measurementUnitTrans(Constants.MeasurementUnits.metrics.distance, 'metrics', 'distance');
-		},
-		measurementUnitsVelocity() {
-			if (this.measurementUnits === Constants.MeasurementUnits.english.id)
-				return this.measurementUnitTrans(Constants.MeasurementUnits.english.velocity, 'english', 'velocity');
-			return this.measurementUnitTrans(Constants.MeasurementUnits.metrics.velocity, 'metrics', 'velocity');
-		},
-		measurementUnitsVolume() {
-			if (this.measurementUnits === Constants.MeasurementUnits.english.id)
-				return this.measurementUnitTrans(Constants.MeasurementUnits.english.volume, 'english', 'volume');
-			return this.measurementUnitTrans(Constants.MeasurementUnits.metrics.volume, 'metrics', 'volume');
-		},
-		measurementUnitsWeight() {
-			if (this.measurementUnits === Constants.MeasurementUnits.english.id)
-				return this.measurementUnitTrans(Constants.MeasurementUnits.english.weight, 'english', 'weight');
-			return this.measurementUnitTrans(Constants.MeasurementUnits.metrics.weight, 'metrics', 'weight');
-		}
-	},
-	created() {
-		this.serviceStore = GlobalUtility.$injector.getService(LibraryConstants.InjectorKeys.SERVICE_STORE);
-	},
-	mounted() {
-		this.reset(this.correlationId(), false);
-	},
-	methods: {
-		measurementUnitTrans(object, key, subKey) {
-			return Object.getOwnPropertyNames(object).map((item) => { return { id: item, name: GlobalUtility.$trans.t('measurementUnits.' + key + '.' + subKey + '.' + item + 'Abbr') }; });
-		},
-		async ok() {
-			const settings = this.serviceStore.getters.getSettings();
-			if (!settings.measurementUnits)
-				settings.measurementUnits = {};
+	setup(props, context) {
+		const formSettingsRef = ref(null);
 
-			settings.measurementUnits.id = this.measurementUnitsId;
-			settings.measurementUnits.acceleration = this.measurementUnitAccelerationId;
-			settings.measurementUnits.area = this.measurementUnitAreaId;
-			settings.measurementUnits.distance = this.measurementUnitDistanceId;
-			settings.measurementUnits.velocity = this.measurementUnitVelocityId;
-			settings.measurementUnits.volume = this.measurementUnitVolumeId;
-			settings.measurementUnits.weight = this.measurementUnitWeightId;
+		const {
+			correlationId,
+			error,
+			hasFailed,
+			hasSucceeded,
+			initialize,
+			logger,
+			noBreakingSpaces,
+			notImplementedError,
+			success,
+			isSaving,
+			serverErrors,
+			setErrors,
+			beforeUnload,
+			dirty,
+			dirtyCheck,
+			leaveCheck,
+			cancel,
+			close,
+			fab,
+			hasPicture,
+			name,
+			ok,
+			open,
+			picture,
+			preComplete,
+			preCompleteI,
+			requestReset,
+			reset,
+			serviceStore,
+			serviceUsers,
+			user,
+			gamerTag,
+			measurementUnitTrans,
+			measurementUnitsId,
+			measurementUnitAccelerationId,
+			measurementUnitAreaId,
+			measurementUnitDistanceId,
+			measurementUnitLengthId,
+			measurementUnitVelocityId,
+			measurementUnitVolumeId,
+			measurementUnitWeightId,
+			measurementUnitsSelect,
+			measurementUnitsAcceleration,
+			measurementUnitsArea,
+			measurementUnitsDistance,
+			measurementUnitsLength,
+			measurementUnitsVelocity,
+			measurementUnitsVolume,
+			measurementUnitsWeight,
+			preCompleteOk,
+			resetForm,
+			resetFormIdCheck,
+			scope,
+			validation
+		} = useAppSettingsComponent(props, context, formSettingsRef);
 
-			this.serviceStore.dispatcher.setSettings(this.correlationId(), settings);
-		},
-		reset(correlationId, notify) {
-			this.$refs.frm.reset();
-			this.errorMessage = null;
-			if (this.errorTimer)
-				clearTimeout(this.errorTimer);
-
-			notify = (notify !== null && notify !== undefined) ? notify : true;
-			if (notify)
-				this.notify('messages.reset');
-		},
-		// eslint-disable-next-line
-		async resetForm(correlationId) {
-			const settings = this.serviceStore.getters.getSettings();
-			if (!settings.measurementUnits)
-				settings.measurementUnits = {};
-
-			this.measurementUnitsId = settings.measurementUnits.id;
-			this.measurementUnitAccelerationId = settings.measurementUnits.acceleration;
-			this.measurementUnitAreaId = settings.measurementUnits.area;
-			this.measurementUnitDistanceId = settings.measurementUnits.distance;
-			this.measurementUnitVelocityId = settings.measurementUnits.velocity;
-			this.measurementUnitVolumeId = settings.measurementUnits.volume;
-			this.measurementUnitWeightId = settings.measurementUnits.weight;
-			// this.measurementUnitsId = settings.measurementUnits.id ? settings.measurementUnits.id : Constants.MeasurementUnits.English;
-			// this.measurementUnitAccelerationId = settings.measurementUnits.acceleration ? settings.measurementUnits.acceleration : Constants.MeasurementUnits[this.measurementUnitsId].acceleration.default;
-			// this.measurementUnitAreaId = settings.measurementUnits.area ? settings.measurementUnits.acceleration : Constants.MeasurementUnits[this.measurementUnitsId].area.default;
-			// this.measurementUnitDistanceId = settings.measurementUnits.distance ? settings.measurementUnits.acceleration : Constants.MeasurementUnits[this.measurementUnitsId].distance.default;
-			// this.measurementUnitVelocityId = settings.measurementUnits.velocity ? settings.measurementUnits.acceleration : Constants.MeasurementUnits[this.measurementUnitsId].velocity.default;
-			// this.measurementUnitVolumeId = settings.measurementUnits.volume ? settings.measurementUnits.acceleration : Constants.MeasurementUnits[this.measurementUnitsId].volume.default;
-			// this.measurementUnitWeightId = settings.measurementUnits.weight ? settings.measurementUnits.acceleration : Constants.MeasurementUnits[this.measurementUnitsId].weight.default;
-		}
-    }
+		return {
+			correlationId,
+			error,
+			hasFailed,
+			hasSucceeded,
+			initialize,
+			logger,
+			noBreakingSpaces,
+			notImplementedError,
+			success,
+			isSaving,
+			serverErrors,
+			setErrors,
+			beforeUnload,
+			dirty,
+			dirtyCheck,
+			leaveCheck,
+			cancel,
+			close,
+			fab,
+			hasPicture,
+			name,
+			ok,
+			open,
+			picture,
+			preComplete,
+			preCompleteI,
+			requestReset,
+			reset,
+			serviceStore,
+			serviceUsers,
+			user,
+			gamerTag,
+			measurementUnitTrans,
+			measurementUnitsId,
+			measurementUnitAccelerationId,
+			measurementUnitAreaId,
+			measurementUnitDistanceId,
+			measurementUnitLengthId,
+			measurementUnitVelocityId,
+			measurementUnitVolumeId,
+			measurementUnitWeightId,
+			measurementUnitsSelect,
+			measurementUnitsAcceleration,
+			measurementUnitsArea,
+			measurementUnitsDistance,
+			measurementUnitsLength,
+			measurementUnitsVelocity,
+			measurementUnitsVolume,
+			measurementUnitsWeight,
+			preCompleteOk,
+			resetForm,
+			resetFormIdCheck,
+			scope,
+			validation,
+			formSettingsRef
+		};
+	},
+	validations () {
+		return {
+			gamerTag: { 
+				// validatorGamerTag,
+				minLength: minLength(3),
+				maxLength: maxLength(20),
+				$autoDirty: true 
+			},
+			measurementUnitsId: { required, $autoDirty: true },
+			measurementUnitAccelerationId: { required, $autoDirty: true },
+			measurementUnitAreaId: { required, $autoDirty: true },
+			measurementUnitDistanceId: { required, $autoDirty: true },
+			measurementUnitLengthId: { required, $autoDirty: true },
+			measurementUnitVelocityId: { required, $autoDirty: true },
+			measurementUnitVolumeId: { required, $autoDirty: true },
+			measurementUnitWeightId: { required, $autoDirty: true },
+		};
+	}
 };
 </script>
 

@@ -1,30 +1,47 @@
 <template>
-	<div>
-		<div class="row justify-center">
-			<div class="col-xs-12">
-				<q-card class="my-card">
-					<q-card-section>
-						<div class="support">
-							<h1>Support</h1>
-							<br>
-							<h2>Lost? Need some help?</h2>
-						</div>
-					</q-card-section>
-				</q-card>
-			</div>
-		</div>
-	</div>
+	<v-row>
+		<v-col cols="12">
+			<v-card>
+				<v-card-title>
+<p class="text-h6 text-center pb-4">{{ $t('titles.support') }}</p>
+				</v-card-title>
+				<v-card-text>
+Forthcoming
+				</v-card-text>
+			</v-card>
+		</v-col>
+	</v-row>
 </template>
 
 <script>
-import baseSupport from '@/library_vue/components/baseSupport';
+import { useBaseSupportComponent } from '@/library_vue/components/baseSupport';
 
 export default {
-	name: 'AppSupport',
-	extends: baseSupport,
-	setup(props) {
-		return Object.assign(baseSupport.setup(props), {
-		});
+	name: 'Support',
+	setup(props, context) {
+		const {
+			correlationId,
+			error,
+			hasFailed,
+			hasSucceeded,
+			initialize,
+			logger,
+			noBreakingSpaces,
+			notImplementedError,
+			success
+		} = useBaseSupportComponent(props, context);
+
+		return {
+			correlationId,
+			error,
+			hasFailed,
+			hasSucceeded,
+			initialize,
+			logger,
+			noBreakingSpaces,
+			notImplementedError,
+			success
+		};
 	}
 };
 </script>

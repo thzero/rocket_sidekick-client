@@ -1,253 +1,594 @@
 <template>
-	<q-layout view="lHh Lpr lFf">
-		<q-header elevated>
-			<q-toolbar class="text-white">
-				<q-btn
-					:class="`${$q.screen.gt.sm ? 'hidden': ''}`"
-					flat
-					dense
-					round
-					@click="toggleDrawer"
-					aria-label="Menu"
-					icon="menu"
-				>
-					<q-menu auto-close>
-						<q-list style="min-width: 100px">
-							<q-item clickable to="/flightInfo">
-								<q-item-section>{{ $t('menu.tools.flightInfo') }}</q-item-section>
-							</q-item>
-							<q-item clickable to="/flightPath">
-								<q-item-section>{{ $t('menu.tools.flightPath') }}</q-item-section>
-							</q-item>
-							<q-item clickable to="/thrust2Weight">
-								<q-item-section>{{ $t('menu.tools.thrust2Weight') }}</q-item-section>
-							</q-item>
-							<q-item href="https://www.thrustcurve.org" target="_blank">
-								<q-item-section>{{ $t('menu.thrustcurve') }}</q-item-section>
-							</q-item>
-						</q-list>
-					</q-menu>
-				</q-btn>
+	<v-app id="root">
 
-				<q-toolbar-title class="text-left">
-					<router-link
-						to="/"
-						class="toolbar-title"
-					>
-						{{ $t('titles.application') }}
-					</router-link>
-				</q-toolbar-title>
-
-				<q-space />
-
-				<q-btn
-					:class="`q-mr-sm ${$q.screen.lt.md ? 'hidden': ''}`"
-					color="secondary"
-					clickable
-					to="/flightInfo"
-					:label="$t('menu.tools.flightInfo')"
-				/>
-				<q-btn
-					:class="`q-mr-sm ${$q.screen.lt.md ? 'hidden': ''}`"
-					class="q-mr-sm"
-					color="secondary"
-					clickable
-					to="/flightPath"
-					:label="$t('menu.tools.flightPath')"
-				/>
-				<q-btn
-					:class="`q-mr-sm ${$q.screen.lt.md ? 'hidden': ''}`"
-					class="q-mr-sm"
-					color="secondary"
-					clickable
-					to="/thrust2Weight"
-					:label="$t('menu.tools.thrust2Weight')"
-				/>
-				<q-btn
-					:class="`q-mr-sm ${$q.screen.lt.md ? 'hidden': ''}`"
-					color="secondary"
-					href="https://www.thrustcurve.org"
-					target="_blank"
-					:label="$t('menu.thrustcurve')"
-				/>
-
-				<q-btn
-					flat
-					dense
-					round
-					@click="toggleDrawer"
-					aria-label="Menu"
-					icon="more_vert"
-				>
-					<q-menu auto-close>
-						<q-list style="min-width: 100px">
-							<q-item clickable to="/settings">
-								<q-item-section avatar>
-									<q-avatar text-color="black" icon="settings" />
-								</q-item-section>
-								<q-item-section>{{ $t('titles.settings') }}</q-item-section>
-							</q-item>
-							<!-- <q-item clickable to="/support">
-								<q-item-section avatar>
-									<q-avatar text-color="black" icon="help" />
-								</q-item-section>
-								<q-item-section>{{ $t('titles.support') }}</q-item-section>
-							</q-item> -->
-							<q-item clickable to="/openSource">
-								<q-item-section avatar>
-									<q-avatar text-color="black" icon="mdi-open-source-initiative" />
-								</q-item-section>
-								<q-item-section>{{ $t('titles.openSource') }}</q-item-section>
-							</q-item>
-							<q-separator />
-							<q-item
-								v-if="!isLoggedIn"
-								clickable
-								v-ripple
-								@click="clickSignIn">
-								<q-item-section avatar>
-									<q-avatar text-color="green" icon="power_settings_new" />
-								</q-item-section>
-								<q-item-section>{{ $t('titles.signIn') }}</q-item-section>
-							</q-item>
-							<q-item
-								v-if="isLoggedIn"
-								clickable
-								v-ripple
-								@click="dialogSignOut.open()">
-								<q-item-section avatar>
-									<q-avatar text-color="red" icon="power_settings_new" />
-								</q-item-section>
-								<q-item-section>{{ $t('titles.signOut') }}</q-item-section>
-							</q-item>
-						</q-list>
-					</q-menu>
-				</q-btn>
-			</q-toolbar>
-		</q-header>
-
-		<!-- <q-drawer
-			v-model="drawerOpen"
-			show-if-above
-			bordered
-			class="bg-grey-2"
+		<v-app-bar
+			app
+			color="primary"
+			density="compact"
 		>
-			<q-list>
-				<q-item-label header>Essential Links</q-item-label>
-				<q-item clickable tag="a" target="_blank" href="https://quasar.dev">
-					<q-item-section avatar>
-						<q-icon name="school" />
-					</q-item-section>
-					<q-item-section>
-						<q-item-label>Docs</q-item-label>
-						<q-item-label caption>quasar.dev</q-item-label>
-					</q-item-section>
-				</q-item>
-				<q-item clickable tag="a" target="_blank" href="https://github.com/quasarframework/">
-					<q-item-section avatar>
-						<q-icon name="code" />
-					</q-item-section>
-					<q-item-section>
-						<q-item-label>Github</q-item-label>
-						<q-item-label caption>github.com/quasarframework</q-item-label>
-					</q-item-section>
-				</q-item>
-				<q-item clickable tag="a" target="_blank" href="https://chat.quasar.dev">
-					<q-item-section avatar>
-						<q-icon name="chat" />
-					</q-item-section>
-					<q-item-section>
-						<q-item-label>Discord Chat Channel</q-item-label>
-						<q-item-label caption>chat.quasar.dev</q-item-label>
-					</q-item-section>
-				</q-item>
-				<q-item clickable tag="a" target="_blank" href="https://forum.quasar.dev">
-					<q-item-section avatar>
-						<q-icon name="forum" />
-					</q-item-section>
-					<q-item-section>
-						<q-item-label>Forum</q-item-label>
-						<q-item-label caption>forum.quasar.dev</q-item-label>
-					</q-item-section>
-				</q-item>
-				<q-item clickable tag="a" target="_blank" href="https://twitter.com/quasarframework">
-					<q-item-section avatar>
-						<q-icon name="rss_feed" />
-					</q-item-section>
-					<q-item-section>
-						<q-item-label>Twitter</q-item-label>
-						<q-item-label caption>@quasarframework</q-item-label>
-					</q-item-section>
-				</q-item>
-			</q-list>
-		</q-drawer> -->
+			<template v-slot:prepend>
+				<v-app-bar-nav-icon
+					class="hidden-md-and-up"
+					@click.stop="toggleDrawer"
+				>
+				</v-app-bar-nav-icon>
+			</template>
 
-		<QLayoutFooter />
+			<v-app-bar-title class="headline text-uppercase">
+				<router-link
+					to="/"
+					class="toolbar-title"
+				>
+					{{ $t('titles.application') }}
+				</router-link>
+			</v-app-bar-title>
 
-		<q-page-container>
-			<q-page class="q-pa-md">
+			<v-spacer></v-spacer>
+
+			<v-btn 
+				v-if="$vuetify.display.mdAndUp && features.Checklists"
+				to="/checklists"
+			>
+				{{ $t('menu.checklists.title') }}
+			</v-btn>
+			<v-menu
+				v-if="$vuetify.display.mdAndUp"
+			>
+				<template v-slot:activator="{ props }">
+					<v-btn append-icon="mdi-menu-down"
+						v-bind="props"
+					>{{ $t('menu.content.info.title') }}</v-btn>
+				</template>
+				<v-list density="compact">
+					<v-list-item
+						v-for="item in info"
+						:key="item.name"
+						:to="contentLink(item)"
+					>
+						<v-list-item-title>{{ contentTitle(item) }}</v-list-item-title>
+					</v-list-item>
+				</v-list>
+			</v-menu>
+			<v-btn 
+				v-if="$vuetify.display.mdAndUp && features.Launches"
+				to="/launches"
+			>
+				{{ $t('menu.launches.title') }}
+			</v-btn>
+			<v-menu
+				v-if="$vuetify.display.mdAndUp && features.Rockets"
+			>
+				<template v-slot:activator="{ props }">
+					<v-btn append-icon="mdi-menu-down"
+						v-bind="props"
+					>{{ $t('menu.rockets.title') }}</v-btn>
+				</template>
+				<v-list density="compact">
+					<v-list-item
+						to="/rockets/rockets"
+					>
+						<v-list-item-title>{{ $t('menu.rockets.rockets') }}</v-list-item-title>
+					</v-list-item>
+					<v-list-item
+						to="/rockets/altimeters"
+					>
+						<v-list-item-title>{{ $t('menu.rockets.altimeters') }}</v-list-item-title>
+					</v-list-item>
+					<v-list-item
+						to="/rockets/parachutes"
+					>
+						<v-list-item-title>{{ $t('menu.rockets.parachutes') }}</v-list-item-title>
+					</v-list-item>
+				</v-list>
+			</v-menu>
+			<v-menu
+				v-if="$vuetify.display.mdAndUp"
+			>
+				<template v-slot:activator="{ props }">
+					<v-btn append-icon="mdi-menu-down"
+						v-bind="props"
+					>{{ $t('menu.content.tools.title') }}</v-btn>
+				</template>
+				<v-list density="compact">
+					<v-list-item
+						v-for="item in tools"
+						:key="item.name"
+						:to="contentLink(item)"
+					>
+						<v-list-item-title>{{ contentTitle(item) }}</v-list-item-title>
+					</v-list-item>
+				</v-list>
+				<!-- 
+				<v-list density="compact" class="pl-2 pr-2">
+					<hr/>
+				</v-list>
+				<v-list density="compact">
+					<v-list-item
+						to="/landing"
+					>
+						<v-list-item-title>{{ $t('menu.content.app') }}</v-list-item-title>
+					</v-list-item>
+				</v-list> -->
+			</v-menu>
+			<v-btn 
+				v-if="$vuetify.display.mdAndUp"
+				to="/content/links"
+			>
+				{{ $t('menu.content.links.title') }}
+			</v-btn>
+			<!-- <v-menu
+				v-if="$vuetify.display.mdAndUp"
+			>
+				<template v-slot:activator="{ props }">
+					<v-btn append-icon="mdi-menu-down"
+						v-bind="props"
+					>{{ $t('menu.content.links.title') }}</v-btn>
+				</template>
+				<v-list density="compact">
+					<v-list-item
+						v-for="item in links"
+						:key="item.name"
+						:href="item.link"
+						target="_blank"
+					>
+						<v-list-item-title>{{ $t(item.title) }}</v-list-item-title>
+					</v-list-item>
+				</v-list density="compact">
+			</v-menu> -->
+			<v-btn 
+				v-if="$vuetify.display.mdAndUp && features.MobileApp"
+				to="/landing"
+			>
+				{{ $t('menu.content.app') }}
+			</v-btn>
+
+			<template v-slot:append>
+				<v-menu>
+					<template v-slot:activator="{ props }">
+						<v-btn
+							v-bind="props"
+							icon="mdi-dots-vertical"
+						></v-btn>
+					</template>
+					<v-list density="compact">
+						<v-list-item
+							v-if="isLoggedIn"
+							to="/settings"
+						>
+							<template v-slot:prepend>
+								<v-icon>mdi-cog</v-icon>
+							</template>
+							<v-list-item-title>{{ $t('titles.settings') }}</v-list-item-title>
+						</v-list-item>
+						<v-list-item @click="clickAbout">
+							<!-- to="/about" -->
+							<template v-slot:prepend>
+								<v-icon>mdi-information</v-icon>
+							</template>
+							<v-list-item-title>{{ $t('titles.about') }}</v-list-item-title>
+						</v-list-item>
+						<v-list-item @click="clickPrivcy">
+							<!-- to="/privacy" -->
+							<template v-slot:prepend>
+								<v-icon>mdi-information</v-icon>
+							</template>
+							<v-list-item-title>{{ $t('titles.privacy') }}</v-list-item-title>
+						</v-list-item>
+						<!-- <v-list-item @click="clickSupport">
+							<template v-slot:prepend>
+								<v-icon>mdi-help</v-icon>
+							</template>
+							<v-list-item-title>{{ $t('titles.support') }}</v-list-item-title>
+						</v-list-item> -->
+						<v-list-item @click="clickOpenSource">
+							<!-- to="/openSource" -->
+							<template v-slot:prepend>
+								<v-icon>mdi-open-source-initiative</v-icon>
+							</template>
+							<v-list-item-title>{{ $t('titles.openSource') }}</v-list-item-title>
+						</v-list-item>
+						<v-list-item
+							v-if="displaySignIn"
+							@click="clickSignIn"
+						>
+							<template v-slot:prepend>
+								<v-icon color="green darken-2">
+									mdi-account
+								</v-icon>
+							</template>
+							<v-list-item-title>{{ $t('titles.signIn') }}</v-list-item-title>
+						</v-list-item>
+						<v-list-item
+							v-if="isLoggedIn"
+							@click="clickSignOut"
+						>
+							<template v-slot:prepend>
+								<v-icon color="red darken-2">
+									mdi-account
+								</v-icon>
+							</template>
+							<v-list-item-title>{{ $t('titles.signOut') }}</v-list-item-title>
+						</v-list-item>
+					</v-list>
+				</v-menu>
+			</template>
+		</v-app-bar>
+
+		<v-navigation-drawer
+			v-model="drawer"
+			temporary
+		>
+			<v-list density="compact">
+				<v-list-item
+					v-if="features.Checklists"
+					to="/checklists"
+				>
+					<v-list-item-title>{{ $t('menu.checklists.title') }}</v-list-item-title>
+				</v-list-item>
+				<v-list-item>
+					{{ $t('menu.content.info.title') }}
+					<v-list density="compact">
+						<v-list-item
+							v-for="item in info"
+							:key="item.name"
+							:to="contentLink(item)"
+						>
+							<v-list-item-title>{{ contentTitle(item) }}</v-list-item-title>
+						</v-list-item>
+					</v-list>
+				</v-list-item>
+				<v-list-item
+					v-if="features.Launches"
+					to="/launches"
+				>
+					<v-list-item-title>{{ $t('menu.launches.title') }}</v-list-item-title>
+				</v-list-item>
+				<v-list-item
+					v-if="features.Rockets"
+				>
+					{{ $t('menu.rockets.title') }}
+					<v-list density="compact">
+						<v-list-item
+							to="/rockets/rockets"
+						>
+							<v-list-item-title>{{ $t('menu.rockets.rockets') }}</v-list-item-title>
+						</v-list-item>
+						<v-list-item
+							to="/rockets/altimeters"
+						>
+							<v-list-item-title>{{ $t('menu.rockets.altimeters') }}</v-list-item-title>
+						</v-list-item>
+						<v-list-item
+							to="/rockets/parachutes"
+						>
+							<v-list-item-title>{{ $t('menu.rockets.parachutes') }}</v-list-item-title>
+						</v-list-item>
+					</v-list>
+				</v-list-item>
+				<v-list-item>
+					{{ $t('menu.content.tools.title') }}
+					<v-list density="compact">
+						<v-list-item
+							v-for="item in tools"
+							:key="item.name"
+							:to="contentLink(item)"
+						>
+							<v-list-item-title>{{ contentTitle(item) }}</v-list-item-title>
+						</v-list-item>
+					</v-list>
+				</v-list-item>
+				<v-list-item
+					to="/content/links"
+				>
+					<v-list-item-title>{{ $t('menu.content.links.title') }}</v-list-item-title>
+				</v-list-item>
+				<!-- <v-list-item>
+					{{ $t('menu.links.title') }}
+					<v-list density="compact">
+						<v-list-item
+							v-for="item in links"
+							:key="item.name"
+							:href="item.link"
+							target="_blank"
+						>
+							<v-list-item-title>{{ $t(item.title) }}</v-list-item-title>
+						</v-list-item>
+					</v-list>
+				</v-list-item> -->
+				<v-list-item
+					v-if="features.MobileApp"
+					to="/landing"
+				>
+					<v-list-item-title>{{ $t('menu.content.app') }}</v-list-item-title>
+				</v-list-item>
+			</v-list>
+		</v-navigation-drawer>
+
+		<v-main id="top">
+			<span class="bg" />
+			<v-container
+				fluid
+				pt-2
+			>
 				<router-view />
-			</q-page>
-		</q-page-container>
+			</v-container>
+		</v-main>
 
-		<QLoadingOverlay
-			:signal="isAuthCompleted"
-		/>
-
-		<QConfirmationDialog
+		<VConfirmationDialog
+			:non-recoverable="false"
 			:signal="dialogSignOut.signal"
 			@cancel="dialogSignOut.cancel()"
 			@ok="dialogSignOutOk"
 		/>
-	</q-layout>
+		<!-- <VDisplayDialog
+			:signal="dialogDisplayMarkupSignal.signal"
+			@cancel="dialogDisplayMarkupCancel"
+			@ok="dialogDisplayMarkupOk"
+		>
+			!--eslint-disable vue/no-v-html --
+			<div
+				class="markdown-body"
+				style="vertical-align: top;"
+				v-html="displayMarkupValue"
+			/>
+			!--eslint-enable--
+		</VDisplayDialog> -->
+
+		<VLayoutFooter />
+
+		<VLoadingOverlay
+			:signal="isAuthCompleted"
+		/>
+
+		<VCookieComply
+			:preferences="preferences"
+		/>
+	</v-app>
 </template>
 
 <script>
-import { ref } from 'vue';
-import { useQuasar } from 'quasar';
+import { computed, onMounted, ref } from 'vue';
+
+import Constants from '@/constants';
+import LibraryConstants from '@thzero/library_client/constants';
 
 import GlobalUtility from '@thzero/library_client/utility/global';
 
-import baseMainLayout from '@/library_vue/layouts/baseMainLayout';
+import { useBaseMainLayout } from '@/library_vue/layouts/baseMainLayout';
 
-import QLayoutFooter from '@/library_vue_quasar/components/QLayoutFooter';
-import QLoadingOverlay from '@/library_vue_quasar/components/QLoadingOverlay';
-
-import QConfirmationDialog from '@/library_vue_quasar/components/QConfirmationDialog';
+import VCookieComply from '@/library_vue_vuetify/components/VCookieComply';
+import VConfirmationDialog from '@/library_vue_vuetify/components/VConfirmationDialog';
+// import VDisplayDialog from '@/library_vue_vuetify/components/VDisplayDialog';
+import VLayoutFooter from '@/library_vue_vuetify/components/VLayoutFooter';
+import VLoadingOverlay from '@/library_vue_vuetify/components/VLoadingOverlay';
 
 import DialogSupport from '@/library_vue/components/support/dialog';
 
 export default {
 	name: 'MainLayout',
 	components: {
-		QConfirmationDialog,
-		QLayoutFooter,
-		QLoadingOverlay
+		VConfirmationDialog,
+		VCookieComply,
+		// VDisplayDialog,
+		VLayoutFooter,
+		VLoadingOverlay
 	},
-	extends: baseMainLayout,
-	setup() {
-		const $q = useQuasar();
-
-		$q.loading.show({
-			delay: 400 // ms
+	setup(props, context) {
+		const {
+			correlationId,
+			error,
+			hasFailed,
+			hasSucceeded,
+			initialize,
+			logger,
+			noBreakingSpaces,
+			notImplementedError,
+			success,
+			features,
+			closeOnContentClick,
+			clickAbout,
+			clickOpenSource,
+			clickPrivcy,
+			clickSignIn,
+			clickSignOut,
+			clickSupport,
+			dialogSignOut,
+			dialogSignOutOk,
+			drawer,
+			isAuthCompleted,
+			isLoggedIn,
+			serviceAuth,
+			serviceStore,
+			toggleDrawer
+		} = useBaseMainLayout(props, context, {
+			features: Constants.features
 		});
 
-		$q.loading.hide();
+		const serviceMarkup = GlobalUtility.$injector.getService(LibraryConstants.InjectorKeys.SERVICE_MARKUP_PARSER);
 
-		const drawerOpen = ref(false);
+		const dialogDisplayMarkupSignal = ref(new DialogSupport());
+		const displayMarkupValue = ref(null);
+		const dialogNewCharacter = ref(new DialogSupport());
 
-		const dialogNewGame = ref(new DialogSupport());
+		const preferences = [
+			{
+				title: GlobalUtility.$trans.t('strings.cookieCompliance.performance.title'),
+				description: GlobalUtility.$trans.t('strings.cookieCompliance.performance.description'),
+				items: [
+					{ 
+						label: 'Active',
+						value: 'performance', 
+						isRequired: true 
+					}
+				],
+			},
+			// {
+			// 	title: GlobalUtility.$trans.t('strings.cookieCompliance.session.title'),
+			// 	description: GlobalUtility.$trans.t('strings.cookieCompliance.session.description'),
+			// 	items: [
+			// 		{ 
+			// 			label: 'Active',
+			// 			value: 'session', 
+			// 			isRequired: true 
+			// 		}
+			// 	],
+			// },
+			{
+				title: GlobalUtility.$trans.t('strings.cookieCompliance.analytics.title'),
+				description: GlobalUtility.$trans.t('strings.cookieCompliance.analytics.description'),
+				items: [
+					{ 
+						label: 'GoogleAnalytics', 
+						value: 'ga', 
+						isEnable: true 
+					},
+				],
+			},
+			// {
+			// 	title: GlobalUtility.$trans.t('strings.cookieCompliance.xsrf.title'),
+			// 	description: GlobalUtility.$trans.t('strings.cookieCompliance.xsrf.description'),
+			// 	items: [
+			// 		{ 
+			// 			label: 'XSRF-TOKEN', 
+			// 			value: 'performance', 
+			// 			isEnable: true 
+			// 		},
+			// 	],
+			// },
+		];
 
-		GlobalUtility.$EventBus.on('main-menu-toggle-drawer', () => {
-			drawerOpen.value = !drawerOpen.value;
+		const displaySignIn = computed(() => {
+			return !isLoggedIn && Constants.Features.Auth;
+		});
+		const info = computed(() => {
+			let temp = serviceStore.getters.getContent();
+			if (!temp)
+				return [];
+			if (!temp.info)
+				return [];
+			return temp.info.sort((a, b) => a.order >= b.order);
+		});
+		// const links = computed(() => {
+		// 	let temp = serviceStore.getters.getContent();
+		// 	if (!temp)
+		// 		return [];
+		// 	if (!temp.links)
+		// 		return [];
+		// 	const links = temp.links.filter(l => String.isNullOrEmpty(l.category) || l.category === 'guidance');
+		// 	if (!links)
+		// 		return [];
+		// 	links.push({
+		// 		title : "menu.content.links.title",
+		// 		link : "/links",
+		// 		order : "99"
+		// 	});
+		// 	return links.sort((a, b) => a.order >= b.order);
+		// });
+		const tools = computed(() => {
+			let temp = serviceStore.getters.getContent();
+			if (!temp)
+				return [];
+			if (!temp.tools)
+				return [];
+			return temp.tools.sort((a, b) => a.order >= b.order);
 		});
 
-		return Object.assign(baseMainLayout.setup(), {
-			dialogNewGame,
-			drawerOpen
-			// markup,
+		const contentLink = (item,) => {
+			if (item.markup)
+				return `/content/info/${item.id}`;
+			
+			return item.link;
+		};
+		const contentTitle = (item,) => {
+			return (item.markup ? item.title : GlobalUtility.$trans.t(item.title));
+		};
+		const dialogDisplayMarkupCancel = async () => {
+			dialogDisplayMarkupSignal.value.cancel();
+		};
+		const dialogDisplayMarkupOk = async () => {
+			dialogDisplayMarkupSignal.value.ok();
+		};
+		const markup = (correlationId, value) => {
+			displayMarkupValue.value = value ? serviceMarkup.trimResults(correlationId, serviceMarkup.render(correlationId, value)) : null;
+		};
+		
+		GlobalUtility.$EventBus.on('display-markup', (value) => {
+			markup(correlationId(), value);
+			dialogDisplayMarkupSignal.value.open();
 		});
-	}
+
+		onMounted(async () => {
+			await serviceStore.dispatcher.requestContent(correlationId());
+		});
+
+		return {
+			correlationId,
+			error,
+			hasFailed,
+			hasSucceeded,
+			initialize,
+			logger,
+			noBreakingSpaces,
+			notImplementedError,
+			success,
+			features,
+			closeOnContentClick,
+			clickAbout,
+			clickOpenSource,
+			clickPrivcy,
+			clickSignIn,
+			clickSignOut,
+			clickSupport,
+			dialogSignOut,
+			dialogSignOutOk,
+			drawer,
+			isAuthCompleted,
+			isLoggedIn,
+			serviceAuth,
+			serviceStore,
+			toggleDrawer,
+			contentLink,
+			contentTitle,
+			dialogDisplayMarkupCancel,
+			dialogDisplayMarkupOk,
+			dialogDisplayMarkupSignal,
+			displayMarkupValue,
+			dialogNewCharacter,
+			info,
+			displaySignIn,
+			// links,
+			markup,
+			preferences,
+			serviceMarkup,
+			tools
+		};
+	},
+	// data: () => ({
+	// 	closeOnContentClick: true,
+	// 	// drawer: false,
+	// 	dialogDisplayMarkupSignal: new DialogSupport(),
+	// 	displayMarkupValue: null,
+	// 	dialogNewCharacter: new DialogSupport()
+	// }),
+	// created() {
+	// 	this._serviceMarkup = GlobalUtility.$injector.getService(LibraryConstants.InjectorKeys.SERVICE_MARKUP_PARSER);
+
+	// 	GlobalUtility.$EventBus.on('display-markup', (value) => {
+	// 		this.markup(this.correlationId(), value);
+	// 		this.dialogDisplayMarkupSignal.open();
+	// 	});
+	// },
+	// methods: {
+	// 	async dialogDisplayMarkupCancel() {
+	// 		this.dialogDisplayMarkupSignal.cancel();
+	// 	},
+	// 	async dialogDisplayMarkupOk() {
+	// 		this.dialogDisplayMarkupSignal.ok();
+	// 	},
+	// 	markup(correlationId, value) {
+	// 		this.displayMarkupValue = value ? this._serviceMarkup.trimResults(correlationId, this._serviceMarkup.render(correlationId, value)) : null;
+	// 	}
+	// }
 };
 </script>
 
