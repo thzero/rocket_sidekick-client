@@ -22,14 +22,12 @@
 
 <script>
 import { useBaseComponent } from '@/library_vue/components/base';
+import { useAppCalculationOutputProps } from '@/components/content/tools/useAppCalculationOutputProps';
 
 export default {
 	name: 'CalculatedOuput',
 	props: {
-		modelValue: {
-			type: Array,
-			default: () => { return []; }
-		}
+		...useAppCalculationOutputProps
 	},
 	setup (props, context) {
 		const {
