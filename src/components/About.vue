@@ -1,11 +1,20 @@
 <template>
-	<v-row>
-		<v-col cols="0" md="3" />
-		<v-col cols="12" md="6">
+	<v-row dense>
+		<v-col cols="12" md="2" />
+		<v-col cols="12" md="8">
+			<v-toolbar
+				density="compact"
+			>
+				<v-toolbar-title class="text-center text-h5">
+					<span>{{ $t('titles.about') }}</span>
+				</v-toolbar-title>
+			</v-toolbar>
+		</v-col>
+	</v-row>
+	<v-row dense>
+		<v-col cols="12" md="2" />
+		<v-col cols="12" md="8">
 			<v-card>
-				<v-card-title>
-<p class="text-h6 text-center pb-4">{{ $t('titles.about') }}</p>
-				</v-card-title>
 				<v-card-text>
 <div class="mt-4">
     <p>
@@ -36,6 +45,14 @@
 </div>
 <div class="text-h6 text-center pb-4">
     <a href="https://thzero.com" target="_blank"><img src="/images/thZeroLabs.png" alt="thzero.com" /></a>
+</div>
+<div class="mt-4">
+    <p class="text-h6 text-center pb-4">
+		<v-btn variant="flat" color="primary"
+											to="/privacy">
+			{{ $t('titles.privacy') }}
+		</v-btn>
+	</p>
 </div>
 <div>
     {{ $t('strings.copyright2') }} <a href="https://thzero.com" target="_blank">thzero.com</a> {{ $t('strings.copyright3') }}

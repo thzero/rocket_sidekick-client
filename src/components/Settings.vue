@@ -8,198 +8,208 @@
 		:pre-complete-ok="preCompleteOk"
 		:dirtyCheck="dirtyCheck"
 	>
-		<v-container fluid>
-			<v-row dense>
-				<v-col
-					cols="12"
+		<v-row dense>
+			<v-col cols="12" lg="2" />
+			<v-col cols="12" lg="8">
+				<v-row dense>
+			<v-col
+				cols="12"
+			>
+				<v-toolbar
+					density="compact"
 				>
-					<div class="text-center text-h5">
+					<v-toolbar-title class="text-center text-h5">
 						<span>{{ $t('titles.settings') }}</span>
-					</div>
-				</v-col>
-				<v-col
-					cols="12"
-					sm="6"
-					:class="'pl-0 pr-' + ($vuetify.display.mdAndUp ? '2' : '0')"
-				>
-					<v-card>
-						<v-card-text>
-							<v-row
-								align="center"
-								dense
+					</v-toolbar-title>
+				</v-toolbar>
+				<!-- <div class="text-center text-h5">
+					<span>{{ $t('titles.settings') }}</span>
+				</div> -->
+			</v-col>
+			<v-col
+				cols="12"
+				sm="6"
+				:class="'pl-0 pr-' + ($vuetify.display.mdAndUp ? '2' : '0')"
+			>
+				<v-card>
+					<v-card-text>
+						<v-row
+							align="center"
+							dense
+						>
+							<v-col
+								cols="9"
+								class="text-h4 mb-1 pt-1"
 							>
-								<v-col
-									cols="9"
-									class="text-h4 mb-1 pt-1"
+								{{ name }}
+							</v-col>
+							<v-col
+								cols="3"
+								style="text-align: right;"
+							>
+								<v-avatar
+									tile
+									size="80"
+									color="grey"
 								>
-									{{ name }}
-								</v-col>
-								<v-col
-									cols="3"
-									style="text-align: right;"
-								>
-									<v-avatar
-										tile
-										size="80"
-										color="grey"
+									<img
+										v-if="hasPicture"
+										:src="picture"
+										class="responsive"
 									>
-										<img
-											v-if="hasPicture"
-											:src="picture"
-											class="responsive"
-										>
-									</v-avatar>
-								</v-col>
-							</v-row>
-						</v-card-text>
-					</v-card>
-				</v-col>
-				<v-col
-					cols="12"
-					sm="6"
-					class="pl-0 pr-0"
-				>
-					<v-card>
-						<v-card-text>
-							<VTextFieldWithValidation
-								ref="gamerTagRef"
-								vid="gamerTag"
-								v-model="gamerTag"
-								:counter="30"
-								:validation="validation"
-								:label="$t('forms.gamerTag')"
-							/>
-						</v-card-text>
-					</v-card>
-				</v-col>
-				<v-col
-					cols="12"
-					class="pl-0 pr-0"
-				>
-					<v-card>
-						<v-card-item>
-							<v-card-title class="text-center text-h6">{{ $t('titles.measurementUnits') }}</v-card-title>
-						</v-card-item>
-						<v-card-text>
-							<v-row dense>
-								<v-col
-									cols="12"
-									sm="6"
-									md="3"
-								>
-									<VSelectWithValidation
-										ref="measurementUnitRef"
-										vid="measurementUnitsId"
-										v-model="measurementUnitsId"
-										:items="measurementUnitsSelect"
-										:validation="validation"
-										:label="$t('forms.settings.measurementUnits.title')"
-									/>
-								</v-col>
-								<v-col
-									cols="12"
-									sm="6"
-									md="3"
-								>
-									<VSelectWithValidation
-										ref="measurementUnitAccelerationRef"
-										vid="measurementUnitAccelerationId"
-										v-model="measurementUnitAccelerationId"
-										:items="measurementUnitsAcceleration"
-										:validation="validation"
-										:label="$t('forms.settings.measurementUnits.acceleration')"
-									/>
-								</v-col>
-								<v-col
-									cols="12"
-									sm="6"
-									md="3"
-								>
-									<VSelectWithValidation
-										ref="measurementUnitAreaRef"
-										vid="measurementUnitAreaId"
-										v-model="measurementUnitAreaId"
-										:items="measurementUnitsArea"
-										:validation="validation"
-										:label="$t('forms.settings.measurementUnits.area')"
-									/>
-								</v-col>
-								<v-col
-									cols="12"
-									sm="6"
-									md="3"
-								>
-									<VSelectWithValidation
-										ref="measurementUnitDistanceRef"
-										vid="measurementUnitDistanceId"
-										v-model="measurementUnitDistanceId"
-										:items="measurementUnitsDistance"
-										:validation="validation"
-										:label="$t('forms.settings.measurementUnits.distance')"
-									/>
-								</v-col>
-								<v-col
-									cols="12"
-									sm="6"
-									md="3"
-								>
-									<VSelectWithValidation
-										ref="measurementUnitLengthRef"
-										vid="measurementUnitLengthId"
-										v-model="measurementUnitLengthId"
-										:items="measurementUnitsLength"
-										:validation="validation"
-										:label="$t('forms.settings.measurementUnits.length')"
-									/>
-								</v-col>
-								<v-col
-									cols="12"
-									sm="6"
-									md="3"
-								>
-									<VSelectWithValidation
-										ref="measurementUnitVelocityRef"
-										vid="measurementUnitVelocityId"
-										v-model="measurementUnitVelocityId"
-										:items="measurementUnitsVelocity"
-										:validation="validation"
-										:label="$t('forms.settings.measurementUnits.velocity')"
-									/>
-								</v-col>
-								<v-col
-									cols="12"
-									sm="6"
-									md="3"
-								>
-									<VSelectWithValidation
-										ref="measurementUnitVolumeRef"
-										vid="measurementUnitVolumeId"
-										v-model="measurementUnitVolumeId"
-										:items="measurementUnitsVolume"
-										:validation="validation"
-										:label="$t('forms.settings.measurementUnits.volume')"
-									/>
-								</v-col>
-								<v-col
-									cols="12"
-									sm="6"
-									md="3"
-								>
-									<VSelectWithValidation
-										ref="measurementUnitWeightRef"
-										vid="measurementUnitWeightId"
-										v-model="measurementUnitWeightId"
-										:items="measurementUnitsVolume"
-										:validation="validation"
-										:label="$t('forms.settings.measurementUnits.weight')"
-									/>
-								</v-col>
-							</v-row>
-						</v-card-text>
-					</v-card>
-				</v-col>
-			</v-row>
-		</v-container>
+								</v-avatar>
+							</v-col>
+						</v-row>
+					</v-card-text>
+				</v-card>
+			</v-col>
+			<v-col
+				cols="12"
+				sm="6"
+				class="pl-0 pr-0"
+			>
+				<v-card>
+					<v-card-text>
+						<VTextFieldWithValidation
+							ref="gamerTagRef"
+							vid="gamerTag"
+							v-model="gamerTag"
+							:counter="30"
+							:validation="validation"
+							:label="$t('forms.gamerTag')"
+						/>
+					</v-card-text>
+				</v-card>
+			</v-col>
+			<v-col
+				cols="12"
+				class="pl-0 pr-0"
+			>
+				<v-card>
+					<v-card-item>
+						<v-card-title class="text-center text-h6">{{ $t('titles.measurementUnits') }}</v-card-title>
+					</v-card-item>
+					<v-card-text>
+						<v-row dense>
+							<v-col
+								cols="12"
+								sm="6"
+								md="3"
+							>
+								<VSelectWithValidation
+									ref="measurementUnitRef"
+									vid="measurementUnitsId"
+									v-model="measurementUnitsId"
+									:items="measurementUnitsSelect"
+									:validation="validation"
+									:label="$t('forms.settings.measurementUnits.title')"
+								/>
+							</v-col>
+							<v-col
+								cols="12"
+								sm="6"
+								md="3"
+							>
+								<VSelectWithValidation
+									ref="measurementUnitAccelerationRef"
+									vid="measurementUnitAccelerationId"
+									v-model="measurementUnitAccelerationId"
+									:items="measurementUnitsAcceleration"
+									:validation="validation"
+									:label="$t('forms.settings.measurementUnits.acceleration')"
+								/>
+							</v-col>
+							<v-col
+								cols="12"
+								sm="6"
+								md="3"
+							>
+								<VSelectWithValidation
+									ref="measurementUnitAreaRef"
+									vid="measurementUnitAreaId"
+									v-model="measurementUnitAreaId"
+									:items="measurementUnitsArea"
+									:validation="validation"
+									:label="$t('forms.settings.measurementUnits.area')"
+								/>
+							</v-col>
+							<v-col
+								cols="12"
+								sm="6"
+								md="3"
+							>
+								<VSelectWithValidation
+									ref="measurementUnitDistanceRef"
+									vid="measurementUnitDistanceId"
+									v-model="measurementUnitDistanceId"
+									:items="measurementUnitsDistance"
+									:validation="validation"
+									:label="$t('forms.settings.measurementUnits.distance')"
+								/>
+							</v-col>
+							<v-col
+								cols="12"
+								sm="6"
+								md="3"
+							>
+								<VSelectWithValidation
+									ref="measurementUnitLengthRef"
+									vid="measurementUnitLengthId"
+									v-model="measurementUnitLengthId"
+									:items="measurementUnitsLength"
+									:validation="validation"
+									:label="$t('forms.settings.measurementUnits.length')"
+								/>
+							</v-col>
+							<v-col
+								cols="12"
+								sm="6"
+								md="3"
+							>
+								<VSelectWithValidation
+									ref="measurementUnitVelocityRef"
+									vid="measurementUnitVelocityId"
+									v-model="measurementUnitVelocityId"
+									:items="measurementUnitsVelocity"
+									:validation="validation"
+									:label="$t('forms.settings.measurementUnits.velocity')"
+								/>
+							</v-col>
+							<v-col
+								cols="12"
+								sm="6"
+								md="3"
+							>
+								<VSelectWithValidation
+									ref="measurementUnitVolumeRef"
+									vid="measurementUnitVolumeId"
+									v-model="measurementUnitVolumeId"
+									:items="measurementUnitsVolume"
+									:validation="validation"
+									:label="$t('forms.settings.measurementUnits.volume')"
+								/>
+							</v-col>
+							<v-col
+								cols="12"
+								sm="6"
+								md="3"
+							>
+								<VSelectWithValidation
+									ref="measurementUnitWeightRef"
+									vid="measurementUnitWeightId"
+									v-model="measurementUnitWeightId"
+									:items="measurementUnitsVolume"
+									:validation="validation"
+									:label="$t('forms.settings.measurementUnits.weight')"
+								/>
+							</v-col>
+						</v-row>
+					</v-card-text>
+				</v-card>
+			</v-col>
+				</v-row>
+			</v-col>
+		</v-row>
 	</VFormControl>
 </template>
 
