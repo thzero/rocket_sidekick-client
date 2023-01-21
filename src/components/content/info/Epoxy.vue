@@ -152,19 +152,12 @@
 </template>
 		
 <script>
-import { onMounted, ref } from 'vue';
-
-import LibraryConstants from '@thzero/library_client/constants';
-
-import GlobalUtility from '@thzero/library_client/utility/global';
-
-import { useContentBaseComponent } from '@/components/content/contentBase';
+import { useAppEpoxyComponent } from '@/components/content/info/appEpoxy';
 
 export default {
 	name: 'Epxoy',
 	setup(props, context) {
-		const {
-			correlationId,
+		const {	correlationId,
 			error,
 			hasFailed,
 			hasSucceeded,
@@ -172,24 +165,11 @@ export default {
 			logger,
 			noBreakingSpaces,
 			notImplementedError,
-			success
-		} = useContentBaseComponent(props, context);
-
-		const serviceStore = GlobalUtility.$injector.getService(LibraryConstants.InjectorKeys.SERVICE_STORE);
-		
-		const data = ref(null);
-		const links = ref(null);
-
-		onMounted(async () => {
-			let temp = serviceStore.getters.getContent();
-			if (!temp)
-				return [];
-			if (!temp.info)
-				return [];
-			const content = temp.info.find(l => l.id === 'epoxy');
-			data.value = content ? content.data : [];
-			links.value = content ? content.links : [];
-		});
+			success,
+			serviceStore,
+			data,
+			links
+		} = useAppEpoxyComponent(props, context);
 
 		return {
 			correlationId,

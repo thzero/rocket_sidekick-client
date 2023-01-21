@@ -221,6 +221,20 @@ const routes = [
 		]
 	},
 	{
+		path: '/privacy',
+		component: () => import(/* webpackPrefetch: true */ /* webpackChunkName: "group-layouts" */ './layouts/MainLayout.vue'),
+		children: [
+			{
+				path: '',
+				name: 'privacy',
+				component: () => import(/* webpackPrefetch: true */ /* webpackChunkName: "group-support" */ './components/Privacy.vue'),
+				meta: {
+					requiresAuth: false
+				}
+			}
+		]
+	},
+	{
 		path: '/settings',
 		component: () => import(/* webpackPrefetch: true */ /* webpackChunkName: "group-layouts" */ './layouts/MainLayout.vue'),
 		children: [

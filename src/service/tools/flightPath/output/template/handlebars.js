@@ -78,7 +78,7 @@ class HandlebarsFlightPathOutputTemplateService extends FlightPathOutputTemmplat
 	}
 
 	_setTemplateMain(correlationId, template) {
-		const response = this._setTemplate(correlationId, template, this.defaultTemplateMain);
+		const response = this._setTemplate(correlationId, template, this.templateMainDefault);
 		if (this._hasFailed(response))
 			return response;
 
@@ -87,7 +87,7 @@ class HandlebarsFlightPathOutputTemplateService extends FlightPathOutputTemmplat
 	}
 
 	_setTemplatePinLaunch(correlationId, template) {
-		const response = this._setTemplate(correlationId, template, this.defaultTemplatePinLaunch);
+		const response = this._setTemplate(correlationId, template, this.templatePinLaunchDefault);
 		if (this._hasFailed(response))
 			return response;
 
@@ -96,7 +96,7 @@ class HandlebarsFlightPathOutputTemplateService extends FlightPathOutputTemmplat
 	}
 
 	_setTemplatePinMaxAltitude(correlationId, template) {
-		const response = this._setTemplate(correlationId, template, this.defaultTemplatePinMaxAltitude);
+		const response = this._setTemplate(correlationId, template, this.templatePinMaxAltitudeDefault);
 		if (this._hasFailed(response))
 			return response;
 
@@ -105,7 +105,7 @@ class HandlebarsFlightPathOutputTemplateService extends FlightPathOutputTemmplat
 	}
 
 	_setTemplatePinMaxVelocity(correlationId, template) {
-		const response = this._setTemplate(correlationId, template, this.defaultTemplatePinMaxVelocity);
+		const response = this._setTemplate(correlationId, template, this.templatePinMaxVelocityDefault);
 		if (this._hasFailed(response))
 			return response;
 
@@ -128,7 +128,7 @@ class HandlebarsFlightPathOutputTemplateService extends FlightPathOutputTemmplat
 	}
 
 	_setTemplatePinTouchdown(correlationId, template) {
-		const response = this._setTemplate(correlationId, template, this.defaultTemplatePinTouchdown);
+		const response = this._setTemplate(correlationId, template, this.templatePinTouchdownDefault);
 		if (this._hasFailed(response))
 			return response;
 
@@ -136,7 +136,7 @@ class HandlebarsFlightPathOutputTemplateService extends FlightPathOutputTemmplat
 		return this._success(correlationId);
 	}
 
-	get defaultTemplateMain() {
+	get templateMainDefault() {
 		return `<?xml version="1.0" encoding="UTF-8"?>
 <kml xmlns="http://www.opengis.net/kml/2.2">
 	<Document>
@@ -189,7 +189,7 @@ class HandlebarsFlightPathOutputTemplateService extends FlightPathOutputTemmplat
 </kml>`
 	}
 
-	get defaultTemplatePinMaxAcceleration() {
+	get templatePinMaxAccelerationDefault() {
 		return `
 	<Placemark>
 	<name><![CDATA[{{flightInfo.translations.maxAcceleration}]]></name>
@@ -210,7 +210,7 @@ class HandlebarsFlightPathOutputTemplateService extends FlightPathOutputTemmplat
 	</Placemark>`;
 	}
 
-	get defaultTemplatePinMaxAltitude() {
+	get templatePinMaxAltitudeDefault() {
 		return `
 	<Placemark>
 	<name><![CDATA[{{flightInfo.translations.maxAltitude}} ({{flightInfo.maxAltitude}} {{flightInfo.translations.measurementUnits.distance}})]]></name>
@@ -231,7 +231,7 @@ class HandlebarsFlightPathOutputTemplateService extends FlightPathOutputTemmplat
 	</Placemark>`;
 	}
 
-	get defaultTemplatePinMaxVelocity() {
+	get templatePinMaxVelocityDefault() {
 		return `
 	<Placemark>
 		<name><![CDATA[{{flightInfo.translations.maxVelocity}} ({{flightInfo.maxVelocity}} {{flightInfo.translations.measurementUnits.velocity}})]]></name>
@@ -252,7 +252,7 @@ class HandlebarsFlightPathOutputTemplateService extends FlightPathOutputTemmplat
 	</Placemark>`;
 	}
 
-	get defaultTemplatePinLaunch() {
+	get templatePinLaunchDefault() {
 		return `
 		<Placemark>
 			<name><![CDATA[{{flightInfo.translations.launch}}]]></name>
@@ -269,7 +269,7 @@ class HandlebarsFlightPathOutputTemplateService extends FlightPathOutputTemmplat
 		</Placemark>`;
 	}
 
-	get defaultTemplatePinRecoveryDrogue() {
+	get templatePinRecoveryDrogueDefault() {
 		return `
 	<Placemark>
 	<name><![CDATA[{{flightInfo.translations.recoveryDrogue}}]]></name>
@@ -290,7 +290,7 @@ class HandlebarsFlightPathOutputTemplateService extends FlightPathOutputTemmplat
 	</Placemark>`;
 	}
 
-	get defaultTemplatePinRecoveryMain() {
+	get templatePinRecoveryMainDefault() {
 		return `
 	<Placemark>
 	<name><![CDATA[{{flightInfo.translations.recoveryMain}}]]></name>
@@ -311,7 +311,7 @@ class HandlebarsFlightPathOutputTemplateService extends FlightPathOutputTemmplat
 	</Placemark>`;
 	}
 
-	get defaultTemplatePinTouchdown() {
+	get templatePinTouchdownDefault() {
 		return `
 		<Placemark>
 			<name><![CDATA[{{flightInfo.translations.touchdown}}]]></name>

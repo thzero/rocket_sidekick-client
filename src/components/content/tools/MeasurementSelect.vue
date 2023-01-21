@@ -11,16 +11,10 @@
 </template>
 
 <script>
-import { computed } from 'vue';
-
-import Constants from '@/constants';
-
-import GlobalUtility from '@thzero/library_client/utility/global';
-
 import VSelectWithValidation from '@/library_vue_vuetify/components/form//VSelectWithValidation';
 
-import { useBaseControlEditComponent } from '@/library_vue/components/baseControlEdit';
-import { useBaseControlEditProps } from '@/library_vue/components/baseControlEditProps';
+import { useAppMeasurementSelectComponent } from '@/components/content/tools/appMeasurementSelect';
+import { useAppMeasurementSelectProps } from '@/components/content/tools/appMeasurementSelectProps';
 
 export default {
 	name: 'MeasurementSelect',
@@ -28,15 +22,7 @@ export default {
 		VSelectWithValidation
 	},
     props: {
-        ...useBaseControlEditProps,
-        measurementUnitsId: {
-            type: String,
-            default: Constants.MeasurementUnits.english.id
-        },
-        measurementUnitsType: {
-            type: String,
-            default: null
-        }
+		...useAppMeasurementSelectProps
     },
 	setup(props, context) {
 		const {
@@ -58,18 +44,10 @@ export default {
 			hideDetails,
 			innerValue,
 			initValue,
-			innerValueUpdate
-		} = useBaseControlEditComponent(props, context);
-
-		const measurementUnits = computed(() => {
-			if (props.measurementUnitsId === Constants.MeasurementUnits.english.id)
-				return measurementUnitTrans(Constants.MeasurementUnits.english[props.measurementUnitsType], 'english', props.measurementUnitsType);
-			return measurementUnitTrans(Constants.MeasurementUnits.metrics[props.measurementUnitsType], 'metrics', props.measurementUnitsType);
-		});
-		
-		const measurementUnitTrans = (object, key, subKey) => {
-			return object ? Object.getOwnPropertyNames(object).filter(l => l !== 'default').map((item) => { return { id: item, name: GlobalUtility.$trans.t('measurementUnits.' + key + '.' + subKey + '.' + item + 'Abbr') }; }) : {};
-		};
+			innerValueUpdate,
+			measurementUnits,
+			measurementUnitTrans
+		} = useAppMeasurementSelectComponent(props, context);
 
 		return {
 			correlationId,
@@ -91,8 +69,8 @@ export default {
 			innerValue,
 			initValue,
 			innerValueUpdate,
-			measurementUnitTrans,
-			measurementUnits
+			measurementUnits,
+			measurementUnitTrans
 		};
 	}
 };
