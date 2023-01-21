@@ -416,8 +416,6 @@
 <script>
 import { between, decimal, helpers, required } from '@vuelidate/validators';
 
-import DialogSupport from '@/library_vue/components/support/dialog';
-
 import CalculatedOuput from '@/components/content/tools/CalculatedOuput';
 import MeasurementSelect from '@/components/content/tools/MeasurementSelect';
 import MotorLookupDialog from '@/components/external/MotorLookupDialog';
