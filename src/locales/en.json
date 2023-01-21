@@ -749,7 +749,8 @@
 				"organizations": "Organizations",
 				"study": "Study Guides",
 				"tools": "Tools",
-				"vendors": "Vendors"
+				"vendors": "Vendors",
+				"videos": "Videos"
 			},
 			"tools": {
 				"flightInfo": "Flight Info",

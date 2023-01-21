@@ -152,7 +152,7 @@
 </template>
 		
 <script>
-import { useAppEpoxyComponent } from '@/components/content/info/appEpoxy';
+import { useEpoxyBaseComponent } from '@/components/content/info/epoxyBase';
 
 export default {
 	name: 'Epxoy',
@@ -169,7 +169,7 @@ export default {
 			serviceStore,
 			data,
 			links
-		} = useAppEpoxyComponent(props, context);
+		} = useEpoxyBaseComponent(props, context);
 
 		return {
 			correlationId,

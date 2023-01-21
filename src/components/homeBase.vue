@@ -9,7 +9,7 @@ import GlobalUtility from '@thzero/library_client/utility/global';
 
 import { useBaseComponent } from '@/library_vue/components/base';
 
-export function useAppHomeComponent(props, context, options) {
+export function useHomeBaseComponent(props, context, options) {
 	const {
 		correlationId,
 		error,

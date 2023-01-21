@@ -36,15 +36,15 @@
 <script>
 import { Chart, registerables } from 'chart.js';
 
-import { useAppFlightInfoChartComponent } from '@/components/content/tools/flightInfo/charts/appFlightInfoChart';
-import { useAppFlightInfoChartProps } from '@/components/content/tools/flightInfo/charts/appFlightInfoChartProps';
+import { useFlightInfoChartCBaseomponent } from '@/components/content/tools/flightInfo/charts/flightInfoChartBase';
+import { useFlightInfoChartBaseProps } from '@/components/content/tools/flightInfo/charts/flightInfoChartBaseProps';
 
 Chart.register(...registerables);
 
 export default {
 	name: 'FlightInfoChart',
 	props: {
-		...useAppFlightInfoChartProps
+		...useFlightInfoChartBaseProps
 	},
 	// extends: base,
 	setup(props, context) {
@@ -64,7 +64,7 @@ export default {
 			location,
 			otionsChart,
 			title
-		} = useAppFlightInfoChartComponent(props, context);
+		} = useFlightInfoChartCBaseomponent(props, context);
 
 		return {
 			correlationId,

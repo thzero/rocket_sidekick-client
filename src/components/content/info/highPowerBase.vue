@@ -5,7 +5,7 @@ import Constants from '@/constants';
 
 import { useContentBaseComponent } from '@/components/content/contentBase';
 
-export function useAppHighPowerComponent(props, context, options) {
+export function useHighPowerBaseComponent(props, context, options) {
 	const {
 		correlationId,
 		error,
@@ -19,7 +19,32 @@ export function useAppHighPowerComponent(props, context, options) {
 		serviceStore
 	} = useContentBaseComponent(props, context, options);
 
-	const highpowerImage = ref(Constants.External.imnages + '/highpower/display.jpeg');
+	const slides = ref([
+		{
+			type: 'image',
+			url: Constants.External.imnages + '/highpower/460816-74948bcf6f6ce15869bcdb5a36622a2b.jpeg'
+		},
+		{
+			type: 'image',
+			url: Constants.External.imnages + '/highpower/PXL_20221028_145519749.jpg'
+		},
+		{
+			type: 'image',
+			url: Constants.External.imnages + '/highpower/PXL_20221028_171718106 (2).jpg'
+		},
+		{
+			type: 'video',
+			embed: '<iframe width="1024" height="576" src="https://www.youtube.com/embed/TOHzd8O8kWs" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>'
+		},
+		{
+			type: 'video',
+			embed: '<iframe width="1024" height="576" src="https://www.youtube.com/embed/DgAG1-6QfjE" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>'
+		},
+		{
+			type: 'video',
+			embed: '<iframe width="1024" height="576" src="https://www.youtube.com/embed/TOHzd8O8kWs" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>'
+		}
+	]);
 
 	const highPower = computed(() => {
 		let temp = serviceStore.getters.getContent();
@@ -42,7 +67,7 @@ export function useAppHighPowerComponent(props, context, options) {
 			return [];
 		if (!temp.links)
 			return [];
-		return temp.links;
+		return temp.links.filter(l => l.enabled);
 	});
 	const linksBooks = computed(() => {
 		if (!highPowerLinks.value)
@@ -94,6 +119,15 @@ export function useAppHighPowerComponent(props, context, options) {
 			return [];
 		return links.value.filter(l => l.category === 'vendor' && l.highPower);
 	});
+	const linksVideos = computed(() => {
+		const output = [];
+		if (highPowerLinks.value)
+			output.push(...(highPowerLinks.value.filter(l => l.category === 'video')));
+		if (links.value)
+			output.push(...(links.value.filter(l => l.category === 'video' && l.highPower)));
+		const temp = Intl.Collator();
+		return output.sort((a, b) => temp.compare(a.title, b.title));
+	});
 
 	const sort = (links) => {
 		links.sort((a, b) => a.order >= b.order);
@@ -113,7 +147,7 @@ export function useAppHighPowerComponent(props, context, options) {
 		noBreakingSpaces,
 		notImplementedError,
 		success,
-		highpowerImage,
+		slides,
 		highPower,
 		highPowerLinks,
 		links,
@@ -127,6 +161,7 @@ export function useAppHighPowerComponent(props, context, options) {
 		linksStudyGuides,
 		linksTools,
 		linksVendors,
+		linksVideos,
 		sort,
 		target
 	};

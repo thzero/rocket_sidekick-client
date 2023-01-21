@@ -22,12 +22,12 @@
 
 <script>
 import { useBaseComponent } from '@/library_vue/components/base';
-import { useAppCalculationOutputProps } from '@/components/content/tools/appCalculationOutputProps';
+import { useCalculationOutputBaseProps } from '@/components/content/tools/calculationOutputBaseProps';
 
 export default {
 	name: 'CalculatedOuput',
 	props: {
-		...useAppCalculationOutputProps
+		...useCalculationOutputBaseProps
 	},
 	setup (props, context) {
 		const {

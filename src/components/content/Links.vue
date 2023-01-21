@@ -194,12 +194,32 @@
 					</v-card-text>
 				</v-card>
 			</v-col>
+			<v-col cols="12" md="6">
+				<v-card>
+					<v-card-title>
+	<p class="text-h6 text-center">{{ $t('titles.content.links.videos') }}</p>
+					</v-card-title>
+					<v-card-text>
+		<v-list density="compact">
+			<v-list-item
+				v-for="item in linksVideos"
+				:key="item.name"
+				:href="item.link"
+				:target="target(item)"
+				class="link"
+			>
+				<v-list-item-title>{{ $t(item.title) }}</v-list-item-title>
+			</v-list-item>
+		</v-list>
+					</v-card-text>
+				</v-card>
+			</v-col>
 		</v-row>
 	</div>
 </template>
 
 <script>
-import { useAppLinksComponent } from '@/components/content/appLinks';
+import { useLinksBaseComponent } from '@/components/content/linksBase';
 
 export default {
 	name: 'Links',
@@ -224,9 +244,10 @@ export default {
 			linksManufacturers,
 			linksOrganizations,
 			linksVendors,
+			linksVideos,
 			sort,
 			target
-		} = useAppLinksComponent(props, context);
+		} = useLinksBaseComponent(props, context);
 
 		return {
 			correlationId,
@@ -248,6 +269,7 @@ export default {
 			linksManufacturers,
 			linksOrganizations,
 			linksVendors,
+			linksVideos,
 			sort,
 			target
 		};

@@ -7,7 +7,7 @@ import GlobalUtility from '@thzero/library_client/utility/global';
 
 import { useContentBaseComponent } from '@/components/content/contentBase';
 
-export function useAppEpoxyComponent(props, context, options) {
+export function useEpoxyBaseComponent(props, context, options) {
 	const {
 		correlationId,
 		error,
@@ -18,7 +18,7 @@ export function useAppEpoxyComponent(props, context, options) {
 		noBreakingSpaces,
 		notImplementedError,
 		success
-	} = useContentBaseComponent(props, context);
+	} = useContentBaseComponent(props, context, options);
 
 	const serviceStore = GlobalUtility.$injector.getService(LibraryConstants.InjectorKeys.SERVICE_STORE);
 	

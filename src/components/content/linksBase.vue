@@ -3,7 +3,7 @@ import { computed } from 'vue';
 
 import { useContentBaseComponent } from '@/components/content/contentBase';
 
-export function useAppLinksComponent(props, context, options) {
+export function useLinksBaseComponent(props, context, options) {
 	const {
 		correlationId,
 		error,
@@ -70,6 +70,11 @@ export function useAppLinksComponent(props, context, options) {
 			return [];
 		return links.value.filter(l => l.category === 'vendor');
 	});
+	const linksVideos = computed(() => {
+		if (!links.value)
+			return [];
+		return links.value.filter(l => l.category === 'video');
+	});
 	
 	const target = (item) => {
 		return !item.local ? 'blank' : '';
@@ -99,6 +104,7 @@ export function useAppLinksComponent(props, context, options) {
 		linksManufacturers,
 		linksOrganizations,
 		linksVendors,
+		linksVideos,
 		sort,
 		target
 	};

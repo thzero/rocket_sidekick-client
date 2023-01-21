@@ -13,8 +13,8 @@
 <script>
 import VSelectWithValidation from '@/library_vue_vuetify/components/form//VSelectWithValidation';
 
-import { useAppMeasurementSelectComponent } from '@/components/content/tools/appMeasurementSelect';
-import { useAppMeasurementSelectProps } from '@/components/content/tools/appMeasurementSelectProps';
+import { useMeasurementSelectBaseComponent } from '@/components/content/tools/measurementSelectBase';
+import { useMeasurementSelectBaseProps } from '@/components/content/tools/measurementSelectBaseProps';
 
 export default {
 	name: 'MeasurementSelect',
@@ -22,7 +22,7 @@ export default {
 		VSelectWithValidation
 	},
     props: {
-		...useAppMeasurementSelectProps
+		...useMeasurementSelectBaseProps
     },
 	setup(props, context) {
 		const {
@@ -47,7 +47,7 @@ export default {
 			innerValueUpdate,
 			measurementUnits,
 			measurementUnitTrans
-		} = useAppMeasurementSelectComponent(props, context);
+		} = useMeasurementSelectBaseComponent(props, context);
 
 		return {
 			correlationId,

@@ -524,7 +524,7 @@ import { required, requiredUnless } from '@vuelidate/validators';
 import flightInfoData from '@/components/content/tools/flightInfo/FlightInfoData';
 import flightInfoChart from '@/components/content/tools/flightInfo/charts/FlightInfo';
 
-import { useAppFlightInfoComponent } from '@/components/content/tools/flightInfo/appFlightInfo';
+import { useFlightInfoBaseComponent } from '@/components/content/tools/flightInfo/flightInfoBase';
 
 import VColorWithValidation from '@/library_vue_vuetify/components/form/VColorWithValidation';
 import VDateTimeField from '@/library_vue_vuetify/components/form/VDateTimeFieldTemp';
@@ -657,7 +657,7 @@ export default {
 			resetInput,
 			scope,
 			validation
-		} = useAppFlightInfoComponent(props, context);
+		} = useFlightInfoBaseComponent(props, context);
 
 		return {
 			correlationId,

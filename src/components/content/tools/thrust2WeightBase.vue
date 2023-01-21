@@ -11,7 +11,7 @@ import DialogSupport from '@/library_vue/components/support/dialog';
 
 import { useToolsBaseComponent } from '@/components/content/tools/toolsBase';
 
-export function useAppThrust2WeightComponent(props, context, options) {
+export function useThrust2WeightBaseComponent(props, context, options) {
 	const {
 		correlationId,
 		error,
