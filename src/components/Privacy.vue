@@ -28,12 +28,9 @@
 </template>
 
 <script>
-import { ref } from 'vue';
-
-import { useBasePrivacyComponent } from '@/library_vue/components/basePrivacy';
+import { useAppPrivacyComponent } from '@/components/appPrivacy';
 
 import VMarkdown from '@/library_vue_vuetify/components/markup/VMarkdown';
-import GlobalUtility from '@thzero/library_client/utility/global';
 
 export default {
 	name: 'Support',
@@ -50,10 +47,9 @@ export default {
 			logger,
 			noBreakingSpaces,
 			notImplementedError,
-			success
-		} = useBasePrivacyComponent(props, context);
-
-		const privacyMarkup = ref(GlobalUtility.$trans.t('strings.privacy.text1'));
+			success,
+			privacyMarkup
+		} = useAppPrivacyComponent(props, context);
 
 		return {
 			correlationId,
