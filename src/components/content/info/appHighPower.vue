@@ -1,5 +1,7 @@
 <script>
-import { computed } from 'vue';
+import { computed, ref } from 'vue';
+
+import Constants from '@/constants';
 
 import { useContentBaseComponent } from '@/components/content/contentBase';
 
@@ -16,6 +18,8 @@ export function useAppHighPowerComponent(props, context, options) {
 		success,
 		serviceStore
 	} = useContentBaseComponent(props, context, options);
+
+	const highpowerImage = ref(Constants.External.imnages + '/highpower/display.jpeg');
 
 	const highPower = computed(() => {
 		let temp = serviceStore.getters.getContent();
@@ -109,6 +113,7 @@ export function useAppHighPowerComponent(props, context, options) {
 		noBreakingSpaces,
 		notImplementedError,
 		success,
+		highpowerImage,
 		highPower,
 		highPowerLinks,
 		links,

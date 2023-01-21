@@ -1,11 +1,13 @@
 const Constants = {
 	External: {
 		github: 'https://github.com/thzero/rocket_sidekick-client',
+		imnages: 'https://imagesrocketsidekick.thzero.com',
 		store: {
 			android: null,
 			ios: null,
 		},
-		thrustCurve: 'https://thrustcurve.org'
+		thrustCurve: 'https://thrustcurve.org',
+		imnages: 'https://imagesrocketsidekick.thzero.com'
 	},
 	ExternalKeys: {
 		MotorSearch: 'motorSearch'
