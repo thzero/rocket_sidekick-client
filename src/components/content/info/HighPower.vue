@@ -25,8 +25,81 @@
 
 					</v-card-text>
 				</v-card>
+				<v-card
+					v-if="$vuetify.display.lgAndUp"
+					class="mt-4"
+				>
+					<v-card-title>
+	<p class="text-h6 text-center">{{ $t('titles.content.links.guidance') }}</p>
+					</v-card-title>
+					<v-card-text>
+		<v-list density="compact">
+			<v-list-item
+				v-for="item in linksGuidance"
+				:key="item.name"
+				:href="item.link"
+				:target="target(item)"
+				class="link"
+			>
+				<v-list-item-title>{{ $t(item.title) }}</v-list-item-title>
+			</v-list-item>
+		</v-list>
+					</v-card-text>
+				</v-card>
+				<v-card
+					v-if="$vuetify.display.lgAndUp"
+					class="mt-4"
+				>
+					<v-card-title>
+	<p class="text-h6 text-center">{{ $t('titles.content.links.construction') }}</p>
+					</v-card-title>
+					<v-card-text>
+		<v-list density="compact">
+			<v-list-item
+				v-for="item in linksConstruction"
+				:key="item.name"
+				:href="item.link"
+				:target="target(item)"
+				class="link"
+			>
+				<v-list-item-title>{{ $t(item.title) }}</v-list-item-title>
+			</v-list-item>
+		</v-list>
+					</v-card-text>
+				</v-card>
+				<v-card
+					v-if="$vuetify.display.lgAndUp"
+					class="mt-4"
+				>
+					<v-card-title>
+	<p class="text-h6 text-center">{{ $t('titles.content.links.tools') }}</p>
+					</v-card-title>
+					<v-card-text>
+		<v-list density="compact">
+			<v-list-item
+				v-for="item in linksTools"
+				:key="item.name"
+				:href="item.link"
+				:target="target(item)"
+				class="link"
+			>
+				<v-list-item-title>{{ $t(item.title) }}</v-list-item-title>
+			</v-list-item>
+		</v-list>
+					</v-card-text>
+				</v-card>
 			</v-col>
-			<v-col cols="12" md="6">
+			<v-col cols="12" md="6" class="text-center">
+				<v-card>
+					<v-card-text>
+	<img :src="highpowerImage" style="height: 850px;" />
+					</v-card-text>
+				</v-card>
+			</v-col>
+			<v-col 
+				v-if="$vuetify.display.mdAndDown"
+				cols="12" md="6"
+			>
 				<v-card>
 					<v-card-title>
 	<p class="text-h6 text-center">{{ $t('titles.content.links.guidance') }}</p>
@@ -46,7 +119,10 @@
 					</v-card-text>
 				</v-card>
 			</v-col>
-			<v-col cols="12" md="6">
+			<v-col 
+				v-if="$vuetify.display.mdAndDown"
+				cols="12" md="6"
+			>
 				<v-card>
 					<v-card-title>
 	<p class="text-h6 text-center">{{ $t('titles.content.links.construction') }}</p>
@@ -66,7 +142,10 @@
 					</v-card-text>
 				</v-card>
 			</v-col>
-			<v-col cols="12" md="6">
+			<v-col 
+				v-if="$vuetify.display.mdAndDown"
+				cols="12" md="6"
+			>
 				<v-card>
 					<v-card-title>
 	<p class="text-h6 text-center">{{ $t('titles.content.links.tools') }}</p>
@@ -246,6 +325,7 @@ export default {
 			noBreakingSpaces,
 			notImplementedError,
 			success,
+			highpowerImage,
 			highPower,
 			highPowerLinks,
 			links,
@@ -273,6 +353,7 @@ export default {
 			noBreakingSpaces,
 			notImplementedError,
 			success,
+			highpowerImage,
 			highPower,
 			highPowerLinks,
 			links,
