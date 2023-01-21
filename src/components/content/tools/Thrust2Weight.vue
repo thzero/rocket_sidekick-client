@@ -414,18 +414,9 @@
 </template>
 
 <script>
-import { onMounted, ref, watch } from 'vue';
-
-import useVuelidate from '@vuelidate/core';
 import { between, decimal, helpers, required } from '@vuelidate/validators';
 
-import Constants from '@/constants';
-
-import GlobalUtility from '@thzero/library_client/utility/global';
-
 import DialogSupport from '@/library_vue/components/support/dialog';
-
-import { useAppThrust2WeightComponent } from '@/components/content/tools/appThrust2Weight';
 
 import CalculatedOuput from '@/components/content/tools/CalculatedOuput';
 import MeasurementSelect from '@/components/content/tools/MeasurementSelect';

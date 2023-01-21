@@ -171,12 +171,7 @@
 </template>
 
 <script>
-import { onMounted, ref } from 'vue';
-
-import useVuelidate from '@vuelidate/core';
 import { between, decimal, integer, helpers, required } from '@vuelidate/validators';
-
-import Constants from '@/constants';
 
 import GlobalUtility from '@thzero/library_client/utility/global';
 
