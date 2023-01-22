@@ -1,5 +1,5 @@
 <script>
-import { onMounted, ref } from 'vue';
+import { computed, ref } from 'vue';
 
 import LibraryConstants from '@thzero/library_client/constants';
 
@@ -22,18 +22,24 @@ export function useEpoxyBaseComponent(props, context, options) {
 
 	const serviceStore = GlobalUtility.$injector.getService(LibraryConstants.InjectorKeys.SERVICE_STORE);
 	
-	const data = ref(null);
-	const links = ref(null);
-
-	onMounted(async () => {
+	const content = computed(() => {
 		let temp = serviceStore.getters.getContent();
 		if (!temp)
 			return [];
 		if (!temp.info)
 			return [];
 		const content = temp.info.find(l => l.id === 'epoxy');
-		data.value = content ? content.data : [];
-		links.value = content ? content.links : [];
+		return content;
+	});
+	const data = computed(() => {
+		if (!content.value || !content.value.data)
+			return [];
+		return content.value.data;
+	});
+	const links = computed(() => {
+		if (!content.value || !content.value.links)
+			return [];
+		return content.value.links;
 	});
 
 	return {
@@ -47,6 +53,7 @@ export function useEpoxyBaseComponent(props, context, options) {
 		notImplementedError,
 		success,
 		serviceStore,
+		content,
 		data,
 		links
 	};

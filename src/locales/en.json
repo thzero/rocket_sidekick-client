@@ -637,7 +637,23 @@
 				"epoxy": {
 					"additionalLinks": "Additional Links",
 					"desc": "Chart comparing specifications of some common epoxies, plus some additional links about epoxies and model rocketry.",
-					"chart": "Chart"
+					"chart": "Chart",
+					"compressionStrength": "Compression strength (psi)",
+					"deflectionTemp": "Deflection temperature",
+					"flexuralModulus": "Flexural modulus (psi)",
+					"flexuralStrength": "Flexural strength (psi)",
+					"maxUseTemp": "Maximum use temperature",
+					"potLifeTime": "Pot life (m)",
+					"handlingTime": "Handling time (m)",
+					"fullCureTime": "Full cure (m)",
+					"ratioWeight": "Ratio by weight",
+					"ratioWeight2": "(resin/hardener)",
+					"ratioVolume": "Ratio by volume",
+					"ratioVolume2": "(resin/hardener)",
+					"shoreHardness": "Shore \"D\" hardness",
+					"specificGravity": "Specific gravity",
+					"tensileElongation": "Tensile elongation (psi)",
+					"tensileStrength": "Tensile strength (psi)"
 				},
 				"highPower": {
 					"additionalLinks": "Additional Links",

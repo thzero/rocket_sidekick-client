@@ -29,98 +29,98 @@
 					</thead>
 					<tbody>
 						<tr>
-							<td>Ratio by weight<br/>(resin/hardener)</td>
+							<td>{{ $t('strings.content.info.epoxy.ratioWeight') }}<br/>{{ $t('strings.content.info.epoxy.ratioWeight2') }}</td>
 							<td
 								v-for="item in data"
 								:key="item.name"
 							>{{ item.ratioWeight }}</td>
 						</tr>
 						<tr>
-							<td>Ratio by volume<br/>(resin/hardener)</td>
+							<td>{{ $t('strings.content.info.epoxy.ratioVolume') }}<br/>{{ $t('strings.content.info.epoxy.ratioVolume2') }}</td>
 							<td
 								v-for="item in data"
 								:key="item.name"
 							>{{ item.ratioVolume }}</td>
 						</tr>
 						<tr>
-							<td>Pot life (m)</td>
+							<td>{{ $t('strings.content.info.epoxy.potLifeTime') }}</td>
 							<td
 								v-for="item in data"
 								:key="item.name"
 							>{{ item.potLife }}</td>
 						</tr>
 						<tr>
-							<td>Handling time (m)</td>
+							<td>{{ $t('strings.content.info.epoxy.handlingTime') }}</td>
 							<td
 								v-for="item in data"
 								:key="item.name"
 							>{{ item.handlingTime }}</td>
 						</tr>
 						<tr>
-							<td>Full cure (m)</td>
+							<td>{{ $t('strings.content.info.epoxy.fullCureTime') }}</td>
 							<td
 								v-for="item in data"
 								:key="item.name"
 							>{{ item.fullCure }}</td>
 						</tr>
 						<tr>
-							<td>Shore “D” hardness</td>
+							<td>{{ $t('strings.content.info.epoxy.shoreHardness') }}</td>
 							<td
 								v-for="item in data"
 								:key="item.name"
 							>{{ item.shoreHardness }}</td>
 						</tr>
 						<tr>
-							<td>Specific gravity</td>
+							<td>{{ $t('strings.content.info.epoxy.specificGravity') }}</td>
 							<td
 								v-for="item in data"
 								:key="item.name"
 							>{{ item.specificGravity }}</td>
 						</tr>
 						<tr>
-							<td>Tensile strength (psi)</td>
+							<td>{{ $t('strings.content.info.epoxy.tensileStrength') }}</td>
 							<td
 								v-for="item in data"
 								:key="item.name"
 							>{{ item.tensileStrength ? item.tensileStrength.toLocaleString() : '' }}</td>
 						</tr>
 						<tr>
-							<td>Tensile Elongation (%)</td>
+							<td>{{ $t('strings.content.info.epoxy.tensileElongation') }}</td>
 							<td
 								v-for="item in data"
 								:key="item.name"
 							>{{ item.tensileElongation }}</td>
 						</tr>
 						<tr>
-							<td>Flexural strength (psi)</td>
+							<td>{{ $t('strings.content.info.epoxy.flexuralStrength') }}</td>
 							<td
 								v-for="item in data"
 								:key="item.name"
 							>{{ item.fFlexuralStrength ? item.fFlexuralStrength.toLocaleString() : '' }}</td>
 						</tr>
 						<tr>
-							<td>Flexural Modulus (psi)</td>
+							<td>{{ $t('strings.content.info.epoxy.flexuralModulus') }}</td>
 							<td
 								v-for="item in data"
 								:key="item.name"
 							>{{ item.flexuralModulus ? item.flexuralModulus.toLocaleString() : '' }}</td>
 						</tr>
 						<tr>
-							<td>Compression strength (psi)</td>
+							<td>{{ $t('strings.content.info.epoxy.compressionStrength') }}</td>
 							<td
 								v-for="item in data"
 								:key="item.name"
 							>{{ item.compressionStrength ? item.compressionStrength.toLocaleString() : '' }}</td>
 						</tr>
 						<tr>
-							<td>Maximum use temperature</td>
+							<td>{{ $t('strings.content.info.epoxy.maxUseTemp') }}</td>
 							<td
 								v-for="item in data"
 								:key="item.name"
 							>{{ item.maxUseTemp }}</td>
 						</tr>
 						<tr>
-							<td>Deflection temperature </td>
+							<td>{{ $t('strings.content.info.epoxy.deflectionTemp') }}</td>
 							<td
 								v-for="item in data"
 								:key="item.name"
@@ -167,6 +167,7 @@ export default {
 			notImplementedError,
 			success,
 			serviceStore,
+			content,
 			data,
 			links
 		} = useEpoxyBaseComponent(props, context);
@@ -182,6 +183,7 @@ export default {
 			notImplementedError,
 			success,
 			serviceStore,
+			content,
 			data,
 			links
 		};
