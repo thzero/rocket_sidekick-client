@@ -92,30 +92,6 @@
 			<v-col cols="12" md="6" class="text-center">
 				<v-card>
 					<v-card-text>
-						<!-- <v-carousel show-arrows="hover">
-							<v-carousel-item
-								cycle
-								height="800"
-								cover
-							>
-								<v-carousel-item
-									v-for="(slide, i) in slides"
-									:key="i"
-								>
-								sdfasdfasdf
-									<v-sheet
-										height="100%"
-									>
-										<div class="d-flex fill-height justify-center align-center">
-											<img :src="item.url" v-if="item.type==='index'" />
-											<div v-if="item.type==='video'" v-html="item.embed"></div>
-									{{item}}
-								sadfasdfasdfdfgsdfgsdfg	
-										</div>
-									</v-sheet>
-								</v-carousel-item>
-							</v-carousel-item>
-						</v-carousel> -->
 						<v-carousel
 							cycle
 							height="800"

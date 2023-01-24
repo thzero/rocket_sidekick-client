@@ -16,6 +16,11 @@
 			</v-col>
 		</v-row>
 		<v-row dense>
+			<v-col cols="12">
+<VMarkdown v-model="textGuidance2" :use-github=false />
+			</v-col>
+		</v-row>
+		<v-row dense>
 			<v-col cols="12" class="text-center text-h5 pb-2">
 				{{ $t('strings.content.info.epoxy.chart') }}
 			</v-col>
@@ -198,6 +203,8 @@ export default {
 			textChartDesc,
 			textDesc,
 			textGuidance1,
+			textGuidance2,
+			textGuidance3,
 			content,
 			data,
 			haveLinks,
@@ -219,6 +226,8 @@ export default {
 			textChartDesc,
 			textDesc,
 			textGuidance1,
+			textGuidance2,
+			textGuidance3,
 			content,
 			data,
 			haveLinks,

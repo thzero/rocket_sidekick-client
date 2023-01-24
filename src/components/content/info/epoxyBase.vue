@@ -25,6 +25,8 @@ export function useEpoxyBaseComponent(props, context, options) {
 	const textChartDesc = ref(GlobalUtility.$trans.t('strings.content.info.epoxy.chartDesc'));
 	const textDesc = ref(GlobalUtility.$trans.t('strings.content.info.epoxy.desc'));
 	const textGuidance1 = ref(GlobalUtility.$trans.t('strings.content.info.epoxy.guidance1'));
+	const textGuidance2 = ref(GlobalUtility.$trans.t('strings.content.info.epoxy.guidance2'));
+	const textGuidance3 = ref(GlobalUtility.$trans.t('strings.content.info.epoxy.guidance3'));
 	
 	const content = computed(() => {
 		let temp = serviceStore.getters.getContent();
@@ -73,6 +75,8 @@ export function useEpoxyBaseComponent(props, context, options) {
 		textChartDesc,
 		textDesc,
 		textGuidance1,
+		textGuidance2,
+		textGuidance3,
 		content,
 		data,
 		haveLinks,
