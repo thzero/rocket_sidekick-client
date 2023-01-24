@@ -1,5 +1,5 @@
 <script>
-import { computed, ref } from 'vue';
+import { computed } from 'vue';
 
 import LibraryConstants from '@thzero/library_client/constants';
 
@@ -36,11 +36,24 @@ export function useEpoxyBaseComponent(props, context, options) {
 			return [];
 		return content.value.data;
 	});
+	const haveLinks = computed(() => {
+		if (!content.value || !content.value.links)
+			return false;
+		return content.value.links.length > 0;
+	});
 	const links = computed(() => {
 		if (!content.value || !content.value.links)
 			return [];
 		return content.value.links;
 	});
+	const temperature = (tempF, tempC) => {
+		if (String.isNullOrEmpty(tempF))
+			return null;
+		let temp = `${tempF}&#8457;`;
+		if (!String.isNullOrEmpty(tempC))
+			temp += ` (${tempC}&#8451;)`;
+		return temp;
+	}
 
 	return {
 		correlationId,
@@ -55,7 +68,9 @@ export function useEpoxyBaseComponent(props, context, options) {
 		serviceStore,
 		content,
 		data,
-		links
+		haveLinks,
+		links,
+		temperature
 	};
 };
 </script>

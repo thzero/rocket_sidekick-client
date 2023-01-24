@@ -6,6 +6,11 @@
 			</v-col>
 		</v-row>
 		<v-row dense>
+			<v-col cols="12">
+				{{ $t('strings.content.info.epoxy.desc') }}
+			</v-col>
+		</v-row>
+		<v-row dense>
 			<v-col cols="12" class="text-center text-h5 pb-2">
 				{{ $t('strings.content.info.epoxy.chart') }}
 			</v-col>
@@ -117,20 +122,28 @@
 							<td
 								v-for="item in data"
 								:key="item.name"
-							>{{ item.maxUseTemp }}</td>
+							>
+								<div v-html="temperature(item.maxUseTempF, item.maxUseTempC)"></div>
+								<div>{{ item.maxUseTemp }}</div>
+							</td>
 						</tr>
 						<tr>
 							<td>{{ $t('strings.content.info.epoxy.deflectionTemp') }}</td>
 							<td
 								v-for="item in data"
 								:key="item.name"
-							>{{ item.deflectionTemp }}</td>
+							>
+								<div v-html="temperature(item.deflectionTempF, item.deflectionTempC)"></div>
+								<div>{{ item.deflectionTemp }}</div>
+							</td>
 						</tr>
 					</tbody>
 				</v-table>
 			</v-col>
 		</v-row>
-		<v-row dense>
+		<v-row dense
+			v-if="haveLinks"
+		>
 			<v-col cols="12" class="text-center text-h5 pt-4 pb-2">
 				{{ $t('strings.content.info.epoxy.additionalLinks') }}
 			</v-col>
@@ -169,7 +182,8 @@ export default {
 			serviceStore,
 			content,
 			data,
-			links
+			links,
+			temperature
 		} = useEpoxyBaseComponent(props, context);
 
 		return {
@@ -185,7 +199,8 @@ export default {
 			serviceStore,
 			content,
 			data,
-			links
+			links,
+			temperature
 		};
 	}
 };
