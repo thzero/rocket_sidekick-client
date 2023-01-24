@@ -7,14 +7,19 @@
 		</v-row>
 		<v-row dense>
 			<v-col cols="12">
-				{{ $t('strings.content.info.3dprinting.desc') }}
+<VMarkdown v-model="textDesc" :use-github=false />
 			</v-col>
 		</v-row>
 		<v-row dense>
 			<v-col cols="12">
 				<q class="font-italic" cite="https://3dprinting.com/what-is-3d-printing">
-					{{ $t('strings.content.info.3dprinting.quote') }}
+<VMarkdown v-model="textWhatIs" :use-github=false tag="span" />
 				</q> -- <a href="https://3dprinting.com/what-is-3d-printing" target="_blank">3D printing.com)</a>
+			</v-col>
+		</v-row>
+		<v-row dense>
+			<v-col cols="12">
+<VMarkdown v-model="textGuidance1" :use-github=false />
 			</v-col>
 		</v-row>
 		<v-row dense>
@@ -24,7 +29,7 @@
 		</v-row>
 		<v-row dense>
 			<v-col cols="12">
-				{{ $t('strings.content.info.3dprinting.chartDesc') }}
+<VMarkdown v-model="textChartDesc" :use-github=false />
 			</v-col>
 		</v-row>
 		<v-row dense>
@@ -117,8 +122,13 @@
 <script>
 import { use3DPrintingBaseComponent } from '@/components/content/info/3DPrintingBase';
 
+import VMarkdown from '@/library_vue_vuetify/components/markup/VMarkdown';
+
 export default {
 	name: 'Epxoy',
+	components: {
+		VMarkdown
+	},
 	setup(props, context) {
 		const {	correlationId,
 			error,
@@ -130,8 +140,15 @@ export default {
 			notImplementedError,
 			success,
 			serviceStore,
+			textChartDesc,
+			textDesc,
+			textGuidance1,
+			textGuidance2,
+			textGuidance3,
+			textWhatIs,
 			content,
 			data,
+			haveLinks,
 			links,
 			temperature
 		} = use3DPrintingBaseComponent(props, context);
@@ -147,8 +164,15 @@ export default {
 			notImplementedError,
 			success,
 			serviceStore,
+			textChartDesc,
+			textDesc,
+			textGuidance1,
+			textGuidance2,
+			textGuidance3,
+			textWhatIs,
 			content,
 			data,
+			haveLinks,
 			links,
 			temperature
 		};

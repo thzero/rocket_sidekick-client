@@ -1,5 +1,5 @@
 <script>
-import { computed } from 'vue';
+import { computed, ref } from 'vue';
 
 import LibraryConstants from '@thzero/library_client/constants';
 
@@ -21,6 +21,13 @@ export function use3DPrintingBaseComponent(props, context, options) {
 	} = useContentBaseComponent(props, context, options);
 
 	const serviceStore = GlobalUtility.$injector.getService(LibraryConstants.InjectorKeys.SERVICE_STORE);
+
+	const textChartDesc = ref(GlobalUtility.$trans.t('strings.content.info.3dprinting.chartDesc'));
+	const textDesc = ref(GlobalUtility.$trans.t('strings.content.info.3dprinting.desc'));
+	const textGuidance1 = ref(GlobalUtility.$trans.t('strings.content.info.3dprinting.guidance1'));
+	const textGuidance2 = ref(GlobalUtility.$trans.t('strings.content.info.3dprinting.guidance2'));
+	const textGuidance3 = ref(GlobalUtility.$trans.t('strings.content.info.3dprinting.guidance3'));
+	const textWhatIs = ref(GlobalUtility.$trans.t('strings.content.info.3dprinting.whatIs'));
 	
 	const content = computed(() => {
 		let temp = serviceStore.getters.getContent();
@@ -66,6 +73,12 @@ export function use3DPrintingBaseComponent(props, context, options) {
 		notImplementedError,
 		success,
 		serviceStore,
+		textChartDesc,
+		textDesc,
+		textGuidance1,
+		textGuidance2,
+		textGuidance3,
+		textWhatIs,
 		content,
 		data,
 		haveLinks,
