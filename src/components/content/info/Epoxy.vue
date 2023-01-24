@@ -7,12 +7,12 @@
 		</v-row>
 		<v-row dense>
 			<v-col cols="12">
-<VMarkdown v-model="desc" :use-github=false />
+<VMarkdown v-model="textDesc" :use-github=false />
 			</v-col>
 		</v-row>
 		<v-row dense>
 			<v-col cols="12">
-<VMarkdown v-model="guidance1" :use-github=false />
+<VMarkdown v-model="textGuidance1" :use-github=false />
 			</v-col>
 		</v-row>
 		<v-row dense>
@@ -22,7 +22,7 @@
 		</v-row>
 		<v-row dense>
 			<v-col cols="12">
-<VMarkdown v-model="chartDesc" :use-github=false />
+<VMarkdown v-model="textChartDesc" :use-github=false />
 			</v-col>
 		</v-row>
 		<v-row dense>
@@ -195,9 +195,9 @@ export default {
 			notImplementedError,
 			success,
 			serviceStore,
-			chartDesc,
-			desc,
-			guidance1,
+			textChartDesc,
+			textDesc,
+			textGuidance1,
 			content,
 			data,
 			haveLinks,
@@ -216,9 +216,9 @@ export default {
 			notImplementedError,
 			success,
 			serviceStore,
-			chartDesc,
-			desc,
-			guidance1,
+			textChartDesc,
+			textDesc,
+			textGuidance1,
 			content,
 			data,
 			haveLinks,

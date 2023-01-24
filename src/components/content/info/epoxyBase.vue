@@ -22,9 +22,9 @@ export function useEpoxyBaseComponent(props, context, options) {
 
 	const serviceStore = GlobalUtility.$injector.getService(LibraryConstants.InjectorKeys.SERVICE_STORE);
 
-	const chartDesc = ref(GlobalUtility.$trans.t('strings.content.info.epoxy.chartDesc'));
-	const desc = ref(GlobalUtility.$trans.t('strings.content.info.epoxy.desc'));
-	const guidance1 = ref(GlobalUtility.$trans.t('strings.content.info.epoxy.guidance1'));
+	const textChartDesc = ref(GlobalUtility.$trans.t('strings.content.info.epoxy.chartDesc'));
+	const textDesc = ref(GlobalUtility.$trans.t('strings.content.info.epoxy.desc'));
+	const textGuidance1 = ref(GlobalUtility.$trans.t('strings.content.info.epoxy.guidance1'));
 	
 	const content = computed(() => {
 		let temp = serviceStore.getters.getContent();
@@ -70,9 +70,9 @@ export function useEpoxyBaseComponent(props, context, options) {
 		notImplementedError,
 		success,
 		serviceStore,
-		chartDesc,
-		desc,
-		guidance1,
+		textChartDesc,
+		textDesc,
+		textGuidance1,
 		content,
 		data,
 		haveLinks,
