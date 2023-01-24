@@ -473,6 +473,7 @@
 			},
 			"info": {
 				"title": "Info",
+				"3dprinting": "3D Printing", 
 				"epoxy": "Epoxy",
 				"highPower": "High Power"
 			},
@@ -634,6 +635,22 @@
 		},
 		"content": {
 			"info": {
+				"3dprinting": {
+					"additionalLinks": "Additional Links",
+					"desc": "This article discusses some information about 3d printing in respect to model rocketry.   First, What is 3D printing?",
+					"quote": "3D printing or additive manufacturing is a process of making three dimensional solid objects from a digital file.The creation of a 3D printed object is achieved using additive processes. In an additive process an object is created by laying down successive layers of material until the object is created. Each of these layers can be seen as a thinly sliced cross-section of the object. 3D printing is the opposite of subtractive manufacturing which is cutting out / hollowing out a piece of metal or plastic with for instance a milling machine.3D printing enables you to produce complex shapes using less material than traditional manufacturing methods.",
+					"chart": "Chart",
+					"chartDesc": "A chart listing some gerneral aspects of different common types of filaments, but not all.  This is directionally as the values different across the different vendors ([eSun](https://www.esun3d.com/) is used here).",
+					"recommendation1": "",
+					"compressionStrength": "Compression strength (psi)",
+					"deflectionTemp": "Deflection temperature",
+					"density": "Density (g/cm3)",
+                    "impact" : "IZOD Impact Strength (kJ/㎡)",
+                    "flexuralModulus" : "Flexural Modulus (MPa)",
+                    "flexuralStrength" : "Flexural Strength (MPa)",
+                    "tensileElongation" : "Elongation at Break (%)",
+                    "tensileStrength" : "Tensile Strength (MPa)"
+				},
 				"epoxy": {
 					"additionalLinks": "Additional Links",
 					"desc": "Chart comparing specifications of some common epoxies, plus some additional links about epoxies and model rocketry.",
@@ -749,6 +766,7 @@
 		"content": {
 			"info": {
 				"title": "Information", 
+				"3dprinting": "3D Printing", 
 				"epoxy": "Epoxy", 
 				"highPower": "High Power Rocketry"
 			},
