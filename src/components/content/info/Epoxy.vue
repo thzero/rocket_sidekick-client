@@ -7,12 +7,22 @@
 		</v-row>
 		<v-row dense>
 			<v-col cols="12">
-				{{ $t('strings.content.info.epoxy.desc') }}
+<VMarkdown v-model="desc" :use-github=false />
+			</v-col>
+		</v-row>
+		<v-row dense>
+			<v-col cols="12">
+<VMarkdown v-model="guidance1" :use-github=false />
 			</v-col>
 		</v-row>
 		<v-row dense>
 			<v-col cols="12" class="text-center text-h5 pb-2">
 				{{ $t('strings.content.info.epoxy.chart') }}
+			</v-col>
+		</v-row>
+		<v-row dense>
+			<v-col cols="12">
+<VMarkdown v-model="chartDesc" :use-github=false />
 			</v-col>
 		</v-row>
 		<v-row dense>
@@ -167,8 +177,13 @@
 <script>
 import { useEpoxyBaseComponent } from '@/components/content/info/epoxyBase';
 
+import VMarkdown from '@/library_vue_vuetify/components/markup/VMarkdown';
+
 export default {
 	name: 'Epxoy',
+	components: {
+		VMarkdown
+	},
 	setup(props, context) {
 		const {	correlationId,
 			error,
@@ -180,8 +195,12 @@ export default {
 			notImplementedError,
 			success,
 			serviceStore,
+			chartDesc,
+			desc,
+			guidance1,
 			content,
 			data,
+			haveLinks,
 			links,
 			temperature
 		} = useEpoxyBaseComponent(props, context);
@@ -197,8 +216,12 @@ export default {
 			notImplementedError,
 			success,
 			serviceStore,
+			chartDesc,
+			desc,
+			guidance1,
 			content,
 			data,
+			haveLinks,
 			links,
 			temperature
 		};

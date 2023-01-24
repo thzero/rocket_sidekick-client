@@ -1,5 +1,5 @@
 <script>
-import { computed } from 'vue';
+import { computed, ref } from 'vue';
 
 import LibraryConstants from '@thzero/library_client/constants';
 
@@ -21,6 +21,10 @@ export function useEpoxyBaseComponent(props, context, options) {
 	} = useContentBaseComponent(props, context, options);
 
 	const serviceStore = GlobalUtility.$injector.getService(LibraryConstants.InjectorKeys.SERVICE_STORE);
+
+	const chartDesc = ref(GlobalUtility.$trans.t('strings.content.info.epoxy.chartDesc'));
+	const desc = ref(GlobalUtility.$trans.t('strings.content.info.epoxy.desc'));
+	const guidance1 = ref(GlobalUtility.$trans.t('strings.content.info.epoxy.guidance1'));
 	
 	const content = computed(() => {
 		let temp = serviceStore.getters.getContent();
@@ -66,6 +70,9 @@ export function useEpoxyBaseComponent(props, context, options) {
 		notImplementedError,
 		success,
 		serviceStore,
+		chartDesc,
+		desc,
+		guidance1,
 		content,
 		data,
 		haveLinks,
