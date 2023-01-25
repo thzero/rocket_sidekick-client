@@ -60,18 +60,16 @@ export function use3DPrintingBaseComponent(props, context, options) {
 	// ]);
 	// const textChartDesc = ref(GlobalUtility.$trans.t('strings.content.info.3dprinting.chartDesc'));
 	// const textDesc = ref(GlobalUtility.$trans.t('strings.content.info.3dprinting.desc'));
-	// const textGuidance1 = ref(GlobalUtility.$trans.t('strings.content.info.3dprinting.guidance1'));
+	// const textDefinition = ref(GlobalUtility.$trans.t('strings.content.info.3dprinting.whatIs'));
+	// const textMarkup = ref(GlobalUtility.$trans.t('strings.content.info.3dprinting.guidance1'));
 	// const textGuidance2 = ref(GlobalUtility.$trans.t('strings.content.info.3dprinting.guidance2'));
 	// const textGuidance3 = ref(GlobalUtility.$trans.t('strings.content.info.3dprinting.guidance3'));
-	// const textWhatIs = ref(GlobalUtility.$trans.t('strings.content.info.3dprinting.whatIs'));
 	
 	const content = ref(null);
 	const textChartDesc = ref(null);
 	const textDesc = ref(null);
-	const textGuidance1 = ref(null);
-	const textGuidance2 = ref(null);
-	const textGuidance3 = ref(null);
-	const textWhatIs = ref(null);
+	const textDefinition = ref(null);
+	const textMarkup = ref(null);
 	
 	// const content = computed(() => {
 	// 	let temp = serviceStore.getters.getContent();
@@ -143,8 +141,8 @@ export function use3DPrintingBaseComponent(props, context, options) {
 
 		textChartDesc.value = response.results.descriptionChart;
 		textDesc.value = response.results.description;
-		textGuidance1.value = response.results.markup;
-		textWhatIs.value = response.results.definition;
+		textDefinition.value = response.results.definition;
+		textMarkup.value = response.results.markup;
 	});
 
 	return {
@@ -162,10 +160,8 @@ export function use3DPrintingBaseComponent(props, context, options) {
 		target,
 		textChartDesc,
 		textDesc,
-		textGuidance1,
-		textGuidance2,
-		textGuidance3,
-		textWhatIs,
+		textDefinition,
+		textMarkup,
 		content,
 		data,
 		haveLinks,

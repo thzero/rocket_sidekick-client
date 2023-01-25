@@ -13,13 +13,13 @@
 		<v-row dense>
 			<v-col cols="12">
 				<q class="font-italic" cite="https://3dprinting.com/what-is-3d-printing">
-<VMarkdown v-model="textWhatIs" :use-github=false tag="span" />
+<VMarkdown v-model="textDefinition" :use-github=false tag="span" />
 				</q> -- <a href="https://3dprinting.com/what-is-3d-printing" target="_blank">3D printing.com)</a>
 			</v-col>
 		</v-row>
 		<v-row dense>
 			<v-col cols="12" md="6">
-<VMarkdown v-model="textGuidance1" :use-github=false />
+<VMarkdown v-model="textMarkup" :use-github=false />
 			</v-col>
 			<v-col cols="12" md="6">
 <v-carousel
@@ -255,10 +255,8 @@ export default {
 			target,
 			textChartDesc,
 			textDesc,
-			textGuidance1,
-			textGuidance2,
-			textGuidance3,
-			textWhatIs,
+			textDefinition,
+			textMarkup,
 			content,
 			data,
 			haveLinks,
@@ -287,10 +285,8 @@ export default {
 			target,
 			textChartDesc,
 			textDesc,
-			textGuidance1,
-			textGuidance2,
-			textGuidance3,
-			textWhatIs,
+			textDefinition,
+			textMarkup,
 			content,
 			data,
 			haveLinks,
