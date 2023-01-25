@@ -139,7 +139,6 @@ export function use3DPrintingBaseComponent(props, context, options) {
 		const response = await serviceStore.dispatcher.requestContentMarkup(correlationId(), 'info.3dprinting');
 		if (hasFailed(response))
 			return;
-		console.log(response.results);
 		content.value = response.results;
 
 		textChartDesc.value = response.results.descriptionChart;
