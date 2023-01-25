@@ -22,11 +22,10 @@ export function useEpoxyBaseComponent(props, context, options) {
 	} = useContentBaseComponent(props, context, options);
 
 	const content = ref(null);
-	const textChartDesc = ref(GlobalUtility.$trans.t('strings.content.info.epoxy.chartDesc'));
-	const textDesc = ref(GlobalUtility.$trans.t('strings.content.info.epoxy.desc'));
-	const textNMarkup = ref(GlobalUtility.$trans.t('strings.content.info.epoxy.guidance1'));
-	const textNMarkup2 = ref(GlobalUtility.$trans.t('strings.content.info.epoxy.guidance2'));
-	const textGuidance3 = ref(GlobalUtility.$trans.t('strings.content.info.epoxy.guidance3'));
+	const textChartDesc = ref(null);
+	const textDesc = ref(null);
+	const textMarkup = ref(null);
+	const textMarkup2 = ref(null);
 	
 	const data = computed(() => {
 		if (!content.value || !content.value.supplemental || !content.value.supplemental.data)
@@ -60,8 +59,8 @@ export function useEpoxyBaseComponent(props, context, options) {
 
 		textChartDesc.value = response.results.descriptionChart;
 		textDesc.value = response.results.description;
-		textNMarkup.value = response.results.markup;
-		textNMarkup2.value = response.results.markup2;
+		textMarkup.value = response.results.markup;
+		textMarkup2.value = response.results.markup2;
 	});
 
 	return {
@@ -79,9 +78,8 @@ export function useEpoxyBaseComponent(props, context, options) {
 		target,
 		textChartDesc,
 		textDesc,
-		textNMarkup,
-		textNMarkup2,
-		textGuidance3,
+		textMarkup,
+		textMarkup2,
 		content,
 		data,
 		haveLinks,
