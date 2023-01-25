@@ -1,5 +1,5 @@
 <script>
-import { computed, ref } from 'vue';
+import { computed, onMounted, ref } from 'vue';
 
 import GlobalUtility from '@thzero/library_client/utility/global';
 
@@ -21,35 +21,27 @@ export function useEpoxyBaseComponent(props, context, options) {
 		target,
 	} = useContentBaseComponent(props, context, options);
 
+	const content = ref(null);
 	const textChartDesc = ref(GlobalUtility.$trans.t('strings.content.info.epoxy.chartDesc'));
 	const textDesc = ref(GlobalUtility.$trans.t('strings.content.info.epoxy.desc'));
-	const textGuidance1 = ref(GlobalUtility.$trans.t('strings.content.info.epoxy.guidance1'));
-	const textGuidance2 = ref(GlobalUtility.$trans.t('strings.content.info.epoxy.guidance2'));
+	const textNMarkup = ref(GlobalUtility.$trans.t('strings.content.info.epoxy.guidance1'));
+	const textNMarkup2 = ref(GlobalUtility.$trans.t('strings.content.info.epoxy.guidance2'));
 	const textGuidance3 = ref(GlobalUtility.$trans.t('strings.content.info.epoxy.guidance3'));
 	
-	const content = computed(() => {
-		let temp = serviceStore.getters.getContent();
-		if (!temp)
-			return [];
-		if (!temp.info)
-			return [];
-		const content = temp.info.find(l => l.id === 'epoxy');
-		return content;
-	});
 	const data = computed(() => {
-		if (!content.value || !content.value.data)
+		if (!content.value || !content.value.supplemental || !content.value.supplemental.data)
 			return [];
-		return content.value.data;
+		return content.value.supplemental.data;
 	});
 	const haveLinks = computed(() => {
-		if (!content.value || !content.value.links)
+		if (!content.value || !content.value.supplemental || !content.value.supplemental.links)
 			return false;
-		return content.value.links.length > 0;
+		return content.value.supplemental.links.length > 0;
 	});
 	const links = computed(() => {
-		if (!content.value || !content.value.links)
+		if (!content.value || !content.value.supplemental || !content.value.supplemental.links)
 			return [];
-		return content.value.links;
+		return content.value.supplemental.links;
 	});
 	const temperature = (tempF, tempC) => {
 		if (String.isNullOrEmpty(tempF))
@@ -58,7 +50,19 @@ export function useEpoxyBaseComponent(props, context, options) {
 		if (!String.isNullOrEmpty(tempC))
 			temp += ` (${tempC}&#8451;)`;
 		return temp;
-	}
+	};
+
+	onMounted(async () => {
+		const response = await serviceStore.dispatcher.requestContentMarkup(correlationId(), 'info.epoxy');
+		if (hasFailed(response))
+			return;
+		content.value = response.results;
+
+		textChartDesc.value = response.results.descriptionChart;
+		textDesc.value = response.results.description;
+		textNMarkup.value = response.results.markup;
+		textNMarkup2.value = response.results.markup2;
+	});
 
 	return {
 		correlationId,
@@ -75,8 +79,8 @@ export function useEpoxyBaseComponent(props, context, options) {
 		target,
 		textChartDesc,
 		textDesc,
-		textGuidance1,
-		textGuidance2,
+		textNMarkup,
+		textNMarkup2,
 		textGuidance3,
 		content,
 		data,

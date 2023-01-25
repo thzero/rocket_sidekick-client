@@ -12,12 +12,12 @@
 		</v-row>
 		<v-row dense>
 			<v-col cols="12">
-<VMarkdown v-model="textGuidance1" :use-github=false />
+<VMarkdown v-model="textNMarkup" :use-github=false />
 			</v-col>
 		</v-row>
 		<v-row dense>
 			<v-col cols="12">
-<VMarkdown v-model="textGuidance2" :use-github=false />
+<VMarkdown v-model="textNMarkup2" :use-github=false />
 			</v-col>
 		</v-row>
 		<v-row dense>
@@ -202,8 +202,8 @@ export default {
 			serviceStore,
 			textChartDesc,
 			textDesc,
-			textGuidance1,
-			textGuidance2,
+			textNMarkup,
+			textNMarkup2,
 			textGuidance3,
 			content,
 			data,
@@ -225,8 +225,8 @@ export default {
 			serviceStore,
 			textChartDesc,
 			textDesc,
-			textGuidance1,
-			textGuidance2,
+			textNMarkup,
+			textNMarkup2,
 			textGuidance3,
 			content,
 			data,
