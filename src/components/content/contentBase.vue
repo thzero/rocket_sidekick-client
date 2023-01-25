@@ -19,6 +19,13 @@ export function useContentBaseComponent(props, context, options) {
 	} = useBaseComponent(props, context, options);
 
 	const serviceStore = GlobalUtility.$injector.getService(LibraryConstants.InjectorKeys.SERVICE_STORE);
+	
+	const sortByOrder = (links) => {
+		links.sort((a, b) => a.order >= b.order);
+	};
+	const target = (item) => {
+		return !item.local ? 'blank' : '';
+	};
 
 	return {
 		correlationId,
@@ -30,7 +37,9 @@ export function useContentBaseComponent(props, context, options) {
 		noBreakingSpaces,
 		notImplementedError,
 		success,
-		serviceStore
+		serviceStore,
+		sortByOrder,
+		target
 	};
 };
 </script>

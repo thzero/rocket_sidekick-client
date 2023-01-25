@@ -14,7 +14,9 @@ export function useLinksBaseComponent(props, context, options) {
 		noBreakingSpaces,
 		notImplementedError,
 		success,
-		serviceStore
+		serviceStore,
+		sort,
+		target
 	} = useContentBaseComponent(props, context, options);
 
 	const links = computed(() => {
@@ -75,14 +77,6 @@ export function useLinksBaseComponent(props, context, options) {
 			return [];
 		return links.value.filter(l => l.category === 'video');
 	});
-	
-	const target = (item) => {
-		return !item.local ? 'blank' : '';
-	};
-
-	const sort = (links) => {
-		links.sort((a, b) => a.order >= b.order);
-	};
 
 	return {
 		correlationId,

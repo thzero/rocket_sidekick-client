@@ -5,7 +5,7 @@ import Constants from '@/constants';
 
 import GlobalUtility from '@thzero/library_client/utility/global';
 
-import { useBaseControlEditComponent } from '@/library_vue/components/baseControlEdit';
+import { useToolsBaseComponent } from '@/components/content/tools/toolsBase';
 
 export function useMeasurementSelectBaseComponent(props, context, options) {
 	const {
@@ -18,6 +18,9 @@ export function useMeasurementSelectBaseComponent(props, context, options) {
 		noBreakingSpaces,
 		notImplementedError,
 		success,
+		serviceStore,
+		sortByOrder,
+		target,
 		isSaving,
 		serverErrors,
 		setErrors,
@@ -28,7 +31,7 @@ export function useMeasurementSelectBaseComponent(props, context, options) {
 		innerValue,
 		initValue,
 		innerValueUpdate
-	} = useBaseControlEditComponent(props, context, options);
+	} = useToolsBaseComponent(props, context, options);
 
 	const measurementUnits = computed(() => {
 		if (props.measurementUnitsId === Constants.MeasurementUnits.english.id)
@@ -52,6 +55,9 @@ export function useMeasurementSelectBaseComponent(props, context, options) {
 		noBreakingSpaces,
 		notImplementedError,
 		success,
+		serviceStore,
+		sortByOrder,
+		target,
 		isSaving,
 		serverErrors,
 		setErrors,

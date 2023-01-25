@@ -775,6 +775,11 @@
 			},
 			"links": {
 				"title": "Links",
+				"3dprinting": {
+					"collections": "Collections of 3D Models",
+					"modeling": "3D CAD Software",
+					"tools": "3D Model Generation Tools"
+				},
 				"construction": "Construction",
 				"books": "Books",
 				"competitions": "Competitions",

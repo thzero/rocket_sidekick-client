@@ -16,7 +16,9 @@ export function useHighPowerBaseComponent(props, context, options) {
 		noBreakingSpaces,
 		notImplementedError,
 		success,
-		serviceStore
+		serviceStore,
+		sortByOrder,
+		target,
 	} = useContentBaseComponent(props, context, options);
 
 	const slides = ref([
@@ -129,14 +131,6 @@ export function useHighPowerBaseComponent(props, context, options) {
 		return output.sort((a, b) => temp.compare(a.title, b.title));
 	});
 
-	const sort = (links) => {
-		links.sort((a, b) => a.order >= b.order);
-	};
-	
-	const target = (item) => {
-		return !item.local ? 'blank' : '';
-	};
-
 	return {
 		correlationId,
 		error,
@@ -147,6 +141,9 @@ export function useHighPowerBaseComponent(props, context, options) {
 		noBreakingSpaces,
 		notImplementedError,
 		success,
+		serviceStore,
+		sortByOrder,
+		target,
 		slides,
 		highPower,
 		highPowerLinks,
@@ -161,9 +158,7 @@ export function useHighPowerBaseComponent(props, context, options) {
 		linksStudyGuides,
 		linksTools,
 		linksVendors,
-		linksVideos,
-		sort,
-		target
+		linksVideos
 	};
 };
 </script>

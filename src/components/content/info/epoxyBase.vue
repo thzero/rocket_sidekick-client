@@ -1,8 +1,6 @@
 <script>
 import { computed, ref } from 'vue';
 
-import LibraryConstants from '@thzero/library_client/constants';
-
 import GlobalUtility from '@thzero/library_client/utility/global';
 
 import { useContentBaseComponent } from '@/components/content/contentBase';
@@ -17,10 +15,11 @@ export function useEpoxyBaseComponent(props, context, options) {
 		logger,
 		noBreakingSpaces,
 		notImplementedError,
-		success
+		success,
+		serviceStore,
+		sortByOrder,
+		target,
 	} = useContentBaseComponent(props, context, options);
-
-	const serviceStore = GlobalUtility.$injector.getService(LibraryConstants.InjectorKeys.SERVICE_STORE);
 
 	const textChartDesc = ref(GlobalUtility.$trans.t('strings.content.info.epoxy.chartDesc'));
 	const textDesc = ref(GlobalUtility.$trans.t('strings.content.info.epoxy.desc'));
@@ -72,6 +71,8 @@ export function useEpoxyBaseComponent(props, context, options) {
 		notImplementedError,
 		success,
 		serviceStore,
+		sortByOrder,
+		target,
 		textChartDesc,
 		textDesc,
 		textGuidance1,

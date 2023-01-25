@@ -33,6 +33,8 @@ export function useFoamBaseComponent(props, context, options) {
 		measurementUnitsWeightDefaultId,
 		resetFormI,
 		serviceStore,
+		sortByOrder,
+		target,
 		toFixed,
 		settings,
 	} = useToolsBaseComponent(props, context, options);
@@ -151,6 +153,8 @@ export function useFoamBaseComponent(props, context, options) {
 		measurementUnitsWeightDefaultId,
 		resetFormI,
 		serviceStore,
+		sortByOrder,
+		target,
 		toFixed,
 		settings,
 		serviceToolsFoam,

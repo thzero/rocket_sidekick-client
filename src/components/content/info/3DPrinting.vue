@@ -18,8 +18,39 @@
 			</v-col>
 		</v-row>
 		<v-row dense>
-			<v-col cols="12">
+			<v-col cols="12" md="6">
 <VMarkdown v-model="textGuidance1" :use-github=false />
+			</v-col>
+			<v-col cols="12" md="6">
+<v-carousel
+	cycle
+	height="800"
+	hide-delimiter-background
+	show-arrows="hover"
+>
+	<v-carousel-item
+		v-for="(slide, i) in slides"
+			:key="i"
+		>
+		<v-sheet
+			height="100%"
+		>
+			<div class="d-flex fill-height justify-center align-center">
+				<table>
+					<tr><td>
+						<img :src="slideUrl(slide.url)" style="width: 600px" />
+					</td></tr>
+					<tr><td
+						v-if="slide.desc"
+						class="text-center"
+					>
+						{{ slide.desc }}
+					</td></tr>
+				</table>
+			</div>
+		</v-sheet>
+	</v-carousel-item>
+</v-carousel>
 			</v-col>
 		</v-row>
 		<v-row dense>
@@ -102,10 +133,10 @@
 			<v-col cols="12" class="text-center text-h5 pt-4 pb-2">
 				{{ $t('strings.content.info.3dprinting.additionalLinks') }}
 			</v-col>
-			<v-col cols="12" class="pb-2">
+			<!-- <v-col cols="12" md="6" class="pb-2">
 				<div
 					v-for="item in links"
-					:key="item.url"
+					:key="item.link"
 				>
 					<a 
 						:href="item.url"
@@ -114,6 +145,86 @@
 					{{ !String.isNullOrEmpty(item.title) ? item.title : item.url}}
 					</a><br/>
 				</div>
+			</v-col> -->
+			<v-col cols="12" md="6">
+				<v-card>
+					<v-card-title>
+	<p class="text-h6 text-center">{{ $t('titles.content.links.general') }}</p>
+					</v-card-title>
+					<v-card-text>
+		<v-list density="compact">
+			<v-list-item
+				v-for="item in linksGeneral"
+				:key="item.name"
+				:href="item.link"
+				:target="target(item)"
+				class="link"
+			>
+				<v-list-item-title>{{ $t(item.title) }}</v-list-item-title>
+			</v-list-item>
+		</v-list>
+					</v-card-text>
+				</v-card>
+			</v-col>
+			<v-col cols="12" md="6">
+				<v-card>
+					<v-card-title>
+	<p class="text-h6 text-center">{{ $t('titles.content.links.3dprinting.collections') }}</p>
+					</v-card-title>
+					<v-card-text>
+		<v-list density="compact">
+			<v-list-item
+				v-for="item in linksCollections"
+				:key="item.name"
+				:href="item.link"
+				:target="target(item)"
+				class="link"
+			>
+				<v-list-item-title>{{ $t(item.title) }}</v-list-item-title>
+			</v-list-item>
+		</v-list>
+					</v-card-text>
+				</v-card>
+			</v-col>
+			<v-col cols="12" md="6">
+				<v-card>
+					<v-card-title>
+	<p class="text-h6 text-center">{{ $t('titles.content.links.3dprinting.modeling') }}</p>
+					</v-card-title>
+					<v-card-text>
+		<v-list density="compact">
+			<v-list-item
+				v-for="item in linksModeling"
+				:key="item.name"
+				:href="item.link"
+				:target="target(item)"
+				class="link"
+			>
+				<v-list-item-title>{{ $t(item.title) }}</v-list-item-title>
+			</v-list-item>
+		</v-list>
+					</v-card-text>
+				</v-card>
+			</v-col>
+			<v-col cols="12" md="6">
+				<v-card>
+					<v-card-title>
+	<p class="text-h6 text-center">{{ $t('titles.content.links.3dprinting.tools') }}</p>
+					</v-card-title>
+					<v-card-text>
+		<v-list density="compact">
+			<v-list-item
+				v-for="item in linksTools"
+				:key="item.name"
+				:href="item.link"
+				:target="target(item)"
+				class="link"
+			>
+				<v-list-item-title>{{ $t(item.title) }}</v-list-item-title>
+			</v-list-item>
+		</v-list>
+					</v-card-text>
+				</v-card>
 			</v-col>
 		</v-row>
 	</div>
@@ -140,6 +251,8 @@ export default {
 			notImplementedError,
 			success,
 			serviceStore,
+			sort,
+			target,
 			textChartDesc,
 			textDesc,
 			textGuidance1,
@@ -150,6 +263,12 @@ export default {
 			data,
 			haveLinks,
 			links,
+			linksCollections,
+			linksGeneral,
+			linksModeling,
+			linksTools,
+			slides,
+			slideUrl,
 			temperature
 		} = use3DPrintingBaseComponent(props, context);
 
@@ -164,6 +283,8 @@ export default {
 			notImplementedError,
 			success,
 			serviceStore,
+			sort,
+			target,
 			textChartDesc,
 			textDesc,
 			textGuidance1,
@@ -174,6 +295,12 @@ export default {
 			data,
 			haveLinks,
 			links,
+			linksCollections,
+			linksGeneral,
+			linksModeling,
+			linksTools,
+			slides,
+			slideUrl,
 			temperature
 		};
 	}
@@ -181,11 +308,14 @@ export default {
 </script>
 
 <style scoped>
-	.header {
-		writing-mode: vertical-rl;
-		transform: rotate(180deg);
-		text-align: left;
-		margin-bottom: 12px;
-		min-height: 100px;
-	}
+.header {
+	writing-mode: vertical-rl;
+	transform: rotate(180deg);
+	text-align: left;
+	margin-bottom: 12px;
+	min-height: 100px;
+}
+.link {
+	text-decoration: underline;
+}
 </style>
