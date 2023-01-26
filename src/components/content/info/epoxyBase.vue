@@ -1,8 +1,6 @@
 <script>
 import { computed, onMounted, ref } from 'vue';
 
-import GlobalUtility from '@thzero/library_client/utility/global';
-
 import { useContentBaseComponent } from '@/components/content/contentBase';
 
 export function useEpoxyBaseComponent(props, context, options) {
@@ -76,11 +74,11 @@ export function useEpoxyBaseComponent(props, context, options) {
 		serviceStore,
 		sortByOrder,
 		target,
+		content,
 		textChartDesc,
 		textDesc,
 		textMarkup,
 		textMarkup2,
-		content,
 		data,
 		haveLinks,
 		links,

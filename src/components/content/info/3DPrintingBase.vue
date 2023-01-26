@@ -21,65 +21,12 @@ export function use3DPrintingBaseComponent(props, context, options) {
 		target,
 	} = useContentBaseComponent(props, context, options);
 
-	// const slides = ref([
-	// 	{
-	// 		type: 'image',
-	// 		url: Constants.External.imnages + '/3dprinting/PXL_20230119_194542677.jpg',
-	// 		desc: 'Electronics for two Eggtimer Quantum or Featherweight Raven altimeters'
-	// 	},
-	// 	{
-	// 		type: 'image',
-	// 		url: Constants.External.imnages + '/3dprinting/PXL_20230122_174744273.jpg',
-	// 		desc: 'Electronics Bay for two MissileWorks RRC3 altimeters'
-	// 	},
-	// 	{
-	// 		type: 'image',
-	// 		url: Constants.External.imnages + '/3dprinting/PXL_20221205_164103587.jpg',
-	// 		desc: 'Fin Guide for bonding fins'
-	// 	},
-	// 	{
-	// 		type: 'image',
-	// 		url: Constants.External.imnages + '/3dprinting/PXL_20220224_145008984.jpg',
-	// 		desc: '3D printed fins with built in airfoil'
-	// 	},
-	// 	{
-	// 		type: 'image',
-	// 		url: Constants.External.imnages + '/3dprinting/PXL_20210922_231341112.jpg',
-	// 		desc: 'Mobius Mini 2 Camera external holder'
-	// 	},
-	// 	{
-	// 		type: 'image',
-	// 		url: Constants.External.imnages + '/3dprinting/PXL_20230109_163038385.jpg',
-	// 		desc: 'Ejection charge cannister'
-	// 	},
-	// 	{
-	// 		type: 'image',
-	// 		url: Constants.External.imnages + '/3dprinting/PXL_20230119_214200985.jpg',
-	// 		desc: 'Holder for electronics such as GPS trackers'
-	// 	}
-	// ]);
-	// const textChartDesc = ref(GlobalUtility.$trans.t('strings.content.info.3dprinting.chartDesc'));
-	// const textDesc = ref(GlobalUtility.$trans.t('strings.content.info.3dprinting.desc'));
-	// const textDefinition = ref(GlobalUtility.$trans.t('strings.content.info.3dprinting.whatIs'));
-	// const textMarkup = ref(GlobalUtility.$trans.t('strings.content.info.3dprinting.guidance1'));
-	// const textGuidance2 = ref(GlobalUtility.$trans.t('strings.content.info.3dprinting.guidance2'));
-	// const textGuidance3 = ref(GlobalUtility.$trans.t('strings.content.info.3dprinting.guidance3'));
-	
 	const content = ref(null);
 	const textChartDesc = ref(null);
 	const textDesc = ref(null);
 	const textDefinition = ref(null);
 	const textMarkup = ref(null);
 	
-	// const content = computed(() => {
-	// 	let temp = serviceStore.getters.getContent();
-	// 	if (!temp)
-	// 		return [];
-	// 	if (!temp.info)
-	// 		return [];
-	// 	const content = temp.info.find(l => l.id === '3dprinting');
-	// 	return content;
-	// });
 	const data = computed(() => {
 		if (!content.value || !content.value.supplemental || !content.value.supplemental.data)
 			return [];
