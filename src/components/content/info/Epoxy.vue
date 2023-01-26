@@ -6,8 +6,28 @@
 			</v-col>
 		</v-row>
 		<v-row dense>
+			<v-col cols="12">
+<VMarkdown v-model="textDesc" :use-github=false />
+			</v-col>
+		</v-row>
+		<v-row dense>
+			<v-col cols="12">
+<VMarkdown v-model="textMarkup" :use-github=false />
+			</v-col>
+		</v-row>
+		<v-row dense>
+			<v-col cols="12">
+<VMarkdown v-model="textMarkup2" :use-github=false />
+			</v-col>
+		</v-row>
+		<v-row dense>
 			<v-col cols="12" class="text-center text-h5 pb-2">
 				{{ $t('strings.content.info.epoxy.chart') }}
+			</v-col>
+		</v-row>
+		<v-row dense>
+			<v-col cols="12">
+<VMarkdown v-model="textChartDesc" :use-github=false />
 			</v-col>
 		</v-row>
 		<v-row dense>
@@ -117,20 +137,28 @@
 							<td
 								v-for="item in data"
 								:key="item.name"
-							>{{ item.maxUseTemp }}</td>
+							>
+								<div v-html="temperature(item.maxUseTempF, item.maxUseTempC)"></div>
+								<div>{{ item.maxUseTemp }}</div>
+							</td>
 						</tr>
 						<tr>
 							<td>{{ $t('strings.content.info.epoxy.deflectionTemp') }}</td>
 							<td
 								v-for="item in data"
 								:key="item.name"
-							>{{ item.deflectionTemp }}</td>
+							>
+								<div v-html="temperature(item.deflectionTempF, item.deflectionTempC)"></div>
+								<div>{{ item.deflectionTemp }}</div>
+							</td>
 						</tr>
 					</tbody>
 				</v-table>
 			</v-col>
 		</v-row>
-		<v-row dense>
+		<v-row dense
+			v-if="haveLinks"
+		>
 			<v-col cols="12" class="text-center text-h5 pt-4 pb-2">
 				{{ $t('strings.content.info.epoxy.additionalLinks') }}
 			</v-col>
@@ -154,8 +182,13 @@
 <script>
 import { useEpoxyBaseComponent } from '@/components/content/info/epoxyBase';
 
+import VMarkdown from '@/library_vue_vuetify/components/markup/VMarkdown';
+
 export default {
 	name: 'Epxoy',
+	components: {
+		VMarkdown
+	},
 	setup(props, context) {
 		const {	correlationId,
 			error,
@@ -167,9 +200,15 @@ export default {
 			notImplementedError,
 			success,
 			serviceStore,
+			textChartDesc,
+			textDesc,
+			textMarkup,
+			textMarkup2,
 			content,
 			data,
-			links
+			haveLinks,
+			links,
+			temperature
 		} = useEpoxyBaseComponent(props, context);
 
 		return {
@@ -183,9 +222,15 @@ export default {
 			notImplementedError,
 			success,
 			serviceStore,
+			textChartDesc,
+			textDesc,
+			textMarkup,
+			textMarkup2,
 			content,
 			data,
-			links
+			haveLinks,
+			links,
+			temperature
 		};
 	}
 };

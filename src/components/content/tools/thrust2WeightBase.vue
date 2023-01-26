@@ -35,6 +35,8 @@ export function useThrust2WeightBaseComponent(props, context, options) {
 		measurementUnitsWeightDefaultId,
 		resetFormI,
 		serviceStore,
+		sortByOrder,
+		target,
 		setNotify,
 		toFixed,
 		settings
@@ -289,6 +291,8 @@ export function useThrust2WeightBaseComponent(props, context, options) {
 		measurementUnitsWeightDefaultId,
 		resetFormI,
 		serviceStore,
+		sortByOrder,
+		target,
 		toFixed,
 		settings,
 		serviceToolsThrust2Weight,

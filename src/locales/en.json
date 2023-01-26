@@ -473,6 +473,7 @@
 			},
 			"info": {
 				"title": "Info",
+				"3dprinting": "3D Printing", 
 				"epoxy": "Epoxy",
 				"highPower": "High Power"
 			},
@@ -634,10 +635,29 @@
 		},
 		"content": {
 			"info": {
+				"3dprinting": {
+					"additionalLinks": "Additional Links",
+					"desc": "This article discusses some information about 3d printing in respect to model rocketry.   First, What is 3D printing?",
+					"chart": "Chart",
+					"chartDesc": "A chart listing some gerneral aspects of different common types of filaments, but not all.  This is directionally as the values different across the different vendors ([eSun](https://www.esun3d.com)'s filament properties are shown here).",
+					"guidance1": "## Filaments\nThere are lots of different types of FDM filament available for FDM printers, and even more types of resins for resin printers.   Discussed here are a few of the basic materials most commonly seen, or recommended, in the model rocketry hobby.  [All3DP]('https://all3dp.com') has a good beginning [article]('https://all3dp.com/1/3d-printing-materials-guide-3d-printer-material') on different materials.\n\n### PLA\nFor most hobby grade printers, such as those from Creality, Prusa, etc. that are under $500 or so, the most common filament type is PLA.  Its generally a good all around filmanet for FDM (filament deposit material) printing as its easy to print, readily available in multiple colors and styles.  For those starting in the 3d printing hob However, it is not necessarily the best choice for rocketry.  One of the downsides of PLA is the low deflection temp; this means that the plastic can soften out if left for awhile in the hot car, direct sun, or even if exposed to the heat of the rocket engine and ejection charge. There are some derivatives of PLA formula by vendors, such as PLA+.  Based on the manufacturer specs, these can have enhanced properties including deflection temp that may make them more suitable that standard PLA for rocketry purposes.\n\nRocketSidekick mostly uses PLA for parts and tools such as fin guide and drill guides instead of parts of rockets or parts that attach to rockets.  The other use is for prototyping, especially if you are designing your own rocket parts or tools. As noted, it is easy to print and cheap, so you can print out parts for little cost.\n\n### PETG\nAnother type of filament that is generally easy to print, although it does require slightly tweaks to print settings, is PETG.  If a printer can print PLA, it can print PETG.  For model rocketry purposes PETG has one major benefit over is the higher deflection temperature.  It is not outstanding, but it is significantly higher than PLA that PETG is a common recommendation in forums, etc.  Not all manufacturers, especially on less expensive models, have default PETG printing profiles.  Many printers, such as the Creality Ender series or Prusa series, have either good communities or great manufacturer support or both and often you can find printing profiles, but you may still need to test and expirement. \n\nRocketSidekick uses PETG for all structural parts that are attached to the rocket, as well as nose cones, tail cones, body tube adapters, etc.  \n\n### ABS\nAnother material is ABS, it can be bit better than PETG but its not as easy to print as it requires higher heats and gives off fumes (please see any manufacturers recommendations on printing with ABS), so its typically not a starter filament material.  It does have higher deflection temp that PETG, so if your printer is capable and can safely print it, then it may be even a better choice over PETG.",
+					"compressionStrength": "Compression strength (psi)",
+					"deflectionTemp": "Deflection temperature",
+					"density": "Density (g/cm3)",
+                    "impact" : "IZOD Impact Strength (kJ/㎡)",
+                    "flexuralModulus" : "Flexural Modulus (MPa)",
+                    "flexuralStrength" : "Flexural Strength (MPa)",
+                    "tensileElongation" : "Elongation at Break (%)",
+                    "tensileStrength" : "Tensile Strength (MPa)",
+					"whatIs": "3D printing or additive manufacturing is a process of making three dimensional solid objects from a digital file.The creation of a 3D printed object is achieved using additive processes. In an additive process an object is created by laying down successive layers of material until the object is created. Each of these layers can be seen as a thinly sliced cross-section of the object. 3D printing is the opposite of subtractive manufacturing which is cutting out / hollowing out a piece of metal or plastic with for instance a milling machine.3D printing enables you to produce complex shapes using less material than traditional manufacturing methods."
+				},
 				"epoxy": {
 					"additionalLinks": "Additional Links",
 					"desc": "Chart comparing specifications of some common epoxies, plus some additional links about epoxies and model rocketry.",
+					"guidance1": "RocketSidekick typically uses a combination of epoxies on its projects.\n## Mid Power\nOn most mid power builds, the Bob Smith 15 and 30 minute epoxies are used for bonding purposes.  The 30 minute epoxy is used especially for couplers.  Rocketpoxy is generally used in mid-power for fillets.\n## High Power\nFor high power rockets, the epoxy types can vary but generally Rocketpoxy is used for bonding and fillets, athough occassionally System Three is used with bonding couplers as its more viscous than Rocketpoxy so couplers slide into tubes better.  West Systems is used as laminating epoxy for fiberglassing tubes and fins including tip-to-tip fiberglassing.  Recommendations are noted that West Systems with filler mixed to constistency of peanut butter is also an excellent choice for fillets, but Rocketsidekick has not tried this technique yet.  For min. diameter builds, ProLine has been recommended as a good choice for both bonding root fins to the rocket body as well as the fillets.",
+					"guidance2": "## Motor Mount\nA note about motor mounts and epoxy.  NFPA 1125 sets a maximum case temp of 220&#8451; and while the motor mount material will act as insulation there has been inconclusive research and results on testing different materials to determine expected amounts of heat reduction.  Usual guidance is to use JB Weld to bond motor retainers to the motor tubes, and often recommendations for using JBWeld for the root edges of the fins.  RocketSidekick generally follows this guidance with internal fillets either done with Rocketpoxy or JBWeld.",
 					"chart": "Chart",
+					"chartDesc": "A chart listing some gerneral properties of different epoxies used in rocketry from perferrably manufacturers sites (url's provided where available).  Always refer to the manufacturer for exact details.",
 					"compressionStrength": "Compression strength (psi)",
 					"deflectionTemp": "Deflection temperature",
 					"flexuralModulus": "Flexural modulus (psi)",
@@ -749,11 +769,17 @@
 		"content": {
 			"info": {
 				"title": "Information", 
+				"3dprinting": "3D Printing", 
 				"epoxy": "Epoxy", 
 				"highPower": "High Power Rocketry"
 			},
 			"links": {
 				"title": "Links",
+				"3dprinting": {
+					"collections": "Collections of 3D Models",
+					"modeling": "3D CAD Software",
+					"tools": "3D Model Generation Tools"
+				},
 				"construction": "Construction",
 				"books": "Books",
 				"competitions": "Competitions",

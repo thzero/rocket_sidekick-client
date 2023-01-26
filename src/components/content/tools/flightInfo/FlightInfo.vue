@@ -559,6 +559,8 @@ export default {
 			notImplementedError,
 			success,
 			serviceStore,
+			sortByOrder,
+			target,
 			calculationOutput,
 			dateFormat,
 			dateFormatMask,
@@ -660,7 +662,7 @@ export default {
 		} = useFlightInfoBaseComponent(props, context);
 
 		return {
-			correlationId,
+				correlationId,
 			error,
 			hasFailed,
 			hasSucceeded,
@@ -670,6 +672,8 @@ export default {
 			notImplementedError,
 			success,
 			serviceStore,
+			sortByOrder,
+			target,
 			calculationOutput,
 			dateFormat,
 			dateFormatMask,

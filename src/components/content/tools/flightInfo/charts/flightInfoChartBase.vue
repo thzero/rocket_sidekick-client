@@ -5,7 +5,7 @@ import { Chart, registerables } from 'chart.js';
 
 import GlobalUtility from '@thzero/library_client/utility/global';
 
-import { useBaseComponent } from '@/library_vue/components/base';
+import { useToolsBaseComponent } from '@/components/content/tools/toolsBase';
 
 Chart.register(...registerables);
 
@@ -19,8 +19,11 @@ export function useFlightInfoChartCBaseomponent(props, context, options) {
 		logger,
 		noBreakingSpaces,
 		notImplementedError,
-		success
-	} = useBaseComponent(props, context, options);
+		success,
+		serviceStore,
+		sortByOrder,
+		target,
+	} = useToolsBaseComponent(props, context, options);
 	
 	const chart = ref(null);
 	const chartContext = ref(null);
@@ -180,6 +183,9 @@ export function useFlightInfoChartCBaseomponent(props, context, options) {
 		noBreakingSpaces,
 		notImplementedError,
 		success,
+		serviceStore,
+		sortByOrder,
+		target,
 		chart,
 		chartContext,
 		date,

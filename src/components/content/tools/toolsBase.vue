@@ -18,7 +18,9 @@ export function useToolsBaseComponent(props, context, options) {
 		noBreakingSpaces,
 		notImplementedError,
 		success,
-		serviceStore
+		serviceStore,
+		sortByOrder,
+		target
 	} = useContentBaseComponent(props, context, options);
 
 	const calculationOutput = ref([]);
@@ -152,6 +154,8 @@ export function useToolsBaseComponent(props, context, options) {
 		notImplementedError,
 		success,
 		serviceStore,
+		sortByOrder,
+		target,
 		calculationOutput,
 		dateFormat,
 		dateFormatMask,

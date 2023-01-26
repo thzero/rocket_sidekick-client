@@ -35,6 +35,9 @@ export default {
 			noBreakingSpaces,
 			notImplementedError,
 			success,
+			serviceStore,
+			sortByOrder,
+			target,
 			isSaving,
 			serverErrors,
 			setErrors,
@@ -49,8 +52,7 @@ export default {
 			measurementUnitTrans
 		} = useMeasurementSelectBaseComponent(props, context);
 
-		return {
-			correlationId,
+		return {	correlationId,
 			error,
 			hasFailed,
 			hasSucceeded,
@@ -59,6 +61,9 @@ export default {
 			noBreakingSpaces,
 			notImplementedError,
 			success,
+			serviceStore,
+			sortByOrder,
+			target,
 			isSaving,
 			serverErrors,
 			setErrors,
