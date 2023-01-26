@@ -190,7 +190,8 @@ export default {
 		VMarkdown
 	},
 	setup(props, context) {
-		const {	correlationId,
+		const {	
+			correlationId,
 			error,
 			hasFailed,
 			hasSucceeded,

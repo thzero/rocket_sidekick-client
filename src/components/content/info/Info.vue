@@ -100,7 +100,8 @@ export default {
 			licenseUrl
 		} = useInfoBaseComponent(props, context);
 
-		return {	correlationId,
+		return {	
+			correlationId,
 			error,
 			hasFailed,
 			hasSucceeded,

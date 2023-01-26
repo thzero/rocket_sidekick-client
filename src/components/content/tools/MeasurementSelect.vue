@@ -52,7 +52,8 @@ export default {
 			measurementUnitTrans
 		} = useMeasurementSelectBaseComponent(props, context);
 
-		return {	correlationId,
+		return {	
+			correlationId,
 			error,
 			hasFailed,
 			hasSucceeded,
