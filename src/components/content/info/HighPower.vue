@@ -16,12 +16,14 @@
 	<p class="text-h6 text-center">{{ $t('titles.content.links.general') }}</p>
 					</v-card-title>
 					<v-card-text>
-<p>{{ $t('strings.content.info.highPower.welcome1') }}<br><br></p>
+<VMarkdown v-model="textMarkup" :use-github=false />
 
-		<q class="font-italic" cite="https://www.nar.org/high-power-rocketry-info">{{ $t('strings.content.info.highPower.welcome1NAR') }}.</q> -- <a href="https://www.nar.org" target="_blank">National Association of Rocketry (NAR)</a>
+		<q class="font-italic" cite="https://www.nar.org/high-power-rocketry-info">
+<VMarkdown v-model="textDefinition" :use-github=false tag="span" />
+		</q> -- <a href="https://www.nar.org" target="_blank">National Association of Rocketry (NAR)</a>
 <br><br>
 		
-<p>{{ $t('strings.content.info.highPower.welcome2') }}<br><br></p>
+<VMarkdown v-model="textMarkup2" :use-github=false />
 
 					</v-card-text>
 				</v-card>
@@ -106,7 +108,7 @@
 									height="100%"
 								>
 									<div class="d-flex fill-height justify-center align-center">
-										<img :src="slide.url" v-if="slide.type==='image'" style="height: 800px" />
+										<img :src="slideUrl(slide.url)" v-if="slide.type==='image'" style="height: 800px" />
 										<div v-if="slide.type==='video'" v-html="slide.embed"></div>
 									</div>
 							</v-sheet>
@@ -351,8 +353,13 @@
 <script>
 import { useHighPowerBaseComponent } from '@/components/content/info/highPowerBase';
 
+import VMarkdown from '@/library_vue_vuetify/components/markup/VMarkdown';
+
 export default {
-	name: 'Links',
+	name: 'HighPower',
+	components: {
+		VMarkdown
+	},
 	setup(props, context) {
 		const {
 			correlationId,
@@ -364,8 +371,15 @@ export default {
 			noBreakingSpaces,
 			notImplementedError,
 			success,
-			slides,
-			highPower,
+			serviceStore,
+			sortByOrder,
+			target,
+			content,
+			textChartDesc,
+			textDefinition,
+			textDesc,
+			textMarkup,
+			textMarkup2,
 			highPowerLinks,
 			links,
 			linksBooks,
@@ -379,8 +393,8 @@ export default {
 			linksTools,
 			linksVendors,
 			linksVideos,
-			sort,
-			target
+			slides,
+			slideUrl
 		} = useHighPowerBaseComponent(props, context);
 
 		return {
@@ -393,8 +407,16 @@ export default {
 			noBreakingSpaces,
 			notImplementedError,
 			success,
+			serviceStore,
+			sortByOrder,
+			target,
 			slides,
-			highPower,
+			content,
+			textChartDesc,
+			textDefinition,
+			textDesc,
+			textMarkup,
+			textMarkup2,
 			highPowerLinks,
 			links,
 			linksBooks,
@@ -408,8 +430,8 @@ export default {
 			linksTools,
 			linksVendors,
 			linksVideos,
-			sort,
-			target
+			slides,
+			slideUrl
 		};
 	}
 };

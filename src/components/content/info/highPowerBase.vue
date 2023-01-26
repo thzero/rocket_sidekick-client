@@ -1,5 +1,5 @@
 <script>
-import { computed, ref } from 'vue';
+import { computed, onMounted, ref } from 'vue';
 
 import Constants from '@/constants';
 
@@ -20,48 +20,45 @@ export function useHighPowerBaseComponent(props, context, options) {
 		sortByOrder,
 		target,
 	} = useContentBaseComponent(props, context, options);
+	
+	const content = ref(null);
+	const textChartDesc = ref(null);
+	const textDefinition = ref(null);
+	const textDesc = ref(null);
+	const textMarkup = ref(null);
+	const textMarkup2 = ref(null);
 
-	const slides = ref([
-		{
-			type: 'image',
-			url: Constants.External.imnages + '/highpower/460816-74948bcf6f6ce15869bcdb5a36622a2b.jpeg'
-		},
-		{
-			type: 'image',
-			url: Constants.External.imnages + '/highpower/PXL_20221028_145519749.jpg'
-		},
-		{
-			type: 'image',
-			url: Constants.External.imnages + '/highpower/PXL_20221028_171718106 (2).jpg'
-		},
-		{
-			type: 'video',
-			embed: '<iframe width="1024" height="576" src="https://www.youtube.com/embed/TOHzd8O8kWs" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>'
-		},
-		{
-			type: 'video',
-			embed: '<iframe width="1024" height="576" src="https://www.youtube.com/embed/DgAG1-6QfjE" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>'
-		},
-		{
-			type: 'video',
-			embed: '<iframe width="1024" height="576" src="https://www.youtube.com/embed/TOHzd8O8kWs" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>'
-		}
-	]);
+	// const slides = ref([
+	// 	{
+	// 		type: 'image',
+	// 		url: Constants.External.imnages + '/highpower/460816-74948bcf6f6ce15869bcdb5a36622a2b.jpeg'
+	// 	},
+	// 	{
+	// 		type: 'image',
+	// 		url: Constants.External.imnages + '/highpower/PXL_20221028_145519749.jpg'
+	// 	},
+	// 	{
+	// 		type: 'image',
+	// 		url: Constants.External.imnages + '/highpower/PXL_20221028_171718106 (2).jpg'
+	// 	},
+	// 	{
+	// 		type: 'video',
+	// 		embed: '<iframe width="1024" height="576" src="https://www.youtube.com/embed/TOHzd8O8kWs" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>'
+	// 	},
+	// 	{
+	// 		type: 'video',
+	// 		embed: '<iframe width="1024" height="576" src="https://www.youtube.com/embed/DgAG1-6QfjE" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>'
+	// 	},
+	// 	{
+	// 		type: 'video',
+	// 		embed: '<iframe width="1024" height="576" src="https://www.youtube.com/embed/TOHzd8O8kWs" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>'
+	// 	}
+	// ]);
 
-	const highPower = computed(() => {
-		let temp = serviceStore.getters.getContent();
-		if (!temp)
-			return {};
-		if (!temp.info)
-			return {};
-		return temp.info.find(l => l.id === 'highPower');
-	});
 	const highPowerLinks = computed(() => {
-		if (!highPower.value)
+		if (!content.value || !content.value.supplemental || !content.value.supplemental.links)
 			return [];
-		if (!highPower.value.links)
-			return [];
-		return highPower.value.links.filter(l => l.enabled);
+		return content.value.supplemental.links.filter(l => l.enabled);
 	});
 	const links = computed(() => {
 		let temp = serviceStore.getters.getContent();
@@ -130,6 +127,28 @@ export function useHighPowerBaseComponent(props, context, options) {
 		const temp = Intl.Collator();
 		return output.sort((a, b) => temp.compare(a.title, b.title));
 	});
+	const slides = computed(() => {
+		if (!content.value || !content.value.supplemental || !content.value.supplemental.slides)
+			return [];
+		return content.value.supplemental.slides;
+	});
+
+	const slideUrl = (url) => {
+		return Constants.External.imnages + url;
+	};
+
+	onMounted(async () => {
+		const response = await serviceStore.dispatcher.requestContentMarkup(correlationId(), 'info.highPower');
+		if (hasFailed(response))
+			return;
+		content.value = response.results;
+
+		textChartDesc.value = response.results.descriptionChart;
+		textDefinition.value = response.results.definition;
+		textDesc.value = response.results.description;
+		textMarkup.value = response.results.markup;
+		textMarkup2.value = response.results.markup2;
+	});
 
 	return {
 		correlationId,
@@ -145,7 +164,12 @@ export function useHighPowerBaseComponent(props, context, options) {
 		sortByOrder,
 		target,
 		slides,
-		highPower,
+		content,
+		textChartDesc,
+		textDefinition,
+		textDesc,
+		textMarkup,
+		textMarkup2,
 		highPowerLinks,
 		links,
 		linksBooks,
@@ -158,7 +182,9 @@ export function useHighPowerBaseComponent(props, context, options) {
 		linksStudyGuides,
 		linksTools,
 		linksVendors,
-		linksVideos
+		linksVideos,
+		slides,
+		slideUrl
 	};
 };
 </script>
