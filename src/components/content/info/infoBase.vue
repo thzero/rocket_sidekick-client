@@ -3,9 +3,6 @@ import { useRoute } from 'vue-router';
 import { computed, onMounted, ref } from 'vue';
 
 import Constants from '@/common/constants';
-import LibraryConstants from '@thzero/library_client/constants';
-
-import GlobalUtility from '@thzero/library_client/utility/global';
 
 import { useContentBaseComponent } from '@/components/content/contentBase';
 
