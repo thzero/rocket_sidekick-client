@@ -113,7 +113,7 @@ const routes = [
 					{
 						path: '',
 						name: 'content_info',
-						component: () => import(/* webpackPrefetch: true */ /* webpackChunkName: "group-content-info" */ './components/content/info/Info.vue'),
+						component: () => import(/* webpackPrefetch: true */ /* webpackChunkName: "group-content-info" */ './components/content/info/InfoMarkup.vue'),
 						meta: {
 							requiresAuth: false
 						}

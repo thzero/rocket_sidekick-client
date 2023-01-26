@@ -7,17 +7,17 @@
 		</v-row>
 		<v-row dense>
 			<v-col cols="12">
-<VMarkdown v-model="textDesc" :use-github=false />
+<VMarkdown v-model="contentDesc" :use-github=false />
 			</v-col>
 		</v-row>
 		<v-row dense>
 			<v-col cols="12">
-<VMarkdown v-model="textMarkup" :use-github=false />
+<VMarkdown v-model="contentMarkup" :use-github=false />
 			</v-col>
 		</v-row>
 		<v-row dense>
 			<v-col cols="12">
-<VMarkdown v-model="textMarkup2" :use-github=false />
+<VMarkdown v-model="contentMarkup2" :use-github=false />
 			</v-col>
 		</v-row>
 		<v-row dense>
@@ -27,7 +27,7 @@
 		</v-row>
 		<v-row dense>
 			<v-col cols="12">
-<VMarkdown v-model="textChartDesc" :use-github=false />
+<VMarkdown v-model="contentChartDesc" :use-github=false />
 			</v-col>
 		</v-row>
 		<v-row dense>
@@ -176,17 +176,28 @@
 				</div>
 			</v-col>
 		</v-row>
+		<v-row dense>
+			<v-col cols="12" class="text-center text-h5 pb-2; float: right">
+				<v-card>
+					<v-card-text class="float: right">
+<Attribution v-model="content" v-if="hasAttribution" @has-attribution="handleAttribution" />
+					</v-card-text>
+				</v-card>
+			</v-col>
+		</v-row>
 	</div>
 </template>
 		
 <script>
 import { useEpoxyBaseComponent } from '@/components/content/info/epoxyBase';
 
+import Attribution from '@/components/content/info/Attribution';
 import VMarkdown from '@/library_vue_vuetify/components/markup/VMarkdown';
 
 export default {
 	name: 'Epxoy',
 	components: {
+		Attribution,
 		VMarkdown
 	},
 	setup(props, context) {
@@ -201,11 +212,17 @@ export default {
 			notImplementedError,
 			success,
 			serviceStore,
-			textChartDesc,
-			textDesc,
-			textMarkup,
-			textMarkup2,
+			sortByOrder,
+			target,
 			content,
+			contentDesc,
+			contentDefinition,
+			contentMarkup,
+			contentTitle,
+			handleAttribution,
+			hasAttribution,
+			contentChartDesc,
+			contentMarkup2,
 			data,
 			haveLinks,
 			links,
@@ -223,11 +240,17 @@ export default {
 			notImplementedError,
 			success,
 			serviceStore,
-			textChartDesc,
-			textDesc,
-			textMarkup,
-			textMarkup2,
+			sortByOrder,
+			target,
 			content,
+			contentDesc,
+			contentDefinition,
+			contentMarkup,
+			contentTitle,
+			handleAttribution,
+			hasAttribution,
+			contentChartDesc,
+			contentMarkup2,
 			data,
 			haveLinks,
 			links,
