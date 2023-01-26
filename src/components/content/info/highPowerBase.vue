@@ -28,33 +28,6 @@ export function useHighPowerBaseComponent(props, context, options) {
 	const textMarkup = ref(null);
 	const textMarkup2 = ref(null);
 
-	// const slides = ref([
-	// 	{
-	// 		type: 'image',
-	// 		url: Constants.External.imnages + '/highpower/460816-74948bcf6f6ce15869bcdb5a36622a2b.jpeg'
-	// 	},
-	// 	{
-	// 		type: 'image',
-	// 		url: Constants.External.imnages + '/highpower/PXL_20221028_145519749.jpg'
-	// 	},
-	// 	{
-	// 		type: 'image',
-	// 		url: Constants.External.imnages + '/highpower/PXL_20221028_171718106 (2).jpg'
-	// 	},
-	// 	{
-	// 		type: 'video',
-	// 		embed: '<iframe width="1024" height="576" src="https://www.youtube.com/embed/TOHzd8O8kWs" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>'
-	// 	},
-	// 	{
-	// 		type: 'video',
-	// 		embed: '<iframe width="1024" height="576" src="https://www.youtube.com/embed/DgAG1-6QfjE" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>'
-	// 	},
-	// 	{
-	// 		type: 'video',
-	// 		embed: '<iframe width="1024" height="576" src="https://www.youtube.com/embed/TOHzd8O8kWs" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>'
-	// 	}
-	// ]);
-
 	const highPowerLinks = computed(() => {
 		if (!content.value || !content.value.supplemental || !content.value.supplemental.links)
 			return [];
