@@ -1,4 +1,8 @@
 const Constants = {
+	DateTime: {
+		DEFAULT_DATE_FORMAT: 'MM/DD/YYYY',
+		DEFAULT_TIME_FORMAT: 'HH:mm'
+	},
 	External: {
 		github: 'https://github.com/thzero/rocket_sidekick-client',
 		imnages: 'https://imagesrocketsidekick.thzero.com',
@@ -12,6 +16,21 @@ const Constants = {
 	ExternalKeys: {
 		MotorSearch: 'motorSearch'
 	},
+	ExtractTypes: {
+		Csv: 'csv',
+		Text: 'text'
+	},
+	Features: {
+		Auth: false,
+		Checklists: false,
+		Fleet: true,
+		Launches: false,
+		MobileApp: false,
+		Favorites: true,
+		RememberMe: false,
+		Statistics: false,
+		Yours: false
+	},
 	FlightInfo: {
 		Resolution: 1024
 	},
@@ -19,6 +38,7 @@ const Constants = {
 		SERVICE_API: 'serviceApi',
 		SERVICE_DOWNLOAD: 'serviceDownload',
 		SERVICE_EXTERNAL_MOTOR_SEARCH: 'serviceExternalMotorSearch',
+		SERVICE_ROCKETS: 'serviceRockets',
 		SERVICE_TOOLS_CALCULATION_ENGINE: 'serviceToolsCalculationEngine',
 		SERVICE_TOOLS_FOAM: 'serviceToolsFoam',
 		SERVICE_TOOLS_FLIGHT_INFO_PROCESSOR: 'serviceToolsFlightInfoProcessor',
@@ -30,29 +50,6 @@ const Constants = {
 		SERVICE_TOOLS_FLIGHT_PATH_PROCESSOR: 'serviceToolsFlightPathProcessor',
 		SERVICE_TOOLS_FLIGHT_PATH_PROCESSOR_FEATHERWEIGHT: 'serviceToolsFlightPathProcessorFeatherweight',
 		SERVICE_TOOLS_THRUST2WEIGHT: 'serviceToolsThrust2Weight'
-	},
-	DateTime: {
-		DEFAULT_DATE_FORMAT: 'MM/DD/YYYY',
-		DEFAULT_TIME_FORMAT: 'HH:mm'
-	},
-	ErrorCodes: {
-		Suffix: 'errors',
-		SuffixParams: 'errors.params',
-		Default: 'error'
-	},
-	ExtractTypes: {
-		Csv: 'csv',
-		Text: 'text'
-	},
-	Features: {
-		Auth: false,
-		Checklists: false,
-		Launches: false,
-		MobileApp: false,
-		Rockets: false,
-		Favorites: true,
-		RememberMe: false,
-		Statistics: false
 	},
 	MeasurementUnits: {
 		english: {
