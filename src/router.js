@@ -228,6 +228,27 @@ const routes = [
 		]
 	},
 	{
+		path: '/fleet',
+		component: () => import(/* webpackPrefetch: true */ /* webpackChunkName: "group-layouts" */ './layouts/MainLayout.vue'),
+		children: [
+			{
+				path: '',
+				name: 'content_rockets',
+				component: () => import(/* webpackPrefetch: true */ /* webpackChunkName: "group-layouts" */ './layouts/ContentLayout.vue'),
+				children: [
+					{
+						path: '',
+						name: 'content_rockets',
+						component: () => import(/* webpackPrefetch: true */ /* webpackChunkName: "group-content-info" */ './components/content/rockets/Rockets.vue'),
+						meta: {
+							requiresAuth: false
+						}
+					}
+				]
+			}
+		]
+	},
+	{
 		path: '/openSource',
 		component: () => import(/* webpackPrefetch: true */ /* webpackChunkName: "group-layouts" */ './layouts/MainLayout.vue'),
 		children: [

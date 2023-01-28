@@ -81,6 +81,10 @@ class AppStore extends BaseStore {
 				motorManufacturers: [],
 				motorSearchCriteria: {},
 				motorSearchResults: {},
+				rockets: [],
+				rocketsTtl: 0,
+				rocketsTtlDiff: 1000 * 60 * 30,
+				rocketsUser: [],
 				thrust2weight: {},
 				toolSettings: []
 			}),
@@ -169,6 +173,30 @@ class AppStore extends BaseStore {
 
 					return [];
 				},
+				async requestRockets(correlationId, params) {
+					const now = Utility.getTimestamp();
+					const ttlContent = this.rocketsTtl ? this.rocketsTtl : 0;
+					const delta = now - ttlContent;
+					if (this.rockets && (delta <= this.rocketsTtlDiff))
+						return Response.success(correlationId, this.rockets);
+
+					const service = GlobalUtility.$injector.getService(Constants.InjectorKeys.SERVICE_ROCKETS);
+					const response = await service.listing(correlationId, params);
+					this.$logger.debug('store', 'requestRockets', 'response', response, correlationId);
+					if (Response.hasSucceeded(response))
+						await this.setRockets(correlationId, response.results);
+
+					return Response.error('store', 'requestRockets', null, null, null, null, correlationId);
+				},
+				async requestRocketsUser(correlationId, params) {
+					const service = GlobalUtility.$injector.getService(Constants.InjectorKeys.SERVICE_ROCKETS);
+					const response = await service.listingUser(correlationId, params);
+					this.$logger.debug('store', 'requestRocketsUser', 'response', response, correlationId);
+					if (Response.hasSucceeded(response))
+						await this.setRocketsUser(correlationId, response.results);
+
+					return Response.error('store', 'requestRocketsUser', null, null, null, null, correlationId);
+				},
 				async setContent(correlationId, content) {
 					this.$logger.debug('store', 'setContent', 'content.a', content, correlationId);
 					this.$logger.debug('store', 'setContent', 'content.b', this.content, correlationId);
@@ -231,6 +259,19 @@ class AppStore extends BaseStore {
 				},
 				async setMotorSearchResults(correlationId, value) {
 					this.motorSearchResults = value;
+				},
+				async setRockets(correlationId, rockets) {
+					this.$logger.debug('store', 'setRockets', 'rockets.a', rockets, correlationId);
+					this.$logger.debug('store', 'setRockets', 'rockets.b', this.rockets, correlationId);
+					this.rockets = rockets;
+					this.rocketsTtl = Utility.getTimestamp();
+					this.$logger.debug('store', 'setRockets', 'rockets.c', this.rockets, correlationId);
+				},
+				async setRocketsUser(correlationId, rockets) {
+					this.$logger.debug('store', 'setRocketsUser', 'rockets.a', rockets, correlationId);
+					this.$logger.debug('store', 'setRocketsUser', 'rockets.b', this.rocketsUser, correlationId);
+					this.rocketsUser = rockets;
+					this.$logger.debug('store', 'setRocketsUser', 'rockets.c', this.rocketsUser, correlationId);
 				}
 			},
 			getters: {
@@ -280,6 +321,12 @@ class AppStore extends BaseStore {
 				},
 				async getMotorSearchCriteria() {
 					return GlobalUtility.$store.motorSearchCriteria;
+				},
+				getRockets() {
+					return GlobalUtility.$store.rockets;
+				},
+				getRocketsUser() {
+					return GlobalUtility.$store.rocketsUser;
 				}
 			},
 			dispatcher: {
@@ -300,6 +347,12 @@ class AppStore extends BaseStore {
 				},
 				async requestMotorSearchResults(correlationId, criteria) {
 					return await GlobalUtility.$store.requestMotorSearchResults(correlationId, criteria);
+				},
+				async requestRockets(correlationId, params) {
+					return await GlobalUtility.$store.requestRockets(correlationId, params);
+				},
+				async requestRocketsUser(correlationId, params) {
+					return await GlobalUtility.$store.requestRocketsUser(correlationId, params);
 				},
 				async setFlightInfoDataTypeUse(correlationId, value) {
 					await GlobalUtility.$store.setFlightInfoDataTypeUse(correlationId, value);

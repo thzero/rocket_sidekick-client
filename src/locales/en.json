@@ -482,6 +482,9 @@
 				"simulators": "Simulators"
 			}
 		},
+		"fleet": {
+			"title": "Fleet"
+		},
 		"launches": {
 			"title": "Launches"
 		},
@@ -495,7 +498,10 @@
 		"settings": {
 			"title": "Settings"
 		},
-		"thrustcurve": "ThrustCurve.org"
+		"thrustcurve": "ThrustCurve.org",
+		"yours": {
+			"title": "Yours"
+		}
 	},
 	"messages": {
 		"calculated": "Calculated",

@@ -3,6 +3,7 @@ import Constants from '@/constants';
 import apiService from '@/service/api';
 import authService from '@thzero/library_client_firebase/service';
 import downloadService from '@/service/download';
+import rocketsService from '@/service/rockets';
 import flightInfoProcessorToolsService from '@/service/tools/flightInfo/index';
 import flightInfoProcessorEggtimerToolsService from '@/service/tools/flightInfo/processors/eggtimer';
 import flightPathOutputToolsService from '@/service/tools/flightPath/output/index';
@@ -36,6 +37,8 @@ class Services extends BaseServices {
 		this._injectService(Constants.InjectorKeys.SERVICE_DOWNLOAD, new downloadService());
 
 		this._injectService(Constants.InjectorKeys.SERVICE_EXTERNAL_MOTOR_SEARCH, new thrustCurveMotorSearchExternalService());
+		
+		this._injectService(Constants.InjectorKeys.SERVICE_ROCKETS, new rocketsService());
 		
 		this._injectService(Constants.InjectorKeys.SERVICE_TOOLS_CALCULATION_ENGINE, new mathJsCalculationEngineToolsService());
 		this._injectService(Constants.InjectorKeys.SERVICE_TOOLS_FOAM, new foamToolsService());

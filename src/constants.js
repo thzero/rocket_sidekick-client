@@ -26,6 +26,7 @@ const Constants = {
 		Fleet: true,
 		Launches: false,
 		MobileApp: false,
+		Rockets: false,
 		Favorites: true,
 		RememberMe: false,
 		Statistics: false,
