@@ -401,7 +401,7 @@ export default {
 			serviceStore,
 			toggleDrawer
 		} = useBaseMainLayout(props, context, {
-			features: Constants.features
+			features: Constants.Features
 		});
 
 		const serviceMarkup = GlobalUtility.$injector.getService(LibraryConstants.InjectorKeys.SERVICE_MARKUP_PARSER);
