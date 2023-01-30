@@ -27,7 +27,7 @@
 
 			<v-btn 
 				v-if="$vuetify.display.mdAndUp && features.Fleet"
-				to="/fleet"
+				to="/content/rockets"
 			>
 				{{ $t('menu.fleet.title') }}
 			</v-btn>
@@ -241,7 +241,7 @@
 				</v-list-item>
 				<v-list-item
 					v-if="features.Fleet"
-					to="/fleet"
+					to="/content/rockets"
 				>
 					<v-list-item-title>{{ $t('menu.fleet.title') }}</v-list-item-title>
 				</v-list-item>

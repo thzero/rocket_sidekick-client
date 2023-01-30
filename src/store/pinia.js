@@ -105,8 +105,10 @@ class AppStore extends BaseStore {
 					const service = GlobalUtility.$injector.getService(LibraryConstants.InjectorKeys.SERVICE_UTILITY);
 					const response = await service.content(correlationId);
 					this.$logger.debug('store', 'requestContent', 'response', response, correlationId);
-					if (Response.hasSucceeded(response))
+					if (Response.hasSucceeded(response)) {
 						await this.setContent(correlationId, response.results);
+						return response;
+					}
 
 					return Response.error('store', 'requestContent', null, null, null, null, correlationId);
 				},
@@ -174,17 +176,19 @@ class AppStore extends BaseStore {
 					return [];
 				},
 				async requestRockets(correlationId, params) {
-					const now = Utility.getTimestamp();
-					const ttlContent = this.rocketsTtl ? this.rocketsTtl : 0;
-					const delta = now - ttlContent;
-					if (this.rockets && (delta <= this.rocketsTtlDiff))
-						return Response.success(correlationId, this.rockets);
+					// const now = Utility.getTimestamp();
+					// const ttlContent = this.rocketsTtl ? this.rocketsTtl : 0;
+					// const delta = now - ttlContent;
+					// if (this.rockets && (delta <= this.rocketsTtlDiff))
+					// 	return Response.success(correlationId, this.rockets);
 
 					const service = GlobalUtility.$injector.getService(Constants.InjectorKeys.SERVICE_ROCKETS);
 					const response = await service.listing(correlationId, params);
 					this.$logger.debug('store', 'requestRockets', 'response', response, correlationId);
-					if (Response.hasSucceeded(response))
-						await this.setRockets(correlationId, response.results);
+					if (Response.hasSucceeded(response)) {
+						await this.setRockets(correlationId, response.results.data);
+						return response.results.data;
+					}
 
 					return Response.error('store', 'requestRockets', null, null, null, null, correlationId);
 				},
@@ -192,8 +196,10 @@ class AppStore extends BaseStore {
 					const service = GlobalUtility.$injector.getService(Constants.InjectorKeys.SERVICE_ROCKETS);
 					const response = await service.listingUser(correlationId, params);
 					this.$logger.debug('store', 'requestRocketsUser', 'response', response, correlationId);
-					if (Response.hasSucceeded(response))
-						await this.setRocketsUser(correlationId, response.results);
+					if (Response.hasSucceeded(response)) {
+						await this.setRocketsUser(correlationId, response.results.data);
+						return response.results.data;
+					}
 
 					return Response.error('store', 'requestRocketsUser', null, null, null, null, correlationId);
 				},

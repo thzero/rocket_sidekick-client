@@ -6,37 +6,20 @@
 					<v-card-title>
 	<p class="text-h6 text-center">{{ $t('titles.content.rockets.title') }}</p>
 					</v-card-title>
+				</v-card>
+			</v-col>
+		</v-row>
+		<v-row dense>
+			<v-col cols="12">
+				<v-card
+					v-for="item in rockets"
+					:key="item.name"
+				>
+					<v-card-title>
+	<p class="text-h6 text-center">{{ item.name }}</p>
+					</v-card-title>
 					<v-card-text>
-						<v-row dense>
-							<v-col cols="6"
-								v-for="item in rockets"
-								:key="item.name"
-							>
-								<v-card
-									v-for="item in rockets"
-									:key="item.name"
-									class="mx-auto"
-									max-width="400"
-    								color="secondary"
-								>
-									<v-img
-										v-if="hasCoverUrl(item)"
-										:src="item.coverUrl"
-										cover
-									></v-img>
-
-									<v-card-title>
-										 <v-btn
-										 	:to="rocketUrl(item)"
-											size="large"
-											variant="text"
-										 >
-											{{ item.name }}
-										</v-btn>
-									</v-card-title>
-								</v-card>
-							</v-col>
-						</v-row>
+<VMarkdown v-model="item.description" :use-github=false />
 					</v-card-text>
 				</v-card>
 			</v-col>
@@ -45,7 +28,7 @@
 </template>
 
 <script>
-import { useRocketsBaseComponent } from '@/components/content/rockets/rocketsBase';
+import { useRocketBaseComponent } from '@/components/content/rockets/rocketsBase';
 
 import VMarkdown from '@/library_vue_vuetify/components/markup/VMarkdown';
 
@@ -68,10 +51,9 @@ export default {
 			serviceStore,
 			sort,
 			target,
-			rockets,
-			hasCoverUrl,
-			rocketUrl
-		} = useRocketsBaseComponent(props, context);
+			id,
+			rocket
+		} = useRocketBaseComponent(props, context);
 
 		return {
 			correlationId,
@@ -86,9 +68,8 @@ export default {
 			serviceStore,
 			sort,
 			target,
-			rockets,
-			hasCoverUrl,
-			rocketUrl
+			id,
+			rocket
 		};
 	}
 };
