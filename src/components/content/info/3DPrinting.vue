@@ -227,7 +227,9 @@
 				</v-card>
 			</v-col>
 		</v-row>
-		<v-row dense>
+		<v-row dense
+			v-show="hasAttribution"
+		>
 			<v-col cols="12" class="text-center text-h5 pb-2; float: right">
 				<v-card>
 					<v-card-text class="float: right">
