@@ -669,9 +669,9 @@
 					"flexuralModulus": "Flexural modulus (psi)",
 					"flexuralStrength": "Flexural strength (psi)",
 					"maxUseTemp": "Maximum use temperature",
-					"potLifeTime": "Pot life (m)",
-					"handlingTime": "Handling time (m)",
-					"fullCureTime": "Full cure (m)",
+					"potLifeTime": "Pot life (min.)",
+					"handlingTime": "Handling time (hour)",
+					"fullCureTime": "Full cure (hour)",
 					"ratioWeight": "Ratio by weight",
 					"ratioWeight2": "(resin/hardener)",
 					"ratioVolume": "Ratio by volume",
@@ -799,6 +799,9 @@
 				"tools": "Tools",
 				"vendors": "Vendors",
 				"videos": "Videos"
+			},
+			"rockets": {
+				"title": "Rockets"
 			},
 			"tools": {
 				"flightInfo": "Flight Info",
