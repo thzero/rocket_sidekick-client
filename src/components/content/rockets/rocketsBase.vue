@@ -1,7 +1,7 @@
 <script>
 import { onMounted, ref} from 'vue';
 
-import { useContentBaseComponent } from '@/components/content/contentBase';
+import { useRocketBaseComponent } from '@/components/content/rockets/rocketBase';
 
 export function useRocketsBaseComponent(props, context, options) {
 	const {
@@ -16,21 +16,24 @@ export function useRocketsBaseComponent(props, context, options) {
 		success,
 		serviceStore,
 		sort,
-		target
-	} = useContentBaseComponent(props, context, options);
+		target,
+		hasCoverUrl,
+		rocketTypeIcon,
+		rocketTypeIconDetermine
+	} = useRocketBaseComponent(props, context, options);
 
 	const params = ref({});
 	const rockets = ref([]);
 
 	const fetch = async () => {
-		return await serviceStore.dispatcher.requestRockets(correlationId(), params.value);
+		const response = await serviceStore.dispatcher.requestRockets(correlationId(), params.value);
+		if (hasFailed(response))
+			return [];
+		return response.results;
 	}
 
-	const hasCoverUrl = (item) => {
-		return !String.isNullOrEmpty(item.coverUrl);
-	}
 	const rocketUrl = (item) => {
-		return '/rocket/' + item.id;
+		return '/content/rocket/' + item.id;
 	}
 
 	onMounted(async () => {
@@ -50,8 +53,10 @@ export function useRocketsBaseComponent(props, context, options) {
 		serviceStore,
 		sort,
 		target,
-		rockets,
 		hasCoverUrl,
+		rocketTypeIcon,
+		rocketTypeIconDetermine,
+		rockets,
 		rocketUrl
 	};
 };

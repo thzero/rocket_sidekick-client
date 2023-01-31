@@ -157,7 +157,7 @@
 			</v-col>
 		</v-row>
 		<v-row dense
-			v-if="haveLinks"
+			v-if="hasLinks"
 		>
 			<v-col cols="12" class="text-center text-h5 pt-4 pb-2">
 				{{ $t('strings.content.info.epoxy.additionalLinks') }}
@@ -226,7 +226,7 @@ export default {
 			contentChartDesc,
 			contentMarkup2,
 			data,
-			haveLinks,
+			hasLinks,
 			links,
 			temperature
 		} = useEpoxyBaseComponent(props, context);
@@ -254,7 +254,7 @@ export default {
 			contentChartDesc,
 			contentMarkup2,
 			data,
-			haveLinks,
+			hasLinks,
 			links,
 			temperature
 		};

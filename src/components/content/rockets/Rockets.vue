@@ -4,7 +4,7 @@
 			<v-col cols="12">
 				<v-card>
 					<v-card-title>
-	<p class="text-h6 text-center">{{ $t('titles.content.rockets.title') }}</p>
+	<p class="text-h6 text-center">{{ $t('titles.rockets.title') }}</p>
 					</v-card-title>
 					<v-card-text>
 						<v-row dense>
@@ -26,13 +26,20 @@
 									></v-img>
 
 									<v-card-title>
-										 <v-btn
-										 	:to="rocketUrl(item)"
-											size="large"
-											variant="text"
-										 >
-											{{ item.name }}
-										</v-btn>
+										<v-row dense>
+											<v-col>
+												<v-btn
+													:to="rocketUrl(item)"
+													size="large"
+													variant="text"
+												>
+													{{ item.name }}
+												</v-btn>
+											</v-col>
+											<v-col>
+												<img :src="rocketTypeIcon(item)" style="height: 48px; float: right;" />
+											</v-col>
+										</v-row>
 									</v-card-title>
 								</v-card>
 							</v-col>
@@ -68,8 +75,10 @@ export default {
 			serviceStore,
 			sort,
 			target,
-			rockets,
 			hasCoverUrl,
+			rocketTypeIcon,
+			rocketTypeIconDetermine,
+			rockets,
 			rocketUrl
 		} = useRocketsBaseComponent(props, context);
 
@@ -86,8 +95,10 @@ export default {
 			serviceStore,
 			sort,
 			target,
-			rockets,
 			hasCoverUrl,
+			rocketTypeIcon,
+			rocketTypeIconDetermine,
+			rockets,
 			rocketUrl
 		};
 	}

@@ -128,7 +128,7 @@
 			</v-col>
 		</v-row>
 		<v-row dense
-			v-if="haveLinks"
+			v-if="hasLinks"
 		>
 			<v-col cols="12" class="text-center text-h5 pt-4 pb-2">
 				{{ $t('strings.content.info.3dprinting.additionalLinks') }}
@@ -276,7 +276,7 @@ export default {
 			hasAttribution,
 			contentChartDesc,
 			data,
-			haveLinks,
+			hasLinks,
 			links,
 			linksCollections,
 			linksGeneral,
@@ -309,7 +309,7 @@ export default {
 			hasAttribution,
 			contentChartDesc,
 			data,
-			haveLinks,
+			hasLinks,
 			links,
 			linksCollections,
 			linksGeneral,

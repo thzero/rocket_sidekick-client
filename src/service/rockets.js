@@ -14,14 +14,36 @@ class RocketsService extends RestExternalService {
 		}
 	}
     
-	async listingUsers(correlationId, params) {
+	async listingUser(correlationId, params) {
 		try {
 			const response = await this._serviceCommunicationRest.post(correlationId, LibraryConstants.ExternalKeys.BACKEND, { url: 'rockets/listing/user' }, params);
-			this._logger.debug('RocketsService', 'listingUsers', 'response', response, correlationId);
+			this._logger.debug('RocketsService', 'listingUser', 'response', response, correlationId);
 			return response;
 		}
 		catch (err) {
-			return this._error('RocketsService', 'listingUsers', null, err, null, null, correlationId);
+			return this._error('RocketsService', 'listingUser', null, err, null, null, correlationId);
+		}
+	}
+
+	async retrieve(correlationId, id) {
+		try {
+			const response = await this._serviceCommunicationRest.getById(correlationId, LibraryConstants.ExternalKeys.BACKEND, 'rockets', id);
+			this._logger.debug('RocketsService', 'retrieve', 'response', response, correlationId);
+			return response;
+		}
+		catch (err) {
+			return this._error('RocketsService', 'retrieve', null, err, null, null, correlationId);
+		}
+	}
+    
+	async retrieveUser(correlationId, id) {
+		try {
+			const response = await this._serviceCommunicationRest.getById(correlationId, LibraryConstants.ExternalKeys.BACKEND, 'rockets/user', user.id);
+			this._logger.debug('RocketsService', 'retrieveUser', 'response', response, correlationId);
+			return response;
+		}
+		catch (err) {
+			return this._error('RocketsService', 'retrieveUser', null, err, null, null, correlationId);
 		}
 	}
 }

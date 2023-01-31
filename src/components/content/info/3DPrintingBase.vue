@@ -35,7 +35,7 @@ export function use3DPrintingBaseComponent(props, context, options) {
 			return [];
 		return content.value.supplemental.data;
 	});
-	const haveLinks = computed(() => {
+	const hasLinks = computed(() => {
 		if (!content.value || !content.value.supplemental || !content.value.supplemental.links)
 			return false;
 		return content.value.supplemental.links.length > 0;
@@ -117,7 +117,7 @@ export function use3DPrintingBaseComponent(props, context, options) {
 		hasAttribution,
 		contentChartDesc,
 		data,
-		haveLinks,
+		hasLinks,
 		links,
 		linksCollections,
 		linksGeneral,

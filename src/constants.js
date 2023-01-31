@@ -22,15 +22,19 @@ const Constants = {
 	},
 	Features: {
 		Auth: false,
-		Checklists: false,
-		Fleet: true,
-		Launches: false,
 		MobileApp: false,
-		Rockets: false,
+		Rockets: true,
 		Favorites: true,
 		RememberMe: false,
 		Statistics: false,
-		Yours: false
+		Yours: {
+			value: false,
+			Altimeters: false,
+			Checklists: false,
+			Launches: false,
+			Parachutes: false,
+			Rockets: false
+		}
 	},
 	FlightInfo: {
 		Resolution: 1024
@@ -53,6 +57,30 @@ const Constants = {
 		SERVICE_TOOLS_THRUST2WEIGHT: 'serviceToolsThrust2Weight'
 	},
 	MeasurementUnits: {
+		acceleration: {
+			id: 'acceleration'
+		},
+		area: {
+			id: 'area'
+		},
+		distance: {
+			id: 'distance'
+		},
+		fluid: {
+			id: 'fluid'
+		},
+		length: {
+			id: 'length'
+		},
+		velocity: {
+			id: 'velocity'
+		},
+		volume: {
+			id: 'volume'
+		},
+		weight: {
+			id: 'weight'
+		},
 		english: {
 			id: 'english',
 			acceleration: {
@@ -64,31 +92,35 @@ const Constants = {
 				in2: 'in^2',
 				ft2: 'ft^2'
 			},
-			fluid: {
-				default: 'floz',
-				floz: 'floz'
-			},
 			distance: {
 				default: 'ft',
 				ft: 'ft',
 				mi: 'mi'
 			},
+			fluid: {
+				default: 'floz',
+				floz: 'floz'
+			},
 			length: {
+				id: 'length',
 				default: 'in',
 				in: 'in',
 				ft: 'ft'
 			},
 			velocity: {
+				id: 'velocity',
 				default: 'fts',
 				fts: 'ft/s',
 				mph: 'mph'
 			},
 			volume: {
+				id: 'volume',
 				default: 'in3',
 				in3: 'in^3',
 				ft3: 'ft^3'
 			},
 			weight: {
+				id: 'weight',
 				default: 'oz',
 				oz: 'oz',
 				lb: 'lb'
@@ -111,15 +143,15 @@ const Constants = {
 				m: 'm',
 				km: 'km'
 			},
+			fluid: {
+				default: 'ml',
+				ml: 'ml'
+			},
 			length: {
 				default: 'mm',
 				mm: 'mm',
 				cm: 'cm',
 				m: 'm'
-			},
-			fluid: {
-				default: 'ml',
-				ml: 'ml'
 			},
 			velocity: {
 				default: 'ms',

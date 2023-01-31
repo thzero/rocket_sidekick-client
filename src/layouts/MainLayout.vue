@@ -23,13 +23,11 @@
 				</router-link>
 			</v-app-bar-title>
 
-			<v-spacer></v-spacer>
-
 			<v-btn 
-				v-if="$vuetify.display.mdAndUp && features.Fleet"
+				v-if="$vuetify.display.mdAndUp && features.Rockets"
 				to="/content/rockets"
 			>
-				{{ $t('menu.fleet.title') }}
+				{{ $t('menu.content.rockets.title') }}
 			</v-btn>
 			<v-menu
 				v-if="$vuetify.display.mdAndUp"
@@ -46,32 +44,6 @@
 						:to="contentLink(item)"
 					>
 						<v-list-item-title>{{ contentTitle(item) }}</v-list-item-title>
-					</v-list-item>
-				</v-list>
-			</v-menu>
-			<v-menu
-				v-if="$vuetify.display.mdAndUp && features.Rockets"
-			>
-				<template v-slot:activator="{ props }">
-					<v-btn append-icon="mdi-menu-down"
-						v-bind="props"
-					>{{ $t('menu.rockets.title') }}</v-btn>
-				</template>
-				<v-list density="compact">
-					<v-list-item
-						to="/rockets/rockets"
-					>
-						<v-list-item-title>{{ $t('menu.rockets.rockets') }}</v-list-item-title>
-					</v-list-item>
-					<v-list-item
-						to="/rockets/altimeters"
-					>
-						<v-list-item-title>{{ $t('menu.rockets.altimeters') }}</v-list-item-title>
-					</v-list-item>
-					<v-list-item
-						to="/rockets/parachutes"
-					>
-						<v-list-item-title>{{ $t('menu.rockets.parachutes') }}</v-list-item-title>
 					</v-list-item>
 				</v-list>
 			</v-menu>
@@ -93,14 +65,8 @@
 					</v-list-item>
 				</v-list>
 			</v-menu>
-			<v-btn 
-				v-if="$vuetify.display.mdAndUp"
-				to="/content/links"
-			>
-				{{ $t('menu.content.links.title') }}
-			</v-btn>
 			<v-menu
-				v-if="$vuetify.display.mdAndUp && features.Yours"
+				v-if="$vuetify.display.mdAndUp && features.Yours.value"
 			>
 				<template v-slot:activator="{ props }">
 					<v-btn append-icon="mdi-menu-down"
@@ -109,40 +75,44 @@
 				</template>
 				<v-list density="compact">
 					<v-list-item
-						v-if="features.Checklists"
-						to="/checklists"
+						v-if="features.Yours.Checklists"
+						to="/rockets/checklists"
 					>
-						<v-list-item-title>{{ $t('menu.checklists.title') }}</v-list-item-title>
+						<v-list-item-title>{{ $t('menu.yours.checklists') }}</v-list-item-title>
 					</v-list-item>
 					<v-list-item
-						v-if="features.Launches"
-						to="/launches"
+						v-if="features.Yours.Launches"
+						to="/rockets/launches"
 					>
-						<v-list-item-title>{{ $t('menu.launches.title') }}</v-list-item-title>
+						<v-list-item-title>{{ $t('menu.yours.rockets') }}</v-list-item-title>
 					</v-list-item>
-					<v-list-item>
-						<v-list-item-title><hr></v-list-item-title>
+					<v-divider></v-divider>
+					<v-list-item
+						v-if="features.Yours.Altimeters"
+						to="/rockets/altimeters"
+					>
+						<v-list-item-title>{{ $t('menu.yours.altimeters') }}</v-list-item-title>
 					</v-list-item>
 					<v-list-item
-						v-if="features.altimeters"
-						href="/altimeters"
+						v-if="features.Yours.Parachutes"
+						to="/rockets/parachutes"
 					>
-						<v-list-item-title>{{ $t('menu.altimeters.title') }}</v-list-item-title>
+						<v-list-item-title>{{ $t('menu.yours.parachutes') }}</v-list-item-title>
 					</v-list-item>
 					<v-list-item
-						v-if="features.parachutes"
-						href="/parachutes"
+						v-if="features.Yours.Rockets"
+						to="/rockets/rockets"
 					>
-						<v-list-item-title>{{ $t('menu.parachutes.title') }}</v-list-item-title>
-					</v-list-item>
-					<v-list-item
-						v-if="features.rockets"
-						href="/rockets"
-					>
-						<v-list-item-title>{{ $t('menu.rockets.title') }}</v-list-item-title>
+						<v-list-item-title>{{ $t('menu.yours.rockets') }}</v-list-item-title>
 					</v-list-item>
 				</v-list>
 			</v-menu>
+			<v-btn 
+				v-if="$vuetify.display.mdAndUp"
+				to="/content/links"
+			>
+				{{ $t('menu.content.links.title') }}
+			</v-btn>
 			<v-btn 
 				v-if="$vuetify.display.mdAndUp && features.MobileApp"
 				to="/landing"
@@ -240,47 +210,10 @@
 					</v-list>
 				</v-list-item>
 				<v-list-item
-					v-if="features.Fleet"
+					v-if="features.Rocket"
 					to="/content/rockets"
 				>
-					<v-list-item-title>{{ $t('menu.fleet.title') }}</v-list-item-title>
-				</v-list-item>
-				<v-list-item
-					v-if="features.Yours"
-				>
-					{{ $t('menu.yours.title') }}
-					<v-list density="compact">
-						<v-list-item
-							v-if="features.Checklists"
-							to="/checklists"
-						>
-							<v-list-item-title>{{ $t('menu.checklists.title') }}</v-list-item-title>
-						</v-list-item>
-						<v-list-item
-							v-if="features.Launches"
-							to="/launches"
-						>
-							<v-list-item-title>{{ $t('menu.launches.title') }}</v-list-item-title>
-						</v-list-item>
-						<v-list-item>
-							<v-list-item-title><hr></v-list-item-title>
-						</v-list-item>
-						<v-list-item
-							to="/rockets/altimeters"
-						>
-							<v-list-item-title>{{ $t('menu.rockets.altimeters') }}</v-list-item-title>
-						</v-list-item>
-						<v-list-item
-							to="/rockets/parachutes"
-						>
-							<v-list-item-title>{{ $t('menu.rockets.parachutes') }}</v-list-item-title>
-						</v-list-item>
-						<v-list-item
-							to="/rockets/rockets"
-						>
-							<v-list-item-title>{{ $t('menu.rockets.rockets') }}</v-list-item-title>
-						</v-list-item>
-					</v-list>
+					<v-list-item-title>{{ $t('menu.content.rockets.title') }}</v-list-item-title>
 				</v-list-item>
 				<v-list-item>
 					{{ $t('menu.content.tools.title') }}
@@ -291,6 +224,44 @@
 							:to="contentLink(item)"
 						>
 							<v-list-item-title>{{ contentTitle(item) }}</v-list-item-title>
+						</v-list-item>
+					</v-list>
+				</v-list-item>
+				<v-list-item
+					v-if="features.Yours.value"
+				>
+					{{ $t('menu.yours.title') }}
+					<v-list density="compact">
+						<v-list-item
+							v-if="features.Yours.Checklists"
+							to="/checklists"
+						>
+							<v-list-item-title>{{ $t('menu.yours.checklists') }}</v-list-item-title>
+						</v-list-item>
+						<v-list-item
+							v-if="features.Yours.Launches"
+							to="/launches"
+						>
+							<v-list-item-title>{{ $t('menu.yours.launches') }}</v-list-item-title>
+						</v-list-item>
+						<v-divider></v-divider>
+						<v-list-item
+							v-if="features.Yours.Altimeters"
+							to="/rockets/altimeters"
+						>
+							<v-list-item-title>{{ $t('menu.yours.altimeters') }}</v-list-item-title>
+						</v-list-item>
+						<v-list-item
+							v-if="features.Yours.Parachutes"
+							to="/rockets/parachutes"
+						>
+							<v-list-item-title>{{ $t('menu.yours.parachutes') }}</v-list-item-title>
+						</v-list-item>
+						<v-list-item
+							v-if="features.Yours.Rockets"
+							to="/rockets/rockets"
+						>
+							<v-list-item-title>{{ $t('menu.yours.rockets') }}</v-list-item-title>
 						</v-list-item>
 					</v-list>
 				</v-list-item>

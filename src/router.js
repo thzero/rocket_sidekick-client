@@ -233,13 +233,13 @@ const routes = [
 		children: [
 			{
 				path: '',
-				name: 'content_rockets',
+				name: 'content_rocket',
 				component: () => import(/* webpackPrefetch: true */ /* webpackChunkName: "group-layouts" */ './layouts/ContentLayout.vue'),
 				children: [
 					{
 						path: '',
-						name: 'content_rockets',
-						component: () => import(/* webpackPrefetch: true */ /* webpackChunkName: "group-content-info" */ './components/content/rockets/Rocket.vue'),
+						name: 'content_rocket',
+						component: () => import(/* webpackPrefetch: true */ /* webpackChunkName: "group-content-info" */ './components/content/rockets/RocketInfo.vue'),
 						meta: {
 							requiresAuth: false
 						}

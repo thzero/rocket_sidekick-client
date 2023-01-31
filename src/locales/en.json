@@ -330,35 +330,35 @@
 		"welcome": "Hello {msg}!"
 	},
 	"measurements":{
-		"english":{
-		"acceleration":{
-			"abbr":"ft/s^s"
-		},
-		"altitude":{
-			"abbr":"ft",
-			"name":"Feet"
-		},
-		"time":{
-			"abbr":"s"
-		},
-		"velocity":{
-			"abbr":"ft/s"
-		}
+		"english": {
+			"acceleration":{
+				"abbr":"ft/s^s"
+			},
+			"altitude":{
+				"abbr":"ft",
+				"name":"Feet"
+			},
+			"time":{
+				"abbr":"s"
+			},
+			"velocity":{
+				"abbr":"ft/s"
+			}
 		},
 		"metric":{
-		"acceleration":{
-			"abbr":"m/s^s"
-		},
-		"altitude":{
-			"abbr":"m",
-			"name":"Meters"
-		},
-		"time":{
-			"abbr":"s"
-		},
-		"velocity":{
-			"abbr":"m/s"
-		}
+			"acceleration":{
+				"abbr":"m/s^s"
+			},
+			"altitude":{
+				"abbr":"m",
+				"name":"Meters"
+			},
+			"time":{
+				"abbr":"s"
+			},
+			"velocity":{
+				"abbr":"m/s"
+			}
 		}
 	},
 	"measurementUnits": {
@@ -480,27 +480,25 @@
 			"links": {
 				"title": "Links",
 				"simulators": "Simulators"
+			},
+			"rockets": {
+				"title": "Rockets"
 			}
-		},
-		"fleet": {
-			"title": "Fleet"
 		},
 		"launches": {
 			"title": "Launches"
-		},
-		"rockets": {
-			"altimeters": "Altimeters",
-			"checklists": "checklists",
-			"parachutes": "Parachutes",
-			"rockets": "Rockets",
-			"title": "Rockets"
 		},
 		"settings": {
 			"title": "Settings"
 		},
 		"thrustcurve": "ThrustCurve.org",
 		"yours": {
-			"title": "Yours"
+			"title": "Yours",
+			"altimeters": "Altimeters",
+			"checklists": "Checklists",
+			"launches": "Launches",
+			"parachutes": "Parachutes",
+			"rockets": "Rockets"
 		}
 	},
 	"messages": {
@@ -761,6 +759,12 @@
 		"privacy": {
 			"text1": "# General Privacy\n## Emails\nThis site does not send emails.\n<br/>\n## Ads\nAt this time, this site does not show ads.\n<br/>\n## Cookies\nLimited cookies for Google Analytics only.\n<br/>\n## Storage\nInformation that you enter into the various tools are stored locally on your browser and not transmitted to any server.\n<br/>\n## Personal Information\nThe site does not capture any personal information.\n<br/>\n# Accounts\nThe site is free to use without having an account on Rocketsidekick.  Having an account allows you to update customized settings, store rockets, alimeters, and parachutes, create checklists as well as syncing data with compannion mobile application (forthcoming).\n<br/>\n## Authentication\nAll authentication for the accounts will be through social providers; this site will keep and store no passwords.\n<br/>\n## Storage\nIn addition to the above, having an account does mean certain data is stored on the Rocketsidekick's server.\n<br/>\n* Authentication provider id, email and photo.\n* Information that you enttered into the site about in the following sections:\n  * Rockets\n  * Parachutes\n  * Altimeters\n  * Checklists\n  * Settings\n<br/>\nThe information is stored for later retrieval during use of the Rocksidekick site, as well as syncing with the companion mobile application (forthcoming).   This data is not shared with other sites or 3rd parties.\n"
 		},
+		"rockets": {
+			"buildLogUrl": "Build Log",
+			"diameterMajor": "Diameter",
+			"length": "Length",
+			"weight": "Weight"
+		},
 		"save": "Save",
 		"share": "Share",
 		"yes": "Yes",
@@ -800,9 +804,6 @@
 				"vendors": "Vendors",
 				"videos": "Videos"
 			},
-			"rockets": {
-				"title": "Rockets"
-			},
 			"tools": {
 				"flightInfo": "Flight Info",
 				"flightPath": "Flight Path",
@@ -824,6 +825,12 @@
 		"news": "News",
 		"newsLatest": "Latest News",
 		"openSource": "Open Source",
+		"rockets": {
+			"title": "Rockets",
+			"albums": "Photo Albums",
+			"specifications": "Specifications",
+			"videos": "Video Albums"
+		},
 		"privacy": "Privacy Policy",
 		"profile": "Profile",
 		"settings": "Settings",
