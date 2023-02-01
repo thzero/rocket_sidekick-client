@@ -1,5 +1,14 @@
 <template>
-	<Header v-model="rocket.name" />
+	<Header v-model="rocket.name">
+		<!-- <template v-slot:after>
+			<v-btn
+				class="mr-2"
+				color="primary"
+			>
+				{{ $t('buttons.back') }}
+			</v-btn>
+		</template> -->
+	</Header>
 	<v-row dense>
 		<v-col cols="12">
 			<v-card
@@ -9,7 +18,17 @@
 					v-if="hasCoverUrl(rocket)"
 					:src="rocket.coverUrl"
 					cover
-				></v-img>
+				>
+					<div class="text-right pt-4">
+						<v-btn
+							class="mr-2"
+							color="primary"
+							:to="rocketsUrl"
+						>
+							{{ $t('buttons.back') }}
+						</v-btn>
+					</div>
+				</v-img>
 
 				<v-card-title
 					class="bg-secondary"
@@ -113,7 +132,7 @@
 			</v-row>
 		</v-col>
 		<v-col 
-			v-if="hasFlightLogs"
+			v-if="hasLaunches"
 			cols="12"
 		>
 			<v-card>
@@ -131,6 +150,7 @@
 import Constants from '@/constants';
 
 import { useRocketInfoBaseComponent } from '@/components/content/rockets/rocketInfoBase';
+import { useRocketInfoBaseProps } from '@/components/content/rockets/rocketInfoBaseProps';
 
 import Header from '@/components/content/Header';
 import VMarkdown from '@/library_vue_vuetify/components/markup/VMarkdown';
@@ -140,6 +160,9 @@ export default {
 	components: {
 		Header,
 		VMarkdown
+	},
+	props: {
+		...useRocketInfoBaseProps
 	},
 	setup(props, context) {
 		const {
@@ -168,7 +191,8 @@ export default {
 			measurementUnitTranslate,
 			measurementUnitTranslateLength,
 			measurementUnitTranslateWeight,
-			videos
+			videos,
+			rocketsUrl
 		} = useRocketInfoBaseComponent(props, context);
 
 		return {
@@ -197,7 +221,8 @@ export default {
 			measurementUnitTranslate,
 			measurementUnitTranslateLength,
 			measurementUnitTranslateWeight,
-			videos
+			videos,
+			rocketsUrl
 		};
 	}
 };

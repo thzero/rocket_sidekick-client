@@ -49,6 +49,7 @@
 
 <script>
 import { useRocketsBaseComponent } from '@/components/content/rockets/rocketsBase';
+import { useRocketsBaseProps } from '@/components/content/rockets/rocketsBaseProps';
 
 import Header from '@/components/content/Header';
 import VMarkdown from '@/library_vue_vuetify/components/markup/VMarkdown';
@@ -58,6 +59,9 @@ export default {
 	components: {
 		Header,
 		VMarkdown
+	},
+	props: {
+		...useRocketsBaseProps
 	},
 	setup(props, context) {
 		const {

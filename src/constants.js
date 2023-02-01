@@ -180,6 +180,10 @@ const Constants = {
 			volume: 'volume',
 			weight: 'weight'
 		}
+	},
+	RocketTypes: {
+		Site: 'site',
+		Yours: 'yours'
 	}
 };
 

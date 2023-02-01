@@ -228,7 +228,7 @@ const routes = [
 		]
 	},
 	{
-		path: '/content/rocket/:id',
+		path: '/rocket/:id',
 		component: () => import(/* webpackPrefetch: true */ /* webpackChunkName: "group-layouts" */ './layouts/MainLayout.vue'),
 		children: [
 			{
@@ -249,7 +249,7 @@ const routes = [
 		]
 	},
 	{
-		path: '/content/rockets',
+		path: '/rockets',
 		component: () => import(/* webpackPrefetch: true */ /* webpackChunkName: "group-layouts" */ './layouts/MainLayout.vue'),
 		children: [
 			{

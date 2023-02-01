@@ -8,6 +8,7 @@
 		"rememberMe": "Rembmer Me"
 	},
 	"buttons": {
+		"back": "Back",
 		"calculate": "Calculate",
 		"cancel": "Cancel",
 		"clear": "Clear",
@@ -831,7 +832,8 @@
 			"albums": "Photo Albums",
 			"launches": "Flight Logs",
 			"specifications": "Specifications",
-			"videos": "Video Albums"
+			"videos": "Video Albums",
+			"yours": "Yours"
 		},
 		"privacy": "Privacy Policy",
 		"profile": "Profile",

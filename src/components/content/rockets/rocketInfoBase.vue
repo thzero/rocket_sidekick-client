@@ -30,7 +30,6 @@ export function useRocketInfoBaseComponent(props, context, options) {
 	} = useRocketBaseComponent(props, context, options);
 
 	const rocket = ref([]);
-	const title = ref(GlobalUtility.$trans.t('titles.rockets.title'));
 
 	const rocketId = computed(() => {
 		return routes.params.id;
@@ -59,8 +58,20 @@ export function useRocketInfoBaseComponent(props, context, options) {
 			return false;
 		return rocket.value.videos.length > 0;
 	});
+	const rocketsUrl = computed((item) => {
+		if (props.type === Constants.RocketTypes.Site)
+			return '/rockets';
+		if (props.type === Constants.RocketTypes.Yours)
+			return '/)yours/rockets';
+		return null;
+	});
+
 	const fetch = async () => {
-		const response = await serviceStore.dispatcher.requestRocketsById(correlationId(), rocketId.value);
+		let response;
+		if (props.type === Constants.RocketTypes.Site)
+			response = await serviceStore.dispatcher.requestRocketsById(correlationId(), rocketId.value);
+		else if (props.type === Constants.RocketTypes.Yours)
+			response = await serviceStore.dispatcher.requestRocketsByIdUser(correlationId(), rocketId.value);
 		if (hasFailed(response))
 			return [];
 		return response.results;
@@ -108,12 +119,12 @@ export function useRocketInfoBaseComponent(props, context, options) {
 		rocketTypeIcon,
 		rocketTypeIconDetermine,
 		rocket,
-		title,
 		rocketId,
 		measurementUnitTranslate,
 		measurementUnitTranslateLength,
 		measurementUnitTranslateWeight,
-		videos
+		videos,
+		rocketsUrl
 	};
 };
 </script>

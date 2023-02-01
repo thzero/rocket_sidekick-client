@@ -3,7 +3,13 @@
 		<v-col cols="12">
 			<v-card>
 				<v-card-title>
-<p class="text-h4 text-center">{{ modelValue }}</p>
+				<!-- <div style="float: left;">
+<slot name="before" />
+					</div>
+					<div style="float: right;">
+<slot name="after" />
+					</div> -->
+<div class="text-h4 text-center">{{ modelValue }}</div>
 				</v-card-title>
 			</v-card>
 		</v-col>
