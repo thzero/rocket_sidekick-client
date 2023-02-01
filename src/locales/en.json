@@ -762,6 +762,7 @@
 		"rockets": {
 			"buildLogUrl": "Build Log",
 			"diameterMajor": "Diameter",
+			"editing": "Editing is currently only available via the mobile application.",
 			"length": "Length",
 			"weight": "Weight"
 		},
@@ -828,6 +829,7 @@
 		"rockets": {
 			"title": "Rockets",
 			"albums": "Photo Albums",
+			"launches": "Flight Logs",
 			"specifications": "Specifications",
 			"videos": "Video Albums"
 		},

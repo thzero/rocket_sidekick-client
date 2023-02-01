@@ -60,25 +60,13 @@
 						</v-card-text>
 					</v-card>
 				</v-col>
-				<v-col 
-					v-if="hasFlightLogs"
-					cols="12"
-				>
-					<v-card>
-						<v-card-title>
-		<p class="text-h6 text-center">{{ $t('titles.rockets.flightlogs') }}</p>
-						</v-card-title>
-						<v-card-text>
-						</v-card-text>
-					</v-card>
-				</v-col>
 			</v-row>
 		</v-col>
 		<v-col cols="12" md="6">
 			<v-row dense>
 				<v-col 
 					v-if="hasAlbums"
-					cols="12"
+					cols="12" md="6"
 				>
 					<v-card>
 						<v-card-title>
@@ -101,7 +89,7 @@
 				</v-col>
 				<v-col 
 					v-if="hasVideos"
-					cols="12"
+					cols="12" md="6"
 				>
 					<v-card>
 						<v-card-title>
@@ -123,6 +111,18 @@
 					</v-card>
 				</v-col>
 			</v-row>
+		</v-col>
+		<v-col 
+			v-if="hasFlightLogs"
+			cols="12"
+		>
+			<v-card>
+				<v-card-title>
+<p class="text-h6 text-center">{{ $t('titles.rockets.launches') }}</p>
+				</v-card-title>
+				<v-card-text>
+				</v-card-text>
+			</v-card>
 		</v-col>
 	</v-row>
 </template>
@@ -158,7 +158,7 @@ export default {
 			albums,
 			hasAlbums,
 			hasAlbumsOrVideos,
-			hasFlightLogs,
+			hasLaunches,
 			hasVideos,
 			hasCoverUrl,
 			rocketTypeIcon,
@@ -187,7 +187,7 @@ export default {
 			albums,
 			hasAlbums,
 			hasAlbumsOrVideos,
-			hasFlightLogs,
+			hasLaunches,
 			hasVideos,
 			hasCoverUrl,
 			rocketTypeIcon,

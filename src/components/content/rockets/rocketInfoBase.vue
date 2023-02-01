@@ -46,7 +46,7 @@ export function useRocketInfoBaseComponent(props, context, options) {
 			return false;
 		return rocket.value.albums.length > 0;
 	});
-	const hasFlightLogs = computed(() => {
+	const hasLaunches = computed(() => {
 		if (!rocket.value || !rocket.value.logs)
 			return false;
 		return rocket.value.logs.length > 0;
@@ -102,7 +102,7 @@ export function useRocketInfoBaseComponent(props, context, options) {
 		albums,
 		hasAlbums,
 		hasAlbumsOrVideos,
-		hasFlightLogs,
+		hasLaunches,
 		hasVideos,
 		hasCoverUrl,
 		rocketTypeIcon,
