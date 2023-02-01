@@ -1,15 +1,16 @@
 <template>
 	<div>
-		<v-row dense>
+		<!-- <v-row dense>
 			<v-col cols="12" class="text-center text-h5 pb-2">
 				{{ $t('titles.content.info.3dprinting') + ' ' + $t('titles.content.info.title') }}
 			</v-col>
-		</v-row>
+		</v-row> -->
+		<Header v-model="title"/>
 		<v-row dense>
 			<v-col cols="12">
+				<v-card>
+					<v-card-text>
 <VMarkdown v-model="contentDesc" :use-github=false />
-			</v-col>
-		</v-row>
 		<v-row dense>
 			<v-col cols="12">
 				<q class="font-italic" cite="https://3dprinting.com/what-is-3d-printing">
@@ -53,18 +54,29 @@
 </v-carousel>
 			</v-col>
 		</v-row>
+					</v-card-text>
+				</v-card>
+			</v-col>
+		</v-row>
 		<v-row dense>
-			<v-col cols="12" class="text-center text-h5 pb-2">
+			<v-col cols="12">
+				<div class="text-center text-h5 pb-2">
+		{{ $t('strings.content.info.3dprinting.chart') }}
+				</div>
+			</v-col>
+			<v-col cols="12">
+				<v-card>
+					<v-card-title>
+						<div class="text-center text-h5 pb-2">
 				{{ $t('strings.content.info.3dprinting.chart') }}
-			</v-col>
-		</v-row>
-		<v-row dense>
-			<v-col cols="12">
-<VMarkdown v-model="contentChartDesc" :use-github=false />
-			</v-col>
-		</v-row>
-		<v-row dense>
-			<v-col cols="12">
+						</div>
+					</v-card-title>
+					<v-card-text>
+				<v-row dense>
+					<v-col cols="12">
+		<VMarkdown v-model="contentChartDesc" :use-github=false />
+					</v-col>
+				</v-row>
 				<v-table
 					fixed-header
 				>
@@ -125,6 +137,8 @@
 						</tr>
 					</tbody>
 				</v-table>
+					</v-card-text>
+				</v-card>
 			</v-col>
 		</v-row>
 		<v-row dense
@@ -244,6 +258,7 @@
 <script>
 import { use3DPrintingBaseComponent } from '@/components/content/info/3DPrintingBase';
 
+import Header from '@/components/content/Header';
 import Attribution from '@/components/content/info/Attribution';
 import VMarkdown from '@/library_vue_vuetify/components/markup/VMarkdown';
 
@@ -251,6 +266,7 @@ export default {
 	name: 'Epxoy',
 	components: {
 		Attribution,
+		Header,
 		VMarkdown
 	},
 	setup(props, context) {
@@ -275,6 +291,7 @@ export default {
 			handleAttribution,
 			hasAttribution,
 			contentChartDesc,
+			title,
 			data,
 			hasLinks,
 			links,
@@ -308,6 +325,7 @@ export default {
 			handleAttribution,
 			hasAttribution,
 			contentChartDesc,
+			title,
 			data,
 			hasLinks,
 			links,

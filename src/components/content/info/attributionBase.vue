@@ -18,7 +18,7 @@ export function useAttributionBaseComponent(props, context, options) {
 		success,
 		serviceStore,
 		sortByOrder,
-		target,
+		target
 	} = useContentBaseComponent(props, context, options);
 
 	const author = computed(() => {

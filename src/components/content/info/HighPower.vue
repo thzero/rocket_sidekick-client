@@ -1,20 +1,9 @@
 <template>
 	<div>
-		<v-row>
-			<v-col cols="12">
-				<v-card>
-					<v-card-title>
-	<p class="text-h6 text-center">{{ $t('titles.content.info.highPower') }}</p>
-					</v-card-title>
-				</v-card>
-			</v-col>
-		</v-row>
+		<Header v-model="title" />
 		<v-row dense>
 			<v-col cols="12">
 				<v-card>
-					<v-card-title>
-	<p class="text-h6 text-center">{{ $t('titles.content.links.general') }}</p>
-					</v-card-title>
 					<v-card-text>
 <VMarkdown v-model="contentMarkup" :use-github=false />
 
@@ -53,6 +42,9 @@
 						</v-carousel>
 					</v-card-text>
 				</v-card>
+			</v-col>
+			<v-col cols="12" class="text-center text-h5 pt-4 pb-2">
+				{{ $t('strings.content.info.3dprinting.additionalLinks') }}
 			</v-col>
 			<v-col cols="12" md="6">
 				<v-card
@@ -371,12 +363,14 @@
 import { useHighPowerBaseComponent } from '@/components/content/info/highPowerBase';
 
 import Attribution from '@/components/content/info/Attribution';
+import Header from '@/components/content/Header';
 import VMarkdown from '@/library_vue_vuetify/components/markup/VMarkdown';
 
 export default {
 	name: 'HighPower',
 	components: {
 		Attribution,
+		Header,
 		VMarkdown
 	},
 	setup(props, context) {
@@ -402,6 +396,7 @@ export default {
 			hasAttribution,
 			contentChartDesc,
 			contentMarkup2,
+			title,
 			highPowerLinks,
 			links,
 			linksBooks,
@@ -441,6 +436,7 @@ export default {
 			hasAttribution,
 			contentChartDesc,
 			contentMarkup2,
+			title,
 			highPowerLinks,
 			links,
 			linksBooks,

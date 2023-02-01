@@ -1,37 +1,49 @@
 <template>
 	<div>
-		<v-row dense>
+		<!-- <v-row dense>
 			<v-col cols="12" class="text-center text-h5 pb-2">
 				{{ $t('titles.content.info.epoxy') + ' ' + $t('titles.content.info.title') }}
 			</v-col>
-		</v-row>
+		</v-row> -->
+		<Header v-model="title" />
 		<v-row dense>
 			<v-col cols="12">
-<VMarkdown v-model="contentDesc" :use-github=false />
+				<v-card>
+					<v-card-text>
+						<v-row dense>
+							<v-col cols="12">
+				<VMarkdown v-model="contentDesc" :use-github=false />
+							</v-col>
+						</v-row>
+						<v-row dense>
+							<v-col cols="12">
+				<VMarkdown v-model="contentMarkup" :use-github=false />
+							</v-col>
+						</v-row>
+						<v-row dense>
+							<v-col cols="12">
+				<VMarkdown v-model="contentMarkup2" :use-github=false />
+							</v-col>
+						</v-row>
+					</v-card-text>
+				</v-card>
 			</v-col>
 		</v-row>
 		<v-row dense>
 			<v-col cols="12">
-<VMarkdown v-model="contentMarkup" :use-github=false />
+				<div class="text-center text-h5 pb-2">
+					{{ $t('strings.content.info.epoxy.chart') }}
+				</div>
 			</v-col>
-		</v-row>
-		<v-row dense>
 			<v-col cols="12">
-<VMarkdown v-model="contentMarkup2" :use-github=false />
-			</v-col>
-		</v-row>
-		<v-row dense>
-			<v-col cols="12" class="text-center text-h5 pb-2">
-				{{ $t('strings.content.info.epoxy.chart') }}
-			</v-col>
-		</v-row>
-		<v-row dense>
-			<v-col cols="12">
+				<v-card>
+					<!-- <v-card-title>
+						<div class="text-center text-h5 pb-2">
+							{{ $t('strings.content.info.epoxy.chart') }}
+						</div>
+					</v-card-title> -->
+					<v-card-text>
 <VMarkdown v-model="contentChartDesc" :use-github=false />
-			</v-col>
-		</v-row>
-		<v-row dense>
-			<v-col cols="12">
 				<v-table
 					fixed-header
 				>
@@ -154,6 +166,8 @@
 						</tr>
 					</tbody>
 				</v-table>
+					</v-card-text>
+				</v-card>
 			</v-col>
 		</v-row>
 		<v-row dense
@@ -163,17 +177,21 @@
 				{{ $t('strings.content.info.epoxy.additionalLinks') }}
 			</v-col>
 			<v-col cols="12" class="pb-2">
-				<div
-					v-for="item in links"
-					:key="item.url"
-				>
-					<a 
-						:href="item.url"
-						target="_blank"
-					>
-					{{ !String.isNullOrEmpty(item.title) ? item.title : item.url}}
-					</a><br/>
-				</div>
+				<v-card>
+					<v-card-text>
+						<div
+							v-for="item in links"
+							:key="item.url"
+						>
+							<a 
+								:href="item.url"
+								target="_blank"
+							>
+							{{ !String.isNullOrEmpty(item.title) ? item.title : item.url}}
+							</a><br/>
+						</div>
+					</v-card-text>
+				</v-card>
 			</v-col>
 		</v-row>
 		<v-row dense
@@ -194,12 +212,14 @@
 import { useEpoxyBaseComponent } from '@/components/content/info/epoxyBase';
 
 import Attribution from '@/components/content/info/Attribution';
+import Header from '@/components/content/Header';
 import VMarkdown from '@/library_vue_vuetify/components/markup/VMarkdown';
 
 export default {
 	name: 'Epxoy',
 	components: {
 		Attribution,
+		Header,
 		VMarkdown
 	},
 	setup(props, context) {
@@ -228,7 +248,8 @@ export default {
 			data,
 			hasLinks,
 			links,
-			temperature
+			temperature,
+			title
 		} = useEpoxyBaseComponent(props, context);
 
 		return {
@@ -256,7 +277,8 @@ export default {
 			data,
 			hasLinks,
 			links,
-			temperature
+			temperature,
+			title
 		};
 	}
 };

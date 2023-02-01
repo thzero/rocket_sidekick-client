@@ -1,6 +1,8 @@
 <script>
 import { onMounted, ref} from 'vue';
 
+import GlobalUtility from '@thzero/library_client/utility/global';
+
 import { useRocketBaseComponent } from '@/components/content/rockets/rocketBase';
 
 export function useRocketsBaseComponent(props, context, options) {
@@ -24,6 +26,7 @@ export function useRocketsBaseComponent(props, context, options) {
 
 	const params = ref({});
 	const rockets = ref([]);
+	const title = ref(GlobalUtility.$trans.t('titles.rockets.title'));
 
 	const fetch = async () => {
 		const response = await serviceStore.dispatcher.requestRockets(correlationId(), params.value);
@@ -57,6 +60,7 @@ export function useRocketsBaseComponent(props, context, options) {
 		rocketTypeIcon,
 		rocketTypeIconDetermine,
 		rockets,
+		title,
 		rocketUrl
 	};
 };

@@ -1,64 +1,62 @@
 <template>
-	<div>
-		<v-row>
-			<v-col cols="12">
-				<v-card>
-					<v-card-title>
-	<p class="text-h6 text-center">{{ $t('titles.rockets.title') }}</p>
-					</v-card-title>
-					<v-card-text>
-						<v-row dense>
-							<v-col cols="6"
+	<Header v-model="title" />
+	<v-row>
+		<v-col cols="12">
+			<v-card>
+				<v-card-text>
+					<v-row dense>
+						<v-col cols="6"
+							v-for="item in rockets"
+							:key="item.name"
+						>
+							<v-card
 								v-for="item in rockets"
 								:key="item.name"
+								class="mx-auto"
+								max-width="400"
+								color="secondary"
 							>
-								<v-card
-									v-for="item in rockets"
-									:key="item.name"
-									class="mx-auto"
-									max-width="400"
-    								color="secondary"
-								>
-									<v-img
-										v-if="hasCoverUrl(item)"
-										:src="item.coverUrl"
-										cover
-									></v-img>
+								<v-img
+									v-if="hasCoverUrl(item)"
+									:src="item.coverUrl"
+									cover
+								></v-img>
 
-									<v-card-title>
-										<v-row dense>
-											<v-col>
-												<v-btn
-													:to="rocketUrl(item)"
-													size="large"
-													variant="text"
-												>
-													{{ item.name }}
-												</v-btn>
-											</v-col>
-											<v-col>
-												<img :src="rocketTypeIcon(item)" style="height: 48px; float: right;" />
-											</v-col>
-										</v-row>
-									</v-card-title>
-								</v-card>
-							</v-col>
-						</v-row>
-					</v-card-text>
-				</v-card>
-			</v-col>
-		</v-row>
-	</div>
+								<v-card-title>
+									<v-row dense>
+										<v-col>
+											<v-btn
+												:to="rocketUrl(item)"
+												size="large"
+												variant="text"
+											>
+												{{ item.name }}
+											</v-btn>
+										</v-col>
+										<v-col>
+											<img :src="rocketTypeIcon(item)" style="height: 48px; float: right;" />
+										</v-col>
+									</v-row>
+								</v-card-title>
+							</v-card>
+						</v-col>
+					</v-row>
+				</v-card-text>
+			</v-card>
+		</v-col>
+	</v-row>
 </template>
 
 <script>
 import { useRocketsBaseComponent } from '@/components/content/rockets/rocketsBase';
 
+import Header from '@/components/content/Header';
 import VMarkdown from '@/library_vue_vuetify/components/markup/VMarkdown';
 
 export default {
 	name: 'Rockets',
 	components: {
+		Header,
 		VMarkdown
 	},
 	setup(props, context) {
@@ -79,6 +77,7 @@ export default {
 			rocketTypeIcon,
 			rocketTypeIconDetermine,
 			rockets,
+			title,
 			rocketUrl
 		} = useRocketsBaseComponent(props, context);
 
@@ -99,6 +98,7 @@ export default {
 			rocketTypeIcon,
 			rocketTypeIconDetermine,
 			rockets,
+			title,
 			rocketUrl
 		};
 	}

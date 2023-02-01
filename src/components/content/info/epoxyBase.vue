@@ -1,6 +1,8 @@
 <script>
 import { computed, onMounted, ref } from 'vue';
 
+import GlobalUtility from '@thzero/library_client/utility/global';
+
 import { useInfoBaseComponent } from '@/components/content/info/infoBase';
 
 export function useEpoxyBaseComponent(props, context, options) {
@@ -23,11 +25,12 @@ export function useEpoxyBaseComponent(props, context, options) {
 		contentMarkup,
 		contentTitle,
 		handleAttribution,
-		hasAttribution,
+		hasAttribution
 	} = useInfoBaseComponent(props, context, options);
 
 	const contentChartDesc = ref(null);
 	const contentMarkup2 = ref(null);
+	const title = ref(GlobalUtility.$trans.t('titles.content.info.epoxy') + ' ' + GlobalUtility.$trans.t('titles.content.info.title'));
 	
 	const data = computed(() => {
 		if (!content.value || !content.value.supplemental || !content.value.supplemental.data)
@@ -90,7 +93,8 @@ export function useEpoxyBaseComponent(props, context, options) {
 		data,
 		hasLinks,
 		links,
-		temperature
+		temperature,
+		title
 	};
 };
 </script>

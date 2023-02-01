@@ -30,6 +30,7 @@ export function useRocketInfoBaseComponent(props, context, options) {
 	} = useRocketBaseComponent(props, context, options);
 
 	const rocket = ref([]);
+	const title = ref(GlobalUtility.$trans.t('titles.rockets.title'));
 
 	const rocketId = computed(() => {
 		return routes.params.id;
@@ -107,6 +108,7 @@ export function useRocketInfoBaseComponent(props, context, options) {
 		rocketTypeIcon,
 		rocketTypeIconDetermine,
 		rocket,
+		title,
 		rocketId,
 		measurementUnitTranslate,
 		measurementUnitTranslateLength,

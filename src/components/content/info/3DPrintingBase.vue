@@ -3,6 +3,8 @@ import { computed, onMounted, ref } from 'vue';
 
 import Constants from '@/constants';
 
+import GlobalUtility from '@thzero/library_client/utility/global';
+
 import { useInfoBaseComponent } from '@/components/content/info/infoBase';
 
 export function use3DPrintingBaseComponent(props, context, options) {
@@ -29,6 +31,7 @@ export function use3DPrintingBaseComponent(props, context, options) {
 	} = useInfoBaseComponent(props, context, options);
 
 	const contentChartDesc = ref(null);
+	const title = ref(GlobalUtility.$trans.t('titles.content.info.3dprinting') + ' ' + GlobalUtility.$trans.t('titles.content.info.title'));
 	
 	const data = computed(() => {
 		if (!content.value || !content.value.supplemental || !content.value.supplemental.data)
@@ -116,6 +119,7 @@ export function use3DPrintingBaseComponent(props, context, options) {
 		handleAttribution,
 		hasAttribution,
 		contentChartDesc,
+		title,
 		data,
 		hasLinks,
 		links,

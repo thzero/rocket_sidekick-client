@@ -20,12 +20,14 @@
 import { useInfoMarkupBaseComponent } from '@/components/content/info/infoMarkupBase';
 
 import Attribution from '@/components/content/info/Attribution';
+import Header from '@/components/content/Header';
 import VMarkdown from '@/library_vue_vuetify/components/markup/VMarkdown';
 
 export default {
 	name: 'InfoMarkup',
 	components: {
 		Attribution,
+		Header,
 		VMarkdown
 	},
 	setup(props, context) {
