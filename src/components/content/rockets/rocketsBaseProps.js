@@ -1,8 +1,8 @@
-import Constants from "@/constants";
+import AppConstants from "@/constants";
 
 export const useRocketsBaseProps = {
 		type: {
 			type: String,
-			default: Constants.RocketTypes.Site
+			default: AppConstants.RocketTypes.Site
 		}
 };

@@ -1,7 +1,5 @@
 <script>
-import { computed, onMounted, ref} from 'vue';
-
-import Constants from '@/common/constants';
+import AppCommonConstants from '@/common/constants';
 
 import { useContentBaseComponent } from '@/components/content/contentBase';
 
@@ -41,15 +39,15 @@ export function useRocketBaseComponent(props, context, options) {
 	const rocketTypeIconDetermine = (item) => {
 		if (!item)
 			return null;
-		if (item.typeId === Constants.RocketTypes.highone)
+		if (item.typeId === AppCommonConstants.RocketTypes.highone)
 			return 'rocket_level1.png';
-		if (item.typeId === Constants.RocketTypes.hightwo)
+		if (item.typeId === AppCommonConstants.RocketTypes.hightwo)
 			return 'rocket_level2.png';
-		if (item.typeId === Constants.RocketTypes.highthree)
+		if (item.typeId === AppCommonConstants.RocketTypes.highthree)
 			return 'rocket_level3.png';
-		if (item.typeId === Constants.RocketTypes.low)
+		if (item.typeId === AppCommonConstants.RocketTypes.low)
 			return 'rocket_low.png';
-		if (item.typeId === Constants.RocketTypes.mid)
+		if (item.typeId === AppCommonConstants.RocketTypes.mid)
 			return 'rocket_mid.png';
 		return null;
 	};

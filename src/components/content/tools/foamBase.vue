@@ -3,9 +3,9 @@ import { onMounted, ref } from 'vue';
 
 import useVuelidate from '@vuelidate/core';
 
-import Constants from '@/constants';
+import AppConstants from '@/constants';
 
-import GlobalUtility from '@thzero/library_client/utility/global';
+import LibraryClientUtility from '@thzero/library_client/utility/index';
 
 import { useToolsBaseComponent } from '@/components/content/tools/toolsBase';
 
@@ -39,7 +39,7 @@ export function useFoamBaseComponent(props, context, options) {
 		settings,
 	} = useToolsBaseComponent(props, context, options);
 
-	const serviceToolsFoam = GlobalUtility.$injector.getService(Constants.InjectorKeys.SERVICE_TOOLS_FOAM);
+	const serviceToolsFoam = LibraryClientUtility.$injector.getService(AppConstants.InjectorKeys.SERVICE_TOOLS_FOAM);
 
 	const calculationData = ref(null);
 	const calculationResults = initCalculationResults(correlationId(), ref({}));
@@ -49,7 +49,7 @@ export function useFoamBaseComponent(props, context, options) {
 	const finTabLength = ref(0.3);
 	const finWidth = ref(null);
 	const lengthMeasurementUnitId = ref(null);
-	const measurementUnitslengthType = ref(Constants.MeasurementUnits.types.length);
+	const measurementUnitslengthType = ref(AppConstants.MeasurementUnits.types.length);
 	const motorTubeOD = ref(null);
 	const numberFins = ref(null);
 

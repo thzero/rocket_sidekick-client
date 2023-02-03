@@ -147,8 +147,6 @@
 </template>
 
 <script>
-import Constants from '@/constants';
-
 import { useRocketInfoBaseComponent } from '@/components/content/rockets/rocketInfoBase';
 import { useRocketInfoBaseProps } from '@/components/content/rockets/rocketInfoBaseProps';
 

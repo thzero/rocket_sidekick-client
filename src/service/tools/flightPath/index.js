@@ -1,7 +1,7 @@
-import Constants from '@/constants';
+import AppConstants from '@/constants';
 
 import AppUtility from '@/utility/app';
-import CommonUtility from '@thzero/library_common/utility/index';
+import LibraryCommonUtility from '@thzero/library_common/utility/index';
 
 import BaseService from '@thzero/library_client/service/index';
 
@@ -13,7 +13,7 @@ class FlightPathProcessorService extends BaseService {
 	}
 
 	init(injector) {
-		const serviceFlightPathProcessorFeatherweight = injector.getService(Constants.InjectorKeys.SERVICE_TOOLS_FLIGHT_PATH_PROCESSOR_FEATHERWEIGHT);
+		const serviceFlightPathProcessorFeatherweight = injector.getService(AppConstants.InjectorKeys.SERVICE_TOOLS_FLIGHT_PATH_PROCESSOR_FEATHERWEIGHT);
 		this.registerProcessor(serviceFlightPathProcessorFeatherweight);
 	}
 
@@ -60,7 +60,7 @@ class FlightPathProcessorService extends BaseService {
 		this._enforceNotEmpty('FlightPathProcessorService', 'process', measurementUnits.measurementUnitsDistanceOutputId, 'measurementUnitsDistanceOutputId', correlationId);
 		this._enforceNotEmpty('FlightPathProcessorService', 'process', measurementUnits.measurementUnitsVelocityOutputId, 'measurementUnitsVelocityOutputId', correlationId);
 
-		if (CommonUtility.isNull(data))
+		if (LibraryCommonUtility.isNull(data))
 			return this._error('FlightPathProcessorService', 'process', null, err, null, 'errors.process.noInput', correlationId);
 
 		if (String.isNullOrEmpty(processorId))

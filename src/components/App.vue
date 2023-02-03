@@ -5,9 +5,9 @@
 <script>
 import { useTheme } from 'vuetify';
 
-import LibraryConstants from '@thzero/library_client/constants';
+import LibraryClientConstants from '@thzero/library_client/constants';
 
-import GlobalUtility from '@thzero/library_client/utility/global';
+import LibraryClientUtility from '@thzero/library_client/utility/index';
 
 import { useBaseAppComponent } from '@/library_vue/components/baseApp';
 
@@ -36,7 +36,7 @@ export default {
 			}
 		);
 
-		const serviceStore = GlobalUtility.$injector.getService(LibraryConstants.InjectorKeys.SERVICE_STORE);
+		const serviceStore = LibraryClientUtility.$injector.getService(LibraryClientConstants.InjectorKeys.SERVICE_STORE);
 
 		// const initialize = async () => {
 		// 	return [

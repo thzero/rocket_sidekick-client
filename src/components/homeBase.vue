@@ -1,11 +1,11 @@
 <script>
 import { computed, onMounted, ref } from 'vue';
 
-import Constants from '@/constants';
-import LibraryConstants from '@thzero/library_client/constants';
+import AppConstants from '@/constants';
+import LibraryClientConstants from '@thzero/library_client/constants';
 
 import AppUtility from '@/utility/app';
-import GlobalUtility from '@thzero/library_client/utility/global';
+import LibraryClientUtility from '@thzero/library_client/utility/index';
 
 import { useBaseComponent } from '@/library_vue/components/base';
 
@@ -22,13 +22,13 @@ export function useHomeBaseComponent(props, context, options) {
 		success,
 	} = useBaseComponent(props, context, options);
 
-	const serviceStore = GlobalUtility.$injector.getService(LibraryConstants.InjectorKeys.SERVICE_STORE);
+	const serviceStore = LibraryClientUtility.$injector.getService(LibraryClientConstants.InjectorKeys.SERVICE_STORE);
 
-	const externalGithub = ref(Constants.External.github);
+	const externalGithub = ref(AppConstants.External.github);
 	const initializeCompleted = ref(false);
 
 	const contentDescription = (item,) => {
-		return (item.markup ? item.description : GlobalUtility.$trans.t(item.description));
+		return (item.markup ? item.description : LibraryClientUtility.$trans.t(item.description));
 	};
 	const contentLink = (item,) => {
 		if (item.markup)
@@ -37,7 +37,7 @@ export function useHomeBaseComponent(props, context, options) {
 		return item.link;
 	};
 	const contentTitle = (item,) => {
-		return (item.markup ? item.title : GlobalUtility.$trans.t(item.title));
+		return (item.markup ? item.title : LibraryClientUtility.$trans.t(item.title));
 	};
 
 	const hasContent = computed(() => {
@@ -76,7 +76,7 @@ export function useHomeBaseComponent(props, context, options) {
 		return AppUtility.userDisplayName(correlationId(), serviceStore.user);
 	});
 
-	GlobalUtility.$EventBus.on('initialize-completed', (value) => {
+	LibraryClientUtility.$EventBus.on('initialize-completed', (value) => {
 		initializeCompleted.value = value;
 	});
 

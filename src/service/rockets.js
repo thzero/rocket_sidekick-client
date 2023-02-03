@@ -1,11 +1,11 @@
-import LibraryConstants from '@thzero/library_client/constants.js';
+import LibraryClientConstants from '@thzero/library_client/constants.js';
 
 import RestExternalService from '@thzero/library_client/service/externalRest';
 
 class RocketsService extends RestExternalService {
 	async listing(correlationId, params) {
 		try {
-			const response = await this._serviceCommunicationRest.post(correlationId, LibraryConstants.ExternalKeys.BACKEND, { url: 'rockets/listing' }, params);
+			const response = await this._serviceCommunicationRest.post(correlationId, LibraryClientConstants.ExternalKeys.BACKEND, { url: 'rockets/listing' }, params);
 			this._logger.debug('RocketsService', 'listing', 'response', response, correlationId);
 			return response;
 		}
@@ -16,7 +16,7 @@ class RocketsService extends RestExternalService {
     
 	async listingUser(correlationId, params) {
 		try {
-			const response = await this._serviceCommunicationRest.post(correlationId, LibraryConstants.ExternalKeys.BACKEND, { url: 'rockets/listing/user' }, params);
+			const response = await this._serviceCommunicationRest.post(correlationId, LibraryClientConstants.ExternalKeys.BACKEND, { url: 'rockets/listing/user' }, params);
 			this._logger.debug('RocketsService', 'listingUser', 'response', response, correlationId);
 			return response;
 		}
@@ -27,7 +27,7 @@ class RocketsService extends RestExternalService {
 
 	async retrieve(correlationId, id) {
 		try {
-			const response = await this._serviceCommunicationRest.getById(correlationId, LibraryConstants.ExternalKeys.BACKEND, 'rockets', id);
+			const response = await this._serviceCommunicationRest.getById(correlationId, LibraryClientConstants.ExternalKeys.BACKEND, 'rockets', id);
 			this._logger.debug('RocketsService', 'retrieve', 'response', response, correlationId);
 			return response;
 		}
@@ -38,7 +38,7 @@ class RocketsService extends RestExternalService {
     
 	async retrieveUser(correlationId, id) {
 		try {
-			const response = await this._serviceCommunicationRest.getById(correlationId, LibraryConstants.ExternalKeys.BACKEND, 'rockets/user', user.id);
+			const response = await this._serviceCommunicationRest.getById(correlationId, LibraryClientConstants.ExternalKeys.BACKEND, 'rockets/user', user.id);
 			this._logger.debug('RocketsService', 'retrieveUser', 'response', response, correlationId);
 			return response;
 		}

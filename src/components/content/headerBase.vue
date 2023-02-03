@@ -1,6 +1,4 @@
 <script>
-import Constants from '@/common/constants';
-
 import { useContentBaseComponent } from '@/components/content/contentBase';
 
 export function useHeaderBaseComponent(props, context, options) {

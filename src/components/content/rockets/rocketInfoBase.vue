@@ -4,7 +4,7 @@ import { computed, onMounted, ref} from 'vue';
 
 import Constants from '@/constants';
 
-import GlobalUtility from '@thzero/library_client/utility/global';
+import LibraryClientUtility from '@thzero/library_client/utility/index';
 
 import { useRocketBaseComponent } from '@/components/content/rockets/rocketBase';
 
@@ -79,7 +79,7 @@ export function useRocketInfoBaseComponent(props, context, options) {
 	const measurementUnitTranslate = (measurementUnitId, measurementUnit, measurementUnitType) => {
 		if (String.isNullOrEmpty(measurementUnitId) || String.isNullOrEmpty(measurementUnit))
 			return '';
-		return GlobalUtility.$trans.t('measurementUnits.' + measurementUnitId + '.' + measurementUnitType + '.' + measurementUnit + 'Abbr');
+		return LibraryClientUtility.$trans.t('measurementUnits.' + measurementUnitId + '.' + measurementUnitType + '.' + measurementUnit + 'Abbr');
 	};
 	const measurementUnitTranslateLength = (measurementUnitId, measurementUnit) => {
 		return measurementUnitTranslate(measurementUnitId, measurementUnit, Constants.MeasurementUnits.length.id);

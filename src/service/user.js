@@ -1,4 +1,4 @@
-import LibraryConstants from '@thzero/library_client/constants';
+import LibraryClientConstants from '@thzero/library_client/constants';
 
 import AppUtility from '@/utility/app';
 
@@ -15,8 +15,8 @@ class UserService extends VueBaseUserService {
 	async init(injector) {
 		await super.init(injector);
 
-		this._serviceCommunicationRest = injector.getService(LibraryConstants.InjectorKeys.SERVICE_COMMUNICATION_REST);
-		this._serviceStore = injector.getService(LibraryConstants.InjectorKeys.SERVICE_STORE);
+		this._serviceCommunicationRest = injector.getService(LibraryClientConstants.InjectorKeys.SERVICE_COMMUNICATION_REST);
+		this._serviceStore = injector.getService(LibraryClientConstants.InjectorKeys.SERVICE_STORE);
 	}
 
 	async fetchFavoritesByGamerId(correlationId, user) {
@@ -25,7 +25,7 @@ class UserService extends VueBaseUserService {
 
 		this._logger.debug('UserService', 'fetchFavoritesByGamerId', 'userId', user.id, correlationId);
 		try {
-			const response = await this._serviceCommunicationRest.getById(correlationId, LibraryConstants.ExternalKeys.BACKEND, 'users/favorites', user.id);
+			const response = await this._serviceCommunicationRest.getById(correlationId, LibraryClientConstants.ExternalKeys.BACKEND, 'users/favorites', user.id);
 			this._logger.debug('UserService', 'fetchFavoritesByGamerId', 'response', response, correlationId);
 			if (this._hasSucceeded(response))
 				return response;
@@ -43,7 +43,7 @@ class UserService extends VueBaseUserService {
 
 		this._logger.debug('UserService', 'fetchByGamerId', 'gamerId', gamerId, correlationId);
 		try {
-			const response = await this._serviceCommunicationRest.getById(correlationId, LibraryConstants.ExternalKeys.BACKEND, 'users/gamerId', gamerId);
+			const response = await this._serviceCommunicationRest.getById(correlationId, LibraryClientConstants.ExternalKeys.BACKEND, 'users/gamerId', gamerId);
 			this._logger.debug('UserService', 'fetchByGamerId', 'response', response, correlationId);
 			if (this._hasSucceeded(response))
 				return response;
@@ -61,7 +61,7 @@ class UserService extends VueBaseUserService {
 
 		this._logger.debug('UserService', 'fetchByGamerTag', 'gamerTag', gamerTag, correlationId);
 		try {
-			const response = await this._serviceCommunicationRest.getById(correlationId, LibraryConstants.ExternalKeys.BACKEND, 'users/gamerTag', gamerTag);
+			const response = await this._serviceCommunicationRest.getById(correlationId, LibraryClientConstants.ExternalKeys.BACKEND, 'users/gamerTag', gamerTag);
 			this._logger.debug('UserService', 'fetchByGamerTag', 'response', response, correlationId);
 			if (this._hasSucceeded(response))
 				return response;

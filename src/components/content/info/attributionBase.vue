@@ -1,7 +1,7 @@
 <script>
 import { computed, watch } from 'vue';
 
-import Constants from '@/common/constants';
+import AppCommonConstants from '@/common/constants';
 
 import { useContentBaseComponent } from '@/components/content/contentBase';
 
@@ -70,9 +70,9 @@ export function useAttributionBaseComponent(props, context, options) {
 		if (!props.modelValue || !props.modelValue.license)
 			return null;
 		const license = props.modelValue.license.toLowerCase();
-		let item = Object.entries(Constants.Licenses.Free).find(l => l[1].id === license);
+		let item = Object.entries(AppCommonConstants.Licenses.Free).find(l => l[1].id === license);
 		if (!item)
-			item = Object.entries(Constants.Licenses.Public).find(l => l[1].id === license);
+			item = Object.entries(AppCommonConstants.Licenses.Public).find(l => l[1].id === license);
 		if (item.length < 1)
 			return null;
 		item = item[1];

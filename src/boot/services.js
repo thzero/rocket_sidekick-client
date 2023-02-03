@@ -1,4 +1,4 @@
-import Constants from '@/constants';
+import AppConstants from '@/constants';
 
 import apiService from '@/service/api';
 import authService from '@thzero/library_client_firebase/service';
@@ -33,26 +33,26 @@ class Services extends BaseServices {
 	_initialize() {
 		super._initialize();
 
-		this._injectService(Constants.InjectorKeys.SERVICE_API, new apiService());
-		this._injectService(Constants.InjectorKeys.SERVICE_DOWNLOAD, new downloadService());
+		this._injectService(AppConstants.InjectorKeys.SERVICE_API, new apiService());
+		this._injectService(AppConstants.InjectorKeys.SERVICE_DOWNLOAD, new downloadService());
 
-		this._injectService(Constants.InjectorKeys.SERVICE_EXTERNAL_MOTOR_SEARCH, new thrustCurveMotorSearchExternalService());
+		this._injectService(AppConstants.InjectorKeys.SERVICE_EXTERNAL_MOTOR_SEARCH, new thrustCurveMotorSearchExternalService());
 		
-		this._injectService(Constants.InjectorKeys.SERVICE_ROCKETS, new rocketsService());
+		this._injectService(AppConstants.InjectorKeys.SERVICE_ROCKETS, new rocketsService());
 		
-		this._injectService(Constants.InjectorKeys.SERVICE_TOOLS_CALCULATION_ENGINE, new mathJsCalculationEngineToolsService());
-		this._injectService(Constants.InjectorKeys.SERVICE_TOOLS_FOAM, new foamToolsService());
+		this._injectService(AppConstants.InjectorKeys.SERVICE_TOOLS_CALCULATION_ENGINE, new mathJsCalculationEngineToolsService());
+		this._injectService(AppConstants.InjectorKeys.SERVICE_TOOLS_FOAM, new foamToolsService());
 
-		this._injectService(Constants.InjectorKeys.SERVICE_TOOLS_FLIGHT_INFO_PROCESSOR, new flightInfoProcessorToolsService());
-		this._injectService(Constants.InjectorKeys.SERVICE_TOOLS_FLIGHT_INFO_PROCESSOR_EGGTIMER, new flightInfoProcessorEggtimerToolsService());
-		this._injectService(Constants.InjectorKeys.SERVICE_TOOLS_FLIGHT_PATH_OUTPUT, new flightPathOutputToolsService());
-		this._injectService(Constants.InjectorKeys.SERVICE_TOOLS_FLIGHT_PATH_OUTPUT_KML, new flightPathOutputKmlToolsService());
-		this._injectService(Constants.InjectorKeys.SERVICE_TOOLS_FLIGHT_PATH_OUTPUT_TEMPLATE, new flightPathOutputTemplateToolsService());
-		this._injectService(Constants.InjectorKeys.SERVICE_TOOLS_FLIGHT_PATH_OUTPUT_TEMPLATE_HANDLEBARS, new flightPathOutputTemplateHandlebarsToolsService());
-		this._injectService(Constants.InjectorKeys.SERVICE_TOOLS_FLIGHT_PATH_PROCESSOR, new flightPathProcessorToolsService());
-		this._injectService(Constants.InjectorKeys.SERVICE_TOOLS_FLIGHT_PATH_PROCESSOR_FEATHERWEIGHT, new flightPathProcessorFeatherweightToolsService());
+		this._injectService(AppConstants.InjectorKeys.SERVICE_TOOLS_FLIGHT_INFO_PROCESSOR, new flightInfoProcessorToolsService());
+		this._injectService(AppConstants.InjectorKeys.SERVICE_TOOLS_FLIGHT_INFO_PROCESSOR_EGGTIMER, new flightInfoProcessorEggtimerToolsService());
+		this._injectService(AppConstants.InjectorKeys.SERVICE_TOOLS_FLIGHT_PATH_OUTPUT, new flightPathOutputToolsService());
+		this._injectService(AppConstants.InjectorKeys.SERVICE_TOOLS_FLIGHT_PATH_OUTPUT_KML, new flightPathOutputKmlToolsService());
+		this._injectService(AppConstants.InjectorKeys.SERVICE_TOOLS_FLIGHT_PATH_OUTPUT_TEMPLATE, new flightPathOutputTemplateToolsService());
+		this._injectService(AppConstants.InjectorKeys.SERVICE_TOOLS_FLIGHT_PATH_OUTPUT_TEMPLATE_HANDLEBARS, new flightPathOutputTemplateHandlebarsToolsService());
+		this._injectService(AppConstants.InjectorKeys.SERVICE_TOOLS_FLIGHT_PATH_PROCESSOR, new flightPathProcessorToolsService());
+		this._injectService(AppConstants.InjectorKeys.SERVICE_TOOLS_FLIGHT_PATH_PROCESSOR_FEATHERWEIGHT, new flightPathProcessorFeatherweightToolsService());
 
-		this._injectService(Constants.InjectorKeys.SERVICE_TOOLS_THRUST2WEIGHT, new thrust2WeightToolsService());
+		this._injectService(AppConstants.InjectorKeys.SERVICE_TOOLS_THRUST2WEIGHT, new thrust2WeightToolsService());
 	}
 
 	_initializeAuth() {

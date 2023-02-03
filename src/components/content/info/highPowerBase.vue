@@ -1,9 +1,9 @@
 <script>
 import { computed, onMounted, ref } from 'vue';
 
-import Constants from '@/constants';
+import AppConstants from '@/constants';
 
-import GlobalUtility from '@thzero/library_client/utility/global';
+import LibraryClientUtility from '@thzero/library_client/utility/index';
 
 import { useInfoBaseComponent } from '@/components/content/info/infoBase';
 
@@ -32,7 +32,7 @@ export function useHighPowerBaseComponent(props, context, options) {
 	
 	const contentChartDesc = ref(null);
 	const contentMarkup2 = ref(null);
-	const title = ref(GlobalUtility.$trans.t('titles.content.info.highPower'));
+	const title = ref(LibraryClientUtility.$trans.t('titles.content.info.highPower'));
 
 	const highPowerLinks = computed(() => {
 		if (!content.value || !content.value.supplemental || !content.value.supplemental.links)
@@ -113,7 +113,7 @@ export function useHighPowerBaseComponent(props, context, options) {
 	});
 
 	const slideUrl = (url) => {
-		return Constants.External.imnages + url;
+		return AppConstants.External.imnages + url;
 	};
 
 	onMounted(async () => {

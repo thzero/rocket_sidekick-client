@@ -1,9 +1,9 @@
 <script>
 import { computed } from 'vue';
 
-import Constants from '@/constants';
+import AppConstants from '@/constants';
 
-import GlobalUtility from '@thzero/library_client/utility/global';
+import LibraryClientUtility from '@thzero/library_client/utility/index';
 
 import { useToolsBaseComponent } from '@/components/content/tools/toolsBase';
 
@@ -34,15 +34,15 @@ export function useMeasurementSelectBaseComponent(props, context, options) {
 	} = useToolsBaseComponent(props, context, options);
 
 	const measurementUnits = computed(() => {
-		if (props.measurementUnitsId === Constants.MeasurementUnits.english.id)
-			return measurementUnitTrans(Constants.MeasurementUnits.english[props.measurementUnitsType], 'english', props.measurementUnitsType);
-		return measurementUnitTrans(Constants.MeasurementUnits.metrics[props.measurementUnitsType], 'metrics', props.measurementUnitsType);
+		if (props.measurementUnitsId === AppConstants.MeasurementUnits.english.id)
+			return measurementUnitTrans(AppConstants.MeasurementUnits.english[props.measurementUnitsType], 'english', props.measurementUnitsType);
+		return measurementUnitTrans(AppConstants.MeasurementUnits.metrics[props.measurementUnitsType], 'metrics', props.measurementUnitsType);
 	});
 	
 	const keyword = 'Default'.toLowerCase(); // otherwise gives a '_sfc_main is not defined' error as Vite is looking for lower case version of the keyword
 
 	const measurementUnitTrans = (object, key, subKey) => {
-		return object ? Object.getOwnPropertyNames(object).filter(l => l !== keyword).map((item) => { return { id: item, name: GlobalUtility.$trans.t('measurementUnits.' + key + '.' + subKey + '.' + item + 'Abbr') }; }) : {};
+		return object ? Object.getOwnPropertyNames(object).filter(l => l !== keyword).map((item) => { return { id: item, name: LibraryClientUtility.$trans.t('measurementUnits.' + key + '.' + subKey + '.' + item + 'Abbr') }; }) : {};
 	};
 
 	return {

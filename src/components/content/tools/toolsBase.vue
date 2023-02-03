@@ -2,8 +2,8 @@
 import { computed, onMounted, ref } from 'vue';
 
 import AppUtility from '@/utility/app';
-import GlobalUtility from '@thzero/library_client/utility/global';
-import Utility from '@thzero/library_common/utility';
+import LibraryClientUtility from '@thzero/library_client/utility/index';
+import LibraryCommonUtility from '@thzero/library_common/utility';
 
 import { useContentBaseComponent } from '@/components/content/contentBase';
 
@@ -43,10 +43,10 @@ export function useToolsBaseComponent(props, context, options) {
 	const settings = ref(null);
 
 	const dateFormat = computed(() => {
-		return GlobalUtility.dateFormat();
+		return LibraryClientUtility.dateFormat();
 	});
 	const dateFormatMask = computed(() => {
-		return GlobalUtility.dateFormat().replace(/[a-zA-Z0-9]/g, '#');
+		return LibraryClientUtility.dateFormat().replace(/[a-zA-Z0-9]/g, '#');
 	});
 
 	const calculateI = async (correlationId, calculationResults, func) => {
@@ -112,19 +112,19 @@ export function useToolsBaseComponent(props, context, options) {
 		if (String.isNullOrEmpty(message))
 			return;
 
-		message = (!transformed ? GlobalUtility.$trans.t(message) : message);
+		message = (!transformed ? LibraryClientUtility.$trans.t(message) : message);
 		if (String.isNullOrEmpty(message))
 			return;
 
 		notifyColor.value = null;
-		notifyMessage.value = (!transformed ? GlobalUtility.$trans.t(message) : message);
+		notifyMessage.value = (!transformed ? LibraryClientUtility.$trans.t(message) : message);
 		notifySignal.value = true;
 	};
 	const toFixed = (value) => {
 		if (!value)
 			return '';
 
-		if (Utility.isString(value))
+		if (LibraryCommonUtility.isString(value))
 			return value.toFixed(2);
 		
 		return value;

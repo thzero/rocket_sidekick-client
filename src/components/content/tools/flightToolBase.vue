@@ -1,12 +1,12 @@
 <script>
 import { computed, onMounted, ref, watch } from 'vue';
 
-import Constants from '@/constants';
+import AppConstants from '@/constants';
 
 import AppUtility from '@/utility/app';
-import CommonUtility from '@thzero/library_common/utility/index';
-import GlobalUtility from '@thzero/library_client/utility/global';
-import VuetifyUtility from '@/library_vue_vuetify/utility/index';
+import LibraryClientUtility from '@thzero/library_client/utility/index';
+import LibraryCommonUtility from '@thzero/library_common/utility/index';
+import LibraryVuetifyUtility from '@/library_vue_vuetify/utility/index';
 
 import { useToolsBaseComponent } from '@/components/content/tools/toolsBase';
 
@@ -80,20 +80,20 @@ export function useFlightToolsBaseComponent(props, context, options) {
 	const flightMeasurementUnitsOptionsAcceleration = computed(() => {
 		if (String.isNullOrEmpty(flightMeasurementUnitsId.value))
 			return [];
-		const object = Constants.MeasurementUnits[flightMeasurementUnitsId.value].acceleration;
-		return Object.getOwnPropertyNames(object).filter(l => l !== keyword).map((item) => { return { id: item, name: GlobalUtility.$trans.t('measurementUnits.' + flightMeasurementUnitsId.value + '.acceleration.' + item + 'Abbr') }; });
+		const object = AppConstants.MeasurementUnits[flightMeasurementUnitsId.value].acceleration;
+		return Object.getOwnPropertyNames(object).filter(l => l !== keyword).map((item) => { return { id: item, name: LibraryClientUtility.$trans.t('measurementUnits.' + flightMeasurementUnitsId.value + '.acceleration.' + item + 'Abbr') }; });
 	});
 	const flightMeasurementUnitsOptionsDistance = computed(() => {
 		if (String.isNullOrEmpty(flightMeasurementUnitsId.value))
 			return [];
-		const object = Constants.MeasurementUnits[flightMeasurementUnitsId.value].distance;
-		return Object.getOwnPropertyNames(object).filter(l => l !== keyword).map((item) => { return { id: item, name: GlobalUtility.$trans.t('measurementUnits.' + flightMeasurementUnitsId.value + '.distance.' + item + 'Abbr') }; });
+		const object = AppConstants.MeasurementUnits[flightMeasurementUnitsId.value].distance;
+		return Object.getOwnPropertyNames(object).filter(l => l !== keyword).map((item) => { return { id: item, name: LibraryClientUtility.$trans.t('measurementUnits.' + flightMeasurementUnitsId.value + '.distance.' + item + 'Abbr') }; });
 	});
 	const flightMeasurementUnitsOptionsVelocity = computed(() => {
 		if (String.isNullOrEmpty(flightMeasurementUnitsId.value))
 			return [];
-		const object = Constants.MeasurementUnits[flightMeasurementUnitsId.value].velocity;
-		return Object.getOwnPropertyNames(object).filter(l => l !== keyword).map((item) => { return { id: item, name: GlobalUtility.$trans.t('measurementUnits.' + flightMeasurementUnitsId.value + '.velocity.' + item + 'Abbr') }; });
+		const object = AppConstants.MeasurementUnits[flightMeasurementUnitsId.value].velocity;
+		return Object.getOwnPropertyNames(object).filter(l => l !== keyword).map((item) => { return { id: item, name: LibraryClientUtility.$trans.t('measurementUnits.' + flightMeasurementUnitsId.value + '.velocity.' + item + 'Abbr') }; });
 	});
 
 	const flightDataLoad = (correlationId) => {
@@ -147,7 +147,7 @@ export function useFlightToolsBaseComponent(props, context, options) {
 			flightMeasurementUnitsVelocityOutputId.value = AppUtility.measurementUnitVelocityId(correlationId, settings.value);
 	};
 	const flightMeasurementUnitsLoadOptions = (correlationId) => {
-		flightMeasurementUnitsOptions.value = VuetifyUtility.selectOptions(AppUtility.measurementUnitsOptions(), GlobalUtility.$trans.t, 'measurementUnits');
+		flightMeasurementUnitsOptions.value = LibraryVuetifyUtility.selectOptions(AppUtility.measurementUnitsOptions(), LibraryClientUtility.$trans.t, 'measurementUnits');
 	};
 	const flightMeasurementUnitsReset = (correlationId) => {
 		flightMeasurementUnitsAccelerationId.value = AppUtility.measurementUnitsAccelerationId(correlationId, settings.value, flightMeasurementUnitsId.value);
@@ -173,7 +173,7 @@ export function useFlightToolsBaseComponent(props, context, options) {
 			velocityId: flightMeasurementUnitsVelocityId.value,
 		};
 		measurementUnits.input = measurementUnits.input ? measurementUnits.input : [];
-		measurementUnits.input = CommonUtility.updateArrayByObject(measurementUnits.input, input);
+		measurementUnits.input = LibraryCommonUtility.updateArrayByObject(measurementUnits.input, input);
 		measurementUnits.output = {
 			unitsId: flightMeasurementUnitsOutputId.value,
 			accelerationId: flightMeasurementUnitsAccelerationOutputId.value,

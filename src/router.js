@@ -1,6 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router';
 
-import GlobalUtility from '@thzero/library_client/utility/global';
+import LibraryClientUtility from '@thzero/library_client/utility/index';
 
 const routes = [
 	{
@@ -391,7 +391,7 @@ const router = createRouter({
 // eslint-disable-next-line
 router.beforeResolve((to, from, next) => {
 	if (to.matched.some(record => record.meta.notFound)) {
-		GlobalUtility.$navRouter.push('/notFound');
+		LibraryClientUtility.$navRouter.push('/notFound');
 		return;
 	}
 

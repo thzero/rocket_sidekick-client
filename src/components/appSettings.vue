@@ -2,9 +2,9 @@
 import { computed, ref, watch } from 'vue';
 import useVuelidate from '@vuelidate/core';
 
-import Constants from '@/constants';
+import AppConstants from '@/constants';
 
-import GlobalUtility from '@thzero/library_client/utility/global';
+import LibraryClientUtility from '@thzero/library_client/utility/index';
 
 import { useBaseSettingsComponent } from '@/library_vue/components/baseSettings';
 
@@ -56,48 +56,48 @@ export function useAppSettingsComponent(props, context, formRef) {
 	const measurementUnitWeightId = ref(null);
 
 	const measurementUnitsSelect = computed(() => {
-		return [Constants.MeasurementUnits.english.id, Constants.MeasurementUnits.metrics.id].map((item) => { return { id: item, name: GlobalUtility.$trans.t('measurementUnits.' + item + '.title') }; });
+		return [AppConstants.MeasurementUnits.english.id, AppConstants.MeasurementUnits.metrics.id].map((item) => { return { id: item, name: LibraryClientUtility.$trans.t('measurementUnits.' + item + '.title') }; });
 	});
 	const measurementUnitsAcceleration = computed(() => {
-		if (measurementUnitsId.value === Constants.MeasurementUnits.english.id)
-			return measurementUnitTrans(Constants.MeasurementUnits.english.acceleration, 'english', 'acceleration');
-		return measurementUnitTrans(Constants.MeasurementUnits.metrics.acceleration, 'metrics', 'acceleration');
+		if (measurementUnitsId.value === AppConstants.MeasurementUnits.english.id)
+			return measurementUnitTrans(AppConstants.MeasurementUnits.english.acceleration, 'english', 'acceleration');
+		return measurementUnitTrans(AppConstants.MeasurementUnits.metrics.acceleration, 'metrics', 'acceleration');
 	});
 	const measurementUnitsArea = computed(() => {
-		if (measurementUnitsId.value === Constants.MeasurementUnits.english.id)
-			return measurementUnitTrans(Constants.MeasurementUnits.english.area, 'english', 'area');
-		return measurementUnitTrans(Constants.MeasurementUnits.metrics.area, 'metrics', 'area');
+		if (measurementUnitsId.value === AppConstants.MeasurementUnits.english.id)
+			return measurementUnitTrans(AppConstants.MeasurementUnits.english.area, 'english', 'area');
+		return measurementUnitTrans(AppConstants.MeasurementUnits.metrics.area, 'metrics', 'area');
 	});
 	const measurementUnitsDistance = computed(() => {
-		if (measurementUnitsId.value === Constants.MeasurementUnits.english.id)
-			return measurementUnitTrans(Constants.MeasurementUnits.english.distance, 'english', 'distance');
-		return measurementUnitTrans(Constants.MeasurementUnits.metrics.distance, 'metrics', 'distance');
+		if (measurementUnitsId.value === AppConstants.MeasurementUnits.english.id)
+			return measurementUnitTrans(AppConstants.MeasurementUnits.english.distance, 'english', 'distance');
+		return measurementUnitTrans(AppConstants.MeasurementUnits.metrics.distance, 'metrics', 'distance');
 	});
 	const measurementUnitsLength = computed(() => {
-		if (measurementUnitsId.value === Constants.MeasurementUnits.english.id)
-			return measurementUnitTrans(Constants.MeasurementUnits.english.length, 'english', 'length');
-		return measurementUnitTrans(Constants.MeasurementUnits.metrics.length, 'metrics', 'length');
+		if (measurementUnitsId.value === AppConstants.MeasurementUnits.english.id)
+			return measurementUnitTrans(AppConstants.MeasurementUnits.english.length, 'english', 'length');
+		return measurementUnitTrans(AppConstants.MeasurementUnits.metrics.length, 'metrics', 'length');
 	});
 	const measurementUnitsVelocity = computed(() => {
-		if (measurementUnitsId.value === Constants.MeasurementUnits.english.id)
-			return measurementUnitTrans(Constants.MeasurementUnits.english.velocity, 'english', 'velocity');
-		return measurementUnitTrans(Constants.MeasurementUnits.metrics.velocity, 'metrics', 'velocity');
+		if (measurementUnitsId.value === AppConstants.MeasurementUnits.english.id)
+			return measurementUnitTrans(AppConstants.MeasurementUnits.english.velocity, 'english', 'velocity');
+		return measurementUnitTrans(AppConstants.MeasurementUnits.metrics.velocity, 'metrics', 'velocity');
 	});
 	const measurementUnitsVolume = computed(() => {
-		if (measurementUnitsId.value === Constants.MeasurementUnits.english.id)
-			return measurementUnitTrans(Constants.MeasurementUnits.english.volume, 'english', 'volume');
-		return measurementUnitTrans(Constants.MeasurementUnits.metrics.volume, 'metrics', 'volume');
+		if (measurementUnitsId.value === AppConstants.MeasurementUnits.english.id)
+			return measurementUnitTrans(AppConstants.MeasurementUnits.english.volume, 'english', 'volume');
+		return measurementUnitTrans(AppConstants.MeasurementUnits.metrics.volume, 'metrics', 'volume');
 	});
 	const measurementUnitsWeight = computed(() => {
-		if (measurementUnitsId.value === Constants.MeasurementUnits.english.id)
-			return measurementUnitTrans(Constants.MeasurementUnits.english.weight, 'english', 'weight');
-		return measurementUnitTrans(Constants.MeasurementUnits.metrics.weight, 'metrics', 'weight');
+		if (measurementUnitsId.value === AppConstants.MeasurementUnits.english.id)
+			return measurementUnitTrans(AppConstants.MeasurementUnits.english.weight, 'english', 'weight');
+		return measurementUnitTrans(AppConstants.MeasurementUnits.metrics.weight, 'metrics', 'weight');
 	});
 	
 	const keyword = 'Default'.toLowerCase(); // otherwise gives a '_sfc_main is not defined' error as Vite is looking for lower case version of the keyword
 
 	const measurementUnitTrans = (object, key, subKey) => {
-		return Object.getOwnPropertyNames(object).filter(l => l !== keyword).map((item) => { return { id: item, name: GlobalUtility.$trans.t('measurementUnits.' + key + '.' + subKey + '.' + item + 'Abbr') }; });
+		return Object.getOwnPropertyNames(object).filter(l => l !== keyword).map((item) => { return { id: item, name: LibraryClientUtility.$trans.t('measurementUnits.' + key + '.' + subKey + '.' + item + 'Abbr') }; });
 	};
 	const preCompleteOk = async (correlationId) => {
 		try {
@@ -137,30 +137,30 @@ export function useAppSettingsComponent(props, context, formRef) {
 		measurementUnitVelocityId.value = settings.measurementUnits.velocity;
 		measurementUnitVolumeId.value = settings.measurementUnits.volume;
 		measurementUnitWeightId.value = settings.measurementUnits.weight;
-		measurementUnitsId.value = settings.measurementUnits.id ? settings.measurementUnits.id : Constants.MeasurementUnits.english.id;
+		measurementUnitsId.value = settings.measurementUnits.id ? settings.measurementUnits.id : AppConstants.MeasurementUnits.english.id;
 
-		const measurementUnitAccelerationIdT = settings.measurementUnits.acceleration ? settings.measurementUnits.acceleration : Constants.MeasurementUnits[measurementUnitsId.value].acceleration[keyword];
+		const measurementUnitAccelerationIdT = settings.measurementUnits.acceleration ? settings.measurementUnits.acceleration : AppConstants.MeasurementUnits[measurementUnitsId.value].acceleration[keyword];
 		measurementUnitAccelerationId.value = resetFormIdCheck(measurementUnitAccelerationIdT, measurementUnitsAcceleration.value);
-		const measurementUnitAreaIdT = settings.measurementUnits.area ? settings.measurementUnits.area : Constants.MeasurementUnits[measurementUnitsId.value].area[keyword];
+		const measurementUnitAreaIdT = settings.measurementUnits.area ? settings.measurementUnits.area : AppConstants.MeasurementUnits[measurementUnitsId.value].area[keyword];
 		measurementUnitAreaId.value = resetFormIdCheck(measurementUnitAreaIdT, measurementUnitsArea.value);
-		const measurementUnitDistanceIdT = settings.measurementUnits.distance ? settings.measurementUnits.distance : Constants.MeasurementUnits[measurementUnitsId.value].distance[keyword];
+		const measurementUnitDistanceIdT = settings.measurementUnits.distance ? settings.measurementUnits.distance : AppConstants.MeasurementUnits[measurementUnitsId.value].distance[keyword];
 		measurementUnitDistanceId.value = resetFormIdCheck(measurementUnitDistanceIdT, measurementUnitsDistance.value);
-		const measurementUnitLengthIdT = settings.measurementUnits.length ? settings.measurementUnits.length : Constants.MeasurementUnits[measurementUnitsId.value].length[keyword];
+		const measurementUnitLengthIdT = settings.measurementUnits.length ? settings.measurementUnits.length : AppConstants.MeasurementUnits[measurementUnitsId.value].length[keyword];
 		measurementUnitLengthId.value = resetFormIdCheck(measurementUnitLengthIdT, measurementUnitsLength.value);
-		const measurementUnitVelocityIdT = settings.measurementUnits.velocity ? settings.measurementUnits.velocity : Constants.MeasurementUnits[measurementUnitsId.value].velocity[keyword];
+		const measurementUnitVelocityIdT = settings.measurementUnits.velocity ? settings.measurementUnits.velocity : AppConstants.MeasurementUnits[measurementUnitsId.value].velocity[keyword];
 		measurementUnitVelocityId.value = resetFormIdCheck(measurementUnitVelocityIdT, measurementUnitsVelocity.value);
-		const measurementUnitVolumeIdT = settings.measurementUnits.volume ? settings.measurementUnits.volume : Constants.MeasurementUnits[measurementUnitsId.value].volume[keyword];
+		const measurementUnitVolumeIdT = settings.measurementUnits.volume ? settings.measurementUnits.volume : AppConstants.MeasurementUnits[measurementUnitsId.value].volume[keyword];
 		measurementUnitVolumeId.value = resetFormIdCheck(measurementUnitVolumeIdT, measurementUnitsVolume.value);
-		const measurementUnitWeightIdT = settings.measurementUnits.weight ? settings.measurementUnits.weight : Constants.MeasurementUnits[measurementUnitsId.value].weight[keyword];
+		const measurementUnitWeightIdT = settings.measurementUnits.weight ? settings.measurementUnits.weight : AppConstants.MeasurementUnits[measurementUnitsId.value].weight[keyword];
 		measurementUnitWeightId.value = resetFormIdCheck(measurementUnitWeightIdT, measurementUnitsWeight.value);
 
-		measurementUnitAccelerationId.value = settings.measurementUnits.acceleration ? settings.measurementUnits.acceleration : Constants.MeasurementUnits[measurementUnitsId.value].acceleration[keyword];
-		measurementUnitAreaId.value = settings.measurementUnits.area ? settings.measurementUnits.area : Constants.MeasurementUnits[measurementUnitsId.value].area[keyword];
-		measurementUnitDistanceId.value = settings.measurementUnits.distance ? settings.measurementUnits.distance : Constants.MeasurementUnits[measurementUnitsId.value].distance[keyword];
-		measurementUnitLengthId.value = settings.measurementUnits.length ? settings.measurementUnits.length : Constants.MeasurementUnits[measurementUnitsId.value].length[keyword];
-		measurementUnitVelocityId.value = settings.measurementUnits.velocity ? settings.measurementUnits.velocity : Constants.MeasurementUnits[measurementUnitsId.value].velocity[keyword];
-		measurementUnitVolumeId.value = settings.measurementUnits.volume ? settings.measurementUnits.volume : Constants.MeasurementUnits[measurementUnitsId.value].volume[keyword];
-		measurementUnitWeightId.value = settings.measurementUnits.weight ? settings.measurementUnits.weight : Constants.MeasurementUnits[measurementUnitsId.value].weight[keyword];
+		measurementUnitAccelerationId.value = settings.measurementUnits.acceleration ? settings.measurementUnits.acceleration : AppConstants.MeasurementUnits[measurementUnitsId.value].acceleration[keyword];
+		measurementUnitAreaId.value = settings.measurementUnits.area ? settings.measurementUnits.area : AppConstants.MeasurementUnits[measurementUnitsId.value].area[keyword];
+		measurementUnitDistanceId.value = settings.measurementUnits.distance ? settings.measurementUnits.distance : AppConstants.MeasurementUnits[measurementUnitsId.value].distance[keyword];
+		measurementUnitLengthId.value = settings.measurementUnits.length ? settings.measurementUnits.length : AppConstants.MeasurementUnits[measurementUnitsId.value].length[keyword];
+		measurementUnitVelocityId.value = settings.measurementUnits.velocity ? settings.measurementUnits.velocity : AppConstants.MeasurementUnits[measurementUnitsId.value].velocity[keyword];
+		measurementUnitVolumeId.value = settings.measurementUnits.volume ? settings.measurementUnits.volume : AppConstants.MeasurementUnits[measurementUnitsId.value].volume[keyword];
+		measurementUnitWeightId.value = settings.measurementUnits.weight ? settings.measurementUnits.weight : AppConstants.MeasurementUnits[measurementUnitsId.value].weight[keyword];
 	};
 	const resetFormIdCheck = (id, values) => {
 		const temp = values.find(l => l.id === id);
@@ -169,17 +169,17 @@ export function useAppSettingsComponent(props, context, formRef) {
 
 	watch(() => measurementUnitsId,
 		(value) => {
-			let units = Constants.MeasurementUnits.english;
-			if (measurementUnitsId.value ===  Constants.MeasurementUnits.metrics.id)
-				Constants.MeasurementUnits.metrics;
+			let units = AppConstants.MeasurementUnits.english;
+			if (measurementUnitsId.value ===  AppConstants.MeasurementUnits.metrics.id)
+				AppConstants.MeasurementUnits.metrics;
 
-			measurementUnitAccelerationId.value = Constants.MeasurementUnits[units].acceleration[keyword];
-			measurementUnitAreaId.value = Constants.MeasurementUnits[units].area[keyword];
-			measurementUnitDistanceId.value = Constants.MeasurementUnits[units].distance[keyword];
-			measurementUnitLengthId.value = Constants.MeasurementUnits[units].length[keyword];
-			measurementUnitVelocityId.value = Constants.MeasurementUnits[units].velocity[keyword];
-			measurementUnitVolumeId.value = Constants.MeasurementUnits[units].volume[keyword];
-			measurementUnitWeightId.value = Constants.MeasurementUnits[units].weight[keyword];
+			measurementUnitAccelerationId.value = AppConstants.MeasurementUnits[units].acceleration[keyword];
+			measurementUnitAreaId.value = AppConstants.MeasurementUnits[units].area[keyword];
+			measurementUnitDistanceId.value = AppConstants.MeasurementUnits[units].distance[keyword];
+			measurementUnitLengthId.value = AppConstants.MeasurementUnits[units].length[keyword];
+			measurementUnitVelocityId.value = AppConstants.MeasurementUnits[units].velocity[keyword];
+			measurementUnitVolumeId.value = AppConstants.MeasurementUnits[units].volume[keyword];
+			measurementUnitWeightId.value = AppConstants.MeasurementUnits[units].weight[keyword];
 		}
 	);
 	watch(() => user.value,

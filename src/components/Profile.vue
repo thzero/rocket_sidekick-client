@@ -14,7 +14,7 @@
 <script>
 import { computed, getCurrentInstance, ref } from 'vue';
 
-import GlobalUtility from '@thzero/library_client/utility/global';
+import LibraryClientUtility from '@thzero/library_client/utility/index';
 
 import base from '@/library_vue/components/base';
 
@@ -24,7 +24,7 @@ export default {
 	setup(props) {
 		const instance = getCurrentInstance();
 		
-		const serviceStore = GlobalUtility.$injector.getService(LibraryConstants.InjectorKeys.SERVICE_STORE);
+		const serviceStore = LibraryClientUtility.$injector.getService(LibraryConstants.InjectorKeys.SERVICE_STORE);
 
 		const signedIn = ref(false);
 
@@ -64,7 +64,7 @@ export default {
 	// 		return (this.user != null && this.user.external.picture != null ? this.user.external.picture : null);
 	// 	},
 	// 	user() {
-	// 		return GlobalUtility.$store.state.user;
+	// 		return LibraryClientUtility.$store.state.user;
 	// 	}
 	// }
 };

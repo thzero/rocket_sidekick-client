@@ -6,11 +6,11 @@ import useVuelidate from '@vuelidate/core';
 import Papa from 'papaparse';
 import html2canvas from 'html2canvas';
 
-import Constants from '@/constants';
+import AppConstants from '@/constants';
 
 import AppUtility from '@/utility/app';
-import GlobalUtility from '@thzero/library_client/utility/global';
-import VuetifyUtility from '@/library_vue_vuetify/utility/index';
+import LibraryClientUtility from '@thzero/library_client/utility/index';
+import LibraryVuetifyUtility from '@/library_vue_vuetify/utility/index';
 
 import { useFlightToolsBaseComponent } from '@/components/content/tools/flightToolBase';
 
@@ -98,14 +98,14 @@ export function useFlightInfoBaseComponent(props, context, options) {
 
 			flightInfoDataTypeUse.value = serviceStore.getters.getFlightInfoDataTypeUse();
 
-			flightProcessors.value = VuetifyUtility.selectOptions(serviceFlightInfo.serviceProcessors, GlobalUtility.$trans.t, 'forms.content.tools.flightInfo.processors', (l) => { return l.id; }, null, (l) => { return l.id; });
+			flightProcessors.value = LibraryVuetifyUtility.selectOptions(serviceFlightInfo.serviceProcessors, LibraryClientUtility.$trans.t, 'forms.content.tools.flightInfo.processors', (l) => { return l.id; }, null, (l) => { return l.id; });
 
-			resolution.value = serviceStore.getters.getFlightInfoResolution(correlationIdI) ?? Constants.FlightInfo.Resolution;
+			resolution.value = serviceStore.getters.getFlightInfoResolution(correlationIdI) ?? AppConstants.FlightInfo.Resolution;
 		}
 	}, {}));
 
-	const serviceDownload = GlobalUtility.$injector.getService(Constants.InjectorKeys.SERVICE_DOWNLOAD);
-	const serviceFlightInfo = GlobalUtility.$injector.getService(Constants.InjectorKeys.SERVICE_TOOLS_FLIGHT_INFO_PROCESSOR);
+	const serviceDownload = LibraryClientUtility.$injector.getService(AppConstants.InjectorKeys.SERVICE_DOWNLOAD);
+	const serviceFlightInfo = LibraryClientUtility.$injector.getService(AppConstants.InjectorKeys.SERVICE_TOOLS_FLIGHT_INFO_PROCESSOR);
 
 	const buttons = ref({
 		export: {
@@ -135,7 +135,7 @@ export function useFlightInfoBaseComponent(props, context, options) {
 	const flightInfoStyleEventMainBorderColor = ref(null);
 	const flightInfoStyleVelocityColor = ref(null);
 	const flightInfoStyleVelocityFColor = ref(null);
-	const resolution = ref(Constants.FlightInfo.Resolution);
+	const resolution = ref(AppConstants.FlightInfo.Resolution);
 	
 	const checkFlightInfoDataTypeUse = () => {
 		flightInfoDataTypeUseDisabled.value = true;
@@ -329,14 +329,14 @@ export function useFlightInfoBaseComponent(props, context, options) {
 		setTimeout(() => {
 			try {
 				if (String.isNullOrEmpty(flightInfoInput.value)) {
-					setError(GlobalUtility.$trans.t('errors.process.noInput'));
+					setError(LibraryClientUtility.$trans.t('errors.process.noInput'));
 					processing.value = false;
 					return;
 				}
 
 				const data = Papa.parse(flightInfoInput.value.trim());
 				if (data.errors && data.errors.length > 0) {
-					setError(GlobalUtility.$trans.t('errors.process.unableToConvert'));
+					setError(LibraryClientUtility.$trans.t('errors.process.unableToConvert'));
 					processing.value = false;
 					return;
 				}
@@ -360,13 +360,13 @@ export function useFlightInfoBaseComponent(props, context, options) {
 					flightInfoDataTypes);
 				AppUtility.debug2('flightInfoResults', flightInfoResults);
 				if (flightInfoResults.errors && data.errors.length > 0) {
-					const errors = flightInfoResults.errors.map(e => GlobalUtility.$trans.t(e) + '<br/>');
+					const errors = flightInfoResults.errors.map(e => LibraryClientUtility.$trans.t(e) + '<br/>');
 					setError(errors);
 					processing.value = false;
 					return;
 				}
 
-				flightInfoResults.info.title = GlobalUtility.$trans.t('charts.flightInfo.title');
+				flightInfoResults.info.title = LibraryClientUtility.$trans.t('charts.flightInfo.title');
 				if (!String.isNullOrEmpty(flightDataDate.value))
 					flightInfoResults.info.date = flightDataDate.value;
 				if (!String.isNullOrEmpty(flightMeasurementUnitsId.value))

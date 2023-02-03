@@ -37,11 +37,10 @@
 <script>
 import { computed } from 'vue';
 
-import LibraryConstants from '@thzero/library_client/constants';
+import LibraryClientConstants from '@thzero/library_client/constants';
 
-import CommonUtility from '@thzero/library_common/utility';
-import LibraryUtility from '@thzero/library_common/utility';
-import GlobalUtility from '@thzero/library_client/utility/global';
+import LibraryClientUtility from '@thzero/library_client/utility/index';
+import LibraryCommonUtility from '@thzero/library_common/utility';
 
 import { useBaseComponent } from '@/library_vue/components/base';
 
@@ -65,16 +64,16 @@ export default {
 			success
 		} = useBaseComponent(props, context);
 
-		const serviceStore = GlobalUtility.$injector.getService(LibraryConstants.InjectorKeys.SERVICE_STORE);
+		const serviceStore = LibraryClientUtility.$injector.getService(LibraryClientConstants.InjectorKeys.SERVICE_STORE);
 		
 		const getDateHuman = computed(() => {
-			return LibraryUtility.getDateHuman(date);
+			return LibraryCommonUtility.getDateHuman(date);
 		});
 		const news = computed(() => {
 			if (!serviceStore.news.latest)
 				return [];
-			const newsS = CommonUtility.sortByTimestamp(serviceStore.news.latest.filter(l => l.sticky));
-			const news = CommonUtility.sortByTimestamp(serviceStore.news.latest.filter(l => !l.sticky));
+			const newsS = LibraryCommonUtility.sortByTimestamp(serviceStore.news.latest.filter(l => l.sticky));
+			const news = LibraryCommonUtility.sortByTimestamp(serviceStore.news.latest.filter(l => !l.sticky));
 			return newsS.concat(news);
 		});
 		

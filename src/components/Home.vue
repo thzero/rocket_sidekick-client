@@ -190,7 +190,7 @@
 </template>
 
 <script>
-import GlobalUtility from '@thzero/library_client/utility/global';
+import LibraryClientUtility from '@thzero/library_client/utility/index';
 
 import { useHomeBaseComponent } from '@/components/homeBase';
 
@@ -272,7 +272,7 @@ export default {
 				const correlationId = this.correlationId();
 
 				await Promise.all([
-					GlobalUtility.$store.dispatcher.news.getLatest(correlationId)
+					LibraryClientUtility.$store.dispatcher.news.getLatest(correlationId)
 				]);
 			}
 			finally {
