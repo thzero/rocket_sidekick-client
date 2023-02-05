@@ -90,13 +90,13 @@
 								:key="item.name"
 							>{{ item.deflectionTempC }}</td>
 						</tr>
-						<!-- <tr>
+						<tr>
 							<td>{{ $t('strings.content.info.3dprinting.density') }}</td>
 							<td
 								v-for="item in data"
 								:key="item.name"
 							>{{ item.density }}</td>
-						</tr> -->
+						</tr>
 						<tr>
 							<td>{{ $t('strings.content.info.3dprinting.impact') }}</td>
 							<td

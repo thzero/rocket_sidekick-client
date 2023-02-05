@@ -39,7 +39,7 @@ export function useWeathercockingBaseComponent(props, context, options) {
 		settings,
 	} = useToolsBaseComponent(props, context, options);
 
-	const serviceToolsFoam = LibraryClientUtility.$injector.getService(AppConstants.InjectorKeys.SERVICE_TOOLS_FOAM);
+	const serviceToolsWeatherCocking = LibraryClientUtility.$injector.getService(AppConstants.InjectorKeys.SERVICE_TOOLS_WEATHERCOCKING);
 
 	const calculationData = ref(null);
 	const calculationResults = initCalculationResults(correlationId(), ref({}));
@@ -57,13 +57,13 @@ export function useWeathercockingBaseComponent(props, context, options) {
 		calculateI(correlationId(), calculationResults, async (correlationIdI, calculationResultsI) => {
 			calculationResultsI.value.foams = [];
 
-			const responseFoams = await serviceToolsFoam.foams(correlationIdI);
+			const responseFoams = await serviceToolsWeatherCocking.foams(correlationIdI);
 			if (!responseFoams || !responseFoams.success) {
 				return false; // TODO
 			}
 
 			initCalculationData(correlationIdI);
-			const responseCalc = await serviceToolsFoam.initializeCalculation(correlationIdI, calculationData.value, measurementUnitsId.value, settings);
+			const responseCalc = await serviceToolsWeatherCocking.initializeCalculation(correlationIdI, calculationData.value, measurementUnitsId.value, settings);
 			if (!responseCalc || !responseCalc.success) {
 				return false; // TODO
 			}
@@ -81,7 +81,7 @@ export function useWeathercockingBaseComponent(props, context, options) {
 			let responseCalcFoamInstance;
 			for (const foam of responseFoams.results) {
 				foam.totalVolume = calculationResultsI.value.totalVolume;
-				responseCalcFoam = await serviceToolsFoam.initializeCalculationFoam(correlationIdI, foam, measurementUnitsId.value);
+				responseCalcFoam = await serviceToolsWeatherCocking.initializeCalculationFoam(correlationIdI, foam, measurementUnitsId.value);
 				if (!responseCalcFoam || !responseCalcFoam.success) {
 					continue; // TODO
 				}
@@ -126,7 +126,7 @@ export function useWeathercockingBaseComponent(props, context, options) {
 	onMounted(async () => {
 		reset(false);
 
-		calculationData.value = serviceToolsFoam.initialize(correlationId());
+		calculationData.value = serviceToolsWeatherCocking.initialize(correlationId());
 		lengthMeasurementUnitId.value = measurementUnitsLengthDefaultId.value;
 	});
 
@@ -157,7 +157,7 @@ export function useWeathercockingBaseComponent(props, context, options) {
 		target,
 		toFixed,
 		settings,
-		serviceToolsFoam,
+		serviceToolsWeatherCocking,
 		calculationData,
 		calculationResults,
 		formFoamRef,
