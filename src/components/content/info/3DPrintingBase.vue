@@ -25,13 +25,12 @@ export function use3DPrintingBaseComponent(props, context, options) {
 		contentDesc,
 		contentDefinition,
 		contentMarkup,
-		contentTitle,
 		handleAttribution,
 		hasAttribution,
 	} = useInfoBaseComponent(props, context, options);
 
 	const contentChartDesc = ref(null);
-	const title = ref(LibraryClientUtility.$trans.t('titles.content.info.3dprinting') + ' ' + LibraryClientUtility.$trans.t('titles.content.info.title'));
+	const contentTitle = ref(LibraryClientUtility.$trans.t('titles.content.info.3dprinting') + ' ' + LibraryClientUtility.$trans.t('titles.content.info.title'));
 	
 	const data = computed(() => {
 		if (!content.value || !content.value.supplemental || !content.value.supplemental.data)
@@ -119,7 +118,6 @@ export function use3DPrintingBaseComponent(props, context, options) {
 		handleAttribution,
 		hasAttribution,
 		contentChartDesc,
-		title,
 		data,
 		hasLinks,
 		links,

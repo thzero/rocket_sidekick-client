@@ -1,11 +1,6 @@
 <template>
 	<div>
-		<!-- <v-row dense>
-			<v-col cols="12" class="text-center text-h5 pb-2">
-				{{ $t('titles.content.info.epoxy') + ' ' + $t('titles.content.info.title') }}
-			</v-col>
-		</v-row> -->
-		<Header v-model="title" />
+		<Header v-model="contentTitle" />
 		<v-row dense>
 			<v-col cols="12">
 				<v-card>
@@ -37,11 +32,6 @@
 			</v-col>
 			<v-col cols="12">
 				<v-card>
-					<!-- <v-card-title>
-						<div class="text-center text-h5 pb-2">
-							{{ $t('strings.content.info.epoxy.chart') }}
-						</div>
-					</v-card-title> -->
 					<v-card-text>
 <VMarkdown v-model="contentChartDesc" :use-github=false />
 				<v-table
@@ -177,30 +167,18 @@
 				{{ $t('strings.content.info.epoxy.additionalLinks') }}
 			</v-col>
 			<v-col cols="12" class="pb-2">
-				<v-card>
-					<v-card-text>
-						<div
-							v-for="item in links"
-							:key="item.url"
-						>
-							<a 
-								:href="item.url"
-								target="_blank"
-							>
-							{{ !String.isNullOrEmpty(item.title) ? item.title : item.url}}
-							</a><br/>
-						</div>
-					</v-card-text>
-				</v-card>
+				<AdditionalLinks 
+					v-model="links" 
+				/>
 			</v-col>
 		</v-row>
 		<v-row dense
-			v-show="hasAttribution"
+			v-show="hasAttribution" 
 		>
 			<v-col cols="12" class="text-center text-h5 pb-2; float: right">
 				<v-card>
 					<v-card-text class="float: right">
-<Attribution v-model="content" v-if="hasAttribution" @has-attribution="handleAttribution" />
+<Attribution v-model="content" @has-attribution="handleAttribution" />
 					</v-card-text>
 				</v-card>
 			</v-col>
@@ -211,6 +189,7 @@
 <script>
 import { useEpoxyBaseComponent } from '@/components/content/info/epoxyBase';
 
+import AdditionalLinks from '@/components/content/info/AdditionalLinks';
 import Attribution from '@/components/content/info/Attribution';
 import Header from '@/components/content/Header';
 import VMarkdown from '@/library_vue_vuetify/components/markup/VMarkdown';
@@ -218,6 +197,7 @@ import VMarkdown from '@/library_vue_vuetify/components/markup/VMarkdown';
 export default {
 	name: 'Epxoy',
 	components: {
+		AdditionalLinks,
 		Attribution,
 		Header,
 		VMarkdown
@@ -248,8 +228,7 @@ export default {
 			data,
 			hasLinks,
 			links,
-			temperature,
-			title
+			temperature
 		} = useEpoxyBaseComponent(props, context);
 
 		return {
@@ -277,8 +256,7 @@ export default {
 			data,
 			hasLinks,
 			links,
-			temperature,
-			title
+			temperature
 		};
 	}
 };
