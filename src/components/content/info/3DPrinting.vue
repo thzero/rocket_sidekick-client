@@ -1,25 +1,26 @@
 <template>
 	<div>
-		<v-row dense>
+		<!-- <v-row dense>
 			<v-col cols="12" class="text-center text-h5 pb-2">
 				{{ $t('titles.content.info.3dprinting') + ' ' + $t('titles.content.info.title') }}
 			</v-col>
-		</v-row>
+		</v-row> -->
+		<Header v-model="title"/>
 		<v-row dense>
 			<v-col cols="12">
-<VMarkdown v-model="textDesc" :use-github=false />
-			</v-col>
-		</v-row>
+				<v-card>
+					<v-card-text>
+<VMarkdown v-model="contentDesc" :use-github=false />
 		<v-row dense>
 			<v-col cols="12">
 				<q class="font-italic" cite="https://3dprinting.com/what-is-3d-printing">
-<VMarkdown v-model="textDefinition" :use-github=false tag="span" />
+<VMarkdown v-model="contentDefinition" :use-github=false tag="span" />
 				</q> -- <a href="https://3dprinting.com/what-is-3d-printing" target="_blank">3D printing.com)</a>
 			</v-col>
 		</v-row>
 		<v-row dense>
 			<v-col cols="12" md="6">
-<VMarkdown v-model="textMarkup" :use-github=false />
+<VMarkdown v-model="contentMarkup" :use-github=false />
 			</v-col>
 			<v-col cols="12" md="6">
 <v-carousel
@@ -53,18 +54,29 @@
 </v-carousel>
 			</v-col>
 		</v-row>
+					</v-card-text>
+				</v-card>
+			</v-col>
+		</v-row>
 		<v-row dense>
-			<v-col cols="12" class="text-center text-h5 pb-2">
+			<v-col cols="12">
+				<div class="text-center text-h5 pb-2">
+		{{ $t('strings.content.info.3dprinting.chart') }}
+				</div>
+			</v-col>
+			<v-col cols="12">
+				<v-card>
+					<v-card-title>
+						<div class="text-center text-h5 pb-2">
 				{{ $t('strings.content.info.3dprinting.chart') }}
-			</v-col>
-		</v-row>
-		<v-row dense>
-			<v-col cols="12">
-<VMarkdown v-model="textChartDesc" :use-github=false />
-			</v-col>
-		</v-row>
-		<v-row dense>
-			<v-col cols="12">
+						</div>
+					</v-card-title>
+					<v-card-text>
+				<v-row dense>
+					<v-col cols="12">
+		<VMarkdown v-model="contentChartDesc" :use-github=false />
+					</v-col>
+				</v-row>
 				<v-table
 					fixed-header
 				>
@@ -125,10 +137,12 @@
 						</tr>
 					</tbody>
 				</v-table>
+					</v-card-text>
+				</v-card>
 			</v-col>
 		</v-row>
 		<v-row dense
-			v-if="haveLinks"
+			v-if="hasLinks"
 		>
 			<v-col cols="12" class="text-center text-h5 pt-4 pb-2">
 				{{ $t('strings.content.info.3dprinting.additionalLinks') }}
@@ -227,21 +241,37 @@
 				</v-card>
 			</v-col>
 		</v-row>
+		<v-row dense
+			v-show="hasAttribution"
+		>
+			<v-col cols="12" class="text-center text-h5 pb-2; float: right">
+				<v-card>
+					<v-card-text class="float: right">
+<Attribution v-model="content" v-if="hasAttribution" @has-attribution="handleAttribution" />
+					</v-card-text>
+				</v-card>
+			</v-col>
+		</v-row>
 	</div>
 </template>
 		
 <script>
 import { use3DPrintingBaseComponent } from '@/components/content/info/3DPrintingBase';
 
+import Header from '@/components/content/Header';
+import Attribution from '@/components/content/info/Attribution';
 import VMarkdown from '@/library_vue_vuetify/components/markup/VMarkdown';
 
 export default {
 	name: 'Epxoy',
 	components: {
+		Attribution,
+		Header,
 		VMarkdown
 	},
 	setup(props, context) {
-		const {	correlationId,
+		const {
+			correlationId,
 			error,
 			hasFailed,
 			hasSucceeded,
@@ -251,15 +281,19 @@ export default {
 			notImplementedError,
 			success,
 			serviceStore,
-			sort,
+			sortByOrder,
 			target,
-			textChartDesc,
-			textDesc,
-			textDefinition,
-			textMarkup,
 			content,
+			contentDesc,
+			contentDefinition,
+			contentMarkup,
+			contentTitle,
+			handleAttribution,
+			hasAttribution,
+			contentChartDesc,
+			title,
 			data,
-			haveLinks,
+			hasLinks,
 			links,
 			linksCollections,
 			linksGeneral,
@@ -271,7 +305,7 @@ export default {
 		} = use3DPrintingBaseComponent(props, context);
 
 		return {
-			correlationId,
+				correlationId,
 			error,
 			hasFailed,
 			hasSucceeded,
@@ -281,15 +315,19 @@ export default {
 			notImplementedError,
 			success,
 			serviceStore,
-			sort,
+			sortByOrder,
 			target,
-			textChartDesc,
-			textDesc,
-			textDefinition,
-			textMarkup,
 			content,
+			contentDesc,
+			contentDefinition,
+			contentMarkup,
+			contentTitle,
+			handleAttribution,
+			hasAttribution,
+			contentChartDesc,
+			title,
 			data,
-			haveLinks,
+			hasLinks,
 			links,
 			linksCollections,
 			linksGeneral,

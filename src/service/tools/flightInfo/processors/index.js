@@ -1,6 +1,6 @@
 import configureMeasurements, { length, speed } from 'convert-units';
 
-import Constants from '@/constants';
+import AppConstants from '@/constants';
 
 // import AppUtility from '@/utility/app';
 
@@ -463,8 +463,8 @@ class FlightInfoProcessorService extends BaseService {
 		// return value;
 		
 		value = this._convert(value)
-			.from(Constants.MeasurementUnits[measurementUnits.id].cceleration[measurementUnits.acceleration])
-			.to(Constants.MeasurementUnits[measurementUnits.outputId].acceleration[measurementUnits.accelerationOutputId]);
+			.from(AppConstants.MeasurementUnits[measurementUnits.id].cceleration[measurementUnits.acceleration])
+			.to(AppConstants.MeasurementUnits[measurementUnits.outputId].acceleration[measurementUnits.accelerationOutputId]);
 		return value;
 	}
 
@@ -479,8 +479,8 @@ class FlightInfoProcessorService extends BaseService {
 		// return value;
 		
 		value = this._convert(value)
-			.from(Constants.MeasurementUnits[measurementUnits.id].distance[measurementUnits.distanceId])
-			.to(Constants.MeasurementUnits[measurementUnits.outputId].distance[measurementUnits.distanceOutputId]);
+			.from(AppConstants.MeasurementUnits[measurementUnits.id].distance[measurementUnits.distanceId])
+			.to(AppConstants.MeasurementUnits[measurementUnits.outputId].distance[measurementUnits.distanceOutputId]);
 		return value;
 	}
 
@@ -495,8 +495,8 @@ class FlightInfoProcessorService extends BaseService {
 		// return value;
 		
 		value = this._convert(value)
-			.from(Constants.MeasurementUnits[measurementUnits.id].velocity[measurementUnits.velocityId])
-			.to(Constants.MeasurementUnits[measurementUnits.outputId].velocity[measurementUnits.velocityOutputId]);
+			.from(AppConstants.MeasurementUnits[measurementUnits.id].velocity[measurementUnits.velocityId])
+			.to(AppConstants.MeasurementUnits[measurementUnits.outputId].velocity[measurementUnits.velocityOutputId]);
 		return value;
 	}
 

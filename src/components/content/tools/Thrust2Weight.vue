@@ -416,7 +416,7 @@
 <script>
 import { between, decimal, helpers, required } from '@vuelidate/validators';
 
-import GlobalUtility from '@thzero/library_client/utility/global';
+import LibraryClientUtility from '@thzero/library_client/utility/index';
 
 import { useThrust2WeightBaseComponent } from '@/components/content/tools/thrust2WeightBase';
 
@@ -598,76 +598,76 @@ export default {
 			motorSelected4: { $autoDirty: true },
 			thrustAverage1: {
 				decimal, between: between(0, 40960), 
-				thrustAverageInitial1: helpers.withMessage(GlobalUtility.$trans.t('errors.content.tools.thrust2Weight.thrustAverageInitial'), thrustAverageInitial1), 
-				thrustAveragePeak1: helpers.withMessage(GlobalUtility.$trans.t('errors.content.tools.thrust2Weight.thrustAveragePeak'), thrustAveragePeak1), 
+				thrustAverageInitial1: helpers.withMessage(LibraryClientUtility.$trans.t('errors.content.tools.thrust2Weight.thrustAverageInitial'), thrustAverageInitial1), 
+				thrustAveragePeak1: helpers.withMessage(LibraryClientUtility.$trans.t('errors.content.tools.thrust2Weight.thrustAveragePeak'), thrustAveragePeak1), 
 				$autoDirty: true, $lazy: true 
 			},
 			thrustAverage2: {
 				decimal, between: between(0, 40960), 
-				thrustAverageInitial2: helpers.withMessage(GlobalUtility.$trans.t('errors.content.tools.thrust2Weight.thrustAverageInitial'), thrustAverageInitial2), 
-				thrustAveragePeak2: helpers.withMessage(GlobalUtility.$trans.t('errors.content.tools.thrust2Weight.thrustAveragePeak'), thrustAveragePeak2), 
+				thrustAverageInitial2: helpers.withMessage(LibraryClientUtility.$trans.t('errors.content.tools.thrust2Weight.thrustAverageInitial'), thrustAverageInitial2), 
+				thrustAveragePeak2: helpers.withMessage(LibraryClientUtility.$trans.t('errors.content.tools.thrust2Weight.thrustAveragePeak'), thrustAveragePeak2), 
 				$autoDirty: true, $lazy: true 
 			},
 			thrustAverage3: {
 				decimal, between: between(0, 40960), 
-				thrustAverageInitial3: helpers.withMessage(GlobalUtility.$trans.t('errors.content.tools.thrust2Weight.thrustAverageInitial'), thrustAverageInitial3), 
-				thrustAveragePeak3: helpers.withMessage(GlobalUtility.$trans.t('errors.content.tools.thrust2Weight.thrustAveragePeak'), thrustAveragePeak3), 
+				thrustAverageInitial3: helpers.withMessage(LibraryClientUtility.$trans.t('errors.content.tools.thrust2Weight.thrustAverageInitial'), thrustAverageInitial3), 
+				thrustAveragePeak3: helpers.withMessage(LibraryClientUtility.$trans.t('errors.content.tools.thrust2Weight.thrustAveragePeak'), thrustAveragePeak3), 
 				$autoDirty: true, $lazy: true 
 			},
 			thrustAverage4: {
 				decimal, between: between(0, 40960), 
-				thrustAverageInitial4: helpers.withMessage(GlobalUtility.$trans.t('errors.content.tools.thrust2Weight.thrustAverageInitial'), thrustAverageInitial4), 
-				thrustAveragePeak4: helpers.withMessage(GlobalUtility.$trans.t('errors.content.tools.thrust2Weight.thrustAveragePeak'), thrustAveragePeak4), 
+				thrustAverageInitial4: helpers.withMessage(LibraryClientUtility.$trans.t('errors.content.tools.thrust2Weight.thrustAverageInitial'), thrustAverageInitial4), 
+				thrustAveragePeak4: helpers.withMessage(LibraryClientUtility.$trans.t('errors.content.tools.thrust2Weight.thrustAveragePeak'), thrustAveragePeak4), 
 				$autoDirty: true, $lazy: true 
 			},
 			thrustInitial1: {
 				required, decimal, between: between(0, 40960), 
-				thrustInitialAverage1: helpers.withMessage(GlobalUtility.$trans.t('errors.content.tools.thrust2Weight.thrustInitialAverage'), thrustInitialAverage1), 
-				thrustInitialPeak1: helpers.withMessage(GlobalUtility.$trans.t('errors.content.tools.thrust2Weight.thrustInitialPeak'), thrustInitialPeak1), 
+				thrustInitialAverage1: helpers.withMessage(LibraryClientUtility.$trans.t('errors.content.tools.thrust2Weight.thrustInitialAverage'), thrustInitialAverage1), 
+				thrustInitialPeak1: helpers.withMessage(LibraryClientUtility.$trans.t('errors.content.tools.thrust2Weight.thrustInitialPeak'), thrustInitialPeak1), 
 				$autoDirty: true 
 			},
 			thrustInitial2: { 
 				thrustInitialtRequired2, decimal, between: between(0, 40960), 
-				thrustInitialAverage2: helpers.withMessage(GlobalUtility.$trans.t('errors.content.tools.thrust2Weight.thrustInitialAverage'), thrustInitialAverage2), 
-				thrustInitialPeak2: helpers.withMessage(GlobalUtility.$trans.t('errors.content.tools.thrust2Weight.thrustInitialPeak'), thrustInitialPeak2), 
+				thrustInitialAverage2: helpers.withMessage(LibraryClientUtility.$trans.t('errors.content.tools.thrust2Weight.thrustInitialAverage'), thrustInitialAverage2), 
+				thrustInitialPeak2: helpers.withMessage(LibraryClientUtility.$trans.t('errors.content.tools.thrust2Weight.thrustInitialPeak'), thrustInitialPeak2), 
 				$autoDirty: true 
 			},
 			thrustInitial3: { 
 				thrustInitialtRequired3, decimal, between: between(0, 40960), 
-				thrustInitialAverage3: helpers.withMessage(GlobalUtility.$trans.t('errors.content.tools.thrust2Weight.thrustInitialAverage'), thrustInitialAverage3), 
-				thrustInitialPeak3: helpers.withMessage(GlobalUtility.$trans.t('errors.content.tools.thrust2Weight.thrustInitialPeak'), thrustInitialPeak3), 
+				thrustInitialAverage3: helpers.withMessage(LibraryClientUtility.$trans.t('errors.content.tools.thrust2Weight.thrustInitialAverage'), thrustInitialAverage3), 
+				thrustInitialPeak3: helpers.withMessage(LibraryClientUtility.$trans.t('errors.content.tools.thrust2Weight.thrustInitialPeak'), thrustInitialPeak3), 
 				$autoDirty: true 
 			},
 			thrustInitial4: { 
 				thrustInitialtRequired4, decimal, between: between(0, 40960), 
-				thrustInitialAverage4: helpers.withMessage(GlobalUtility.$trans.t('errors.content.tools.thrust2Weight.thrustInitialAverage'), thrustInitialAverage4), 
-				thrustInitialPeak4: helpers.withMessage(GlobalUtility.$trans.t('errors.content.tools.thrust2Weight.thrustInitialPeak'), thrustInitialPeak4), 
+				thrustInitialAverage4: helpers.withMessage(LibraryClientUtility.$trans.t('errors.content.tools.thrust2Weight.thrustInitialAverage'), thrustInitialAverage4), 
+				thrustInitialPeak4: helpers.withMessage(LibraryClientUtility.$trans.t('errors.content.tools.thrust2Weight.thrustInitialPeak'), thrustInitialPeak4), 
 				$autoDirty: true 
 			},
 			// thrustInitial3: { required, decimal, between: between(0, 40960), $autoDirty: true },
 			// thrustInitial4: { required, decimal, between: between(0, 40960), $autoDirty: true },
 			thrustPeak1: { 
 				decimal, between: between(0, 40960), 
-				thrustPeakAverage1: helpers.withMessage(GlobalUtility.$trans.t('errors.content.tools.thrust2Weight.thrustPeakAverage'), thrustPeakAverage1), 
-				thrustPeakInitial1: helpers.withMessage(GlobalUtility.$trans.t('errors.content.tools.thrust2Weight.thrustPeakInitial'), thrustPeakInitial1), 
+				thrustPeakAverage1: helpers.withMessage(LibraryClientUtility.$trans.t('errors.content.tools.thrust2Weight.thrustPeakAverage'), thrustPeakAverage1), 
+				thrustPeakInitial1: helpers.withMessage(LibraryClientUtility.$trans.t('errors.content.tools.thrust2Weight.thrustPeakInitial'), thrustPeakInitial1), 
 				$autoDirty: true, $lazy: true 
 			},
 			thrustPeak2: { 
 				decimal, between: between(0, 40960), 
-				thrustPeakAverage2: helpers.withMessage(GlobalUtility.$trans.t('errors.content.tools.thrust2Weight.thrustPeakAverage'), thrustPeakAverage2), 
-				thrustPeakInitial2: helpers.withMessage(GlobalUtility.$trans.t('errors.content.tools.thrust2Weight.thrustPeakInitial'), thrustPeakInitial2), 
+				thrustPeakAverage2: helpers.withMessage(LibraryClientUtility.$trans.t('errors.content.tools.thrust2Weight.thrustPeakAverage'), thrustPeakAverage2), 
+				thrustPeakInitial2: helpers.withMessage(LibraryClientUtility.$trans.t('errors.content.tools.thrust2Weight.thrustPeakInitial'), thrustPeakInitial2), 
 				$autoDirty: true, $lazy: true 
 			},
 			thrustPeak3: { 
 				decimal, between: between(0, 40960), 
-				thrustPeakAverage3: helpers.withMessage(GlobalUtility.$trans.t('errors.content.tools.thrust2Weight.thrustPeakAverage'), thrustPeakAverage3), 
-				thrustPeakInitial3: helpers.withMessage(GlobalUtility.$trans.t('errors.content.tools.thrust2Weight.thrustPeakInitial'), thrustPeakInitial3), 
+				thrustPeakAverage3: helpers.withMessage(LibraryClientUtility.$trans.t('errors.content.tools.thrust2Weight.thrustPeakAverage'), thrustPeakAverage3), 
+				thrustPeakInitial3: helpers.withMessage(LibraryClientUtility.$trans.t('errors.content.tools.thrust2Weight.thrustPeakInitial'), thrustPeakInitial3), 
 				$autoDirty: true, $lazy: true 
 			},
 			thrustPeak4: { 
 				decimal, between: between(0, 40960), 
-				thrustPeakAverage4: helpers.withMessage(GlobalUtility.$trans.t('errors.content.tools.thrust2Weight.thrustPeakAverage'), thrustPeakAverage4), 
-				thrustPeakInitial4: helpers.withMessage(GlobalUtility.$trans.t('errors.content.tools.thrust2Weight.thrustPeakInitial'), thrustPeakInitial4), 
+				thrustPeakAverage4: helpers.withMessage(LibraryClientUtility.$trans.t('errors.content.tools.thrust2Weight.thrustPeakAverage'), thrustPeakAverage4), 
+				thrustPeakInitial4: helpers.withMessage(LibraryClientUtility.$trans.t('errors.content.tools.thrust2Weight.thrustPeakInitial'), thrustPeakInitial4), 
 				$autoDirty: true, $lazy: true 
 			},
 		};

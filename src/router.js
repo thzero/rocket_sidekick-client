@@ -1,6 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router';
 
-import GlobalUtility from '@thzero/library_client/utility/global';
+import LibraryClientUtility from '@thzero/library_client/utility/index';
 
 const routes = [
 	{
@@ -113,7 +113,7 @@ const routes = [
 					{
 						path: '',
 						name: 'content_info',
-						component: () => import(/* webpackPrefetch: true */ /* webpackChunkName: "group-content-info" */ './components/content/info/Info.vue'),
+						component: () => import(/* webpackPrefetch: true */ /* webpackChunkName: "group-content-info" */ './components/content/info/InfoMarkup.vue'),
 						meta: {
 							requiresAuth: false
 						}
@@ -219,6 +219,48 @@ const routes = [
 						path: '',
 						name: 'content_tools_thrust2Weight',
 						component: () => import(/* webpackPrefetch: true */ /* webpackChunkName: "group-content-tools" */ './components/content/tools/Thrust2Weight.vue'),
+						meta: {
+							requiresAuth: false
+						}
+					}
+				]
+			}
+		]
+	},
+	{
+		path: '/rocket/:id',
+		component: () => import(/* webpackPrefetch: true */ /* webpackChunkName: "group-layouts" */ './layouts/MainLayout.vue'),
+		children: [
+			{
+				path: '',
+				name: 'content_rocket',
+				component: () => import(/* webpackPrefetch: true */ /* webpackChunkName: "group-layouts" */ './layouts/ContentLayout.vue'),
+				children: [
+					{
+						path: '',
+						name: 'content_rocket',
+						component: () => import(/* webpackPrefetch: true */ /* webpackChunkName: "group-content-info" */ './components/content/rockets/RocketInfo.vue'),
+						meta: {
+							requiresAuth: false
+						}
+					}
+				]
+			}
+		]
+	},
+	{
+		path: '/rockets',
+		component: () => import(/* webpackPrefetch: true */ /* webpackChunkName: "group-layouts" */ './layouts/MainLayout.vue'),
+		children: [
+			{
+				path: '',
+				name: 'content_rockets',
+				component: () => import(/* webpackPrefetch: true */ /* webpackChunkName: "group-layouts" */ './layouts/ContentLayout.vue'),
+				children: [
+					{
+						path: '',
+						name: 'content_rockets',
+						component: () => import(/* webpackPrefetch: true */ /* webpackChunkName: "group-content-info" */ './components/content/rockets/Rockets.vue'),
 						meta: {
 							requiresAuth: false
 						}
@@ -349,7 +391,7 @@ const router = createRouter({
 // eslint-disable-next-line
 router.beforeResolve((to, from, next) => {
 	if (to.matched.some(record => record.meta.notFound)) {
-		GlobalUtility.$navRouter.push('/notFound');
+		LibraryClientUtility.$navRouter.push('/notFound');
 		return;
 	}
 

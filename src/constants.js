@@ -1,4 +1,8 @@
 const Constants = {
+	DateTime: {
+		DEFAULT_DATE_FORMAT: 'MM/DD/YYYY',
+		DEFAULT_TIME_FORMAT: 'HH:mm'
+	},
 	External: {
 		github: 'https://github.com/thzero/rocket_sidekick-client',
 		imnages: 'https://imagesrocketsidekick.thzero.com',
@@ -12,6 +16,26 @@ const Constants = {
 	ExternalKeys: {
 		MotorSearch: 'motorSearch'
 	},
+	ExtractTypes: {
+		Csv: 'csv',
+		Text: 'text'
+	},
+	Features: {
+		Auth: false,
+		MobileApp: false,
+		Rockets: true,
+		Favorites: true,
+		RememberMe: false,
+		Statistics: false,
+		Yours: {
+			value: false,
+			Altimeters: false,
+			Checklists: false,
+			Launches: false,
+			Parachutes: false,
+			Rockets: false
+		}
+	},
 	FlightInfo: {
 		Resolution: 1024
 	},
@@ -19,6 +43,7 @@ const Constants = {
 		SERVICE_API: 'serviceApi',
 		SERVICE_DOWNLOAD: 'serviceDownload',
 		SERVICE_EXTERNAL_MOTOR_SEARCH: 'serviceExternalMotorSearch',
+		SERVICE_ROCKETS: 'serviceRockets',
 		SERVICE_TOOLS_CALCULATION_ENGINE: 'serviceToolsCalculationEngine',
 		SERVICE_TOOLS_FOAM: 'serviceToolsFoam',
 		SERVICE_TOOLS_FLIGHT_INFO_PROCESSOR: 'serviceToolsFlightInfoProcessor',
@@ -31,30 +56,31 @@ const Constants = {
 		SERVICE_TOOLS_FLIGHT_PATH_PROCESSOR_FEATHERWEIGHT: 'serviceToolsFlightPathProcessorFeatherweight',
 		SERVICE_TOOLS_THRUST2WEIGHT: 'serviceToolsThrust2Weight'
 	},
-	DateTime: {
-		DEFAULT_DATE_FORMAT: 'MM/DD/YYYY',
-		DEFAULT_TIME_FORMAT: 'HH:mm'
-	},
-	ErrorCodes: {
-		Suffix: 'errors',
-		SuffixParams: 'errors.params',
-		Default: 'error'
-	},
-	ExtractTypes: {
-		Csv: 'csv',
-		Text: 'text'
-	},
-	Features: {
-		Auth: false,
-		Checklists: false,
-		Launches: false,
-		MobileApp: false,
-		Rockets: false,
-		Favorites: true,
-		RememberMe: false,
-		Statistics: false
-	},
 	MeasurementUnits: {
+		acceleration: {
+			id: 'acceleration'
+		},
+		area: {
+			id: 'area'
+		},
+		distance: {
+			id: 'distance'
+		},
+		fluid: {
+			id: 'fluid'
+		},
+		length: {
+			id: 'length'
+		},
+		velocity: {
+			id: 'velocity'
+		},
+		volume: {
+			id: 'volume'
+		},
+		weight: {
+			id: 'weight'
+		},
 		english: {
 			id: 'english',
 			acceleration: {
@@ -66,31 +92,35 @@ const Constants = {
 				in2: 'in^2',
 				ft2: 'ft^2'
 			},
-			fluid: {
-				default: 'floz',
-				floz: 'floz'
-			},
 			distance: {
 				default: 'ft',
 				ft: 'ft',
 				mi: 'mi'
 			},
+			fluid: {
+				default: 'floz',
+				floz: 'floz'
+			},
 			length: {
+				id: 'length',
 				default: 'in',
 				in: 'in',
 				ft: 'ft'
 			},
 			velocity: {
+				id: 'velocity',
 				default: 'fts',
 				fts: 'ft/s',
 				mph: 'mph'
 			},
 			volume: {
+				id: 'volume',
 				default: 'in3',
 				in3: 'in^3',
 				ft3: 'ft^3'
 			},
 			weight: {
+				id: 'weight',
 				default: 'oz',
 				oz: 'oz',
 				lb: 'lb'
@@ -113,15 +143,15 @@ const Constants = {
 				m: 'm',
 				km: 'km'
 			},
+			fluid: {
+				default: 'ml',
+				ml: 'ml'
+			},
 			length: {
 				default: 'mm',
 				mm: 'mm',
 				cm: 'cm',
 				m: 'm'
-			},
-			fluid: {
-				default: 'ml',
-				ml: 'ml'
 			},
 			velocity: {
 				default: 'ms',
@@ -150,6 +180,10 @@ const Constants = {
 			volume: 'volume',
 			weight: 'weight'
 		}
+	},
+	RocketTypes: {
+		Site: 'site',
+		Yours: 'yours'
 	}
 };
 

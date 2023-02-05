@@ -1,6 +1,6 @@
-import LibraryConstants from '@thzero/library_client/constants.js';
+import LibraryClientConstants from '@thzero/library_client/constants.js';
 
-import GlobalUtility from '@thzero/library_client/utility/global';
+import LibraryClientUtility from '@thzero/library_client/utility/index';
 
 import UtilityService from '@thzero/library_client/service/utility';
 
@@ -8,9 +8,9 @@ class AppUtilityService extends UtilityService {
 	async content(correlationId) {
 		try {
 			const body = {
-				locale: GlobalUtility.$trans.locale
+				locale: LibraryClientUtility.$trans.locale
 			};
-			const response = await this._serviceCommunicationRest.post(correlationId, LibraryConstants.ExternalKeys.BACKEND, { url: 'utility/content' }, body);
+			const response = await this._serviceCommunicationRest.post(correlationId, LibraryClientConstants.ExternalKeys.BACKEND, { url: 'utility/content' }, body);
 			this._logger.debug('AppUtilityService', 'content', 'response', response, correlationId);
 			return response;
 		}
@@ -24,10 +24,10 @@ class AppUtilityService extends UtilityService {
 
 		try {
 			const body = {
-				locale: GlobalUtility.$trans.locale,
+				locale: LibraryClientUtility.$trans.locale,
 				contentId: contentId
 			};
-			const response = await this._serviceCommunicationRest.post(correlationId, LibraryConstants.ExternalKeys.BACKEND, { url: 'utility/content/markup' }, body);
+			const response = await this._serviceCommunicationRest.post(correlationId, LibraryClientConstants.ExternalKeys.BACKEND, { url: 'utility/content/markup' }, body);
 			this._logger.debug('AppUtilityService', 'contentMarkup', 'response', response, correlationId);
 			return response;
 		}

@@ -4,10 +4,10 @@ import { computed, onMounted, ref } from 'vue';
 import useVuelidate from '@vuelidate/core';
 
 import Constants from '@/constants';
-import LibraryConstants from '@thzero/library_client/constants';
+import LibraryClientConstants from '@thzero/library_client/constants';
 
-import CommonUtility from '@thzero/library_common/utility/index';
-import GlobalUtility from '@thzero/library_client/utility/global';
+import LibraryClientUtility from '@thzero/library_client/utility/index';
+import LibraryCommonUtility from '@thzero/library_common/utility/index';
 
 import { useBaseComponent } from '@/library_vue/components/base';
 
@@ -26,8 +26,8 @@ export function useAppMobileLookupDialogComponent(props, context, options) {
 		success
 	} = useBaseComponent(props, context, options);
 
-	const serviceStore = GlobalUtility.$injector.getService(LibraryConstants.InjectorKeys.SERVICE_STORE);
-	const serviceExternalMotorSearch = GlobalUtility.$injector.getService(Constants.InjectorKeys.SERVICE_EXTERNAL_MOTOR_SEARCH);
+	const serviceStore = LibraryClientUtility.$injector.getService(LibraryClientConstants.InjectorKeys.SERVICE_STORE);
+	const serviceExternalMotorSearch = LibraryClientUtility.$injector.getService(Constants.InjectorKeys.SERVICE_EXTERNAL_MOTOR_SEARCH);
 
 	const dialogResetMessage = ref(null);
 	const dialogMotorLookup = ref(null);
@@ -44,11 +44,11 @@ export function useAppMobileLookupDialogComponent(props, context, options) {
 
 	const clickMotorSearchResetDisabled = computed(() => {
 		// const ttl = .serviceStore.state.motorSearchResults ? serviceStore.state.motorSearchResults.ttl : 0;
-		const now = CommonUtility.getTimestamp();
+		const now = LibraryCommonUtility.getTimestamp();
 		return (ttl.value < now);
 	});
 	const diameters = computed(() => {
-		return ['', '13', '18', '24', '29', '38', '75', '98'].map((item) => { return { id: item, name: (item ? item + GlobalUtility.$trans.t('motorSearch.motor_diameter_measurement') : '') }; });
+		return ['', '13', '18', '24', '29', '38', '75', '98'].map((item) => { return { id: item, name: (item ? item + LibraryClientUtility.$trans.t('motorSearch.motor_diameter_measurement') : '') }; });
 	});
 	const impulseClasses = computed(() => {
 		return ['', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O'].map((item) => { return { id: item, name: item }; });
@@ -101,7 +101,7 @@ export function useAppMobileLookupDialogComponent(props, context, options) {
 		// const ttl2 = serviceStore.state.motorSearchResults ? serviceStore.state.motorSearchResults.ttl : 0;
 		const ttl2 = ttl.value;
 
-		const now = CommonUtility.getTimestamp();
+		const now = LibraryCommonUtility.getTimestamp();
 		if (ttl2 < now) {
 			return;
 		}
@@ -116,20 +116,20 @@ export function useAppMobileLookupDialogComponent(props, context, options) {
 		const durationInDays = duration / spanInDays;
 		const durationInHours = duration / spanInHours;
 
-		let message = GlobalUtility.$trans.t('motorSearch.motor_reset_message') + '<br>';
+		let message = LibraryClientUtility.$trans.t('motorSearch.motor_reset_message') + '<br>';
 		if (durationInWeeks <= 1) {
 			let timespan = '';
 			if (durationInDays <= 1) {
 				if (durationInHours < 1)
-					timespan = GlobalUtility.$trans.t('motorSearch.motor_reset_message_time_hour_less');
+					timespan = LibraryClientUtility.$trans.t('motorSearch.motor_reset_message_time_hour_less');
 				else
-					timespan = GlobalUtility.$trans.t('motorSearch.motor_reset_message_time_duration', { duration: durationInHours, type: GlobalUtility.$trans.t('motorSearch.motor_reset_hours') });
+					timespan = LibraryClientUtility.$trans.t('motorSearch.motor_reset_message_time_duration', { duration: durationInHours, type: LibraryClientUtility.$trans.t('motorSearch.motor_reset_hours') });
 			}
 			else
-				timespan = GlobalUtility.$trans.t('motorSearch.motor_reset_message_time_duration', { duration: durationInDays, type: GlobalUtility.$trans.t('motorSearch.motor_reset_days') });
-			message += GlobalUtility.$trans.t('motorSearch.motor_reset_message_warning', { timespan: timespan }) + '<br>' + GlobalUtility.$trans.t('motorSearch.motor_reset_message_warning2') + '<br>';
+				timespan = LibraryClientUtility.$trans.t('motorSearch.motor_reset_message_time_duration', { duration: durationInDays, type: LibraryClientUtility.$trans.t('motorSearch.motor_reset_days') });
+			message += LibraryClientUtility.$trans.t('motorSearch.motor_reset_message_warning', { timespan: timespan }) + '<br>' + LibraryClientUtility.$trans.t('motorSearch.motor_reset_message_warning2') + '<br>';
 		}
-		message = message + '<br>' + GlobalUtility.$trans.t('motorSearch.motor_reset_message_confirm');
+		message = message + '<br>' + LibraryClientUtility.$trans.t('motorSearch.motor_reset_message_confirm');
 
 		dialogResetMessage.value = message;
 		dialogResetManager.value.open();
@@ -147,11 +147,11 @@ export function useAppMobileLookupDialogComponent(props, context, options) {
 	};
 	const motorCaseInfo = (motor) => {
 		if (motor.type === 'SU')
-			return GlobalUtility.$trans.t('motorSearch.motor_type_singleuse');
+			return LibraryClientUtility.$trans.t('motorSearch.motor_type_singleuse');
 
 		if (motor.type === 'hybrid' || motor.type === 'reload') {
 			if (motor.caseInfo !== null) {
-				const type = GlobalUtility.$trans.t('motorSearch.motor_type_' + motor.type.toLowerCase());
+				const type = LibraryClientUtility.$trans.t('motorSearch.motor_type_' + motor.type.toLowerCase());
 				return '(' + motor.caseInfo + '; ' + type + ')';
 			}
 		}
@@ -200,8 +200,8 @@ export function useAppMobileLookupDialogComponent(props, context, options) {
 		impulseClass.value = data.impulseClass;
 		manufacturer.value = data.manufacturer;
 		motor.value = data.motor;
-		sparky.value = !CommonUtility.isNull(data.sparky) ? data.sparky : false;
-		singleUse.value = !CommonUtility.isNull(data.singleUse) ? data.singleUse : false;
+		sparky.value = !LibraryCommonUtility.isNull(data.sparky) ? data.sparky : false;
+		singleUse.value = !LibraryCommonUtility.isNull(data.singleUse) ? data.singleUse : false;
 
 		// (async () => {
 		// 	// await clickMotorSearch();

@@ -1,4 +1,4 @@
-import LibraryUtility from '@thzero/library_common/utility/index';
+import LibraryCommonUtility from '@thzero/library_common/utility/index';
 
 import BaseService from '@thzero/library_client/service/index';
 
@@ -15,7 +15,7 @@ class InstanceCalculationEngineToolService extends BaseService {
 	get symTypeSet() { return this._engine.symTypeSet; }
 
 	addListener(correlationId, func) {
-		if (!func || LibraryUtility.isNotFunction(func))
+		if (!func || LibraryCommonUtility.isNotFunction(func))
 			return;
 
 		this._listeners.push(func);

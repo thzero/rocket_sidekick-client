@@ -1,7 +1,7 @@
 <script>
 import { ref } from 'vue';
 
-import GlobalUtility from '@thzero/library_client/utility/global';
+import LibraryClientUtility from '@thzero/library_client/utility/index';
 
 import { useBasePrivacyComponent } from '@/library_vue/components/basePrivacy';
 
@@ -18,7 +18,7 @@ export function useAppPrivacyComponent(props, context, options) {
 			success
 		} = useBasePrivacyComponent(props, context, options);
 
-	const privacyMarkup = ref(GlobalUtility.$trans.t('strings.privacy.text1'));
+	const privacyMarkup = ref(LibraryClientUtility.$trans.t('strings.privacy.text1'));
 
 	return {
 		correlationId,

@@ -234,6 +234,9 @@ export default {
 			noBreakingSpaces,
 			notImplementedError,
 			success,
+			serviceStore,
+			sort,
+			target,
 			links,
 			linksBooks,
 			linksCompetitions,
@@ -244,13 +247,10 @@ export default {
 			linksManufacturers,
 			linksOrganizations,
 			linksVendors,
-			linksVideos,
-			sort,
-			target
+			linksVideos
 		} = useLinksBaseComponent(props, context);
 
-		return {
-			correlationId,
+		return {	correlationId,
 			error,
 			hasFailed,
 			hasSucceeded,
@@ -259,6 +259,9 @@ export default {
 			noBreakingSpaces,
 			notImplementedError,
 			success,
+			serviceStore,
+			sort,
+			target,
 			links,
 			linksBooks,
 			linksCompetitions,
@@ -269,9 +272,7 @@ export default {
 			linksManufacturers,
 			linksOrganizations,
 			linksVendors,
-			linksVideos,
-			sort,
-			target
+			linksVideos
 		};
 	}
 };

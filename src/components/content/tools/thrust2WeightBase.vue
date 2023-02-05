@@ -3,9 +3,9 @@ import { onMounted, ref, watch } from 'vue';
 
 import useVuelidate from '@vuelidate/core';
 
-import Constants from '@/constants';
+import AppConstants from '@/constants';
 
-import GlobalUtility from '@thzero/library_client/utility/global';
+import LibraryClientUtility from '@thzero/library_client/utility/index';
 
 import DialogSupport from '@/library_vue/components/support/dialog';
 
@@ -42,7 +42,7 @@ export function useThrust2WeightBaseComponent(props, context, options) {
 		settings
 	} = useToolsBaseComponent(props, context, options);
 
-	const serviceToolsThrust2Weight = GlobalUtility.$injector.getService(Constants.InjectorKeys.SERVICE_TOOLS_THRUST2WEIGHT);
+	const serviceToolsThrust2Weight = LibraryClientUtility.$injector.getService(AppConstants.InjectorKeys.SERVICE_TOOLS_THRUST2WEIGHT);
 
 	const calculationResults = initCalculationResults(correlationId(), ref({}));
 	const dialogMotorSearchRef = ref(null);
@@ -52,7 +52,7 @@ export function useThrust2WeightBaseComponent(props, context, options) {
 	const massMeasurementUnitId = ref(null);
 	const maxLaunchRodTime = ref(null);
 	const maxLaunchRodTimeDefault = ref(0.3);
-	const measurementUnitsWeightType = ref(Constants.MeasurementUnits.types.weight);
+	const measurementUnitsWeightType = ref(AppConstants.MeasurementUnits.types.weight);
 	const motorLookup1 = ref(null);
 	const motorLookup2 = ref(null);
 	const motorLookup3 = ref(null);

@@ -1,4 +1,4 @@
-import Constants from '@/constants';
+import AppConstants from '@/constants';
 
 import MotorSearchExternalService from '@/service/external/motorSearch';
 
@@ -95,7 +95,7 @@ class ThrustCurveMotorSearchExternalService extends MotorSearchExternalService {
 	}
 
 	_urlKey() {
-		return Constants.ExternalKeys.MotorSearch + 'ThrustCurve';
+		return AppConstants.ExternalKeys.MotorSearch + 'ThrustCurve';
 	}
 }
 

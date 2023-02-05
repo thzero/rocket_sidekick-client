@@ -3,7 +3,7 @@ import { onMounted, ref, watch } from 'vue';
 
 import { Chart, registerables } from 'chart.js';
 
-import GlobalUtility from '@thzero/library_client/utility/global';
+import LibraryClientUtility from '@thzero/library_client/utility/index';
 
 import { useToolsBaseComponent } from '@/components/content/tools/toolsBase';
 
@@ -71,7 +71,7 @@ export function useFlightInfoChartCBaseomponent(props, context, options) {
 			}
 
 			if (flightInfo) {
-				title.value = flightInfo.title ?? GlobalUtility.$trans.t('charts.flightInfo.title');
+				title.value = flightInfo.title ?? LibraryClientUtility.$trans.t('charts.flightInfo.title');
 				date.value = flightInfo.date ?? '';
 				location.value = flightInfo.location ?? '';
 
@@ -90,7 +90,7 @@ export function useFlightInfoChartCBaseomponent(props, context, options) {
 					chartTemp.data.datasets.push({
 						type: 'line',
 						data: flightInfo.altitude.dataF,
-						label: GlobalUtility.$trans.t('charts.flightInfo.altitude.titleF'),
+						label: LibraryClientUtility.$trans.t('charts.flightInfo.altitude.titleF'),
 						borderColor: flightInfo.style.altitudeF,
 						fill: false,
 						pointRadius: 0
@@ -100,7 +100,7 @@ export function useFlightInfoChartCBaseomponent(props, context, options) {
 					chartTemp.data.datasets.push({
 						type: 'line',
 						data: flightInfo.altitude.data,
-						label: GlobalUtility.$trans.t('charts.flightInfo.altitude.title'),
+						label: LibraryClientUtility.$trans.t('charts.flightInfo.altitude.title'),
 						borderColor: flightInfo.style.altitude,
 						fill: false,
 						pointRadius: 0
@@ -111,7 +111,7 @@ export function useFlightInfoChartCBaseomponent(props, context, options) {
 					chartTemp.data.datasets.push({
 						type: 'line',
 						data: flightInfo.velocity.dataF,
-						label: GlobalUtility.$trans.t('charts.flightInfo.velocity.titleF'),
+						label: LibraryClientUtility.$trans.t('charts.flightInfo.velocity.titleF'),
 						borderColor: flightInfo.style.velocityF,
 						fill: false,
 						pointRadius: 0
@@ -121,7 +121,7 @@ export function useFlightInfoChartCBaseomponent(props, context, options) {
 					chartTemp.data.datasets.push({
 						type: 'line',
 						data: flightInfo.velocity.data,
-						label: GlobalUtility.$trans.t('charts.flightInfo.velocity.title'),
+						label: LibraryClientUtility.$trans.t('charts.flightInfo.velocity.title'),
 						borderColor: flightInfo.style.velocity,
 						fill: false,
 						pointRadius: 0
@@ -131,7 +131,7 @@ export function useFlightInfoChartCBaseomponent(props, context, options) {
 				chartTemp.data.datasets.push({
 					type: 'scatter',
 					data: flightInfo.events.apogee.data,
-					label: GlobalUtility.$trans.t('charts.flightInfo.events.apogee'),
+					label: LibraryClientUtility.$trans.t('charts.flightInfo.events.apogee'),
 					borderColor: flightInfo.style.event.apogeeBorder,
 					backgroundColor: flightInfo.style.event.apogee + '7F',
 					borderWidth: 2,
@@ -140,14 +140,14 @@ export function useFlightInfoChartCBaseomponent(props, context, options) {
 				// chartTemp.data.datasets.push({
 				// 	type: 'scatter',
 				// 	data: flightInfo.events.noseOver.data,
-				// 	label: GlobalUtility.$trans.t('charts.flightInfo.events.noseOver'),
+				// 	label: LibraryClientUtility.$trans.t('charts.flightInfo.events.noseOver'),
 				// 	borderColor: '#FFFF00',
 				// 	pointRadius: 10
 				// });
 				chartTemp.data.datasets.push({
 					type: 'scatter',
 					data: flightInfo.events.drogue.data,
-					label: GlobalUtility.$trans.t('charts.flightInfo.events.drogue'),
+					label: LibraryClientUtility.$trans.t('charts.flightInfo.events.drogue'),
 					borderColor: flightInfo.style.event.drogueBorder,
 					backgroundColor: flightInfo.style.event.drogue + '7F',
 					pointRadius: 10
@@ -155,7 +155,7 @@ export function useFlightInfoChartCBaseomponent(props, context, options) {
 				chartTemp.data.datasets.push({
 					type: 'scatter',
 					data: flightInfo.events.main.data,
-					label: GlobalUtility.$trans.t('charts.flightInfo.events.main'),
+					label: LibraryClientUtility.$trans.t('charts.flightInfo.events.main'),
 					borderColor: flightInfo.style.event.mainBorder,
 					backgroundColor: flightInfo.style.event.main + '7F',
 					pointRadius: 10
@@ -167,7 +167,7 @@ export function useFlightInfoChartCBaseomponent(props, context, options) {
 	);
 
 	onMounted(async () => {
-		// this.otionsChart.plugins.title.text = GlobalUtility.$trans.t('charts.flightInfo.title');
+		// this.otionsChart.plugins.title.text = LibraryClientUtility.$trans.t('charts.flightInfo.title');
 		chartContext.value = document.getElementById('flight-info-chart-int');
 		if (props.chartData)
 			chart.value = new Chart(chartContext.value, props.chartData);

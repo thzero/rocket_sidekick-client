@@ -1,9 +1,11 @@
 <script>
 import { computed, onMounted, ref } from 'vue';
 
-import Constants from '@/constants';
+import AppConstants from '@/constants';
 
-import { useContentBaseComponent } from '@/components/content/contentBase';
+import LibraryClientUtility from '@thzero/library_client/utility/index';
+
+import { useInfoBaseComponent } from '@/components/content/info/infoBase';
 
 export function useHighPowerBaseComponent(props, context, options) {
 	const {
@@ -19,14 +21,18 @@ export function useHighPowerBaseComponent(props, context, options) {
 		serviceStore,
 		sortByOrder,
 		target,
-	} = useContentBaseComponent(props, context, options);
+		content,
+		contentDesc,
+		contentDefinition,
+		contentMarkup,
+		contentTitle,
+		handleAttribution,
+		hasAttribution
+	} = useInfoBaseComponent(props, context, options);
 	
-	const content = ref(null);
-	const textChartDesc = ref(null);
-	const textDefinition = ref(null);
-	const textDesc = ref(null);
-	const textMarkup = ref(null);
-	const textMarkup2 = ref(null);
+	const contentChartDesc = ref(null);
+	const contentMarkup2 = ref(null);
+	const title = ref(LibraryClientUtility.$trans.t('titles.content.info.highPower'));
 
 	const highPowerLinks = computed(() => {
 		if (!content.value || !content.value.supplemental || !content.value.supplemental.links)
@@ -107,7 +113,7 @@ export function useHighPowerBaseComponent(props, context, options) {
 	});
 
 	const slideUrl = (url) => {
-		return Constants.External.imnages + url;
+		return AppConstants.External.imnages + url;
 	};
 
 	onMounted(async () => {
@@ -116,11 +122,11 @@ export function useHighPowerBaseComponent(props, context, options) {
 			return;
 		content.value = response.results;
 
-		textChartDesc.value = response.results.descriptionChart;
-		textDefinition.value = response.results.definition;
-		textDesc.value = response.results.description;
-		textMarkup.value = response.results.markup;
-		textMarkup2.value = response.results.markup2;
+		contentChartDesc.value = response.results.descriptionChart;
+		contentDefinition.value = response.results.definition;
+		contentDesc.value = response.results.description;
+		contentMarkup.value = response.results.markup;
+		contentMarkup2.value = response.results.markup2;
 	});
 
 	return {
@@ -136,13 +142,16 @@ export function useHighPowerBaseComponent(props, context, options) {
 		serviceStore,
 		sortByOrder,
 		target,
-		slides,
 		content,
-		textChartDesc,
-		textDefinition,
-		textDesc,
-		textMarkup,
-		textMarkup2,
+		contentDesc,
+		contentDefinition,
+		contentMarkup,
+		contentTitle,
+		handleAttribution,
+		hasAttribution,
+		contentChartDesc,
+		contentMarkup2,
+		title,
 		highPowerLinks,
 		links,
 		linksBooks,

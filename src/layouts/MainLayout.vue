@@ -23,13 +23,11 @@
 				</router-link>
 			</v-app-bar-title>
 
-			<v-spacer></v-spacer>
-
 			<v-btn 
-				v-if="$vuetify.display.mdAndUp && features.Checklists"
-				to="/checklists"
+				v-if="$vuetify.display.mdAndUp && features.Rockets"
+				to="/rockets"
 			>
-				{{ $t('menu.checklists.title') }}
+				{{ $t('menu.content.rockets.title') }}
 			</v-btn>
 			<v-menu
 				v-if="$vuetify.display.mdAndUp"
@@ -46,38 +44,6 @@
 						:to="contentLink(item)"
 					>
 						<v-list-item-title>{{ contentTitle(item) }}</v-list-item-title>
-					</v-list-item>
-				</v-list>
-			</v-menu>
-			<v-btn 
-				v-if="$vuetify.display.mdAndUp && features.Launches"
-				to="/launches"
-			>
-				{{ $t('menu.launches.title') }}
-			</v-btn>
-			<v-menu
-				v-if="$vuetify.display.mdAndUp && features.Rockets"
-			>
-				<template v-slot:activator="{ props }">
-					<v-btn append-icon="mdi-menu-down"
-						v-bind="props"
-					>{{ $t('menu.rockets.title') }}</v-btn>
-				</template>
-				<v-list density="compact">
-					<v-list-item
-						to="/rockets/rockets"
-					>
-						<v-list-item-title>{{ $t('menu.rockets.rockets') }}</v-list-item-title>
-					</v-list-item>
-					<v-list-item
-						to="/rockets/altimeters"
-					>
-						<v-list-item-title>{{ $t('menu.rockets.altimeters') }}</v-list-item-title>
-					</v-list-item>
-					<v-list-item
-						to="/rockets/parachutes"
-					>
-						<v-list-item-title>{{ $t('menu.rockets.parachutes') }}</v-list-item-title>
 					</v-list-item>
 				</v-list>
 			</v-menu>
@@ -98,17 +64,48 @@
 						<v-list-item-title>{{ contentTitle(item) }}</v-list-item-title>
 					</v-list-item>
 				</v-list>
-				<!-- 
-				<v-list density="compact" class="pl-2 pr-2">
-					<hr/>
-				</v-list>
+			</v-menu>
+			<v-menu
+				v-if="$vuetify.display.mdAndUp && features.Yours.value"
+			>
+				<template v-slot:activator="{ props }">
+					<v-btn append-icon="mdi-menu-down"
+						v-bind="props"
+					>{{ $t('menu.yours.title') }}</v-btn>
+				</template>
 				<v-list density="compact">
 					<v-list-item
-						to="/landing"
+						v-if="features.Yours.Checklists"
+						to="/yours/checklists"
 					>
-						<v-list-item-title>{{ $t('menu.content.app') }}</v-list-item-title>
+						<v-list-item-title>{{ $t('menu.yours.checklists') }}</v-list-item-title>
 					</v-list-item>
-				</v-list> -->
+					<v-list-item
+						v-if="features.Yours.Launches"
+						to="/yours/launches"
+					>
+						<v-list-item-title>{{ $t('menu.yours.rockets') }}</v-list-item-title>
+					</v-list-item>
+					<v-divider></v-divider>
+					<v-list-item
+						v-if="features.Yours.Altimeters"
+						to="yours/altimeters"
+					>
+						<v-list-item-title>{{ $t('menu.yours.altimeters') }}</v-list-item-title>
+					</v-list-item>
+					<v-list-item
+						v-if="features.Yours.Parachutes"
+						to="yours/parachutes"
+					>
+						<v-list-item-title>{{ $t('menu.yours.parachutes') }}</v-list-item-title>
+					</v-list-item>
+					<v-list-item
+						v-if="features.Yours.Rockets"
+						to="/yours/rockets"
+					>
+						<v-list-item-title>{{ $t('menu.yours.rockets') }}</v-list-item-title>
+					</v-list-item>
+				</v-list>
 			</v-menu>
 			<v-btn 
 				v-if="$vuetify.display.mdAndUp"
@@ -116,25 +113,6 @@
 			>
 				{{ $t('menu.content.links.title') }}
 			</v-btn>
-			<!-- <v-menu
-				v-if="$vuetify.display.mdAndUp"
-			>
-				<template v-slot:activator="{ props }">
-					<v-btn append-icon="mdi-menu-down"
-						v-bind="props"
-					>{{ $t('menu.content.links.title') }}</v-btn>
-				</template>
-				<v-list density="compact">
-					<v-list-item
-						v-for="item in links"
-						:key="item.name"
-						:href="item.link"
-						target="_blank"
-					>
-						<v-list-item-title>{{ $t(item.title) }}</v-list-item-title>
-					</v-list-item>
-				</v-list density="compact">
-			</v-menu> -->
 			<v-btn 
 				v-if="$vuetify.display.mdAndUp && features.MobileApp"
 				to="/landing"
@@ -219,12 +197,6 @@
 			temporary
 		>
 			<v-list density="compact">
-				<v-list-item
-					v-if="features.Checklists"
-					to="/checklists"
-				>
-					<v-list-item-title>{{ $t('menu.checklists.title') }}</v-list-item-title>
-				</v-list-item>
 				<v-list-item>
 					{{ $t('menu.content.info.title') }}
 					<v-list density="compact">
@@ -238,32 +210,10 @@
 					</v-list>
 				</v-list-item>
 				<v-list-item
-					v-if="features.Launches"
-					to="/launches"
+					v-if="features.Rocket"
+					to="/rockets"
 				>
-					<v-list-item-title>{{ $t('menu.launches.title') }}</v-list-item-title>
-				</v-list-item>
-				<v-list-item
-					v-if="features.Rockets"
-				>
-					{{ $t('menu.rockets.title') }}
-					<v-list density="compact">
-						<v-list-item
-							to="/rockets/rockets"
-						>
-							<v-list-item-title>{{ $t('menu.rockets.rockets') }}</v-list-item-title>
-						</v-list-item>
-						<v-list-item
-							to="/rockets/altimeters"
-						>
-							<v-list-item-title>{{ $t('menu.rockets.altimeters') }}</v-list-item-title>
-						</v-list-item>
-						<v-list-item
-							to="/rockets/parachutes"
-						>
-							<v-list-item-title>{{ $t('menu.rockets.parachutes') }}</v-list-item-title>
-						</v-list-item>
-					</v-list>
+					<v-list-item-title>{{ $t('menu.content.rockets.title') }}</v-list-item-title>
 				</v-list-item>
 				<v-list-item>
 					{{ $t('menu.content.tools.title') }}
@@ -274,6 +224,44 @@
 							:to="contentLink(item)"
 						>
 							<v-list-item-title>{{ contentTitle(item) }}</v-list-item-title>
+						</v-list-item>
+					</v-list>
+				</v-list-item>
+				<v-list-item
+					v-if="features.Yours.value"
+				>
+					{{ $t('menu.yours.title') }}
+					<v-list density="compact">
+						<v-list-item
+							v-if="features.Yours.Checklists"
+							to="/yours/checklists"
+						>
+							<v-list-item-title>{{ $t('menu.yours.checklists') }}</v-list-item-title>
+						</v-list-item>
+						<v-list-item
+							v-if="features.Yours.Launches"
+							to="/yours/launches"
+						>
+							<v-list-item-title>{{ $t('menu.yours.launches') }}</v-list-item-title>
+						</v-list-item>
+						<v-divider></v-divider>
+						<v-list-item
+							v-if="features.Yours.Altimeters"
+							to="/yours/altimeters"
+						>
+							<v-list-item-title>{{ $t('menu.yours.altimeters') }}</v-list-item-title>
+						</v-list-item>
+						<v-list-item
+							v-if="features.Yours.Parachutes"
+							to="/yours/parachutes"
+						>
+							<v-list-item-title>{{ $t('menu.yours.parachutes') }}</v-list-item-title>
+						</v-list-item>
+						<v-list-item
+							v-if="features.Yours.Rockets"
+							to="/yours/rockets"
+						>
+							<v-list-item-title>{{ $t('menu.yours.rockets') }}</v-list-item-title>
 						</v-list-item>
 					</v-list>
 				</v-list-item>
@@ -349,10 +337,10 @@
 <script>
 import { computed, onMounted, ref } from 'vue';
 
-import Constants from '@/constants';
-import LibraryConstants from '@thzero/library_client/constants';
+import AppConstants from '@/constants';
+import LibraryClientConstants from '@thzero/library_client/constants';
 
-import GlobalUtility from '@thzero/library_client/utility/global';
+import LibraryClientUtility from '@thzero/library_client/utility/index';
 
 import { useBaseMainLayout } from '@/library_vue/layouts/baseMainLayout';
 
@@ -401,10 +389,10 @@ export default {
 			serviceStore,
 			toggleDrawer
 		} = useBaseMainLayout(props, context, {
-			features: Constants.features
+			features: AppConstants.Features
 		});
 
-		const serviceMarkup = GlobalUtility.$injector.getService(LibraryConstants.InjectorKeys.SERVICE_MARKUP_PARSER);
+		const serviceMarkup = LibraryClientUtility.$injector.getService(LibraryClientConstants.InjectorKeys.SERVICE_MARKUP_PARSER);
 
 		const dialogDisplayMarkupSignal = ref(new DialogSupport());
 		const displayMarkupValue = ref(null);
@@ -412,8 +400,8 @@ export default {
 
 		const preferences = [
 			{
-				title: GlobalUtility.$trans.t('strings.cookieCompliance.performance.title'),
-				description: GlobalUtility.$trans.t('strings.cookieCompliance.performance.description'),
+				title: LibraryClientUtility.$trans.t('strings.cookieCompliance.performance.title'),
+				description: LibraryClientUtility.$trans.t('strings.cookieCompliance.performance.description'),
 				items: [
 					{ 
 						label: 'Active',
@@ -423,8 +411,8 @@ export default {
 				],
 			},
 			// {
-			// 	title: GlobalUtility.$trans.t('strings.cookieCompliance.session.title'),
-			// 	description: GlobalUtility.$trans.t('strings.cookieCompliance.session.description'),
+			// 	title: LibraryClientUtility.$trans.t('strings.cookieCompliance.session.title'),
+			// 	description: LibraryClientUtility.$trans.t('strings.cookieCompliance.session.description'),
 			// 	items: [
 			// 		{ 
 			// 			label: 'Active',
@@ -434,8 +422,8 @@ export default {
 			// 	],
 			// },
 			{
-				title: GlobalUtility.$trans.t('strings.cookieCompliance.analytics.title'),
-				description: GlobalUtility.$trans.t('strings.cookieCompliance.analytics.description'),
+				title: LibraryClientUtility.$trans.t('strings.cookieCompliance.analytics.title'),
+				description: LibraryClientUtility.$trans.t('strings.cookieCompliance.analytics.description'),
 				items: [
 					{ 
 						label: 'GoogleAnalytics', 
@@ -445,8 +433,8 @@ export default {
 				],
 			},
 			// {
-			// 	title: GlobalUtility.$trans.t('strings.cookieCompliance.xsrf.title'),
-			// 	description: GlobalUtility.$trans.t('strings.cookieCompliance.xsrf.description'),
+			// 	title: LibraryClientUtility.$trans.t('strings.cookieCompliance.xsrf.title'),
+			// 	description: LibraryClientUtility.$trans.t('strings.cookieCompliance.xsrf.description'),
 			// 	items: [
 			// 		{ 
 			// 			label: 'XSRF-TOKEN', 
@@ -458,7 +446,7 @@ export default {
 		];
 
 		const displaySignIn = computed(() => {
-			return !isLoggedIn && Constants.Features.Auth;
+			return !isLoggedIn && AppConstants.Features.Auth;
 		});
 		const info = computed(() => {
 			let temp = serviceStore.getters.getContent();
@@ -500,7 +488,7 @@ export default {
 			return item.link;
 		};
 		const contentTitle = (item,) => {
-			return (item.markup ? item.title : GlobalUtility.$trans.t(item.title));
+			return (item.markup ? item.title : LibraryClientUtility.$trans.t(item.title));
 		};
 		const dialogDisplayMarkupCancel = async () => {
 			dialogDisplayMarkupSignal.value.cancel();
@@ -512,7 +500,7 @@ export default {
 			displayMarkupValue.value = value ? serviceMarkup.trimResults(correlationId, serviceMarkup.render(correlationId, value)) : null;
 		};
 		
-		GlobalUtility.$EventBus.on('display-markup', (value) => {
+		LibraryClientUtility.$EventBus.on('display-markup', (value) => {
 			markup(correlationId(), value);
 			dialogDisplayMarkupSignal.value.open();
 		});
@@ -571,9 +559,9 @@ export default {
 	// 	dialogNewCharacter: new DialogSupport()
 	// }),
 	// created() {
-	// 	this._serviceMarkup = GlobalUtility.$injector.getService(LibraryConstants.InjectorKeys.SERVICE_MARKUP_PARSER);
+	// 	this._serviceMarkup = LibraryClientUtility.$injector.getService(LibraryClientConstants.InjectorKeys.SERVICE_MARKUP_PARSER);
 
-	// 	GlobalUtility.$EventBus.on('display-markup', (value) => {
+	// 	LibraryClientUtility.$EventBus.on('display-markup', (value) => {
 	// 		this.markup(this.correlationId(), value);
 	// 		this.dialogDisplayMarkupSignal.open();
 	// 	});

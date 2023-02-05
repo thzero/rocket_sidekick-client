@@ -1,7 +1,7 @@
 <script>
-import LibraryConstants from '@thzero/library_client/constants';
+import LibraryClientConstants from '@thzero/library_client/constants';
 
-import GlobalUtility from '@thzero/library_client/utility/global';
+import LibraryClientUtility from '@thzero/library_client/utility/index';
 
 import { useBaseComponent } from '@/library_vue/components/base';
 
@@ -18,7 +18,7 @@ export function useContentBaseComponent(props, context, options) {
 		success
 	} = useBaseComponent(props, context, options);
 
-	const serviceStore = GlobalUtility.$injector.getService(LibraryConstants.InjectorKeys.SERVICE_STORE);
+	const serviceStore = LibraryClientUtility.$injector.getService(LibraryClientConstants.InjectorKeys.SERVICE_STORE);
 	
 	const sortByOrder = (links) => {
 		links.sort((a, b) => a.order >= b.order);

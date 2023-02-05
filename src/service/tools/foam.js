@@ -1,4 +1,4 @@
-import Constants from '@/constants';
+import AppConstants from '@/constants';
 
 import BaseService from '@thzero/library_client/service/index';
 
@@ -8,7 +8,7 @@ class FoamToolsService extends BaseService {
 	}
 
     init(injector) {
-		this._serviceCalculationEngine = injector.getService(Constants.InjectorKeys.SERVICE_TOOLS_CALCULATION_ENGINE);
+		this._serviceCalculationEngine = injector.getService(AppConstants.InjectorKeys.SERVICE_TOOLS_CALCULATION_ENGINE);
     }
 
 	foams(correlationId) {
@@ -73,7 +73,7 @@ class FoamToolsService extends BaseService {
 				},
 				units: {
 					from: data.units,
-					to: Constants.MeasurementUnits.metrics.length.mm
+					to: AppConstants.MeasurementUnits.metrics.length.mm
 				}
 			},
 			{
@@ -107,7 +107,7 @@ class FoamToolsService extends BaseService {
 				evaluate: 'volumeBodyTube - volumeMotorTube - volumeFins',
 				result: true,
 				format: this._serviceCalculationEngine.formatFixed(),
-				unit: Constants.MeasurementUnits[measurementUnits].fluid.default
+				unit: AppConstants.MeasurementUnits[measurementUnits].fluid.default
 			}
 		];
 		
@@ -134,7 +134,7 @@ class FoamToolsService extends BaseService {
 				type: this._serviceCalculationEngine.symTypeEvaluate,
 				var: 'totalVolume',
 				evaluate: data.totalVolume,
-				unit: Constants.MeasurementUnits.metrics.fluid.ml
+				unit: AppConstants.MeasurementUnits.metrics.fluid.ml
 			},
 			{
 				type: this._serviceCalculationEngine.symTypeSet,
@@ -156,7 +156,7 @@ class FoamToolsService extends BaseService {
 				type: this._serviceCalculationEngine.symTypeEvaluate,
 				var: 'foamWeight',
 				evaluate: 'density * totalVolume',
-				unit: Constants.MeasurementUnits[measurementUnits].weight.default,
+				unit: AppConstants.MeasurementUnits[measurementUnits].weight.default,
 				result: true,
 				format: this._serviceCalculationEngine.formatFixed()
 			},
@@ -165,7 +165,7 @@ class FoamToolsService extends BaseService {
 				var: 'requiredAmount',
 				evaluate: 'totalVolume / expansion',
 				result: true,
-				unit: Constants.MeasurementUnits[measurementUnits].fluid.default,
+				unit: AppConstants.MeasurementUnits[measurementUnits].fluid.default,
 				format: this._serviceCalculationEngine.formatFixed()
 			},
 			{

@@ -1,6 +1,6 @@
-import LibraryConstants from '@thzero/library_client/constants';
+import LibraryClientConstants from '@thzero/library_client/constants';
 
-import CommonUtility from '@thzero/library_common/utility/index';
+import LibraryCommonUtility from '@thzero/library_common/utility/index';
 
 import BaseService from '@thzero/library_client/service/index';
 
@@ -16,7 +16,7 @@ class MotorSearchExternalService extends BaseService {
     init(injector) {
 		super.init(injector);
 
-		this._serviceCommunicationRest = injector.getService(LibraryConstants.InjectorKeys.SERVICE_COMMUNICATION_REST);
+		this._serviceCommunicationRest = injector.getService(LibraryClientConstants.InjectorKeys.SERVICE_COMMUNICATION_REST);
     }
 
 	nameLocale() {
@@ -29,8 +29,8 @@ class MotorSearchExternalService extends BaseService {
 
     async manufacturers(correlationId, cached) {
         try {
-			const now = CommonUtility.getTimestamp();
-			let ttl = CommonUtility.getTimestamp() + this._ttlDefault;
+			const now = LibraryCommonUtility.getTimestamp();
+			let ttl = LibraryCommonUtility.getTimestamp() + this._ttlDefault;
 			if (cached) {
 				if (!cached.ttl)
 					cached.ttl = ttl;
@@ -77,7 +77,7 @@ class MotorSearchExternalService extends BaseService {
 				motor.samples = response.results.samples;
 			}
 
-			cache.last = CommonUtility.getTimestamp();
+			cache.last = LibraryCommonUtility.getTimestamp();
 
 			return this._successResponse({
 				motor: motor,
@@ -91,8 +91,8 @@ class MotorSearchExternalService extends BaseService {
 
     async search(correlationId, criteria, cached) {
         try {
-			const now = CommonUtility.getTimestamp();
-			const ttl = CommonUtility.getTimestamp() + this._ttlDefault;
+			const now = LibraryCommonUtility.getTimestamp();
+			const ttl = LibraryCommonUtility.getTimestamp() + this._ttlDefault;
 
 			if (cached && (cached.ttl !== null && cached.ttl > now) && (cached.data && cached.data.length > 0)) {
 				const responseFilter = this._searchFilter(correlationId, criteria, cached.data);

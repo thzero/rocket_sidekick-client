@@ -1,7 +1,7 @@
-import Constants from '@/constants';
+import AppConstants from '@/constants';
 
 import AppUtility from '@/utility/app';
-import CommonUtility from '@thzero/library_common/utility/index';
+import LibraryCommonUtility from '@thzero/library_common/utility/index';
 
 import Results from '../results';
 
@@ -16,7 +16,7 @@ class FlightInfoProcessorService extends BaseService {
 
 	init(injector) {
 		// TODO: Convert to library
-		const serviceFlightInfoProcessorEggtimer = injector.getService(Constants.InjectorKeys.SERVICE_TOOLS_FLIGHT_INFO_PROCESSOR_EGGTIMER);
+		const serviceFlightInfoProcessorEggtimer = injector.getService(AppConstants.InjectorKeys.SERVICE_TOOLS_FLIGHT_INFO_PROCESSOR_EGGTIMER);
 		this.registerProcessor(serviceFlightInfoProcessorEggtimer);
 	}
 
@@ -77,7 +77,7 @@ class FlightInfoProcessorService extends BaseService {
 
 		const results = new Results();
 
-		if (CommonUtility.isNull(data)) {
+		if (LibraryCommonUtility.isNull(data)) {
 			results.errors.push('errors.process.noInput');
 			return results;
 		}

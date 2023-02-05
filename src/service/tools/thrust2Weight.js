@@ -1,4 +1,4 @@
-import Constants from '@/constants';
+import AppConstants from '@/constants';
 
 import BaseService from '@thzero/library_client/service/index';
 
@@ -8,7 +8,7 @@ class Thrust2WeightToolsService extends BaseService {
 	}
 
     init(injector) {
-		this._serviceCalculationEngine = injector.getService(Constants.InjectorKeys.SERVICE_TOOLS_CALCULATION_ENGINE);
+		this._serviceCalculationEngine = injector.getService(AppConstants.InjectorKeys.SERVICE_TOOLS_CALCULATION_ENGINE);
     }
 
 	initialize() {
@@ -31,7 +31,7 @@ class Thrust2WeightToolsService extends BaseService {
 				type: this._serviceCalculationEngine.symTypeSet,
 				var: 'gravity',
 				value: 9.8,
-				unit: Constants.MeasurementUnits.metrics.acceleration.ms2
+				unit: AppConstants.MeasurementUnits.metrics.acceleration.ms2
 			},
 			{
 				type: this._serviceCalculationEngine.symTypeSet,
@@ -39,7 +39,7 @@ class Thrust2WeightToolsService extends BaseService {
 				value: data.mass,
 				units: {
 					from: data.units,
-					to: Constants.MeasurementUnits.metrics.weight.kg
+					to: AppConstants.MeasurementUnits.metrics.weight.kg
 				}
 			},
 			{

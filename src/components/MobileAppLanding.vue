@@ -41,10 +41,10 @@
 <script>
 import { computed, ref } from 'vue';
 
-import Constants from '@/constants';
-import LibraryConstants from '@thzero/library_client/constants';
+import AppConstants from '@/constants';
+import LibraryClientConstants from '@thzero/library_client/constants';
 
-import GlobalUtility from '@thzero/library_client/utility/global';
+import LibraryClientUtility from '@thzero/library_client/utility/index';
 
 import { useBaseComponent } from '@/library_vue/components/base';
 
@@ -68,10 +68,10 @@ export default {
 			success
 		} = useBaseComponent(props, context);
 
-		const serviceStore = GlobalUtility.$injector.getService(LibraryConstants.InjectorKeys.SERVICE_STORE);
+		const serviceStore = LibraryClientUtility.$injector.getService(LibraryClientConstants.InjectorKeys.SERVICE_STORE);
 
-		const deviceAndroidUrl = ref(Constants.External.store.android);
-		const deviceiOsUrl = ref(Constants.External.store.ios);
+		const deviceAndroidUrl = ref(AppConstants.External.store.android);
+		const deviceiOsUrl = ref(AppConstants.External.store.ios);
 
 		const deviceAndroidAvailable = computed(() => {
 			return !String.isNullOrEmpty(deviceAndroidUrl.value);
@@ -80,7 +80,7 @@ export default {
 			return !String.isNullOrEmpty(deviceAndroidUrl.value);
 		});
 		const text = computed(() => {
-			return GlobalUtility.$trans.t('mobileApp.text1');
+			return LibraryClientUtility.$trans.t('mobileApp.text1');
 		});
 
 		return {

@@ -173,7 +173,7 @@
 <script>
 import { between, decimal, integer, helpers, required } from '@vuelidate/validators';
 
-import GlobalUtility from '@thzero/library_client/utility/global';
+import LibraryClientUtility from '@thzero/library_client/utility/index';
 
 import { useFoamBaseComponent } from '@/components/content/tools/foamBase';
 
@@ -290,17 +290,17 @@ export default {
 			finRootLength: { required, decimal, between: between(0, 9999), $autoDirty: true },
 			finTabLength: { 
 				decimal, between: between(0, 999999), 
-				finTabFinRoot: helpers.withMessage(GlobalUtility.$trans.t('errors.content.tools.foam.finTabFinRoot'), finTabFinRoot), 
+				finTabFinRoot: helpers.withMessage(LibraryClientUtility.$trans.t('errors.content.tools.foam.finTabFinRoot'), finTabFinRoot), 
 				$autoDirty: true 
 			},
 			finWidth: {
 				required, decimal, between: between(0, 999999), 
-				motorTfinWidthubeBodyTube: helpers.withMessage(GlobalUtility.$trans.t('errors.content.tools.foam.finWidth'), finWidth), 
+				motorTfinWidthubeBodyTube: helpers.withMessage(LibraryClientUtility.$trans.t('errors.content.tools.foam.finWidth'), finWidth), 
 				$autoDirty: true 
 			},
 			motorTubeOD: { 
 				required, decimal, between: between(0, 9999), 
-				motorTubeBodyTube: helpers.withMessage(GlobalUtility.$trans.t('errors.content.tools.foam.motorTubeBodyTube'), motorTubeBodyTube), 
+				motorTubeBodyTube: helpers.withMessage(LibraryClientUtility.$trans.t('errors.content.tools.foam.motorTubeBodyTube'), motorTubeBodyTube), 
 				$autoDirty: true 
 			},
 			numberFins: { required, integer, between: between(0, 999999), $autoDirty: true }

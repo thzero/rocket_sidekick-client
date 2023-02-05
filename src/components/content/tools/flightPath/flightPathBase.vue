@@ -5,12 +5,12 @@ import useVuelidate from '@vuelidate/core';
 
 import Papa from 'papaparse';
 
-import Constants from '@/constants';
+import AppConstants from '@/constants';
 
 import AppUtility from '@/utility/app';
-import CommonUtility from '@thzero/library_common/utility/index';
-import GlobalUtility from '@thzero/library_client/utility/global';
-import VuetifyUtility from '@/library_vue_vuetify/utility/index';
+import LibraryClientUtility from '@thzero/library_client/utility/index';
+import LibraryCommonUtility from '@thzero/library_common/utility/index';
+import LibraryVuetifyUtility from '@/library_vue_vuetify/utility/index';
 
 import { useFlightToolsBaseComponent } from '@/components/content/tools/flightToolBase';
 
@@ -93,12 +93,12 @@ export function useFlightPathBaseComponent(props, context, options) {
 			flightDataLoad(correlationIdI);
 			flightMeasurementUnitsLoad(correlationIdI, flightProcessor.value);
 
-			flightProcessors.value = VuetifyUtility.selectOptions(serviceFlightPath.serviceProcessors, GlobalUtility.$trans.t, 'forms.content.tools.flightPath.processors', (l) => { return l.id; }, null, (l) => { return l.id; });
+			flightProcessors.value = LibraryVuetifyUtility.selectOptions(serviceFlightPath.serviceProcessors, LibraryClientUtility.$trans.t, 'forms.content.tools.flightPath.processors', (l) => { return l.id; }, null, (l) => { return l.id; });
 		}
 	}, {}));
 
-	const serviceDownload = GlobalUtility.$injector.getService(Constants.InjectorKeys.SERVICE_DOWNLOAD);
-	const serviceFlightPath = GlobalUtility.$injector.getService(Constants.InjectorKeys.SERVICE_TOOLS_FLIGHT_PATH_PROCESSOR);
+	const serviceDownload = LibraryClientUtility.$injector.getService(AppConstants.InjectorKeys.SERVICE_DOWNLOAD);
+	const serviceFlightPath = LibraryClientUtility.$injector.getService(AppConstants.InjectorKeys.SERVICE_TOOLS_FLIGHT_PATH_PROCESSOR);
 
 	const buttons = ref({
 		export: {
@@ -214,7 +214,7 @@ export function useFlightPathBaseComponent(props, context, options) {
 	const flightPathExport = () => {
 		try {
 			const correlationIdI = correlationId();
-			if (CommonUtility.isNull(flightPathData.value))
+			if (LibraryCommonUtility.isNull(flightPathData.value))
 				return;
 
 			downloadProgress.value = true;
@@ -259,14 +259,14 @@ export function useFlightPathBaseComponent(props, context, options) {
 
 		try {
 			if (String.isNullOrEmpty(flightPathInput.value)) {
-				setError(correlationIdI, GlobalUtility.$trans.t('errors.process.noInput'));	
+				setError(correlationIdI, LibraryClientUtility.$trans.t('errors.process.noInput'));	
 				processing.value = false;
 				return;
 			}
 
 			const data = Papa.parse(flightPathInput.value.trim());
 			if (data.errors && data.errors.length > 0) {
-				setError(correlationIdI, GlobalUtility.$trans.t('errors.process.unableToConvert'));
+				setError(correlationIdI, LibraryClientUtility.$trans.t('errors.process.unableToConvert'));
 				processing.value = false;
 				return;
 			}

@@ -1,32 +1,52 @@
 <template>
 	<div>
-		<v-row>
+		<Header v-model="title" />
+		<v-row dense>
 			<v-col cols="12">
 				<v-card>
-					<v-card-title>
-	<p class="text-h6 text-center">{{ $t('titles.content.info.highPower') }}</p>
-					</v-card-title>
-				</v-card>
-			</v-col>
-		</v-row>
-		<v-row dense>
-			<v-col cols="12" md="6">
-				<v-card>
-					<v-card-title>
-	<p class="text-h6 text-center">{{ $t('titles.content.links.general') }}</p>
-					</v-card-title>
 					<v-card-text>
-<VMarkdown v-model="textMarkup" :use-github=false />
+<VMarkdown v-model="contentMarkup" :use-github=false />
 
 		<q class="font-italic" cite="https://www.nar.org/high-power-rocketry-info">
-<VMarkdown v-model="textDefinition" :use-github=false tag="span" />
+<VMarkdown v-model="contentDefinition" :use-github=false tag="span" />
 		</q> -- <a href="https://www.nar.org" target="_blank">National Association of Rocketry (NAR)</a>
 <br><br>
 		
-<VMarkdown v-model="textMarkup2" :use-github=false />
+<VMarkdown v-model="contentMarkup2" :use-github=false />
 
 					</v-card-text>
 				</v-card>
+			</v-col>
+			<v-col cols="12" class="text-center">
+				<v-card>
+					<v-card-text>
+						<v-carousel
+							cycle
+							height="800"
+							hide-delimiter-background
+							show-arrows="hover"
+						>
+							<v-carousel-item
+								v-for="(slide, i) in slides"
+									:key="i"
+								>
+								<v-sheet
+									height="100%"
+								>
+									<div class="d-flex fill-height justify-center align-center">
+										<img :src="slideUrl(slide.url)" v-if="slide.type==='image'" style="height: 800px;" />
+										<div v-if="slide.type==='video'" v-html="slide.embed"></div>
+									</div>
+							</v-sheet>
+							</v-carousel-item>
+						</v-carousel>
+					</v-card-text>
+				</v-card>
+			</v-col>
+			<v-col cols="12" class="text-center text-h5 pt-4 pb-2">
+				{{ $t('strings.content.info.3dprinting.additionalLinks') }}
+			</v-col>
+			<v-col cols="12" md="6">
 				<v-card
 					v-if="$vuetify.display.lgAndUp"
 					class="mt-2"
@@ -48,6 +68,8 @@
 		</v-list>
 					</v-card-text>
 				</v-card>
+			</v-col>
+			<v-col cols="12" md="6">
 				<v-card
 					v-if="$vuetify.display.lgAndUp"
 					class="mt-2"
@@ -69,6 +91,8 @@
 		</v-list>
 					</v-card-text>
 				</v-card>
+			</v-col>
+			<v-col cols="12" md="6">
 				<v-card
 					v-if="$vuetify.display.lgAndUp"
 					class="mt-2"
@@ -88,32 +112,6 @@
 				<v-list-item-title>{{ $t(item.title) }}</v-list-item-title>
 			</v-list-item>
 		</v-list>
-					</v-card-text>
-				</v-card>
-			</v-col>
-			<v-col cols="12" md="6" class="text-center">
-				<v-card>
-					<v-card-text>
-						<v-carousel
-							cycle
-							height="800"
-							hide-delimiter-background
-							show-arrows="hover"
-						>
-							<v-carousel-item
-								v-for="(slide, i) in slides"
-									:key="i"
-								>
-								<v-sheet
-									height="100%"
-								>
-									<div class="d-flex fill-height justify-center align-center">
-										<img :src="slideUrl(slide.url)" v-if="slide.type==='image'" style="height: 800px" />
-										<div v-if="slide.type==='video'" v-html="slide.embed"></div>
-									</div>
-							</v-sheet>
-							</v-carousel-item>
-						</v-carousel>
 					</v-card-text>
 				</v-card>
 			</v-col>
@@ -347,21 +345,36 @@
 				</v-card>
 			</v-col>
 		</v-row>
+		<v-row dense
+			v-show="hasAttribution" 
+		>
+			<v-col cols="12" class="text-center text-h5 pb-2; float: right">
+				<v-card>
+					<v-card-text class="float: right">
+<Attribution v-model="content" @has-attribution="handleAttribution" />
+					</v-card-text>
+				</v-card>
+			</v-col>
+		</v-row>
 	</div>
 </template>
 
 <script>
 import { useHighPowerBaseComponent } from '@/components/content/info/highPowerBase';
 
+import Attribution from '@/components/content/info/Attribution';
+import Header from '@/components/content/Header';
 import VMarkdown from '@/library_vue_vuetify/components/markup/VMarkdown';
 
 export default {
 	name: 'HighPower',
 	components: {
+		Attribution,
+		Header,
 		VMarkdown
 	},
 	setup(props, context) {
-		const {
+		const {	
 			correlationId,
 			error,
 			hasFailed,
@@ -375,11 +388,15 @@ export default {
 			sortByOrder,
 			target,
 			content,
-			textChartDesc,
-			textDefinition,
-			textDesc,
-			textMarkup,
-			textMarkup2,
+			contentDesc,
+			contentDefinition,
+			contentMarkup,
+			contentTitle,
+			handleAttribution,
+			hasAttribution,
+			contentChartDesc,
+			contentMarkup2,
+			title,
 			highPowerLinks,
 			links,
 			linksBooks,
@@ -410,13 +427,16 @@ export default {
 			serviceStore,
 			sortByOrder,
 			target,
-			slides,
 			content,
-			textChartDesc,
-			textDefinition,
-			textDesc,
-			textMarkup,
-			textMarkup2,
+			contentDesc,
+			contentDefinition,
+			contentMarkup,
+			contentTitle,
+			handleAttribution,
+			hasAttribution,
+			contentChartDesc,
+			contentMarkup2,
+			title,
 			highPowerLinks,
 			links,
 			linksBooks,

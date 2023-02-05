@@ -1,9 +1,11 @@
 <script>
 import { computed, onMounted, ref } from 'vue';
 
-import Constants from '@/constants';
+import AppConstants from '@/constants';
 
-import { useContentBaseComponent } from '@/components/content/contentBase';
+import LibraryClientUtility from '@thzero/library_client/utility/index';
+
+import { useInfoBaseComponent } from '@/components/content/info/infoBase';
 
 export function use3DPrintingBaseComponent(props, context, options) {
 	const {
@@ -19,20 +21,24 @@ export function use3DPrintingBaseComponent(props, context, options) {
 		serviceStore,
 		sortByOrder,
 		target,
-	} = useContentBaseComponent(props, context, options);
+		content,
+		contentDesc,
+		contentDefinition,
+		contentMarkup,
+		contentTitle,
+		handleAttribution,
+		hasAttribution,
+	} = useInfoBaseComponent(props, context, options);
 
-	const content = ref(null);
-	const textChartDesc = ref(null);
-	const textDesc = ref(null);
-	const textDefinition = ref(null);
-	const textMarkup = ref(null);
+	const contentChartDesc = ref(null);
+	const title = ref(LibraryClientUtility.$trans.t('titles.content.info.3dprinting') + ' ' + LibraryClientUtility.$trans.t('titles.content.info.title'));
 	
 	const data = computed(() => {
 		if (!content.value || !content.value.supplemental || !content.value.supplemental.data)
 			return [];
 		return content.value.supplemental.data;
 	});
-	const haveLinks = computed(() => {
+	const hasLinks = computed(() => {
 		if (!content.value || !content.value.supplemental || !content.value.supplemental.links)
 			return false;
 		return content.value.supplemental.links.length > 0;
@@ -69,7 +75,7 @@ export function use3DPrintingBaseComponent(props, context, options) {
 	});
 
 	const slideUrl = (url) => {
-		return Constants.External.imnages + url;
+		return AppConstants.External.imnages + url;
 	};
 	const temperature = (tempF, tempC) => {
 		if (String.isNullOrEmpty(tempC))
@@ -86,10 +92,10 @@ export function use3DPrintingBaseComponent(props, context, options) {
 			return;
 		content.value = response.results;
 
-		textChartDesc.value = response.results.descriptionChart;
-		textDesc.value = response.results.description;
-		textDefinition.value = response.results.definition;
-		textMarkup.value = response.results.markup;
+		contentChartDesc.value = response.results.descriptionChart;
+		contentDesc.value = response.results.description;
+		contentDefinition.value = response.results.definition;
+		contentMarkup.value = response.results.markup;
 	});
 
 	return {
@@ -105,13 +111,17 @@ export function use3DPrintingBaseComponent(props, context, options) {
 		serviceStore,
 		sortByOrder,
 		target,
-		textChartDesc,
-		textDesc,
-		textDefinition,
-		textMarkup,
 		content,
+		contentDesc,
+		contentDefinition,
+		contentMarkup,
+		contentTitle,
+		handleAttribution,
+		hasAttribution,
+		contentChartDesc,
+		title,
 		data,
-		haveLinks,
+		hasLinks,
 		links,
 		linksCollections,
 		linksGeneral,

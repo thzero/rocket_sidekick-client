@@ -1,7 +1,9 @@
 <script>
 import { computed, onMounted, ref } from 'vue';
 
-import { useContentBaseComponent } from '@/components/content/contentBase';
+import LibraryClientUtility from '@thzero/library_client/utility/index';
+
+import { useInfoBaseComponent } from '@/components/content/info/infoBase';
 
 export function useEpoxyBaseComponent(props, context, options) {
 	const {
@@ -17,20 +19,25 @@ export function useEpoxyBaseComponent(props, context, options) {
 		serviceStore,
 		sortByOrder,
 		target,
-	} = useContentBaseComponent(props, context, options);
+		content,
+		contentDesc,
+		contentDefinition,
+		contentMarkup,
+		contentTitle,
+		handleAttribution,
+		hasAttribution
+	} = useInfoBaseComponent(props, context, options);
 
-	const content = ref(null);
-	const textChartDesc = ref(null);
-	const textDesc = ref(null);
-	const textMarkup = ref(null);
-	const textMarkup2 = ref(null);
+	const contentChartDesc = ref(null);
+	const contentMarkup2 = ref(null);
+	const title = ref(LibraryClientUtility.$trans.t('titles.content.info.epoxy') + ' ' + LibraryClientUtility.$trans.t('titles.content.info.title'));
 	
 	const data = computed(() => {
 		if (!content.value || !content.value.supplemental || !content.value.supplemental.data)
 			return [];
 		return content.value.supplemental.data;
 	});
-	const haveLinks = computed(() => {
+	const hasLinks = computed(() => {
 		if (!content.value || !content.value.supplemental || !content.value.supplemental.links)
 			return false;
 		return content.value.supplemental.links.length > 0;
@@ -55,10 +62,10 @@ export function useEpoxyBaseComponent(props, context, options) {
 			return;
 		content.value = response.results;
 
-		textChartDesc.value = response.results.descriptionChart;
-		textDesc.value = response.results.description;
-		textMarkup.value = response.results.markup;
-		textMarkup2.value = response.results.markup2;
+		contentChartDesc.value = response.results.descriptionChart;
+		contentDesc.value = response.results.description;
+		contentMarkup.value = response.results.markup;
+		contentMarkup2.value = response.results.markup2;
 	});
 
 	return {
@@ -75,14 +82,19 @@ export function useEpoxyBaseComponent(props, context, options) {
 		sortByOrder,
 		target,
 		content,
-		textChartDesc,
-		textDesc,
-		textMarkup,
-		textMarkup2,
+		contentDesc,
+		contentDefinition,
+		contentMarkup,
+		contentTitle,
+		handleAttribution,
+		hasAttribution,
+		contentChartDesc,
+		contentMarkup2,
 		data,
-		haveLinks,
+		hasLinks,
 		links,
-		temperature
+		temperature,
+		title
 	};
 };
 </script>

@@ -88,6 +88,9 @@ export function useLinksBaseComponent(props, context, options) {
 		noBreakingSpaces,
 		notImplementedError,
 		success,
+		serviceStore,
+		sort,
+		target,
 		links,
 		linksBooks,
 		linksCompetitions,
@@ -98,9 +101,7 @@ export function useLinksBaseComponent(props, context, options) {
 		linksManufacturers,
 		linksOrganizations,
 		linksVendors,
-		linksVideos,
-		sort,
-		target
+		linksVideos
 	};
 };
 </script>
