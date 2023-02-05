@@ -25,14 +25,13 @@ export function useHighPowerBaseComponent(props, context, options) {
 		contentDesc,
 		contentDefinition,
 		contentMarkup,
-		contentTitle,
 		handleAttribution,
 		hasAttribution
 	} = useInfoBaseComponent(props, context, options);
 	
 	const contentChartDesc = ref(null);
 	const contentMarkup2 = ref(null);
-	const title = ref(LibraryClientUtility.$trans.t('titles.content.info.highPower'));
+	const contentTitle = ref(LibraryClientUtility.$trans.t('titles.content.info.highPower') + ' ' + LibraryClientUtility.$trans.t('titles.content.info.title'));
 
 	const highPowerLinks = computed(() => {
 		if (!content.value || !content.value.supplemental || !content.value.supplemental.links)
@@ -151,7 +150,6 @@ export function useHighPowerBaseComponent(props, context, options) {
 		hasAttribution,
 		contentChartDesc,
 		contentMarkup2,
-		title,
 		highPowerLinks,
 		links,
 		linksBooks,

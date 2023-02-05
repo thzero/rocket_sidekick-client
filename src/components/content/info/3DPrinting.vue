@@ -1,11 +1,6 @@
 <template>
 	<div>
-		<!-- <v-row dense>
-			<v-col cols="12" class="text-center text-h5 pb-2">
-				{{ $t('titles.content.info.3dprinting') + ' ' + $t('titles.content.info.title') }}
-			</v-col>
-		</v-row> -->
-		<Header v-model="title"/>
+		<Header v-model="contentTitle"/>
 		<v-row dense>
 			<v-col cols="12">
 				<v-card>
@@ -147,107 +142,38 @@
 			<v-col cols="12" class="text-center text-h5 pt-4 pb-2">
 				{{ $t('strings.content.info.3dprinting.additionalLinks') }}
 			</v-col>
-			<!-- <v-col cols="12" md="6" class="pb-2">
-				<div
-					v-for="item in links"
-					:key="item.link"
-				>
-					<a 
-						:href="item.url"
-						target="_blank"
-					>
-					{{ !String.isNullOrEmpty(item.title) ? item.title : item.url}}
-					</a><br/>
-				</div>
-			</v-col> -->
 			<v-col cols="12" md="6">
-				<v-card>
-					<v-card-title>
-	<p class="text-h6 text-center">{{ $t('titles.content.links.general') }}</p>
-					</v-card-title>
-					<v-card-text>
-		<v-list density="compact">
-			<v-list-item
-				v-for="item in linksGeneral"
-				:key="item.name"
-				:href="item.link"
-				:target="target(item)"
-				class="link"
-			>
-				<v-list-item-title>{{ $t(item.title) }}</v-list-item-title>
-			</v-list-item>
-		</v-list>
-					</v-card-text>
-				</v-card>
+				<AdditionalLinks 
+					v-model="linksGeneral"
+					title="titles.content.links.general"
+				/>
 			</v-col>
 			<v-col cols="12" md="6">
-				<v-card>
-					<v-card-title>
-	<p class="text-h6 text-center">{{ $t('titles.content.links.3dprinting.collections') }}</p>
-					</v-card-title>
-					<v-card-text>
-		<v-list density="compact">
-			<v-list-item
-				v-for="item in linksCollections"
-				:key="item.name"
-				:href="item.link"
-				:target="target(item)"
-				class="link"
-			>
-				<v-list-item-title>{{ $t(item.title) }}</v-list-item-title>
-			</v-list-item>
-		</v-list>
-					</v-card-text>
-				</v-card>
+				<AdditionalLinks 
+					v-model="linksCollections"
+					title="titles.content.links.3dprinting.collections"
+				/>
 			</v-col>
 			<v-col cols="12" md="6">
-				<v-card>
-					<v-card-title>
-	<p class="text-h6 text-center">{{ $t('titles.content.links.3dprinting.modeling') }}</p>
-					</v-card-title>
-					<v-card-text>
-		<v-list density="compact">
-			<v-list-item
-				v-for="item in linksModeling"
-				:key="item.name"
-				:href="item.link"
-				:target="target(item)"
-				class="link"
-			>
-				<v-list-item-title>{{ $t(item.title) }}</v-list-item-title>
-			</v-list-item>
-		</v-list>
-					</v-card-text>
-				</v-card>
+				<AdditionalLinks 
+					v-model="linksModeling"
+					title="titles.content.links.3dprinting.modeling"
+				/>
 			</v-col>
 			<v-col cols="12" md="6">
-				<v-card>
-					<v-card-title>
-	<p class="text-h6 text-center">{{ $t('titles.content.links.3dprinting.tools') }}</p>
-					</v-card-title>
-					<v-card-text>
-		<v-list density="compact">
-			<v-list-item
-				v-for="item in linksTools"
-				:key="item.name"
-				:href="item.link"
-				:target="target(item)"
-				class="link"
-			>
-				<v-list-item-title>{{ $t(item.title) }}</v-list-item-title>
-			</v-list-item>
-		</v-list>
-					</v-card-text>
-				</v-card>
+				<AdditionalLinks 
+					v-model="linksTools"
+					title="titles.content.links.3dprinting.tools"
+				/>
 			</v-col>
 		</v-row>
 		<v-row dense
-			v-show="hasAttribution"
+			v-show="hasAttribution" 
 		>
 			<v-col cols="12" class="text-center text-h5 pb-2; float: right">
 				<v-card>
 					<v-card-text class="float: right">
-<Attribution v-model="content" v-if="hasAttribution" @has-attribution="handleAttribution" />
+<Attribution v-model="content" @has-attribution="handleAttribution" />
 					</v-card-text>
 				</v-card>
 			</v-col>
@@ -258,13 +184,15 @@
 <script>
 import { use3DPrintingBaseComponent } from '@/components/content/info/3DPrintingBase';
 
-import Header from '@/components/content/Header';
+import AdditionalLinks from '@/components/content/info/AdditionalLinks';
 import Attribution from '@/components/content/info/Attribution';
+import Header from '@/components/content/Header';
 import VMarkdown from '@/library_vue_vuetify/components/markup/VMarkdown';
 
 export default {
 	name: 'Epxoy',
 	components: {
+		AdditionalLinks,
 		Attribution,
 		Header,
 		VMarkdown
@@ -291,7 +219,6 @@ export default {
 			handleAttribution,
 			hasAttribution,
 			contentChartDesc,
-			title,
 			data,
 			hasLinks,
 			links,
@@ -325,7 +252,6 @@ export default {
 			handleAttribution,
 			hasAttribution,
 			contentChartDesc,
-			title,
 			data,
 			hasLinks,
 			links,

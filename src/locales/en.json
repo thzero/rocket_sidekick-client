@@ -476,7 +476,8 @@
 				"title": "Info",
 				"3dprinting": "3D Printing", 
 				"epoxy": "Epoxy",
-				"highPower": "High Power"
+				"highPower": "High Power Rocketry",
+				"shearPins": "Shear Pins"
 			},
 			"links": {
 				"title": "Links",
@@ -783,7 +784,8 @@
 				"title": "Information", 
 				"3dprinting": "3D Printing", 
 				"epoxy": "Epoxy", 
-				"highPower": "High Power Rocketry"
+				"highPower": "High Power Rocketry",
+				"shearPins": "Shear Pins"
 			},
 			"links": {
 				"title": "Links",

@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<Header v-model="title" />
+		<Header v-model="contentTitle" />
 		<v-row dense>
 			<v-col cols="12">
 				<v-card>
@@ -47,302 +47,99 @@
 				{{ $t('strings.content.info.3dprinting.additionalLinks') }}
 			</v-col>
 			<v-col cols="12" md="6">
-				<v-card
+				<AdditionalLinks 
 					v-if="$vuetify.display.lgAndUp"
-					class="mt-2"
-				>
-					<v-card-title>
-	<p class="text-h6 text-center">{{ $t('titles.content.links.guidance') }}</p>
-					</v-card-title>
-					<v-card-text>
-		<v-list density="compact">
-			<v-list-item
-				v-for="item in linksGuidance"
-				:key="item.name"
-				:href="item.link"
-				:target="target(item)"
-				class="link"
-			>
-				<v-list-item-title>{{ $t(item.title) }}</v-list-item-title>
-			</v-list-item>
-		</v-list>
-					</v-card-text>
-				</v-card>
+					v-model="linksGuidance"
+					title="titles.content.links.guidance"
+				/>
 			</v-col>
 			<v-col cols="12" md="6">
-				<v-card
+				<AdditionalLinks 
 					v-if="$vuetify.display.lgAndUp"
-					class="mt-2"
-				>
-					<v-card-title>
-	<p class="text-h6 text-center">{{ $t('titles.content.links.construction') }}</p>
-					</v-card-title>
-					<v-card-text>
-		<v-list density="compact">
-			<v-list-item
-				v-for="item in linksConstruction"
-				:key="item.name"
-				:href="item.link"
-				:target="target(item)"
-				class="link"
-			>
-				<v-list-item-title>{{ $t(item.title) }}</v-list-item-title>
-			</v-list-item>
-		</v-list>
-					</v-card-text>
-				</v-card>
+					v-model="linksConstruction"
+					title="titles.content.links.construction"
+				/>
 			</v-col>
 			<v-col cols="12" md="6">
-				<v-card
-					v-if="$vuetify.display.lgAndUp"
-					class="mt-2"
-				>
-					<v-card-title>
-	<p class="text-h6 text-center">{{ $t('titles.content.links.tools') }}</p>
-					</v-card-title>
-					<v-card-text>
-		<v-list density="compact">
-			<v-list-item
-				v-for="item in linksTools"
-				:key="item.name"
-				:href="item.link"
-				:target="target(item)"
-				class="link"
-			>
-				<v-list-item-title>{{ $t(item.title) }}</v-list-item-title>
-			</v-list-item>
-		</v-list>
-					</v-card-text>
-				</v-card>
+				<AdditionalLinks 
+					v-model="linksTools"
+					title="titles.content.links.tools"
+				/>
 			</v-col>
 			<v-col 
 				v-if="$vuetify.display.mdAndDown"
 				cols="12" md="6"
 			>
-				<v-card>
-					<v-card-title>
-	<p class="text-h6 text-center">{{ $t('titles.content.links.guidance') }}</p>
-					</v-card-title>
-					<v-card-text>
-		<v-list density="compact">
-			<v-list-item
-				v-for="item in linksGuidance"
-				:key="item.name"
-				:href="item.link"
-				:target="target(item)"
-				class="link"
-			>
-				<v-list-item-title>{{ $t(item.title) }}</v-list-item-title>
-			</v-list-item>
-		</v-list>
-					</v-card-text>
-				</v-card>
+				<AdditionalLinks 
+					v-model="linksGuidance"
+					title="titles.content.links.guidance"
+				/>
 			</v-col>
 			<v-col 
 				v-if="$vuetify.display.mdAndDown"
 				cols="12" md="6"
 			>
-				<v-card>
-					<v-card-title>
-	<p class="text-h6 text-center">{{ $t('titles.content.links.construction') }}</p>
-					</v-card-title>
-					<v-card-text>
-		<v-list density="compact">
-			<v-list-item
-				v-for="item in linksConstruction"
-				:key="item.name"
-				:href="item.link"
-				:target="target(item)"
-				class="link"
-			>
-				<v-list-item-title>{{ $t(item.title) }}</v-list-item-title>
-			</v-list-item>
-		</v-list>
-					</v-card-text>
-				</v-card>
+				<AdditionalLinks 
+					v-model="linksConstruction"
+					title="titles.content.links.construction"
+				/>
 			</v-col>
 			<v-col 
 				v-if="$vuetify.display.mdAndDown"
 				cols="12" md="6"
 			>
-				<v-card>
-					<v-card-title>
-	<p class="text-h6 text-center">{{ $t('titles.content.links.tools') }}</p>
-					</v-card-title>
-					<v-card-text>
-		<v-list density="compact">
-			<v-list-item
-				v-for="item in linksTools"
-				:key="item.name"
-				:href="item.link"
-				:target="target(item)"
-				class="link"
-			>
-				<v-list-item-title>{{ $t(item.title) }}</v-list-item-title>
-			</v-list-item>
-		</v-list>
-					</v-card-text>
-				</v-card>
+				<AdditionalLinks 
+					v-model="linksTools"
+					title="titles.content.links.tools"
+				/>
 			</v-col>
 			<v-col cols="12" md="6">
-				<v-card>
-					<v-card-title>
-	<p class="text-h6 text-center">{{ $t('titles.content.links.books') }}</p>
-					</v-card-title>
-					<v-card-text>
-		<v-list density="compact">
-			<v-list-item
-				v-for="item in linksBooks"
-				:key="item.name"
-				:href="item.link"
-				:target="target(item)"
-				class="link"
-			>
-				<v-list-item-title>{{ $t(item.title) }}</v-list-item-title>
-			</v-list-item>
-		</v-list>
-					</v-card-text>
-				</v-card>
+				<AdditionalLinks 
+					v-model="linksBooks"
+					title="titles.content.links.books"
+				/>
 			</v-col>
 			<v-col cols="12" md="6">
-				<v-card class="mt-2">
-					<v-card-title>
-	<p class="text-h6 text-center">{{ $t('titles.content.links.study') }}</p>
-					</v-card-title>
-					<v-card-text>
-		<v-list density="compact">
-			<v-list-item
-				v-for="item in linksStudyGuides"
-				:key="item.name"
-				:href="item.link"
-				:target="target(item)"
-				class="link"
-			>
-				<v-list-item-title>{{ $t(item.title) }}</v-list-item-title>
-			</v-list-item>
-		</v-list>
-					</v-card-text>
-				</v-card>
+				<AdditionalLinks 
+					v-model="linksStudyGuides"
+					title="titles.content.links.study"
+				/>
 			</v-col>
 			<v-col cols="12" md="6">
-				<v-card>
-					<v-card-title>
-	<p class="text-h6 text-center">{{ $t('titles.content.links.organizations') }}</p>
-					</v-card-title>
-					<v-card-text>
-		<v-list density="compact">
-			<v-list-item
-				v-for="item in linksOrganizations"
-				:key="item.name"
-				:href="item.link"
-				:target="target(item)"
-				class="link"
-			>
-				<v-list-item-title>{{ $t(item.title) }}</v-list-item-title>
-			</v-list-item>
-		</v-list>
-					</v-card-text>
-				</v-card>
+				<AdditionalLinks 
+					v-model="linksOrganizations"
+					title="titles.content.links.organizations"
+				/>
 			</v-col>
 			<v-col cols="12" md="6">
-				<v-card>
-					<v-card-title>
-	<p class="text-h6 text-center">{{ $t('titles.content.links.forums') }}</p>
-					</v-card-title>
-					<v-card-text>
-		<v-list density="compact">
-			<v-list-item
-				v-for="item in linksForums"
-				:key="item.name"
-				:href="item.link"
-				:target="target(item)"
-				class="link"
-			>
-				<v-list-item-title>{{ $t(item.title) }}</v-list-item-title>
-			</v-list-item>
-		</v-list>
-					</v-card-text>
-				</v-card>
+				<AdditionalLinks 
+					v-model="linksForums"
+					title="titles.content.links.forums"
+				/>
 			</v-col>
 			<v-col cols="12" md="6">
-				<v-card>
-					<v-card-title>
-	<p class="text-h6 text-center">{{ $t('titles.content.links.manufacturers') }}</p>
-					</v-card-title>
-					<v-card-text>
-		<v-list density="compact">
-			<v-list-item
-				v-for="item in linksManufacturers"
-				:key="item.name"
-				:href="item.link"
-				:target="target(item)"
-				class="link"
-			>
-				<v-list-item-title>{{ $t(item.title) }}</v-list-item-title>
-			</v-list-item>
-		</v-list>
-					</v-card-text>
-				</v-card>
+				<AdditionalLinks 
+					v-model="linksManufacturers"
+					title="titles.content.links.manufacturers"
+				/>
 			</v-col>
 			<v-col cols="12" md="6">
-				<v-card>
-					<v-card-title>
-	<p class="text-h6 text-center">{{ $t('titles.content.links.vendors') }}</p>
-					</v-card-title>
-					<v-card-text>
-		<v-list density="compact">
-			<v-list-item
-				v-for="item in linksVendors"
-				:key="item.name"
-				:href="item.link"
-				:target="target(item)"
-				class="link"
-			>
-				<v-list-item-title>{{ $t(item.title) }}</v-list-item-title>
-			</v-list-item>
-		</v-list>
-					</v-card-text>
-				</v-card>
+				<AdditionalLinks 
+					v-model="linksVendors"
+					title="titles.content.links.vendors"
+				/>
 			</v-col>
 			<v-col cols="12" md="6">
-				<v-card>
-					<v-card-title>
-	<p class="text-h6 text-center">{{ $t('titles.content.links.videos') }}</p>
-					</v-card-title>
-					<v-card-text>
-		<v-list density="compact">
-			<v-list-item
-				v-for="item in linksVideos"
-				:key="item.name"
-				:href="item.link"
-				:target="target(item)"
-				class="link"
-			>
-				<v-list-item-title>{{ $t(item.title) }}</v-list-item-title>
-			</v-list-item>
-		</v-list>
-					</v-card-text>
-				</v-card>
+				<AdditionalLinks 
+					v-model="linksVideos"
+					title="titles.content.links.videos"
+				/>
 			</v-col>
 			<v-col cols="12" md="6">
-				<v-card>
-					<v-card-title>
-	<p class="text-h6 text-center">{{ $t('titles.content.links.events') }}</p>
-					</v-card-title>
-					<v-card-text>
-		<v-list density="compact">
-			<v-list-item
-				v-for="item in linksEvents"
-				:key="item.name"
-				:href="item.link"
-				:target="target(item)"
-				class="link"
-			>
-				<v-list-item-title>{{ $t(item.title) }}</v-list-item-title>
-			</v-list-item>
-		</v-list>
-					</v-card-text>
-				</v-card>
+				<AdditionalLinks 
+					v-model="linksEvents"
+					title="titles.content.links.events"
+				/>
 			</v-col>
 		</v-row>
 		<v-row dense
@@ -362,6 +159,7 @@
 <script>
 import { useHighPowerBaseComponent } from '@/components/content/info/highPowerBase';
 
+import AdditionalLinks from '@/components/content/info/AdditionalLinks';
 import Attribution from '@/components/content/info/Attribution';
 import Header from '@/components/content/Header';
 import VMarkdown from '@/library_vue_vuetify/components/markup/VMarkdown';
@@ -369,6 +167,7 @@ import VMarkdown from '@/library_vue_vuetify/components/markup/VMarkdown';
 export default {
 	name: 'HighPower',
 	components: {
+		AdditionalLinks,
 		Attribution,
 		Header,
 		VMarkdown
@@ -396,7 +195,6 @@ export default {
 			hasAttribution,
 			contentChartDesc,
 			contentMarkup2,
-			title,
 			highPowerLinks,
 			links,
 			linksBooks,
@@ -436,7 +234,6 @@ export default {
 			hasAttribution,
 			contentChartDesc,
 			contentMarkup2,
-			title,
 			highPowerLinks,
 			links,
 			linksBooks,

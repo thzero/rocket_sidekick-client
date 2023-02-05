@@ -70,9 +70,11 @@ export function useAttributionBaseComponent(props, context, options) {
 		if (!props.modelValue || !props.modelValue.license)
 			return null;
 		const license = props.modelValue.license.toLowerCase();
-		let item = Object.entries(AppCommonConstants.Licenses.Free).find(l => l[1].id === license);
+		let item = Object.entries(AppCommonConstants.Licenses.Free).find(l => (l[0].toLowerCase() === license) || (l[1].id.toLowerCase() === license));
 		if (!item)
-			item = Object.entries(AppCommonConstants.Licenses.Public).find(l => l[1].id === license);
+			item = Object.entries(AppCommonConstants.Licenses.Public).find(l => (l[0].toLowerCase() === license) || (l[1].id.toLowerCase() === license));
+		if (!item)
+			return null;
 		if (item.length < 1)
 			return null;
 		item = item[1];
