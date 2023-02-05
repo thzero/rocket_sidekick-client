@@ -16,6 +16,7 @@ import foamToolsService from '@/service/tools/foam';
 import mathJsCalculationEngineToolsService from '@/service/tools/engine/mathjs/index';
 import restCommunicationService from '@thzero/library_client_service_rest_fetch';
 import thrust2WeightToolsService from '@/service/tools/thrust2Weight';
+import weatherCockingToolsService from '@/service/tools/weatherCocking';
 import thrustCurveMotorSearchExternalService from '@/service/external/motorSearchThrustCurve';
 import settingsService from '@/service/settings';
 import storeService from '@thzero/library_client_vue3_store_pinia/service/store/index'; // STORE TYPE
@@ -53,6 +54,7 @@ class Services extends BaseServices {
 		this._injectService(AppConstants.InjectorKeys.SERVICE_TOOLS_FLIGHT_PATH_PROCESSOR_FEATHERWEIGHT, new flightPathProcessorFeatherweightToolsService());
 
 		this._injectService(AppConstants.InjectorKeys.SERVICE_TOOLS_THRUST2WEIGHT, new thrust2WeightToolsService());
+		this._injectService(AppConstants.InjectorKeys.SERVICE_TOOLS_WEATHERCOCKING, new weatherCockingToolsService());
 	}
 
 	_initializeAuth() {

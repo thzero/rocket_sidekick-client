@@ -54,7 +54,8 @@ const Constants = {
 		SERVICE_TOOLS_FLIGHT_PATH_OUTPUT_TEMPLATE_HANDLEBARS: 'serviceToolsFlightPathOutputTemplateHandlebars',
 		SERVICE_TOOLS_FLIGHT_PATH_PROCESSOR: 'serviceToolsFlightPathProcessor',
 		SERVICE_TOOLS_FLIGHT_PATH_PROCESSOR_FEATHERWEIGHT: 'serviceToolsFlightPathProcessorFeatherweight',
-		SERVICE_TOOLS_THRUST2WEIGHT: 'serviceToolsThrust2Weight'
+		SERVICE_TOOLS_THRUST2WEIGHT: 'serviceToolsThrust2Weight',
+		SERVICE_TOOLS_WEATHERCOCKING: 'serviceToolsWeatherCocking'
 	},
 	MeasurementUnits: {
 		acceleration: {
