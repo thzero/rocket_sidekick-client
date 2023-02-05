@@ -696,7 +696,7 @@
 			},
 			"tools": {
 				"ejectionCharges": {
-					"desc": ""
+					"desc": "A tool to calculate the size of ejection charge needed based on body tube volumes."
 				},
 				"flightInfo": {
 					"desc": "Utility to create a graphical flight chart with flight information from altimeters for use in posting to websites, in videos, etc. Currently only Eggtimer output is supported."
@@ -740,6 +740,9 @@
 					"to": " : 1",
 					"guidance": "Initial thrust is more important during the initial boost phase off the launch pad.  Average thrust is the average of the thrust across the burn timespan.  The peak thrust does not always occur during launch or initial boost phase; consult the thrust curves at ",
 					"guidance2": "When using a ThrustCuve motor profile, the initial thrust is a approximate value and is determined from the sample data included with the motor profile.  The largest thrust (N) sample that falls below the Max. Launch Rod Time specified is used.  If there is a discrepancy between the thrust curve data during this time period and the max thrust, then the thrust curve data is used."
+				},
+				"weatherCocking": {
+					"desc": "A tool to determine whether a rocket, based on wind speed and rail exit speed has a potential to weathercock."
 				}
 			},
 			"welcome": "RocketSidekick hosts a variety of tools in once place for model rocketry.  Some of the tools are custom build, others are based on formulas found in variety of rocketry forums and sites, as well as some sections having links or information.",
@@ -812,7 +815,8 @@
 				"flightInfo": "Flight Info",
 				"flightPath": "Flight Path",
 				"foam": "Fin Can Foam Calculator",
-				"thrust2Weight": "Thrust 2 Weight"
+				"thrust2Weight": "Thrust 2 Weight",
+				"weatherCocking": "Weathercocking"
 			}
 		},
 		"edit": "Edit",

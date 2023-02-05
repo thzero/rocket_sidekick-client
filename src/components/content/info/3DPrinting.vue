@@ -61,11 +61,6 @@
 			</v-col>
 			<v-col cols="12">
 				<v-card>
-					<v-card-title>
-						<div class="text-center text-h5 pb-2">
-				{{ $t('strings.content.info.3dprinting.chart') }}
-						</div>
-					</v-card-title>
 					<v-card-text>
 				<v-row dense>
 					<v-col cols="12">
@@ -89,12 +84,19 @@
 					</thead>
 					<tbody>
 						<tr>
+							<td>{{ $t('strings.content.info.3dprinting.deflectionTempC') }}</td>
+							<td
+								v-for="item in data"
+								:key="item.name"
+							>{{ item.deflectionTempC }}</td>
+						</tr>
+						<!-- <tr>
 							<td>{{ $t('strings.content.info.3dprinting.density') }}</td>
 							<td
 								v-for="item in data"
 								:key="item.name"
 							>{{ item.density }}</td>
-						</tr>
+						</tr> -->
 						<tr>
 							<td>{{ $t('strings.content.info.3dprinting.impact') }}</td>
 							<td
