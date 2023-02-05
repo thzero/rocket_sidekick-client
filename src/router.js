@@ -320,7 +320,7 @@ const routes = [
 				name: 'about',
 				component: () => import(/* webpackPrefetch: true */ /* webpackChunkName: "group-support" */ './components/About.vue'),
 				meta: {
-					requiresAuth: true
+					requiresAuth: false
 				}
 			}
 		]
