@@ -2,4 +2,5 @@ Suggestions
 
     Better validation on foam (and other tools) based on english/metric measurement unit selected.
 
-    Think about being able to compare two or more motors side by side with thrust2weight
+For calculations instead of mathjs?
+    https://theoephraim.github.io/node-google-spreadsheet/#/
