@@ -77,7 +77,7 @@ class AppUtility {
 	static measurementUnitFluidId(correlationId, settings, measurementUnitsId) {
 		measurementUnitsId = !String.isNullOrEmpty(measurementUnitsId) ? measurementUnitsId : AppUtility.measurementUnitsId(correlationId, settings);
 		return settings && settings.measurementUnits && settings.measurementUnits.fluid ? settings.measurementUnits.fluid : 
-		AppConstants.MeasurementUnits[measurementUnitsId].distance.default;
+		AppConstants.MeasurementUnits[measurementUnitsId].fluid.default;
 	}
 
 	static measurementUnitLengthId(correlationId, settings, measurementUnitsId) {

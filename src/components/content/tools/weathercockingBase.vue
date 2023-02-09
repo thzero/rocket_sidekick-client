@@ -8,6 +8,7 @@ import AppConstants from '@/constants';
 import LibraryClientUtility from '@thzero/library_client/utility/index';
 
 import { useToolsBaseComponent } from '@/components/content/tools/toolsBase';
+import { useToolsMeasurementBaseComponent } from '@/components/content/tools/toolsMeasurementBase';
 
 export function useWeathercockingBaseComponent(props, context, options) {
 	const {
@@ -36,15 +37,6 @@ export function useWeathercockingBaseComponent(props, context, options) {
 		initCalculationResults,
 		measurementUnitsIdOutput,
 		measurementUnitsIdSettings,
-		measurementUnitsAccelerationDefaultId,
-		measurementUnitsAreaDefaultId,
-		measurementUnitsDensityDefaultId,
-		measurementUnitsDistanceDefaultId,
-		measurementUnitsFluidDefaultId,
-		measurementUnitsLengthDefaultId,
-		measurementUnitsVelocityDefaultId,
-		measurementUnitsVolumeDefaultId,
-		measurementUnitsWeightDefaultId,
 		notifyColor,
 		notifyMessage,
 		notifySignal,
@@ -56,6 +48,27 @@ export function useWeathercockingBaseComponent(props, context, options) {
 		toFixed,
 		settings
 	} = useToolsBaseComponent(props, context, options);
+	
+	const {
+		measurementUnitsAccelerationDefaultId,
+		measurementUnitsAccelerationType,
+		measurementUnitsAreaDefaultId,
+		measurementUnitsAreaType,
+		measurementUnitsDensityDefaultId,
+		measurementUnitsDensityType,
+		measurementUnitsDistanceType,
+		measurementUnitsDistanceDefaultId,
+		measurementUnitsFluidDefaultId,
+		measurementUnitsFluidType,
+		measurementUnitsLengthDefaultId,
+		measurementUnitslengthType,
+		measurementUnitsVelocityDefaultId,
+		measurementUnitsVelocityType,
+		measurementUnitsVolumeDefaultId,
+		measurementUnitsVolumeType,
+		measurementUnitsWeightDefaultId,
+		measurementUnitsWeightType
+	} = useToolsMeasurementBaseComponent(props, context, options);
 
 	const serviceToolsWeathercocking = LibraryClientUtility.$injector.getService(AppConstants.InjectorKeys.SERVICE_TOOLS_WEATHERCOCKING);
 
@@ -64,7 +77,6 @@ export function useWeathercockingBaseComponent(props, context, options) {
 	const exitVelocity = ref(null);
 	const exitVelocityMeasurementUnitId = ref(null);
 	const exitVelocityMeasurementUnitsId = ref(null);
-	const measurementUnitsVelocityType = ref(AppConstants.MeasurementUnits.types.velocity);
 	const weathercockingFormRef = ref(null);
 	const windVelocity = ref(null);
 	const windVelocityMeasurementUnitId = ref(null);
@@ -145,15 +157,6 @@ export function useWeathercockingBaseComponent(props, context, options) {
 		initCalculationResults,
 		measurementUnitsIdOutput,
 		measurementUnitsIdSettings,
-		measurementUnitsAccelerationDefaultId,
-		measurementUnitsAreaDefaultId,
-		measurementUnitsDensityDefaultId,
-		measurementUnitsDistanceDefaultId,
-		measurementUnitsFluidDefaultId,
-		measurementUnitsLengthDefaultId,
-		measurementUnitsVelocityDefaultId,
-		measurementUnitsVolumeDefaultId,
-		measurementUnitsWeightDefaultId,
 		notifyColor,
 		notifyMessage,
 		notifySignal,
@@ -164,13 +167,13 @@ export function useWeathercockingBaseComponent(props, context, options) {
 		setNotify,
 		toFixed,
 		settings,
+		measurementUnitsVelocityType,
 		serviceToolsWeathercocking,
 		calculationData,
 		calculationResults,
 		exitVelocity,
 		exitVelocityMeasurementUnitsId,
 		exitVelocityMeasurementUnitId,
-		measurementUnitsVelocityType,
 		weathercockingFormRef,
 		windVelocity,
 		windVelocityMeasurementUnitsId,

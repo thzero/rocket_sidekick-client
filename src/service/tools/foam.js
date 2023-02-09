@@ -60,6 +60,15 @@ class FoamToolsService extends ToolsService {
 	async initializeCalculation(correlationId, data, outputMeasurementUnitsId) {
 		this._enforceNotNull('FoamToolsService', 'initializeCalculation', data, 'data', correlationId);
 		this._enforceNotEmpty('FoamToolsService', 'initializeCalculation', outputMeasurementUnitsId, 'outputMeasurementUnitsId', correlationId);
+		
+		const fluidMeasurementUnit = this._measurementUnitFromId(correlationId, data.fluidMeasurementUnitsId, AppConstants.MeasurementUnits.fluid.id, data.fluidMeasurementUnitId);
+		let response = this._enforceNotNullResponse('FoamToolsService', 'initializeCalculation', fluidMeasurementUnit, 'fluidMeasurementUnit', correlationId);
+		if (this._hasFailed(response))
+			return response;
+		const lengthMeasurementUnit = this._measurementUnitFromId(correlationId, data.lengthMeasurementUnitsId, AppConstants.MeasurementUnits.length.id, data.lengthMeasurementUnitId);
+		response = this._enforceNotNullResponse('FoamToolsService', 'initializeCalculation', lengthMeasurementUnit, 'lengthMeasurementUnit', correlationId);
+		if (this._hasFailed(response))
+			return response;
 
 		const calculationSteps = [
 			{
@@ -72,7 +81,7 @@ class FoamToolsService extends ToolsService {
 					motorTubeOD: data.motorTubeOD
 				},
 				units: {
-					from: data.units,
+					from: lengthMeasurementUnit,
 					to: AppConstants.MeasurementUnits.metrics.length.mm
 				}
 			},
@@ -107,7 +116,7 @@ class FoamToolsService extends ToolsService {
 				evaluate: 'volumeBodyTube - volumeMotorTube - volumeFins',
 				result: true,
 				format: this._serviceCalculationEngine.formatFixed(),
-				unit: AppConstants.MeasurementUnits[outputMeasurementUnitsId].fluid.default
+				unit: fluidMeasurementUnit
 			}
 		];
 		

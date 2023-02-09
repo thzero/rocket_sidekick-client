@@ -118,7 +118,7 @@ const Constants = {
 			velocity: {
 				default: 'fts',
 				fts: 'ft/s',
-				mph: 'mph'
+				mph: 'mile/h'
 			},
 			volume: {
 				default: 'in3',
@@ -144,8 +144,8 @@ const Constants = {
 				mm2: 'mm^2'
 			},
 			density: {
-				default: 'km3',
-				km3: 'k/m^3'
+				default: 'kgm3',
+				kgm3: 'kg/m^3'
 			},
 			distance: {
 				default: 'm',
@@ -154,7 +154,8 @@ const Constants = {
 			},
 			fluid: {
 				default: 'ml',
-				ml: 'ml'
+				ml: 'ml',
+				l: 'l'
 			},
 			length: {
 				default: 'mm',

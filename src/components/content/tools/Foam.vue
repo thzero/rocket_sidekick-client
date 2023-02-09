@@ -30,21 +30,21 @@
 												:label="$t('forms.content.tools.foam.bodyTubeID')"
 											/>
 										</td>
-										<td style="width: 150px;">
+										<td class="measurementUnits">
 											<MeasurementUnitsSelect
-												ref="measurementUnitsIdRef"
-												vid="measurementUnitsId"
-												v-model="measurementUnitsId"
+												ref="lengthMeasurementUnitsIdRef"
+												vid="lengthMeasurementUnitsId"
+												v-model="lengthMeasurementUnitsId"
 												:validation="validation"
 												:label="$t('forms.settings.measurementUnits.title')"
 											/>
 										</td>
-										<td style="width: 150px;">
+										<td class="measurementUnits">
 											<MeasurementUnitSelect
 												ref="lengthMeasurementUnitRef"
 												vid="lengthMeasurementUnitId"
 												v-model="lengthMeasurementUnitId"
-												:measurementUnitsId="measurementUnitsId"
+												:measurementUnitsId="lengthMeasurementUnitsId"
 												:measurementUnitsType="measurementUnitslengthType"
 												:validation="validation"
 												:label="$t('forms.settings.measurementUnits.length')"
@@ -102,6 +102,34 @@
 									:label="$t('forms.content.tools.foam.numberFins')"
 									:placeholder="$t('forms.content.tools.foam.numberFins_hint')"
 								/>
+							</v-col>
+						</v-row>
+						<v-row dense>
+							<v-col cols="12">
+								<table style="width: 100%">
+									<tr>
+										<td class="measurementUnits">
+											<MeasurementUnitsSelect
+												ref="fluidMeasurementUnitsIdRef"
+												vid="fluidMeasurementUnitsId"
+												v-model="fluidMeasurementUnitsId"
+												:validation="validation"
+												:label="$t('forms.settings.measurementUnits.title')"
+											/>
+										</td>
+										<td class="measurementUnits">
+											<MeasurementUnitSelect
+												ref="fluidMeasurementUnitIdRef"
+												vid="fluidMeasurementUnitId"
+												v-model="fluidMeasurementUnitId"
+												:measurementUnitsId="fluidMeasurementUnitsId"
+												:measurementUnitsType="measurementUnitsFluidType"
+												:validation="validation"
+												:label="$t('forms.settings.measurementUnits.fluid')"
+											/>
+										</td>
+									</tr>
+								</table>
 							</v-col>
 						</v-row>
 					</template>
@@ -230,15 +258,6 @@ export default {
 			initCalculationResults,
 			measurementUnitsIdOutput,
 			measurementUnitsIdSettings,
-			measurementUnitsAccelerationDefaultId,
-			measurementUnitsAreaDefaultId,
-			measurementUnitsDensityDefaultId,
-			measurementUnitsDistanceDefaultId,
-			measurementUnitsFluidDefaultId,
-			measurementUnitsLengthDefaultId,
-			measurementUnitsVelocityDefaultId,
-			measurementUnitsVolumeDefaultId,
-			measurementUnitsWeightDefaultId,
 			notifyColor,
 			notifyMessage,
 			notifySignal,
@@ -249,6 +268,8 @@ export default {
 			setNotify,
 			toFixed,
 			settings,
+			measurementUnitsFluidType,
+			measurementUnitslengthType,
 			serviceToolsFoam,
 			calculationData,
 			calculationResults,
@@ -257,9 +278,10 @@ export default {
 			finRootLength,
 			finTabLength,
 			finWidth,
+			fluidMeasurementUnitId,
+			fluidMeasurementUnitsId,
 			lengthMeasurementUnitId,
-			measurementUnitsId,
-			measurementUnitslengthType,
+			lengthMeasurementUnitsId,
 			motorTubeOD,
 			numberFins,
 			calculationOk,
@@ -296,15 +318,6 @@ export default {
 			initCalculationResults,
 			measurementUnitsIdOutput,
 			measurementUnitsIdSettings,
-			measurementUnitsAccelerationDefaultId,
-			measurementUnitsAreaDefaultId,
-			measurementUnitsDensityDefaultId,
-			measurementUnitsDistanceDefaultId,
-			measurementUnitsFluidDefaultId,
-			measurementUnitsLengthDefaultId,
-			measurementUnitsVelocityDefaultId,
-			measurementUnitsVolumeDefaultId,
-			measurementUnitsWeightDefaultId,
 			notifyColor,
 			notifyMessage,
 			notifySignal,
@@ -315,6 +328,8 @@ export default {
 			setNotify,
 			toFixed,
 			settings,
+			measurementUnitsFluidType,
+			measurementUnitslengthType,
 			serviceToolsFoam,
 			calculationData,
 			calculationResults,
@@ -323,9 +338,10 @@ export default {
 			finRootLength,
 			finTabLength,
 			finWidth,
+			fluidMeasurementUnitId,
+			fluidMeasurementUnitsId,
 			lengthMeasurementUnitId,
-			measurementUnitsId,
-			measurementUnitslengthType,
+			lengthMeasurementUnitsId,
 			motorTubeOD,
 			numberFins,
 			calculationOk,
@@ -350,8 +366,10 @@ export default {
 				motorTfinWidthubeBodyTube: helpers.withMessage(LibraryClientUtility.$trans.t('errors.content.tools.foam.finWidth'), finWidth), 
 				$autoDirty: true 
 			},
+			fluidMeasurementUnitId: { $autoDirty: true },
+			fluidMeasurementUnitsId: { required, $autoDirty: true },
 			lengthMeasurementUnitId: { $autoDirty: true },
-			measurementUnitsId: { required, $autoDirty: true },
+			lengthMeasurementUnitsId: { required, $autoDirty: true },
 			motorTubeOD: { 
 				required, decimal, between: between(0, 9999), 
 				motorTubeBodyTube: helpers.withMessage(LibraryClientUtility.$trans.t('errors.content.tools.foam.motorTubeBodyTube'), motorTubeBodyTube), 

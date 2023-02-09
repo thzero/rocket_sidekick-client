@@ -19,15 +19,6 @@
 					<template v-slot:default>
 						<v-row dense>
 							<v-col cols="12" sm="6" >
-								<VNumberFieldWithValidation
-									ref="coeffDragRef"
-									vid="coeffDrag"
-									v-model="coeffDrag"
-									:validation="validation"
-									:label="$t('forms.content.tools.parachuteSizing.coeffDrag')"
-								/>
-							</v-col>
-							<v-col cols="12" sm="6" >
 								<table style="width: 100%">
 									<tr>
 										<td>
@@ -39,7 +30,7 @@
 												:label="$t('forms.content.tools.parachuteSizing.airDensity')"
 											/>
 										</td>
-										<td style="width: 205px;">
+										<td class="measurementUnits">
 											<MeasurementUnitsSelect
 												ref="airDensityMeasurementUnitsIdRef"
 												vid="airDensityMeasurementUnitsId"
@@ -48,7 +39,7 @@
 												:label="$t('forms.settings.measurementUnits.title')"
 											/>
 										</td>
-										<td style="width: 150px;">
+										<td class="measurementUnits">
 											<MeasurementUnitSelect
 												ref="airDensityMeasurementUnitIdRef"
 												vid="airDensityMeasurementUnitId"
@@ -67,6 +58,52 @@
 									<tr>
 										<td>
 											<VNumberFieldWithValidation
+												ref="massRef"
+												vid="mass"
+												v-model="mass"
+												:validation="validation"
+												:label="$t('forms.content.tools.parachuteSizing.mass')"
+											/>
+										</td>
+										<td class="measurementUnits">
+											<MeasurementUnitsSelect
+												ref="massWeightMeasurementUnitsIdRef"
+												vid="massWeightMeasurementUnitsId"
+												v-model="massWeightMeasurementUnitsId"
+												:validation="validation"
+												:label="$t('forms.settings.measurementUnits.title')"
+											/>
+										</td>
+										<td class="measurementUnits">
+											<MeasurementUnitSelect
+												ref="massWeightMeasurementUnitIdRef"
+												vid="massWeightMeasurementUnitId"
+												v-model="massWeightMeasurementUnitId"
+												:measurementUnitsId="massWeightMeasurementUnitsId"
+												:measurementUnitsType="measurementUnitsWeightType"
+												:validation="validation"
+												:label="$t('forms.settings.measurementUnits.weight')"
+											/>
+										</td>
+									</tr>
+								</table>
+							</v-col>
+						</v-row>
+						<v-row dense>
+							<v-col cols="12" sm="6" >
+								<VNumberFieldWithValidation
+									ref="coeffDragRef"
+									vid="coeffDrag"
+									v-model="coeffDrag"
+									:validation="validation"
+									:label="$t('forms.content.tools.parachuteSizing.coeffDrag')"
+								/>
+							</v-col>
+							<v-col cols="12" sm="6" >
+								<table style="width: 100%">
+									<tr>
+										<td>
+											<VNumberFieldWithValidation
 												ref="desiredVelocityRef"
 												vid="desiredVelocity"
 												v-model="desiredVelocity"
@@ -74,7 +111,7 @@
 												:label="$t('forms.content.tools.parachuteSizing.desiredVelocity')"
 											/>
 										</td>
-										<td style="width: 205px;">
+										<td class="measurementUnits">
 											<MeasurementUnitsSelect
 												ref="desiredVelocityMeasurementUnitsIdRef"
 												vid="desiredVelocityMeasurementUnitsId"
@@ -83,7 +120,7 @@
 												:label="$t('forms.settings.measurementUnits.title')"
 											/>
 										</td>
-										<td style="width: 150px;">
+										<td class="measurementUnits">
 											<MeasurementUnitSelect
 												ref="desiredVelocityMeasurementUnitIdRef"
 												vid="desiredVelocityMeasurementUnitId"
@@ -92,6 +129,37 @@
 												:measurementUnitsType="measurementUnitsVelocityType"
 												:validation="validation"
 												:label="$t('forms.settings.measurementUnits.velocity')"
+											/>
+										</td>
+									</tr>
+								</table>
+							</v-col>
+						</v-row>
+						<v-row dense>
+							<v-col cols="12" lg="6">
+								<table>
+									<tr>
+										<td>
+											<span class="text-h7 text-bold">{{ $t('forms.content.tools.parachuteSizing.diameterMeasurementUnits') }}</span>&nbsp;&nbsp;
+										</td>
+										<td class="measurementUnits">
+											<MeasurementUnitsSelect
+												ref="diameterLengthMeasurementUnitsIdRef"
+												vid="diameterLengthMeasurementUnitsId"
+												v-model="diameterLengthMeasurementUnitsId"
+												:validation="validation"
+												:label="$t('forms.settings.measurementUnits.title')"
+											/>
+										</td>
+										<td class="measurementUnits">
+											<MeasurementUnitSelect
+												ref="diameterLengthMeasurementUnitIdRef"
+												vid="diameterLengthMeasurementUnitId"
+												v-model="diameterLengthMeasurementUnitId"
+												:measurementUnitsId="diameterLengthMeasurementUnitsId"
+												:measurementUnitsType="measurementUnitslengthType"
+												:validation="validation"
+												:label="$t('forms.settings.measurementUnits.length')"
 											/>
 										</td>
 									</tr>
@@ -115,10 +183,8 @@
 							<v-col>
 								<v-row class="pb-2" dense>
 									<v-col cols="4">
-										<span class="text-h6 text-bold">{{ $t('strings.content.tools.parachuteSizing.degrees') }}</span>&nbsp;&nbsp;
-									</v-col>
-									<v-col cols="4">
-										<span class="text-h6 text-bold">{{ $t('strings.content.tools.parachuteSizing.weathercocked') }}</span>&nbsp;&nbsp;
+										<span class="text-h6 text-bold">{{ $t('forms.content.tools.parachuteSizing.diameter') }}</span>&nbsp;&nbsp;
+										<span class="text-h6 text-bold" v-if="calculationResults.diameter">{{ calculationResults.diameter }}</span>
 									</v-col>
 								</v-row>
 							</v-col>
@@ -183,15 +249,6 @@ export default {
 			initCalculationResults,
 			measurementUnitsIdOutput,
 			measurementUnitsIdSettings,
-			measurementUnitsAccelerationDefaultId,
-			measurementUnitsAreaDefaultId,
-			measurementUnitsDensityDefaultId,
-			measurementUnitsDistanceDefaultId,
-			measurementUnitsFluidDefaultId,
-			measurementUnitsLengthDefaultId,
-			measurementUnitsVelocityDefaultId,
-			measurementUnitsVolumeDefaultId,
-			measurementUnitsWeightDefaultId,
 			notifyColor,
 			notifyMessage,
 			notifySignal,
@@ -202,6 +259,10 @@ export default {
 			setNotify,
 			toFixed,
 			settings,
+			measurementUnitsDensityType,
+			measurementUnitslengthType,
+			measurementUnitsVelocityType,
+			measurementUnitsWeightType,
 			serviceToolsParachuteSizing,
 			calculationData,
 			calculationResults,
@@ -212,11 +273,11 @@ export default {
 			desiredVelocity,
 			desiredVelocityMeasurementUnitId,
 			desiredVelocityMeasurementUnitsId,
+			diameterLengthMeasurementUnitId,
+			diameterLengthMeasurementUnitsId,
 			mass,
 			massWeightMeasurementUnitId,
 			massWeightMeasurementUnitsId,
-			measurementUnitsVelocityType,
-			measurementUnitsWeightType,
 			parachuteSizingFormRef,
 			calculationOk,
 			initCalculationData,
@@ -252,15 +313,6 @@ export default {
 			initCalculationResults,
 			measurementUnitsIdOutput,
 			measurementUnitsIdSettings,
-			measurementUnitsAccelerationDefaultId,
-			measurementUnitsAreaDefaultId,
-			measurementUnitsDensityDefaultId,
-			measurementUnitsDistanceDefaultId,
-			measurementUnitsFluidDefaultId,
-			measurementUnitsLengthDefaultId,
-			measurementUnitsVelocityDefaultId,
-			measurementUnitsVolumeDefaultId,
-			measurementUnitsWeightDefaultId,
 			notifyColor,
 			notifyMessage,
 			notifySignal,
@@ -271,6 +323,10 @@ export default {
 			setNotify,
 			toFixed,
 			settings,
+			measurementUnitsDensityType,
+			measurementUnitslengthType,
+			measurementUnitsVelocityType,
+			measurementUnitsWeightType,
 			serviceToolsParachuteSizing,
 			calculationData,
 			calculationResults,
@@ -281,11 +337,11 @@ export default {
 			desiredVelocity,
 			desiredVelocityMeasurementUnitId,
 			desiredVelocityMeasurementUnitsId,
+			diameterLengthMeasurementUnitId,
+			diameterLengthMeasurementUnitsId,
 			mass,
 			massWeightMeasurementUnitId,
 			massWeightMeasurementUnitsId,
-			measurementUnitsVelocityType,
-			measurementUnitsWeightType,
 			parachuteSizingFormRef,
 			calculationOk,
 			initCalculationData,
@@ -304,6 +360,8 @@ export default {
 			desiredVelocity: { required, decimal, between: between(0.1, 999), $autoDirty: true },
 			desiredVelocityMeasurementUnitId: { required, $autoDirty: true },
 			desiredVelocityMeasurementUnitsId: { required, $autoDirty: true },
+			diameterLengthMeasurementUnitId: { required, $autoDirty: true },
+			diameterLengthMeasurementUnitsId: { required, $autoDirty: true }, 
 			mass: { required, decimal, between: between(0.1, 999), $autoDirty: true },
 			massWeightMeasurementUnitId: { required, $autoDirty: true },
 			massWeightMeasurementUnitsId: { required, $autoDirty: true }

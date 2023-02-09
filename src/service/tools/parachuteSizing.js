@@ -35,6 +35,14 @@ class ParachuteSizingToolsService extends ToolsService {
 		response = this._enforceNotNullResponse('ParachuteSizingToolsService', 'initializeCalculation', desiredVelocityMeasurementUnit, 'desiredVelocityMeasurementUnit', correlationId);
 		if (this._hasFailed(response))
 			return response;
+		const diameterLengthMeasurementUnit = this._measurementUnitFromId(correlationId, data.diameterLengthMeasurementUnitsId, AppConstants.MeasurementUnits.length.id, data.diameterLengthMeasurementUnitId);
+		response = this._enforceNotNullResponse('ParachuteSizingToolsService', 'initializeCalculation', diameterLengthMeasurementUnit, 'diameterLengthMeasurementUnit', correlationId);
+		if (this._hasFailed(response))
+			return response;
+		const massWeightMeasurementUnit = this._measurementUnitFromId(correlationId, data.massWeightMeasurementUnitsId, AppConstants.MeasurementUnits.weight.id, data.massWeightMeasurementUnitId);
+		response = this._enforceNotNullResponse('ParachuteSizingToolsService', 'initializeCalculation', massWeightMeasurementUnit, 'massWeightMeasurementUnit', correlationId);
+		if (this._hasFailed(response))
+			return response; 
 		
 		const calculationSteps = [
 			{
@@ -48,7 +56,7 @@ class ParachuteSizingToolsService extends ToolsService {
 				value: data.airDensity,
 				units: {
 					from: airDensityMeasurementUnit,
-					to: AppConstants.MeasurementUnits.metrics.density.km3
+					to: AppConstants.MeasurementUnits.metrics.density.kgm3
 				}
 			},
 			{
@@ -61,27 +69,36 @@ class ParachuteSizingToolsService extends ToolsService {
 				}
 			},
 			{
-				type: this._serviceCalculationEngine.symTypeEvaluate,
-				var: 'numerator',
-				evaluate: '8 * mass * 9.8 m/^2'
+				type: this._serviceCalculationEngine.symTypeSet,
+				var: 'mass',
+				value: data.mass,
+				units: {
+					from: massWeightMeasurementUnit,
+					to: AppConstants.MeasurementUnits.metrics.weight.kg
+				}
 			},
 			{
 				type: this._serviceCalculationEngine.symTypeEvaluate,
-				var: 'denominator',
-				evaluate: 'pi * coeffDrag * airDensity'
+				var: 'numerator',
+				evaluate: '8 * mass * 9.8 m/s^2'
 			},
 			{
 				type: this._serviceCalculationEngine.symTypeEvaluate,
 				var: 'temp',
-				evaluate: 'sqrt numerator / denominator'
+				evaluate: 'pi * coeffDrag * airDensity'
 			},
 			{
 				type: this._serviceCalculationEngine.symTypeEvaluate,
-				var: 'angleDegrees',
-				evaluate: 'temp',
+				var: 'denominator',
+				evaluate: 'temp * desiredVelocity^2'
+			},
+			{
+				type: this._serviceCalculationEngine.symTypeEvaluate,
+				var: 'diameter',
+				evaluate: 'sqrt(numerator / denominator)',
 				result: true,
 				format: this._serviceCalculationEngine.formatFixed(),
-				unit: AppConstants.MeasurementUnits[outputMeasurementUnitsId].length.default
+				unit: diameterLengthMeasurementUnit
 			}
 		];
 		

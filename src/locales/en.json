@@ -258,7 +258,10 @@
 				"parachuteSizing": {
 					"airDensity": "Air Density",
 					"coeffDrag": "Coeff. of Drag",
-					"desiredVelocity": "Desired Velocity"
+					"desiredVelocity": "Desired Velocity",
+					"diameter": "Parachute Diameter",
+					"diameterMeasurementUnits": "Diameter Meas. Units",
+					"mass": "Mass"
 				},
 				"thrust2Weight": {
 					"mass": "Rocket Weight",
@@ -320,6 +323,7 @@
 				"area": "Area",
 				"density": "Density",
 				"distance": "Distance",
+				"fluid": "Fluid",
 				"length": "Length",
 				"velocity": "Velocity",
 				"volume": "Volume",
@@ -395,6 +399,10 @@
 				"mi": "Miles",
 				"miAbbr": "mi"
 			},
+			"fluid": {
+				"floz": "Fluid Ounce",
+				"flozAbbr": "fl oz"
+			},
 			"length": {
 				"in": "Inches",
 				"inAbbr": "in",
@@ -435,14 +443,20 @@
 				"mm2Abbr": "mm^2"
 			},
 			"density": {
-				"km3": "Kilogram Per Cubic Meter",
-				"km3Abbr": "k/m^3"
+				"kgm3": "Kilogram Per Cubic Meter",
+				"kgm3Abbr": "kg/m^3"
 			},
 			"distance": {
 				"m": "Meters",
 				"mAbbr": "m",
 				"km": "Kilometers",
 				"kmAbbr": "km"
+			},
+			"fluid": {
+				"ml": "Millileter",
+				"mlAbbr": "ml",
+				"l": "Liter",
+				"lAbbr": "l"
 			},
 			"length": {
 				"cm": "Centimeters",

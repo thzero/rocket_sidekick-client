@@ -13,6 +13,7 @@ import LibraryClientUtility from '@thzero/library_client/utility/index';
 import LibraryVuetifyUtility from '@/library_vue_vuetify/utility/index';
 
 import { useFlightToolsBaseComponent } from '@/components/content/tools/flightToolBase';
+import { useToolsMeasurementBaseComponent } from '@/components/content/tools/toolsMeasurementBase';
 
 export function useFlightInfoBaseComponent(props, context, options) {
 	const {
@@ -42,15 +43,6 @@ export function useFlightInfoBaseComponent(props, context, options) {
 		initCalculationResults,
 		measurementUnitsIdOutput,
 		measurementUnitsIdSettings,
-		measurementUnitsAccelerationDefaultId,
-		measurementUnitsAreaDefaultId,
-		measurementUnitsDensityDefaultId,
-		measurementUnitsDistanceDefaultId,
-		measurementUnitsFluidDefaultId,
-		measurementUnitsLengthDefaultId,
-		measurementUnitsVelocityDefaultId,
-		measurementUnitsVolumeDefaultId,
-		measurementUnitsWeightDefaultId,
 		notifyColor,
 		notifyMessage,
 		notifySignal,
@@ -106,6 +98,27 @@ export function useFlightInfoBaseComponent(props, context, options) {
 			resolution.value = serviceStore.getters.getFlightInfoResolution(correlationIdI) ?? AppConstants.FlightInfo.Resolution;
 		}
 	}, {}));
+	
+	const {
+		measurementUnitsAccelerationDefaultId,
+		measurementUnitsAccelerationType,
+		measurementUnitsAreaDefaultId,
+		measurementUnitsAreaType,
+		measurementUnitsDensityDefaultId,
+		measurementUnitsDensityType,
+		measurementUnitsDistanceType,
+		measurementUnitsDistanceDefaultId,
+		measurementUnitsFluidDefaultId,
+		measurementUnitsFluidType,
+		measurementUnitsLengthDefaultId,
+		measurementUnitslengthType,
+		measurementUnitsVelocityDefaultId,
+		measurementUnitsVelocityType,
+		measurementUnitsVolumeDefaultId,
+		measurementUnitsVolumeType,
+		measurementUnitsWeightDefaultId,
+		measurementUnitsWeightType
+	} = useToolsMeasurementBaseComponent(props, context, options);
 
 	const serviceDownload = LibraryClientUtility.$injector.getService(AppConstants.InjectorKeys.SERVICE_DOWNLOAD);
 	const serviceFlightInfo = LibraryClientUtility.$injector.getService(AppConstants.InjectorKeys.SERVICE_TOOLS_FLIGHT_INFO_PROCESSOR);
@@ -507,15 +520,6 @@ export function useFlightInfoBaseComponent(props, context, options) {
 		initCalculationResults,
 		measurementUnitsIdOutput,
 		measurementUnitsIdSettings,
-		measurementUnitsAccelerationDefaultId,
-		measurementUnitsAreaDefaultId,
-		measurementUnitsDensityDefaultId,
-		measurementUnitsDistanceDefaultId,
-		measurementUnitsFluidDefaultId,
-		measurementUnitsLengthDefaultId,
-		measurementUnitsVelocityDefaultId,
-		measurementUnitsVolumeDefaultId,
-		measurementUnitsWeightDefaultId,
 		notifyColor,
 		notifyMessage,
 		notifySignal,

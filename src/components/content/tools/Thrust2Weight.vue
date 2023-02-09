@@ -30,7 +30,7 @@
 												:label="$t('forms.content.tools.thrust2Weight.mass')"
 											/>
 										</td>
-										<td style="width: 150px;">
+										<td class="measurementUnits">
 											<MeasurementUnitsSelect
 												ref="massMeasurementUnitsIdRef"
 												vid="massMeasurementUnitsId"
@@ -39,7 +39,7 @@
 												:label="$t('forms.settings.measurementUnits.title')"
 											/>
 										</td>
-										<td style="width: 150px;">
+										<td class="measurementUnits">
 											<MeasurementUnitSelect
 												ref="massMeasurementUnitRef"
 												vid="massMeasurementUnitId"
@@ -108,25 +108,29 @@
 										/>
 									</v-col>
 									<v-col cols="12" lg="6">
-										<table><tr><td style="width: 100%;">
-											<VTextField
-												ref="motorLookup1Ref"
-												vid="motorLookup1"
-												v-model="motorLookup1"
-												:readonly="true"
-												:label="$t('forms.content.tools.thrust2Weight.motor')"
-												:placeholder="$t('forms.content.tools.thrust2Weight.motor_hint')"
-											/>
-										</td>
-										<td>
-											<v-btn
-												class="ml-2"
-												color="primary"
-												@click="clickMotorSearch(1)"
-											>
-												{{ $t('buttons.search') }}
-											</v-btn>
-										</td></tr></table>
+										<table>
+											<tr>
+												<td style="width: 100%;">
+													<VTextField
+														ref="motorLookup1Ref"
+														vid="motorLookup1"
+														v-model="motorLookup1"
+														:readonly="true"
+														:label="$t('forms.content.tools.thrust2Weight.motor')"
+														:placeholder="$t('forms.content.tools.thrust2Weight.motor_hint')"
+													/>
+												</td>
+												<td>
+													<v-btn
+														class="ml-2"
+														color="primary"
+														@click="clickMotorSearch(1)"
+													>
+														{{ $t('buttons.search') }}
+													</v-btn>
+												</td>
+											</tr>
+										</table>
 									</v-col>
 								</v-row>
 							</v-col>
@@ -177,26 +181,30 @@
 										/>
 									</v-col>
 									<v-col cols="12" lg="6">
-										<table><tr><td style="width: 100%;">
-											<VTextField
-												ref="motorLookup2Ref"
-												vid="motorLookup2"
-												v-model="motorLookup2"
-												:readonly="true"
-												:label="$t('forms.content.tools.thrust2Weight.motor')"
-												:placeholder="$t('forms.content.tools.thrust2Weight.motor_hint')"
-											/>
-										</td>
-										<td>
-											<v-btn
-												class="ml-2"
-												color="primary"
-												:disabled="!motorSelected2"
-												@click="clickMotorSearch(2)"
-											>
-												{{ $t('buttons.search') }}
-											</v-btn>
-										</td></tr></table>
+										<table>
+											<tr>
+												<td style="width: 100%;">
+													<VTextField
+														ref="motorLookup2Ref"
+														vid="motorLookup2"
+														v-model="motorLookup2"
+														:readonly="true"
+														:label="$t('forms.content.tools.thrust2Weight.motor')"
+														:placeholder="$t('forms.content.tools.thrust2Weight.motor_hint')"
+													/>
+												</td>
+												<td>
+													<v-btn
+														class="ml-2"
+														color="primary"
+														:disabled="!motorSelected2"
+														@click="clickMotorSearch(2)"
+													>
+														{{ $t('buttons.search') }}
+													</v-btn>
+												</td>
+											</tr>
+										</table>
 									</v-col>
 								</v-row>
 							</v-col>
@@ -247,26 +255,30 @@
 										/>
 									</v-col>
 									<v-col cols="12" lg="6">
-										<table><tr><td style="width: 100%;">
-											<VTextField
-												ref="motorLookup3Ref"
-												vid="motorLookup3"
-												v-model="motorLookup3"
-												:readonly="true"
-												:label="$t('forms.content.tools.thrust2Weight.motor')"
-												:placeholder="$t('forms.content.tools.thrust2Weight.motor_hint')"
-											/>
-										</td>
-										<td>
-											<v-btn
-												class="ml-2"
-												color="primary"
-												:disabled="!motorSelected3"
-												@click="clickMotorSearch(3)"
-											>
-												{{ $t('buttons.search') }}
-											</v-btn>
-										</td></tr></table>
+										<table>
+											<tr>
+												<td style="width: 100%;">
+													<VTextField
+														ref="motorLookup3Ref"
+														vid="motorLookup3"
+														v-model="motorLookup3"
+														:readonly="true"
+														:label="$t('forms.content.tools.thrust2Weight.motor')"
+														:placeholder="$t('forms.content.tools.thrust2Weight.motor_hint')"
+													/>
+												</td>
+												<td>
+													<v-btn
+														class="ml-2"
+														color="primary"
+														:disabled="!motorSelected3"
+														@click="clickMotorSearch(3)"
+													>
+														{{ $t('buttons.search') }}
+													</v-btn>
+												</td>
+											</tr>
+										</table>
 									</v-col>
 								</v-row>
 							</v-col>
@@ -317,26 +329,30 @@
 										/>
 									</v-col>
 									<v-col cols="12" lg="6">
-										<table><tr><td style="width: 100%;">
-											<VTextField
-												ref="motorLookup4Ref"
-												vid="motorLookup4"
-												v-model="motorLookup4"
-												:readonly="true"
-												:label="$t('forms.content.tools.thrust2Weight.motor')"
-												:placeholder="$t('forms.content.tools.thrust2Weight.motor_hint')"
-											/>
-										</td>
-										<td>
-											<v-btn
-												class="ml-2"
-												color="primary"
-												:disabled="!motorSelected4"
-												@click="clickMotorSearch(4)"
-											>
-												{{ $t('buttons.search') }}
-											</v-btn>
-										</td></tr></table>
+										<table>
+											<tr>
+												<td style="width: 100%;">
+													<VTextField
+														ref="motorLookup4Ref"
+														vid="motorLookup4"
+														v-model="motorLookup4"
+														:readonly="true"
+														:label="$t('forms.content.tools.thrust2Weight.motor')"
+														:placeholder="$t('forms.content.tools.thrust2Weight.motor_hint')"
+													/>
+												</td>
+												<td>
+													<v-btn
+														class="ml-2"
+														color="primary"
+														:disabled="!motorSelected4"
+														@click="clickMotorSearch(4)"
+													>
+														{{ $t('buttons.search') }}
+													</v-btn>
+												</td>
+											</tr>
+										</table>
 									</v-col>
 								</v-row>
 							</v-col>
@@ -481,15 +497,6 @@ export default {
 			initCalculationResults,
 			measurementUnitsIdOutput,
 			measurementUnitsIdSettings,
-			measurementUnitsAccelerationDefaultId,
-			measurementUnitsAreaDefaultId,
-			measurementUnitsDensityDefaultId,
-			measurementUnitsDistanceDefaultId,
-			measurementUnitsFluidDefaultId,
-			measurementUnitsLengthDefaultId,
-			measurementUnitsVelocityDefaultId,
-			measurementUnitsVolumeDefaultId,
-			measurementUnitsWeightDefaultId,
 			notifyColor,
 			notifyMessage,
 			notifySignal,
@@ -500,6 +507,7 @@ export default {
 			setNotify,
 			toFixed,
 			settings,
+			measurementUnitsWeightType,
 			serviceToolsThrust2Weight,
 			calculationResults,
 			dialogMotorSearchRef,
@@ -510,7 +518,6 @@ export default {
 			massMeasurementUnitsId,
 			maxLaunchRodTime,
 			maxLaunchRodTimeDefault,
-			measurementUnitsWeightType,
 			motorLookup1,
 			motorLookup2,
 			motorLookup3,
@@ -572,15 +579,6 @@ export default {
 			initCalculationResults,
 			measurementUnitsIdOutput,
 			measurementUnitsIdSettings,
-			measurementUnitsAccelerationDefaultId,
-			measurementUnitsAreaDefaultId,
-			measurementUnitsDensityDefaultId,
-			measurementUnitsDistanceDefaultId,
-			measurementUnitsFluidDefaultId,
-			measurementUnitsLengthDefaultId,
-			measurementUnitsVelocityDefaultId,
-			measurementUnitsVolumeDefaultId,
-			measurementUnitsWeightDefaultId,
 			notifyColor,
 			notifyMessage,
 			notifySignal,
@@ -591,6 +589,7 @@ export default {
 			setNotify,
 			toFixed,
 			settings,
+			measurementUnitsWeightType,
 			serviceToolsThrust2Weight,
 			calculationResults,
 			dialogMotorSearchRef,
@@ -601,7 +600,6 @@ export default {
 			massMeasurementUnitsId,
 			maxLaunchRodTime,
 			maxLaunchRodTimeDefault,
-			measurementUnitsWeightType,
 			motorLookup1,
 			motorLookup2,
 			motorLookup3,

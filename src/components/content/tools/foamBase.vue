@@ -8,6 +8,7 @@ import AppConstants from '@/constants';
 import LibraryClientUtility from '@thzero/library_client/utility/index';
 
 import { useToolsBaseComponent } from '@/components/content/tools/toolsBase';
+import { useToolsMeasurementBaseComponent } from '@/components/content/tools/toolsMeasurementBase';
 
 export function useFoamBaseComponent(props, context, options) {
 	const {
@@ -36,15 +37,6 @@ export function useFoamBaseComponent(props, context, options) {
 		initCalculationResults,
 		measurementUnitsIdOutput,
 		measurementUnitsIdSettings,
-		measurementUnitsAccelerationDefaultId,
-		measurementUnitsAreaDefaultId,
-		measurementUnitsDensityDefaultId,
-		measurementUnitsDistanceDefaultId,
-		measurementUnitsFluidDefaultId,
-		measurementUnitsLengthDefaultId,
-		measurementUnitsVelocityDefaultId,
-		measurementUnitsVolumeDefaultId,
-		measurementUnitsWeightDefaultId,
 		notifyColor,
 		notifyMessage,
 		notifySignal,
@@ -56,6 +48,27 @@ export function useFoamBaseComponent(props, context, options) {
 		toFixed,
 		settings
 	} = useToolsBaseComponent(props, context, options);
+	
+	const {
+		measurementUnitsAccelerationDefaultId,
+		measurementUnitsAccelerationType,
+		measurementUnitsAreaDefaultId,
+		measurementUnitsAreaType,
+		measurementUnitsDensityDefaultId,
+		measurementUnitsDensityType,
+		measurementUnitsDistanceType,
+		measurementUnitsDistanceDefaultId,
+		measurementUnitsFluidDefaultId,
+		measurementUnitsFluidType,
+		measurementUnitsLengthDefaultId,
+		measurementUnitslengthType,
+		measurementUnitsVelocityDefaultId,
+		measurementUnitsVelocityType,
+		measurementUnitsVolumeDefaultId,
+		measurementUnitsVolumeType,
+		measurementUnitsWeightDefaultId,
+		measurementUnitsWeightType
+	} = useToolsMeasurementBaseComponent(props, context, options);
 
 	const serviceToolsFoam = LibraryClientUtility.$injector.getService(AppConstants.InjectorKeys.SERVICE_TOOLS_FOAM);
 
@@ -66,9 +79,10 @@ export function useFoamBaseComponent(props, context, options) {
 	const finRootLength = ref(null);
 	const finTabLength = ref(0.3);
 	const finWidth = ref(null);
+	const fluidMeasurementUnitId = ref(null);
+	const fluidMeasurementUnitsId = ref(null);
 	const lengthMeasurementUnitId = ref(null);
-	const measurementUnitsId = ref(null);
-	const measurementUnitslengthType = ref(AppConstants.MeasurementUnits.types.length);
+	const lengthMeasurementUnitsId = ref(null);
 	const motorTubeOD = ref(null);
 	const numberFins = ref(null);
 
@@ -119,10 +133,13 @@ export function useFoamBaseComponent(props, context, options) {
 	};
 	const initCalculationData = (correlationId) => {
 		calculationData.value.bodyTubeID = bodyTubeID.value;
-		calculationData.value.units = lengthMeasurementUnitId.value;
+		calculationData.value.fluidMeasurementUnitId = fluidMeasurementUnitId.value;
+		calculationData.value.fluidMeasurementUnitsId = fluidMeasurementUnitsId.value;
 		calculationData.value.finRootLength = finRootLength.value;
 		calculationData.value.finTabLength = finTabLength.value;
 		calculationData.value.finWidth = finWidth.value;
+		calculationData.value.lengthMeasurementUnitId = lengthMeasurementUnitId.value;
+		calculationData.value.lengthMeasurementUnitsId = lengthMeasurementUnitsId.value;
 		calculationData.value.motorTubeOD = motorTubeOD.value;
 		calculationData.value.numberFins = numberFins.value;
 	};
@@ -146,8 +163,10 @@ export function useFoamBaseComponent(props, context, options) {
 		reset(false);
 
 		calculationData.value = serviceToolsFoam.initialize(correlationId());
+		fluidMeasurementUnitId.value = measurementUnitsFluidDefaultId.value;
+		fluidMeasurementUnitsId.value = measurementUnitsIdSettings.value;
 		lengthMeasurementUnitId.value = measurementUnitsLengthDefaultId.value;
-		measurementUnitsId.value = measurementUnitsIdSettings.value;
+		lengthMeasurementUnitsId.value = measurementUnitsIdSettings.value;
 	});
 
 	return {
@@ -176,15 +195,6 @@ export function useFoamBaseComponent(props, context, options) {
 		initCalculationResults,
 		measurementUnitsIdOutput,
 		measurementUnitsIdSettings,
-		measurementUnitsAccelerationDefaultId,
-		measurementUnitsAreaDefaultId,
-		measurementUnitsDensityDefaultId,
-		measurementUnitsDistanceDefaultId,
-		measurementUnitsFluidDefaultId,
-		measurementUnitsLengthDefaultId,
-		measurementUnitsVelocityDefaultId,
-		measurementUnitsVolumeDefaultId,
-		measurementUnitsWeightDefaultId,
 		notifyColor,
 		notifyMessage,
 		notifySignal,
@@ -195,6 +205,8 @@ export function useFoamBaseComponent(props, context, options) {
 		setNotify,
 		toFixed,
 		settings,
+		measurementUnitsFluidType,
+		measurementUnitslengthType,
 		serviceToolsFoam,
 		calculationData,
 		calculationResults,
@@ -203,9 +215,10 @@ export function useFoamBaseComponent(props, context, options) {
 		finRootLength,
 		finTabLength,
 		finWidth,
+		fluidMeasurementUnitId,
+		fluidMeasurementUnitsId ,
 		lengthMeasurementUnitId,
-		measurementUnitsId,
-		measurementUnitslengthType,
+		lengthMeasurementUnitsId,
 		motorTubeOD,
 		numberFins,
 		calculationOk,

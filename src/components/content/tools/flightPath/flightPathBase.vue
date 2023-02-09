@@ -13,6 +13,7 @@ import LibraryCommonUtility from '@thzero/library_common/utility/index';
 import LibraryVuetifyUtility from '@/library_vue_vuetify/utility/index';
 
 import { useFlightToolsBaseComponent } from '@/components/content/tools/flightToolBase';
+import { useToolsMeasurementBaseComponent } from '@/components/content/tools/toolsMeasurementBase';
 
 export function useFlightPathBaseComponent(props, context, options) {
 	const {
@@ -41,15 +42,6 @@ export function useFlightPathBaseComponent(props, context, options) {
 		initCalculationResults,
 		measurementUnitsIdOutput,
 		measurementUnitsIdSettings,
-		measurementUnitsAccelerationDefaultId,
-		measurementUnitsAreaDefaultId,
-		measurementUnitsDensityDefaultId,
-		measurementUnitsDistanceDefaultId,
-		measurementUnitsFluidDefaultId,
-		measurementUnitsLengthDefaultId,
-		measurementUnitsVelocityDefaultId,
-		measurementUnitsVolumeDefaultId,
-		measurementUnitsWeightDefaultId,
 		notifyColor,
 		notifyMessage,
 		notifySignal,
@@ -100,6 +92,27 @@ export function useFlightPathBaseComponent(props, context, options) {
 			flightProcessors.value = LibraryVuetifyUtility.selectOptions(serviceFlightPath.serviceProcessors, LibraryClientUtility.$trans.t, 'forms.content.tools.flightPath.processors', (l) => { return l.id; }, null, (l) => { return l.id; });
 		}
 	}, {}));
+	
+	const {
+		measurementUnitsAccelerationDefaultId,
+		measurementUnitsAccelerationType,
+		measurementUnitsAreaDefaultId,
+		measurementUnitsAreaType,
+		measurementUnitsDensityDefaultId,
+		measurementUnitsDensityType,
+		measurementUnitsDistanceType,
+		measurementUnitsDistanceDefaultId,
+		measurementUnitsFluidDefaultId,
+		measurementUnitsFluidType,
+		measurementUnitsLengthDefaultId,
+		measurementUnitslengthType,
+		measurementUnitsVelocityDefaultId,
+		measurementUnitsVelocityType,
+		measurementUnitsVolumeDefaultId,
+		measurementUnitsVolumeType,
+		measurementUnitsWeightDefaultId,
+		measurementUnitsWeightType
+	} = useToolsMeasurementBaseComponent(props, context, options);
 
 	const serviceDownload = LibraryClientUtility.$injector.getService(AppConstants.InjectorKeys.SERVICE_DOWNLOAD);
 	const serviceFlightPath = LibraryClientUtility.$injector.getService(AppConstants.InjectorKeys.SERVICE_TOOLS_FLIGHT_PATH_PROCESSOR);
@@ -136,7 +149,6 @@ export function useFlightPathBaseComponent(props, context, options) {
 	const clickFlightPathStylesReset = () => {
 		flightPathStyleReset(correlationId(), false);
 	};
-	
 	const flightPathInputChange = () => {
 		document.getElementById('top').scrollIntoView({behavior: 'smooth'});
 	};
@@ -405,15 +417,6 @@ export function useFlightPathBaseComponent(props, context, options) {
 		initCalculationResults,
 		measurementUnitsIdOutput,
 		measurementUnitsIdSettings,
-		measurementUnitsAccelerationDefaultId,
-		measurementUnitsAreaDefaultId,
-		measurementUnitsDensityDefaultId,
-		measurementUnitsDistanceDefaultId,
-		measurementUnitsFluidDefaultId,
-		measurementUnitsLengthDefaultId,
-		measurementUnitsVelocityDefaultId,
-		measurementUnitsVolumeDefaultId,
-		measurementUnitsWeightDefaultId,
 		notifyColor,
 		notifyMessage,
 		notifySignal,
@@ -459,7 +462,6 @@ export function useFlightPathBaseComponent(props, context, options) {
 		flightPath,
 		flightPathData,
 		flightPathInput,
-		clickFlightPathStylesReset,
 		flightPathStylePathFlightColor,
 		flightPathStylePathGroundColor,
 		flightPathStylePinLaunchColor,
@@ -471,8 +473,7 @@ export function useFlightPathBaseComponent(props, context, options) {
 		flightPathStylePinTouchdownColor,
 		flightPathStylePinTouchdownSelected,
 		output,
-		styles,
-		initialized,
+		clickFlightPathStylesReset,
 		flightPathInputChange,
 		flightPathStyleLoad,
 		templateMain,

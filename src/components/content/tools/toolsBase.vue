@@ -29,15 +29,6 @@ export function useToolsBaseComponent(props, context, options) {
 	const errorTimer = ref(null);
 	const measurementUnitsIdOutput = ref(null);
 	const measurementUnitsIdSettings = ref(null);
-	const measurementUnitsAccelerationDefaultId = ref(null);
-	const measurementUnitsAreaDefaultId = ref(null);
-	const measurementUnitsDensityDefaultId = ref(null);
-	const measurementUnitsDistanceDefaultId = ref(null);
-	const measurementUnitsFluidDefaultId = ref(null);
-	const measurementUnitsLengthDefaultId = ref(null);
-	const measurementUnitsVelocityDefaultId = ref(null);
-	const measurementUnitsVolumeDefaultId = ref(null);
-	const measurementUnitsWeightDefaultId = ref(null);
 	const notifyColor = ref(null);
 	const notifyMessage = ref(null);
 	const notifySignal = ref(false);
@@ -136,15 +127,6 @@ export function useToolsBaseComponent(props, context, options) {
 		settings.value = serviceStore.getters.user.getUserSettings();
 		measurementUnitsIdOutput.value = AppUtility.measurementUnitsId(correlationId, settings.value);
 		measurementUnitsIdSettings.value = AppUtility.measurementUnitsId(correlationId, settings.value);
-		measurementUnitsAccelerationDefaultId.value = AppUtility.measurementUnitsAccelerationId(correlationId, settings.value);
-		measurementUnitsAreaDefaultId.value = AppUtility.measurementUnitAreaId(correlationId, settings.value);
-		measurementUnitsDensityDefaultId.value = AppUtility.measurementUnitDensityId(correlationId, settings.value);
-		measurementUnitsDistanceDefaultId.value = AppUtility.measurementUnitDistanceId(correlationId, settings.value);
-		measurementUnitsFluidDefaultId.value = AppUtility.measurementUnitFluidId(correlationId, settings.value);
-		measurementUnitsLengthDefaultId.value = AppUtility.measurementUnitLengthId(correlationId, settings.value);
-		measurementUnitsVelocityDefaultId.value = AppUtility.measurementUnitVelocityId(correlationId, settings.value);
-		measurementUnitsVolumeDefaultId.value = AppUtility.measurementUnitVolumeId(correlationId, settings.value);
-		measurementUnitsWeightDefaultId.value = AppUtility.measurementUnitWeightId(correlationId, settings.value);
 	});
 
 	return {
@@ -173,15 +155,6 @@ export function useToolsBaseComponent(props, context, options) {
 		initCalculationResults,
 		measurementUnitsIdOutput,
 		measurementUnitsIdSettings,
-		measurementUnitsAccelerationDefaultId,
-		measurementUnitsAreaDefaultId,
-		measurementUnitsDensityDefaultId,
-		measurementUnitsDistanceDefaultId,
-		measurementUnitsFluidDefaultId,
-		measurementUnitsLengthDefaultId,
-		measurementUnitsVelocityDefaultId,
-		measurementUnitsVolumeDefaultId,
-		measurementUnitsWeightDefaultId,
 		notifyColor,
 		notifyMessage,
 		notifySignal,

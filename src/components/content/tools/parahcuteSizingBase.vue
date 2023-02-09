@@ -8,6 +8,7 @@ import AppConstants from '@/constants';
 import LibraryClientUtility from '@thzero/library_client/utility/index';
 
 import { useToolsBaseComponent } from '@/components/content/tools/toolsBase';
+import { useToolsMeasurementBaseComponent } from '@/components/content/tools/toolsMeasurementBase';
 
 export function useParachuteSizingBaseComponent(props, context, options) {
 	const {
@@ -36,15 +37,6 @@ export function useParachuteSizingBaseComponent(props, context, options) {
 		initCalculationResults,
 		measurementUnitsIdOutput,
 		measurementUnitsIdSettings,
-		measurementUnitsAccelerationDefaultId,
-		measurementUnitsAreaDefaultId,
-		measurementUnitsDensityDefaultId,
-		measurementUnitsDistanceDefaultId,
-		measurementUnitsFluidDefaultId,
-		measurementUnitsLengthDefaultId,
-		measurementUnitsVelocityDefaultId,
-		measurementUnitsVolumeDefaultId,
-		measurementUnitsWeightDefaultId,
 		notifyColor,
 		notifyMessage,
 		notifySignal,
@@ -56,6 +48,27 @@ export function useParachuteSizingBaseComponent(props, context, options) {
 		toFixed,
 		settings
 	} = useToolsBaseComponent(props, context, options);
+	
+	const {
+		measurementUnitsAccelerationDefaultId,
+		measurementUnitsAccelerationType,
+		measurementUnitsAreaDefaultId,
+		measurementUnitsAreaType,
+		measurementUnitsDensityDefaultId,
+		measurementUnitsDensityType,
+		measurementUnitsDistanceType,
+		measurementUnitsDistanceDefaultId,
+		measurementUnitsFluidDefaultId,
+		measurementUnitsFluidType,
+		measurementUnitsLengthDefaultId,
+		measurementUnitslengthType,
+		measurementUnitsVelocityDefaultId,
+		measurementUnitsVelocityType,
+		measurementUnitsVolumeDefaultId,
+		measurementUnitsVolumeType,
+		measurementUnitsWeightDefaultId,
+		measurementUnitsWeightType
+	} = useToolsMeasurementBaseComponent(props, context, options);
 
 	const serviceToolsParachuteSizing = LibraryClientUtility.$injector.getService(AppConstants.InjectorKeys.SERVICE_TOOLS_PARACHUTE_SIZING);
 
@@ -68,11 +81,11 @@ export function useParachuteSizingBaseComponent(props, context, options) {
 	const desiredVelocity = ref(null);
 	const desiredVelocityMeasurementUnitId = ref(null);
 	const desiredVelocityMeasurementUnitsId = ref(null);
+	const diameterLengthMeasurementUnitId = ref(null);
+	const diameterLengthMeasurementUnitsId = ref(null);
 	const mass = ref(null);
 	const massWeightMeasurementUnitId = ref(null);
 	const massWeightMeasurementUnitsId = ref(null);
-	const measurementUnitsVelocityType = ref(AppConstants.MeasurementUnits.types.velocity);
-	const measurementUnitsWeightType = ref(AppConstants.MeasurementUnits.types.weight);
 	const parachuteSizingFormRef = ref(null);
 
 	const calculationOk = async () => {
@@ -102,7 +115,9 @@ export function useParachuteSizingBaseComponent(props, context, options) {
 		calculationData.value.desiredVelocity = desiredVelocity.value;
 		calculationData.value.desiredVelocityMeasurementUnitId = desiredVelocityMeasurementUnitId.value;
 		calculationData.value.desiredVelocityMeasurementUnitsId = desiredVelocityMeasurementUnitsId.value;
-		calculationData.value.desiredVelocity = mass.value;
+		calculationData.value.diameterLengthMeasurementUnitsId = diameterLengthMeasurementUnitsId.value;
+		calculationData.value.diameterLengthMeasurementUnitId = diameterLengthMeasurementUnitId.value;
+		calculationData.value.mass = mass.value;
 		calculationData.value.massWeightMeasurementUnitId = massWeightMeasurementUnitId.value;
 		calculationData.value.massWeightMeasurementUnitsId = massWeightMeasurementUnitsId.value;
 	};
@@ -126,10 +141,12 @@ export function useParachuteSizingBaseComponent(props, context, options) {
 		calculationData.value = serviceToolsParachuteSizing.initialize(correlationId());
 		airDensityMeasurementUnitsId.value = measurementUnitsIdSettings.value;
 		desiredVelocityMeasurementUnitsId.value = measurementUnitsIdSettings.value;
+		diameterLengthMeasurementUnitsId.value = measurementUnitsIdSettings.value;
 		massWeightMeasurementUnitsId.value = measurementUnitsIdSettings.value;
 
 		airDensityMeasurementUnitId.value = measurementUnitsDensityDefaultId.value;
 		desiredVelocityMeasurementUnitId.value = measurementUnitsVelocityDefaultId.value;
+		diameterLengthMeasurementUnitId.value = measurementUnitsLengthDefaultId.value;
 		massWeightMeasurementUnitId.value = measurementUnitsWeightDefaultId.value;
 	});
 
@@ -159,15 +176,6 @@ export function useParachuteSizingBaseComponent(props, context, options) {
 		initCalculationResults,
 		measurementUnitsIdOutput,
 		measurementUnitsIdSettings,
-		measurementUnitsAccelerationDefaultId,
-		measurementUnitsAreaDefaultId,
-		measurementUnitsDensityDefaultId,
-		measurementUnitsDistanceDefaultId,
-		measurementUnitsFluidDefaultId,
-		measurementUnitsLengthDefaultId,
-		measurementUnitsVelocityDefaultId,
-		measurementUnitsVolumeDefaultId,
-		measurementUnitsWeightDefaultId,
 		notifyColor,
 		notifyMessage,
 		notifySignal,
@@ -178,6 +186,10 @@ export function useParachuteSizingBaseComponent(props, context, options) {
 		setNotify,
 		toFixed,
 		settings,
+		measurementUnitsDensityType,
+		measurementUnitslengthType,
+		measurementUnitsVelocityType,
+		measurementUnitsWeightType,
 		serviceToolsParachuteSizing,
 		calculationData,
 		calculationResults,
@@ -188,11 +200,11 @@ export function useParachuteSizingBaseComponent(props, context, options) {
 		desiredVelocity,
 		desiredVelocityMeasurementUnitId,
 		desiredVelocityMeasurementUnitsId,
+		diameterLengthMeasurementUnitId,
+		diameterLengthMeasurementUnitsId,
 		mass,
 		massWeightMeasurementUnitId,
 		massWeightMeasurementUnitsId,
-		measurementUnitsVelocityType,
-		measurementUnitsWeightType,
 		parachuteSizingFormRef,
 		calculationOk,
 		initCalculationData,

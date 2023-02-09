@@ -10,6 +10,7 @@ import LibraryClientUtility from '@thzero/library_client/utility/index';
 import DialogSupport from '@/library_vue/components/support/dialog';
 
 import { useToolsBaseComponent } from '@/components/content/tools/toolsBase';
+import { useToolsMeasurementBaseComponent } from '@/components/content/tools/toolsMeasurementBase';
 
 export function useThrust2WeightBaseComponent(props, context, options) {
 	const {
@@ -38,15 +39,6 @@ export function useThrust2WeightBaseComponent(props, context, options) {
 		initCalculationResults,
 		measurementUnitsIdOutput,
 		measurementUnitsIdSettings,
-		measurementUnitsAccelerationDefaultId,
-		measurementUnitsAreaDefaultId,
-		measurementUnitsDensityDefaultId,
-		measurementUnitsDistanceDefaultId,
-		measurementUnitsFluidDefaultId,
-		measurementUnitsLengthDefaultId,
-		measurementUnitsVelocityDefaultId,
-		measurementUnitsVolumeDefaultId,
-		measurementUnitsWeightDefaultId,
 		notifyColor,
 		notifyMessage,
 		notifySignal,
@@ -58,6 +50,27 @@ export function useThrust2WeightBaseComponent(props, context, options) {
 		toFixed,
 		settings
 	} = useToolsBaseComponent(props, context, options);
+	
+	const {
+		measurementUnitsAccelerationDefaultId,
+		measurementUnitsAccelerationType,
+		measurementUnitsAreaDefaultId,
+		measurementUnitsAreaType,
+		measurementUnitsDensityDefaultId,
+		measurementUnitsDensityType,
+		measurementUnitsDistanceType,
+		measurementUnitsDistanceDefaultId,
+		measurementUnitsFluidDefaultId,
+		measurementUnitsFluidType,
+		measurementUnitsLengthDefaultId,
+		measurementUnitslengthType,
+		measurementUnitsVelocityDefaultId,
+		measurementUnitsVelocityType,
+		measurementUnitsVolumeDefaultId,
+		measurementUnitsVolumeType,
+		measurementUnitsWeightDefaultId,
+		measurementUnitsWeightType
+	} = useToolsMeasurementBaseComponent(props, context, options);
 
 	const serviceToolsThrust2Weight = LibraryClientUtility.$injector.getService(AppConstants.InjectorKeys.SERVICE_TOOLS_THRUST2WEIGHT);
 
@@ -70,7 +83,6 @@ export function useThrust2WeightBaseComponent(props, context, options) {
 	const massMeasurementUnitsId = ref(null);
 	const maxLaunchRodTime = ref(null);
 	const maxLaunchRodTimeDefault = ref(0.3);
-	const measurementUnitsWeightType = ref(AppConstants.MeasurementUnits.types.weight);
 	const motorLookup1 = ref(null);
 	const motorLookup2 = ref(null);
 	const motorLookup3 = ref(null);
@@ -313,15 +325,6 @@ export function useThrust2WeightBaseComponent(props, context, options) {
 		initCalculationResults,
 		measurementUnitsIdOutput,
 		measurementUnitsIdSettings,
-		measurementUnitsAccelerationDefaultId,
-		measurementUnitsAreaDefaultId,
-		measurementUnitsDensityDefaultId,
-		measurementUnitsDistanceDefaultId,
-		measurementUnitsFluidDefaultId,
-		measurementUnitsLengthDefaultId,
-		measurementUnitsVelocityDefaultId,
-		measurementUnitsVolumeDefaultId,
-		measurementUnitsWeightDefaultId,
 		notifyColor,
 		notifyMessage,
 		notifySignal,
@@ -332,6 +335,7 @@ export function useThrust2WeightBaseComponent(props, context, options) {
 		setNotify,
 		toFixed,
 		settings,
+		measurementUnitsWeightType,
 		serviceToolsThrust2Weight,
 		calculationResults,
 		dialogMotorSearchRef,
@@ -342,7 +346,6 @@ export function useThrust2WeightBaseComponent(props, context, options) {
 		massMeasurementUnitsId,
 		maxLaunchRodTime,
 		maxLaunchRodTimeDefault,
-		measurementUnitsWeightType,
 		motorLookup1,
 		motorLookup2,
 		motorLookup3,

@@ -30,7 +30,7 @@
 												:label="$t('forms.content.tools.weathercocking.windVelocity')"
 											/>
 										</td>
-										<td style="width: 150px;">
+										<td class="measurementUnits">
 											<MeasurementUnitsSelect
 												ref="windVelocityMeasurementUnitsIdRef"
 												vid="windVelocityMeasurementUnitsId"
@@ -39,7 +39,7 @@
 												:label="$t('forms.settings.measurementUnits.title')"
 											/>
 										</td>
-										<td style="width: 150px;">
+										<td class="measurementUnits">
 											<MeasurementUnitSelect
 												ref="windVelocityMeasurementUnitIdRef"
 												vid="windVelocityMeasurementUnitId"
@@ -65,7 +65,7 @@
 												:label="$t('forms.content.tools.weathercocking.exitVelocity')"
 											/>
 										</td>
-										<td style="width: 205px;">
+										<td class="measurementUnits">
 											<MeasurementUnitsSelect
 												ref="exitVelocityMeasurementUnitsIdRef"
 												vid="exitVelocityMeasurementUnitsId"
@@ -74,7 +74,7 @@
 												:label="$t('forms.settings.measurementUnits.title')"
 											/>
 										</td>
-										<td style="width: 150px;">
+										<td class="measurementUnits">
 											<MeasurementUnitSelect
 												ref="exitVelocityMeasurementUnitIdRef"
 												vid="exitVelocityMeasurementUnitId"
@@ -184,15 +184,6 @@ export default {
 			initCalculationResults,
 			measurementUnitsIdOutput,
 			measurementUnitsIdSettings,
-			measurementUnitsAccelerationDefaultId,
-			measurementUnitsAreaDefaultId,
-			measurementUnitsDensityDefaultId,
-			measurementUnitsDistanceDefaultId,
-			measurementUnitsFluidDefaultId,
-			measurementUnitsLengthDefaultId,
-			measurementUnitsVelocityDefaultId,
-			measurementUnitsVolumeDefaultId,
-			measurementUnitsWeightDefaultId,
 			notifyColor,
 			notifyMessage,
 			notifySignal,
@@ -203,13 +194,13 @@ export default {
 			setNotify,
 			toFixed,
 			settings,
+			measurementUnitsVelocityType,
 			serviceToolsWeathercocking,
 			calculationData,
 			calculationResults,
 			exitVelocity,
 			exitVelocityMeasurementUnitsId,
 			exitVelocityMeasurementUnitId,
-			measurementUnitsVelocityType,
 			weathercockingFormRef,
 			windVelocity,
 			windVelocityMeasurementUnitsId,
@@ -248,15 +239,6 @@ export default {
 			initCalculationResults,
 			measurementUnitsIdOutput,
 			measurementUnitsIdSettings,
-			measurementUnitsAccelerationDefaultId,
-			measurementUnitsAreaDefaultId,
-			measurementUnitsDensityDefaultId,
-			measurementUnitsDistanceDefaultId,
-			measurementUnitsFluidDefaultId,
-			measurementUnitsLengthDefaultId,
-			measurementUnitsVelocityDefaultId,
-			measurementUnitsVolumeDefaultId,
-			measurementUnitsWeightDefaultId,
 			notifyColor,
 			notifyMessage,
 			notifySignal,
@@ -267,13 +249,13 @@ export default {
 			setNotify,
 			toFixed,
 			settings,
+			measurementUnitsVelocityType,
 			serviceToolsWeathercocking,
 			calculationData,
 			calculationResults,
 			exitVelocity,
 			exitVelocityMeasurementUnitsId,
 			exitVelocityMeasurementUnitId,
-			measurementUnitsVelocityType,
 			weathercockingFormRef,
 			windVelocity,
 			windVelocityMeasurementUnitsId,
