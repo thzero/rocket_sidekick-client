@@ -1,6 +1,6 @@
-import BaseService from '@thzero/library_client/service/index';
+import ToolsService from '@/service/tools/index';
 
-class CalculationEngineToolService extends BaseService {
+class CalculationEngineToolService extends ToolsService {
 	constructor() {
 		super();
 		

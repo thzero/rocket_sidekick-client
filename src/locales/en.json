@@ -78,7 +78,7 @@
 		"content": {
 			"tools": {
 				"foam": {
-					"finTabFinRoot": "Greater than or equal Fin Root Length",
+					"finTabFinRoot": "Greater than the Fin Root Length",
 					"finWidth": "Greater than 50% Motor Tube Outside Diameter",
 					"motorTubeBodyTube": "Greater than Body Tube ID"
 				},
@@ -255,6 +255,14 @@
 					"totalVolume": "Total Volume",
 					"totalVolume_hint": "Total volume of left over space in the fin can."
 				},
+				"parachuteSizing": {
+					"airDensity": "Air Density",
+					"coeffDrag": "Coeff. of Drag",
+					"desiredVelocity": "Desired Velocity",
+					"diameter": "Parachute Diameter",
+					"diameterMeasurementUnits": "Diameter Meas. Units",
+					"mass": "Mass"
+				},
 				"thrust2Weight": {
 					"mass": "Rocket Weight",
 					"mass_hint": "Weight of the rocket fully loaded including engines.",
@@ -270,7 +278,11 @@
 					"thrust_initial_hint": "Initial thrust of the engine.",
 					"thrust_peak": "Peak",
 					"thrust_peak_hint": "Peak thrust of the engine."
-				}	
+				},
+				"weathercocking": {
+					"exitVelocity": "Exit Velocity",
+					"windVelocity": "Wind Velocity"
+				}
 			}
 		},
 		"external": {
@@ -292,7 +304,7 @@
 		"listing": "Listing",
 		"minAbbr": "Min.",
 		"maxAbbr": "Max.",
-		"measurementUnits": "Measurement Units",
+		"measurementUnits": "Meas. Units",
 		"name": "Name",
 		"news": {
 			"article": "Article",
@@ -306,10 +318,12 @@
 		"roles": "Roles",
 		"settings": {
 			"measurementUnits": {
-				"title": "Measurement Units",
+				"title": "Meas. Units",
 				"acceleration": "Acceleration",
 				"area": "Area",
+				"density": "Density",
 				"distance": "Distance",
+				"fluid": "Fluid",
 				"length": "Length",
 				"velocity": "Velocity",
 				"volume": "Volume",
@@ -375,11 +389,19 @@
 				"ft2": "Feet Squared",
 				"ft2Abbr": "ft^2"
 			},
+			"density": {
+				"lbmft3": "Pound-mass Per Cubic Foot",
+				"lbmft3Abbr": "lbm/ft3"
+			},
 			"distance": {
 				"ft": "Feet",
 				"ftAbbr": "ft",
 				"mi": "Miles",
 				"miAbbr": "mi"
+			},
+			"fluid": {
+				"floz": "Fluid Ounce",
+				"flozAbbr": "fl oz"
 			},
 			"length": {
 				"in": "Inches",
@@ -420,11 +442,21 @@
 				"mm2": "Millimeters Squared",
 				"mm2Abbr": "mm^2"
 			},
+			"density": {
+				"kgm3": "Kilogram Per Cubic Meter",
+				"kgm3Abbr": "kg/m^3"
+			},
 			"distance": {
 				"m": "Meters",
 				"mAbbr": "m",
 				"km": "Kilometers",
 				"kmAbbr": "km"
+			},
+			"fluid": {
+				"ml": "Millileter",
+				"mlAbbr": "ml",
+				"l": "Liter",
+				"lAbbr": "l"
 			},
 			"length": {
 				"cm": "Centimeters",
@@ -464,13 +496,15 @@
 			"app": "Mobile App",
 			"title": "Content",
 			"tools": {
+				"title": "Tools", 
 				"ejectionCharges": "Ejection Charges",
 				"flightInfo": "Flight Info",
 				"flightPath": "Flight Path",
 				"foam": "Fin Can Foam Calculator",
+				"parachuteSizing": "Parachute Sizing",
 				"staticPortHoles": "Static Port Holes",
-				"title": "Tools", 
-				"thrust2Weight": "Thrust 2 Weight"
+				"thrust2Weight": "Thrust 2 Weight", 
+				"weathercocking": "Weathercocking"
 			},
 			"info": {
 				"title": "Info",
@@ -645,10 +679,10 @@
 					"additionalLinks": "Additional Links",
 					"desc": "This article discusses some information about 3d printing in respect to model rocketry.   First, What is 3D printing?",
 					"chart": "Chart",
-					"chartDesc": "A chart listing some gerneral aspects of different common types of filaments, but not all.  This is directionally as the values different across the different vendors ([eSun](https://www.esun3d.com)'s filament properties are shown here).",
+					"chartDesc": "A cha rt listing some gerneral aspects of different common types of filaments, but not all.  This is directionally as the values different across the different vendors ([eSun](https://www.esun3d.com)'s filament properties are shown here).",
 					"guidance1": "## Filaments\nThere are lots of different types of FDM filament available for FDM printers, and even more types of resins for resin printers.   Discussed here are a few of the basic materials most commonly seen, or recommended, in the model rocketry hobby.  [All3DP]('https://all3dp.com') has a good beginning [article]('https://all3dp.com/1/3d-printing-materials-guide-3d-printer-material') on different materials.\n\n### PLA\nFor most hobby grade printers, such as those from Creality, Prusa, etc. that are under $500 or so, the most common filament type is PLA.  Its generally a good all around filmanet for FDM (filament deposit material) printing as its easy to print, readily available in multiple colors and styles.  For those starting in the 3d printing hob However, it is not necessarily the best choice for rocketry.  One of the downsides of PLA is the low deflection temp; this means that the plastic can soften out if left for awhile in the hot car, direct sun, or even if exposed to the heat of the rocket engine and ejection charge. There are some derivatives of PLA formula by vendors, such as PLA+.  Based on the manufacturer specs, these can have enhanced properties including deflection temp that may make them more suitable that standard PLA for rocketry purposes.\n\nRocketSidekick mostly uses PLA for parts and tools such as fin guide and drill guides instead of parts of rockets or parts that attach to rockets.  The other use is for prototyping, especially if you are designing your own rocket parts or tools. As noted, it is easy to print and cheap, so you can print out parts for little cost.\n\n### PETG\nAnother type of filament that is generally easy to print, although it does require slightly tweaks to print settings, is PETG.  If a printer can print PLA, it can print PETG.  For model rocketry purposes PETG has one major benefit over is the higher deflection temperature.  It is not outstanding, but it is significantly higher than PLA that PETG is a common recommendation in forums, etc.  Not all manufacturers, especially on less expensive models, have default PETG printing profiles.  Many printers, such as the Creality Ender series or Prusa series, have either good communities or great manufacturer support or both and often you can find printing profiles, but you may still need to test and expirement. \n\nRocketSidekick uses PETG for all structural parts that are attached to the rocket, as well as nose cones, tail cones, body tube adapters, etc.  \n\n### ABS\nAnother material is ABS, it can be bit better than PETG but its not as easy to print as it requires higher heats and gives off fumes (please see any manufacturers recommendations on printing with ABS), so its typically not a starter filament material.  It does have higher deflection temp that PETG, so if your printer is capable and can safely print it, then it may be even a better choice over PETG.",
 					"compressionStrength": "Compression strength (psi)",
-					"deflectionTemp": "Deflection temperature",
+					"deflectionTempC": "Deflection temp. (C)",
 					"density": "Density (g/cm3)",
                     "impact" : "IZOD Impact Strength (kJ/㎡)",
                     "flexuralModulus" : "Flexural Modulus (MPa)",
@@ -713,7 +747,10 @@
 					"expansion": "Expsansion",
 					"foamWeight": "Foam Weight",
 					"requiredAmount": "Required Amount"
-
+				},
+				"parachuteSizing": {
+					"desc": "A tool to determine an estimated size of parachute based on mass, desired velocity, Cd of the parachute as well as air density.",
+					"calculated": "Calculated"
 				},
 				"staticPortHoles": {
 					"desc": ""
@@ -741,8 +778,11 @@
 					"guidance": "Initial thrust is more important during the initial boost phase off the launch pad.  Average thrust is the average of the thrust across the burn timespan.  The peak thrust does not always occur during launch or initial boost phase; consult the thrust curves at ",
 					"guidance2": "When using a ThrustCuve motor profile, the initial thrust is a approximate value and is determined from the sample data included with the motor profile.  The largest thrust (N) sample that falls below the Max. Launch Rod Time specified is used.  If there is a discrepancy between the thrust curve data during this time period and the max thrust, then the thrust curve data is used."
 				},
-				"weatherCocking": {
-					"desc": "A tool to determine whether a rocket, based on wind speed and rail exit speed has a potential to weathercock."
+				"weathercocking": {
+					"desc": "A tool to determine whether a rocket, based on wind speed and rail exit speed has a potential to weathercock.",
+					"calculated": "Calculated",
+					"degrees": "Calculated Degrees",
+					"weathercocked": "Weathercocked (> 20 deg)"
 				}
 			},
 			"welcome": "RocketSidekick hosts a variety of tools in once place for model rocketry.  Some of the tools are custom build, others are based on formulas found in variety of rocketry forums and sites, as well as some sections having links or information.",
@@ -815,8 +855,9 @@
 				"flightInfo": "Flight Info",
 				"flightPath": "Flight Path",
 				"foam": "Fin Can Foam Calculator",
+				"parachuteSizin": "Parachute Sizing",
 				"thrust2Weight": "Thrust 2 Weight",
-				"weatherCocking": "Weathercocking"
+				"weathercocking": "Weathercocking"
 			}
 		},
 		"edit": "Edit",
@@ -827,7 +868,7 @@
 		"help": "Help",
 		"home": "Home",
 		"issues": "Issues",
-		"measurementUnits": "Measurement Units",
+		"measurementUnits": "Meas. Units",
 		"new": "New",
 		"newType": "New {type}",
 		"news": "News",

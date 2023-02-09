@@ -4,3 +4,12 @@ Suggestions
 
 For calculations instead of mathjs?
     https://theoephraim.github.io/node-google-spreadsheet/#/
+
+Tools
+    Foam
+        Allow selection of rocket once enabled
+    Parachute Sizing
+        Lookup to the atompsheric chart based on altitude entry
+        Allow selection of parachute and rocket once enabled
+    Thrust2Weight
+        Allow selection of rocket once enabled

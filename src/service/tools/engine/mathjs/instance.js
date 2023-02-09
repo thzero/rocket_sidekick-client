@@ -8,18 +8,18 @@ class MathJsInstanceCalculationEngineToolService extends InstanceCalculationEngi
 
 		this._math = create(all);
 		this._parser = this._math.parser();
-		this._math.import({
-				import: function () { throw new Error('Function import is disabled') },
-				createUnit: function () { throw new Error('Function createUnit is disabled') },
-				evaluate: function () { throw new Error('Function evaluate is disabled') },
-				parse: function () { throw new Error('Function parse is disabled') },
-				simplify: function () { throw new Error('Function simplify is disabled') },
-				derivative: function () { throw new Error('Function derivative is disabled') }
-			}, 
-			{ 
-				override: true 
-			}
-		);
+		// this._math.import({
+		// 		import: function () { throw new Error('Function import is disabled') },
+		// 		createUnit: function () { throw new Error('Function createUnit is disabled') },
+		// 		evaluate: function () { throw new Error('Function evaluate is disabled') },
+		// 		parse: function () { throw new Error('Function parse is disabled') },
+		// 		simplify: function () { throw new Error('Function simplify is disabled') },
+		// 		derivative: function () { throw new Error('Function derivative is disabled') }
+		// 	}, 
+		// 	{ 
+		// 		override: true 
+		// 	}
+		// );
 
 		this._formatters = [];
 		this._initFormatters();

@@ -8,6 +8,7 @@ import AppConstants from '@/constants';
 import LibraryClientUtility from '@thzero/library_client/utility/index';
 
 import { useToolsBaseComponent } from '@/components/content/tools/toolsBase';
+import { useToolsMeasurementBaseComponent } from '@/components/content/tools/toolsMeasurementBase';
 
 export function useWeathercockingBaseComponent(props, context, options) {
 	const {
@@ -17,53 +18,74 @@ export function useWeathercockingBaseComponent(props, context, options) {
 		hasSucceeded,
 		initialize,
 		logger,
+		noBreakingSpaces,
+		notImplementedError,
 		success,
-		calculationOutput,
-		calculateI,
-		handleListener,
-		initCalculationResults,
-		measurementUnitsId,
-		measurementUnitsAccelerationDefaultId,
-		measurementUnitsAreaDefaultId,
-		measurementUnitsFluidDefaultId,
-		measurementUnitsDistanceDefaultId,
-		measurementUnitsLengthDefaultId,
-		measurementUnitsVelocityDefaultId,
-		measurementUnitsVolumeDefaultId,
-		measurementUnitsWeightDefaultId,
-		resetFormI,
 		serviceStore,
 		sortByOrder,
 		target,
+		calculationOutput,
+		dateFormat,
+		dateFormatMask,
+		errorMessage,
+		errors,
+		errorTimer,
+		calculateI,
+		formatNumber,
+		handleListener,
+		initCalculationOutput,
+		initCalculationResults,
+		measurementUnitsIdOutput,
+		measurementUnitsIdSettings,
+		notifyColor,
+		notifyMessage,
+		notifySignal,
+		notifyTimeout,
+		resetFormI,
+		setErrorMessage,
+		setErrorTimer,
+		setNotify,
 		toFixed,
-		settings,
+		settings
 	} = useToolsBaseComponent(props, context, options);
+	
+	const {
+		measurementUnitsAccelerationDefaultId,
+		measurementUnitsAccelerationType,
+		measurementUnitsAreaDefaultId,
+		measurementUnitsAreaType,
+		measurementUnitsDensityDefaultId,
+		measurementUnitsDensityType,
+		measurementUnitsDistanceType,
+		measurementUnitsDistanceDefaultId,
+		measurementUnitsFluidDefaultId,
+		measurementUnitsFluidType,
+		measurementUnitsLengthDefaultId,
+		measurementUnitslengthType,
+		measurementUnitsVelocityDefaultId,
+		measurementUnitsVelocityType,
+		measurementUnitsVolumeDefaultId,
+		measurementUnitsVolumeType,
+		measurementUnitsWeightDefaultId,
+		measurementUnitsWeightType
+	} = useToolsMeasurementBaseComponent(props, context, options);
 
-	const serviceToolsFoam = LibraryClientUtility.$injector.getService(AppConstants.InjectorKeys.SERVICE_TOOLS_FOAM);
+	const serviceToolsWeathercocking = LibraryClientUtility.$injector.getService(AppConstants.InjectorKeys.SERVICE_TOOLS_WEATHERCOCKING);
 
 	const calculationData = ref(null);
 	const calculationResults = initCalculationResults(correlationId(), ref({}));
-	const formFoamRef = ref(null);
-	const bodyTubeID = ref(null);
-	const finRootLength = ref(null);
-	const finTabLength = ref(0.3);
-	const finWidth = ref(null);
-	const lengthMeasurementUnitId = ref(null);
-	const measurementUnitslengthType = ref(AppConstants.MeasurementUnits.types.length);
-	const motorTubeOD = ref(null);
-	const numberFins = ref(null);
+	const exitVelocity = ref(null);
+	const exitVelocityMeasurementUnitId = ref(null);
+	const exitVelocityMeasurementUnitsId = ref(null);
+	const weathercockingFormRef = ref(null);
+	const windVelocity = ref(null);
+	const windVelocityMeasurementUnitId = ref(null);
+	const windVelocityMeasurementUnitsId = ref(null);
 
 	const calculationOk = async () => {
 		calculateI(correlationId(), calculationResults, async (correlationIdI, calculationResultsI) => {
-			calculationResultsI.value.foams = [];
-
-			const responseFoams = await serviceToolsFoam.foams(correlationIdI);
-			if (!responseFoams || !responseFoams.success) {
-				return false; // TODO
-			}
-
 			initCalculationData(correlationIdI);
-			const responseCalc = await serviceToolsFoam.initializeCalculation(correlationIdI, calculationData.value, measurementUnitsId.value, settings);
+			const responseCalc = await serviceToolsWeathercocking.initializeCalculation(correlationIdI, calculationData.value, measurementUnitsIdOutput.value, settings);
 			if (!responseCalc || !responseCalc.success) {
 				return false; // TODO
 			}
@@ -75,59 +97,38 @@ export function useWeathercockingBaseComponent(props, context, options) {
 			}
 			calculationResultsI.value = responseCalcInstance.results;
 			calculationResultsI.value.calculated = false;
-			calculationResultsI.value.foams = [];
-			
-			let responseCalcFoam;
-			let responseCalcFoamInstance;
-			for (const foam of responseFoams.results) {
-				foam.totalVolume = calculationResultsI.value.totalVolume;
-				responseCalcFoam = await serviceToolsFoam.initializeCalculationFoam(correlationIdI, foam, measurementUnitsId.value);
-				if (!responseCalcFoam || !responseCalcFoam.success) {
-					continue; // TODO
-				}
-
-				responseCalcFoam.results.instance.addListener(correlationIdI, handleListener);
-				responseCalcFoamInstance = responseCalcFoam.results.instance.calculate(correlationIdI, responseCalcFoam.results.steps, foam.manufacturer);
-				if (!responseCalcFoamInstance || !responseCalcFoamInstance.success) {
-					continue; // TODO
-				}
-
-				calculationResultsI.value.foams.push(responseCalcFoamInstance.results);
-			}
 
 			return true;
 		});
 	};
 	const initCalculationData = (correlationId) => {
-		calculationData.value.bodyTubeID = bodyTubeID.value;
-		calculationData.value.units = lengthMeasurementUnitId.value;
-		calculationData.value.finRootLength = finRootLength.value;
-		calculationData.value.finTabLength = finTabLength.value;
-		calculationData.value.finWidth = finWidth.value;
-		calculationData.value.motorTubeOD = motorTubeOD.value;
-		calculationData.value.numberFins = numberFins.value;
+		calculationData.value.exitVelocity = exitVelocity.value;
+		calculationData.value.exitVelocityMeasurementUnitId = exitVelocityMeasurementUnitId.value;
+		calculationData.value.exitVelocityMeasurementUnitsId = exitVelocityMeasurementUnitsId.value;
+		calculationData.value.windVelocity = windVelocity.value;
+		calculationData.value.windVelocityMeasurementUnitId = windVelocityMeasurementUnitId.value;
+		calculationData.value.windVelocityMeasurementUnitsId = windVelocityMeasurementUnitsId.value;
 	};
 	const reset = async (correlationId) => {
-		await formFoamRef.value.reset(correlationId, false);
+		await weathercockingFormRef.value.reset(correlationId, false);
 	};
 	const resetForm = (correlationId) => {
 		resetFormI(correlationId, calculationResults, (correlationId) => {
 			calculationResults.value.foams = [];
 
-			bodyTubeID.value = null;
-			finRootLength.value = null;
-			finTabLength.value = null;
-			finWidth.value = null;
-			motorTubeOD.value = null;
-			numberFins .value = null;
+			windVelocity.value = null;
+			exitVelocity.value = null;
 		});
 	};
 
 	onMounted(async () => {
 		reset(false);
 
-		calculationData.value = serviceToolsFoam.initialize(correlationId());
-		lengthMeasurementUnitId.value = measurementUnitsLengthDefaultId.value;
+		calculationData.value = serviceToolsWeathercocking.initialize(correlationId());
+		exitVelocityMeasurementUnitsId.value = measurementUnitsIdSettings.value;
+		exitVelocityMeasurementUnitId.value = measurementUnitsVelocityDefaultId.value;
+		windVelocityMeasurementUnitsId.value = measurementUnitsIdSettings.value;
+		windVelocityMeasurementUnitId.value = measurementUnitsVelocityDefaultId.value;
 	});
 
 	return {
@@ -137,38 +138,46 @@ export function useWeathercockingBaseComponent(props, context, options) {
 		hasSucceeded,
 		initialize,
 		logger,
+		noBreakingSpaces,
+		notImplementedError,
 		success,
-		calculationOutput,
-		calculateI,
-		handleListener,
-		initCalculationResults,
-		measurementUnitsId,
-		measurementUnitsAccelerationDefaultId,
-		measurementUnitsAreaDefaultId,
-		measurementUnitsFluidDefaultId,
-		measurementUnitsDistanceDefaultId,
-		measurementUnitsLengthDefaultId,
-		measurementUnitsVelocityDefaultId,
-		measurementUnitsVolumeDefaultId,
-		measurementUnitsWeightDefaultId,
-		resetFormI,
 		serviceStore,
 		sortByOrder,
 		target,
+		calculationOutput,
+		dateFormat,
+		dateFormatMask,
+		errorMessage,
+		errors,
+		errorTimer,
+		calculateI,
+		formatNumber,
+		handleListener,
+		initCalculationOutput,
+		initCalculationResults,
+		measurementUnitsIdOutput,
+		measurementUnitsIdSettings,
+		notifyColor,
+		notifyMessage,
+		notifySignal,
+		notifyTimeout,
+		resetFormI,
+		setErrorMessage,
+		setErrorTimer,
+		setNotify,
 		toFixed,
 		settings,
-		serviceToolsFoam,
+		measurementUnitsVelocityType,
+		serviceToolsWeathercocking,
 		calculationData,
 		calculationResults,
-		formFoamRef,
-		bodyTubeID,
-		finRootLength,
-		finTabLength,
-		finWidth,
-		lengthMeasurementUnitId,
-		measurementUnitslengthType,
-		motorTubeOD,
-		numberFins,
+		exitVelocity,
+		exitVelocityMeasurementUnitsId,
+		exitVelocityMeasurementUnitId,
+		weathercockingFormRef,
+		windVelocity,
+		windVelocityMeasurementUnitsId,
+		windVelocityMeasurementUnitId,
 		calculationOk,
 		initCalculationData,
 		reset,

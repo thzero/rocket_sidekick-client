@@ -96,4 +96,8 @@ export default {
 		cursor: pointer;
 		text-decoration: underline;
 	}
+
+	.measurementUnits {
+		width: 125px;
+	}
 </style>

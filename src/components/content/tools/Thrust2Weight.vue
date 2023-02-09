@@ -20,26 +20,37 @@
 						<v-row dense>
 							<v-col cols="12" sm="6">
 								<table style="width: 100%">
-									<tr><td>
-										<VNumberFieldWithValidation
-											ref="massRef"
-											vid="mass"
-											v-model="mass"
-											:validation="validation"
-											:label="$t('forms.content.tools.thrust2Weight.mass')"
-										/>
-									</td>
-									<td>
-										<MeasurementSelect
-											ref="massMeasurementUnitRef"
-											vid="massMeasurementUnitId"
-											v-model="massMeasurementUnitId"
-											:measurementUnitsId="measurementUnitsId"
-											:measurementUnitsType="measurementUnitsWeightType"
-											:validation="validation"
-											:label="$t('forms.settings.measurementUnits.weight')"
-										/>
-									</td></tr>
+									<tr>
+										<td>
+											<VNumberFieldWithValidation
+												ref="massRef"
+												vid="mass"
+												v-model="mass"
+												:validation="validation"
+												:label="$t('forms.content.tools.thrust2Weight.mass')"
+											/>
+										</td>
+										<td class="measurementUnits">
+											<MeasurementUnitsSelect
+												ref="massMeasurementUnitsIdRef"
+												vid="massMeasurementUnitsId"
+												v-model="massMeasurementUnitsId"
+												:validation="validation"
+												:label="$t('forms.settings.measurementUnits.title')"
+											/>
+										</td>
+										<td class="measurementUnits">
+											<MeasurementUnitSelect
+												ref="massMeasurementUnitRef"
+												vid="massMeasurementUnitId"
+												v-model="massMeasurementUnitId"
+												:measurementUnitsId="massMeasurementUnitsId"
+												:measurementUnitsType="measurementUnitsWeightType"
+												:validation="validation"
+												:label="$t('forms.settings.measurementUnits.weight')"
+											/>
+										</td>
+									</tr>
 								</table>
 							</v-col>
 							<v-col cols="12" sm="6">
@@ -97,25 +108,29 @@
 										/>
 									</v-col>
 									<v-col cols="12" lg="6">
-										<table><tr><td style="width: 100%;">
-											<VTextField
-												ref="motorLookup1Ref"
-												vid="motorLookup1"
-												v-model="motorLookup1"
-												:readonly="true"
-												:label="$t('forms.content.tools.thrust2Weight.motor')"
-												:placeholder="$t('forms.content.tools.thrust2Weight.motor_hint')"
-											/>
-										</td>
-										<td>
-											<v-btn
-												class="ml-2"
-												color="primary"
-												@click="clickMotorSearch(1)"
-											>
-												{{ $t('buttons.search') }}
-											</v-btn>
-										</td></tr></table>
+										<table>
+											<tr>
+												<td style="width: 100%;">
+													<VTextField
+														ref="motorLookup1Ref"
+														vid="motorLookup1"
+														v-model="motorLookup1"
+														:readonly="true"
+														:label="$t('forms.content.tools.thrust2Weight.motor')"
+														:placeholder="$t('forms.content.tools.thrust2Weight.motor_hint')"
+													/>
+												</td>
+												<td>
+													<v-btn
+														class="ml-2"
+														color="primary"
+														@click="clickMotorSearch(1)"
+													>
+														{{ $t('buttons.search') }}
+													</v-btn>
+												</td>
+											</tr>
+										</table>
 									</v-col>
 								</v-row>
 							</v-col>
@@ -166,26 +181,30 @@
 										/>
 									</v-col>
 									<v-col cols="12" lg="6">
-										<table><tr><td style="width: 100%;">
-											<VTextField
-												ref="motorLookup2Ref"
-												vid="motorLookup2"
-												v-model="motorLookup2"
-												:readonly="true"
-												:label="$t('forms.content.tools.thrust2Weight.motor')"
-												:placeholder="$t('forms.content.tools.thrust2Weight.motor_hint')"
-											/>
-										</td>
-										<td>
-											<v-btn
-												class="ml-2"
-												color="primary"
-												:disabled="!motorSelected2"
-												@click="clickMotorSearch(2)"
-											>
-												{{ $t('buttons.search') }}
-											</v-btn>
-										</td></tr></table>
+										<table>
+											<tr>
+												<td style="width: 100%;">
+													<VTextField
+														ref="motorLookup2Ref"
+														vid="motorLookup2"
+														v-model="motorLookup2"
+														:readonly="true"
+														:label="$t('forms.content.tools.thrust2Weight.motor')"
+														:placeholder="$t('forms.content.tools.thrust2Weight.motor_hint')"
+													/>
+												</td>
+												<td>
+													<v-btn
+														class="ml-2"
+														color="primary"
+														:disabled="!motorSelected2"
+														@click="clickMotorSearch(2)"
+													>
+														{{ $t('buttons.search') }}
+													</v-btn>
+												</td>
+											</tr>
+										</table>
 									</v-col>
 								</v-row>
 							</v-col>
@@ -236,26 +255,30 @@
 										/>
 									</v-col>
 									<v-col cols="12" lg="6">
-										<table><tr><td style="width: 100%;">
-											<VTextField
-												ref="motorLookup3Ref"
-												vid="motorLookup3"
-												v-model="motorLookup3"
-												:readonly="true"
-												:label="$t('forms.content.tools.thrust2Weight.motor')"
-												:placeholder="$t('forms.content.tools.thrust2Weight.motor_hint')"
-											/>
-										</td>
-										<td>
-											<v-btn
-												class="ml-2"
-												color="primary"
-												:disabled="!motorSelected3"
-												@click="clickMotorSearch(3)"
-											>
-												{{ $t('buttons.search') }}
-											</v-btn>
-										</td></tr></table>
+										<table>
+											<tr>
+												<td style="width: 100%;">
+													<VTextField
+														ref="motorLookup3Ref"
+														vid="motorLookup3"
+														v-model="motorLookup3"
+														:readonly="true"
+														:label="$t('forms.content.tools.thrust2Weight.motor')"
+														:placeholder="$t('forms.content.tools.thrust2Weight.motor_hint')"
+													/>
+												</td>
+												<td>
+													<v-btn
+														class="ml-2"
+														color="primary"
+														:disabled="!motorSelected3"
+														@click="clickMotorSearch(3)"
+													>
+														{{ $t('buttons.search') }}
+													</v-btn>
+												</td>
+											</tr>
+										</table>
 									</v-col>
 								</v-row>
 							</v-col>
@@ -306,26 +329,30 @@
 										/>
 									</v-col>
 									<v-col cols="12" lg="6">
-										<table><tr><td style="width: 100%;">
-											<VTextField
-												ref="motorLookup4Ref"
-												vid="motorLookup4"
-												v-model="motorLookup4"
-												:readonly="true"
-												:label="$t('forms.content.tools.thrust2Weight.motor')"
-												:placeholder="$t('forms.content.tools.thrust2Weight.motor_hint')"
-											/>
-										</td>
-										<td>
-											<v-btn
-												class="ml-2"
-												color="primary"
-												:disabled="!motorSelected4"
-												@click="clickMotorSearch(4)"
-											>
-												{{ $t('buttons.search') }}
-											</v-btn>
-										</td></tr></table>
+										<table>
+											<tr>
+												<td style="width: 100%;">
+													<VTextField
+														ref="motorLookup4Ref"
+														vid="motorLookup4"
+														v-model="motorLookup4"
+														:readonly="true"
+														:label="$t('forms.content.tools.thrust2Weight.motor')"
+														:placeholder="$t('forms.content.tools.thrust2Weight.motor_hint')"
+													/>
+												</td>
+												<td>
+													<v-btn
+														class="ml-2"
+														color="primary"
+														:disabled="!motorSelected4"
+														@click="clickMotorSearch(4)"
+													>
+														{{ $t('buttons.search') }}
+													</v-btn>
+												</td>
+											</tr>
+										</table>
 									</v-col>
 								</v-row>
 							</v-col>
@@ -356,16 +383,16 @@
 							<v-col>
 								<v-row class="pb-2" dense>
 									<v-col cols="3">
-										<span class="text-bold">{{ $t('forms.content.tools.thrust2Weight.specifications') }}</span>
+										<span class="text-h6 text-bold">{{ $t('forms.content.tools.thrust2Weight.specifications') }}</span>
 									</v-col>
 									<v-col cols="3">
-										<span class="text-bold">{{ $t('forms.content.tools.thrust2Weight.thrust_initial') }}</span>
+										<span class="text-h6 text-bold">{{ $t('forms.content.tools.thrust2Weight.thrust_initial') }}</span>
 									</v-col>
 									<v-col cols="3">
-										<span class="text-bold">{{ $t('forms.content.tools.thrust2Weight.thrust_peak') }}</span>
+										<span class="text-h6 text-bold">{{ $t('forms.content.tools.thrust2Weight.thrust_peak') }}</span>
 									</v-col>
 									<v-col cols="3">
-										<span class="text-bold">{{ $t('forms.content.tools.thrust2Weight.thrust_average') }}</span>
+										<span class="text-h6 text-bold">{{ $t('forms.content.tools.thrust2Weight.thrust_average') }}</span>
 									</v-col>
 								</v-row>
 								<v-row 
@@ -421,7 +448,8 @@ import LibraryClientUtility from '@thzero/library_client/utility/index';
 import { useThrust2WeightBaseComponent } from '@/components/content/tools/thrust2WeightBase';
 
 import CalculatedOuput from '@/components/content/tools/CalculatedOuput';
-import MeasurementSelect from '@/components/content/tools/MeasurementSelect';
+import MeasurementUnitSelect from '@/components/content/tools/measurementUnitSelect';
+import MeasurementUnitsSelect from '@/components/content/tools/measurementUnitsSelect';
 import MotorLookupDialog from '@/components/external/MotorLookupDialog';
 import VCheckboxWithValidation from '@/library_vue_vuetify/components/form//VCheckboxWithValidation';
 import VFormControl from '@/library_vue_vuetify/components/form/VFormControl';
@@ -433,7 +461,8 @@ export default {
 	name: 'Thrust2Weight',
 	components: {
 		CalculatedOuput,
-		MeasurementSelect,
+		MeasurementUnitSelect,
+		MeasurementUnitsSelect,
 		MotorLookupDialog,
 		VCheckboxWithValidation,
 		VFormControl,
@@ -449,26 +478,36 @@ export default {
 			hasSucceeded,
 			initialize,
 			logger,
+			noBreakingSpaces,
+			notImplementedError,
 			success,
-			calculationOutput,
-			calculateI,
-			handleListener,
-			initCalculationResults,
-			measurementUnitsId,
-			measurementUnitsAccelerationDefaultId,
-			measurementUnitsAreaDefaultId,
-			measurementUnitsFluidDefaultId,
-			measurementUnitsDistanceDefaultId,
-			measurementUnitsLengthDefaultId,
-			measurementUnitsVelocityDefaultId,
-			measurementUnitsVolumeDefaultId,
-			measurementUnitsWeightDefaultId,
-			resetFormI,
 			serviceStore,
 			sortByOrder,
 			target,
+			calculationOutput,
+			dateFormat,
+			dateFormatMask,
+			errorMessage,
+			errors,
+			errorTimer,
+			calculateI,
+			formatNumber,
+			handleListener,
+			initCalculationOutput,
+			initCalculationResults,
+			measurementUnitsIdOutput,
+			measurementUnitsIdSettings,
+			notifyColor,
+			notifyMessage,
+			notifySignal,
+			notifyTimeout,
+			resetFormI,
+			setErrorMessage,
+			setErrorTimer,
+			setNotify,
 			toFixed,
 			settings,
+			measurementUnitsWeightType,
 			serviceToolsThrust2Weight,
 			calculationResults,
 			dialogMotorSearchRef,
@@ -476,9 +515,9 @@ export default {
 			formThrust2WeightRef,
 			mass,
 			massMeasurementUnitId,
+			massMeasurementUnitsId,
 			maxLaunchRodTime,
 			maxLaunchRodTimeDefault,
-			measurementUnitsWeightType,
 			motorLookup1,
 			motorLookup2,
 			motorLookup3,
@@ -521,26 +560,36 @@ export default {
 			hasSucceeded,
 			initialize,
 			logger,
+			noBreakingSpaces,
+			notImplementedError,
 			success,
-			calculationOutput,
-			calculateI,
-			handleListener,
-			initCalculationResults,
-			measurementUnitsId,
-			measurementUnitsAccelerationDefaultId,
-			measurementUnitsAreaDefaultId,
-			measurementUnitsFluidDefaultId,
-			measurementUnitsDistanceDefaultId,
-			measurementUnitsLengthDefaultId,
-			measurementUnitsVelocityDefaultId,
-			measurementUnitsVolumeDefaultId,
-			measurementUnitsWeightDefaultId,
-			resetFormI,
 			serviceStore,
 			sortByOrder,
 			target,
+			calculationOutput,
+			dateFormat,
+			dateFormatMask,
+			errorMessage,
+			errors,
+			errorTimer,
+			calculateI,
+			formatNumber,
+			handleListener,
+			initCalculationOutput,
+			initCalculationResults,
+			measurementUnitsIdOutput,
+			measurementUnitsIdSettings,
+			notifyColor,
+			notifyMessage,
+			notifySignal,
+			notifyTimeout,
+			resetFormI,
+			setErrorMessage,
+			setErrorTimer,
+			setNotify,
 			toFixed,
 			settings,
+			measurementUnitsWeightType,
 			serviceToolsThrust2Weight,
 			calculationResults,
 			dialogMotorSearchRef,
@@ -548,9 +597,9 @@ export default {
 			formThrust2WeightRef,
 			mass,
 			massMeasurementUnitId,
+			massMeasurementUnitsId,
 			maxLaunchRodTime,
 			maxLaunchRodTimeDefault,
-			measurementUnitsWeightType,
 			motorLookup1,
 			motorLookup2,
 			motorLookup3,
@@ -591,6 +640,7 @@ export default {
 			data2: { $autoDirty: true },
 			mass: { required, decimal, between: between(0, 9999), $autoDirty: true },
 			massMeasurementUnitId: { $autoDirty: true },
+			massMeasurementUnitsId: { required, $autoDirty: true },
 			maxLaunchRodTime: { required, decimal, between: between(0, 5), $autoDirty: true },
 			motorSelected1: { $autoDirty: true },
 			motorSelected2: { $autoDirty: true },

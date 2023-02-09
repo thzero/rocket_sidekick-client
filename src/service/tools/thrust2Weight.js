@@ -1,8 +1,8 @@
 import AppConstants from '@/constants';
 
-import BaseService from '@thzero/library_client/service/index';
+import ToolsService from '@/service/tools/index';
 
-class Thrust2WeightToolsService extends BaseService {
+class Thrust2WeightToolsService extends ToolsService {
 	constructor() {
 		super();
 	}
@@ -22,9 +22,9 @@ class Thrust2WeightToolsService extends BaseService {
 		};
 	}
 
-	async initializeCalculation(correlationId, data, measurementUnits) {
+	async initializeCalculation(correlationId, data, outputMeasurementUnitsId) {
 		this._enforceNotNull('Thrust2WeightToolsService', 'initializeCalculation', data, 'data', correlationId);
-		this._enforceNotEmpty('Thrust2WeightToolsService', 'initializeCalculation', measurementUnits, 'measurementUnits', correlationId);
+		this._enforceNotEmpty('Thrust2WeightToolsService', 'initializeCalculation', outputMeasurementUnitsId, 'outputMeasurementUnitsId', correlationId);
 
 		const calculationSteps = [
 			{

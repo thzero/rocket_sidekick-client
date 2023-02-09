@@ -1,11 +1,12 @@
 <template>
     <VSelectWithValidation
-        ref="measurementUnitRef"
+        ref="innerValueRef"
         vid="innerValue"
 		v-model="innerValue"
-		:items="measurementUnits"
+		:items="measurementUnitsOptions"
 		:label="$attrs.label"
         :validation="validation"
+		:vidOverride="vid"
 		@update:modelValue="innerValueUpdate"
     />
 </template>
@@ -13,16 +14,16 @@
 <script>
 import VSelectWithValidation from '@/library_vue_vuetify/components/form//VSelectWithValidation';
 
-import { useMeasurementSelectBaseComponent } from '@/components/content/tools/measurementSelectBase';
-import { useMeasurementSelectBaseProps } from '@/components/content/tools/measurementSelectBaseProps';
+import { useMeasurementUnitsSelectBaseComponent } from '@/components/content/tools/measurementUnitsSelectBase';
+import { useMeasurementUnitsSelectBaseProps } from '@/components/content/tools/measurementUnitsSelectBaseProps';
 
 export default {
-	name: 'MeasurementSelect',
+	name: 'MeasurementUnitsSelect',
 	components: {
 		VSelectWithValidation
 	},
     props: {
-		...useMeasurementSelectBaseProps
+		...useMeasurementUnitsSelectBaseProps
     },
 	setup(props, context) {
 		const {
@@ -46,13 +47,12 @@ export default {
 			errorsI,
 			hideDetails,
 			innerValue,
-			initValue,
 			innerValueUpdate,
-			measurementUnits,
-			measurementUnitTrans
-		} = useMeasurementSelectBaseComponent(props, context);
+			initValue,
+			measurementUnitsOptions
+		} = useMeasurementUnitsSelectBaseComponent(props, context);
 
-		return {	
+		return {
 			correlationId,
 			error,
 			hasFailed,
@@ -73,10 +73,9 @@ export default {
 			errorsI,
 			hideDetails,
 			innerValue,
-			initValue,
 			innerValueUpdate,
-			measurementUnits,
-			measurementUnitTrans
+			initValue,
+			measurementUnitsOptions
 		};
 	}
 };

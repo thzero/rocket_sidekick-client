@@ -2,13 +2,13 @@
 	<div>
 		<v-row dense>
 			<v-col cols="12" class="text-center text-h5 pb-2">
-				{{ $t('titles.content.tools.foam') }}
+				{{ $t('titles.content.tools.weathercocking') }}
 			</v-col>
 		</v-row>
 		<v-row dense>
 			<v-col cols="12">
 				<VFormControl
-					ref="formFoamRef"
+					ref="weathercockingFormRef"
 					:validation="validation"
 					:resetForm="resetForm"
 					buttonClearName="buttons.reset"
@@ -20,77 +20,73 @@
 						<v-row dense>
 							<v-col cols="12" sm="6" >
 								<table style="width: 100%">
-									<tr><td>
-										<VNumberFieldWithValidation
-											ref="bodyTubeIDRef"
-											vid="bodyTubeID"
-											v-model="bodyTubeID"
-											:validation="validation"
-											:label="$t('forms.content.tools.foam.bodyTubeID')"
-										/>
-									</td>
-									<td>
-										<MeasurementSelect
-											ref="lengthMeasurementUnitRef"
-											vid="lengthMeasurementUnitId"
-											v-model="lengthMeasurementUnitId"
-											:measurementUnitsId="measurementUnitsId"
-											:measurementUnitsType="measurementUnitslengthType"
-											:validation="validation"
-											:label="$t('forms.settings.measurementUnits.length')"
-										/>
-									</td></tr>
+									<tr>
+										<td>
+											<VNumberFieldWithValidation
+												ref="windVelocityRef"
+												vid="windVelocity"
+												v-model="windVelocity"
+												:validation="validation"
+												:label="$t('forms.content.tools.weathercocking.windVelocity')"
+											/>
+										</td>
+										<td class="measurementUnits">
+											<MeasurementUnitsSelect
+												ref="windVelocityMeasurementUnitsIdRef"
+												vid="windVelocityMeasurementUnitsId"
+												v-model="windVelocityMeasurementUnitsId"
+												:validation="validation"
+												:label="$t('forms.settings.measurementUnits.title')"
+											/>
+										</td>
+										<td class="measurementUnits">
+											<MeasurementUnitSelect
+												ref="windVelocityMeasurementUnitIdRef"
+												vid="windVelocityMeasurementUnitId"
+												v-model="windVelocityMeasurementUnitId"
+												:measurementUnitsId="windVelocityMeasurementUnitsId"
+												:measurementUnitsType="measurementUnitsVelocityType"
+												:validation="validation"
+												:label="$t('forms.settings.measurementUnits.velocity')"
+											/>
+										</td>
+									</tr>
 								</table>
 							</v-col>
 							<v-col cols="12" sm="6" >
-								<VNumberFieldWithValidation
-									ref="motorTubeODRef"
-									vid="motorTubeOD"
-									v-model="motorTubeOD"
-									:validation="validation"
-									:label="$t('forms.content.tools.foam.motorTubeOD')"
-									:placeholder="$t('forms.content.tools.foam.motorTubeOD_hint')"
-								/>
-							</v-col>
-							<v-col cols="12" sm="6" >
-								<VNumberFieldWithValidation
-									ref="finRootLengthRef"
-									vid="finRootLength"
-									v-model="finRootLength"
-									:validation="validation"
-									:label="$t('forms.content.tools.foam.finRootLength')"
-									:placeholder="$t('forms.content.tools.foam.finRootLength_hint')"
-								/>
-							</v-col>
-							<v-col cols="12" sm="6" >
-								<VNumberFieldWithValidation
-									ref="finTabLengthRef"
-									vid="finTabLength"
-									v-model="finTabLength"
-									:validation="validation"
-									:label="$t('forms.content.tools.foam.finTabLength')"
-									:placeholder="$t('forms.content.tools.foam.finTabLength_hint')"
-								/>
-							</v-col>
-							<v-col cols="12" sm="6" >
-								<VNumberFieldWithValidation
-									ref="finWidthRef"
-									vid="finWidth"
-									v-model="finWidth"
-									:validation="validation"
-									:label="$t('forms.content.tools.foam.finWidth')"
-									:placeholder="$t('forms.content.tools.foam.finWidth_hint')"
-								/>
-							</v-col>
-							<v-col cols="12" sm="6" >
-								<VNumberFieldWithValidation
-									ref="numberFinsRef"
-									vid="numberFins"
-									v-model="numberFins"
-									:validation="validation"
-									:label="$t('forms.content.tools.foam.numberFins')"
-									:placeholder="$t('forms.content.tools.foam.numberFins_hint')"
-								/>
+								<table style="width: 100%">
+									<tr>
+										<td>
+											<VNumberFieldWithValidation
+												ref="exitVelocityRef"
+												vid="exitVelocity"
+												v-model="exitVelocity"
+												:validation="validation"
+												:label="$t('forms.content.tools.weathercocking.exitVelocity')"
+											/>
+										</td>
+										<td class="measurementUnits">
+											<MeasurementUnitsSelect
+												ref="exitVelocityMeasurementUnitsIdRef"
+												vid="exitVelocityMeasurementUnitsId"
+												v-model="exitVelocityMeasurementUnitsId"
+												:validation="validation"
+												:label="$t('forms.settings.measurementUnits.title')"
+											/>
+										</td>
+										<td class="measurementUnits">
+											<MeasurementUnitSelect
+												ref="exitVelocityMeasurementUnitIdRef"
+												vid="exitVelocityMeasurementUnitId"
+												v-model="exitVelocityMeasurementUnitId"
+												:measurementUnitsId="exitVelocityMeasurementUnitsId"
+												:measurementUnitsType="measurementUnitsVelocityType"
+												:validation="validation"
+												:label="$t('forms.settings.measurementUnits.velocity')"
+											/>
+										</td>
+									</tr>
+								</table>
 							</v-col>
 						</v-row>
 					</template>
@@ -103,59 +99,28 @@
 					<v-card-text>
 						<v-row dense class="pb-2">
 							<v-col class="text-center text-h5">
-								{{ $t('strings.content.tools.foam.calculated') }}
+								{{ $t('strings.content.tools.weathercocking.calculated') }}
 							</v-col>
 						</v-row>
 						<v-row dense class="pb-2" v-if="calculationResults.calculated">
 							<v-col>
 								<v-row class="pb-2" dense>
 									<v-col cols="4">
-										<span class="text-bold">{{ $t('forms.content.tools.foam.totalVolume') }}</span>&nbsp;&nbsp;
-										<span class="text-bold" v-if="calculationResults.totalVolume">{{ calculationResults.totalVolume }}</span>
+										<span class="text-h6 text-bold">{{ $t('strings.content.tools.weathercocking.degrees') }}</span>&nbsp;&nbsp;
+									</v-col>
+									<v-col cols="4">
+										<span class="text-h6 text-bold">{{ $t('strings.content.tools.weathercocking.weathercocked') }}</span>&nbsp;&nbsp;
 									</v-col>
 								</v-row>
-								<v-row 
-									class="pb-2" 
-									dense
-									no-gutters
-								>
-									<v-col cols="3" style="">
-											{{ $t('strings.content.tools.foam.brand') }}
+								<v-row class="pb-2" dense>
+									<v-col cols="4">
+										<span class="text-bold">{{ calculationResults.angleDegrees }}</span>
 									</v-col>
-									<v-col cols="2" style="">
-											{{ $t('strings.content.tools.foam.expansion') }}
-									</v-col>
-									<v-col cols="2" style="">
-											{{ $t('strings.content.tools.foam.density') }}
-									</v-col>
-									<v-col cols="2" style="">
-											{{ $t('strings.content.tools.foam.foamWeight') }}
-									</v-col>
-									<v-col cols="2" style="">
-											{{ $t('strings.content.tools.foam.requiredAmount') }}
-									</v-col>
-								</v-row>
-								<v-row 
-									class="pb-2" 
-									dense
-									no-gutters
-									v-for="item in calculationResults.foams"
-									:key="item.manufacturer"
-								>
-									<v-col cols="3" style="">
-											{{ item.manufacturer }}
-									</v-col>
-									<v-col cols="2" style="">
-											{{ item.expansion }}
-									</v-col>
-									<v-col cols="2" style="">
-											{{ item.densityMD }}
-									</v-col>
-									<v-col cols="2" style="">
-											{{ item.foamWeight }}
-									</v-col>
-									<v-col cols="2" style="">
-											{{ item.requiredAmount }}
+									<v-col cols="4">
+										<span 
+										class="text-bold"
+										:style="'color: ' + (calculationResults.weathercocked ? 'red' : 'green')"
+									>{{ calculationResults.weathercocked ? $t('strings.yes') : $t('strings.no') }}</span>
 									</v-col>
 								</v-row>
 							</v-col>
@@ -171,24 +136,26 @@
 </template>
 
 <script>
-import { between, decimal, integer, helpers, required } from '@vuelidate/validators';
-
-import LibraryClientUtility from '@thzero/library_client/utility/index';
+import { between, decimal, required } from '@vuelidate/validators';
 
 import { useWeathercockingBaseComponent } from '@/components/content/tools/weathercockingBase';
 
 import CalculatedOuput from '@/components/content/tools//CalculatedOuput';
+import MeasurementUnitSelect from '@/components/content/tools/measurementUnitSelect';
+import MeasurementUnitsSelect from '@/components/content/tools/measurementUnitsSelect';
 import VFormControl from '@/library_vue_vuetify/components/form/VFormControl';
-import MeasurementSelect from '@/components/content/tools/MeasurementSelect';
 import VNumberFieldWithValidation from '@/library_vue_vuetify/components/form/VNumberFieldWithValidation';
+import VSelectWithValidation from '@/library_vue_vuetify/components/form/VSelectWithValidation';
 
 export default {
-	name: 'WeatherCocking',
+	name: 'Weathercocking',
 	components: {
 		CalculatedOuput,
+		MeasurementUnitSelect,
+		MeasurementUnitsSelect,
 		VFormControl,
-		MeasurementSelect,
-		VNumberFieldWithValidation
+		VNumberFieldWithValidation,
+		VSelectWithValidation
 	},
 	setup (props, context) {
 		const {
@@ -198,84 +165,101 @@ export default {
 			hasSucceeded,
 			initialize,
 			logger,
+			noBreakingSpaces,
+			notImplementedError,
 			success,
-			calculationOutput,
-			calculateI,
-			handleListener,
-			initCalculationResults,
-			measurementUnitsId,
-			measurementUnitsAccelerationDefaultId,
-			measurementUnitsAreaDefaultId,
-			measurementUnitsFluidDefaultId,
-			measurementUnitsDistanceDefaultId,
-			measurementUnitsLengthDefaultId,
-			measurementUnitsVelocityDefaultId,
-			measurementUnitsVolumeDefaultId,
-			measurementUnitsWeightDefaultId,
-			resetFormI,
 			serviceStore,
 			sortByOrder,
 			target,
+			calculationOutput,
+			dateFormat,
+			dateFormatMask,
+			errorMessage,
+			errors,
+			errorTimer,
+			calculateI,
+			formatNumber,
+			handleListener,
+			initCalculationOutput,
+			initCalculationResults,
+			measurementUnitsIdOutput,
+			measurementUnitsIdSettings,
+			notifyColor,
+			notifyMessage,
+			notifySignal,
+			notifyTimeout,
+			resetFormI,
+			setErrorMessage,
+			setErrorTimer,
+			setNotify,
 			toFixed,
 			settings,
-			serviceToolsWeatherCocking,
+			measurementUnitsVelocityType,
+			serviceToolsWeathercocking,
 			calculationData,
 			calculationResults,
-			formFoamRef,
-			bodyTubeID,
-			finRootLength,
-			finTabLength,
-			finWidth,
-			lengthMeasurementUnitId,
-			measurementUnitslengthType,
-			motorTubeOD,
-			numberFins,
+			exitVelocity,
+			exitVelocityMeasurementUnitsId,
+			exitVelocityMeasurementUnitId,
+			weathercockingFormRef,
+			windVelocity,
+			windVelocityMeasurementUnitsId,
+			windVelocityMeasurementUnitId,
 			calculationOk,
 			initCalculationData,
 			reset,
 			resetForm,
 			scope,
-			validation
+			validation,
 		} = useWeathercockingBaseComponent(props, context);
 
-		return {correlationId,
+		return {
+			correlationId,
 			error,
 			hasFailed,
 			hasSucceeded,
 			initialize,
 			logger,
+			noBreakingSpaces,
+			notImplementedError,
 			success,
-			calculationOutput,
-			calculateI,
-			handleListener,
-			initCalculationResults,
-			measurementUnitsId,
-			measurementUnitsAccelerationDefaultId,
-			measurementUnitsAreaDefaultId,
-			measurementUnitsFluidDefaultId,
-			measurementUnitsDistanceDefaultId,
-			measurementUnitsLengthDefaultId,
-			measurementUnitsVelocityDefaultId,
-			measurementUnitsVolumeDefaultId,
-			measurementUnitsWeightDefaultId,
-			resetFormI,
 			serviceStore,
 			sortByOrder,
 			target,
+			calculationOutput,
+			dateFormat,
+			dateFormatMask,
+			errorMessage,
+			errors,
+			errorTimer,
+			calculateI,
+			formatNumber,
+			handleListener,
+			initCalculationOutput,
+			initCalculationResults,
+			measurementUnitsIdOutput,
+			measurementUnitsIdSettings,
+			notifyColor,
+			notifyMessage,
+			notifySignal,
+			notifyTimeout,
+			resetFormI,
+			setErrorMessage,
+			setErrorTimer,
+			setNotify,
 			toFixed,
 			settings,
-			serviceToolsWeatherCocking,
+			measurementUnitsVelocityType,
+			serviceToolsWeathercocking,
 			calculationData,
 			calculationResults,
-			formFoamRef,
-			bodyTubeID,
-			finRootLength,
-			finTabLength,
-			finWidth,
-			lengthMeasurementUnitId,
-			measurementUnitslengthType,
-			motorTubeOD,
-			numberFins,
+			exitVelocity,
+			exitVelocityMeasurementUnitsId,
+			exitVelocityMeasurementUnitId,
+			weathercockingFormRef,
+			windVelocity,
+			windVelocityMeasurementUnitsId,
+			windVelocityMeasurementUnitId,
 			calculationOk,
 			initCalculationData,
 			reset,
@@ -286,50 +270,13 @@ export default {
 	},
 	validations () {
 		return {
-			bodyTubeID: { required, decimal, between: between(0, 9999), $autoDirty: true },
-			finRootLength: { required, decimal, between: between(0, 9999), $autoDirty: true },
-			finTabLength: { 
-				decimal, between: between(0, 999999), 
-				finTabFinRoot: helpers.withMessage(LibraryClientUtility.$trans.t('errors.content.tools.foam.finTabFinRoot'), finTabFinRoot), 
-				$autoDirty: true 
-			},
-			finWidth: {
-				required, decimal, between: between(0, 999999), 
-				motorTfinWidthubeBodyTube: helpers.withMessage(LibraryClientUtility.$trans.t('errors.content.tools.foam.finWidth'), finWidth), 
-				$autoDirty: true 
-			},
-			motorTubeOD: { 
-				required, decimal, between: between(0, 9999), 
-				motorTubeBodyTube: helpers.withMessage(LibraryClientUtility.$trans.t('errors.content.tools.foam.motorTubeBodyTube'), motorTubeBodyTube), 
-				$autoDirty: true 
-			},
-			numberFins: { required, integer, between: between(0, 999999), $autoDirty: true }
+			exitVelocity: { required, decimal, between: between(0.1, 999), $autoDirty: true },
+			exitVelocityMeasurementUnitsId: { required, $autoDirty: true },
+			exitVelocityMeasurementUnitId: { required, $autoDirty: true },
+			windVelocity: { required, decimal, between: between(0.1, 999), $autoDirty: true },
+			windVelocityMeasurementUnitsId: { required, $autoDirty: true },
+			windVelocityMeasurementUnitId: { required, $autoDirty: true }
 		};
 	}
 };
-
-const finTabFinRoot = (value, siblings, vm) => {
-	value = Number(value);
-	if (siblings.finRootLength && (value >= Number(siblings.finRootLength)))
-		return false;
-	return true;
-}
-
-const finWidth = (value, siblings, vm) => {
-	value = Number(value);
-	if (!siblings.motorTubeOD)
-		return true;
-	const motorTubeOD = Number(siblings.motorTubeOD);
-	const delta = value / motorTubeOD;
-	if (delta > 0.5)
-		return false;
-	return true;
-}
-
-const motorTubeBodyTube = (value, siblings, vm) => {
-	value = Number(value);
-	if (siblings.bodyTubeID && (value >= Number(siblings.bodyTubeID)))
-		return false;
-	return true;
-}
 </script>

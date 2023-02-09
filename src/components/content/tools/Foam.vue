@@ -20,26 +20,37 @@
 						<v-row dense>
 							<v-col cols="12" sm="6" >
 								<table style="width: 100%">
-									<tr><td>
-										<VNumberFieldWithValidation
-											ref="bodyTubeIDRef"
-											vid="bodyTubeID"
-											v-model="bodyTubeID"
-											:validation="validation"
-											:label="$t('forms.content.tools.foam.bodyTubeID')"
-										/>
-									</td>
-									<td>
-										<MeasurementSelect
-											ref="lengthMeasurementUnitRef"
-											vid="lengthMeasurementUnitId"
-											v-model="lengthMeasurementUnitId"
-											:measurementUnitsId="measurementUnitsId"
-											:measurementUnitsType="measurementUnitslengthType"
-											:validation="validation"
-											:label="$t('forms.settings.measurementUnits.length')"
-										/>
-									</td></tr>
+									<tr>
+										<td>
+											<VNumberFieldWithValidation
+												ref="bodyTubeIDRef"
+												vid="bodyTubeID"
+												v-model="bodyTubeID"
+												:validation="validation"
+												:label="$t('forms.content.tools.foam.bodyTubeID')"
+											/>
+										</td>
+										<td class="measurementUnits">
+											<MeasurementUnitsSelect
+												ref="lengthMeasurementUnitsIdRef"
+												vid="lengthMeasurementUnitsId"
+												v-model="lengthMeasurementUnitsId"
+												:validation="validation"
+												:label="$t('forms.settings.measurementUnits.title')"
+											/>
+										</td>
+										<td class="measurementUnits">
+											<MeasurementUnitSelect
+												ref="lengthMeasurementUnitRef"
+												vid="lengthMeasurementUnitId"
+												v-model="lengthMeasurementUnitId"
+												:measurementUnitsId="lengthMeasurementUnitsId"
+												:measurementUnitsType="measurementUnitslengthType"
+												:validation="validation"
+												:label="$t('forms.settings.measurementUnits.length')"
+											/>
+										</td>
+									</tr>
 								</table>
 							</v-col>
 							<v-col cols="12" sm="6" >
@@ -93,6 +104,34 @@
 								/>
 							</v-col>
 						</v-row>
+						<v-row dense>
+							<v-col cols="12">
+								<table style="width: 100%">
+									<tr>
+										<td class="measurementUnits">
+											<MeasurementUnitsSelect
+												ref="fluidMeasurementUnitsIdRef"
+												vid="fluidMeasurementUnitsId"
+												v-model="fluidMeasurementUnitsId"
+												:validation="validation"
+												:label="$t('forms.settings.measurementUnits.title')"
+											/>
+										</td>
+										<td class="measurementUnits">
+											<MeasurementUnitSelect
+												ref="fluidMeasurementUnitIdRef"
+												vid="fluidMeasurementUnitId"
+												v-model="fluidMeasurementUnitId"
+												:measurementUnitsId="fluidMeasurementUnitsId"
+												:measurementUnitsType="measurementUnitsFluidType"
+												:validation="validation"
+												:label="$t('forms.settings.measurementUnits.fluid')"
+											/>
+										</td>
+									</tr>
+								</table>
+							</v-col>
+						</v-row>
 					</template>
 				</VFormControl>
 			</v-col>
@@ -110,8 +149,8 @@
 							<v-col>
 								<v-row class="pb-2" dense>
 									<v-col cols="4">
-										<span class="text-bold">{{ $t('forms.content.tools.foam.totalVolume') }}</span>&nbsp;&nbsp;
-										<span class="text-bold" v-if="calculationResults.totalVolume">{{ calculationResults.totalVolume }}</span>
+										<span class="text-h6 text-bold">{{ $t('forms.content.tools.foam.totalVolume') }}</span>&nbsp;&nbsp;
+										<span class="text-h6 text-bold" v-if="calculationResults.totalVolume">{{ calculationResults.totalVolume }}</span>
 									</v-col>
 								</v-row>
 								<v-row 
@@ -119,19 +158,19 @@
 									dense
 									no-gutters
 								>
-									<v-col cols="3" style="">
+									<v-col cols="3" style="text-h6 ">
 											{{ $t('strings.content.tools.foam.brand') }}
 									</v-col>
-									<v-col cols="2" style="">
+									<v-col cols="2" style="text-h6 ">
 											{{ $t('strings.content.tools.foam.expansion') }}
 									</v-col>
-									<v-col cols="2" style="">
+									<v-col cols="2" style="text-h6 ">
 											{{ $t('strings.content.tools.foam.density') }}
 									</v-col>
-									<v-col cols="2" style="">
+									<v-col cols="2" style="text-h6 ">
 											{{ $t('strings.content.tools.foam.foamWeight') }}
 									</v-col>
-									<v-col cols="2" style="">
+									<v-col cols="2" style="text-h6 ">
 											{{ $t('strings.content.tools.foam.requiredAmount') }}
 									</v-col>
 								</v-row>
@@ -178,16 +217,18 @@ import LibraryClientUtility from '@thzero/library_client/utility/index';
 import { useFoamBaseComponent } from '@/components/content/tools/foamBase';
 
 import CalculatedOuput from '@/components/content/tools//CalculatedOuput';
+import MeasurementUnitSelect from '@/components/content/tools/measurementUnitSelect';
+import MeasurementUnitsSelect from '@/components/content/tools/measurementUnitsSelect';
 import VFormControl from '@/library_vue_vuetify/components/form/VFormControl';
-import MeasurementSelect from '@/components/content/tools/MeasurementSelect';
 import VNumberFieldWithValidation from '@/library_vue_vuetify/components/form/VNumberFieldWithValidation';
 
 export default {
 	name: 'Foam',
 	components: {
 		CalculatedOuput,
+		MeasurementUnitSelect,
+		MeasurementUnitsSelect,
 		VFormControl,
-		MeasurementSelect,
 		VNumberFieldWithValidation
 	},
 	setup (props, context) {
@@ -198,26 +239,37 @@ export default {
 			hasSucceeded,
 			initialize,
 			logger,
+			noBreakingSpaces,
+			notImplementedError,
 			success,
-			calculationOutput,
-			calculateI,
-			handleListener,
-			initCalculationResults,
-			measurementUnitsId,
-			measurementUnitsAccelerationDefaultId,
-			measurementUnitsAreaDefaultId,
-			measurementUnitsFluidDefaultId,
-			measurementUnitsDistanceDefaultId,
-			measurementUnitsLengthDefaultId,
-			measurementUnitsVelocityDefaultId,
-			measurementUnitsVolumeDefaultId,
-			measurementUnitsWeightDefaultId,
-			resetFormI,
 			serviceStore,
 			sortByOrder,
 			target,
+			calculationOutput,
+			dateFormat,
+			dateFormatMask,
+			errorMessage,
+			errors,
+			errorTimer,
+			calculateI,
+			formatNumber,
+			handleListener,
+			initCalculationOutput,
+			initCalculationResults,
+			measurementUnitsIdOutput,
+			measurementUnitsIdSettings,
+			notifyColor,
+			notifyMessage,
+			notifySignal,
+			notifyTimeout,
+			resetFormI,
+			setErrorMessage,
+			setErrorTimer,
+			setNotify,
 			toFixed,
 			settings,
+			measurementUnitsFluidType,
+			measurementUnitslengthType,
 			serviceToolsFoam,
 			calculationData,
 			calculationResults,
@@ -226,8 +278,10 @@ export default {
 			finRootLength,
 			finTabLength,
 			finWidth,
+			fluidMeasurementUnitId,
+			fluidMeasurementUnitsId,
 			lengthMeasurementUnitId,
-			measurementUnitslengthType,
+			lengthMeasurementUnitsId,
 			motorTubeOD,
 			numberFins,
 			calculationOk,
@@ -238,32 +292,44 @@ export default {
 			validation
 		} = useFoamBaseComponent(props, context);
 
-		return {correlationId,
+		return {
+			correlationId,
 			error,
 			hasFailed,
 			hasSucceeded,
 			initialize,
 			logger,
+			noBreakingSpaces,
+			notImplementedError,
 			success,
-			calculationOutput,
-			calculateI,
-			handleListener,
-			initCalculationResults,
-			measurementUnitsId,
-			measurementUnitsAccelerationDefaultId,
-			measurementUnitsAreaDefaultId,
-			measurementUnitsFluidDefaultId,
-			measurementUnitsDistanceDefaultId,
-			measurementUnitsLengthDefaultId,
-			measurementUnitsVelocityDefaultId,
-			measurementUnitsVolumeDefaultId,
-			measurementUnitsWeightDefaultId,
-			resetFormI,
 			serviceStore,
 			sortByOrder,
 			target,
+			calculationOutput,
+			dateFormat,
+			dateFormatMask,
+			errorMessage,
+			errors,
+			errorTimer,
+			calculateI,
+			formatNumber,
+			handleListener,
+			initCalculationOutput,
+			initCalculationResults,
+			measurementUnitsIdOutput,
+			measurementUnitsIdSettings,
+			notifyColor,
+			notifyMessage,
+			notifySignal,
+			notifyTimeout,
+			resetFormI,
+			setErrorMessage,
+			setErrorTimer,
+			setNotify,
 			toFixed,
 			settings,
+			measurementUnitsFluidType,
+			measurementUnitslengthType,
 			serviceToolsFoam,
 			calculationData,
 			calculationResults,
@@ -272,8 +338,10 @@ export default {
 			finRootLength,
 			finTabLength,
 			finWidth,
+			fluidMeasurementUnitId,
+			fluidMeasurementUnitsId,
 			lengthMeasurementUnitId,
-			measurementUnitslengthType,
+			lengthMeasurementUnitsId,
 			motorTubeOD,
 			numberFins,
 			calculationOk,
@@ -298,6 +366,10 @@ export default {
 				motorTfinWidthubeBodyTube: helpers.withMessage(LibraryClientUtility.$trans.t('errors.content.tools.foam.finWidth'), finWidth), 
 				$autoDirty: true 
 			},
+			fluidMeasurementUnitId: { $autoDirty: true },
+			fluidMeasurementUnitsId: { required, $autoDirty: true },
+			lengthMeasurementUnitId: { $autoDirty: true },
+			lengthMeasurementUnitsId: { required, $autoDirty: true },
 			motorTubeOD: { 
 				required, decimal, between: between(0, 9999), 
 				motorTubeBodyTube: helpers.withMessage(LibraryClientUtility.$trans.t('errors.content.tools.foam.motorTubeBodyTube'), motorTubeBodyTube), 
@@ -310,7 +382,7 @@ export default {
 
 const finTabFinRoot = (value, siblings, vm) => {
 	value = Number(value);
-	if (siblings.finRootLength && (value >= Number(siblings.finRootLength)))
+	if (siblings.finRootLength && (value > Number(siblings.finRootLength)))
 		return false;
 	return true;
 }

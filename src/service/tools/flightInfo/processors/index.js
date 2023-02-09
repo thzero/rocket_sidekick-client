@@ -4,9 +4,9 @@ import AppConstants from '@/constants';
 
 // import AppUtility from '@/utility/app';
 
-import BaseService from '@thzero/library_client/service/index';
+import ToolsService from '@/service/tools/index';
 
-class FlightInfoProcessorService extends BaseService {
+class FlightInfoProcessorService extends ToolsService {
 	constructor() {
 		super();
 
