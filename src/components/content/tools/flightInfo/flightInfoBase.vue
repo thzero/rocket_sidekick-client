@@ -482,7 +482,6 @@ export function useFlightInfoBaseComponent(props, context, options) {
 	);
 
 	return {
-		
 		correlationId,
 		error,
 		hasFailed,

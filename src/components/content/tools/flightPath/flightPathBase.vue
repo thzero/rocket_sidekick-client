@@ -380,7 +380,6 @@ export function useFlightPathBaseComponent(props, context, options) {
 	);
 
 	return {
-		
 		correlationId,
 		error,
 		hasFailed,
