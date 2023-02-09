@@ -179,7 +179,12 @@
 								{{ $t('strings.content.tools.parachuteSizing.calculated') }}
 							</v-col>
 						</v-row>
-						<v-row dense class="pb-2" v-if="calculationResults.calculated">
+						<v-row dense class="pb-2">
+							<v-col cols="12">
+								<VMarkdown v-model="contentMarkup" :use-github=false />
+							</v-col>
+						</v-row>
+						<v-row dense v-if="calculationResults.calculated">
 							<v-col>
 								<v-row class="pb-2" dense>
 									<v-col cols="4">
@@ -208,10 +213,10 @@ import CalculatedOuput from '@/components/content/tools//CalculatedOuput';
 import MeasurementUnitSelect from '@/components/content/tools/measurementUnitSelect';
 import MeasurementUnitsSelect from '@/components/content/tools/measurementUnitsSelect';
 import VFormControl from '@/library_vue_vuetify/components/form/VFormControl';
+import VMarkdown from '@/library_vue_vuetify/components/markup/VMarkdown';
 import VNumberFieldWithValidation from '@/library_vue_vuetify/components/form/VNumberFieldWithValidation';
 import VSelectWithValidation from '@/library_vue_vuetify/components/form/VSelectWithValidation';
 
-// http://www.rocketmime.com/rockets/descent.html
 export default {
 	name: 'ParachuteSizing',
 	components: {
@@ -219,6 +224,7 @@ export default {
 		MeasurementUnitSelect,
 		MeasurementUnitsSelect,
 		VFormControl,
+		VMarkdown,
 		VNumberFieldWithValidation,
 		VSelectWithValidation
 	},
@@ -279,6 +285,7 @@ export default {
 			massWeightMeasurementUnitId,
 			massWeightMeasurementUnitsId,
 			parachuteSizingFormRef,
+			contentMarkup,
 			calculationOk,
 			initCalculationData,
 			reset,
@@ -343,6 +350,7 @@ export default {
 			massWeightMeasurementUnitId,
 			massWeightMeasurementUnitsId,
 			parachuteSizingFormRef,
+			contentMarkup,
 			calculationOk,
 			initCalculationData,
 			reset,
