@@ -87,6 +87,7 @@ export function useParachuteSizingBaseComponent(props, context, options) {
 	const massWeightMeasurementUnitId = ref(null);
 	const massWeightMeasurementUnitsId = ref(null);
 	const parachuteSizingFormRef = ref(null);
+	const contentMarkup = ref(LibraryClientUtility.$trans.t('strings.content.tools.parachuteSizing.info', { url: 'http://www.rocketmime.com/rockets/descent.html', title: 'Parachute Descent Calculations' }));
 
 	const calculationOk = async () => {
 		calculateI(correlationId(), calculationResults, async (correlationIdI, calculationResultsI) => {
@@ -206,6 +207,7 @@ export function useParachuteSizingBaseComponent(props, context, options) {
 		massWeightMeasurementUnitId,
 		massWeightMeasurementUnitsId,
 		parachuteSizingFormRef,
+		contentMarkup,
 		calculationOk,
 		initCalculationData,
 		reset,

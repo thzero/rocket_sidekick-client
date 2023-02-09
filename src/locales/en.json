@@ -750,7 +750,8 @@
 				},
 				"parachuteSizing": {
 					"desc": "A tool to determine an estimated size of parachute based on mass, desired velocity, Cd of the parachute as well as air density.",
-					"calculated": "Calculated"
+					"calculated": "Calculated",
+					"info": "The tool's calculations are based on the on equations from <a href=\"{url}\" target=\"_blank\">{title}</a>."
 				},
 				"staticPortHoles": {
 					"desc": ""
