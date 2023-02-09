@@ -19,24 +19,41 @@ export function useThrust2WeightBaseComponent(props, context, options) {
 		hasSucceeded,
 		initialize,
 		logger,
+		noBreakingSpaces,
+		notImplementedError,
 		success,
+		serviceStore,
+		sortByOrder,
+		target,
 		calculationOutput,
+		dateFormat,
+		dateFormatMask,
+		errorMessage,
+		errors,
+		errorTimer,
 		calculateI,
+		formatNumber,
 		handleListener,
+		initCalculationOutput,
 		initCalculationResults,
-		measurementUnitsId,
+		measurementUnitsIdOutput,
+		measurementUnitsIdSettings,
 		measurementUnitsAccelerationDefaultId,
 		measurementUnitsAreaDefaultId,
-		measurementUnitsFluidDefaultId,
+		measurementUnitsDensityDefaultId,
 		measurementUnitsDistanceDefaultId,
+		measurementUnitsFluidDefaultId,
 		measurementUnitsLengthDefaultId,
 		measurementUnitsVelocityDefaultId,
 		measurementUnitsVolumeDefaultId,
 		measurementUnitsWeightDefaultId,
+		notifyColor,
+		notifyMessage,
+		notifySignal,
+		notifyTimeout,
 		resetFormI,
-		serviceStore,
-		sortByOrder,
-		target,
+		setErrorMessage,
+		setErrorTimer,
 		setNotify,
 		toFixed,
 		settings
@@ -50,6 +67,7 @@ export function useThrust2WeightBaseComponent(props, context, options) {
 	const formThrust2WeightRef = ref(null);
 	const mass = ref(null);
 	const massMeasurementUnitId = ref(null);
+	const massMeasurementUnitsId = ref(null);
 	const maxLaunchRodTime = ref(null);
 	const maxLaunchRodTimeDefault = ref(0.3);
 	const measurementUnitsWeightType = ref(AppConstants.MeasurementUnits.types.weight);
@@ -154,7 +172,7 @@ export function useThrust2WeightBaseComponent(props, context, options) {
 		dialogMotorSearchManager.value.open();
 	};
 	const executeCalculation = async (correlationId, calculationData, key) => {
-		const response = await serviceToolsThrust2Weight.initializeCalculation(correlationId, calculationData, measurementUnitsId.value, settings);
+		const response = await serviceToolsThrust2Weight.initializeCalculation(correlationId, calculationData, measurementUnitsIdOutput.value, settings);
 		if (!hasSucceeded(response))
 			return error();
 
@@ -167,7 +185,7 @@ export function useThrust2WeightBaseComponent(props, context, options) {
 	const initCalculationData = (correlationId) => {
 		for (let item of motorRef) {
 			item.calculationData.mass = mass.value;
-			item.calculationData.units = massMeasurementUnitId.value;
+			item.calculationData.unitId = massMeasurementUnitId.value;
 			item.calculationData.maxLaunchRodTime = maxLaunchRodTime.value;
 			item.calculationData.thrustAverage = item.thrustAverage.value;
 			item.calculationData.thrustInitial =item. thrustInitial.value;
@@ -229,6 +247,7 @@ export function useThrust2WeightBaseComponent(props, context, options) {
 		reset(false);
 		
 		massMeasurementUnitId.value = measurementUnitsWeightDefaultId.value;
+		massMeasurementUnitsId.value = measurementUnitsIdSettings.value;
 	});
 
 	watch(() => motorSelected1.value,
@@ -275,24 +294,42 @@ export function useThrust2WeightBaseComponent(props, context, options) {
 		hasSucceeded,
 		initialize,
 		logger,
+		noBreakingSpaces,
+		notImplementedError,
 		success,
+		serviceStore,
+		sortByOrder,
+		target,
 		calculationOutput,
+		dateFormat,
+		dateFormatMask,
+		errorMessage,
+		errors,
+		errorTimer,
 		calculateI,
+		formatNumber,
 		handleListener,
+		initCalculationOutput,
 		initCalculationResults,
-		measurementUnitsId,
+		measurementUnitsIdOutput,
+		measurementUnitsIdSettings,
 		measurementUnitsAccelerationDefaultId,
 		measurementUnitsAreaDefaultId,
-		measurementUnitsFluidDefaultId,
+		measurementUnitsDensityDefaultId,
 		measurementUnitsDistanceDefaultId,
+		measurementUnitsFluidDefaultId,
 		measurementUnitsLengthDefaultId,
 		measurementUnitsVelocityDefaultId,
 		measurementUnitsVolumeDefaultId,
 		measurementUnitsWeightDefaultId,
+		notifyColor,
+		notifyMessage,
+		notifySignal,
+		notifyTimeout,
 		resetFormI,
-		serviceStore,
-		sortByOrder,
-		target,
+		setErrorMessage,
+		setErrorTimer,
+		setNotify,
 		toFixed,
 		settings,
 		serviceToolsThrust2Weight,
@@ -302,6 +339,7 @@ export function useThrust2WeightBaseComponent(props, context, options) {
 		formThrust2WeightRef,
 		mass,
 		massMeasurementUnitId,
+		massMeasurementUnitsId,
 		maxLaunchRodTime,
 		maxLaunchRodTimeDefault,
 		measurementUnitsWeightType,

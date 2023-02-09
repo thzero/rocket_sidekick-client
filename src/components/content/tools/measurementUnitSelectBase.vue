@@ -1,13 +1,14 @@
 <script>
-import { computed, ref, watch } from 'vue';
+import { computed, onMounted, watch} from 'vue';
 
 import AppConstants from '@/constants';
 
 import LibraryClientUtility from '@thzero/library_client/utility/index';
 
+import { useBaseControlEditComponent } from '@/library_vue/components/baseControlEdit';
 import { useToolsBaseComponent } from '@/components/content/tools/toolsBase';
 
-export function useFlightInfoDataBaseComponent(props, context, options) {
+export function useMeasurementUnitSelectBaseComponent(props, context, options) {
 	const {
 		correlationId,
 		error,
@@ -55,31 +56,46 @@ export function useFlightInfoDataBaseComponent(props, context, options) {
 		settings
 	} = useToolsBaseComponent(props, context, options);
 
-	const flightInfoInner = ref(null);
+	const {
+		isSaving,
+		serverErrors,
+		setErrors,
+		convertValue,
+		errorI,
+		errorsI,
+		hideDetails,
+		innerValue,
+		innerValueUpdate,
+		initValue
+	} = useBaseControlEditComponent(props, context, options);
+
+	let initialized = false;
 
 	const measurementUnits = computed(() => {
-		return flightInfoInner.value?.measurementUnits ?? AppConstants.MeasurementUnits.english.id;
+		if (props.measurementUnitsId === AppConstants.MeasurementUnits.english.id)
+			return measurementUnitTrans(AppConstants.MeasurementUnits.english[props.measurementUnitsType], 'english', props.measurementUnitsType);
+		if (props.measurementUnitsId === AppConstants.MeasurementUnits.metrics.id)
+			return measurementUnitTrans(AppConstants.MeasurementUnits.metrics[props.measurementUnitsType], 'metrics', props.measurementUnitsType);
+		return [];
 	});
-	const measurementAcceleration = computed(() => {
-		return flightInfoInner.value ? LibraryClientUtility.$trans.t('measurements.' + measurementUnits.value + '.acceleration.abbr') : '';
-	});
-	const measurementAltitude = computed(() => {
-		return flightInfoInner.value ? LibraryClientUtility.$trans.t('measurements.' + measurementUnits.value + '.altitude.abbr') : '';
-	});
-	const measurementTime = computed(() => {
-		return flightInfoInner.value ? LibraryClientUtility.$trans.t('measurements.' + measurementUnits.value + '.time.abbr') : '';
-	});
-	const measurementVelocity = computed(() => {
-		return flightInfoInner.value ? LibraryClientUtility.$trans.t('measurements.' + measurementUnits.value + '.velocity.abbr') : '';
-	});
+	
+	const keyword = 'Default'.toLowerCase(); // otherwise gives a '_sfc_main is not defined' error as Vite is looking for lower case version of the keyword
 
-	const valueType = (value, valueF) => {
-		return props.flightInfoInner?.dataTypes?.use ? valueF : value;
+	const measurementUnitTrans = (object, key, subKey) => {
+		return object ? Object.getOwnPropertyNames(object).filter(l => l !== keyword).map((item) => { return { id: item, name: LibraryClientUtility.$trans.t('measurementUnits.' + key + '.' + subKey + '.' + item + 'Abbr') }; }) : {};
 	};
 
-	watch(() => props.modelValue,
+	onMounted(async () => {
+		setTimeout(() => {
+			initialized = true;
+		}, 50);
+	});
+		
+	watch(() => props.measurementUnitsId,
 		(value) => {
-			flightInfoInner.value = value;
+			if (!initialized)
+				return;
+			innerValue.value = null;
 		}
 	);
 
@@ -128,13 +144,18 @@ export function useFlightInfoDataBaseComponent(props, context, options) {
 		setNotify,
 		toFixed,
 		settings,
-		flightInfoInner,
+		isSaving,
+		serverErrors,
+		setErrors,
+		convertValue,
+		errorI,
+		errorsI,
+		hideDetails,
+		innerValue,
+		innerValueUpdate,
+		initValue,
 		measurementUnits,
-		measurementAcceleration,
-		measurementAltitude,
-		measurementTime,
-		measurementVelocity,
-		valueType
+		measurementUnitTrans
 	};
 };
 </script>

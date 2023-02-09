@@ -62,6 +62,12 @@ class AppUtility {
 		AppConstants.MeasurementUnits[measurementUnitsId].area.default;
 	}
 
+	static measurementUnitDensityId(correlationId, settings, measurementUnitsId) {
+		measurementUnitsId = !String.isNullOrEmpty(measurementUnitsId) ? measurementUnitsId : AppUtility.measurementUnitsId(correlationId, settings);
+		return settings && settings.measurementUnits && settings.measurementUnits.density ? settings.measurementUnits.density : 
+		AppConstants.MeasurementUnits[measurementUnitsId].density.default;
+	}
+
 	static measurementUnitDistanceId(correlationId, settings, measurementUnitsId) {
 		measurementUnitsId = !String.isNullOrEmpty(measurementUnitsId) ? measurementUnitsId : AppUtility.measurementUnitsId(correlationId, settings);
 		return settings && settings.measurementUnits && settings.measurementUnits.distance ? settings.measurementUnits.distance : 

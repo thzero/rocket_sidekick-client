@@ -1,52 +1,30 @@
 <template>
-	<div>
-		<v-row
-			dense
-			v-if="date"
-		>
-			<v-col cols="6" class="text-h6 text-left pl-2">
-				{{ title }}
-			</v-col>
-			<v-col cols="6" class="text-h6 text-right pr-2">
-				{{ date }}
-			</v-col>
-		</v-row>
-		<v-row
-			dense
-			v-if="!date"
-		>
-			<v-col cols="12" class="text-h6 text-left pl-2">
-				{{ title }}
-			</v-col>
-		</v-row>
-		<v-row
-			dense
-			v-if="location"
-		>
-			<v-col cols="12" class="text-center text-subtitle1 text-left pl-2">
-				{{ location }}
-			</v-col>
-		</v-row>
-	</div>
-	<div style="min-height: 800px;">
-		<canvas id="flight-info-chart-int"></canvas>
-	</div>
+    <VSelectWithValidation
+		ref="measurementUnitIdRef"
+		vid="innerValue"
+		v-model="innerValue"
+		:items="measurementUnits"
+		:label="$attrs.label"
+        :validation="validation"
+		:vidOverride="vid"
+		@update:modelValue="innerValueUpdate"
+    />
 </template>
 
 <script>
-import { Chart, registerables } from 'chart.js';
+import VSelectWithValidation from '@/library_vue_vuetify/components/form//VSelectWithValidation';
 
-import { useFlightInfoChartCBaseomponent } from '@/components/content/tools/flightInfo/charts/flightInfoChartBase';
-import { useFlightInfoChartBaseProps } from '@/components/content/tools/flightInfo/charts/flightInfoChartBaseProps';
-
-Chart.register(...registerables);
+import { useMeasurementUnitSelectBaseComponent } from '@/components/content/tools/measurementUnitSelectBase';
+import { useMeasurementUnitSelectBaseProps } from '@/components/content/tools/measurementUnitSelectBaseProps';
 
 export default {
-	name: 'FlightInfoChart',
-	props: {
-		...useFlightInfoChartBaseProps
+	name: 'MeasurementUnitSelect',
+	components: {
+		VSelectWithValidation
 	},
-	// extends: base,
+    props: {
+		...useMeasurementUnitSelectBaseProps
+    },
 	setup(props, context) {
 		const {
 			correlationId,
@@ -93,15 +71,21 @@ export default {
 			setNotify,
 			toFixed,
 			settings,
-			chart,
-			chartContext,
-			date,
-			location,
-			otionsChart,
-			title
-		} = useFlightInfoChartCBaseomponent(props, context);
+			isSaving,
+			serverErrors,
+			setErrors,
+			convertValue,
+			errorI,
+			errorsI,
+			hideDetails,
+			innerValue,
+			innerValueUpdate,
+			initValue,
+			measurementUnits,
+			measurementUnitTrans
+		} = useMeasurementUnitSelectBaseComponent(props, context);
 
-		return {
+		return {	
 			correlationId,
 			error,
 			hasFailed,
@@ -146,13 +130,22 @@ export default {
 			setNotify,
 			toFixed,
 			settings,
-			chart,
-			chartContext,
-			date,
-			location,
-			otionsChart,
-			title
+			isSaving,
+			serverErrors,
+			setErrors,
+			convertValue,
+			errorI,
+			errorsI,
+			hideDetails,
+			innerValue,
+			innerValueUpdate,
+			initValue,
+			measurementUnits,
+			measurementUnitTrans
 		};
 	}
 };
 </script>
+
+<style scoped>
+</style>

@@ -228,6 +228,27 @@ const routes = [
 		]
 	},
 	{
+		path: '/content/tools/parachuteSizing',
+		component: () => import(/* webpackPrefetch: true */ /* webpackChunkName: "group-layouts" */ './layouts/MainLayout.vue'),
+		children: [
+			{
+				path: '',
+				name: 'content_tools_parachuteSizing',
+				component: () => import(/* webpackPrefetch: true */ /* webpackChunkName: "group-layouts" */ './layouts/ContentLayout.vue'),
+				children: [
+					{
+						path: '',
+						name: 'content_tools_parachuteSizing',
+						component: () => import(/* webpackPrefetch: true */ /* webpackChunkName: "group-content-tools" */ './components/content/tools/ParachuteSizing.vue'),
+						meta: {
+							requiresAuth: false
+						}
+					}
+				]
+			}
+		]
+	},
+	{
 		path: '/content/tools/thrust2Weight',
 		component: () => import(/* webpackPrefetch: true */ /* webpackChunkName: "group-layouts" */ './layouts/MainLayout.vue'),
 		children: [
@@ -249,18 +270,18 @@ const routes = [
 		]
 	},
 	{
-		path: '/content/tools/weatherCocking',
+		path: '/content/tools/weathercocking',
 		component: () => import(/* webpackPrefetch: true */ /* webpackChunkName: "group-layouts" */ './layouts/MainLayout.vue'),
 		children: [
 			{
 				path: '',
-				name: 'content_tools_weahter_cocking',
+				name: 'content_tools_weahtercocking',
 				component: () => import(/* webpackPrefetch: true */  /* webpackChunkName: "group-layouts" */'./layouts/ContentLayout.vue'),
 				children: [
 					{
 						path: '',
-						name: 'content_tools_weahter_cocking',
-						component: () => import(/* webpackPrefetch: true */ /* webpackChunkName: "group-content-tools" */ './components/content/tools/WeatherCocking.vue'),
+						name: 'content_tools_weahtercocking',
+						component: () => import(/* webpackPrefetch: true */ /* webpackChunkName: "group-content-tools" */ './components/content/tools/Weathercocking.vue'),
 						meta: {
 							requiresAuth: false
 						}

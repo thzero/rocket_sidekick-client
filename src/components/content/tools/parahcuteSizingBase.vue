@@ -9,7 +9,7 @@ import LibraryClientUtility from '@thzero/library_client/utility/index';
 
 import { useToolsBaseComponent } from '@/components/content/tools/toolsBase';
 
-export function useFoamBaseComponent(props, context, options) {
+export function useParachuteSizingBaseComponent(props, context, options) {
 	const {
 		correlationId,
 		error,
@@ -57,32 +57,28 @@ export function useFoamBaseComponent(props, context, options) {
 		settings
 	} = useToolsBaseComponent(props, context, options);
 
-	const serviceToolsFoam = LibraryClientUtility.$injector.getService(AppConstants.InjectorKeys.SERVICE_TOOLS_FOAM);
+	const serviceToolsParachuteSizing = LibraryClientUtility.$injector.getService(AppConstants.InjectorKeys.SERVICE_TOOLS_PARACHUTE_SIZING);
 
 	const calculationData = ref(null);
 	const calculationResults = initCalculationResults(correlationId(), ref({}));
-	const formFoamRef = ref(null);
-	const bodyTubeID = ref(null);
-	const finRootLength = ref(null);
-	const finTabLength = ref(0.3);
-	const finWidth = ref(null);
-	const lengthMeasurementUnitId = ref(null);
-	const measurementUnitsId = ref(null);
-	const measurementUnitslengthType = ref(AppConstants.MeasurementUnits.types.length);
-	const motorTubeOD = ref(null);
-	const numberFins = ref(null);
+	const airDensity = ref(null);
+	const airDensityMeasurementUnitId = ref(null);
+	const airDensityMeasurementUnitsId = ref(null);
+	const coeffDrag = ref(null);
+	const desiredVelocity = ref(null);
+	const desiredVelocityMeasurementUnitId = ref(null);
+	const desiredVelocityMeasurementUnitsId = ref(null);
+	const mass = ref(null);
+	const massWeightMeasurementUnitId = ref(null);
+	const massWeightMeasurementUnitsId = ref(null);
+	const measurementUnitsVelocityType = ref(AppConstants.MeasurementUnits.types.velocity);
+	const measurementUnitsWeightType = ref(AppConstants.MeasurementUnits.types.weight);
+	const parachuteSizingFormRef = ref(null);
 
 	const calculationOk = async () => {
 		calculateI(correlationId(), calculationResults, async (correlationIdI, calculationResultsI) => {
-			calculationResultsI.value.foams = [];
-
-			const responseFoams = await serviceToolsFoam.foams(correlationIdI);
-			if (!responseFoams || !responseFoams.success) {
-				return false; // TODO
-			}
-
 			initCalculationData(correlationIdI);
-			const responseCalc = await serviceToolsFoam.initializeCalculation(correlationIdI, calculationData.value, measurementUnitsIdOutput.value, settings);
+			const responseCalc = await serviceToolsParachuteSizing.initializeCalculation(correlationIdI, calculationData.value, measurementUnitsIdOutput.value, settings);
 			if (!responseCalc || !responseCalc.success) {
 				return false; // TODO
 			}
@@ -94,60 +90,47 @@ export function useFoamBaseComponent(props, context, options) {
 			}
 			calculationResultsI.value = responseCalcInstance.results;
 			calculationResultsI.value.calculated = false;
-			calculationResultsI.value.foams = [];
-			
-			let responseCalcFoam;
-			let responseCalcFoamInstance;
-			for (const foam of responseFoams.results) {
-				foam.totalVolume = calculationResultsI.value.totalVolume;
-				responseCalcFoam = await serviceToolsFoam.initializeCalculationFoam(correlationIdI, foam, measurementUnitsIdOutput.value);
-				if (!responseCalcFoam || !responseCalcFoam.success) {
-					continue; // TODO
-				}
-
-				responseCalcFoam.results.instance.addListener(correlationIdI, handleListener);
-				responseCalcFoamInstance = responseCalcFoam.results.instance.calculate(correlationIdI, responseCalcFoam.results.steps, foam.manufacturer);
-				if (!responseCalcFoamInstance || !responseCalcFoamInstance.success) {
-					continue; // TODO
-				}
-
-				calculationResultsI.value.foams.push(responseCalcFoamInstance.results);
-			}
 
 			return true;
 		});
 	};
 	const initCalculationData = (correlationId) => {
-		calculationData.value.bodyTubeID = bodyTubeID.value;
-		calculationData.value.units = lengthMeasurementUnitId.value;
-		calculationData.value.finRootLength = finRootLength.value;
-		calculationData.value.finTabLength = finTabLength.value;
-		calculationData.value.finWidth = finWidth.value;
-		calculationData.value.motorTubeOD = motorTubeOD.value;
-		calculationData.value.numberFins = numberFins.value;
+		calculationData.value.airDensity = airDensity.value;
+		calculationData.value.airDensityMeasurementUnitId = airDensityMeasurementUnitId.value;
+		calculationData.value.airDensityMeasurementUnitsId = airDensityMeasurementUnitsId.value;
+		calculationData.value.coeffDrag = coeffDrag.value;
+		calculationData.value.desiredVelocity = desiredVelocity.value;
+		calculationData.value.desiredVelocityMeasurementUnitId = desiredVelocityMeasurementUnitId.value;
+		calculationData.value.desiredVelocityMeasurementUnitsId = desiredVelocityMeasurementUnitsId.value;
+		calculationData.value.desiredVelocity = mass.value;
+		calculationData.value.massWeightMeasurementUnitId = massWeightMeasurementUnitId.value;
+		calculationData.value.massWeightMeasurementUnitsId = massWeightMeasurementUnitsId.value;
 	};
 	const reset = async (correlationId) => {
-		await formFoamRef.value.reset(correlationId, false);
+		await parachuteSizingFormRef.value.reset(correlationId, false);
 	};
 	const resetForm = (correlationId) => {
 		resetFormI(correlationId, calculationResults, (correlationId) => {
 			calculationResults.value.foams = [];
 
-			bodyTubeID.value = null;
-			finRootLength.value = null;
-			finTabLength.value = null;
-			finWidth.value = null;
-			motorTubeOD.value = null;
-			numberFins .value = null;
+			airDensity.value = null;
+			coeffDrag.value = null;
+			desiredVelocity.value = null;
+			mass.value = null;
 		});
 	};
 
 	onMounted(async () => {
 		reset(false);
 
-		calculationData.value = serviceToolsFoam.initialize(correlationId());
-		lengthMeasurementUnitId.value = measurementUnitsLengthDefaultId.value;
-		measurementUnitsId.value = measurementUnitsIdSettings.value;
+		calculationData.value = serviceToolsParachuteSizing.initialize(correlationId());
+		airDensityMeasurementUnitsId.value = measurementUnitsIdSettings.value;
+		desiredVelocityMeasurementUnitsId.value = measurementUnitsIdSettings.value;
+		massWeightMeasurementUnitsId.value = measurementUnitsIdSettings.value;
+
+		airDensityMeasurementUnitId.value = measurementUnitsDensityDefaultId.value;
+		desiredVelocityMeasurementUnitId.value = measurementUnitsVelocityDefaultId.value;
+		massWeightMeasurementUnitId.value = measurementUnitsWeightDefaultId.value;
 	});
 
 	return {
@@ -195,19 +178,22 @@ export function useFoamBaseComponent(props, context, options) {
 		setNotify,
 		toFixed,
 		settings,
-		serviceToolsFoam,
+		serviceToolsParachuteSizing,
 		calculationData,
 		calculationResults,
-		formFoamRef,
-		bodyTubeID,
-		finRootLength,
-		finTabLength,
-		finWidth,
-		lengthMeasurementUnitId,
-		measurementUnitsId,
-		measurementUnitslengthType,
-		motorTubeOD,
-		numberFins,
+		airDensity,
+		airDensityMeasurementUnitId,
+		airDensityMeasurementUnitsId,
+		coeffDrag,
+		desiredVelocity,
+		desiredVelocityMeasurementUnitId,
+		desiredVelocityMeasurementUnitsId,
+		mass,
+		massWeightMeasurementUnitId,
+		massWeightMeasurementUnitsId,
+		measurementUnitsVelocityType,
+		measurementUnitsWeightType,
+		parachuteSizingFormRef,
 		calculationOk,
 		initCalculationData,
 		reset,

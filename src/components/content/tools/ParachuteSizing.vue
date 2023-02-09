@@ -2,13 +2,13 @@
 	<div>
 		<v-row dense>
 			<v-col cols="12" class="text-center text-h5 pb-2">
-				{{ $t('titles.content.tools.weathercocking') }}
+				{{ $t('titles.content.tools.parachuteSizin') }}
 			</v-col>
 		</v-row>
 		<v-row dense>
 			<v-col cols="12">
 				<VFormControl
-					ref="weathercockingFormRef"
+					ref="parachuteSizingFormRef"
 					:validation="validation"
 					:resetForm="resetForm"
 					buttonClearName="buttons.reset"
@@ -19,35 +19,44 @@
 					<template v-slot:default>
 						<v-row dense>
 							<v-col cols="12" sm="6" >
+								<VNumberFieldWithValidation
+									ref="coeffDragRef"
+									vid="coeffDrag"
+									v-model="coeffDrag"
+									:validation="validation"
+									:label="$t('forms.content.tools.parachuteSizing.coeffDrag')"
+								/>
+							</v-col>
+							<v-col cols="12" sm="6" >
 								<table style="width: 100%">
 									<tr>
 										<td>
 											<VNumberFieldWithValidation
-												ref="windVelocityRef"
-												vid="windVelocity"
-												v-model="windVelocity"
+												ref="airDensityRef"
+												vid="airDensity"
+												v-model="airDensity"
 												:validation="validation"
-												:label="$t('forms.content.tools.weathercocking.windVelocity')"
+												:label="$t('forms.content.tools.parachuteSizing.airDensity')"
 											/>
 										</td>
-										<td style="width: 150px;">
+										<td style="width: 205px;">
 											<MeasurementUnitsSelect
-												ref="windVelocityMeasurementUnitsIdRef"
-												vid="windVelocityMeasurementUnitsId"
-												v-model="windVelocityMeasurementUnitsId"
+												ref="airDensityMeasurementUnitsIdRef"
+												vid="airDensityMeasurementUnitsId"
+												v-model="airDensityMeasurementUnitsId"
 												:validation="validation"
 												:label="$t('forms.settings.measurementUnits.title')"
 											/>
 										</td>
 										<td style="width: 150px;">
 											<MeasurementUnitSelect
-												ref="windVelocityMeasurementUnitIdRef"
-												vid="windVelocityMeasurementUnitId"
-												v-model="windVelocityMeasurementUnitId"
-												:measurementUnitsId="windVelocityMeasurementUnitsId"
-												:measurementUnitsType="measurementUnitsVelocityType"
+												ref="airDensityMeasurementUnitIdRef"
+												vid="airDensityMeasurementUnitId"
+												v-model="airDensityMeasurementUnitId"
+												:measurementUnitsId="airDensityMeasurementUnitsId"
+												:measurementUnitsType="measurementUnitsDensityType"
 												:validation="validation"
-												:label="$t('forms.settings.measurementUnits.velocity')"
+												:label="$t('forms.settings.measurementUnits.density')"
 											/>
 										</td>
 									</tr>
@@ -58,28 +67,28 @@
 									<tr>
 										<td>
 											<VNumberFieldWithValidation
-												ref="exitVelocityRef"
-												vid="exitVelocity"
-												v-model="exitVelocity"
+												ref="desiredVelocityRef"
+												vid="desiredVelocity"
+												v-model="desiredVelocity"
 												:validation="validation"
-												:label="$t('forms.content.tools.weathercocking.exitVelocity')"
+												:label="$t('forms.content.tools.parachuteSizing.desiredVelocity')"
 											/>
 										</td>
 										<td style="width: 205px;">
 											<MeasurementUnitsSelect
-												ref="exitVelocityMeasurementUnitsIdRef"
-												vid="exitVelocityMeasurementUnitsId"
-												v-model="exitVelocityMeasurementUnitsId"
+												ref="desiredVelocityMeasurementUnitsIdRef"
+												vid="desiredVelocityMeasurementUnitsId"
+												v-model="desiredVelocityMeasurementUnitsId"
 												:validation="validation"
 												:label="$t('forms.settings.measurementUnits.title')"
 											/>
 										</td>
 										<td style="width: 150px;">
 											<MeasurementUnitSelect
-												ref="exitVelocityMeasurementUnitIdRef"
-												vid="exitVelocityMeasurementUnitId"
-												v-model="exitVelocityMeasurementUnitId"
-												:measurementUnitsId="exitVelocityMeasurementUnitsId"
+												ref="desiredVelocityMeasurementUnitIdRef"
+												vid="desiredVelocityMeasurementUnitId"
+												v-model="desiredVelocityMeasurementUnitId"
+												:measurementUnitsId="desiredVelocityMeasurementUnitsId"
 												:measurementUnitsType="measurementUnitsVelocityType"
 												:validation="validation"
 												:label="$t('forms.settings.measurementUnits.velocity')"
@@ -99,28 +108,17 @@
 					<v-card-text>
 						<v-row dense class="pb-2">
 							<v-col class="text-center text-h5">
-								{{ $t('strings.content.tools.weathercocking.calculated') }}
+								{{ $t('strings.content.tools.parachuteSizing.calculated') }}
 							</v-col>
 						</v-row>
 						<v-row dense class="pb-2" v-if="calculationResults.calculated">
 							<v-col>
 								<v-row class="pb-2" dense>
 									<v-col cols="4">
-										<span class="text-h6 text-bold">{{ $t('strings.content.tools.weathercocking.degrees') }}</span>&nbsp;&nbsp;
+										<span class="text-h6 text-bold">{{ $t('strings.content.tools.parachuteSizing.degrees') }}</span>&nbsp;&nbsp;
 									</v-col>
 									<v-col cols="4">
-										<span class="text-h6 text-bold">{{ $t('strings.content.tools.weathercocking.weathercocked') }}</span>&nbsp;&nbsp;
-									</v-col>
-								</v-row>
-								<v-row class="pb-2" dense>
-									<v-col cols="4">
-										<span class="text-bold">{{ calculationResults.angleDegrees }}</span>
-									</v-col>
-									<v-col cols="4">
-										<span 
-										class="text-bold"
-										:style="'color: ' + (calculationResults.weathercocked ? 'red' : 'green')"
-									>{{ calculationResults.weathercocked ? $t('strings.yes') : $t('strings.no') }}</span>
+										<span class="text-h6 text-bold">{{ $t('strings.content.tools.parachuteSizing.weathercocked') }}</span>&nbsp;&nbsp;
 									</v-col>
 								</v-row>
 							</v-col>
@@ -138,7 +136,7 @@
 <script>
 import { between, decimal, required } from '@vuelidate/validators';
 
-import { useWeathercockingBaseComponent } from '@/components/content/tools/weathercockingBase';
+import { useParachuteSizingBaseComponent } from '@/components/content/tools/parahcuteSizingBase';
 
 import CalculatedOuput from '@/components/content/tools//CalculatedOuput';
 import MeasurementUnitSelect from '@/components/content/tools/measurementUnitSelect';
@@ -147,8 +145,9 @@ import VFormControl from '@/library_vue_vuetify/components/form/VFormControl';
 import VNumberFieldWithValidation from '@/library_vue_vuetify/components/form/VNumberFieldWithValidation';
 import VSelectWithValidation from '@/library_vue_vuetify/components/form/VSelectWithValidation';
 
+// http://www.rocketmime.com/rockets/descent.html
 export default {
-	name: 'Weathercocking',
+	name: 'ParachuteSizing',
 	components: {
 		CalculatedOuput,
 		MeasurementUnitSelect,
@@ -159,7 +158,7 @@ export default {
 	},
 	setup (props, context) {
 		const {
-			correlationId,
+				correlationId,
 			error,
 			hasFailed,
 			hasSucceeded,
@@ -203,24 +202,29 @@ export default {
 			setNotify,
 			toFixed,
 			settings,
-			serviceToolsWeathercocking,
+			serviceToolsParachuteSizing,
 			calculationData,
 			calculationResults,
-			exitVelocity,
-			exitVelocityMeasurementUnitsId,
-			exitVelocityMeasurementUnitId,
+			airDensity,
+			airDensityMeasurementUnitId,
+			airDensityMeasurementUnitsId,
+			coeffDrag,
+			desiredVelocity,
+			desiredVelocityMeasurementUnitId,
+			desiredVelocityMeasurementUnitsId,
+			mass,
+			massWeightMeasurementUnitId,
+			massWeightMeasurementUnitsId,
 			measurementUnitsVelocityType,
-			weathercockingFormRef,
-			windVelocity,
-			windVelocityMeasurementUnitsId,
-			windVelocityMeasurementUnitId,
+			measurementUnitsWeightType,
+			parachuteSizingFormRef,
 			calculationOk,
 			initCalculationData,
 			reset,
 			resetForm,
 			scope,
 			validation,
-		} = useWeathercockingBaseComponent(props, context);
+		} = useParachuteSizingBaseComponent(props, context);
 
 		return {
 			correlationId,
@@ -267,17 +271,22 @@ export default {
 			setNotify,
 			toFixed,
 			settings,
-			serviceToolsWeathercocking,
+			serviceToolsParachuteSizing,
 			calculationData,
 			calculationResults,
-			exitVelocity,
-			exitVelocityMeasurementUnitsId,
-			exitVelocityMeasurementUnitId,
+			airDensity,
+			airDensityMeasurementUnitId,
+			airDensityMeasurementUnitsId,
+			coeffDrag,
+			desiredVelocity,
+			desiredVelocityMeasurementUnitId,
+			desiredVelocityMeasurementUnitsId,
+			mass,
+			massWeightMeasurementUnitId,
+			massWeightMeasurementUnitsId,
 			measurementUnitsVelocityType,
-			weathercockingFormRef,
-			windVelocity,
-			windVelocityMeasurementUnitsId,
-			windVelocityMeasurementUnitId,
+			measurementUnitsWeightType,
+			parachuteSizingFormRef,
 			calculationOk,
 			initCalculationData,
 			reset,
@@ -288,12 +297,16 @@ export default {
 	},
 	validations () {
 		return {
-			exitVelocity: { required, decimal, between: between(0.1, 999), $autoDirty: true },
-			exitVelocityMeasurementUnitsId: { required, $autoDirty: true },
-			exitVelocityMeasurementUnitId: { required, $autoDirty: true },
-			windVelocity: { required, decimal, between: between(0.1, 999), $autoDirty: true },
-			windVelocityMeasurementUnitsId: { required, $autoDirty: true },
-			windVelocityMeasurementUnitId: { required, $autoDirty: true }
+			airDensity: { required, decimal, between: between(0.1, 999), $autoDirty: true },
+			airDensityMeasurementUnitId: { required, $autoDirty: true },
+			airDensityMeasurementUnitsId: { required, $autoDirty: true },
+			coeffDrag: { required, decimal, between: between(0.1, 999), $autoDirty: true },
+			desiredVelocity: { required, decimal, between: between(0.1, 999), $autoDirty: true },
+			desiredVelocityMeasurementUnitId: { required, $autoDirty: true },
+			desiredVelocityMeasurementUnitsId: { required, $autoDirty: true },
+			mass: { required, decimal, between: between(0.1, 999), $autoDirty: true },
+			massWeightMeasurementUnitId: { required, $autoDirty: true },
+			massWeightMeasurementUnitsId: { required, $autoDirty: true }
 		};
 	}
 };

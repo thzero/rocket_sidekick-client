@@ -54,8 +54,9 @@ const Constants = {
 		SERVICE_TOOLS_FLIGHT_PATH_OUTPUT_TEMPLATE_HANDLEBARS: 'serviceToolsFlightPathOutputTemplateHandlebars',
 		SERVICE_TOOLS_FLIGHT_PATH_PROCESSOR: 'serviceToolsFlightPathProcessor',
 		SERVICE_TOOLS_FLIGHT_PATH_PROCESSOR_FEATHERWEIGHT: 'serviceToolsFlightPathProcessorFeatherweight',
+		SERVICE_TOOLS_PARACHUTE_SIZING: 'serviceToolsParachuteSizing',
 		SERVICE_TOOLS_THRUST2WEIGHT: 'serviceToolsThrust2Weight',
-		SERVICE_TOOLS_WEATHERCOCKING: 'serviceToolsWeatherCocking'
+		SERVICE_TOOLS_WEATHERCOCKING: 'serviceToolsWeathercocking'
 	},
 	MeasurementUnits: {
 		acceleration: {
@@ -63,6 +64,9 @@ const Constants = {
 		},
 		area: {
 			id: 'area'
+		},
+		density: {
+			id: 'density'
 		},
 		distance: {
 			id: 'distance'
@@ -93,6 +97,10 @@ const Constants = {
 				in2: 'in^2',
 				ft2: 'ft^2'
 			},
+			density: {
+				default: 'lbmft3',
+				lbmft3: 'lbm/ft3'	
+			},
 			distance: {
 				default: 'ft',
 				ft: 'ft',
@@ -103,25 +111,21 @@ const Constants = {
 				floz: 'floz'
 			},
 			length: {
-				id: 'length',
 				default: 'in',
 				in: 'in',
 				ft: 'ft'
 			},
 			velocity: {
-				id: 'velocity',
 				default: 'fts',
 				fts: 'ft/s',
 				mph: 'mph'
 			},
 			volume: {
-				id: 'volume',
 				default: 'in3',
 				in3: 'in^3',
 				ft3: 'ft^3'
 			},
 			weight: {
-				id: 'weight',
 				default: 'oz',
 				oz: 'oz',
 				lb: 'lb'
@@ -138,6 +142,10 @@ const Constants = {
 				cm2: 'cm^2',
 				m2: 'm^2',
 				mm2: 'mm^2'
+			},
+			density: {
+				default: 'km3',
+				km3: 'k/m^3'
 			},
 			distance: {
 				default: 'm',
@@ -175,6 +183,7 @@ const Constants = {
 			acceleration: 'acceleration',
 			area: 'area',
 			fluid: 'fluid',
+			density: 'density',
 			distance: 'distance',
 			length: 'length',
 			velocity: 'velocity',

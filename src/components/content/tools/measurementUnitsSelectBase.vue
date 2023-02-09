@@ -1,13 +1,14 @@
 <script>
-import { computed, ref, watch } from 'vue';
+import { onMounted, ref } from 'vue';
 
-import AppConstants from '@/constants';
-
+import AppUtility from '@/utility/app';
 import LibraryClientUtility from '@thzero/library_client/utility/index';
+import LibraryVuetifyUtility from '@/library_vue_vuetify/utility/index';
 
+import { useBaseControlEditComponent } from '@/library_vue/components/baseControlEdit';
 import { useToolsBaseComponent } from '@/components/content/tools/toolsBase';
 
-export function useFlightInfoDataBaseComponent(props, context, options) {
+export function useMeasurementUnitsSelectBaseComponent(props, context, options) {
 	const {
 		correlationId,
 		error,
@@ -55,33 +56,24 @@ export function useFlightInfoDataBaseComponent(props, context, options) {
 		settings
 	} = useToolsBaseComponent(props, context, options);
 
-	const flightInfoInner = ref(null);
+	const {
+		isSaving,
+		serverErrors,
+		setErrors,
+		convertValue,
+		errorI,
+		errorsI,
+		hideDetails,
+		innerValue,
+		innerValueUpdate,
+		initValue
+	} = useBaseControlEditComponent(props, context, options);
 
-	const measurementUnits = computed(() => {
-		return flightInfoInner.value?.measurementUnits ?? AppConstants.MeasurementUnits.english.id;
-	});
-	const measurementAcceleration = computed(() => {
-		return flightInfoInner.value ? LibraryClientUtility.$trans.t('measurements.' + measurementUnits.value + '.acceleration.abbr') : '';
-	});
-	const measurementAltitude = computed(() => {
-		return flightInfoInner.value ? LibraryClientUtility.$trans.t('measurements.' + measurementUnits.value + '.altitude.abbr') : '';
-	});
-	const measurementTime = computed(() => {
-		return flightInfoInner.value ? LibraryClientUtility.$trans.t('measurements.' + measurementUnits.value + '.time.abbr') : '';
-	});
-	const measurementVelocity = computed(() => {
-		return flightInfoInner.value ? LibraryClientUtility.$trans.t('measurements.' + measurementUnits.value + '.velocity.abbr') : '';
-	});
+	const measurementUnitsOptions = ref(null);
 
-	const valueType = (value, valueF) => {
-		return props.flightInfoInner?.dataTypes?.use ? valueF : value;
-	};
-
-	watch(() => props.modelValue,
-		(value) => {
-			flightInfoInner.value = value;
-		}
-	);
+	onMounted(async () => {
+		measurementUnitsOptions.value = LibraryVuetifyUtility.selectOptions(AppUtility.measurementUnitsOptions(), LibraryClientUtility.$trans.t, 'measurementUnits');
+	});
 
 	return {
 		correlationId,
@@ -128,13 +120,17 @@ export function useFlightInfoDataBaseComponent(props, context, options) {
 		setNotify,
 		toFixed,
 		settings,
-		flightInfoInner,
-		measurementUnits,
-		measurementAcceleration,
-		measurementAltitude,
-		measurementTime,
-		measurementVelocity,
-		valueType
+		isSaving,
+		serverErrors,
+		setErrors,
+		convertValue,
+		errorI,
+		errorsI,
+		hideDetails,
+		innerValue,
+		innerValueUpdate,
+		initValue,
+		measurementUnitsOptions
 	};
 };
 </script>

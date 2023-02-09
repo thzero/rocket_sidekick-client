@@ -20,26 +20,37 @@
 						<v-row dense>
 							<v-col cols="12" sm="6">
 								<table style="width: 100%">
-									<tr><td>
-										<VNumberFieldWithValidation
-											ref="massRef"
-											vid="mass"
-											v-model="mass"
-											:validation="validation"
-											:label="$t('forms.content.tools.thrust2Weight.mass')"
-										/>
-									</td>
-									<td>
-										<MeasurementSelect
-											ref="massMeasurementUnitRef"
-											vid="massMeasurementUnitId"
-											v-model="massMeasurementUnitId"
-											:measurementUnitsId="measurementUnitsId"
-											:measurementUnitsType="measurementUnitsWeightType"
-											:validation="validation"
-											:label="$t('forms.settings.measurementUnits.weight')"
-										/>
-									</td></tr>
+									<tr>
+										<td>
+											<VNumberFieldWithValidation
+												ref="massRef"
+												vid="mass"
+												v-model="mass"
+												:validation="validation"
+												:label="$t('forms.content.tools.thrust2Weight.mass')"
+											/>
+										</td>
+										<td style="width: 150px;">
+											<MeasurementUnitsSelect
+												ref="massMeasurementUnitsIdRef"
+												vid="massMeasurementUnitsId"
+												v-model="massMeasurementUnitsId"
+												:validation="validation"
+												:label="$t('forms.settings.measurementUnits.title')"
+											/>
+										</td>
+										<td style="width: 150px;">
+											<MeasurementUnitSelect
+												ref="massMeasurementUnitRef"
+												vid="massMeasurementUnitId"
+												v-model="massMeasurementUnitId"
+												:measurementUnitsId="massMeasurementUnitsId"
+												:measurementUnitsType="measurementUnitsWeightType"
+												:validation="validation"
+												:label="$t('forms.settings.measurementUnits.weight')"
+											/>
+										</td>
+									</tr>
 								</table>
 							</v-col>
 							<v-col cols="12" sm="6">
@@ -356,16 +367,16 @@
 							<v-col>
 								<v-row class="pb-2" dense>
 									<v-col cols="3">
-										<span class="text-bold">{{ $t('forms.content.tools.thrust2Weight.specifications') }}</span>
+										<span class="text-h6 text-bold">{{ $t('forms.content.tools.thrust2Weight.specifications') }}</span>
 									</v-col>
 									<v-col cols="3">
-										<span class="text-bold">{{ $t('forms.content.tools.thrust2Weight.thrust_initial') }}</span>
+										<span class="text-h6 text-bold">{{ $t('forms.content.tools.thrust2Weight.thrust_initial') }}</span>
 									</v-col>
 									<v-col cols="3">
-										<span class="text-bold">{{ $t('forms.content.tools.thrust2Weight.thrust_peak') }}</span>
+										<span class="text-h6 text-bold">{{ $t('forms.content.tools.thrust2Weight.thrust_peak') }}</span>
 									</v-col>
 									<v-col cols="3">
-										<span class="text-bold">{{ $t('forms.content.tools.thrust2Weight.thrust_average') }}</span>
+										<span class="text-h6 text-bold">{{ $t('forms.content.tools.thrust2Weight.thrust_average') }}</span>
 									</v-col>
 								</v-row>
 								<v-row 
@@ -421,7 +432,8 @@ import LibraryClientUtility from '@thzero/library_client/utility/index';
 import { useThrust2WeightBaseComponent } from '@/components/content/tools/thrust2WeightBase';
 
 import CalculatedOuput from '@/components/content/tools/CalculatedOuput';
-import MeasurementSelect from '@/components/content/tools/MeasurementSelect';
+import MeasurementUnitSelect from '@/components/content/tools/measurementUnitSelect';
+import MeasurementUnitsSelect from '@/components/content/tools/measurementUnitsSelect';
 import MotorLookupDialog from '@/components/external/MotorLookupDialog';
 import VCheckboxWithValidation from '@/library_vue_vuetify/components/form//VCheckboxWithValidation';
 import VFormControl from '@/library_vue_vuetify/components/form/VFormControl';
@@ -433,7 +445,8 @@ export default {
 	name: 'Thrust2Weight',
 	components: {
 		CalculatedOuput,
-		MeasurementSelect,
+		MeasurementUnitSelect,
+		MeasurementUnitsSelect,
 		MotorLookupDialog,
 		VCheckboxWithValidation,
 		VFormControl,
@@ -449,24 +462,42 @@ export default {
 			hasSucceeded,
 			initialize,
 			logger,
+			noBreakingSpaces,
+			notImplementedError,
 			success,
+			serviceStore,
+			sortByOrder,
+			target,
 			calculationOutput,
+			dateFormat,
+			dateFormatMask,
+			errorMessage,
+			errors,
+			errorTimer,
 			calculateI,
+			formatNumber,
 			handleListener,
+			initCalculationOutput,
 			initCalculationResults,
-			measurementUnitsId,
+			measurementUnitsIdOutput,
+			measurementUnitsIdSettings,
 			measurementUnitsAccelerationDefaultId,
 			measurementUnitsAreaDefaultId,
-			measurementUnitsFluidDefaultId,
+			measurementUnitsDensityDefaultId,
 			measurementUnitsDistanceDefaultId,
+			measurementUnitsFluidDefaultId,
 			measurementUnitsLengthDefaultId,
 			measurementUnitsVelocityDefaultId,
 			measurementUnitsVolumeDefaultId,
 			measurementUnitsWeightDefaultId,
+			notifyColor,
+			notifyMessage,
+			notifySignal,
+			notifyTimeout,
 			resetFormI,
-			serviceStore,
-			sortByOrder,
-			target,
+			setErrorMessage,
+			setErrorTimer,
+			setNotify,
 			toFixed,
 			settings,
 			serviceToolsThrust2Weight,
@@ -476,6 +507,7 @@ export default {
 			formThrust2WeightRef,
 			mass,
 			massMeasurementUnitId,
+			massMeasurementUnitsId,
 			maxLaunchRodTime,
 			maxLaunchRodTimeDefault,
 			measurementUnitsWeightType,
@@ -521,24 +553,42 @@ export default {
 			hasSucceeded,
 			initialize,
 			logger,
+			noBreakingSpaces,
+			notImplementedError,
 			success,
+			serviceStore,
+			sortByOrder,
+			target,
 			calculationOutput,
+			dateFormat,
+			dateFormatMask,
+			errorMessage,
+			errors,
+			errorTimer,
 			calculateI,
+			formatNumber,
 			handleListener,
+			initCalculationOutput,
 			initCalculationResults,
-			measurementUnitsId,
+			measurementUnitsIdOutput,
+			measurementUnitsIdSettings,
 			measurementUnitsAccelerationDefaultId,
 			measurementUnitsAreaDefaultId,
-			measurementUnitsFluidDefaultId,
+			measurementUnitsDensityDefaultId,
 			measurementUnitsDistanceDefaultId,
+			measurementUnitsFluidDefaultId,
 			measurementUnitsLengthDefaultId,
 			measurementUnitsVelocityDefaultId,
 			measurementUnitsVolumeDefaultId,
 			measurementUnitsWeightDefaultId,
+			notifyColor,
+			notifyMessage,
+			notifySignal,
+			notifyTimeout,
 			resetFormI,
-			serviceStore,
-			sortByOrder,
-			target,
+			setErrorMessage,
+			setErrorTimer,
+			setNotify,
 			toFixed,
 			settings,
 			serviceToolsThrust2Weight,
@@ -548,6 +598,7 @@ export default {
 			formThrust2WeightRef,
 			mass,
 			massMeasurementUnitId,
+			massMeasurementUnitsId,
 			maxLaunchRodTime,
 			maxLaunchRodTimeDefault,
 			measurementUnitsWeightType,
@@ -591,6 +642,7 @@ export default {
 			data2: { $autoDirty: true },
 			mass: { required, decimal, between: between(0, 9999), $autoDirty: true },
 			massMeasurementUnitId: { $autoDirty: true },
+			massMeasurementUnitsId: { required, $autoDirty: true },
 			maxLaunchRodTime: { required, decimal, between: between(0, 5), $autoDirty: true },
 			motorSelected1: { $autoDirty: true },
 			motorSelected2: { $autoDirty: true },

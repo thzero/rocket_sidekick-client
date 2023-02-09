@@ -16,6 +16,7 @@ import { useFlightToolsBaseComponent } from '@/components/content/tools/flightTo
 
 export function useFlightInfoBaseComponent(props, context, options) {
 	const {
+		
 		correlationId,
 		error,
 		hasFailed,
@@ -39,11 +40,13 @@ export function useFlightInfoBaseComponent(props, context, options) {
 		handleListener,
 		initCalculationOutput,
 		initCalculationResults,
-		measurementUnitsId,
+		measurementUnitsIdOutput,
+		measurementUnitsIdSettings,
 		measurementUnitsAccelerationDefaultId,
 		measurementUnitsAreaDefaultId,
-		measurementUnitsFluidDefaultId,
+		measurementUnitsDensityDefaultId,
 		measurementUnitsDistanceDefaultId,
+		measurementUnitsFluidDefaultId,
 		measurementUnitsLengthDefaultId,
 		measurementUnitsVelocityDefaultId,
 		measurementUnitsVolumeDefaultId,
@@ -479,6 +482,7 @@ export function useFlightInfoBaseComponent(props, context, options) {
 	);
 
 	return {
+		
 		correlationId,
 		error,
 		hasFailed,
@@ -502,11 +506,13 @@ export function useFlightInfoBaseComponent(props, context, options) {
 		handleListener,
 		initCalculationOutput,
 		initCalculationResults,
-		measurementUnitsId,
+		measurementUnitsIdOutput,
+		measurementUnitsIdSettings,
 		measurementUnitsAccelerationDefaultId,
 		measurementUnitsAreaDefaultId,
-		measurementUnitsFluidDefaultId,
+		measurementUnitsDensityDefaultId,
 		measurementUnitsDistanceDefaultId,
+		measurementUnitsFluidDefaultId,
 		measurementUnitsLengthDefaultId,
 		measurementUnitsVelocityDefaultId,
 		measurementUnitsVolumeDefaultId,

@@ -5,9 +5,9 @@ import AppConstants from '@/constants';
 import LibraryClientUtility from '@thzero/library_client/utility/index';
 import LibraryCommonUtility from '@thzero/library_common/utility';
 
-import BaseService from '@thzero/library_client/service/index';
+import ToolsService from '@/service/tools/index';
 
-class FlightPathProcessorService extends BaseService {
+class FlightPathProcessorService extends ToolsService {
 	constructor() {
 		super();
 

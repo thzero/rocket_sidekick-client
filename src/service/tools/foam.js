@@ -1,8 +1,8 @@
 import AppConstants from '@/constants';
 
-import BaseService from '@thzero/library_client/service/index';
+import ToolsService from '@/service/tools/index';
 
-class FoamToolsService extends BaseService {
+class FoamToolsService extends ToolsService {
 	constructor() {
 		super();
 	}
@@ -57,9 +57,9 @@ class FoamToolsService extends BaseService {
 		};
 	}
 
-	async initializeCalculation(correlationId, data, measurementUnits) {
+	async initializeCalculation(correlationId, data, outputMeasurementUnitsId) {
 		this._enforceNotNull('FoamToolsService', 'initializeCalculation', data, 'data', correlationId);
-		this._enforceNotEmpty('FoamToolsService', 'initializeCalculation', measurementUnits, 'measurementUnits', correlationId);
+		this._enforceNotEmpty('FoamToolsService', 'initializeCalculation', outputMeasurementUnitsId, 'outputMeasurementUnitsId', correlationId);
 
 		const calculationSteps = [
 			{
@@ -107,7 +107,7 @@ class FoamToolsService extends BaseService {
 				evaluate: 'volumeBodyTube - volumeMotorTube - volumeFins',
 				result: true,
 				format: this._serviceCalculationEngine.formatFixed(),
-				unit: AppConstants.MeasurementUnits[measurementUnits].fluid.default
+				unit: AppConstants.MeasurementUnits[outputMeasurementUnitsId].fluid.default
 			}
 		];
 		
@@ -117,9 +117,9 @@ class FoamToolsService extends BaseService {
 		}, correlationId);
 	}
 
-	async initializeCalculationFoam(correlationId, data, measurementUnits) {
+	async initializeCalculationFoam(correlationId, data, outputMeasurementUnitsId) {
 		this._enforceNotNull('FoamToolsService', 'initializeCalculationFoam', data, 'data', correlationId);
-		this._enforceNotEmpty('FoamToolsService', 'initializeCalculationFoam', measurementUnits, 'measurementUnits', correlationId);
+		this._enforceNotEmpty('FoamToolsService', 'initializeCalculationFoam', outputMeasurementUnitsId, 'outputMeasurementUnitsId', correlationId);
 
 		const calculationSteps = [
 			{
@@ -156,7 +156,7 @@ class FoamToolsService extends BaseService {
 				type: this._serviceCalculationEngine.symTypeEvaluate,
 				var: 'foamWeight',
 				evaluate: 'density * totalVolume',
-				unit: AppConstants.MeasurementUnits[measurementUnits].weight.default,
+				unit: AppConstants.MeasurementUnits[outputMeasurementUnitsId].weight.default,
 				result: true,
 				format: this._serviceCalculationEngine.formatFixed()
 			},
@@ -165,7 +165,7 @@ class FoamToolsService extends BaseService {
 				var: 'requiredAmount',
 				evaluate: 'totalVolume / expansion',
 				result: true,
-				unit: AppConstants.MeasurementUnits[measurementUnits].fluid.default,
+				unit: AppConstants.MeasurementUnits[outputMeasurementUnitsId].fluid.default,
 				format: this._serviceCalculationEngine.formatFixed()
 			},
 			{

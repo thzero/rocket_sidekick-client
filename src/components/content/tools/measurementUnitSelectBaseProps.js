@@ -2,7 +2,7 @@ import AppConstants from '@/constants';
 
 import { useBaseControlEditProps } from '@/library_vue/components/baseControlEditProps';
 
-export const useMeasurementSelectBaseProps = {
+export const useMeasurementUnitSelectBaseProps = {
 	...useBaseControlEditProps,
 	measurementUnitsId: {
 		type: String,
