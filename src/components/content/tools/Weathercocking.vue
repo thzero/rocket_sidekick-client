@@ -141,8 +141,8 @@ import { between, decimal, required } from '@vuelidate/validators';
 import { useWeathercockingBaseComponent } from '@/components/content/tools/weathercockingBase';
 
 import CalculatedOuput from '@/components/content/tools//CalculatedOuput';
-import MeasurementUnitSelect from '@/components/content/tools/measurementUnitSelect';
-import MeasurementUnitsSelect from '@/components/content/tools/measurementUnitsSelect';
+import MeasurementUnitSelect from '@/components/content/tools/MeasurementUnitSelect';
+import MeasurementUnitsSelect from '@/components/content/tools/MeasurementUnitsSelect';
 import VFormControl from '@/library_vue_vuetify/components/form/VFormControl';
 import VNumberFieldWithValidation from '@/library_vue_vuetify/components/form/VNumberFieldWithValidation';
 import VSelectWithValidation from '@/library_vue_vuetify/components/form/VSelectWithValidation';

@@ -448,8 +448,8 @@ import LibraryClientUtility from '@thzero/library_client/utility/index';
 import { useThrust2WeightBaseComponent } from '@/components/content/tools/thrust2WeightBase';
 
 import CalculatedOuput from '@/components/content/tools/CalculatedOuput';
-import MeasurementUnitSelect from '@/components/content/tools/measurementUnitSelect';
-import MeasurementUnitsSelect from '@/components/content/tools/measurementUnitsSelect';
+import MeasurementUnitSelect from '@/components/content/tools/MeasurementUnitSelect';
+import MeasurementUnitsSelect from '@/components/content/tools/MeasurementUnitsSelect';
 import MotorLookupDialog from '@/components/external/MotorLookupDialog';
 import VCheckboxWithValidation from '@/library_vue_vuetify/components/form//VCheckboxWithValidation';
 import VFormControl from '@/library_vue_vuetify/components/form/VFormControl';
