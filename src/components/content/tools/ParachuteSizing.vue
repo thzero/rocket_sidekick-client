@@ -210,8 +210,8 @@ import { between, decimal, required } from '@vuelidate/validators';
 import { useParachuteSizingBaseComponent } from '@/components/content/tools/parahcuteSizingBase';
 
 import CalculatedOuput from '@/components/content/tools//CalculatedOuput';
-import MeasurementUnitSelect from '@/components/content/tools/measurementUnitSelect';
-import MeasurementUnitsSelect from '@/components/content/tools/measurementUnitsSelect';
+import MeasurementUnitSelect from '@/components/content/tools/MeasurementUnitSelect';
+import MeasurementUnitsSelect from '@/components/content/tools/MeasurementUnitsSelect';
 import VFormControl from '@/library_vue_vuetify/components/form/VFormControl';
 import VMarkdown from '@/library_vue_vuetify/components/markup/VMarkdown';
 import VNumberFieldWithValidation from '@/library_vue_vuetify/components/form/VNumberFieldWithValidation';
