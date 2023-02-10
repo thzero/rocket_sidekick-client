@@ -217,8 +217,8 @@ import LibraryClientUtility from '@thzero/library_client/utility/index';
 import { useFoamBaseComponent } from '@/components/content/tools/foamBase';
 
 import CalculatedOuput from '@/components/content/tools//CalculatedOuput';
-import MeasurementUnitSelect from '@/components/content/tools/measurementUnitSelect';
-import MeasurementUnitsSelect from '@/components/content/tools/measurementUnitsSelect';
+import MeasurementUnitSelect from '@/components/content/tools/MeasurementUnitSelect.vue';
+import MeasurementUnitsSelect from '@/components/content/tools/MeasurementUnitsSelect';
 import VFormControl from '@/library_vue_vuetify/components/form/VFormControl';
 import VNumberFieldWithValidation from '@/library_vue_vuetify/components/form/VNumberFieldWithValidation';
 
