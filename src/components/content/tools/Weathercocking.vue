@@ -132,6 +132,17 @@
 				</v-card>
 			</v-col>
 		</v-row>
+		<v-row dense
+			v-show="hasAttribution" 
+		>
+			<v-col cols="12" class="text-center text-h5 pb-2; float: right">
+				<v-card>
+					<v-card-text class="float: right">
+<Attribution v-model="content" @has-attribution="handleAttribution" />
+					</v-card-text>
+				</v-card>
+			</v-col>
+		</v-row>
 	</div>
 </template>
 
@@ -140,6 +151,7 @@ import { between, decimal, required } from '@vuelidate/validators';
 
 import { useWeathercockingBaseComponent } from '@/components/content/tools/weathercockingBase';
 
+import Attribution from '@/components/content/info/Attribution';
 import CalculatedOuput from '@/components/content/tools//CalculatedOuput';
 import MeasurementUnitSelect from '@/components/content/tools/MeasurementUnitSelect';
 import MeasurementUnitsSelect from '@/components/content/tools/MeasurementUnitsSelect';
@@ -150,6 +162,7 @@ import VSelectWithValidation from '@/library_vue_vuetify/components/form/VSelect
 export default {
 	name: 'Weathercocking',
 	components: {
+		Attribution,
 		CalculatedOuput,
 		MeasurementUnitSelect,
 		MeasurementUnitsSelect,
@@ -171,29 +184,31 @@ export default {
 			serviceStore,
 			sortByOrder,
 			target,
-			calculationOutput,
-			dateFormat,
-			dateFormatMask,
-			errorMessage,
+			content,
 			errors,
+			errorMessage,
 			errorTimer,
-			calculateI,
-			formatNumber,
-			handleListener,
-			initCalculationOutput,
-			initCalculationResults,
+			hasAttribution,
 			measurementUnitsIdOutput,
 			measurementUnitsIdSettings,
 			notifyColor,
 			notifyMessage,
 			notifySignal,
 			notifyTimeout,
+			settings,
+			dateFormat,
+			dateFormatMask,
+			calculateI,
+			formatNumber,
+			handleListener,
+			handleAttribution,
+			initCalculationOutput,
+			initCalculationResults,
 			resetFormI,
 			setErrorMessage,
 			setErrorTimer,
 			setNotify,
 			toFixed,
-			settings,
 			measurementUnitsVelocityType,
 			serviceToolsWeathercocking,
 			calculationData,
@@ -211,7 +226,7 @@ export default {
 			resetForm,
 			scope,
 			validation,
-		} = useWeathercockingBaseComponent(props, context);
+		} = useWeathercockingBaseComponent(props, context, { id: 'weathercocking' });
 
 		return {
 			correlationId,
@@ -226,29 +241,31 @@ export default {
 			serviceStore,
 			sortByOrder,
 			target,
-			calculationOutput,
-			dateFormat,
-			dateFormatMask,
-			errorMessage,
+			content,
 			errors,
+			errorMessage,
 			errorTimer,
-			calculateI,
-			formatNumber,
-			handleListener,
-			initCalculationOutput,
-			initCalculationResults,
+			hasAttribution,
 			measurementUnitsIdOutput,
 			measurementUnitsIdSettings,
 			notifyColor,
 			notifyMessage,
 			notifySignal,
 			notifyTimeout,
+			settings,
+			dateFormat,
+			dateFormatMask,
+			calculateI,
+			formatNumber,
+			handleListener,
+			handleAttribution,
+			initCalculationOutput,
+			initCalculationResults,
 			resetFormI,
 			setErrorMessage,
 			setErrorTimer,
 			setNotify,
 			toFixed,
-			settings,
 			measurementUnitsVelocityType,
 			serviceToolsWeathercocking,
 			calculationData,

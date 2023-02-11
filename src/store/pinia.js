@@ -352,6 +352,22 @@ class AppStore extends BaseStore {
 				getContent() {
 					return LibraryClientUtility.$store.content;
 				},
+				getContentInfo() {
+					let temp = LibraryClientUtility.$store.content;
+					if (!temp)
+						return [];
+					if (!temp.tools)
+						return [];
+					return temp.tools;
+				},
+				getContentTools() {
+					let temp = LibraryClientUtility.$store.content;
+					if (!temp)
+						return [];
+					if (!temp.tools)
+						return [];
+					return temp.tools;
+				},
 				getFlightData() {
 					return LibraryClientUtility.$store.flightData;
 				},

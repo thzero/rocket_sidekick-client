@@ -50,13 +50,6 @@ export function useInfoMarkupBaseComponent(props, context, options) {
 		content.value = response.results;
 	});
 
-	onMounted(async () => {
-		const response = await serviceStore.dispatcher.requestContentMarkup(correlationId(), contentId.value);
-		if (hasFailed(response))
-			return;
-		content.value = response.results;
-	});
-
 	return {
 		correlationId,
 		error,

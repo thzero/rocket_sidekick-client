@@ -23,10 +23,14 @@ export function useToolsBaseComponent(props, context, options) {
 		target
 	} = useContentBaseComponent(props, context, options);
 
+	const contentId = options ? options.id : null;
+
 	const calculationOutput = ref([]);
+	const content = ref(null);
 	const errors = ref(null);
 	const errorMessage = ref(null);
 	const errorTimer = ref(null);
+	const hasAttribution = ref(false);
 	const measurementUnitsIdOutput = ref(null);
 	const measurementUnitsIdSettings = ref(null);
 	const notifyColor = ref(null);
@@ -67,6 +71,9 @@ export function useToolsBaseComponent(props, context, options) {
 			calculationOutput.value.push(`${prefix}${name}`);
 		else if (type === symbols.symTypeSet)
 			calculationOutput.value.push(`${prefix}${name} = ${value}`);
+	};
+	const handleAttribution = (e) => {
+		hasAttribution.value = e;
 	};
 	const initCalculationOutput = (correlationId) => {
 		calculationOutput.value = [];
@@ -127,6 +134,14 @@ export function useToolsBaseComponent(props, context, options) {
 		settings.value = serviceStore.getters.user.getUserSettings();
 		measurementUnitsIdOutput.value = AppUtility.measurementUnitsId(correlationId, settings.value);
 		measurementUnitsIdSettings.value = AppUtility.measurementUnitsId(correlationId, settings.value);
+
+		if (!String.isNullOrEmpty(contentId)) {
+			const tools = serviceStore.getters.getContentTools();
+			const results = tools.find(l => l.id === contentId);
+			if (!results)
+				return;
+			content.value = results;
+		}
 	});
 
 	return {
@@ -142,29 +157,31 @@ export function useToolsBaseComponent(props, context, options) {
 		serviceStore,
 		sortByOrder,
 		target,
-		calculationOutput,
-		dateFormat,
-		dateFormatMask,
-		errorMessage,
+		content,
 		errors,
+		errorMessage,
 		errorTimer,
-		calculateI,
-		formatNumber,
-		handleListener,
-		initCalculationOutput,
-		initCalculationResults,
+		hasAttribution,
 		measurementUnitsIdOutput,
 		measurementUnitsIdSettings,
 		notifyColor,
 		notifyMessage,
 		notifySignal,
 		notifyTimeout,
+		settings,
+		dateFormat,
+		dateFormatMask,
+		calculateI,
+		formatNumber,
+		handleListener,
+		handleAttribution,
+		initCalculationOutput,
+		initCalculationResults,
 		resetFormI,
 		setErrorMessage,
 		setErrorTimer,
 		setNotify,
-		toFixed,
-		settings
+		toFixed
 	};
 };
 </script>

@@ -449,12 +449,8 @@ export default {
 			return !isLoggedIn && AppConstants.Features.Auth;
 		});
 		const info = computed(() => {
-			let temp = serviceStore.getters.getContent();
-			if (!temp)
-				return [];
-			if (!temp.info)
-				return [];
-			return temp.info.sort((a, b) => a.order >= b.order);
+			let info = serviceStore.getters.getContentInfo();
+			return info.sort((a, b) => a.order >= b.order);
 		});
 		// const links = computed(() => {
 		// 	let temp = serviceStore.getters.getContent();
@@ -473,12 +469,8 @@ export default {
 		// 	return links.sort((a, b) => a.order >= b.order);
 		// });
 		const tools = computed(() => {
-			let temp = serviceStore.getters.getContent();
-			if (!temp)
-				return [];
-			if (!temp.tools)
-				return [];
-			return temp.tools.sort((a, b) => a.order >= b.order);
+			let tools = serviceStore.getters.getContentTools();
+			return tools.sort((a, b) => a.order >= b.order);
 		});
 
 		const contentLink = (item,) => {

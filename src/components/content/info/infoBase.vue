@@ -28,7 +28,7 @@ export function useInfoBaseComponent(props, context, options) {
 
 	const handleAttribution = (e) => {
 		hasAttribution.value = e;
-	}
+	};
 
 	return {
 		correlationId,
