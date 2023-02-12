@@ -5,7 +5,7 @@ import AppCommonConstants from '@/common/constants';
 
 import { useContentBaseComponent } from '@/components/content/contentBase';
 
-export function useAttributionBaseComponent(props, context, options) {
+export function useContentAttributionBaseComponent(props, context, options) {
 	const {
 		correlationId,
 		error,

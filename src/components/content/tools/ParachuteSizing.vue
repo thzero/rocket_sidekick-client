@@ -1,10 +1,9 @@
 <template>
 	<div>
-		<v-row dense>
-			<v-col cols="12" class="text-center text-h5 pb-2">
-				{{ $t('titles.content.tools.parachuteSizin') }}
-			</v-col>
-		</v-row>
+		<ContentHeader 
+			v-model="contentTitle" 
+		/>
+		<ContentDescription id="strings.content.tools.parachuteSizing" />
 		<v-row dense>
 			<v-col cols="12">
 				<VFormControl
@@ -201,6 +200,17 @@
 				</v-card>
 			</v-col>
 		</v-row>
+		<v-row dense
+			v-show="hasAttribution" 
+		>
+			<v-col cols="12" class="text-center text-h5 pb-2; float: right">
+				<v-card>
+					<v-card-text class="float: right">
+<ContentAttribution v-model="content" @has-attribution="handleAttribution" />
+					</v-card-text>
+				</v-card>
+			</v-col>
+		</v-row>
 	</div>
 </template>
 
@@ -209,7 +219,10 @@ import { between, decimal, required } from '@vuelidate/validators';
 
 import { useParachuteSizingBaseComponent } from '@/components/content/tools/parahcuteSizingBase';
 
+import ContentAttribution from '@/components/content/Attribution';
 import CalculatedOuput from '@/components/content/tools//CalculatedOuput';
+import ContentDescription from '@/components/content/Description';
+import ContentHeader from '@/components/content/Header';
 import MeasurementUnitSelect from '@/components/content/tools/MeasurementUnitSelect';
 import MeasurementUnitsSelect from '@/components/content/tools/MeasurementUnitsSelect';
 import VFormControl from '@/library_vue_vuetify/components/form/VFormControl';
@@ -220,7 +233,11 @@ import VSelectWithValidation from '@/library_vue_vuetify/components/form/VSelect
 export default {
 	name: 'ParachuteSizing',
 	components: {
+		ContentAttribution,
 		CalculatedOuput,
+		ContentDescription,
+		ContentDescription,
+		ContentHeader,
 		MeasurementUnitSelect,
 		MeasurementUnitsSelect,
 		VFormControl,
@@ -230,7 +247,7 @@ export default {
 	},
 	setup (props, context) {
 		const {
-				correlationId,
+			correlationId,
 			error,
 			hasFailed,
 			hasSucceeded,
@@ -243,28 +260,32 @@ export default {
 			sortByOrder,
 			target,
 			calculationOutput,
-			dateFormat,
-			dateFormatMask,
-			errorMessage,
+			content,
+			contentTitle,
 			errors,
+			errorMessage,
 			errorTimer,
-			calculateI,
-			formatNumber,
-			handleListener,
-			initCalculationOutput,
-			initCalculationResults,
+			hasAttribution,
 			measurementUnitsIdOutput,
 			measurementUnitsIdSettings,
 			notifyColor,
 			notifyMessage,
 			notifySignal,
 			notifyTimeout,
+			settings,
+			dateFormat,
+			dateFormatMask,
+			calculateI,
+			formatNumber,
+			handleListener,
+			handleAttribution,
+			initCalculationOutput,
+			initCalculationResults,
 			resetFormI,
 			setErrorMessage,
 			setErrorTimer,
 			setNotify,
 			toFixed,
-			settings,
 			measurementUnitsDensityType,
 			measurementUnitslengthType,
 			measurementUnitsVelocityType,
@@ -308,28 +329,32 @@ export default {
 			sortByOrder,
 			target,
 			calculationOutput,
-			dateFormat,
-			dateFormatMask,
-			errorMessage,
+			content,
+			contentTitle,
 			errors,
+			errorMessage,
 			errorTimer,
-			calculateI,
-			formatNumber,
-			handleListener,
-			initCalculationOutput,
-			initCalculationResults,
+			hasAttribution,
 			measurementUnitsIdOutput,
 			measurementUnitsIdSettings,
 			notifyColor,
 			notifyMessage,
 			notifySignal,
 			notifyTimeout,
+			settings,
+			dateFormat,
+			dateFormatMask,
+			calculateI,
+			formatNumber,
+			handleListener,
+			handleAttribution,
+			initCalculationOutput,
+			initCalculationResults,
 			resetFormI,
 			setErrorMessage,
 			setErrorTimer,
 			setNotify,
 			toFixed,
-			settings,
 			measurementUnitsDensityType,
 			measurementUnitslengthType,
 			measurementUnitsVelocityType,

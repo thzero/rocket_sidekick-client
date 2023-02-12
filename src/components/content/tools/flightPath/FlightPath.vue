@@ -11,11 +11,10 @@
 				</v-banner-text>
 			</v-banner>
 		</div>
-		<v-row dense>
-			<v-col cols="12" class="text-center text-h5 pb-2">
-				{{ $t('titles.content.tools.flightPath') }}
-			</v-col>
-		</v-row>
+		<ContentHeader 
+			v-model="contentTitle" 
+		/>
+		<!-- <ContentDescription id="strings.content.tools.flightPath" /> -->
 		<v-row dense>
 			<v-col cols="12" lg="3">
 				<VFormControl
@@ -370,6 +369,17 @@
 				</v-row>
 			</v-col>
 		</v-row>
+		<v-row dense
+			v-show="hasAttribution" 
+		>
+			<v-col cols="12" class="text-center text-h5 pb-2; float: right">
+				<v-card>
+					<v-card-text class="float: right">
+<ContentAttribution v-model="content" @has-attribution="handleAttribution" />
+					</v-card-text>
+				</v-card>
+			</v-col>
+		</v-row>
 	</div>
 	<v-snackbar
 		v-model="notifySignal"
@@ -385,6 +395,9 @@ import { required } from '@vuelidate/validators';
 
 import { useFlightPathBaseComponent } from '@/components/content/tools/flightPath/flightPathBase';
 
+import ContentAttribution from '@/components/content/Attribution';
+import ContentDescription from '@/components/content/Description';
+import ContentHeader from '@/components/content/Header';
 import VCheckboxWithValidation from '@/library_vue_vuetify/components/form//VCheckboxWithValidation';
 import VColorWithValidation from '@/library_vue_vuetify/components/form/VColorWithValidation';
 import VDateTimeField from '@/library_vue_vuetify/components/form/VDateTimeFieldTemp';
@@ -397,6 +410,9 @@ import VTextFieldWithValidation from '@/library_vue_vuetify/components/form/VTex
 export default {
 	name: 'FlightPath',
 	components: {
+		ContentAttribution,
+		ContentDescription,
+		ContentHeader,
 		VCheckboxWithValidation,
 		VColorWithValidation,
 		VDateTimeField,
@@ -421,28 +437,32 @@ export default {
 			sortByOrder,
 			target,
 			calculationOutput,
-			dateFormat,
-			dateFormatMask,
-			errorMessage,
+			content,
+			contentTitle,
 			errors,
+			errorMessage,
 			errorTimer,
-			calculateI,
-			formatNumber,
-			handleListener,
-			initCalculationOutput,
-			initCalculationResults,
+			hasAttribution,
 			measurementUnitsIdOutput,
 			measurementUnitsIdSettings,
 			notifyColor,
 			notifyMessage,
 			notifySignal,
 			notifyTimeout,
+			settings,
+			dateFormat,
+			dateFormatMask,
+			calculateI,
+			formatNumber,
+			handleListener,
+			handleAttribution,
+			initCalculationOutput,
+			initCalculationResults,
 			resetFormI,
 			setErrorMessage,
 			setErrorTimer,
 			setNotify,
 			toFixed,
-			settings,
 			flightDataDate,
 			flightDataLocation,
 			flightDataTitle,
@@ -506,7 +526,8 @@ export default {
 			validation
 		} = useFlightPathBaseComponent(props, context);
 
-		return {		correlationId,
+		return {
+			correlationId,
 			error,
 			hasFailed,
 			hasSucceeded,
@@ -519,28 +540,32 @@ export default {
 			sortByOrder,
 			target,
 			calculationOutput,
-			dateFormat,
-			dateFormatMask,
-			errorMessage,
+			content,
+			contentTitle,
 			errors,
+			errorMessage,
 			errorTimer,
-			calculateI,
-			formatNumber,
-			handleListener,
-			initCalculationOutput,
-			initCalculationResults,
+			hasAttribution,
 			measurementUnitsIdOutput,
 			measurementUnitsIdSettings,
 			notifyColor,
 			notifyMessage,
 			notifySignal,
 			notifyTimeout,
+			settings,
+			dateFormat,
+			dateFormatMask,
+			calculateI,
+			formatNumber,
+			handleListener,
+			handleAttribution,
+			initCalculationOutput,
+			initCalculationResults,
 			resetFormI,
 			setErrorMessage,
 			setErrorTimer,
 			setNotify,
 			toFixed,
-			settings,
 			flightDataDate,
 			flightDataLocation,
 			flightDataTitle,

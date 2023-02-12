@@ -1,10 +1,9 @@
 <template>
 	<div>
-		<v-row dense>
-			<v-col cols="12" class="text-center text-h5 pb-2">
-				{{ $t('titles.content.tools.thrust2Weight') }}
-			</v-col>
-		</v-row>
+		<ContentHeader 
+			v-model="contentTitle" 
+		/>
+		<ContentDescription id="strings.content.tools.thrust2Weight" />
 		<v-row dense>
 			<v-col cols="12">
 				<VFormControl
@@ -431,6 +430,17 @@
 				</v-card>
 			</v-col>
 		</v-row>
+		<v-row dense
+			v-show="hasAttribution" 
+		>
+			<v-col cols="12" class="text-center text-h5 pb-2; float: right">
+				<v-card>
+					<v-card-text class="float: right">
+<ContentAttribution v-model="content" @has-attribution="handleAttribution" />
+					</v-card-text>
+				</v-card>
+			</v-col>
+		</v-row>
 	</div>
 	<MotorLookupDialog
 		ref="dialogMotorSearchRef"
@@ -447,7 +457,10 @@ import LibraryClientUtility from '@thzero/library_client/utility/index';
 
 import { useThrust2WeightBaseComponent } from '@/components/content/tools/thrust2WeightBase';
 
+import ContentAttribution from '@/components/content/Attribution';
 import CalculatedOuput from '@/components/content/tools/CalculatedOuput';
+import ContentDescription from '@/components/content/Description';
+import ContentHeader from '@/components/content/Header';
 import MeasurementUnitSelect from '@/components/content/tools/MeasurementUnitSelect';
 import MeasurementUnitsSelect from '@/components/content/tools/MeasurementUnitsSelect';
 import MotorLookupDialog from '@/components/external/MotorLookupDialog';
@@ -460,7 +473,10 @@ import VTextField from '@/library_vue_vuetify/components/form//VTextField';
 export default {
 	name: 'Thrust2Weight',
 	components: {
+		ContentAttribution,
 		CalculatedOuput,
+		ContentDescription,
+		ContentHeader,
 		MeasurementUnitSelect,
 		MeasurementUnitsSelect,
 		MotorLookupDialog,
@@ -485,28 +501,32 @@ export default {
 			sortByOrder,
 			target,
 			calculationOutput,
-			dateFormat,
-			dateFormatMask,
-			errorMessage,
+			content,
+			contentTitle,
 			errors,
+			errorMessage,
 			errorTimer,
-			calculateI,
-			formatNumber,
-			handleListener,
-			initCalculationOutput,
-			initCalculationResults,
+			hasAttribution,
 			measurementUnitsIdOutput,
 			measurementUnitsIdSettings,
 			notifyColor,
 			notifyMessage,
 			notifySignal,
 			notifyTimeout,
+			settings,
+			dateFormat,
+			dateFormatMask,
+			calculateI,
+			formatNumber,
+			handleListener,
+			handleAttribution,
+			initCalculationOutput,
+			initCalculationResults,
 			resetFormI,
 			setErrorMessage,
 			setErrorTimer,
 			setNotify,
 			toFixed,
-			settings,
 			measurementUnitsWeightType,
 			serviceToolsThrust2Weight,
 			calculationResults,
@@ -567,28 +587,32 @@ export default {
 			sortByOrder,
 			target,
 			calculationOutput,
-			dateFormat,
-			dateFormatMask,
-			errorMessage,
+			content,
+			contentTitle,
 			errors,
+			errorMessage,
 			errorTimer,
-			calculateI,
-			formatNumber,
-			handleListener,
-			initCalculationOutput,
-			initCalculationResults,
+			hasAttribution,
 			measurementUnitsIdOutput,
 			measurementUnitsIdSettings,
 			notifyColor,
 			notifyMessage,
 			notifySignal,
 			notifyTimeout,
+			settings,
+			dateFormat,
+			dateFormatMask,
+			calculateI,
+			formatNumber,
+			handleListener,
+			handleAttribution,
+			initCalculationOutput,
+			initCalculationResults,
 			resetFormI,
 			setErrorMessage,
 			setErrorTimer,
 			setNotify,
 			toFixed,
-			settings,
 			measurementUnitsWeightType,
 			serviceToolsThrust2Weight,
 			calculationResults,

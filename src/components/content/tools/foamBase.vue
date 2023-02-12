@@ -10,7 +10,7 @@ import LibraryClientUtility from '@thzero/library_client/utility/index';
 import { useToolsBaseComponent } from '@/components/content/tools/toolsBase';
 import { useToolsMeasurementBaseComponent } from '@/components/content/tools/toolsMeasurementBase';
 
-export function useFoamBaseComponent(props, context, options) {
+export function useFoamBaseComponent(props, context) {
 	const {
 		correlationId,
 		error,
@@ -25,29 +25,36 @@ export function useFoamBaseComponent(props, context, options) {
 		sortByOrder,
 		target,
 		calculationOutput,
-		dateFormat,
-		dateFormatMask,
-		errorMessage,
+		content,
+		contentTitle,
 		errors,
+		errorMessage,
 		errorTimer,
-		calculateI,
-		formatNumber,
-		handleListener,
-		initCalculationOutput,
-		initCalculationResults,
+		hasAttribution,
 		measurementUnitsIdOutput,
 		measurementUnitsIdSettings,
 		notifyColor,
 		notifyMessage,
 		notifySignal,
 		notifyTimeout,
+		settings,
+		dateFormat,
+		dateFormatMask,
+		calculateI,
+		formatNumber,
+		handleListener,
+		handleAttribution,
+		initCalculationOutput,
+		initCalculationResults,
 		resetFormI,
 		setErrorMessage,
 		setErrorTimer,
 		setNotify,
-		toFixed,
-		settings
-	} = useToolsBaseComponent(props, context, options);
+		toFixed
+	} = useToolsBaseComponent(props, context, {
+		id: 'foam',
+		title: LibraryClientUtility.$trans.t('titles.content.tools.foam')
+	});
 	
 	const {
 		measurementUnitsAccelerationDefaultId,
@@ -68,7 +75,7 @@ export function useFoamBaseComponent(props, context, options) {
 		measurementUnitsVolumeType,
 		measurementUnitsWeightDefaultId,
 		measurementUnitsWeightType
-	} = useToolsMeasurementBaseComponent(props, context, options);
+	} = useToolsMeasurementBaseComponent(props, context);
 
 	const serviceToolsFoam = LibraryClientUtility.$injector.getService(AppConstants.InjectorKeys.SERVICE_TOOLS_FOAM);
 
@@ -183,28 +190,32 @@ export function useFoamBaseComponent(props, context, options) {
 		sortByOrder,
 		target,
 		calculationOutput,
-		dateFormat,
-		dateFormatMask,
-		errorMessage,
+		content,
+		contentTitle,
 		errors,
+		errorMessage,
 		errorTimer,
-		calculateI,
-		formatNumber,
-		handleListener,
-		initCalculationOutput,
-		initCalculationResults,
+		hasAttribution,
 		measurementUnitsIdOutput,
 		measurementUnitsIdSettings,
 		notifyColor,
 		notifyMessage,
 		notifySignal,
 		notifyTimeout,
+		settings,
+		dateFormat,
+		dateFormatMask,
+		calculateI,
+		formatNumber,
+		handleListener,
+		handleAttribution,
+		initCalculationOutput,
+		initCalculationResults,
 		resetFormI,
 		setErrorMessage,
 		setErrorTimer,
 		setNotify,
 		toFixed,
-		settings,
 		measurementUnitsFluidType,
 		measurementUnitslengthType,
 		serviceToolsFoam,

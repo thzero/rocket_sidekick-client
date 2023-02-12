@@ -11,11 +11,10 @@
 				</v-banner-text>
 			</v-banner>
 		</div>
-		<v-row dense>
-			<v-col cols="12" class="text-center text-h5 pb-2">
-				{{ $t('titles.content.tools.flightInfo') }}
-			</v-col>
-		</v-row>
+		<ContentHeader 
+			v-model="contentTitle" 
+		/>
+		<!-- <ContentDescription id="strings.content.tools.flightInfo" /> -->
 		<v-row dense>
 			<v-col cols="12" lg="3">
 				<VFormControl
@@ -492,13 +491,13 @@
 					</td></tr>
 					<tr>
 						<td>
-							<flightInfoChart
+							<FlightInfoChart
 								ref="flightInfoChartRef"
 								:chart-data="flightInfoChartData"
 							/>
 						</td>
 						<td >
-							<flightInfoData
+							<FlightInfoData
 								id="flight-info"
 								ref="flightInfoRef"
 								v-model="flightInfo"
@@ -506,6 +505,17 @@
 						</td>
 					</tr>
 				</table>
+			</v-col>
+		</v-row>
+		<v-row dense
+			v-show="hasAttribution" 
+		>
+			<v-col cols="12" class="text-center text-h5 pb-2; float: right">
+				<v-card>
+					<v-card-text class="float: right">
+<ContentAttribution v-model="content" @has-attribution="handleAttribution" />
+					</v-card-text>
+				</v-card>
 			</v-col>
 		</v-row>
 	</div>
@@ -521,11 +531,14 @@
 <script>
 import { required, requiredUnless } from '@vuelidate/validators';
 
-import flightInfoData from '@/components/content/tools/flightInfo/FlightInfoData';
-import flightInfoChart from '@/components/content/tools/flightInfo/charts/FlightInfo';
+import FlightInfoData from '@/components/content/tools/flightInfo/FlightInfoData';
+import FlightInfoChart from '@/components/content/tools/flightInfo/charts/FlightInfo';
 
 import { useFlightInfoBaseComponent } from '@/components/content/tools/flightInfo/flightInfoBase';
 
+import ContentAttribution from '@/components/content/Attribution';
+import ContentHeader from '@/components/content/Header';
+import ContentDescription from '@/components/content/Description';
 import VColorWithValidation from '@/library_vue_vuetify/components/form/VColorWithValidation';
 import VDateTimeField from '@/library_vue_vuetify/components/form/VDateTimeFieldTemp';
 import VFormControl from '@/library_vue_vuetify/components/form/VFormControl';
@@ -537,8 +550,11 @@ import VTextFieldWithValidation from '@/library_vue_vuetify/components/form/VTex
 export default {
 	name: 'FlightInfo',
 	components: {
-		flightInfoData,
-		flightInfoChart,
+		ContentAttribution,
+		ContentDescription,
+		ContentHeader,
+		FlightInfoData,
+		FlightInfoChart,
 		VColorWithValidation,
 		VDateTimeField,
 		VFormControl,
@@ -562,28 +578,32 @@ export default {
 			sortByOrder,
 			target,
 			calculationOutput,
-			dateFormat,
-			dateFormatMask,
-			errorMessage,
+			content,
+			contentTitle,
 			errors,
+			errorMessage,
 			errorTimer,
-			calculateI,
-			formatNumber,
-			handleListener,
-			initCalculationOutput,
-			initCalculationResults,
+			hasAttribution,
 			measurementUnitsIdOutput,
 			measurementUnitsIdSettings,
 			notifyColor,
 			notifyMessage,
 			notifySignal,
 			notifyTimeout,
+			settings,
+			dateFormat,
+			dateFormatMask,
+			calculateI,
+			formatNumber,
+			handleListener,
+			handleAttribution,
+			initCalculationOutput,
+			initCalculationResults,
 			resetFormI,
 			setErrorMessage,
 			setErrorTimer,
 			setNotify,
 			toFixed,
-			settings,
 			flightDataDate,
 			flightDataLocation,
 			flightDataTitle,
@@ -652,7 +672,7 @@ export default {
 			resetInput,
 			scope,
 			validation
-		} = useFlightInfoBaseComponent(props, context);
+		} = useFlightInfoBaseComponent(props, context, { id: 'flightInfo' });
 
 		return {
 			correlationId,
@@ -668,28 +688,32 @@ export default {
 			sortByOrder,
 			target,
 			calculationOutput,
-			dateFormat,
-			dateFormatMask,
-			errorMessage,
+			content,
+			contentTitle,
 			errors,
+			errorMessage,
 			errorTimer,
-			calculateI,
-			formatNumber,
-			handleListener,
-			initCalculationOutput,
-			initCalculationResults,
+			hasAttribution,
 			measurementUnitsIdOutput,
 			measurementUnitsIdSettings,
 			notifyColor,
 			notifyMessage,
 			notifySignal,
 			notifyTimeout,
+			settings,
+			dateFormat,
+			dateFormatMask,
+			calculateI,
+			formatNumber,
+			handleListener,
+			handleAttribution,
+			initCalculationOutput,
+			initCalculationResults,
 			resetFormI,
 			setErrorMessage,
 			setErrorTimer,
 			setNotify,
 			toFixed,
-			settings,
 			flightDataDate,
 			flightDataLocation,
 			flightDataTitle,

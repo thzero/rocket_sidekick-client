@@ -5,10 +5,11 @@ import AppConstants from '@/constants';
 
 import AppUtility from '@/utility/app';
 import LibraryClientUtility from '@thzero/library_client/utility/index';
+import LibraryClientVueUtility from '@thzero/library_client_vue3/utility/index';
 import LibraryCommonUtility from '@thzero/library_common/utility/index';
-import LibraryVuetifyUtility from '@/library_vue_vuetify/utility/index';
 
 import { useToolsBaseComponent } from '@/components/content/tools/toolsBase';
+import { useToolsMeasurementBaseComponent } from '@/components/content/tools/toolsMeasurementBase';
 
 export function useFlightToolsBaseComponent(props, context, options) {
 	const {
@@ -25,38 +26,54 @@ export function useFlightToolsBaseComponent(props, context, options) {
 		sortByOrder,
 		target,
 		calculationOutput,
-		dateFormat,
-		dateFormatMask,
-		errorMessage,
+		content,
+		contentTitle,
 		errors,
+		errorMessage,
 		errorTimer,
-		calculateI,
-		formatNumber,
-		handleListener,
-		initCalculationOutput,
-		initCalculationResults,
+		hasAttribution,
 		measurementUnitsIdOutput,
 		measurementUnitsIdSettings,
-		measurementUnitsAccelerationDefaultId,
-		measurementUnitsAreaDefaultId,
-		measurementUnitsDensityDefaultId,
-		measurementUnitsDistanceDefaultId,
-		measurementUnitsFluidDefaultId,
-		measurementUnitsLengthDefaultId,
-		measurementUnitsVelocityDefaultId,
-		measurementUnitsVolumeDefaultId,
-		measurementUnitsWeightDefaultId,
 		notifyColor,
 		notifyMessage,
 		notifySignal,
 		notifyTimeout,
+		settings,
+		dateFormat,
+		dateFormatMask,
+		calculateI,
+		formatNumber,
+		handleListener,
+		handleAttribution,
+		initCalculationOutput,
+		initCalculationResults,
 		resetFormI,
 		setErrorMessage,
 		setErrorTimer,
 		setNotify,
-		toFixed,
-		settings
+		toFixed
 	} = useToolsBaseComponent(props, context, options);
+	
+	const {
+		measurementUnitsAccelerationDefaultId,
+		measurementUnitsAccelerationType,
+		measurementUnitsAreaDefaultId,
+		measurementUnitsAreaType,
+		measurementUnitsDensityDefaultId,
+		measurementUnitsDensityType,
+		measurementUnitsDistanceType,
+		measurementUnitsDistanceDefaultId,
+		measurementUnitsFluidDefaultId,
+		measurementUnitsFluidType,
+		measurementUnitsLengthDefaultId,
+		measurementUnitslengthType,
+		measurementUnitsVelocityDefaultId,
+		measurementUnitsVelocityType,
+		measurementUnitsVolumeDefaultId,
+		measurementUnitsVolumeType,
+		measurementUnitsWeightDefaultId,
+		measurementUnitsWeightType
+	} = useToolsMeasurementBaseComponent(props, context, options);
 
 	const flightDataDate = ref(null);
 	const flightDataLocation = ref(null);
@@ -149,7 +166,7 @@ export function useFlightToolsBaseComponent(props, context, options) {
 			flightMeasurementUnitsVelocityOutputId.value = AppUtility.measurementUnitVelocityId(correlationId, settings.value);
 	};
 	const flightMeasurementUnitsLoadOptions = (correlationId) => {
-		flightMeasurementUnitsOptions.value = LibraryVuetifyUtility.selectOptions(AppUtility.measurementUnitsOptions(), LibraryClientUtility.$trans.t, 'measurementUnits');
+		flightMeasurementUnitsOptions.value = LibraryClientVueUtility.selectOptions(AppUtility.measurementUnitsOptions(), LibraryClientUtility.$trans.t, 'measurementUnits');
 	};
 	const flightMeasurementUnitsReset = (correlationId) => {
 		flightMeasurementUnitsAccelerationId.value = AppUtility.measurementUnitsAccelerationId(correlationId, settings.value, flightMeasurementUnitsId.value);
@@ -228,37 +245,32 @@ export function useFlightToolsBaseComponent(props, context, options) {
 		sortByOrder,
 		target,
 		calculationOutput,
-		dateFormat,
-		dateFormatMask,
-		errorMessage,
+		content,
+		contentTitle,
 		errors,
+		errorMessage,
 		errorTimer,
-		calculateI,
-		formatNumber,
-		handleListener,
-		initCalculationOutput,
-		initCalculationResults,
+		hasAttribution,
 		measurementUnitsIdOutput,
 		measurementUnitsIdSettings,
-		measurementUnitsAccelerationDefaultId,
-		measurementUnitsAreaDefaultId,
-		measurementUnitsDensityDefaultId,
-		measurementUnitsDistanceDefaultId,
-		measurementUnitsFluidDefaultId,
-		measurementUnitsLengthDefaultId,
-		measurementUnitsVelocityDefaultId,
-		measurementUnitsVolumeDefaultId,
-		measurementUnitsWeightDefaultId,
 		notifyColor,
 		notifyMessage,
 		notifySignal,
 		notifyTimeout,
+		settings,
+		dateFormat,
+		dateFormatMask,
+		calculateI,
+		formatNumber,
+		handleListener,
+		handleAttribution,
+		initCalculationOutput,
+		initCalculationResults,
 		resetFormI,
 		setErrorMessage,
 		setErrorTimer,
 		setNotify,
 		toFixed,
-		settings,
 		flightDataDate,
 		flightDataLocation,
 		flightDataTitle,

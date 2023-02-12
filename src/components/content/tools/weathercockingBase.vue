@@ -10,7 +10,7 @@ import LibraryClientUtility from '@thzero/library_client/utility/index';
 import { useToolsBaseComponent } from '@/components/content/tools/toolsBase';
 import { useToolsMeasurementBaseComponent } from '@/components/content/tools/toolsMeasurementBase';
 
-export function useWeathercockingBaseComponent(props, context, options) {
+export function useWeathercockingBaseComponent(props, context) {
 	const {
 		correlationId,
 		error,
@@ -24,30 +24,37 @@ export function useWeathercockingBaseComponent(props, context, options) {
 		serviceStore,
 		sortByOrder,
 		target,
+		content,
 		calculationOutput,
-		dateFormat,
-		dateFormatMask,
-		errorMessage,
+		contentTitle,
 		errors,
+		errorMessage,
 		errorTimer,
-		calculateI,
-		formatNumber,
-		handleListener,
-		initCalculationOutput,
-		initCalculationResults,
+		hasAttribution,
 		measurementUnitsIdOutput,
 		measurementUnitsIdSettings,
 		notifyColor,
 		notifyMessage,
 		notifySignal,
 		notifyTimeout,
+		settings,
+		dateFormat,
+		dateFormatMask,
+		calculateI,
+		formatNumber,
+		handleListener,
+		handleAttribution,
+		initCalculationOutput,
+		initCalculationResults,
 		resetFormI,
 		setErrorMessage,
 		setErrorTimer,
 		setNotify,
-		toFixed,
-		settings
-	} = useToolsBaseComponent(props, context, options);
+		toFixed
+	} = useToolsBaseComponent(props, context, { 
+		id: 'weathercocking',
+		title: LibraryClientUtility.$trans.t('titles.content.tools.weathercocking')
+	 });
 	
 	const {
 		measurementUnitsAccelerationDefaultId,
@@ -68,7 +75,7 @@ export function useWeathercockingBaseComponent(props, context, options) {
 		measurementUnitsVolumeType,
 		measurementUnitsWeightDefaultId,
 		measurementUnitsWeightType
-	} = useToolsMeasurementBaseComponent(props, context, options);
+	} = useToolsMeasurementBaseComponent(props, context);
 
 	const serviceToolsWeathercocking = LibraryClientUtility.$injector.getService(AppConstants.InjectorKeys.SERVICE_TOOLS_WEATHERCOCKING);
 
@@ -145,28 +152,32 @@ export function useWeathercockingBaseComponent(props, context, options) {
 		sortByOrder,
 		target,
 		calculationOutput,
-		dateFormat,
-		dateFormatMask,
-		errorMessage,
+		content,
+		contentTitle,
 		errors,
+		errorMessage,
 		errorTimer,
-		calculateI,
-		formatNumber,
-		handleListener,
-		initCalculationOutput,
-		initCalculationResults,
+		hasAttribution,
 		measurementUnitsIdOutput,
 		measurementUnitsIdSettings,
 		notifyColor,
 		notifyMessage,
 		notifySignal,
 		notifyTimeout,
+		settings,
+		dateFormat,
+		dateFormatMask,
+		calculateI,
+		formatNumber,
+		handleListener,
+		handleAttribution,
+		initCalculationOutput,
+		initCalculationResults,
 		resetFormI,
 		setErrorMessage,
 		setErrorTimer,
 		setNotify,
 		toFixed,
-		settings,
 		measurementUnitsVelocityType,
 		serviceToolsWeathercocking,
 		calculationData,

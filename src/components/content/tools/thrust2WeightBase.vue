@@ -12,7 +12,7 @@ import DialogSupport from '@/library_vue/components/support/dialog';
 import { useToolsBaseComponent } from '@/components/content/tools/toolsBase';
 import { useToolsMeasurementBaseComponent } from '@/components/content/tools/toolsMeasurementBase';
 
-export function useThrust2WeightBaseComponent(props, context, options) {
+export function useThrust2WeightBaseComponent(props, context) {
 	const {
 		correlationId,
 		error,
@@ -27,29 +27,36 @@ export function useThrust2WeightBaseComponent(props, context, options) {
 		sortByOrder,
 		target,
 		calculationOutput,
-		dateFormat,
-		dateFormatMask,
-		errorMessage,
+		content,
+		contentTitle,
 		errors,
+		errorMessage,
 		errorTimer,
-		calculateI,
-		formatNumber,
-		handleListener,
-		initCalculationOutput,
-		initCalculationResults,
+		hasAttribution,
 		measurementUnitsIdOutput,
 		measurementUnitsIdSettings,
 		notifyColor,
 		notifyMessage,
 		notifySignal,
 		notifyTimeout,
+		settings,
+		dateFormat,
+		dateFormatMask,
+		calculateI,
+		formatNumber,
+		handleListener,
+		handleAttribution,
+		initCalculationOutput,
+		initCalculationResults,
 		resetFormI,
 		setErrorMessage,
 		setErrorTimer,
 		setNotify,
-		toFixed,
-		settings
-	} = useToolsBaseComponent(props, context, options);
+		toFixed
+	} = useToolsBaseComponent(props, context, { 
+		id: 'thrust2Weight',
+		title: LibraryClientUtility.$trans.t('titles.content.tools.thrust2Weight')
+	 });
 	
 	const {
 		measurementUnitsAccelerationDefaultId,
@@ -70,7 +77,7 @@ export function useThrust2WeightBaseComponent(props, context, options) {
 		measurementUnitsVolumeType,
 		measurementUnitsWeightDefaultId,
 		measurementUnitsWeightType
-	} = useToolsMeasurementBaseComponent(props, context, options);
+	} = useToolsMeasurementBaseComponent(props, context);
 
 	const serviceToolsThrust2Weight = LibraryClientUtility.$injector.getService(AppConstants.InjectorKeys.SERVICE_TOOLS_THRUST2WEIGHT);
 
@@ -313,28 +320,32 @@ export function useThrust2WeightBaseComponent(props, context, options) {
 		sortByOrder,
 		target,
 		calculationOutput,
-		dateFormat,
-		dateFormatMask,
-		errorMessage,
+		content,
+		contentTitle,
 		errors,
+		errorMessage,
 		errorTimer,
-		calculateI,
-		formatNumber,
-		handleListener,
-		initCalculationOutput,
-		initCalculationResults,
+		hasAttribution,
 		measurementUnitsIdOutput,
 		measurementUnitsIdSettings,
 		notifyColor,
 		notifyMessage,
 		notifySignal,
 		notifyTimeout,
+		settings,
+		dateFormat,
+		dateFormatMask,
+		calculateI,
+		formatNumber,
+		handleListener,
+		handleAttribution,
+		initCalculationOutput,
+		initCalculationResults,
 		resetFormI,
 		setErrorMessage,
 		setErrorTimer,
 		setNotify,
 		toFixed,
-		settings,
 		measurementUnitsWeightType,
 		serviceToolsThrust2Weight,
 		calculationResults,

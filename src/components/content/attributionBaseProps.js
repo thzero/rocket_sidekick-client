@@ -1,4 +1,4 @@
-export const useAttributionBaseProps = {
+export const useContentAttributionBaseProps = {
 		modelValue: {
 			type: Object,
 			default: {}

@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<Header v-model="contentTitle"/>
+		<ContentHeader v-model="contentTitle"/>
 		<v-row dense>
 			<v-col cols="12">
 				<v-card>
@@ -175,7 +175,7 @@
 			<v-col cols="12" class="text-center text-h5 pb-2; float: right">
 				<v-card>
 					<v-card-text class="float: right">
-<Attribution v-model="content" @has-attribution="handleAttribution" />
+<ContentAttribution v-model="content" @has-attribution="handleAttribution" />
 					</v-card-text>
 				</v-card>
 			</v-col>
@@ -187,16 +187,16 @@
 import { use3DPrintingBaseComponent } from '@/components/content/info/3DPrintingBase';
 
 import AdditionalLinks from '@/components/content/info/AdditionalLinks';
-import Attribution from '@/components/content/info/Attribution';
-import Header from '@/components/content/Header';
+import ContentAttribution from '@/components/content/Attribution';
+import ContentHeader from '@/components/content/Header';
 import VMarkdown from '@/library_vue_vuetify/components/markup/VMarkdown';
 
 export default {
 	name: 'Epxoy',
 	components: {
 		AdditionalLinks,
-		Attribution,
-		Header,
+		ContentAttribution,
+		ContentHeader,
 		VMarkdown
 	},
 	setup(props, context) {

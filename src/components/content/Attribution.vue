@@ -45,13 +45,13 @@
 </template>
 		
 <script>
-import { useAttributionBaseComponent } from '@/components/content/info/attributionBase';
-import { useAttributionBaseProps } from '@/components/content/info/attributionBaseProps';
+import { useContentAttributionBaseComponent } from '@/components/content/attributionBase';
+import { useContentAttributionBaseProps } from '@/components/content/attributionBaseProps';
 
 export default {
-	name: 'Attribution',
+	name: 'ContentAttribution',
 	props: {
-		...useAttributionBaseProps
+		...useContentAttributionBaseProps
 	},
 	emits: ['hasAttribution'],
 	setup(props, context) {
@@ -82,7 +82,7 @@ export default {
 			licenseName,
 			licenseImage,
 			licenseUrl
-		} = useAttributionBaseComponent(props, context);
+		} = useContentAttributionBaseComponent(props, context);
 
 		return {	
 			correlationId,

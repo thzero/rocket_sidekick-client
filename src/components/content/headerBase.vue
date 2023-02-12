@@ -1,7 +1,13 @@
 <script>
+import { computed, ref } from 'vue';
+
 import { useContentBaseComponent } from '@/components/content/contentBase';
 
-export function useHeaderBaseComponent(props, context, options) {
+import LibraryClientUtility from '@thzero/library_client/utility/index';
+
+import DialogSupport from '@/library_vue/components/support/dialog';
+
+export function useContentHeaderBaseComponent(props, context, options) {
 	const {
 		correlationId,
 		error,
@@ -17,6 +23,24 @@ export function useHeaderBaseComponent(props, context, options) {
 		target
 	} = useContentBaseComponent(props, context, options);
 
+	const dialogHelpSignal = ref(new DialogSupport());
+
+	const hasHelp = computed(() => {
+		return !String.isNullOrEmpty(helpMarkup.value) || !String.isNullOrEmpty(helpMarkupId.value);
+	});
+	const helpMarkup = computed(() => {
+		if (!String.isNullOrEmpty(props.helpMarkupId)) 
+			return LibraryClientUtility.$trans.t(props.helpMarkupId);
+		return props.helpMarkup;
+	});
+	const helpMarkupId = computed(() => {
+		return props.helpMarkupId;
+	});
+
+	const handleHelp = async () => {
+		dialogHelpSignal.value.open(correlationId());
+	};
+
 	return {
 		correlationId,
 		error,
@@ -29,7 +53,11 @@ export function useHeaderBaseComponent(props, context, options) {
 		success,
 		serviceStore,
 		sortByOrder,
-		target
+		target,
+		dialogHelpSignal,
+		handleHelp,
+		helpMarkup,
+		hasHelp
 	};
 };
 </script>

@@ -1,11 +1,9 @@
 <template>
 	<div>
+		<ContentHeader v-model="contentTitle" />
 		<v-row dense>
 			<v-col cols="12" class="pb-2">
 				<v-card>
-					<v-card-title class="text-center text-h5 pb-2">
-						{{ contentTitle }}
-					</v-card-title>
 					<v-card-text>
 <VMarkdown v-model="contentMarkup" :use-github=false />
 <Attribution v-model="content" @has-attribution="handleAttribution" />
@@ -19,15 +17,15 @@
 <script>
 import { useInfoMarkupBaseComponent } from '@/components/content/info/infoMarkupBase';
 
-import Attribution from '@/components/content/info/Attribution';
-import Header from '@/components/content/Header';
+import Attribution from '@/components/content/Attribution';
+import ContentHeader from '@/components/content/Header';
 import VMarkdown from '@/library_vue_vuetify/components/markup/VMarkdown';
 
 export default {
 	name: 'InfoMarkup',
 	components: {
 		Attribution,
-		Header,
+		ContentHeader,
 		VMarkdown
 	},
 	setup(props, context) {
