@@ -130,7 +130,6 @@
 					</template>
 					<v-list density="compact">
 						<v-list-item
-							v-if="isLoggedIn"
 							to="/settings"
 						>
 							<template v-slot:prepend>

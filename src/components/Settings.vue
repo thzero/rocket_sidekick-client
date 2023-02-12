@@ -202,7 +202,7 @@
 													ref="measurementUnitWeightRef"
 													vid="measurementUnitWeightId"
 													v-model="measurementUnitWeightId"
-													:items="measurementUnitsVolume"
+													:items="measurementUnitsWeight"
 													:validation="validation"
 													:label="$t('forms.settings.measurementUnits.weight')"
 												/>

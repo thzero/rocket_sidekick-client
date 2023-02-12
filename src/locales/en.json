@@ -543,6 +543,7 @@
 			"description": "Click or hover to see description..."
 		},
 		"dev": "DEV",
+		"error": "An error occured, please try again.",
 		"failed": "Action failed",
 		"loading": "Loading...",
 		"success": "Action was successful",
