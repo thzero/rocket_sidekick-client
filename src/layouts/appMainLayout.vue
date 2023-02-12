@@ -10,7 +10,7 @@ import { useBaseMainLayout } from '@/library_vue/layouts/baseMainLayout';
 
 import DialogSupport from '@/library_vue/components/support/dialog';
 
-export function useMainBaseLayout(props, context, options) {
+export function useAppMainLayout(props, context, options) {
 	const {
 		correlationId,
 		error,
