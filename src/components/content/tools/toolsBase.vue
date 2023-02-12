@@ -158,6 +158,7 @@ export function useToolsBaseComponent(props, context, options) {
 		serviceStore,
 		sortByOrder,
 		target,
+		calculationOutput,
 		content,
 		contentTitle,
 		errors,
