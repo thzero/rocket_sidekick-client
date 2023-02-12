@@ -9,8 +9,8 @@ import AppConstants from '@/constants';
 
 import AppUtility from '@/utility/app';
 import LibraryClientUtility from '@thzero/library_client/utility/index';
+import LibraryClientVueUtility from '@thzero/library_client_vue3/utility/index';
 import LibraryCommonUtility from '@thzero/library_common/utility/index';
-import LibraryVuetifyUtility from '@/library_vue_vuetify/utility/index';
 
 import { useFlightToolsBaseComponent } from '@/components/content/tools/flightToolBase';
 import { useToolsMeasurementBaseComponent } from '@/components/content/tools/toolsMeasurementBase';
@@ -94,7 +94,7 @@ export function useFlightPathBaseComponent(props, context) {
 			flightDataLoad(correlationIdI);
 			flightMeasurementUnitsLoad(correlationIdI, flightProcessor.value);
 
-			flightProcessors.value = LibraryVuetifyUtility.selectOptions(serviceFlightPath.serviceProcessors, LibraryClientUtility.$trans.t, 'forms.content.tools.flightPath.processors', (l) => { return l.id; }, null, (l) => { return l.id; });
+			flightProcessors.value = LibraryClientVueUtility.selectOptions(serviceFlightPath.serviceProcessors, LibraryClientUtility.$trans.t, 'forms.content.tools.flightPath.processors', (l) => { return l.id; }, null, (l) => { return l.id; });
 		},
 		title: LibraryClientUtility.$trans.t('titles.content.tools.flightPath')
 	});
