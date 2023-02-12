@@ -369,7 +369,7 @@ const routes = [
 				name: 'settings',
 				component: () => import(/* webpackPrefetch: true */ /* webpackChunkName: "group-support" */ './components/Settings.vue'),
 				meta: {
-					requiresAuth: true
+					requiresAuth: false
 				}
 			}
 		]

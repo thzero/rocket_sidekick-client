@@ -10,7 +10,7 @@ import AppConstants from '@/constants';
 
 import AppUtility from '@/utility/app';
 import LibraryClientUtility from '@thzero/library_client/utility/index';
-import LibraryVuetifyUtility from '@/library_vue_vuetify/utility/index';
+import LibraryClientVueUtility from '@thzero/library_client_vue3/utility/index';
 
 import { useFlightToolsBaseComponent } from '@/components/content/tools/flightToolBase';
 import { useToolsMeasurementBaseComponent } from '@/components/content/tools/toolsMeasurementBase';
@@ -97,7 +97,7 @@ export function useFlightInfoBaseComponent(props, context) {
 
 			flightInfoDataTypeUse.value = serviceStore.getters.getFlightInfoDataTypeUse();
 
-			flightProcessors.value = LibraryVuetifyUtility.selectOptions(serviceFlightInfo.serviceProcessors, LibraryClientUtility.$trans.t, 'forms.content.tools.flightInfo.processors', (l) => { return l.id; }, null, (l) => { return l.id; });
+			flightProcessors.value = LibraryClientVueUtility.selectOptions(serviceFlightInfo.serviceProcessors, LibraryClientUtility.$trans.t, 'forms.content.tools.flightInfo.processors', (l) => { return l.id; }, null, (l) => { return l.id; });
 
 			resolution.value = serviceStore.getters.getFlightInfoResolution(correlationIdI) ?? AppConstants.FlightInfo.Resolution;
 		},
