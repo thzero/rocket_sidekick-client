@@ -11,7 +11,10 @@
 				</v-banner-text>
 			</v-banner>
 		</div>
-		<ContentHeader v-model="contentTitle" />
+		<ContentHeader 
+			v-model="contentTitle" 
+		/>
+		<!-- <ContentDescription id="strings.content.tools.flightPath" /> -->
 		<v-row dense>
 			<v-col cols="12" lg="3">
 				<VFormControl
@@ -393,6 +396,7 @@ import { required } from '@vuelidate/validators';
 import { useFlightPathBaseComponent } from '@/components/content/tools/flightPath/flightPathBase';
 
 import ContentAttribution from '@/components/content/Attribution';
+import ContentDescription from '@/components/content/Description';
 import ContentHeader from '@/components/content/Header';
 import VCheckboxWithValidation from '@/library_vue_vuetify/components/form//VCheckboxWithValidation';
 import VColorWithValidation from '@/library_vue_vuetify/components/form/VColorWithValidation';
@@ -407,6 +411,7 @@ export default {
 	name: 'FlightPath',
 	components: {
 		ContentAttribution,
+		ContentDescription,
 		ContentHeader,
 		VCheckboxWithValidation,
 		VColorWithValidation,

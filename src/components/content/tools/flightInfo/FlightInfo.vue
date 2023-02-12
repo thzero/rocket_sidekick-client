@@ -11,7 +11,10 @@
 				</v-banner-text>
 			</v-banner>
 		</div>
-		<ContentHeader v-model="contentTitle" />
+		<ContentHeader 
+			v-model="contentTitle" 
+		/>
+		<!-- <ContentDescription id="strings.content.tools.flightInfo" /> -->
 		<v-row dense>
 			<v-col cols="12" lg="3">
 				<VFormControl
@@ -535,6 +538,7 @@ import { useFlightInfoBaseComponent } from '@/components/content/tools/flightInf
 
 import ContentAttribution from '@/components/content/Attribution';
 import ContentHeader from '@/components/content/Header';
+import ContentDescription from '@/components/content/Description';
 import VColorWithValidation from '@/library_vue_vuetify/components/form/VColorWithValidation';
 import VDateTimeField from '@/library_vue_vuetify/components/form/VDateTimeFieldTemp';
 import VFormControl from '@/library_vue_vuetify/components/form/VFormControl';
@@ -547,6 +551,7 @@ export default {
 	name: 'FlightInfo',
 	components: {
 		ContentAttribution,
+		ContentDescription,
 		ContentHeader,
 		FlightInfoData,
 		FlightInfoChart,

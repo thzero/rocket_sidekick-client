@@ -9,21 +9,49 @@
 					<div style="float: right;">
 <slot name="after" />
 					</div> -->
-<div class="text-h4 text-center">{{ modelValue }}</div>
+<div class="text-h4 text-center">
+	{{ modelValue }}
+	<span
+		v-if="hasHelp"
+		style="float: right;"
+	>
+		<v-btn
+			icon="mdi-help-circle-outline"
+			color="info"
+			@click="handleHelp"
+		/>
+	</span>
+</div>
 				</v-card-title>
 			</v-card>
 		</v-col>
 	</v-row>
+	<VDisplayDialog
+		:signal="dialogHelpSignal.signal"
+	>
+		<!--eslint-disable vue/no-v-html -->
+		<div
+			class="markdown-body"
+			style="vertical-align: top;"
+			v-html="helpMarkup"
+		/>
+		<!--eslint-enable-->
+	</VDisplayDialog>
 </template>
 		
 <script>
 import { useContentHeaderBaseComponent } from '@/components/content/headerBase';
 import { useContentHeaderBaseProps } from '@/components/content/headerBaseProps';
 
+import VDisplayDialog from '@/library_vue_vuetify/components/VDisplayDialog';
+
 export default {
 	name: 'ContentHeader',
 	props: {
 		...useContentHeaderBaseProps
+	},
+	components: {
+		VDisplayDialog
 	},
 	setup(props, context) {
 		const {
@@ -39,7 +67,10 @@ export default {
 			serviceStore,
 			sortByOrder,
 			target,
-			title
+			dialogHelpSignal,
+			handleHelp,
+			helpMarkup,
+			hasHelp
 		} = useContentHeaderBaseComponent(props, context);
 
 		return {
@@ -55,7 +86,10 @@ export default {
 			serviceStore,
 			sortByOrder,
 			target,
-			title
+			dialogHelpSignal,
+			handleHelp,
+			helpMarkup,
+			hasHelp
 		};
 	}
 };

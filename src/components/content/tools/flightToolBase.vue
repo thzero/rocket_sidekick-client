@@ -5,8 +5,8 @@ import AppConstants from '@/constants';
 
 import AppUtility from '@/utility/app';
 import LibraryClientUtility from '@thzero/library_client/utility/index';
+import LibraryClientVueUtility from '@thzero/library_client_vue3/utility/index';
 import LibraryCommonUtility from '@thzero/library_common/utility/index';
-import LibraryVuetifyUtility from '@/library_vue_vuetify/utility/index';
 
 import { useToolsBaseComponent } from '@/components/content/tools/toolsBase';
 import { useToolsMeasurementBaseComponent } from '@/components/content/tools/toolsMeasurementBase';
@@ -166,7 +166,7 @@ export function useFlightToolsBaseComponent(props, context, options) {
 			flightMeasurementUnitsVelocityOutputId.value = AppUtility.measurementUnitVelocityId(correlationId, settings.value);
 	};
 	const flightMeasurementUnitsLoadOptions = (correlationId) => {
-		flightMeasurementUnitsOptions.value = LibraryVuetifyUtility.selectOptions(AppUtility.measurementUnitsOptions(), LibraryClientUtility.$trans.t, 'measurementUnits');
+		flightMeasurementUnitsOptions.value = LibraryClientVueUtility.selectOptions(AppUtility.measurementUnitsOptions(), LibraryClientUtility.$trans.t, 'measurementUnits');
 	};
 	const flightMeasurementUnitsReset = (correlationId) => {
 		flightMeasurementUnitsAccelerationId.value = AppUtility.measurementUnitsAccelerationId(correlationId, settings.value, flightMeasurementUnitsId.value);

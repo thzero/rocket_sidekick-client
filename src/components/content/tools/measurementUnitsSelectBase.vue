@@ -3,7 +3,7 @@ import { onMounted, ref } from 'vue';
 
 import AppUtility from '@/utility/app';
 import LibraryClientUtility from '@thzero/library_client/utility/index';
-import LibraryVuetifyUtility from '@/library_vue_vuetify/utility/index';
+import LibraryClientVueUtility from '@thzero/library_client_vue3/utility/index';
 
 import { useBaseControlEditComponent } from '@/library_vue/components/baseControlEdit';
 import { useToolsBaseComponent } from '@/components/content/tools/toolsBase';
@@ -40,7 +40,7 @@ export function useMeasurementUnitsSelectBaseComponent(props, context, options) 
 	const measurementUnitsOptions = ref(null);
 
 	onMounted(async () => {
-		measurementUnitsOptions.value = LibraryVuetifyUtility.selectOptions(AppUtility.measurementUnitsOptions(), LibraryClientUtility.$trans.t, 'measurementUnits');
+		measurementUnitsOptions.value = LibraryClientVueUtility.selectOptions(AppUtility.measurementUnitsOptions(), LibraryClientUtility.$trans.t, 'measurementUnits');
 	});
 
 	return {

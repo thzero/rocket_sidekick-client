@@ -1,15 +1,9 @@
 <template>
 	<div>
-		<ContentHeader v-model="contentTitle" />
-		<v-row dense>
-			<v-col cols="12" class="pb-2">
-				<v-card>
-					<v-card-text>
-				{{ $t('strings.content.tools.thrust2Weight.desc') }}
-					</v-card-text>
-				</v-card>
-			</v-col>
-		</v-row>
+		<ContentHeader 
+			v-model="contentTitle" 
+		/>
+		<ContentDescription id="strings.content.tools.thrust2Weight" />
 		<v-row dense>
 			<v-col cols="12">
 				<VFormControl
@@ -465,6 +459,7 @@ import { useThrust2WeightBaseComponent } from '@/components/content/tools/thrust
 
 import ContentAttribution from '@/components/content/Attribution';
 import CalculatedOuput from '@/components/content/tools/CalculatedOuput';
+import ContentDescription from '@/components/content/Description';
 import ContentHeader from '@/components/content/Header';
 import MeasurementUnitSelect from '@/components/content/tools/MeasurementUnitSelect';
 import MeasurementUnitsSelect from '@/components/content/tools/MeasurementUnitsSelect';
@@ -480,6 +475,7 @@ export default {
 	components: {
 		ContentAttribution,
 		CalculatedOuput,
+		ContentDescription,
 		ContentHeader,
 		MeasurementUnitSelect,
 		MeasurementUnitsSelect,
