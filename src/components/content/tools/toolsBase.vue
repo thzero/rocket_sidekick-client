@@ -27,6 +27,7 @@ export function useToolsBaseComponent(props, context, options) {
 
 	const calculationOutput = ref([]);
 	const content = ref(null);
+	const contentTitle = ref(options ? options.title : null);
 	const errors = ref(null);
 	const errorMessage = ref(null);
 	const errorTimer = ref(null);
@@ -158,6 +159,7 @@ export function useToolsBaseComponent(props, context, options) {
 		sortByOrder,
 		target,
 		content,
+		contentTitle,
 		errors,
 		errorMessage,
 		errorTimer,

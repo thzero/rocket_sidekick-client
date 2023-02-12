@@ -10,7 +10,7 @@ import LibraryClientUtility from '@thzero/library_client/utility/index';
 import { useToolsBaseComponent } from '@/components/content/tools/toolsBase';
 import { useToolsMeasurementBaseComponent } from '@/components/content/tools/toolsMeasurementBase';
 
-export function useWeathercockingBaseComponent(props, context, options) {
+export function useWeathercockingBaseComponent(props, context) {
 	const {
 		correlationId,
 		error,
@@ -25,6 +25,8 @@ export function useWeathercockingBaseComponent(props, context, options) {
 		sortByOrder,
 		target,
 		content,
+		calculationOutput,
+		contentTitle,
 		errors,
 		errorMessage,
 		errorTimer,
@@ -49,7 +51,10 @@ export function useWeathercockingBaseComponent(props, context, options) {
 		setErrorTimer,
 		setNotify,
 		toFixed
-	} = useToolsBaseComponent(props, context, options);
+	} = useToolsBaseComponent(props, context, { 
+		id: 'weathercocking',
+		title: LibraryClientUtility.$trans.t('titles.content.tools.weathercocking')
+	 });
 	
 	const {
 		measurementUnitsAccelerationDefaultId,
@@ -70,7 +75,7 @@ export function useWeathercockingBaseComponent(props, context, options) {
 		measurementUnitsVolumeType,
 		measurementUnitsWeightDefaultId,
 		measurementUnitsWeightType
-	} = useToolsMeasurementBaseComponent(props, context, options);
+	} = useToolsMeasurementBaseComponent(props, context);
 
 	const serviceToolsWeathercocking = LibraryClientUtility.$injector.getService(AppConstants.InjectorKeys.SERVICE_TOOLS_WEATHERCOCKING);
 
@@ -146,7 +151,9 @@ export function useWeathercockingBaseComponent(props, context, options) {
 		serviceStore,
 		sortByOrder,
 		target,
+		calculationOutput,
 		content,
+		contentTitle,
 		errors,
 		errorMessage,
 		errorTimer,

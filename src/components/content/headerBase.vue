@@ -1,7 +1,7 @@
 <script>
 import { useContentBaseComponent } from '@/components/content/contentBase';
 
-export function useHeaderBaseComponent(props, context, options) {
+export function useContentHeaderBaseComponent(props, context, options) {
 	const {
 		correlationId,
 		error,

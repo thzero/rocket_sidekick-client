@@ -12,9 +12,8 @@ import DialogSupport from '@/library_vue/components/support/dialog';
 import { useToolsBaseComponent } from '@/components/content/tools/toolsBase';
 import { useToolsMeasurementBaseComponent } from '@/components/content/tools/toolsMeasurementBase';
 
-export function useThrust2WeightBaseComponent(props, context, options) {
+export function useThrust2WeightBaseComponent(props, context) {
 	const {
-		
 		correlationId,
 		error,
 		hasFailed,
@@ -27,7 +26,9 @@ export function useThrust2WeightBaseComponent(props, context, options) {
 		serviceStore,
 		sortByOrder,
 		target,
+		calculationOutput,
 		content,
+		contentTitle,
 		errors,
 		errorMessage,
 		errorTimer,
@@ -52,7 +53,10 @@ export function useThrust2WeightBaseComponent(props, context, options) {
 		setErrorTimer,
 		setNotify,
 		toFixed
-	} = useToolsBaseComponent(props, context, options);
+	} = useToolsBaseComponent(props, context, { 
+		id: 'thrust2Weight',
+		title: LibraryClientUtility.$trans.t('titles.content.tools.thrust2Weight')
+	 });
 	
 	const {
 		measurementUnitsAccelerationDefaultId,
@@ -73,7 +77,7 @@ export function useThrust2WeightBaseComponent(props, context, options) {
 		measurementUnitsVolumeType,
 		measurementUnitsWeightDefaultId,
 		measurementUnitsWeightType
-	} = useToolsMeasurementBaseComponent(props, context, options);
+	} = useToolsMeasurementBaseComponent(props, context);
 
 	const serviceToolsThrust2Weight = LibraryClientUtility.$injector.getService(AppConstants.InjectorKeys.SERVICE_TOOLS_THRUST2WEIGHT);
 
@@ -315,7 +319,9 @@ export function useThrust2WeightBaseComponent(props, context, options) {
 		serviceStore,
 		sortByOrder,
 		target,
+		calculationOutput,
 		content,
+		contentTitle,
 		errors,
 		errorMessage,
 		errorTimer,

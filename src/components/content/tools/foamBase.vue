@@ -10,7 +10,7 @@ import LibraryClientUtility from '@thzero/library_client/utility/index';
 import { useToolsBaseComponent } from '@/components/content/tools/toolsBase';
 import { useToolsMeasurementBaseComponent } from '@/components/content/tools/toolsMeasurementBase';
 
-export function useFoamBaseComponent(props, context, options) {
+export function useFoamBaseComponent(props, context) {
 	const {
 		correlationId,
 		error,
@@ -24,7 +24,9 @@ export function useFoamBaseComponent(props, context, options) {
 		serviceStore,
 		sortByOrder,
 		target,
+		calculationOutput,
 		content,
+		contentTitle,
 		errors,
 		errorMessage,
 		errorTimer,
@@ -49,7 +51,10 @@ export function useFoamBaseComponent(props, context, options) {
 		setErrorTimer,
 		setNotify,
 		toFixed
-	} = useToolsBaseComponent(props, context, options);
+	} = useToolsBaseComponent(props, context, {
+		id: 'foam',
+		title: LibraryClientUtility.$trans.t('titles.content.tools.foam')
+	});
 	
 	const {
 		measurementUnitsAccelerationDefaultId,
@@ -70,7 +75,7 @@ export function useFoamBaseComponent(props, context, options) {
 		measurementUnitsVolumeType,
 		measurementUnitsWeightDefaultId,
 		measurementUnitsWeightType
-	} = useToolsMeasurementBaseComponent(props, context, options);
+	} = useToolsMeasurementBaseComponent(props, context);
 
 	const serviceToolsFoam = LibraryClientUtility.$injector.getService(AppConstants.InjectorKeys.SERVICE_TOOLS_FOAM);
 
@@ -184,7 +189,9 @@ export function useFoamBaseComponent(props, context, options) {
 		serviceStore,
 		sortByOrder,
 		target,
+		calculationOutput,
 		content,
+		contentTitle,
 		errors,
 		errorMessage,
 		errorTimer,

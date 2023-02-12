@@ -15,7 +15,7 @@ import LibraryVuetifyUtility from '@/library_vue_vuetify/utility/index';
 import { useFlightToolsBaseComponent } from '@/components/content/tools/flightToolBase';
 import { useToolsMeasurementBaseComponent } from '@/components/content/tools/toolsMeasurementBase';
 
-export function useFlightPathBaseComponent(props, context, options) {
+export function useFlightPathBaseComponent(props, context) {
 	const {
 		correlationId,
 		error,
@@ -29,7 +29,9 @@ export function useFlightPathBaseComponent(props, context, options) {
 		serviceStore,
 		sortByOrder,
 		target,
+		calculationOutput,
 		content,
+		contentTitle,
 		errors,
 		errorMessage,
 		errorTimer,
@@ -81,7 +83,8 @@ export function useFlightPathBaseComponent(props, context, options) {
 		flightMeasurementUnitsLoadOptions,
 		flightMeasurementUnitsReset,
 		flightMeasurementUnitsSave
-	} = useFlightToolsBaseComponent(props, context, Object.assign({
+	} = useFlightToolsBaseComponent(props, context, {
+		id: 'flightPath',
 		onMounted: async (correlationIdI) => {
 			reset(correlationIdI);
 
@@ -92,8 +95,9 @@ export function useFlightPathBaseComponent(props, context, options) {
 			flightMeasurementUnitsLoad(correlationIdI, flightProcessor.value);
 
 			flightProcessors.value = LibraryVuetifyUtility.selectOptions(serviceFlightPath.serviceProcessors, LibraryClientUtility.$trans.t, 'forms.content.tools.flightPath.processors', (l) => { return l.id; }, null, (l) => { return l.id; });
-		}
-	}, {}));
+		},
+		title: LibraryClientUtility.$trans.t('titles.content.tools.flightPath')
+	});
 	
 	const {
 		measurementUnitsAccelerationDefaultId,
@@ -114,7 +118,7 @@ export function useFlightPathBaseComponent(props, context, options) {
 		measurementUnitsVolumeType,
 		measurementUnitsWeightDefaultId,
 		measurementUnitsWeightType
-	} = useToolsMeasurementBaseComponent(props, context, options);
+	} = useToolsMeasurementBaseComponent(props, context);
 
 	const serviceDownload = LibraryClientUtility.$injector.getService(AppConstants.InjectorKeys.SERVICE_DOWNLOAD);
 	const serviceFlightPath = LibraryClientUtility.$injector.getService(AppConstants.InjectorKeys.SERVICE_TOOLS_FLIGHT_PATH_PROCESSOR);
@@ -406,7 +410,9 @@ export function useFlightPathBaseComponent(props, context, options) {
 		serviceStore,
 		sortByOrder,
 		target,
+		calculationOutput,
 		content,
+		contentTitle,
 		errors,
 		errorMessage,
 		errorTimer,

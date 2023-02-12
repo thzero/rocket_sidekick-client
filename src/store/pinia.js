@@ -358,7 +358,7 @@ class AppStore extends BaseStore {
 						return [];
 					if (!temp.tools)
 						return [];
-					return temp.tools;
+					return temp.info;
 				},
 				getContentTools() {
 					let temp = LibraryClientUtility.$store.content;

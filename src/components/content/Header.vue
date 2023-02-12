@@ -17,13 +17,13 @@
 </template>
 		
 <script>
-import { useHeaderBaseComponent } from '@/components/content/headerBase';
-import { useHeaderBaseProps } from '@/components/content/headerBaseProps';
+import { useContentHeaderBaseComponent } from '@/components/content/headerBase';
+import { useContentHeaderBaseProps } from '@/components/content/headerBaseProps';
 
 export default {
-	name: 'Header',
+	name: 'ContentHeader',
 	props: {
-		...useHeaderBaseProps
+		...useContentHeaderBaseProps
 	},
 	setup(props, context) {
 		const {
@@ -40,7 +40,7 @@ export default {
 			sortByOrder,
 			target,
 			title
-		} = useHeaderBaseComponent(props, context);
+		} = useContentHeaderBaseComponent(props, context);
 
 		return {
 			correlationId,

@@ -15,7 +15,7 @@ import LibraryVuetifyUtility from '@/library_vue_vuetify/utility/index';
 import { useFlightToolsBaseComponent } from '@/components/content/tools/flightToolBase';
 import { useToolsMeasurementBaseComponent } from '@/components/content/tools/toolsMeasurementBase';
 
-export function useFlightInfoBaseComponent(props, context, options) {
+export function useFlightInfoBaseComponent(props, context) {
 	const {
 		correlationId,
 		error,
@@ -29,7 +29,9 @@ export function useFlightInfoBaseComponent(props, context, options) {
 		serviceStore,
 		sortByOrder,
 		target,
+		calculationOutput,
 		content,
+		contentTitle,
 		errors,
 		errorMessage,
 		errorTimer,
@@ -81,7 +83,8 @@ export function useFlightInfoBaseComponent(props, context, options) {
 		flightMeasurementUnitsLoadOptions,
 		flightMeasurementUnitsReset,
 		flightMeasurementUnitsSave
-	} = useFlightToolsBaseComponent(props, context, Object.assign({
+	} = useFlightToolsBaseComponent(props, context, {
+		id: 'flightInfo',
 		onMounted: async (correlationIdI) => {
 			reset(correlationIdI);
 
@@ -97,8 +100,9 @@ export function useFlightInfoBaseComponent(props, context, options) {
 			flightProcessors.value = LibraryVuetifyUtility.selectOptions(serviceFlightInfo.serviceProcessors, LibraryClientUtility.$trans.t, 'forms.content.tools.flightInfo.processors', (l) => { return l.id; }, null, (l) => { return l.id; });
 
 			resolution.value = serviceStore.getters.getFlightInfoResolution(correlationIdI) ?? AppConstants.FlightInfo.Resolution;
-		}
-	}, {}));
+		},
+		title: LibraryClientUtility.$trans.t('titles.content.tools.flightInfo')
+	});
 	
 	const {
 		measurementUnitsAccelerationDefaultId,
@@ -119,7 +123,7 @@ export function useFlightInfoBaseComponent(props, context, options) {
 		measurementUnitsVolumeType,
 		measurementUnitsWeightDefaultId,
 		measurementUnitsWeightType
-	} = useToolsMeasurementBaseComponent(props, context, options);
+	} = useToolsMeasurementBaseComponent(props, context);
 
 	const serviceDownload = LibraryClientUtility.$injector.getService(AppConstants.InjectorKeys.SERVICE_DOWNLOAD);
 	const serviceFlightInfo = LibraryClientUtility.$injector.getService(AppConstants.InjectorKeys.SERVICE_TOOLS_FLIGHT_INFO_PROCESSOR);
@@ -508,7 +512,9 @@ export function useFlightInfoBaseComponent(props, context, options) {
 		serviceStore,
 		sortByOrder,
 		target,
+		calculationOutput,
 		content,
+		contentTitle,
 		errors,
 		errorMessage,
 		errorTimer,

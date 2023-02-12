@@ -1,8 +1,13 @@
 <template>
 	<div>
+		<ContentHeader v-model="contentTitle" />
 		<v-row dense>
-			<v-col cols="12" class="text-center text-h5 pb-2">
-				{{ $t('titles.content.tools.thrust2Weight') }}
+			<v-col cols="12" class="pb-2">
+				<v-card>
+					<v-card-text>
+				{{ $t('strings.content.tools.thrust2Weight.desc') }}
+					</v-card-text>
+				</v-card>
 			</v-col>
 		</v-row>
 		<v-row dense>
@@ -437,7 +442,7 @@
 			<v-col cols="12" class="text-center text-h5 pb-2; float: right">
 				<v-card>
 					<v-card-text class="float: right">
-<Attribution v-model="content" @has-attribution="handleAttribution" />
+<ContentAttribution v-model="content" @has-attribution="handleAttribution" />
 					</v-card-text>
 				</v-card>
 			</v-col>
@@ -458,8 +463,9 @@ import LibraryClientUtility from '@thzero/library_client/utility/index';
 
 import { useThrust2WeightBaseComponent } from '@/components/content/tools/thrust2WeightBase';
 
-import Attribution from '@/components/content/info/Attribution';
+import ContentAttribution from '@/components/content/Attribution';
 import CalculatedOuput from '@/components/content/tools/CalculatedOuput';
+import ContentHeader from '@/components/content/Header';
 import MeasurementUnitSelect from '@/components/content/tools/MeasurementUnitSelect';
 import MeasurementUnitsSelect from '@/components/content/tools/MeasurementUnitsSelect';
 import MotorLookupDialog from '@/components/external/MotorLookupDialog';
@@ -472,8 +478,9 @@ import VTextField from '@/library_vue_vuetify/components/form//VTextField';
 export default {
 	name: 'Thrust2Weight',
 	components: {
-		Attribution,
+		ContentAttribution,
 		CalculatedOuput,
+		ContentHeader,
 		MeasurementUnitSelect,
 		MeasurementUnitsSelect,
 		MotorLookupDialog,
@@ -497,7 +504,9 @@ export default {
 			serviceStore,
 			sortByOrder,
 			target,
+			calculationOutput,
 			content,
+			contentTitle,
 			errors,
 			errorMessage,
 			errorTimer,
@@ -566,7 +575,7 @@ export default {
 			selectMotor,
 			scope,
 			validation
-		} = useThrust2WeightBaseComponent(props, context, { id: 'thrust2Weight' });
+		} = useThrust2WeightBaseComponent(props, context);
 
 		return {
 			correlationId,
@@ -581,7 +590,9 @@ export default {
 			serviceStore,
 			sortByOrder,
 			target,
+			calculationOutput,
 			content,
+			contentTitle,
 			errors,
 			errorMessage,
 			errorTimer,

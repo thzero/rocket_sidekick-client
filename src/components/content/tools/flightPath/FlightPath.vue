@@ -11,11 +11,7 @@
 				</v-banner-text>
 			</v-banner>
 		</div>
-		<v-row dense>
-			<v-col cols="12" class="text-center text-h5 pb-2">
-				{{ $t('titles.content.tools.flightPath') }}
-			</v-col>
-		</v-row>
+		<ContentHeader v-model="contentTitle" />
 		<v-row dense>
 			<v-col cols="12" lg="3">
 				<VFormControl
@@ -376,7 +372,7 @@
 			<v-col cols="12" class="text-center text-h5 pb-2; float: right">
 				<v-card>
 					<v-card-text class="float: right">
-<Attribution v-model="content" @has-attribution="handleAttribution" />
+<ContentAttribution v-model="content" @has-attribution="handleAttribution" />
 					</v-card-text>
 				</v-card>
 			</v-col>
@@ -396,7 +392,8 @@ import { required } from '@vuelidate/validators';
 
 import { useFlightPathBaseComponent } from '@/components/content/tools/flightPath/flightPathBase';
 
-import Attribution from '@/components/content/info/Attribution';
+import ContentAttribution from '@/components/content/Attribution';
+import ContentHeader from '@/components/content/Header';
 import VCheckboxWithValidation from '@/library_vue_vuetify/components/form//VCheckboxWithValidation';
 import VColorWithValidation from '@/library_vue_vuetify/components/form/VColorWithValidation';
 import VDateTimeField from '@/library_vue_vuetify/components/form/VDateTimeFieldTemp';
@@ -409,7 +406,8 @@ import VTextFieldWithValidation from '@/library_vue_vuetify/components/form/VTex
 export default {
 	name: 'FlightPath',
 	components: {
-		Attribution,
+		ContentAttribution,
+		ContentHeader,
 		VCheckboxWithValidation,
 		VColorWithValidation,
 		VDateTimeField,
@@ -433,7 +431,9 @@ export default {
 			serviceStore,
 			sortByOrder,
 			target,
+			calculationOutput,
 			content,
+			contentTitle,
 			errors,
 			errorMessage,
 			errorTimer,
@@ -519,7 +519,7 @@ export default {
 			resetInput,
 			scope,
 			validation
-		} = useFlightPathBaseComponent(props, context, { id: 'flightPath' });
+		} = useFlightPathBaseComponent(props, context);
 
 		return {
 			correlationId,
@@ -534,7 +534,9 @@ export default {
 			serviceStore,
 			sortByOrder,
 			target,
+			calculationOutput,
 			content,
+			contentTitle,
 			errors,
 			errorMessage,
 			errorTimer,

@@ -1,8 +1,13 @@
 <template>
 	<div>
+		<ContentHeader v-model="contentTitle" />
 		<v-row dense>
-			<v-col cols="12" class="text-center text-h5 pb-2">
-				{{ $t('titles.content.tools.foam') }}
+			<v-col cols="12" class="pb-2">
+				<v-card>
+					<v-card-text>
+				{{ $t('strings.content.tools.foam.desc') }}
+					</v-card-text>
+				</v-card>
 			</v-col>
 		</v-row>
 		<v-row dense>
@@ -212,7 +217,7 @@
 			<v-col cols="12" class="text-center text-h5 pb-2; float: right">
 				<v-card>
 					<v-card-text class="float: right">
-<Attribution v-model="content" @has-attribution="handleAttribution" />
+<ContentAttribution v-model="content" @has-attribution="handleAttribution" />
 					</v-card-text>
 				</v-card>
 			</v-col>
@@ -227,8 +232,9 @@ import LibraryClientUtility from '@thzero/library_client/utility/index';
 
 import { useFoamBaseComponent } from '@/components/content/tools/foamBase';
 
-import Attribution from '@/components/content/info/Attribution';
+import ContentAttribution from '@/components/content/Attribution';
 import CalculatedOuput from '@/components/content/tools//CalculatedOuput';
+import ContentHeader from '@/components/content/Header';
 import MeasurementUnitSelect from '@/components/content/tools/MeasurementUnitSelect.vue';
 import MeasurementUnitsSelect from '@/components/content/tools/MeasurementUnitsSelect';
 import VFormControl from '@/library_vue_vuetify/components/form/VFormControl';
@@ -237,8 +243,9 @@ import VNumberFieldWithValidation from '@/library_vue_vuetify/components/form/VN
 export default {
 	name: 'Foam',
 	components: {
-		Attribution,
+		ContentAttribution,
 		CalculatedOuput,
+		ContentHeader,
 		MeasurementUnitSelect,
 		MeasurementUnitsSelect,
 		VFormControl,
@@ -258,7 +265,9 @@ export default {
 			serviceStore,
 			sortByOrder,
 			target,
+			calculationOutput,
 			content,
+			contentTitle,
 			errors,
 			errorMessage,
 			errorTimer,
@@ -305,7 +314,7 @@ export default {
 			resetForm,
 			scope,
 			validation
-		} = useFoamBaseComponent(props, context, { id: 'foam' });
+		} = useFoamBaseComponent(props, context);
 
 		return {
 			correlationId,
@@ -320,7 +329,9 @@ export default {
 			serviceStore,
 			sortByOrder,
 			target,
+			calculationOutput,
 			content,
+			contentTitle,
 			errors,
 			errorMessage,
 			errorTimer,
