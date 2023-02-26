@@ -89,10 +89,22 @@ Login to Google Cloud hosting, select the same account that was setup for Fireba
 
 Enable the following APIs
 
-* Cloud Build API
 * Firebase Management API
 * Firebase Hosting API
 * Cloud Resource Manager API
+
+### Setup Google Cloud Source Repositories
+
+This is a mirror of the GitHub repo for the following repos:
+* https://img.shields.io/github/package-json/v/thzero/rocket_sidekick-client
+
+* Add Repository
+* Connect external repository
+* Select the project setup by Firebase, then GitHub
+* Select the rocket_sidekick-common repo
+* Connect selected repositories
+
+Select repository, then permissions.  Verify that the Cloud Build Service Account is listed.
 
 #### Cloud Build Trigger
 
