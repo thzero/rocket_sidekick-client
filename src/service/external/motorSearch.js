@@ -13,11 +13,11 @@ class MotorSearchExternalService extends BaseService {
 		this._ttlDefault = 7 * 24 * 60 * 60 * 1000;
 	}
 
-    init(injector) {
+	init(injector) {
 		super.init(injector);
 
 		this._serviceCommunicationRest = injector.getService(LibraryClientConstants.InjectorKeys.SERVICE_COMMUNICATION_REST);
-    }
+	}
 
 	nameLocale() {
 		this.notImplementedError();
@@ -27,8 +27,8 @@ class MotorSearchExternalService extends BaseService {
 		this._calculationData.reset();
 	}
 
-    async manufacturers(correlationId, cached) {
-        try {
+	async manufacturers(correlationId, cached) {
+		try {
 			const now = LibraryCommonUtility.getTimestamp();
 			let ttl = LibraryCommonUtility.getTimestamp() + this._ttlDefault;
 			if (cached) {
@@ -54,8 +54,8 @@ class MotorSearchExternalService extends BaseService {
 		}
 	}
 
-    async motor(correlationId, motorId, cache) {
-        try {
+  async motor(correlationId, motorId, cache) {
+    try {
 			let motor = null;
 			for (const item of cache.data) {
 				if (item.motorId !== motorId)
@@ -89,8 +89,8 @@ class MotorSearchExternalService extends BaseService {
 		}
 	}
 
-    async search(correlationId, criteria, cached) {
-        try {
+	async search(correlationId, criteria, cached) {
+		try {
 			const now = LibraryCommonUtility.getTimestamp();
 			const ttl = LibraryCommonUtility.getTimestamp() + this._ttlDefault;
 
@@ -239,8 +239,8 @@ class MotorSearchExternalService extends BaseService {
 				if (result.motorId !== item.motorId)
 					continue;
 
-					data[i] = result;
-					difference = difference.filter((l) => l.motorId === result.motorId);
+				data[i] = result;
+				difference = difference.filter((l) => l.motorId === result.motorId);
 				break;
 			}
 

@@ -72,7 +72,7 @@ class HandlebarsFlightPathOutputTemplateService extends FlightPathOutputTemmplat
 			template = Handlebars.compile(template);
 			return this._successResponse(template, correlationId);
 		}
-		catch(err) {
+		catch (err) {
 			return this._error('FlightPathOutputTemplateService', 'setTemplate', null, err, null, null, correlationId);
 		}
 	}
@@ -119,7 +119,7 @@ class HandlebarsFlightPathOutputTemplateService extends FlightPathOutputTemmplat
 			return this._success(correlationId);
 		}
 
-		const response = this._setTemplate(correlationId, template, ``);
+		const response = this._setTemplate(correlationId, template, '');
 		if (this._hasFailed(response))
 			return response;
 
@@ -186,7 +186,7 @@ class HandlebarsFlightPathOutputTemplateService extends FlightPathOutputTemmplat
 			</Placemark>
 		</Folder>
 	</Document>
-</kml>`
+</kml>`;
 	}
 
 	get templatePinMaxAccelerationDefault() {

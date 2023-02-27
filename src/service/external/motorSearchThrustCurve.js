@@ -55,15 +55,15 @@ class ThrustCurveMotorSearchExternalService extends MotorSearchExternalService {
 		return response;
 	}
 
-    async _search(correlationId, criteria) {
+	async _search(correlationId, criteria) {
 		try {
 			const opts = {
-					ignoreCorrelationId: true,
-					ignoreToken: true
-				};
+				ignoreCorrelationId: true,
+				ignoreToken: true
+			};
 			const body = {
-					availability: 'available',
-					maxResults: 500
+				availability: 'available',
+				maxResults: 500
 			};
 			if (!String.isNullOrEmpty(criteria.impulseClass)) {
 				body.impulseClass = criteria.impulseClass;

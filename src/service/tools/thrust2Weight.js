@@ -54,7 +54,7 @@ class Thrust2WeightToolsService extends ToolsService {
 			{
 				type: this._serviceCalculationEngine.symTypeEvaluate,
 				var: 'massInNewtons',
-				evaluate: 'massInKg * gravity',
+				evaluate: 'massInKg * gravity'
 			},
 			{
 				type: this._serviceCalculationEngine.symTypeEvaluate,
@@ -88,7 +88,7 @@ class Thrust2WeightToolsService extends ToolsService {
 				format: this._serviceCalculationEngine.formatFixed()
 			}
 		];
-		
+
 		return this._successResponse({
 			steps: calculationSteps,
 			instance: this._serviceCalculationEngine.initialize(correlationId)
@@ -97,20 +97,20 @@ class Thrust2WeightToolsService extends ToolsService {
 
 	update(correlationId, motor, data) {
 		if (!motor || !motor.samples || (motor.samples.length <= 0) || !data)
-            return;
+			return;
 
 		data.thrustAverage = motor.avgThrustN;
-        data.thrustPeak = motor.maxThrustN;
-        data.thrustInitial = 0;
-        for (const sample of motor.samples) {
-            if (sample.time > data.maxLaunchRodTime)
-                break;
+		data.thrustPeak = motor.maxThrustN;
+		data.thrustInitial = 0;
+		for (const sample of motor.samples) {
+			if (sample.time > data.maxLaunchRodTime)
+				break;
 
 			if (sample.thrust > data.thrustInitial)
-			data.thrustInitial = sample.thrust;
+				data.thrustInitial = sample.thrust;
 			if (sample.thrust > data.thrustPeak)
 				data.thrustPeak = sample.thrust;
-        }
+		}
 
 		return this._successResponse(data, correlationId);
 	}

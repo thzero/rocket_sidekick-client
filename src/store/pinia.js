@@ -7,7 +7,6 @@ import LibraryCommonUtility from '@thzero/library_common/utility';
 import Response from '@thzero/library_common/response';
 
 import BaseStore from '@thzero/library_client_vue3_store_pinia/store/index';
-import Utility from '@thzero/library_common/utility';
 
 class AppStore extends BaseStore {
 	// _initModules() {
@@ -29,7 +28,7 @@ class AppStore extends BaseStore {
 					'flightPathStyle',
 					'motorManufacturers',
 					'motorSearchCriteria',
-					'motorSearchResults',
+					'motorSearchResults'
 					// 'openSource',
 					// 'plans',
 					// 'user',
@@ -189,7 +188,7 @@ class AppStore extends BaseStore {
 						rocket = this.rockets.find(l => l.id === id);
 					if (rocket)
 						return Response.success(correlationId, rocket);
-					
+
 					const service = LibraryClientUtility.$injector.getService(AppConstants.InjectorKeys.SERVICE_ROCKETS);
 					const response = await service.retrieve(correlationId, id);
 					this.$logger.debug('store', 'requestRocketsById', 'response', response, correlationId);
@@ -212,7 +211,7 @@ class AppStore extends BaseStore {
 						rocket = this.rocketsUser.find(l => l.id === id);
 					if (rocket)
 						return Response.success(correlationId, rocket);
-					
+
 					const service = LibraryClientUtility.$injector.getService(AppConstants.InjectorKeys.SERVICE_ROCKETS);
 					const response = await service.retrieveUser(correlationId, id);
 					this.$logger.debug('store', 'requestRocketsByIdUser', 'response', response, correlationId);
@@ -353,7 +352,7 @@ class AppStore extends BaseStore {
 					return LibraryClientUtility.$store.content;
 				},
 				getContentInfo() {
-					let temp = LibraryClientUtility.$store.content;
+					const temp = LibraryClientUtility.$store.content;
 					if (!temp)
 						return [];
 					if (!temp.tools)
@@ -361,7 +360,7 @@ class AppStore extends BaseStore {
 					return temp.info;
 				},
 				getContentTools() {
-					let temp = LibraryClientUtility.$store.content;
+					const temp = LibraryClientUtility.$store.content;
 					if (!temp)
 						return [];
 					if (!temp.tools)
@@ -441,10 +440,10 @@ class AppStore extends BaseStore {
 				async requestRockets(correlationId, params) {
 					return await LibraryClientUtility.$store.requestRockets(correlationId, params);
 				},
-				async requestRocketsById(correlationId, id)  {
+				async requestRocketsById(correlationId, id) {
 					return await LibraryClientUtility.$store.requestRocketsById(correlationId, id);
 				},
-				async requestRocketsByIdUser(correlationId, id)  {
+				async requestRocketsByIdUser(correlationId, id) {
 					return await LibraryClientUtility.$store.requestRocketsByIdUser(correlationId, id);
 				},
 				async requestRocketsUser(correlationId, params) {

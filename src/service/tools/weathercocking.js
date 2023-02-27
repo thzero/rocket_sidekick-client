@@ -34,7 +34,7 @@ class WeathercockingToolsService extends ToolsService {
 		response = this._enforceNotNullResponse('WeathercockingToolsService', 'initializeCalculation', windVelocityMeasurementUnit, 'windVelocityMeasurementUnit', correlationId);
 		if (this._hasFailed(response))
 			return response;
-		
+
 		const calculationSteps = [
 			{
 				type: this._serviceCalculationEngine.symTypeSet,
@@ -84,7 +84,7 @@ class WeathercockingToolsService extends ToolsService {
 				format: this._serviceCalculationEngine.formatFixed()
 			}
 		];
-		
+
 		return this._successResponse({
 			steps: calculationSteps,
 			instance: this._serviceCalculationEngine.initialize(correlationId)

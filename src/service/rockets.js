@@ -13,7 +13,7 @@ class RocketsService extends RestExternalService {
 			return this._error('RocketsService', 'listing', null, err, null, null, correlationId);
 		}
 	}
-    
+
 	async listingUser(correlationId, params) {
 		try {
 			const response = await this._serviceCommunicationRest.post(correlationId, LibraryClientConstants.ExternalKeys.BACKEND, { url: 'rockets/listing/user' }, params);
@@ -35,10 +35,10 @@ class RocketsService extends RestExternalService {
 			return this._error('RocketsService', 'retrieve', null, err, null, null, correlationId);
 		}
 	}
-    
+
 	async retrieveUser(correlationId, id) {
 		try {
-			const response = await this._serviceCommunicationRest.getById(correlationId, LibraryClientConstants.ExternalKeys.BACKEND, 'rockets/user', user.id);
+			const response = await this._serviceCommunicationRest.getById(correlationId, LibraryClientConstants.ExternalKeys.BACKEND, 'rockets/user', id);
 			this._logger.debug('RocketsService', 'retrieveUser', 'response', response, correlationId);
 			return response;
 		}

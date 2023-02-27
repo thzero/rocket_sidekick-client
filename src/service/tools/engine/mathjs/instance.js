@@ -1,4 +1,4 @@
-import { create, all, format } from 'mathjs';
+import { create, all } from 'mathjs';
 
 import InstanceCalculationEngineToolService from '../instance';
 
@@ -15,9 +15,9 @@ class MathJsInstanceCalculationEngineToolService extends InstanceCalculationEngi
 		// 		parse: function () { throw new Error('Function parse is disabled') },
 		// 		simplify: function () { throw new Error('Function simplify is disabled') },
 		// 		derivative: function () { throw new Error('Function derivative is disabled') }
-		// 	}, 
-		// 	{ 
-		// 		override: true 
+		// 	},
+		// 	{
+		// 		override: true
 		// 	}
 		// );
 
@@ -37,15 +37,14 @@ class MathJsInstanceCalculationEngineToolService extends InstanceCalculationEngi
 			for (const calculationStep of calculationSteps)
 				this._evaluate(correlationId, calculationStep, resultSteps);
 
-			for (const resultStep of resultSteps)
-			{
+			for (const resultStep of resultSteps) {
 				if (resultStep.var) {
 					results[resultStep.var] = this._parser.get(resultStep.var);
 					continue;
 				}
 
 				if (resultStep.data) {
-					for (const [key, value] of Object.entries(calculationStep.data))
+					for (const [key] of Object.entries(resultStep.data))
 						results[key] = this._parser.get(key);
 					continue;
 				}
@@ -84,7 +83,7 @@ class MathJsInstanceCalculationEngineToolService extends InstanceCalculationEngi
 		for (const watcher of this._watchers) {
 			watcher.hasChanged = false;
 			watcher.value = this._parser.get(watcher.var);
-			
+
 			for (const listener of this._listeners) {
 				if (watcher.hasChanged)
 					this._publish(correlationId, listener, this._engine.symTypeSet, watcher.var, watcher.value, this._evaluationName);
@@ -118,14 +117,14 @@ class MathJsInstanceCalculationEngineToolService extends InstanceCalculationEngi
 			this._parser.evaluate(stepC);
 			value = this._parser.get(calculationStep.var);
 		}
-		
+
 		if (calculationStep.result) {
 			this._handleFormatting(correlationId, calculationStep, value);
 			resultSteps.push(calculationStep);
 		}
 
 		this._initWatchers(correlationId, calculationStep);
-		
+
 		return true;
 	}
 
@@ -163,14 +162,14 @@ class MathJsInstanceCalculationEngineToolService extends InstanceCalculationEngi
 		}
 		else
 			this._parser.set(calculationStep.var, value);
-		
+
 		if (calculationStep.result) {
 			this._handleFormatting(correlationId, calculationStep, value);
 			resultSteps.push(calculationStep);
 		}
-		
+
 		this._initWatchers(correlationId, calculationStep);
-		
+
 		return true;
 	}
 
@@ -213,7 +212,7 @@ class MathJsInstanceCalculationEngineToolService extends InstanceCalculationEngi
 						this._parser.set(calculationStep.var, value);
 					}
 				}).bind(this)
-			}
+			};
 	}
 
 	_initFormatters() {

@@ -6,7 +6,7 @@ class FeatherweightFlightPathProcessorService extends FlightPathProcessorService
 	}
 
 	_processData(correlationId, input) {
-		this._enforceNotNull('FeatherweightFlightPathProcessorService', '_processData', input, 'input'), correlationId;
+		this._enforceNotNull('FeatherweightFlightPathProcessorService', '_processData', input, 'input', correlationId);
 
 		const regex = /^[a-z]+$/i;
 		const temp = input.data[0][4];
@@ -43,13 +43,12 @@ class FeatherweightFlightPathProcessorService extends FlightPathProcessorService
 	_processDataSort(correlationId) {
 		return this._successResponse((a, b) => {
 			if (a.time > b.time)
-				return 1
+				return 1;
 			if (a.time < b.time)
-				return -1
+				return -1;
 
 			return 0;
-		},
-		correlationId);
+		}, correlationId);
 	}
 }
 

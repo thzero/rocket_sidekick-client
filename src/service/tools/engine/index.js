@@ -3,13 +3,13 @@ import ToolsService from '@/service/tools/index';
 class CalculationEngineToolService extends ToolsService {
 	constructor() {
 		super();
-		
+
 		this._listeners = [];
 
 		this.symConvertNumber = Symbol('number');
-		
+
 		this.symFormatFixed = Symbol('fixed');
-		
+
 		this.symTypeEvaluate = Symbol('evaluate');
 		this.symTypeSet = Symbol('set');
 	}
@@ -19,7 +19,7 @@ class CalculationEngineToolService extends ToolsService {
 	}
 
 	formatFixed(precision) {
-		precision = precision ? precision : 2;
+		precision = precision || 2;
 		return {
 			type: this.symFormatFixed,
 			precision: 2

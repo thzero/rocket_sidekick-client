@@ -7,7 +7,7 @@ class InstanceCalculationEngineToolService extends BaseService {
 		super();
 
 		this._engine = engine;
-		
+
 		this._listeners = [];
 	}
 
@@ -28,7 +28,7 @@ class InstanceCalculationEngineToolService extends BaseService {
 	initialize(correlationId) {
 		this.notImplementedError();
 	}
-	  
+
 	_proxy(calculationStep) {
 		if (!calculationStep)
 			throw Error('Invalid calculation step.');

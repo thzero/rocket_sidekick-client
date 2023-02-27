@@ -42,8 +42,8 @@ class ParachuteSizingToolsService extends ToolsService {
 		const massWeightMeasurementUnit = this._measurementUnitFromId(correlationId, data.massWeightMeasurementUnitsId, AppConstants.MeasurementUnits.weight.id, data.massWeightMeasurementUnitId);
 		response = this._enforceNotNullResponse('ParachuteSizingToolsService', 'initializeCalculation', massWeightMeasurementUnit, 'massWeightMeasurementUnit', correlationId);
 		if (this._hasFailed(response))
-			return response; 
-		
+			return response;
+
 		const calculationSteps = [
 			{
 				type: this._serviceCalculationEngine.symTypeSet,
@@ -101,7 +101,7 @@ class ParachuteSizingToolsService extends ToolsService {
 				unit: diameterLengthMeasurementUnit
 			}
 		];
-		
+
 		return this._successResponse({
 			steps: calculationSteps,
 			instance: this._serviceCalculationEngine.initialize(correlationId)

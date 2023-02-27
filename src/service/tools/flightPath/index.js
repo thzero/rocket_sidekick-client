@@ -61,14 +61,14 @@ class FlightPathProcessorService extends BaseService {
 		this._enforceNotEmpty('FlightPathProcessorService', 'process', measurementUnits.measurementUnitsVelocityOutputId, 'measurementUnitsVelocityOutputId', correlationId);
 
 		if (LibraryCommonUtility.isNull(data))
-			return this._error('FlightPathProcessorService', 'process', null, err, null, 'errors.process.noInput', correlationId);
+			return this._error('FlightPathProcessorService', 'process', 'Invalid data', null, null, 'errors.process.noInput', correlationId);
 
 		if (String.isNullOrEmpty(processorId))
-			return this._error('FlightPathProcessorService', 'process', null, err, null, 'errors.process.noProcessor', correlationId);
+			return this._error('FlightPathProcessorService', 'process', 'Invalid processor id', null, null, 'errors.process.noProcessor', correlationId);
 
 		const processor = this._determineProcessor(correlationId, processorId);
 		if (!processor)
-			return this._error('FlightPathProcessorService', 'process', null, err, null, 'errors.process.noProcessor', correlationId);
+			return this._error('FlightPathProcessorService', 'process', 'Invalid processor', null, null, 'errors.process.noProcessor', correlationId);
 
 		const results = this._initialize(correlationId, flightInfo);
 		processor.process(correlationId, this, results, data, measurementUnits, templateMain, templatePinLaunch, templatePinTouchdown, templatePinsAdditional);

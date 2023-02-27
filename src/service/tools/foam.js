@@ -60,7 +60,7 @@ class FoamToolsService extends ToolsService {
 	async initializeCalculation(correlationId, data, outputMeasurementUnitsId) {
 		this._enforceNotNull('FoamToolsService', 'initializeCalculation', data, 'data', correlationId);
 		this._enforceNotEmpty('FoamToolsService', 'initializeCalculation', outputMeasurementUnitsId, 'outputMeasurementUnitsId', correlationId);
-		
+
 		const fluidMeasurementUnit = this._measurementUnitFromId(correlationId, data.fluidMeasurementUnitsId, AppConstants.MeasurementUnits.fluid.id, data.fluidMeasurementUnitId);
 		let response = this._enforceNotNullResponse('FoamToolsService', 'initializeCalculation', fluidMeasurementUnit, 'fluidMeasurementUnit', correlationId);
 		if (this._hasFailed(response))
@@ -119,7 +119,7 @@ class FoamToolsService extends ToolsService {
 				unit: fluidMeasurementUnit
 			}
 		];
-		
+
 		return this._successResponse({
 			steps: calculationSteps,
 			instance: this._serviceCalculationEngine.initialize(correlationId)
@@ -135,7 +135,7 @@ class FoamToolsService extends ToolsService {
 				type: this._serviceCalculationEngine.symTypeSet,
 				data: {
 					manufacturer: data.manufacturer,
-					expansion: data.expansion,
+					expansion: data.expansion
 				},
 				result: true
 			},
@@ -149,7 +149,7 @@ class FoamToolsService extends ToolsService {
 				type: this._serviceCalculationEngine.symTypeSet,
 				var: 'density',
 				value: data.densityM,
-				unit: 'g/ml',
+				unit: 'g/ml'
 				// result: true,
 				// format: this._serviceCalculationEngine.formatFixed()
 			},
@@ -192,9 +192,9 @@ class FoamToolsService extends ToolsService {
 				unit: 'oz/in^3',
 				result: true,
 				format: this._serviceCalculationEngine.formatFixed()
-			},
+			}
 		];
-		
+
 		return this._successResponse({
 			steps: calculationSteps,
 			instance: this._serviceCalculationEngine.initialize(correlationId)

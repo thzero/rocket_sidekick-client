@@ -77,8 +77,8 @@ class FlightPathProcessorService extends ToolsService {
 		results.launchCoords = `${temp.longitude},${temp.latitude}`;
 		while (temp) {
 			previous = temp;
-			coords = `${temp.longitude},${temp.latitude},${this._round(temp.altitude * divisor)}`
-			
+			coords = `${temp.longitude},${temp.latitude},${this._round(temp.altitude * divisor)}`;
+
 			// add coords to the path...
 			path.push(coords);
 
@@ -175,7 +175,7 @@ class FlightPath {
 			velocityH: velocityH ? Number(velocityH) : null
 		});
 	}
-	
+
 	process(correlationId) {
 		let start = 0;
 		let started = false;
@@ -191,7 +191,7 @@ class FlightPath {
 			}
 		}
 	}
-	
+
 	sort(correlationId, func) {
 		if (!func)
 			return;

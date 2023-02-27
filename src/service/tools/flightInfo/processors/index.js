@@ -2,7 +2,7 @@ import configureMeasurements, { length, speed } from 'convert-units';
 
 import AppConstants from '@/constants';
 
-// import AppUtility from '@/utility/app';
+import LibraryCommonUtility from '@thzero/library_common/utility/index';
 
 import ToolsService from '@/service/tools/index';
 
@@ -43,8 +43,8 @@ class FlightInfoProcessorService extends ToolsService {
 		if (this._hasFailed(responseProcessInputSort))
 			return responseProcessInputSort;
 
-		if (responseProcessInputSort.results && LibraryUtility.isFunction(responseProcessInputSort.results))
-			this._data.sort(responseProcessInputSorted.results);
+		if (responseProcessInputSort.results && LibraryCommonUtility.isFunction(responseProcessInputSort.results))
+			this._data.sort(responseProcessInputSort.results);
 
 		const responseProcessInputPost = this._processInputPost(correlationId);
 		if (this._hasFailed(responseProcessInputPost))
@@ -461,7 +461,7 @@ class FlightInfoProcessorService extends ToolsService {
 
 		// value = this._round(value * 0.3048);
 		// return value;
-		
+
 		value = this._convert(value)
 			.from(AppConstants.MeasurementUnits[measurementUnits.id].cceleration[measurementUnits.acceleration])
 			.to(AppConstants.MeasurementUnits[measurementUnits.outputId].acceleration[measurementUnits.accelerationOutputId]);
@@ -477,7 +477,7 @@ class FlightInfoProcessorService extends ToolsService {
 
 		// value = this._round(value * 0.3048);
 		// return value;
-		
+
 		value = this._convert(value)
 			.from(AppConstants.MeasurementUnits[measurementUnits.id].distance[measurementUnits.distanceId])
 			.to(AppConstants.MeasurementUnits[measurementUnits.outputId].distance[measurementUnits.distanceOutputId]);
@@ -493,7 +493,7 @@ class FlightInfoProcessorService extends ToolsService {
 
 		// value = this._round(value * 0.3048);
 		// return value;
-		
+
 		value = this._convert(value)
 			.from(AppConstants.MeasurementUnits[measurementUnits.id].velocity[measurementUnits.velocityId])
 			.to(AppConstants.MeasurementUnits[measurementUnits.outputId].velocity[measurementUnits.velocityOutputId]);
@@ -545,7 +545,7 @@ class FlightData {
 			velocityF: velocityF ? Number(velocityF) : null
 		});
 	}
-	
+
 	process(correlationId) {
 	}
 }

@@ -13,9 +13,7 @@ class EggtimerFlightInfoProcessorService extends FlightInfoProcessorService {
 		if ((regex.exec(temp)) !== null)
 			input.data.shift();
 
-		let index = 0;
 		for (const data of input.data) {
-			index++;
 			this._publish(
 				correlationId,
 				data[0], // time
