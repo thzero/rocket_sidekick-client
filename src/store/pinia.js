@@ -97,7 +97,7 @@ class AppStore extends BaseStore {
 						await this.setContent(correlationId, response.results);
 				},
 				async requestContent(correlationId) {
-					const now = Utility.getTimestamp();
+					const now = LibraryCommonUtility.getTimestamp();
 					const ttlContent = this.contentTtl ? this.contentTtl : 0;
 					const delta = now - ttlContent;
 					if (this.content && (delta <= this.contentTtlDiff))
@@ -117,7 +117,7 @@ class AppStore extends BaseStore {
 					if (String.isNullOrEmpty(contentId))
 						return Response.error('store', 'requestContentMarkup', 'contentId', null, null, null, correlationId);
 
-					const now = Utility.getTimestamp();
+					const now = LibraryCommonUtility.getTimestamp();
 					const ttlContent = this.contentMarkupTtl ? this.contentMarkupTtl : 0;
 					const delta = now - ttlContent;
 					if (this.contentMarkup && (delta <= this.contentMarkupTtlDiff)) {
@@ -177,7 +177,7 @@ class AppStore extends BaseStore {
 					return [];
 				},
 				async requestRocketsById(correlationId, id) {
-					// const now = Utility.getTimestamp();
+					// const now = LibraryCommonUtility.getTimestamp();
 					// const ttlContent = this.rocketsTtl ? this.rocketsTtl : 0;
 					// const delta = now - ttlContent;
 					// if (this.rockets && (delta <= this.rocketsTtlDiff))
@@ -200,7 +200,7 @@ class AppStore extends BaseStore {
 					return Response.error('store', 'requestRocketsById', null, null, null, null, correlationId);
 				},
 				async requestRocketsByIdUser(correlationId, id) {
-					// const now = Utility.getTimestamp();
+					// const now = LibraryCommonUtility.getTimestamp();
 					// const ttlContent = this.rocketsTtl ? this.rocketsTtl : 0;
 					// const delta = now - ttlContent;
 					// if (this.rocketsUser && (delta <= this.rocketsTtlDiff))
@@ -223,7 +223,7 @@ class AppStore extends BaseStore {
 					return Response.error('store', 'requestRocketsByIdUser', null, null, null, null, correlationId);
 				},
 				async requestRockets(correlationId, params) {
-					// const now = Utility.getTimestamp();
+					// const now = LibraryCommonUtility.getTimestamp();
 					// const ttlContent = this.rocketsTtl ? this.rocketsTtl : 0;
 					// const delta = now - ttlContent;
 					// if (this.rocketsListing && (delta <= this.rocketsTtlDiff))
@@ -254,15 +254,15 @@ class AppStore extends BaseStore {
 					this.$logger.debug('store', 'setContent', 'content.a', content, correlationId);
 					this.$logger.debug('store', 'setContent', 'content.b', this.content, correlationId);
 					this.content = content;
-					this.contentTtl = Utility.getTimestamp();
+					this.contentTtl = LibraryCommonUtility.getTimestamp();
 					this.$logger.debug('store', 'setContent', 'content.c', this.content, correlationId);
 				},
 				async setContentMarkup(correlationId, content) {
 					this.$logger.debug('store', 'setContent', 'contentMarkup.a', content, correlationId);
 					this.$logger.debug('store', 'setContent', 'contentMarkup.b', this.contentMarkup, correlationId);
 					if (content && !String.isNullOrEmpty(content)) {
-						this.contentMarkupTtl = Utility.getTimestamp();
-						Utility.updateArrayByObject(this.contentMarkup, content);
+						this.contentMarkupTtl = LibraryCommonUtility.getTimestamp();
+						LibraryCommonUtility.updateArrayByObject(this.contentMarkup, content);
 					}
 					this.$logger.debug('store', 'setContent', 'contentMarkup.c', this.contentMarkup, correlationId);
 				},
@@ -316,15 +316,15 @@ class AppStore extends BaseStore {
 				async setRocket(correlationId, rocket) {
 					this.$logger.debug('store', 'setRocket', 'rocket.a', rocket, correlationId);
 					this.$logger.debug('store', 'setRocket', 'rockets.b', this.rockets, correlationId);
-					this.rockets = Utility.updateArrayByObject(this.rockets, rocket);
-					this.rocketsTtl = Utility.getTimestamp();
+					this.rockets = LibraryCommonUtility.updateArrayByObject(this.rockets, rocket);
+					this.rocketsTtl = LibraryCommonUtility.getTimestamp();
 					this.$logger.debug('store', 'setRocket', 'rockets.c', this.rockets, correlationId);
 				},
 				async setRocketUser(correlationId, rocket) {
 					this.$logger.debug('store', 'setRocketUser', 'rocket.a', rocket, correlationId);
 					this.$logger.debug('store', 'setRocketUser', 'rocketsUser.b', this.rocketsUser, correlationId);
-					this.rocketsUser = Utility.updateArrayByObject(this.rockets, rocket);
-					this.rocketsTtl = Utility.getTimestamp();
+					this.rocketsUser = LibraryCommonUtility.updateArrayByObject(this.rockets, rocket);
+					this.rocketsTtl = LibraryCommonUtility.getTimestamp();
 					this.$logger.debug('store', 'setRocketUser', 'rocketsUser.c', this.rocketsUser, correlationId);
 				},
 				async setRocketsUser(correlationId, rockets) {
@@ -337,7 +337,7 @@ class AppStore extends BaseStore {
 					this.$logger.debug('store', 'setRockets', 'rockets.a', rockets, correlationId);
 					this.$logger.debug('store', 'setRockets', 'rocketsListing.b', this.rocketsListing, correlationId);
 					this.rocketsListing = rockets;
-					this.rocketsTtl = Utility.getTimestamp();
+					this.rocketsTtl = LibraryCommonUtility.getTimestamp();
 					this.$logger.debug('store', 'setRockets', 'rocketsListing.c', this.rocketsListing, correlationId);
 				},
 				async setRocketsUser(correlationId, rockets) {
