@@ -23,7 +23,7 @@
 				</router-link>
 			</v-app-bar-title>
 
-			<v-btn 
+			<v-btn
 				v-if="$vuetify.display.mdAndUp && features.Rockets"
 				to="/rockets"
 			>
@@ -107,13 +107,13 @@
 					</v-list-item>
 				</v-list>
 			</v-menu>
-			<v-btn 
+			<v-btn
 				v-if="$vuetify.display.mdAndUp"
 				to="/content/links"
 			>
 				{{ $t('menu.content.links.title') }}
 			</v-btn>
-			<v-btn 
+			<v-btn
 				v-if="$vuetify.display.mdAndUp && features.MobileApp"
 				to="/landing"
 			>
@@ -297,6 +297,7 @@
 				fluid
 				pt-2
 			>
+			[[ {{  online  }}]]
 				<router-view />
 			</v-container>
 		</v-main>
@@ -334,7 +335,11 @@
 </template>
 
 <script>
+import { computed } from 'vue';
+
 import { useAppMainLayout } from '@/layouts/appMainLayout';
+
+import LibraryClientUtility from '@thzero/library_client/utility/index';
 
 import VCookieComply from '@/library_vue_vuetify/components/VCookieComply';
 import VConfirmationDialog from '@/library_vue_vuetify/components/VConfirmationDialog';
@@ -394,6 +399,10 @@ export default {
 			tools
 		} = useAppMainLayout(props, context);
 
+		const online = computed(() => {
+			return LibraryClientUtility.$store.getters.getOnline();
+		});
+
 		return {
 			correlationId,
 			error,
@@ -433,7 +442,8 @@ export default {
 			markup,
 			preferences,
 			serviceMarkup,
-			tools
+			tools,
+			online
 		};
 	},
 	// data: () => ({

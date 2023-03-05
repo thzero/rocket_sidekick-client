@@ -26,12 +26,9 @@ import userService from '@/service/user';
 import utilityService from '@/service/utility';
 import versionService from '@/service/version';
 
-import BaseServices from '@thzero/library_client_vue3/boot/baseServices';
+import AdminServicesBaseBoot from '@thzero/library_client_vue3/boot/baseAdminServices';
 
-import storeSetup from '@/store/pinia'; // STORE TYPE
-// import storeSetup from '@/store/vuex'; // STORE TYPE
-
-class Services extends BaseServices {
+class AppServiceBoot extends AdminServicesBaseBoot {
 	_initialize() {
 		super._initialize();
 
@@ -39,9 +36,9 @@ class Services extends BaseServices {
 		this._injectService(AppConstants.InjectorKeys.SERVICE_DOWNLOAD, new downloadService());
 
 		this._injectService(AppConstants.InjectorKeys.SERVICE_EXTERNAL_MOTOR_SEARCH, new thrustCurveMotorSearchExternalService());
-		
+
 		this._injectService(AppConstants.InjectorKeys.SERVICE_ROCKETS, new rocketsService());
-		
+
 		this._injectService(AppConstants.InjectorKeys.SERVICE_TOOLS_CALCULATION_ENGINE, new mathJsCalculationEngineToolsService());
 		this._injectService(AppConstants.InjectorKeys.SERVICE_TOOLS_FOAM, new foamToolsService());
 
@@ -88,5 +85,4 @@ class Services extends BaseServices {
 	}
 }
 
-export const bootServices = Services;
-export const store = storeSetup;
+export default AppServiceBoot;

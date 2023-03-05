@@ -3,7 +3,10 @@
 </template>
 
 <script>
+import { onMounted } from 'vue';
+
 import { useTheme } from 'vuetify';
+import { SplashScreen } from '@capacitor/splash-screen';
 
 import LibraryClientConstants from '@thzero/library_client/constants';
 
@@ -25,7 +28,7 @@ export default {
 			notImplementedError,
 			success
 		} = useBaseAppComponent(
-			props, 
+			props,
 			context,
 			{
 				initializeI: async () => {
@@ -58,6 +61,10 @@ export default {
 		window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', event => {
 			const themeRequested = userTheme() + (event.matches ? 'Dark' : '');
 			theme.global.name.value = themeRequested;
+		});
+
+		onMounted(async () => {
+			SplashScreen.hide();
 		});
 
 		return {

@@ -7,13 +7,17 @@ import bootStarter from '@thzero/library_client_firebase_vue/boot/starter';
 // import bootAsyncComputed from '@thzero/library_client_vue3/boot/asyncComputed';
 import bootEventBus from '@thzero/library_client_vue3/boot/eventBus';
 import booti18n from '@/boot/i18n';
-import { bootServices, store } from '@/boot/services';
+import bootNetwork from '@/boot/network';
+import bootServices from '@/boot/services';
 import bootUi from '@/library_vue_vuetify/boot/ui';
 import bootValidate from '@/boot/validate';
 // import bootWebComponents from '@thzero/library_client_vue3/boot/webComponents';
 import bootCookieComply from '@/library_vue_vuetify/boot/cookie';
 
 import router from '@/router';
+
+import store from '@/store/pinia'; // STORE TYPE
+// import storeSetup from '@/store/vuex'; // STORE TYPE
 
 import start from '@thzero/library_client_vue3/boot/main';
 
@@ -84,8 +88,7 @@ const redTheme = {
 	}
 };
 
-// start(app, router, store, [ bootAsyncComputed, booti18n, bootEventBus, bootServices, bootValidate, bootUi, bootWebComponents ], bootStarter);
-start(App, router, store, [ booti18n, bootEventBus, bootServices, bootValidate, bootUi, bootCookieComply ], bootStarter, {
+start(App, router, store, [ booti18n, bootEventBus, bootNetwork, bootServices, bootValidate, bootUi, bootCookieComply ], bootStarter, {
 	vuetify: {
 		// icons: {
 		// 	defaultSet: 'mdi',

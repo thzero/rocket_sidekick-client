@@ -80,6 +80,7 @@ class AppStore extends BaseStore {
 				motorManufacturers: [],
 				motorSearchCriteria: {},
 				motorSearchResults: {},
+				online: {},
 				rockets: [],
 				rocketsListing: [],
 				rocketsTtl: 0,
@@ -244,7 +245,7 @@ class AppStore extends BaseStore {
 					const response = await service.listingUser(correlationId, params);
 					this.$logger.debug('store', 'requestRocketsUser', 'response', response, correlationId);
 					if (Response.hasSucceeded(response)) {
-						await this.setRocketsUser(correlationId, response.results.data);
+						await this.setRocketsListing(correlationId, response.results.data);
 						return response.results.data;
 					}
 
@@ -313,6 +314,12 @@ class AppStore extends BaseStore {
 				async setMotorSearchResults(correlationId, value) {
 					this.motorSearchResults = value;
 				},
+				async setOnline(correlationId, online) {
+					this.$logger.debug('store', 'setOnline', 'online.a', online, correlationId);
+					this.$logger.debug('store', 'setOnline', 'online.b', this.online, correlationId);
+					this.online = online;
+					this.$logger.debug('store', 'setOnline', 'online.c', this.online, correlationId);
+				},
 				async setRocket(correlationId, rocket) {
 					this.$logger.debug('store', 'setRocket', 'rocket.a', rocket, correlationId);
 					this.$logger.debug('store', 'setRocket', 'rockets.b', this.rockets, correlationId);
@@ -320,31 +327,18 @@ class AppStore extends BaseStore {
 					this.rocketsTtl = LibraryCommonUtility.getTimestamp();
 					this.$logger.debug('store', 'setRocket', 'rockets.c', this.rockets, correlationId);
 				},
+				async setRocketsListing(correlationId, rockets) {
+					this.$logger.debug('store', 'setRocketsListing', 'rockets.a', rockets, correlationId);
+					this.$logger.debug('store', 'setRocketsListing', 'rocketsListing.b', this.rocketsListing, correlationId);
+					this.rocketsListing = rockets;
+					this.$logger.debug('store', 'setRocketsListing', 'rocketsListing.c', this.rocketsListing, correlationId);
+				},
 				async setRocketUser(correlationId, rocket) {
 					this.$logger.debug('store', 'setRocketUser', 'rocket.a', rocket, correlationId);
 					this.$logger.debug('store', 'setRocketUser', 'rocketsUser.b', this.rocketsUser, correlationId);
 					this.rocketsUser = LibraryCommonUtility.updateArrayByObject(this.rockets, rocket);
 					this.rocketsTtl = LibraryCommonUtility.getTimestamp();
 					this.$logger.debug('store', 'setRocketUser', 'rocketsUser.c', this.rocketsUser, correlationId);
-				},
-				async setRocketsUser(correlationId, rockets) {
-					this.$logger.debug('store', 'setRocketsUser', 'rockets.a', rockets, correlationId);
-					this.$logger.debug('store', 'setRocketsUser', 'rocketsListing.b', this.rocketsListing, correlationId);
-					this.rocketsListing = rockets;
-					this.$logger.debug('store', 'setRocketsUser', 'rocketsListing.c', this.rocketsListing, correlationId);
-				},
-				async setRockets(correlationId, rockets) {
-					this.$logger.debug('store', 'setRockets', 'rockets.a', rockets, correlationId);
-					this.$logger.debug('store', 'setRockets', 'rocketsListing.b', this.rocketsListing, correlationId);
-					this.rocketsListing = rockets;
-					this.rocketsTtl = LibraryCommonUtility.getTimestamp();
-					this.$logger.debug('store', 'setRockets', 'rocketsListing.c', this.rocketsListing, correlationId);
-				},
-				async setRocketsUser(correlationId, rockets) {
-					this.$logger.debug('store', 'setRocketsUser', 'rockets.a', rockets, correlationId);
-					this.$logger.debug('store', 'setRocketsUser', 'rocketsListing.b', this.rocketsListing, correlationId);
-					this.rocketsListing = rockets;
-					this.$logger.debug('store', 'setRocketsUser', 'rocketsListing.c', this.rocketsListing, correlationId);
 				}
 			},
 			getters: {
@@ -410,6 +404,9 @@ class AppStore extends BaseStore {
 				},
 				async getMotorSearchCriteria() {
 					return LibraryClientUtility.$store.motorSearchCriteria;
+				},
+				getOnline() {
+					return LibraryClientUtility.$store.online;
 				},
 				getRockets() {
 					return LibraryClientUtility.$store.rockets;
@@ -484,6 +481,18 @@ class AppStore extends BaseStore {
 				},
 				async setMotorSearchCriteria(correlationId, value) {
 					await LibraryClientUtility.$store.setMotorSearchCriteria(correlationId, value);
+				},
+				async setOnline(correlationId, value) {
+					await LibraryClientUtility.$store.setOnline(correlationId, value);
+				},
+				async setRocket(correlationId, rocket) {
+					await LibraryClientUtility.$store.setRocket(correlationId, value);
+				},
+				async setRocketsListing(correlationId, rockets) {
+					await LibraryClientUtility.$store.setRocketsListing(correlationId, value);
+				},
+				async setRocketUser(correlationId, rocket) {
+					await LibraryClientUtility.$store.setRocketUser(correlationId, value);
 				}
 			}
 		};

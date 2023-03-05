@@ -1,9 +1,9 @@
-import BaseValidation from '@thzero/library_client_vue3/boot/baseValidation';
+import BaseValidationBoot from '@thzero/library_client_vue3/boot/baseValidation';
 
-class Validation extends BaseValidation {
+class ValidationBoot extends BaseValidationBoot {
 	_initialize(extend) {
 		super._initialize(extend);
 	}
 }
 
-export default Validation;
+export default ValidationBoot;

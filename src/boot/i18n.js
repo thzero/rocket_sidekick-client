@@ -1,4 +1,4 @@
-import VueBasei18n from '@thzero/library_client_vue3/boot/basei18n';
+import Vuei18nBaseBoot from '@thzero/library_client_vue3/boot/basei18n';
 
 const resources = {};
 const locales = ['en'];
@@ -7,7 +7,7 @@ locales.forEach(locale => {
 	resources[locale] = modules[`/src/locales/${locale}.json`];
 });
 
-export default class AppVueBasei18n extends VueBasei18n {
+export default class AppVuei18nBoot extends Vuei18nBaseBoot {
 	_initMessages() {
 		return resources;
 	}
