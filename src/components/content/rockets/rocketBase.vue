@@ -1,5 +1,5 @@
 <script>
-import AppCommonConstants from '@rocket_sidekick_common/constants';
+import AppCommonConstants from 'rocket_sidekick_common/constants';
 
 import { useContentBaseComponent } from '@/components/content/contentBase';
 
