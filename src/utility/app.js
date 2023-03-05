@@ -1,6 +1,6 @@
 import AppConstants from '@/constants';
 
-import SettingsUser from '@/common/data/settingsUser';
+import SettingsUser from 'rocket_sidekick_common/data/settingsUser';
 
 class AppUtility {
 	static isDebug = false;
