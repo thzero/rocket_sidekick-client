@@ -42,7 +42,7 @@
 							<th></th>
 							<th
 								v-for="item in data"
-								:key="item.name" 
+								:key="item.name"
 								class="text-left"
 							>
 								<p class="header"><a :href="item.link" target="_blank">{{ item.name }}</a></p>
@@ -118,7 +118,7 @@
 							<td
 								v-for="item in data"
 								:key="item.name"
-							>{{ item.fFlexuralStrength ? item.fFlexuralStrength.toLocaleString() : '' }}</td>
+							>{{ item.flexuralStrength ? item.flexuralStrength.toLocaleString() : '' }}</td>
 						</tr>
 						<tr>
 							<td>{{ $t('strings.content.info.epoxy.flexuralModulus') }}</td>
@@ -167,13 +167,13 @@
 				{{ $t('strings.content.info.epoxy.additionalLinks') }}
 			</v-col>
 			<v-col cols="12" class="pb-2">
-				<AdditionalLinks 
-					v-model="links" 
+				<AdditionalLinks
+					v-model="links"
 				/>
 			</v-col>
 		</v-row>
 		<v-row dense
-			v-show="hasAttribution" 
+			v-show="hasAttribution"
 		>
 			<v-col cols="12" class="text-center text-h5 pb-2; float: right">
 				<v-card>
@@ -185,7 +185,7 @@
 		</v-row>
 	</div>
 </template>
-		
+
 <script>
 import { useEpoxyBaseComponent } from '@/components/content/info/epoxyBase';
 
@@ -203,7 +203,7 @@ export default {
 		VMarkdown
 	},
 	setup(props, context) {
-		const {	
+		const {
 			correlationId,
 			error,
 			hasFailed,
