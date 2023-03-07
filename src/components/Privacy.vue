@@ -30,7 +30,7 @@
 <script>
 import { useAppPrivacyComponent } from '@/components/appPrivacy';
 
-import VMarkdown from '@/library_vue_vuetify/components/markup/VMarkdown';
+import VMarkdown from '@thzero/library_client_vue3_vuetify3/components/markup/VMarkdown';
 
 export default {
 	name: 'Support',

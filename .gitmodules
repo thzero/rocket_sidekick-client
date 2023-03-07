@@ -1,6 +1,0 @@
-[submodule "src/library_vue"]
-	path = src/library_vue
-	url = https://github.com/thzero/library_client_vue3_components
-[submodule "src/library_vue_vuetify"]
-	path = src/library_vue_vuetify
-	url = https://github.com/thzero/library_client_vue3_vuetify3_components

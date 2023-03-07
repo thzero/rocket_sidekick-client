@@ -5,7 +5,7 @@ import AppUtility from '@/utility/app';
 import LibraryClientUtility from '@thzero/library_client/utility/index';
 import LibraryClientVueUtility from '@thzero/library_client_vue3/utility/index';
 
-import { useBaseControlEditComponent } from '@/library_vue/components/baseControlEdit';
+import { useBaseControlEditComponent } from '@thzero/library_client_vue3/components/baseControlEdit';
 import { useToolsBaseComponent } from '@/components/content/tools/toolsBase';
 
 export function useMeasurementUnitsSelectBaseComponent(props, context, options) {

@@ -3,7 +3,7 @@ import { ref } from 'vue';
 
 import LibraryClientUtility from '@thzero/library_client/utility/index';
 
-import { useBasePrivacyComponent } from '@/library_vue/components/basePrivacy';
+import { useBasePrivacyComponent } from '@thzero/library_client_vue3/components/basePrivacy';
 
 export function useAppPrivacyComponent(props, context, options) {
 		const {

@@ -3,16 +3,20 @@ import '@mdi/font/css/materialdesignicons.css'
 // import { mdi } from 'vuetify/iconsets/mdi';
 // import 'animate.css';
 
+import 'vuetify/styles';
+
 import bootStarter from '@thzero/library_client_firebase_vue/boot/starter';
 // import bootAsyncComputed from '@thzero/library_client_vue3/boot/asyncComputed';
 import bootEventBus from '@thzero/library_client_vue3/boot/eventBus';
 import booti18n from '@/boot/i18n';
 import bootNetwork from '@/boot/network';
 import bootServices from '@/boot/services';
-import bootUi from '@/library_vue_vuetify/boot/ui';
+// import bootUi from '@thzero/library_client_vue3_vuetify3/boot/ui';
+import bootUi from '@thzero/library_client_vue3_vuetify3/boot/ui';
 import bootValidate from '@/boot/validate';
 // import bootWebComponents from '@thzero/library_client_vue3/boot/webComponents';
-import bootCookieComply from '@/library_vue_vuetify/boot/cookie';
+// import bootCookieComply from '@thzero/library_client_vue3_vuetify3/boot/cookie';
+import bootCookieComply from '@thzero/library_client_vue3_vuetify3/boot/cookie';
 
 import router from '@/router';
 

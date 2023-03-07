@@ -83,7 +83,7 @@
 		</v-col>
 		<v-col cols="12" md="6">
 			<v-row dense>
-				<v-col 
+				<v-col
 					v-if="hasAlbums"
 					cols="12" md="6"
 				>
@@ -106,7 +106,7 @@
 						</v-card-text>
 					</v-card>
 				</v-col>
-				<v-col 
+				<v-col
 					v-if="hasVideos"
 					cols="12" md="6"
 				>
@@ -131,7 +131,7 @@
 				</v-col>
 			</v-row>
 		</v-col>
-		<v-col 
+		<v-col
 			v-if="hasLaunches"
 			cols="12"
 		>
@@ -151,7 +151,7 @@ import { useRocketInfoBaseComponent } from '@/components/content/rockets/rocketI
 import { useRocketInfoBaseProps } from '@/components/content/rockets/rocketInfoBaseProps';
 
 import Header from '@/components/content/Header';
-import VMarkdown from '@/library_vue_vuetify/components/markup/VMarkdown';
+import VMarkdown from '@thzero/library_client_vue3_vuetify3/components/markup/VMarkdown';
 
 export default {
 	name: 'RocketInfo',

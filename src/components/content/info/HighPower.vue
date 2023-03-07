@@ -11,7 +11,7 @@
 <VMarkdown v-model="contentDefinition" :use-github=false tag="span" />
 		</q> -- <a href="https://www.nar.org" target="_blank">National Association of Rocketry (NAR)</a>
 <br><br>
-		
+
 <VMarkdown v-model="contentMarkup2" :use-github=false />
 
 					</v-card-text>
@@ -47,103 +47,103 @@
 				{{ $t('strings.content.info.3dprinting.additionalLinks') }}
 			</v-col>
 			<v-col cols="12" md="6">
-				<AdditionalLinks 
+				<AdditionalLinks
 					v-if="$vuetify.display.lgAndUp"
 					v-model="linksGuidance"
 					title="titles.content.links.guidance"
 				/>
 			</v-col>
 			<v-col cols="12" md="6">
-				<AdditionalLinks 
+				<AdditionalLinks
 					v-if="$vuetify.display.lgAndUp"
 					v-model="linksConstruction"
 					title="titles.content.links.construction"
 				/>
 			</v-col>
 			<v-col cols="12" md="6">
-				<AdditionalLinks 
+				<AdditionalLinks
 					v-model="linksTools"
 					title="titles.content.links.tools"
 				/>
 			</v-col>
-			<v-col 
+			<v-col
 				v-if="$vuetify.display.mdAndDown"
 				cols="12" md="6"
 			>
-				<AdditionalLinks 
+				<AdditionalLinks
 					v-model="linksGuidance"
 					title="titles.content.links.guidance"
 				/>
 			</v-col>
-			<v-col 
+			<v-col
 				v-if="$vuetify.display.mdAndDown"
 				cols="12" md="6"
 			>
-				<AdditionalLinks 
+				<AdditionalLinks
 					v-model="linksConstruction"
 					title="titles.content.links.construction"
 				/>
 			</v-col>
-			<v-col 
+			<v-col
 				v-if="$vuetify.display.mdAndDown"
 				cols="12" md="6"
 			>
-				<AdditionalLinks 
+				<AdditionalLinks
 					v-model="linksTools"
 					title="titles.content.links.tools"
 				/>
 			</v-col>
 			<v-col cols="12" md="6">
-				<AdditionalLinks 
+				<AdditionalLinks
 					v-model="linksBooks"
 					title="titles.content.links.books"
 				/>
 			</v-col>
 			<v-col cols="12" md="6">
-				<AdditionalLinks 
+				<AdditionalLinks
 					v-model="linksStudyGuides"
 					title="titles.content.links.study"
 				/>
 			</v-col>
 			<v-col cols="12" md="6">
-				<AdditionalLinks 
+				<AdditionalLinks
 					v-model="linksOrganizations"
 					title="titles.content.links.organizations"
 				/>
 			</v-col>
 			<v-col cols="12" md="6">
-				<AdditionalLinks 
+				<AdditionalLinks
 					v-model="linksForums"
 					title="titles.content.links.forums"
 				/>
 			</v-col>
 			<v-col cols="12" md="6">
-				<AdditionalLinks 
+				<AdditionalLinks
 					v-model="linksManufacturers"
 					title="titles.content.links.manufacturers"
 				/>
 			</v-col>
 			<v-col cols="12" md="6">
-				<AdditionalLinks 
+				<AdditionalLinks
 					v-model="linksVendors"
 					title="titles.content.links.vendors"
 				/>
 			</v-col>
 			<v-col cols="12" md="6">
-				<AdditionalLinks 
+				<AdditionalLinks
 					v-model="linksVideos"
 					title="titles.content.links.videos"
 				/>
 			</v-col>
 			<v-col cols="12" md="6">
-				<AdditionalLinks 
+				<AdditionalLinks
 					v-model="linksEvents"
 					title="titles.content.links.events"
 				/>
 			</v-col>
 		</v-row>
 		<v-row dense
-			v-show="hasAttribution" 
+			v-show="hasAttribution"
 		>
 			<v-col cols="12" class="text-center text-h5 pb-2; float: right">
 				<v-card>
@@ -162,7 +162,7 @@ import { useHighPowerBaseComponent } from '@/components/content/info/highPowerBa
 import AdditionalLinks from '@/components/content/info/AdditionalLinks';
 import ContentAttribution from '@/components/content/Attribution';
 import ContentHeader from '@/components/content/Header';
-import VMarkdown from '@/library_vue_vuetify/components/markup/VMarkdown';
+import VMarkdown from '@thzero/library_client_vue3_vuetify3/components/markup/VMarkdown';
 
 export default {
 	name: 'HighPower',
@@ -173,7 +173,7 @@ export default {
 		VMarkdown
 	},
 	setup(props, context) {
-		const {	
+		const {
 			correlationId,
 			error,
 			hasFailed,

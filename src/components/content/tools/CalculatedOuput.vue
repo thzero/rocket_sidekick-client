@@ -1,7 +1,7 @@
 <template>
 	<v-row dense style="overflow: auto; max-height: 100vh;">
 		<v-col
-			cols="12" 
+			cols="12"
 			style="overflow: overflow-y; height: 150px;"
 		>
 			<v-code lang="javascript">
@@ -21,7 +21,7 @@
 </template>
 
 <script>
-import { useBaseComponent } from '@/library_vue/components/base';
+import { useBaseComponent } from '@thzero/library_client_vue3/components/base';
 import { useCalculationOutputBaseProps } from '@/components/content/tools/calculationOutputBaseProps';
 
 export default {

@@ -16,14 +16,14 @@ import { computed, getCurrentInstance, ref } from 'vue';
 
 import LibraryClientUtility from '@thzero/library_client/utility/index';
 
-import base from '@/library_vue/components/base';
+import base from '@thzero/library_client_vue3/components/base';
 
 export default {
 	name: 'Profile',
 	extends: base,
 	setup(props) {
 		const instance = getCurrentInstance();
-		
+
 		const serviceStore = LibraryClientUtility.$injector.getService(LibraryConstants.InjectorKeys.SERVICE_STORE);
 
 		const signedIn = ref(false);

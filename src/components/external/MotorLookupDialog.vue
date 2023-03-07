@@ -182,10 +182,10 @@ import { helpers, minLength, requiredUnless } from '@vuelidate/validators';
 
 import { useAppMobileLookupDialogComponent } from '@/components/external/appMotorLookupDialog';
 
-import VConfirmationDialog from '@/library_vue_vuetify/components/VConfirmationDialog';
-import VFormListingDialog from '@/library_vue_vuetify/components/form/VFormListingDialog';
-import VSelectWithValidation from '@/library_vue_vuetify/components/form/VSelectWithValidation';
-import VTextFieldWithValidation from '@/library_vue_vuetify/components/form/VTextFieldWithValidation';
+import VConfirmationDialog from '@thzero/library_client_vue3_vuetify3/components/VConfirmationDialog';
+import VFormListingDialog from '@thzero/library_client_vue3_vuetify3/components/form/VFormListingDialog';
+import VSelectWithValidation from '@thzero/library_client_vue3_vuetify3/components/form/VSelectWithValidation';
+import VTextFieldWithValidation from '@thzero/library_client_vue3_vuetify3/components/form/VTextFieldWithValidation';
 
 export default {
 	name: 'MotorLookupDialog',
@@ -297,11 +297,11 @@ export default {
 	validations () {
 		return {
 			impulseClass: { requiredIfMotor: requiredUnless(this.motor), $autoDirty: true },
-			motor: { 
-				requiredIfImpulseClass: requiredUnless(this.impulseClass), 
-				minLength: minLength(3), 
+			motor: {
+				requiredIfImpulseClass: requiredUnless(this.impulseClass),
+				minLength: minLength(3),
 				validatorMotor,
-				$autoDirty: true 
+				$autoDirty: true
 			}
 		};
 	}

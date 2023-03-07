@@ -1,5 +1,5 @@
 <script>
-import vAuth from '@/library_vue_vuetify/components/VAuth';
+import vAuth from '@thzero/library_client_vue3_vuetify3/components/VAuth';
 
 export default {
 	name: 'Auth',

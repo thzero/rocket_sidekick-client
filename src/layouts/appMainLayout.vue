@@ -6,9 +6,9 @@ import LibraryClientConstants from '@thzero/library_client/constants';
 
 import LibraryClientUtility from '@thzero/library_client/utility/index';
 
-import { useBaseMainLayout } from '@/library_vue/layouts/baseMainLayout';
+import { useBaseMainLayout } from '@thzero/library_client_vue3/layouts/baseMainLayout';
 
-import DialogSupport from '@/library_vue/components/support/dialog';
+import DialogSupport from '@thzero/library_client_vue3/components/support/dialog';
 
 export function useAppMainLayout(props, context, options) {
 	const {
@@ -52,10 +52,10 @@ export function useAppMainLayout(props, context, options) {
 			title: LibraryClientUtility.$trans.t('strings.cookieCompliance.performance.title'),
 			description: LibraryClientUtility.$trans.t('strings.cookieCompliance.performance.description'),
 			items: [
-				{ 
+				{
 					label: 'Active',
-					value: 'performance', 
-					isRequired: true 
+					value: 'performance',
+					isRequired: true
 				}
 			],
 		},
@@ -63,10 +63,10 @@ export function useAppMainLayout(props, context, options) {
 		// 	title: LibraryClientUtility.$trans.t('strings.cookieCompliance.session.title'),
 		// 	description: LibraryClientUtility.$trans.t('strings.cookieCompliance.session.description'),
 		// 	items: [
-		// 		{ 
+		// 		{
 		// 			label: 'Active',
-		// 			value: 'session', 
-		// 			isRequired: true 
+		// 			value: 'session',
+		// 			isRequired: true
 		// 		}
 		// 	],
 		// },
@@ -74,10 +74,10 @@ export function useAppMainLayout(props, context, options) {
 			title: LibraryClientUtility.$trans.t('strings.cookieCompliance.analytics.title'),
 			description: LibraryClientUtility.$trans.t('strings.cookieCompliance.analytics.description'),
 			items: [
-				{ 
-					label: 'GoogleAnalytics', 
-					value: 'ga', 
-					isEnable: true 
+				{
+					label: 'GoogleAnalytics',
+					value: 'ga',
+					isEnable: true
 				},
 			],
 		},
@@ -85,10 +85,10 @@ export function useAppMainLayout(props, context, options) {
 		// 	title: LibraryClientUtility.$trans.t('strings.cookieCompliance.xsrf.title'),
 		// 	description: LibraryClientUtility.$trans.t('strings.cookieCompliance.xsrf.description'),
 		// 	items: [
-		// 		{ 
-		// 			label: 'XSRF-TOKEN', 
-		// 			value: 'performance', 
-		// 			isEnable: true 
+		// 		{
+		// 			label: 'XSRF-TOKEN',
+		// 			value: 'performance',
+		// 			isEnable: true
 		// 		},
 		// 	],
 		// },
@@ -125,7 +125,7 @@ export function useAppMainLayout(props, context, options) {
 	const contentLink = (item,) => {
 		if (item.markup)
 			return `/content/info/${item.id}`;
-		
+
 		return item.link;
 	};
 	const contentTitle = (item,) => {
@@ -140,7 +140,7 @@ export function useAppMainLayout(props, context, options) {
 	const markup = (correlationId, value) => {
 		displayMarkupValue.value = value ? serviceMarkup.trimResults(correlationId, serviceMarkup.render(correlationId, value)) : null;
 	};
-	
+
 	LibraryClientUtility.$EventBus.on('display-markup', (value) => {
 		markup(correlationId(), value);
 		dialogDisplayMarkupSignal.value.open();

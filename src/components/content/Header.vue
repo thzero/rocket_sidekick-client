@@ -38,12 +38,12 @@
 		<!--eslint-enable-->
 	</VDisplayDialog>
 </template>
-		
+
 <script>
 import { useContentHeaderBaseComponent } from '@/components/content/headerBase';
 import { useContentHeaderBaseProps } from '@/components/content/headerBaseProps';
 
-import VDisplayDialog from '@/library_vue_vuetify/components/VDisplayDialog';
+import VDisplayDialog from '@thzero/library_client_vue3_vuetify3/components/VDisplayDialog';
 
 export default {
 	name: 'ContentHeader',

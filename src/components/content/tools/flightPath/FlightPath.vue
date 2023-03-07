@@ -11,8 +11,8 @@
 				</v-banner-text>
 			</v-banner>
 		</div>
-		<ContentHeader 
-			v-model="contentTitle" 
+		<ContentHeader
+			v-model="contentTitle"
 		/>
 		<!-- <ContentDescription id="strings.content.tools.flightPath" /> -->
 		<v-row dense>
@@ -324,7 +324,7 @@
 						</pre>
 					</v-col>
 				</v-row>
-				<v-row 
+				<v-row
 					v-if="false"
 					dense
 				>
@@ -370,7 +370,7 @@
 			</v-col>
 		</v-row>
 		<v-row dense
-			v-show="hasAttribution" 
+			v-show="hasAttribution"
 		>
 			<v-col cols="12" class="text-center text-h5 pb-2; float: right">
 				<v-card>
@@ -398,14 +398,14 @@ import { useFlightPathBaseComponent } from '@/components/content/tools/flightPat
 import ContentAttribution from '@/components/content/Attribution';
 import ContentDescription from '@/components/content/Description';
 import ContentHeader from '@/components/content/Header';
-import VCheckboxWithValidation from '@/library_vue_vuetify/components/form//VCheckboxWithValidation';
-import VColorWithValidation from '@/library_vue_vuetify/components/form/VColorWithValidation';
-import VDateTimeField from '@/library_vue_vuetify/components/form/VDateTimeFieldTemp';
-import VFormControl from '@/library_vue_vuetify/components/form/VFormControl';
-import VSelectWithValidation from '@/library_vue_vuetify/components/form/VSelectWithValidation';
-import VSwitchWithValidation from '@/library_vue_vuetify/components/form/VSwitchWithValidation';
-import VTextAreaWithValidation from '@/library_vue_vuetify/components/form/VTextAreaWithValidation';
-import VTextFieldWithValidation from '@/library_vue_vuetify/components/form/VTextFieldWithValidation';
+import VCheckboxWithValidation from '@thzero/library_client_vue3_vuetify3/components/form//VCheckboxWithValidation';
+import VColorWithValidation from '@thzero/library_client_vue3_vuetify3/components/form/VColorWithValidation';
+import VDateTimeField from '@thzero/library_client_vue3_vuetify3/components/form/VDateTimeFieldTemp';
+import VFormControl from '@thzero/library_client_vue3_vuetify3/components/form/VFormControl';
+import VSelectWithValidation from '@thzero/library_client_vue3_vuetify3/components/form/VSelectWithValidation';
+import VSwitchWithValidation from '@thzero/library_client_vue3_vuetify3/components/form/VSwitchWithValidation';
+import VTextAreaWithValidation from '@thzero/library_client_vue3_vuetify3/components/form/VTextAreaWithValidation';
+import VTextFieldWithValidation from '@thzero/library_client_vue3_vuetify3/components/form/VTextFieldWithValidation';
 
 export default {
 	name: 'FlightPath',

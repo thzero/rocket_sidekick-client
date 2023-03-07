@@ -1,7 +1,7 @@
 <template>
 	<div>
-		<ContentHeader 
-			v-model="contentTitle" 
+		<ContentHeader
+			v-model="contentTitle"
 		/>
 		<ContentDescription id="strings.content.tools.weathercocking" />
 		<v-row dense>
@@ -116,7 +116,7 @@
 										<span class="text-bold">{{ calculationResults.angleDegrees }}</span>
 									</v-col>
 									<v-col cols="4">
-										<span 
+										<span
 										class="text-bold"
 										:style="'color: ' + (calculationResults.weathercocked ? 'red' : 'green')"
 									>{{ calculationResults.weathercocked ? $t('strings.yes') : $t('strings.no') }}</span>
@@ -132,7 +132,7 @@
 			</v-col>
 		</v-row>
 		<v-row dense
-			v-show="hasAttribution" 
+			v-show="hasAttribution"
 		>
 			<v-col cols="12" class="text-center text-h5 pb-2; float: right">
 				<v-card>
@@ -156,9 +156,9 @@ import ContentDescription from '@/components/content/Description';
 import ContentHeader from '@/components/content/Header';
 import MeasurementUnitSelect from '@/components/content/tools/MeasurementUnitSelect';
 import MeasurementUnitsSelect from '@/components/content/tools/MeasurementUnitsSelect';
-import VFormControl from '@/library_vue_vuetify/components/form/VFormControl';
-import VNumberFieldWithValidation from '@/library_vue_vuetify/components/form/VNumberFieldWithValidation';
-import VSelectWithValidation from '@/library_vue_vuetify/components/form/VSelectWithValidation';
+import VFormControl from '@thzero/library_client_vue3_vuetify3/components/form/VFormControl';
+import VNumberFieldWithValidation from '@thzero/library_client_vue3_vuetify3/components/form/VNumberFieldWithValidation';
+import VSelectWithValidation from '@thzero/library_client_vue3_vuetify3/components/form/VSelectWithValidation';
 
 export default {
 	name: 'Weathercocking',

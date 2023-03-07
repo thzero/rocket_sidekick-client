@@ -222,9 +222,9 @@
 <script>
 import { ref } from 'vue';
 
-import VFormControl from '@/library_vue_vuetify/components/form/VFormControl';
-import VSelectWithValidation from '@/library_vue_vuetify/components/form//VSelectWithValidation';
-import VTextFieldWithValidation from '@/library_vue_vuetify/components/form/VTextFieldWithValidation';
+import VFormControl from '@thzero/library_client_vue3_vuetify3/components/form/VFormControl';
+import VSelectWithValidation from '@thzero/library_client_vue3_vuetify3/components/form//VSelectWithValidation';
+import VTextFieldWithValidation from '@thzero/library_client_vue3_vuetify3/components/form/VTextFieldWithValidation';
 
 import { useAppSettingsComponent } from '@/components/appSettings';
 
@@ -357,11 +357,11 @@ export default {
 	},
 	validations () {
 		return {
-			gamerTag: { 
+			gamerTag: {
 				// validatorGamerTag,
 				minLength: minLength(3),
 				maxLength: maxLength(20),
-				$autoDirty: true 
+				$autoDirty: true
 			},
 			measurementUnitsId: { required, $autoDirty: true },
 			measurementUnitAccelerationId: { required, $autoDirty: true },

@@ -9,9 +9,9 @@ import LibraryClientConstants from '@thzero/library_client/constants';
 import LibraryClientUtility from '@thzero/library_client/utility/index';
 import LibraryCommonUtility from '@thzero/library_common/utility/index';
 
-import { useBaseComponent } from '@/library_vue/components/base';
+import { useBaseComponent } from '@thzero/library_client_vue3/components/base';
 
-import DialogSupport from '@/library_vue/components/support/dialog';
+import DialogSupport from '@thzero/library_client_vue3/components/support/dialog';
 
 export function useAppMobileLookupDialogComponent(props, context, options) {
 	const {
@@ -191,7 +191,7 @@ export function useAppMobileLookupDialogComponent(props, context, options) {
 
 		if (ignoreSettings)
 			return;
-			
+
 		const data = await serviceStore.getters.getMotorSearchCriteria();
 		if (!data)
 			return;

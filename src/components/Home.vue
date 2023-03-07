@@ -34,7 +34,7 @@
 			>
 				<v-card
 					class="mb-2"
-				>	
+				>
 					<v-card-item>
 						<v-row dense>
 							<v-col
@@ -142,7 +142,7 @@
 									<iframe id="slideshow" frameborder="0" class="slideshowFrame"></iframe>
 								</div>
 							</v-col>
-							<!-- 
+							<!--
 							<v-col
 								cols="12"
 								class="text-center"
@@ -157,7 +157,7 @@
 									<a :href="externalGithub" target="_blank">{{ externalGithub }}</a>
 									{{ $t('strings.content.welcome1b') }}
 								</p>
-							</v-col> 
+							</v-col>
 							-->
 						</v-row>
 					</v-card-item>
@@ -195,7 +195,7 @@ import LibraryClientUtility from '@thzero/library_client/utility/index';
 import { useHomeBaseComponent } from '@/components/homeBase';
 
 import News from '@/components/News';
-import VLoadingOverlay from '@/library_vue_vuetify/components/VLoadingOverlay';
+import VLoadingOverlay from '@thzero/library_client_vue3_vuetify3/components/VLoadingOverlay';
 
 const DelayMs = 0; // 250
 

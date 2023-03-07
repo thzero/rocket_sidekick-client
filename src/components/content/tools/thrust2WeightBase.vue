@@ -7,7 +7,7 @@ import AppConstants from '@/constants';
 
 import LibraryClientUtility from '@thzero/library_client/utility/index';
 
-import DialogSupport from '@/library_vue/components/support/dialog';
+import DialogSupport from '@thzero/library_client_vue3/components/support/dialog';
 
 import { useToolsBaseComponent } from '@/components/content/tools/toolsBase';
 import { useToolsMeasurementBaseComponent } from '@/components/content/tools/toolsMeasurementBase';
@@ -53,11 +53,11 @@ export function useThrust2WeightBaseComponent(props, context) {
 		setErrorTimer,
 		setNotify,
 		toFixed
-	} = useToolsBaseComponent(props, context, { 
+	} = useToolsBaseComponent(props, context, {
 		id: 'thrust2Weight',
 		title: LibraryClientUtility.$trans.t('titles.content.tools.thrust2Weight')
 	 });
-	
+
 	const {
 		measurementUnitsAccelerationDefaultId,
 		measurementUnitsAccelerationType,
@@ -157,7 +157,7 @@ export function useThrust2WeightBaseComponent(props, context) {
 		thrustInitial: thrustInitial4,
 		thrustPeak: thrustPeak4
 	});
-	
+
 	const calculationOk = async () => {
 		calculateI(correlationId(), calculationResults, async (correlationIdI, calculationResultsI) => {
 			initCalculationData(correlationIdI);
@@ -217,7 +217,7 @@ export function useThrust2WeightBaseComponent(props, context) {
 	const resetForm = (correlationId) => {
 		resetFormI(correlationId, calculationResults, (correlationId) => {
 			mass.value = null;
-			
+
 			motorLookupSelection.value = null;
 			for (let item of motorRef) {
 				item.motorLookup.value = null;
@@ -240,7 +240,7 @@ export function useThrust2WeightBaseComponent(props, context) {
 		const response = await serviceStore.dispatcher.requestMotor(correlationIdI, item.motorId);
 		if (hasSucceeded(response)) {
 			initCalculationData(correlationIdI);
-			
+
 			const reference = motorRef.find(l => l.key == motorLookupSelection.value)
 
 			const response2 = await serviceToolsThrust2Weight.update(correlationIdI, response.results, reference.calculationData);
@@ -264,7 +264,7 @@ export function useThrust2WeightBaseComponent(props, context) {
 
 	onMounted(async () => {
 		reset(false);
-		
+
 		massMeasurementUnitId.value = measurementUnitsWeightDefaultId.value;
 		massMeasurementUnitsId.value = measurementUnitsIdSettings.value;
 	});
@@ -302,7 +302,7 @@ export function useThrust2WeightBaseComponent(props, context) {
 				return;
 			thrustAverage4.value = null;
 			thrustInitial4.value = null;
-			thrustPeak4.value = null;	
+			thrustPeak4.value = null;
 		}
 	);
 

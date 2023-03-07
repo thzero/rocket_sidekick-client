@@ -42,9 +42,9 @@ import LibraryClientConstants from '@thzero/library_client/constants';
 import LibraryClientUtility from '@thzero/library_client/utility/index';
 import LibraryCommonUtility from '@thzero/library_common/utility';
 
-import { useBaseComponent } from '@/library_vue/components/base';
+import { useBaseComponent } from '@thzero/library_client_vue3/components/base';
 
-import VMarkdown from '@/library_vue_vuetify/components/markup/VMarkdown';
+import VMarkdown from '@thzero/library_client_vue3_vuetify3/components/markup/VMarkdown';
 
 export default {
 	name: 'AppNews',
@@ -65,7 +65,7 @@ export default {
 		} = useBaseComponent(props, context);
 
 		const serviceStore = LibraryClientUtility.$injector.getService(LibraryClientConstants.InjectorKeys.SERVICE_STORE);
-		
+
 		const getDateHuman = computed(() => {
 			return LibraryCommonUtility.getDateHuman(date);
 		});
@@ -76,7 +76,7 @@ export default {
 			const news = LibraryCommonUtility.sortByTimestamp(serviceStore.news.latest.filter(l => !l.sticky));
 			return newsS.concat(news);
 		});
-		
+
 		return {
 			correlationId,
 			error,

@@ -1,7 +1,7 @@
 <!-- pulled from ThrustCurve for reference and longevity -->
 <template>
 	<div class="col-md-8 main">
-    
+
 <h1>Flight Simulators</h1>
 
 <p>
@@ -349,7 +349,7 @@ See the
 </template>
 
 <script>
-import { useBaseComponent } from '@/library_vue/components/base.vue';
+import { useBaseComponent } from '@thzero/library_client_vue3/components/base.vue';
 
 export default {
 	name: 'Simulators',

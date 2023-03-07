@@ -11,8 +11,8 @@
 				</v-banner-text>
 			</v-banner>
 		</div>
-		<ContentHeader 
-			v-model="contentTitle" 
+		<ContentHeader
+			v-model="contentTitle"
 		/>
 		<!-- <ContentDescription id="strings.content.tools.flightInfo" /> -->
 		<v-row dense>
@@ -373,7 +373,7 @@
 								<v-btn
 									class="ml-2"
 									size="small"
-									color="primary" 
+									color="primary"
 									@click="clickResolution(720)"
 								>
 									720
@@ -381,7 +381,7 @@
 								<v-btn
 									class="ml-2"
 									size="small"
-									color="primary" 
+									color="primary"
 									@click="clickResolution(1080)"
 								>
 									1080
@@ -389,7 +389,7 @@
 								<v-btn
 									class="ml-2"
 									size="small"
-									color="primary" 
+									color="primary"
 									@click="clickResolution(1440)"
 								>
 									1440
@@ -397,7 +397,7 @@
 								<v-btn
 									class="ml-2"
 									size="small"
-									color="primary" 
+									color="primary"
 									@click="clickResolution(1920)"
 								>
 									1920
@@ -405,13 +405,13 @@
 								<v-btn
 									class="ml-2"
 									size="small"
-									color="primary" 
+									color="primary"
 									@click="clickResolution(2048)"
 								>
 									2048
 								</v-btn>
 							</td>
-							<td 
+							<td
 								v-if="$vuetify.display.lgAndUp"
 								style="width: 100%;"
 							>
@@ -419,20 +419,20 @@
 									<tr>
 										<td style="width: 100%;">
 											<v-slider
-												v-model="resolution" 
-												:min="720" 
-												:max="2048"  
+												v-model="resolution"
+												:min="720"
+												:max="2048"
 												step="1"
 												class="ml-4"
 												style="width: 100%;"
-												dense 
+												dense
 											/>
 										</td>
 										<td style="white-space: nowrap;">
 											<v-btn
 												class="ml-8 ml-4"
         										size="small"
-												color="primary" 
+												color="primary"
 												@click="clickResolution(this.resolution)"
 											>
 												{{ $t('forms.content.tools.flightInfo.set') }}
@@ -445,27 +445,27 @@
 						<tr
 							v-if="$vuetify.display.mdAndDown"
 						>
-							<td 
+							<td
 								style="width: 100%;"
 							>
 								<table style="width: 100%;">
 									<tr>
 										<td style="width: 100%;">
 											<v-slider
-												v-model="resolution" 
-												:min="720" 
-												:max="2048"  
+												v-model="resolution"
+												:min="720"
+												:max="2048"
 												step="1"
 												class="ml-4"
 												style="width: 100%;"
-												dense 
+												dense
 											/>
 										</td>
 										<td style="white-space: nowrap;">
 											<v-btn
 												class="ml-8 ml-4"
         										size="small"
-												color="primary" 
+												color="primary"
 												@click="clickResolution(this.resolution)"
 											>
 												{{ $t('forms.content.tools.flightInfo.set') }}
@@ -508,7 +508,7 @@
 			</v-col>
 		</v-row>
 		<v-row dense
-			v-show="hasAttribution" 
+			v-show="hasAttribution"
 		>
 			<v-col cols="12" class="text-center text-h5 pb-2; float: right">
 				<v-card>
@@ -539,13 +539,13 @@ import { useFlightInfoBaseComponent } from '@/components/content/tools/flightInf
 import ContentAttribution from '@/components/content/Attribution';
 import ContentHeader from '@/components/content/Header';
 import ContentDescription from '@/components/content/Description';
-import VColorWithValidation from '@/library_vue_vuetify/components/form/VColorWithValidation';
-import VDateTimeField from '@/library_vue_vuetify/components/form/VDateTimeFieldTemp';
-import VFormControl from '@/library_vue_vuetify/components/form/VFormControl';
-import VSelectWithValidation from '@/library_vue_vuetify/components/form/VSelectWithValidation';
-import VSwitchWithValidation from '@/library_vue_vuetify/components/form/VSwitchWithValidation';
-import VTextAreaWithValidation from '@/library_vue_vuetify/components/form/VTextAreaWithValidation';
-import VTextFieldWithValidation from '@/library_vue_vuetify/components/form/VTextFieldWithValidation';
+import VColorWithValidation from '@thzero/library_client_vue3_vuetify3/components/form/VColorWithValidation';
+import VDateTimeField from '@thzero/library_client_vue3_vuetify3/components/form/VDateTimeFieldTemp';
+import VFormControl from '@thzero/library_client_vue3_vuetify3/components/form/VFormControl';
+import VSelectWithValidation from '@thzero/library_client_vue3_vuetify3/components/form/VSelectWithValidation';
+import VSwitchWithValidation from '@thzero/library_client_vue3_vuetify3/components/form/VSwitchWithValidation';
+import VTextAreaWithValidation from '@thzero/library_client_vue3_vuetify3/components/form/VTextAreaWithValidation';
+import VTextFieldWithValidation from '@thzero/library_client_vue3_vuetify3/components/form/VTextFieldWithValidation';
 
 export default {
 	name: 'FlightInfo',

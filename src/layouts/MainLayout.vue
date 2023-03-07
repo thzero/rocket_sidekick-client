@@ -341,11 +341,11 @@ import { useAppMainLayout } from '@/layouts/appMainLayout';
 
 import LibraryClientUtility from '@thzero/library_client/utility/index';
 
-import VCookieComply from '@/library_vue_vuetify/components/VCookieComply';
-import VConfirmationDialog from '@/library_vue_vuetify/components/VConfirmationDialog';
-// import VDisplayDialog from '@/library_vue_vuetify/components/VDisplayDialog';
-import VLayoutFooter from '@/library_vue_vuetify/components/VLayoutFooter';
-import VLoadingOverlay from '@/library_vue_vuetify/components/VLoadingOverlay';
+import VCookieComply from '@thzero/library_client_vue3_vuetify3/components/VCookieComply';
+import VConfirmationDialog from '@thzero/library_client_vue3_vuetify3/components/VConfirmationDialog';
+// import VDisplayDialog from '@thzero/library_client_vue3_vuetify3/components/VDisplayDialog';
+import VLayoutFooter from '@thzero/library_client_vue3_vuetify3/components/VLayoutFooter';
+import VLoadingOverlay from '@thzero/library_client_vue3_vuetify3/components/VLoadingOverlay';
 
 export default {
 	name: 'MainLayout',

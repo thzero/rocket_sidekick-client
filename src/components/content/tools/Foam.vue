@@ -1,7 +1,7 @@
 <template>
 	<div>
-		<ContentHeader 
-			v-model="contentTitle" 
+		<ContentHeader
+			v-model="contentTitle"
 		/>
 		<ContentDescription id="strings.content.tools.foam" />
 		<v-row dense>
@@ -152,8 +152,8 @@
 										<span class="text-h6 text-bold" v-if="calculationResults.totalVolume">{{ calculationResults.totalVolume }}</span>
 									</v-col>
 								</v-row>
-								<v-row 
-									class="pb-2" 
+								<v-row
+									class="pb-2"
 									dense
 									no-gutters
 								>
@@ -173,8 +173,8 @@
 											{{ $t('strings.content.tools.foam.requiredAmount') }}
 									</v-col>
 								</v-row>
-								<v-row 
-									class="pb-2" 
+								<v-row
+									class="pb-2"
 									dense
 									no-gutters
 									v-for="item in calculationResults.foams"
@@ -206,7 +206,7 @@
 			</v-col>
 		</v-row>
 		<v-row dense
-			v-show="hasAttribution" 
+			v-show="hasAttribution"
 		>
 			<v-col cols="12" class="text-center text-h5 pb-2; float: right">
 				<v-card>
@@ -232,8 +232,8 @@ import ContentDescription from '@/components/content/Description';
 import ContentHeader from '@/components/content/Header';
 import MeasurementUnitSelect from '@/components/content/tools/MeasurementUnitSelect.vue';
 import MeasurementUnitsSelect from '@/components/content/tools/MeasurementUnitsSelect';
-import VFormControl from '@/library_vue_vuetify/components/form/VFormControl';
-import VNumberFieldWithValidation from '@/library_vue_vuetify/components/form/VNumberFieldWithValidation';
+import VFormControl from '@thzero/library_client_vue3_vuetify3/components/form/VFormControl';
+import VNumberFieldWithValidation from '@thzero/library_client_vue3_vuetify3/components/form/VNumberFieldWithValidation';
 
 export default {
 	name: 'Foam',
@@ -380,24 +380,24 @@ export default {
 		return {
 			bodyTubeID: { required, decimal, between: between(0, 9999), $autoDirty: true },
 			finRootLength: { required, decimal, between: between(0, 9999), $autoDirty: true },
-			finTabLength: { 
-				decimal, between: between(0, 999999), 
-				finTabFinRoot: helpers.withMessage(LibraryClientUtility.$trans.t('errors.content.tools.foam.finTabFinRoot'), finTabFinRoot), 
-				$autoDirty: true 
+			finTabLength: {
+				decimal, between: between(0, 999999),
+				finTabFinRoot: helpers.withMessage(LibraryClientUtility.$trans.t('errors.content.tools.foam.finTabFinRoot'), finTabFinRoot),
+				$autoDirty: true
 			},
 			finWidth: {
-				required, decimal, between: between(0, 999999), 
-				motorTfinWidthubeBodyTube: helpers.withMessage(LibraryClientUtility.$trans.t('errors.content.tools.foam.finWidth'), finWidth), 
-				$autoDirty: true 
+				required, decimal, between: between(0, 999999),
+				motorTfinWidthubeBodyTube: helpers.withMessage(LibraryClientUtility.$trans.t('errors.content.tools.foam.finWidth'), finWidth),
+				$autoDirty: true
 			},
 			fluidMeasurementUnitId: { $autoDirty: true },
 			fluidMeasurementUnitsId: { required, $autoDirty: true },
 			lengthMeasurementUnitId: { $autoDirty: true },
 			lengthMeasurementUnitsId: { required, $autoDirty: true },
-			motorTubeOD: { 
-				required, decimal, between: between(0, 9999), 
-				motorTubeBodyTube: helpers.withMessage(LibraryClientUtility.$trans.t('errors.content.tools.foam.motorTubeBodyTube'), motorTubeBodyTube), 
-				$autoDirty: true 
+			motorTubeOD: {
+				required, decimal, between: between(0, 9999),
+				motorTubeBodyTube: helpers.withMessage(LibraryClientUtility.$trans.t('errors.content.tools.foam.motorTubeBodyTube'), motorTubeBodyTube),
+				$autoDirty: true
 			},
 			numberFins: { required, integer, between: between(0, 999999), $autoDirty: true }
 		};

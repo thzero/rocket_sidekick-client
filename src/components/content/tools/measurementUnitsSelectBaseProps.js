@@ -1,4 +1,4 @@
-import { useBaseControlEditProps } from '@/library_vue/components/baseControlEditProps';
+import { useBaseControlEditProps } from '@thzero/library_client_vue3/components/baseControlEditProps';
 
 export const useMeasurementUnitsSelectBaseProps = {
 	...useBaseControlEditProps

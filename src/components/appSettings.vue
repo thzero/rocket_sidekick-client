@@ -6,7 +6,7 @@ import AppConstants from '@/constants';
 
 import LibraryClientUtility from '@thzero/library_client/utility/index';
 
-import { useBaseSettingsComponent } from '@/library_vue/components/baseSettings';
+import { useBaseSettingsComponent } from '@thzero/library_client_vue3/components/baseSettings';
 
 export function useAppSettingsComponent(props, context, formRef) {
 	const {
@@ -93,7 +93,7 @@ export function useAppSettingsComponent(props, context, formRef) {
 			return measurementUnitTrans(AppConstants.MeasurementUnits.english.weight, 'english', 'weight');
 		return measurementUnitTrans(AppConstants.MeasurementUnits.metrics.weight, 'metrics', 'weight');
 	});
-	
+
 	const keyword = 'Default'.toLowerCase(); // otherwise gives a '_sfc_main is not defined' error as Vite is looking for lower case version of the keyword
 
 	const measurementUnitTrans = (object, key, subKey) => {

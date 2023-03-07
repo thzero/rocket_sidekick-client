@@ -21,13 +21,13 @@
 				{{ $t('strings.content.info.epoxy.additionalLinks') }}
 			</v-col>
 			<v-col cols="12" class="pb-2">
-				<AdditionalLinks 
-					v-model="links" 
+				<AdditionalLinks
+					v-model="links"
 				/>
 			</v-col>
 		</v-row>
 		<v-row dense
-			v-show="hasAttribution" 
+			v-show="hasAttribution"
 		>
 			<v-col cols="12" class="text-center text-h5 pb-2; float: right">
 				<v-card>
@@ -39,14 +39,14 @@
 		</v-row>
 	</div>
 </template>
-		
+
 <script>
 import { useShearPinsBaseComponent } from '@/components/content/info/shearPinsBase';
 
 import AdditionalLinks from '@/components/content/info/AdditionalLinks';
 import ContentAttribution from '@/components/content/Attribution';
 import ContentHeader from '@/components/content/Header';
-import VMarkdown from '@/library_vue_vuetify/components/markup/VMarkdown';
+import VMarkdown from '@thzero/library_client_vue3_vuetify3/components/markup/VMarkdown';
 
 export default {
 	name: 'ShearPins',
@@ -57,7 +57,7 @@ export default {
 		VMarkdown
 	},
 	setup(props, context) {
-		const {	
+		const {
 			correlationId,
 			error,
 			hasFailed,

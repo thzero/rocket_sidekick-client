@@ -13,13 +13,13 @@
 		</v-row>
 	</div>
 </template>
-		
+
 <script>
 import { useInfoMarkupBaseComponent } from '@/components/content/info/infoMarkupBase';
 
 import Attribution from '@/components/content/Attribution';
 import ContentHeader from '@/components/content/Header';
-import VMarkdown from '@/library_vue_vuetify/components/markup/VMarkdown';
+import VMarkdown from '@thzero/library_client_vue3_vuetify3/components/markup/VMarkdown';
 
 export default {
 	name: 'InfoMarkup',
@@ -29,7 +29,7 @@ export default {
 		VMarkdown
 	},
 	setup(props, context) {
-		const {	
+		const {
 			correlationId,
 			error,
 			hasFailed,

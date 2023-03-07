@@ -5,7 +5,7 @@ import { useContentBaseComponent } from '@/components/content/contentBase';
 
 import LibraryClientUtility from '@thzero/library_client/utility/index';
 
-import DialogSupport from '@/library_vue/components/support/dialog';
+import DialogSupport from '@thzero/library_client_vue3/components/support/dialog';
 
 export function useContentHeaderBaseComponent(props, context, options) {
 	const {
@@ -29,7 +29,7 @@ export function useContentHeaderBaseComponent(props, context, options) {
 		return !String.isNullOrEmpty(helpMarkup.value) || !String.isNullOrEmpty(helpMarkupId.value);
 	});
 	const helpMarkup = computed(() => {
-		if (!String.isNullOrEmpty(props.helpMarkupId)) 
+		if (!String.isNullOrEmpty(props.helpMarkupId))
 			return LibraryClientUtility.$trans.t(props.helpMarkupId);
 		return props.helpMarkup;
 	});

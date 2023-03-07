@@ -5,7 +5,7 @@ import AppConstants from '@/constants';
 
 import LibraryClientUtility from '@thzero/library_client/utility/index';
 
-import { useBaseControlEditComponent } from '@/library_vue/components/baseControlEdit';
+import { useBaseControlEditComponent } from '@thzero/library_client_vue3/components/baseControlEdit';
 import { useToolsBaseComponent } from '@/components/content/tools/toolsBase';
 
 export function useMeasurementUnitSelectBaseComponent(props, context, options) {
@@ -48,7 +48,7 @@ export function useMeasurementUnitSelectBaseComponent(props, context, options) {
 			return measurementUnitTrans(AppConstants.MeasurementUnits.metrics[props.measurementUnitsType], 'metrics', props.measurementUnitsType);
 		return [];
 	});
-	
+
 	const keyword = 'Default'.toLowerCase(); // otherwise gives a '_sfc_main is not defined' error as Vite is looking for lower case version of the keyword
 
 	const measurementUnitTrans = (object, key, subKey) => {
@@ -60,7 +60,7 @@ export function useMeasurementUnitSelectBaseComponent(props, context, options) {
 			initialized = true;
 		}, 50);
 	});
-		
+
 	watch(() => props.measurementUnitsId,
 		(value) => {
 			if (!initialized)

@@ -64,7 +64,7 @@
 </template>
 
 <script>
-import { useBaseAboutComponent } from '@/library_vue/components/baseAbout';
+import { useBaseAboutComponent } from '@thzero/library_client_vue3/components/baseAbout';
 
 export default {
 	name: 'Support',

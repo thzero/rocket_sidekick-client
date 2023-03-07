@@ -7,7 +7,7 @@ import LibraryClientConstants from '@thzero/library_client/constants';
 import AppUtility from '@/utility/app';
 import LibraryClientUtility from '@thzero/library_client/utility/index';
 
-import { useBaseComponent } from '@/library_vue/components/base';
+import { useBaseComponent } from '@thzero/library_client_vue3/components/base';
 
 export function useHomeBaseComponent(props, context, options) {
 	const {
@@ -33,7 +33,7 @@ export function useHomeBaseComponent(props, context, options) {
 	const contentLink = (item,) => {
 		if (item.markup)
 			return `/content/info/${item.id}`;
-		
+
 		return item.link;
 	};
 	const contentTitle = (item,) => {
@@ -91,7 +91,7 @@ export function useHomeBaseComponent(props, context, options) {
 		// iframe.addEventListener('load', function() {
 		// 	iframe.style.height = (Number(iframe.style.width.replace('%')) * 0.75) + 'px';
 		// 	// iframe.style.width = iframe.contentWindow.body.scrollWidth + 'px';
-		// });	
+		// });
 		iframe.src = 'https://docs.google.com/presentation/d/e/2PACX-1vRrKdGwne8BdKJMwMtVG1NZxVtmVOQ_ps5FBnFY85xeRX50vCJGkJQ74Pn7D46f4tqPXk287QhHwype/embed?start=true&loop=false&delayms=3000';
 	});
 

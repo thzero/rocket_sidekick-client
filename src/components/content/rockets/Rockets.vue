@@ -52,7 +52,7 @@ import { useRocketsBaseComponent } from '@/components/content/rockets/rocketsBas
 import { useRocketsBaseProps } from '@/components/content/rockets/rocketsBaseProps';
 
 import Header from '@/components/content/Header';
-import VMarkdown from '@/library_vue_vuetify/components/markup/VMarkdown';
+import VMarkdown from '@thzero/library_client_vue3_vuetify3/components/markup/VMarkdown';
 
 export default {
 	name: 'Rockets',

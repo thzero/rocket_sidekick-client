@@ -24,7 +24,7 @@
 <script>
 import { useAppOpenSourceComponent } from '@/components/appOpenSource';
 
-import VOpenSource from '@/library_vue_vuetify/components/VOpenSource';
+import VOpenSource from '@thzero/library_client_vue3_vuetify3/components/VOpenSource';
 
 export default {
 	name: 'OpenSource',
