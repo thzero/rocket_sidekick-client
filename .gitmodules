@@ -1,0 +1,27 @@
+[submodule "src\\boot"]
+	path = src\\boot
+	url = https://github.com/thzero/rocket_sidekick-client-boot
+[submodule "src\\components"]
+	path = src\\components
+	url = https://github.com/thzero/rocket_sidekick-client-components
+[submodule "src\\layouts"]
+	path = src\\layouts
+	url = https://github.com/thzero/rocket_sidekick-client-layouts
+[submodule "src\\locales"]
+	path = src\\locales
+	url = https://github.com/thzero/rocket_sidekick-client-locales
+[submodule "src\\service"]
+	path = src\\service
+	url = https://github.com/thzero/rocket_sidekick-client-service
+[submodule "src\\store"]
+	path = src\\store
+	url = https://github.com/thzero/rocket_sidekick-client-store
+[submodule "src\\utility"]
+	path = src\\utility
+	url = https://github.com/thzero/rocket_sidekick-client-utility
+[submodule "images"]
+	path = images
+	url = https://github.com/thzero/rocket_sidekick-client-images
+[submodule "public"]
+	path = public
+	url = https://github.com/thzero/rocket_sidekick-client-public
