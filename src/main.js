@@ -11,11 +11,10 @@ import bootEventBus from '@thzero/library_client_vue3/boot/eventBus';
 import booti18n from '@/boot/i18n';
 import bootNetwork from '@/boot/network';
 import bootServices from '@/boot/services';
-// import bootUi from '@thzero/library_client_vue3_vuetify3/boot/ui';
 import bootUi from '@thzero/library_client_vue3_vuetify3/boot/ui';
+// import bootUi from '@/boot/ui';
 import bootValidate from '@/boot/validate';
 // import bootWebComponents from '@thzero/library_client_vue3/boot/webComponents';
-// import bootCookieComply from '@thzero/library_client_vue3_vuetify3/boot/cookie';
 import bootCookieComply from '@thzero/library_client_vue3_vuetify3/boot/cookie';
 
 import router from '@/router';

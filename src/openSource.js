@@ -321,6 +321,13 @@ export function useDependenciesClientBase () { return [  () => {
         },
         {
             category: 'client',
+            name: 'vue-cookie-comply',
+            url: 'https://github.com/yaiks/vue-cookie-comply',
+            licenseName: 'MIT',
+            licenseUrl: 'https://github.com/yaiks/vue-cookie-comply/blob/main/LICENSE'
+        },
+        {
+            category: 'client',
             name: 'vuetify',
             url: 'https://github.com/vuetifyjs/vuetify',
             licenseName: 'MIT',

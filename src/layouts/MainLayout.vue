@@ -322,7 +322,12 @@
 			!--eslint-enable--
 		</VDisplayDialog> -->
 
-		<VLayoutFooter />
+		<v-footer
+			app
+			absolute
+		>
+			<VLayoutFooter />
+		</v-footer>
 
 		<VLoadingOverlay
 			:signal="isAuthCompleted"
@@ -475,9 +480,9 @@ export default {
 };
 </script>
 
-<style scoped>
+<style>
 .toolbar-title {
 	color: white;
-	text-decoration: none;
+	text-decoration: underline;
 }
 </style>
