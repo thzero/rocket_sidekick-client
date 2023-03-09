@@ -49,7 +49,7 @@ const routes = [
 				children: [
 					{
 						path: '',
-						name: 'content_info_3dprintingy',
+						name: 'content_info_3dprinting',
 						component: () => import(/* webpackPrefetch: true */ /* webpackChunkName: "group-content-info" */ './components/content/info/3DPrinting.vue'),
 						meta: {
 							requiresAuth: false
@@ -176,7 +176,7 @@ const routes = [
 					{
 						path: '',
 						name: 'content_tools_flightInfo',
-						component: () => import(/* webpackPrefetch: true */ /* webpackChunkName: "group-content-tools" */ './components/content/tools/flightInfo/FlightInfo.vue'),
+						component: () => import(/* webpackPrefetch: true */ /* webpackChunkName: "group-content-tools" */ './components.app/content/tools/flightInfo/FlightInfo.vue'),
 						meta: {
 							requiresAuth: false
 						}
@@ -197,7 +197,7 @@ const routes = [
 					{
 						path: '',
 						name: 'content_tools_flightPath',
-						component: () => import(/* webpackPrefetch: true */ /* webpackChunkName: "group-content-tools" */ './components/content/tools/flightPath/FlightPath.vue'),
+						component: () => import(/* webpackPrefetch: true */ /* webpackChunkName: "group-content-tools" */ './components.app/content/tools/flightPath/FlightPath.vue'),
 						meta: {
 							requiresAuth: false
 						}
@@ -218,7 +218,7 @@ const routes = [
 					{
 						path: '',
 						name: 'content_tools_foam',
-						component: () => import(/* webpackPrefetch: true */ /* webpackChunkName: "group-content-tools" */ './components/content/tools/Foam.vue'),
+						component: () => import(/* webpackPrefetch: true */ /* webpackChunkName: "group-content-tools" */ './components.app/content/tools/Foam.vue'),
 						meta: {
 							requiresAuth: false
 						}
