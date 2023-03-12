@@ -84,7 +84,7 @@
 		{{ $t('menu.content.links.title') }}
 	</v-btn>
 	<v-btn
-		v-if="$vuetify.display.mdAndUp && features.MobileApp"
+		v-if="$vuetify.display.mdAndUp && features.MobileAppLanding"
 		to="/landing"
 	>
 		{{ $t('menu.content.app') }}

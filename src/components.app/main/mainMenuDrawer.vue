@@ -87,7 +87,7 @@
 			</v-list>
 		</v-list-item> -->
 		<v-list-item
-			v-if="features.MobileApp"
+			v-if="features.MobileAppLanding"
 			to="/landing"
 		>
 			<v-list-item-title>{{ $t('menu.content.app') }}</v-list-item-title>
