@@ -29,7 +29,7 @@ const routes = [
 					{
 						path: '',
 						name: 'mobileapp',
-						component: () => import(/* webpackPrefetch: true */ /* webpackChunkName: "group-mobile-app" */ './components/MobileAppLanding.vue'),
+						component: () => import(/* webpackPrefetch: true */ /* webpackChunkName: "group-mobile-app" */ './components.app/MobileAppLanding.vue'),
 						meta: {
 							requiresAuth: false
 						}
@@ -50,7 +50,7 @@ const routes = [
 					{
 						path: '',
 						name: 'content_info_3dprinting',
-						component: () => import(/* webpackPrefetch: true */ /* webpackChunkName: "group-content-info" */ './components/content/info/3DPrinting.vue'),
+						component: () => import(/* webpackPrefetch: true */ /* webpackChunkName: "group-content-info" */ './components.app/content/info/3DPrinting.vue'),
 						meta: {
 							requiresAuth: false
 						}
@@ -71,7 +71,7 @@ const routes = [
 					{
 						path: '',
 						name: 'content_info_epoxy',
-						component: () => import(/* webpackPrefetch: true */ /* webpackChunkName: "group-content-info" */ './components/content/info/Epoxy.vue'),
+						component: () => import(/* webpackPrefetch: true */ /* webpackChunkName: "group-content-info" */ './components.app/content/info/Epoxy.vue'),
 						meta: {
 							requiresAuth: false
 						}
@@ -92,7 +92,7 @@ const routes = [
 					{
 						path: '',
 						name: 'content_info_highPower',
-						component: () => import(/* webpackPrefetch: true */ /* webpackChunkName: "group-content-info" */ './components/content/info/HighPower.vue'),
+						component: () => import(/* webpackPrefetch: true */ /* webpackChunkName: "group-content-info" */ './components.app/content/info/HighPower.vue'),
 						meta: {
 							requiresAuth: false
 						}
@@ -113,7 +113,7 @@ const routes = [
 					{
 						path: '',
 						name: 'content_info_shear_pins',
-						component: () => import(/* webpackPrefetch: true */ /* webpackChunkName: "group-content-info" */ './components/content/info/ShearPins.vue'),
+						component: () => import(/* webpackPrefetch: true */ /* webpackChunkName: "group-content-info" */ './components.app/content/info/ShearPins.vue'),
 						meta: {
 							requiresAuth: false
 						}
