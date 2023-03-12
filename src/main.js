@@ -12,6 +12,7 @@ import booti18n from '@/boot/i18n';
 import bootNetwork from '@/boot/network';
 // import bootServices from '@/boot/services';
 import bootServices from '@/boot.app/services';
+import bootServicesAdmin from '@/boot.app/servicesAdmin';
 // import bootUi from '@thzero/library_client_vue3_vuetify3/boot/ui';
 import bootUi from '@/boot/ui';
 import bootValidate from '@/boot/validate';
@@ -27,4 +28,4 @@ import start from '@thzero/library_client_vue3/boot/main';
 
 import App from '@/components/App.vue';
 
-start(App, router, store, [ booti18n, bootEventBus, bootNetwork, bootServices, bootValidate, bootUi, bootCookieComply ], bootStarter, {});
+start(App, router, store, [ booti18n, bootEventBus, bootNetwork, bootServices, bootServicesAdmin, bootValidate, bootUi, bootCookieComply ], bootStarter, {});
