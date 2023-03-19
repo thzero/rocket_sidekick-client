@@ -1,7 +1,7 @@
 <script>
 import { computed, onMounted, ref, watch } from 'vue';
 
-import AppConstants from '@/utility/constants';
+import AppCommonConstants from 'rocket_sidekick_common/constants';
 
 import AppUtility from '@/utility/app';
 import LibraryClientUtility from '@thzero/library_client/utility/index';
@@ -99,19 +99,19 @@ export function useFlightToolsBaseComponent(props, context, options) {
 	const flightMeasurementUnitsOptionsAcceleration = computed(() => {
 		if (String.isNullOrEmpty(flightMeasurementUnitsId.value))
 			return [];
-		const object = AppConstants.MeasurementUnits[flightMeasurementUnitsId.value].acceleration;
+		const object = AppCommonConstants.MeasurementUnits[flightMeasurementUnitsId.value].acceleration;
 		return Object.getOwnPropertyNames(object).filter(l => l !== keyword).map((item) => { return { id: item, name: LibraryClientUtility.$trans.t('measurementUnits.' + flightMeasurementUnitsId.value + '.acceleration.' + item + 'Abbr') }; });
 	});
 	const flightMeasurementUnitsOptionsDistance = computed(() => {
 		if (String.isNullOrEmpty(flightMeasurementUnitsId.value))
 			return [];
-		const object = AppConstants.MeasurementUnits[flightMeasurementUnitsId.value].distance;
+		const object = AppCommonConstants.MeasurementUnits[flightMeasurementUnitsId.value].distance;
 		return Object.getOwnPropertyNames(object).filter(l => l !== keyword).map((item) => { return { id: item, name: LibraryClientUtility.$trans.t('measurementUnits.' + flightMeasurementUnitsId.value + '.distance.' + item + 'Abbr') }; });
 	});
 	const flightMeasurementUnitsOptionsVelocity = computed(() => {
 		if (String.isNullOrEmpty(flightMeasurementUnitsId.value))
 			return [];
-		const object = AppConstants.MeasurementUnits[flightMeasurementUnitsId.value].velocity;
+		const object = AppCommonConstants.MeasurementUnits[flightMeasurementUnitsId.value].velocity;
 		return Object.getOwnPropertyNames(object).filter(l => l !== keyword).map((item) => { return { id: item, name: LibraryClientUtility.$trans.t('measurementUnits.' + flightMeasurementUnitsId.value + '.velocity.' + item + 'Abbr') }; });
 	});
 

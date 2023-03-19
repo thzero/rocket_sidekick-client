@@ -1,10 +1,11 @@
-import AppConstants from '@/utility/constants';
+import AppCommonConstants from 'rocket_sidekick_common/constants';
+import AppSharedConstants from '@/utility/constants';
 
 import ToolsService from '@/service/tools/index';
 
 class FoamToolsService extends ToolsService {
     init(injector) {
-		this._serviceCalculationEngine = injector.getService(AppConstants.InjectorKeys.SERVICE_TOOLS_CALCULATION_ENGINE);
+		this._serviceCalculationEngine = injector.getService(AppSharedConstants.InjectorKeys.SERVICE_TOOLS_CALCULATION_ENGINE);
     }
 
 	foams(correlationId) {
@@ -57,11 +58,11 @@ class FoamToolsService extends ToolsService {
 		this._enforceNotNull('FoamToolsService', 'initializeCalculation', data, 'data', correlationId);
 		this._enforceNotEmpty('FoamToolsService', 'initializeCalculation', outputMeasurementUnitsId, 'outputMeasurementUnitsId', correlationId);
 
-		const fluidMeasurementUnit = this._measurementUnitFromId(correlationId, data.fluidMeasurementUnitsId, AppConstants.MeasurementUnits.fluid.id, data.fluidMeasurementUnitId);
+		const fluidMeasurementUnit = this._measurementUnitFromId(correlationId, data.fluidMeasurementUnitsId, AppCommonConstants.MeasurementUnits.fluid.id, data.fluidMeasurementUnitId);
 		let response = this._enforceNotNullResponse('FoamToolsService', 'initializeCalculation', fluidMeasurementUnit, 'fluidMeasurementUnit', correlationId);
 		if (this._hasFailed(response))
 			return response;
-		const lengthMeasurementUnit = this._measurementUnitFromId(correlationId, data.lengthMeasurementUnitsId, AppConstants.MeasurementUnits.length.id, data.lengthMeasurementUnitId);
+		const lengthMeasurementUnit = this._measurementUnitFromId(correlationId, data.lengthMeasurementUnitsId, AppCommonConstants.MeasurementUnits.length.id, data.lengthMeasurementUnitId);
 		response = this._enforceNotNullResponse('FoamToolsService', 'initializeCalculation', lengthMeasurementUnit, 'lengthMeasurementUnit', correlationId);
 		if (this._hasFailed(response))
 			return response;
@@ -78,7 +79,7 @@ class FoamToolsService extends ToolsService {
 				},
 				units: {
 					from: lengthMeasurementUnit,
-					to: AppConstants.MeasurementUnits.metrics.length.mm
+					to: AppCommonConstants.MeasurementUnits.metrics.length.mm
 				}
 			},
 			{
@@ -139,7 +140,7 @@ class FoamToolsService extends ToolsService {
 				type: this._serviceCalculationEngine.symTypeEvaluate,
 				var: 'totalVolume',
 				evaluate: data.totalVolume,
-				unit: AppConstants.MeasurementUnits.metrics.fluid.ml
+				unit: AppCommonConstants.MeasurementUnits.metrics.fluid.ml
 			},
 			{
 				type: this._serviceCalculationEngine.symTypeSet,
@@ -161,7 +162,7 @@ class FoamToolsService extends ToolsService {
 				type: this._serviceCalculationEngine.symTypeEvaluate,
 				var: 'foamWeight',
 				evaluate: 'density * totalVolume',
-				unit: AppConstants.MeasurementUnits[outputMeasurementUnitsId].weight.default,
+				unit: AppCommonConstants.MeasurementUnits[outputMeasurementUnitsId].weight.default,
 				result: true,
 				format: this._serviceCalculationEngine.formatFixed()
 			},
@@ -170,7 +171,7 @@ class FoamToolsService extends ToolsService {
 				var: 'requiredAmount',
 				evaluate: 'totalVolume / expansion',
 				result: true,
-				unit: AppConstants.MeasurementUnits[outputMeasurementUnitsId].fluid.default,
+				unit: AppCommonConstants.MeasurementUnits[outputMeasurementUnitsId].fluid.default,
 				format: this._serviceCalculationEngine.formatFixed()
 			},
 			{

@@ -41,7 +41,7 @@
 <script>
 import { computed, ref } from 'vue';
 
-import AppConstants from '@/utility/constants';
+import AppSharedConstants from '@/utility/constants';
 import LibraryClientConstants from '@thzero/library_client/constants';
 
 import LibraryClientUtility from '@thzero/library_client/utility/index';
@@ -70,8 +70,8 @@ export default {
 
 		const serviceStore = LibraryClientUtility.$injector.getService(LibraryClientConstants.InjectorKeys.SERVICE_STORE);
 
-		const deviceAndroidUrl = ref(AppConstants.External.store.android);
-		const deviceiOsUrl = ref(AppConstants.External.store.ios);
+		const deviceAndroidUrl = ref(AppSharedConstants.External.store.android);
+		const deviceiOsUrl = ref(AppSharedConstants.External.store.ios);
 
 		const deviceAndroidAvailable = computed(() => {
 			return !String.isNullOrEmpty(deviceAndroidUrl.value);

@@ -21,8 +21,8 @@ import bootCookieComply from '@thzero/library_client_vue3_vuetify3/boot/cookie';
 
 import router from '@/router';
 
-import store from '@/store/pinia'; // STORE TYPE
-// import storeSetup from '@/store/vuex'; // STORE TYPE
+import store from '@/store.app/pinia'; // STORE TYPE
+// import storeSetup from '@/store.app/vuex'; // STORE TYPE
 
 import start from '@thzero/library_client_vue3/boot/main';
 

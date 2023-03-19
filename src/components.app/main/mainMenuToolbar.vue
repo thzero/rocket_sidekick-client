@@ -95,7 +95,7 @@
 import { useBaseMenuComponent } from '@/components/main/baseMenu';
 import { baseBaseMenuProps } from '@/components/main/baseBaseMenuProps';
 
-import AppConstants from '@/utility/constants';
+import AppSharedConstants from '@/utility/constants';
 
 export default {
 	name: 'ManuMenu',
@@ -116,7 +116,7 @@ export default {
 			contentLink,
 			contentTitle
 		} = useBaseMenuComponent(props, context, {
-			features: AppConstants.Features
+			features: AppSharedConstants.Features
 		});
 
 		return {

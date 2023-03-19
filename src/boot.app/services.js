@@ -1,6 +1,9 @@
-import AppConstants from '@/utility/constants';
+import AppConstants from '@/constants';
 
 import downloadService from '@/service.app/download';
+import manufacturersService from '@/service/manufacturers';
+import partsService from '@/service/parts';
+import rocketsService from '@/service/rockets';
 import flightInfoProcessorToolsService from '@/service.app/tools/flightInfo/index';
 import flightInfoProcessorEggtimerToolsService from '@/service.app/tools/flightInfo/processors/eggtimer';
 import flightPathOutputToolsService from '@/service.app/tools/flightPath/output/index';
@@ -34,6 +37,18 @@ class AppServiceBoot extends BaseServiceBoot {
 
 	_initializeCommunicationRest() {
 		return new restCommunicationService();
+	}
+
+	_initializeManufacturers() {
+		return new manufacturersService();
+	}
+
+	_initializeParts() {
+		return new partsService();
+	}
+
+	_initializeRockets() {
+		return new rocketsService();
 	}
 }
 

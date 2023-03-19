@@ -1,7 +1,7 @@
 <script>
 import { computed, onMounted, ref } from 'vue';
 
-import AppConstants from '@/utility/constants';
+import AppSharedConstants from '@/utility/constants';
 
 import LibraryClientUtility from '@thzero/library_client/utility/index';
 
@@ -74,7 +74,7 @@ export function use3DPrintingBaseComponent(props, context, options) {
 	});
 
 	const slideUrl = (url) => {
-		return AppConstants.External.imnages + url;
+		return AppSharedConstants.External.imnages + url;
 	};
 	const temperature = (tempF, tempC) => {
 		if (String.isNullOrEmpty(tempC))

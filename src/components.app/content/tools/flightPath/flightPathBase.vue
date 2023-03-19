@@ -5,7 +5,7 @@ import useVuelidate from '@vuelidate/core';
 
 import Papa from 'papaparse';
 
-import AppConstants from '@/utility/constants';
+import AppConstants from '@/constants';
 
 import AppUtility from '@/utility/app';
 import LibraryClientUtility from '@thzero/library_client/utility/index';

@@ -1,12 +1,12 @@
 <script>
-import { nextTick, onMounted, ref, watch } from 'vue';
+import { nextTick, ref, watch } from 'vue';
 
 import useVuelidate from '@vuelidate/core';
 
 import Papa from 'papaparse';
 import html2canvas from 'html2canvas';
 
-import AppConstants from '@/utility/constants';
+import AppConstants from '@/constants';
 
 import AppUtility from '@/utility/app';
 import LibraryClientUtility from '@thzero/library_client/utility/index';
@@ -99,7 +99,7 @@ export function useFlightInfoBaseComponent(props, context) {
 
 			flightProcessors.value = LibraryClientVueUtility.selectOptions(serviceFlightInfo.serviceProcessors, LibraryClientUtility.$trans.t, 'forms.content.tools.flightInfo.processors', (l) => { return l.id; }, null, (l) => { return l.id; });
 
-			resolution.value = serviceStore.getters.getFlightInfoResolution(correlationIdI) ?? AppConstants.FlightInfo.Resolution;
+			resolution.value = serviceStore.getters.getFlightInfoResolution(correlationIdI) ?? AppConstants2.FlightInfo.Resolution;
 		},
 		title: LibraryClientUtility.$trans.t('titles.content.tools.flightInfo')
 	});
@@ -156,7 +156,7 @@ export function useFlightInfoBaseComponent(props, context) {
 	const flightInfoStyleEventMainBorderColor = ref(null);
 	const flightInfoStyleVelocityColor = ref(null);
 	const flightInfoStyleVelocityFColor = ref(null);
-	const resolution = ref(AppConstants.FlightInfo.Resolution);
+	const resolution = ref(AppConstants2.FlightInfo.Resolution);
 
 	const checkFlightInfoDataTypeUse = () => {
 		flightInfoDataTypeUseDisabled.value = true;

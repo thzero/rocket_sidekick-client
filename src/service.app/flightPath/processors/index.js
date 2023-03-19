@@ -1,6 +1,7 @@
 import configureMeasurements, { length, speed } from 'convert-units';
 
-import AppConstants from '@/utility/constants';
+import AppConstants from '@/constants';
+import AppCommonConstants from 'rocket_sidekick_common/constants';
 
 import LibraryClientUtility from '@thzero/library_client/utility/index';
 import LibraryCommonUtility from '@thzero/library_common/utility';
@@ -100,11 +101,11 @@ class FlightPathProcessorService extends ToolsService {
 		}
 
 		results.maxAltitude = this._convert(results.maxAltitude)
-			.from(AppConstants.MeasurementUnits[measurementUnits.measurementUnitsId].distance[measurementUnits.measurementUnitsDistanceId])
-			.to(AppConstants.MeasurementUnits[measurementUnits.measurementUnitsOutputId].distance[measurementUnits.measurementUnitsDistanceOutputId]);
+			.from(AppCommonConstants.MeasurementUnits[measurementUnits.measurementUnitsId].distance[measurementUnits.measurementUnitsDistanceId])
+			.to(AppCommonConstants.MeasurementUnits[measurementUnits.measurementUnitsOutputId].distance[measurementUnits.measurementUnitsDistanceOutputId]);
 		results.maxVelocity = this._convert(results.maxVelocity)
-			.from(AppConstants.MeasurementUnits[measurementUnits.measurementUnitsId].velocity[measurementUnits.measurementUnitsVelocityId])
-			.to(AppConstants.MeasurementUnits[measurementUnits.measurementUnitsOutputId].velocity[measurementUnits.measurementUnitsVelocityOutputId]);
+			.from(AppCommonConstants.MeasurementUnits[measurementUnits.measurementUnitsId].velocity[measurementUnits.measurementUnitsVelocityId])
+			.to(AppCommonConstants.MeasurementUnits[measurementUnits.measurementUnitsOutputId].velocity[measurementUnits.measurementUnitsVelocityOutputId]);
 		results.maxAltitude = Number(results.maxAltitude).toLocaleString();
 		results.maxVelocity = Number(results.maxVelocity).toLocaleString();
 
@@ -116,8 +117,8 @@ class FlightPathProcessorService extends ToolsService {
 		results.translations.flightPath = LibraryClientUtility.$trans.t('forms.content.tools.flightPath.flightPath');
 		results.translations.groundPath = LibraryClientUtility.$trans.t('forms.content.tools.flightPath.groundPath');
 		results.translations.measurementUnits = {};
-		results.translations.measurementUnits.distance = AppConstants.MeasurementUnits[measurementUnits.measurementUnitsOutputId].distance[measurementUnits.measurementUnitsDistanceOutputId];
-		results.translations.measurementUnits.velocity = AppConstants.MeasurementUnits[measurementUnits.measurementUnitsOutputId].velocity[measurementUnits.measurementUnitsVelocityOutputId];
+		results.translations.measurementUnits.distance = AppCommonConstants.MeasurementUnits[measurementUnits.measurementUnitsOutputId].distance[measurementUnits.measurementUnitsDistanceOutputId];
+		results.translations.measurementUnits.velocity = AppCommonConstants.MeasurementUnits[measurementUnits.measurementUnitsOutputId].velocity[measurementUnits.measurementUnitsVelocityOutputId];
 
 		results.flightPathCoords = path;
 		// results.flightPath = this._kml(correlationId, results, path.join('\n'));

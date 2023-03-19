@@ -1,6 +1,6 @@
 import configureMeasurements, { length, speed } from 'convert-units';
 
-import AppConstants from '@/utility/constants';
+import AppCommonConstants from 'rocket_sidekick_common/constants';
 
 import LibraryCommonUtility from '@thzero/library_common/utility/index';
 
@@ -463,8 +463,8 @@ class FlightInfoProcessorService extends ToolsService {
 		// return value;
 
 		value = this._convert(value)
-			.from(AppConstants.MeasurementUnits[measurementUnits.id].cceleration[measurementUnits.acceleration])
-			.to(AppConstants.MeasurementUnits[measurementUnits.outputId].acceleration[measurementUnits.accelerationOutputId]);
+			.from(AppCommonConstants.MeasurementUnits[measurementUnits.id].cceleration[measurementUnits.acceleration])
+			.to(AppCommonConstants.MeasurementUnits[measurementUnits.outputId].acceleration[measurementUnits.accelerationOutputId]);
 		return value;
 	}
 
@@ -479,8 +479,8 @@ class FlightInfoProcessorService extends ToolsService {
 		// return value;
 
 		value = this._convert(value)
-			.from(AppConstants.MeasurementUnits[measurementUnits.id].distance[measurementUnits.distanceId])
-			.to(AppConstants.MeasurementUnits[measurementUnits.outputId].distance[measurementUnits.distanceOutputId]);
+			.from(AppCommonConstants.MeasurementUnits[measurementUnits.id].distance[measurementUnits.distanceId])
+			.to(AppCommonConstants.MeasurementUnits[measurementUnits.outputId].distance[measurementUnits.distanceOutputId]);
 		return value;
 	}
 
@@ -495,8 +495,8 @@ class FlightInfoProcessorService extends ToolsService {
 		// return value;
 
 		value = this._convert(value)
-			.from(AppConstants.MeasurementUnits[measurementUnits.id].velocity[measurementUnits.velocityId])
-			.to(AppConstants.MeasurementUnits[measurementUnits.outputId].velocity[measurementUnits.velocityOutputId]);
+			.from(AppCommonConstants.MeasurementUnits[measurementUnits.id].velocity[measurementUnits.velocityId])
+			.to(AppCommonConstants.MeasurementUnits[measurementUnits.outputId].velocity[measurementUnits.velocityOutputId]);
 		return value;
 	}
 

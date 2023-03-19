@@ -1,7 +1,7 @@
 <script>
 import { computed, ref, watch } from 'vue';
 
-import AppConstants from '@/utility/constants';
+import AppCommonConstants from 'rocket_sidekick_common/constants';
 
 import LibraryClientUtility from '@thzero/library_client/utility/index';
 
@@ -53,7 +53,7 @@ export function useFlightInfoDataBaseComponent(props, context, options) {
 	const flightInfoInner = ref(null);
 
 	const measurementUnits = computed(() => {
-		return flightInfoInner.value?.measurementUnits ?? AppConstants.MeasurementUnits.english.id;
+		return flightInfoInner.value?.measurementUnits ?? AppCommonConstants.MeasurementUnits.english.id;
 	});
 	const measurementAcceleration = computed(() => {
 		return flightInfoInner.value ? LibraryClientUtility.$trans.t('measurements.' + measurementUnits.value + '.acceleration.abbr') : '';
