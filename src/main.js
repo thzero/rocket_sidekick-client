@@ -3,6 +3,8 @@ import '@mdi/font/css/materialdesignicons.css'
 // import { mdi } from 'vuetify/iconsets/mdi';
 // import 'animate.css';
 
+import IdGenerator from '@thzero/library_id_nanoid';
+
 import 'vuetify/styles';
 
 import bootStarter from '@thzero/library_client_firebase_vue/boot/starter';
@@ -28,4 +30,6 @@ import start from '@thzero/library_client_vue3/boot/main';
 
 import App from '@/components/App.vue';
 
-start(App, router, store, [ booti18n, bootEventBus, bootNetwork, bootServices, bootServicesAdmin, bootValidate, bootUi, bootCookieComply ], bootStarter, {});
+start(App, router, store, [ booti18n, bootEventBus, bootNetwork, bootServices, bootServicesAdmin, bootValidate, bootUi, bootCookieComply ], bootStarter, {
+	idGeneratorOverride: IdGenerator
+});

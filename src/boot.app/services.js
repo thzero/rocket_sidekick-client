@@ -14,6 +14,7 @@ import flightPathProcessorToolsService from '@/service.app/tools/flightPath/inde
 import flightPathProcessorFeatherweightToolsService from '@/service.app/tools/flightPath/processors/featherweight';
 import foamToolsService from '@/service.app/tools/foam';
 import restCommunicationService from '@thzero/library_client_service_rest_fetch';
+import utilityService from '@/service.app/utility';
 
 import BaseServiceBoot from '@/boot/services';
 
@@ -49,6 +50,10 @@ class AppServiceBoot extends BaseServiceBoot {
 
 	_initializeRockets() {
 		return new rocketsService();
+	}
+
+	_initializeUtility() {
+		return new utilityService();
 	}
 }
 

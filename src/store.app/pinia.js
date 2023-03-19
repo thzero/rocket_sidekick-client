@@ -6,7 +6,7 @@ import LibraryCommonUtility from '@thzero/library_common/utility';
 import AppStore from '@/store/pinia';
 
 class WebAppStore extends AppStore {
-	_initPluginPersistConfigPathsI() {
+	_initPluginPersistConfigPaths() {
 		return[
 			'flightInfoDataTypeUse',
 			'flightInfoProcessor',
