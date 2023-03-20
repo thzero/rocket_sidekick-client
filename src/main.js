@@ -31,5 +31,9 @@ import start from '@thzero/library_client_vue3/boot/main';
 import App from '@/components/App.vue';
 
 start(App, router, store, [ booti18n, bootEventBus, bootNetwork, bootServices, bootServicesAdmin, bootValidate, bootUi, bootCookieComply ], bootStarter, {
-	idGeneratorOverride: IdGenerator
+	idGenerator: {
+		override: IdGenerator,
+		lengthLong: 16,
+		lengthShort: 16
+	}
 });
