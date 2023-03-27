@@ -1,5 +1,6 @@
 import AppConstants from '@/constants';
 
+import checklistsService from '@/service/checklists';
 import downloadService from '@/service.app/download';
 import manufacturersService from '@/service/manufacturers';
 import partsService from '@/service/parts';
@@ -34,6 +35,10 @@ class AppServiceBoot extends BaseServiceBoot {
 		this._injectService(AppConstants.InjectorKeys.SERVICE_TOOLS_FLIGHT_PATH_PROCESSOR_FEATHERWEIGHT, new flightPathProcessorFeatherweightToolsService());
 
 		this._injectService(AppConstants.InjectorKeys.SERVICE_TOOLS_FOAM, new foamToolsService());
+	}
+
+	_initializeChecklists() {
+		return new checklistsService();
 	}
 
 	_initializeCommunicationRest() {
