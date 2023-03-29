@@ -17,21 +17,42 @@ const routes = [
 			}
 		]
 	},
+	// {
+	// 	path: '/user/checklists/:id',
+	// 	component: () => import(/* webpackPrefetch: true */ /* webpackChunkName: "group-layouts" */ './layouts/MainLayout.vue'),
+	// 	children: [
+	// 		{
+	// 			path: '',
+	// 			name: 'content_checklist',
+	// 			component: () => import(/* webpackPrefetch: true */ /* webpackChunkName: "group-layouts" */ './layouts/ContentLayout.vue'),
+	// 			children: [
+	// 				{
+	// 					path: '',
+	// 					name: 'content_checklist',
+	// 					component: () => import(/* webpackPrefetch: true */ /* webpackChunkName: "group-content-info" */ './components/checklists/Checklist.vue'),
+	// 					meta: {
+	// 						requiresAuth: true
+	// 					}
+	// 				}
+	// 			]
+	// 		}
+	// 	]
+	// },
 	{
-		path: '/landing',
+		path: '/user/checklists',
 		component: () => import(/* webpackPrefetch: true */ /* webpackChunkName: "group-layouts" */ './layouts/MainLayout.vue'),
 		children: [
 			{
 				path: '',
-				name: 'mobileapp',
+				name: 'content_checklists',
 				component: () => import(/* webpackPrefetch: true */ /* webpackChunkName: "group-layouts" */ './layouts/ContentLayout.vue'),
 				children: [
 					{
 						path: '',
-						name: 'mobileapp',
-						component: () => import(/* webpackPrefetch: true */ /* webpackChunkName: "group-mobile-app" */ './components.app/MobileAppLanding.vue'),
+						name: 'content_checklists',
+						component: () => import(/* webpackPrefetch: true */ /* webpackChunkName: "group-content-info" */ './components/checklists/Checklists.vue'),
 						meta: {
-							requiresAuth: false
+							requiresAuth: true
 						}
 					}
 				]
@@ -282,6 +303,27 @@ const routes = [
 						path: '',
 						name: 'content_tools_weahtercocking',
 						component: () => import(/* webpackPrefetch: true */ /* webpackChunkName: "group-content-tools" */ './components/content/tools/Weathercocking.vue'),
+						meta: {
+							requiresAuth: false
+						}
+					}
+				]
+			}
+		]
+	},
+	{
+		path: '/landing',
+		component: () => import(/* webpackPrefetch: true */ /* webpackChunkName: "group-layouts" */ './layouts/MainLayout.vue'),
+		children: [
+			{
+				path: '',
+				name: 'mobileapp',
+				component: () => import(/* webpackPrefetch: true */ /* webpackChunkName: "group-layouts" */ './layouts/ContentLayout.vue'),
+				children: [
+					{
+						path: '',
+						name: 'mobileapp',
+						component: () => import(/* webpackPrefetch: true */ /* webpackChunkName: "group-mobile-app" */ './components.app/MobileAppLanding.vue'),
 						meta: {
 							requiresAuth: false
 						}

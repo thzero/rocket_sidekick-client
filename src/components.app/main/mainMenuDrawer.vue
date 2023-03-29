@@ -37,32 +37,34 @@
 			<v-list density="compact">
 				<v-list-item
 					v-if="features.Yours.Checklists"
-					to="/yours/checklists"
+					to="/user/checklists"
 				>
 					<v-list-item-title>{{ $t('menu.yours.checklists') }}</v-list-item-title>
 				</v-list-item>
 				<v-list-item
 					v-if="features.Yours.Launches"
-					to="/yours/launches"
+					to="/user/launches"
 				>
 					<v-list-item-title>{{ $t('menu.yours.launches') }}</v-list-item-title>
 				</v-list-item>
-				<v-divider></v-divider>
+				<v-divider
+					v-if="features.Yours.Checklists && features.Yours.Launches"
+				></v-divider>
 				<v-list-item
 					v-if="features.Yours.Altimeters"
-					to="/yours/altimeters"
+					to="/user/altimeters"
 				>
 					<v-list-item-title>{{ $t('menu.yours.altimeters') }}</v-list-item-title>
 				</v-list-item>
 				<v-list-item
 					v-if="features.Yours.Parachutes"
-					to="/yours/parachutes"
+					to="/user/parachutes"
 				>
 					<v-list-item-title>{{ $t('menu.yours.parachutes') }}</v-list-item-title>
 				</v-list-item>
 				<v-list-item
 					v-if="features.Yours.Rockets"
-					to="/yours/rockets"
+					to="/user/rockets"
 				>
 					<v-list-item-title>{{ $t('menu.yours.rockets') }}</v-list-item-title>
 				</v-list-item>

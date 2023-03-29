@@ -2,6 +2,7 @@ import AppConstants from '@/constants';
 
 import checklistsService from '@/service/checklists';
 import downloadService from '@/service.app/download';
+import featuresService from '@/service.app/features';
 import manufacturersService from '@/service/manufacturers';
 import partsService from '@/service/parts';
 import rocketsService from '@/service/rockets';
@@ -43,6 +44,10 @@ class AppServiceBoot extends BaseServiceBoot {
 
 	_initializeCommunicationRest() {
 		return new restCommunicationService();
+	}
+
+	_initializeFeatures() {
+		return new featuresService();
 	}
 
 	_initializeManufacturers() {
