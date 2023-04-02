@@ -17,48 +17,6 @@ const routes = [
 			}
 		]
 	},
-	// {
-	// 	path: '/user/checklists/:id',
-	// 	component: () => import(/* webpackPrefetch: true */ /* webpackChunkName: "group-layouts" */ './layouts/MainLayout.vue'),
-	// 	children: [
-	// 		{
-	// 			path: '',
-	// 			name: 'content_checklist',
-	// 			component: () => import(/* webpackPrefetch: true */ /* webpackChunkName: "group-layouts" */ './layouts/ContentLayout.vue'),
-	// 			children: [
-	// 				{
-	// 					path: '',
-	// 					name: 'content_checklist',
-	// 					component: () => import(/* webpackPrefetch: true */ /* webpackChunkName: "group-content-info" */ './components/checklists/Checklist.vue'),
-	// 					meta: {
-	// 						requiresAuth: true
-	// 					}
-	// 				}
-	// 			]
-	// 		}
-	// 	]
-	// },
-	{
-		path: '/user/checklists',
-		component: () => import(/* webpackPrefetch: true */ /* webpackChunkName: "group-layouts" */ './layouts/MainLayout.vue'),
-		children: [
-			{
-				path: '',
-				name: 'content_checklists',
-				component: () => import(/* webpackPrefetch: true */ /* webpackChunkName: "group-layouts" */ './layouts/ContentLayout.vue'),
-				children: [
-					{
-						path: '',
-						name: 'content_checklists',
-						component: () => import(/* webpackPrefetch: true */ /* webpackChunkName: "group-content-info" */ './components/checklists/Checklists.vue'),
-						meta: {
-							requiresAuth: true
-						}
-					}
-				]
-			}
-		]
-	},
 	{
 		path: '/content/info/3dprinting',
 		component: () => import(/* webpackPrefetch: true */ /* webpackChunkName: "group-layouts" */ './layouts/MainLayout.vue'),
@@ -368,6 +326,48 @@ const routes = [
 						component: () => import(/* webpackPrefetch: true */ /* webpackChunkName: "group-content-info" */ './components/content/rockets/Rockets.vue'),
 						meta: {
 							requiresAuth: false
+						}
+					}
+				]
+			}
+		]
+	},
+	// {
+	// 	path: '/user/checklists/:id',
+	// 	component: () => import(/* webpackPrefetch: true */ /* webpackChunkName: "group-layouts" */ './layouts/MainLayout.vue'),
+	// 	children: [
+	// 		{
+	// 			path: '',
+	// 			name: 'content_checklist',
+	// 			component: () => import(/* webpackPrefetch: true */ /* webpackChunkName: "group-layouts" */ './layouts/ContentLayout.vue'),
+	// 			children: [
+	// 				{
+	// 					path: '',
+	// 					name: 'content_checklist',
+	// 					component: () => import(/* webpackPrefetch: true */ /* webpackChunkName: "group-content-info" */ './components/checklists/Checklist.vue'),
+	// 					meta: {
+	// 						requiresAuth: true
+	// 					}
+	// 				}
+	// 			]
+	// 		}
+	// 	]
+	// },
+	{
+		path: '/user/checklists',
+		component: () => import(/* webpackPrefetch: true */ /* webpackChunkName: "group-layouts" */ './layouts/MainLayout.vue'),
+		children: [
+			{
+				path: '',
+				name: 'content_checklists',
+				component: () => import(/* webpackPrefetch: true */ /* webpackChunkName: "group-layouts" */ './layouts/ContentLayout.vue'),
+				children: [
+					{
+						path: '',
+						name: 'content_checklists',
+						component: () => import(/* webpackPrefetch: true */ /* webpackChunkName: "group-content-info" */ './components/checklists/Checklists.vue'),
+						meta: {
+							requiresAuth: true
 						}
 					}
 				]
