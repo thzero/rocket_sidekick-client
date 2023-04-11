@@ -187,7 +187,7 @@
 </template>
 
 <script>
-import { useEpoxyBaseComponent } from '@/components/content/info/epoxyBase';
+import { useEpoxyBaseComponent } from '@/components.app/content/info/epoxyBase';
 
 import AdditionalLinks from '@/components/content/info/AdditionalLinks';
 import ContentAttribution from '@/components/content/Attribution';

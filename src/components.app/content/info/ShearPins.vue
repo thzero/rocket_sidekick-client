@@ -41,7 +41,7 @@
 </template>
 
 <script>
-import { useShearPinsBaseComponent } from '@/components/content/info/shearPinsBase';
+import { useShearPinsBaseComponent } from '@/components.app/content/info/shearPinsBase';
 
 import AdditionalLinks from '@/components/content/info/AdditionalLinks';
 import ContentAttribution from '@/components/content/Attribution';

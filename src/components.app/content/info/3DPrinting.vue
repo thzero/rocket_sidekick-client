@@ -184,7 +184,7 @@
 </template>
 
 <script>
-import { use3DPrintingBaseComponent } from '@/components/content/info/3DPrintingBase';
+import { use3DPrintingBaseComponent } from '@/components.app/content/info/3DPrintingBase';
 
 import AdditionalLinks from '@/components/content/info/AdditionalLinks';
 import ContentAttribution from '@/components/content/Attribution';

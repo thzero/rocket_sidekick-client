@@ -157,7 +157,7 @@
 </template>
 
 <script>
-import { useHighPowerBaseComponent } from '@/components/content/info/highPowerBase';
+import { useHighPowerBaseComponent } from '@/components.app/content/info/highPowerBase';
 
 import AdditionalLinks from '@/components/content/info/AdditionalLinks';
 import ContentAttribution from '@/components/content/Attribution';
