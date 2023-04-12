@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<ContentHeader v-model="contentTitle"/>
+		<ContentHeader :value="contentTitle"/>
 		<v-row dense>
 			<v-col cols="12">
 				<v-card>
@@ -175,7 +175,7 @@
 			<v-col cols="12" class="text-center text-h5 pb-2; float: right">
 				<v-card>
 					<v-card-text class="float: right">
-<ContentAttribution v-model="content" @has-attribution="handleAttribution" />
+<ContentAttribution :value="content" @has-attribution="handleAttribution" />
 					</v-card-text>
 				</v-card>
 			</v-col>
