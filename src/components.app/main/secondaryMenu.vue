@@ -69,10 +69,10 @@
 </template>
 
 <script>
+import AppSharedConstants from '@/utility/constants';
+
 import { useBaseMenuComponent } from '@/components/main/baseMenu';
 import { baseBaseMenuProps } from '@/components/main/baseBaseMenuProps';
-
-import AppSharedConstants from '@/utility/constants';
 
 export default {
 	name: 'SecondaryMenu',
@@ -90,6 +90,10 @@ export default {
 			noBreakingSpaces,
 			notImplementedError,
 			success,
+			features,
+			info,
+			tools,
+			isLoggedIn,
 			contentLink,
 			contentTitle
 		} = useBaseMenuComponent(props, context, {
@@ -106,6 +110,10 @@ export default {
 			noBreakingSpaces,
 			notImplementedError,
 			success,
+			features,
+			info,
+			tools,
+			isLoggedIn,
 			contentLink,
 			contentTitle
 		};

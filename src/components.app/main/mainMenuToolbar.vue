@@ -36,7 +36,7 @@
 		</v-list>
 	</v-menu>
 	<v-menu
-		v-if="$vuetify.display.mdAndUp && features.Yours.value"
+		v-if="$vuetify.display.mdAndUp && features.Yours.value && isLoggedIn"
 	>
 		<template v-slot:activator="{ props }">
 			<v-btn append-icon="mdi-menu-down"
@@ -94,10 +94,10 @@
 </template>
 
 <script>
+import AppSharedConstants from '@/utility/constants';
+
 import { useBaseMenuComponent } from '@/components/main/baseMenu';
 import { baseBaseMenuProps } from '@/components/main/baseBaseMenuProps';
-
-import AppSharedConstants from '@/utility/constants';
 
 export default {
 	name: 'ManuMenu',
@@ -115,6 +115,10 @@ export default {
 			noBreakingSpaces,
 			notImplementedError,
 			success,
+			features,
+			info,
+			tools,
+			isLoggedIn,
 			contentLink,
 			contentTitle
 		} = useBaseMenuComponent(props, context, {
@@ -131,6 +135,10 @@ export default {
 			noBreakingSpaces,
 			notImplementedError,
 			success,
+			features,
+			info,
+			tools,
+			isLoggedIn,
 			contentLink,
 			contentTitle
 		};
