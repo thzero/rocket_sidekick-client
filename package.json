@@ -33,7 +33,7 @@
     "@thzero/library_client_service_rest_fetch": "^0.17.2",
     "@thzero/library_client_vue3": "^0.17.27",
     "@thzero/library_client_vue3_store_pinia": "^0.17.5",
-    "@thzero/library_client_vue3_vuetify3": "^0.17.18",
+    "@thzero/library_client_vue3_vuetify3": "^0.17.19",
     "@thzero/library_common": "^0.17.5",
     "@vuepic/vue-datepicker": "^3.6.7",
     "async-mutex": "^0.4.0",
