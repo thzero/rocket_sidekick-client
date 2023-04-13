@@ -224,7 +224,7 @@ import { between, decimal, integer, helpers, required } from '@vuelidate/validat
 
 import LibraryClientUtility from '@thzero/library_client/utility/index';
 
-import { useFoamBaseComponent } from '@/components/content/tools/foamBase';
+import { useFoamBaseComponent } from '@/components.app/content/tools/foamBase';
 
 import ContentAttribution from '@/components/content/Attribution';
 import CalculatedOuput from '@/components/content/tools//CalculatedOuput';

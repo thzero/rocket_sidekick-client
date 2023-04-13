@@ -36,8 +36,8 @@
 <script>
 import { Chart, registerables } from 'chart.js';
 
-import { useFlightInfoChartCBaseomponent } from '@/components/content/tools/flightInfo/charts/flightInfoChartBase';
-import { useFlightInfoChartBaseProps } from '@/components/content/tools/flightInfo/charts/flightInfoChartBaseProps';
+import { useFlightInfoChartCBaseomponent } from '@/components.app/content/tools/flightInfo/charts/flightInfoChartBase';
+import { useFlightInfoChartBaseProps } from '@/components.app/content/tools/flightInfo/charts/flightInfoChartBaseProps';
 
 Chart.register(...registerables);
 
