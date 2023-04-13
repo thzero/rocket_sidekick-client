@@ -393,7 +393,7 @@
 <script>
 import { required } from '@vuelidate/validators';
 
-import { useFlightPathBaseComponent } from '@/components/content/tools/flightPath/flightPathBase';
+import { useFlightPathBaseComponent } from '@/components.app/content/tools/flightPath/flightPathBase';
 
 import ContentAttribution from '@/components/content/Attribution';
 import ContentDescription from '@/components/content/Description';

@@ -221,8 +221,8 @@
 </template>
 
 <script>
-import { useFlightInfoDataBaseComponent } from '@/components/content/tools/flightInfo/flightInfoDataBase';
-import { useFlightInfoDataBaseProps } from '@/components/content/tools/flightInfo/flightInfoDataBaseProps';
+import { useFlightInfoDataBaseComponent } from '@/components.app/content/tools/flightInfo/flightInfoDataBase';
+import { useFlightInfoDataBaseProps } from '@/components.app/content/tools/flightInfo/flightInfoDataBaseProps';
 
 export default {
 	name: 'flightInfoData',

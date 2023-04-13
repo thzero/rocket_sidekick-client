@@ -12,7 +12,7 @@ import LibraryClientUtility from '@thzero/library_client/utility/index';
 import LibraryClientVueUtility from '@thzero/library_client_vue3/utility/index';
 import LibraryCommonUtility from '@thzero/library_common/utility/index';
 
-import { useFlightToolsBaseComponent } from '@/components/content/tools/flightToolBase';
+import { useFlightToolsBaseComponent } from '@/components.app/content/tools/flightToolBase';
 import { useToolsMeasurementBaseComponent } from '@/components/content/tools/toolsMeasurementBase';
 
 export function useFlightPathBaseComponent(props, context) {

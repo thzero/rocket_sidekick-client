@@ -531,10 +531,10 @@
 <script>
 import { required, requiredUnless } from '@vuelidate/validators';
 
-import FlightInfoData from '@/components/content/tools/flightInfo/FlightInfoData';
-import FlightInfoChart from '@/components/content/tools/flightInfo/charts/FlightInfo';
+import FlightInfoData from '@/components.app/content/tools/flightInfo/FlightInfoData';
+import FlightInfoChart from '@/components.app/content/tools/flightInfo/charts/FlightInfo';
 
-import { useFlightInfoBaseComponent } from '@/components/content/tools/flightInfo/flightInfoBase';
+import { useFlightInfoBaseComponent } from '@/components.app/content/tools/flightInfo/flightInfoBase';
 
 import ContentAttribution from '@/components/content/Attribution';
 import ContentHeader from '@/components/content/Header';
