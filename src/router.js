@@ -18,27 +18,6 @@ const routes = [
 		]
 	},
 	{
-		path: '/landing',
-		component: () => import(/* webpackPrefetch: true */ /* webpackChunkName: "group-layouts" */ './layouts/MainLayout.vue'),
-		children: [
-			{
-				path: '',
-				name: 'mobileapp',
-				component: () => import(/* webpackPrefetch: true */ /* webpackChunkName: "group-layouts" */ './layouts/ContentLayout.vue'),
-				children: [
-					{
-						path: '',
-						name: 'mobileapp',
-						component: () => import(/* webpackPrefetch: true */ /* webpackChunkName: "group-mobile-app" */ './components/MobileAppLanding.vue'),
-						meta: {
-							requiresAuth: false
-						}
-					}
-				]
-			}
-		]
-	},
-	{
 		path: '/content/info/3dprinting',
 		component: () => import(/* webpackPrefetch: true */ /* webpackChunkName: "group-layouts" */ './layouts/MainLayout.vue'),
 		children: [
@@ -49,8 +28,8 @@ const routes = [
 				children: [
 					{
 						path: '',
-						name: 'content_info_3dprintingy',
-						component: () => import(/* webpackPrefetch: true */ /* webpackChunkName: "group-content-info" */ './components/content/info/3DPrinting.vue'),
+						name: 'content_info_3dprinting',
+						component: () => import(/* webpackPrefetch: true */ /* webpackChunkName: "group-content-info" */ './components.app/content/info/3DPrinting.vue'),
 						meta: {
 							requiresAuth: false
 						}
@@ -71,7 +50,7 @@ const routes = [
 					{
 						path: '',
 						name: 'content_info_epoxy',
-						component: () => import(/* webpackPrefetch: true */ /* webpackChunkName: "group-content-info" */ './components/content/info/Epoxy.vue'),
+						component: () => import(/* webpackPrefetch: true */ /* webpackChunkName: "group-content-info" */ './components.app/content/info/Epoxy.vue'),
 						meta: {
 							requiresAuth: false
 						}
@@ -92,7 +71,7 @@ const routes = [
 					{
 						path: '',
 						name: 'content_info_highPower',
-						component: () => import(/* webpackPrefetch: true */ /* webpackChunkName: "group-content-info" */ './components/content/info/HighPower.vue'),
+						component: () => import(/* webpackPrefetch: true */ /* webpackChunkName: "group-content-info" */ './components.app/content/info/HighPower.vue'),
 						meta: {
 							requiresAuth: false
 						}
@@ -113,7 +92,7 @@ const routes = [
 					{
 						path: '',
 						name: 'content_info_shear_pins',
-						component: () => import(/* webpackPrefetch: true */ /* webpackChunkName: "group-content-info" */ './components/content/info/ShearPins.vue'),
+						component: () => import(/* webpackPrefetch: true */ /* webpackChunkName: "group-content-info" */ './components.app/content/info/ShearPins.vue'),
 						meta: {
 							requiresAuth: false
 						}
@@ -176,7 +155,7 @@ const routes = [
 					{
 						path: '',
 						name: 'content_tools_flightInfo',
-						component: () => import(/* webpackPrefetch: true */ /* webpackChunkName: "group-content-tools" */ './components/content/tools/flightInfo/FlightInfo.vue'),
+						component: () => import(/* webpackPrefetch: true */ /* webpackChunkName: "group-content-tools" */ './components.app/content/tools/flightInfo/FlightInfo.vue'),
 						meta: {
 							requiresAuth: false
 						}
@@ -197,7 +176,7 @@ const routes = [
 					{
 						path: '',
 						name: 'content_tools_flightPath',
-						component: () => import(/* webpackPrefetch: true */ /* webpackChunkName: "group-content-tools" */ './components/content/tools/flightPath/FlightPath.vue'),
+						component: () => import(/* webpackPrefetch: true */ /* webpackChunkName: "group-content-tools" */ './components.app/content/tools/flightPath/FlightPath.vue'),
 						meta: {
 							requiresAuth: false
 						}
@@ -218,7 +197,7 @@ const routes = [
 					{
 						path: '',
 						name: 'content_tools_foam',
-						component: () => import(/* webpackPrefetch: true */ /* webpackChunkName: "group-content-tools" */ './components/content/tools/Foam.vue'),
+						component: () => import(/* webpackPrefetch: true */ /* webpackChunkName: "group-content-tools" */ './components.app/content/tools/Foam.vue'),
 						meta: {
 							requiresAuth: false
 						}
@@ -291,6 +270,27 @@ const routes = [
 		]
 	},
 	{
+		path: '/landing',
+		component: () => import(/* webpackPrefetch: true */ /* webpackChunkName: "group-layouts" */ './layouts/MainLayout.vue'),
+		children: [
+			{
+				path: '',
+				name: 'mobileapp',
+				component: () => import(/* webpackPrefetch: true */ /* webpackChunkName: "group-layouts" */ './layouts/ContentLayout.vue'),
+				children: [
+					{
+						path: '',
+						name: 'mobileapp',
+						component: () => import(/* webpackPrefetch: true */ /* webpackChunkName: "group-mobile-app" */ './components.app/MobileAppLanding.vue'),
+						meta: {
+							requiresAuth: false
+						}
+					}
+				]
+			}
+		]
+	},
+	{
 		path: '/rocket/:id',
 		component: () => import(/* webpackPrefetch: true */ /* webpackChunkName: "group-layouts" */ './layouts/MainLayout.vue'),
 		children: [
@@ -326,6 +326,48 @@ const routes = [
 						component: () => import(/* webpackPrefetch: true */ /* webpackChunkName: "group-content-info" */ './components/content/rockets/Rockets.vue'),
 						meta: {
 							requiresAuth: false
+						}
+					}
+				]
+			}
+		]
+	},
+	// {
+	// 	path: '/user/checklists/:id',
+	// 	component: () => import(/* webpackPrefetch: true */ /* webpackChunkName: "group-layouts" */ './layouts/MainLayout.vue'),
+	// 	children: [
+	// 		{
+	// 			path: '',
+	// 			name: 'content_checklist',
+	// 			component: () => import(/* webpackPrefetch: true */ /* webpackChunkName: "group-layouts" */ './layouts/ContentLayout.vue'),
+	// 			children: [
+	// 				{
+	// 					path: '',
+	// 					name: 'content_checklist',
+	// 					component: () => import(/* webpackPrefetch: true */ /* webpackChunkName: "group-content-info" */ './components/checklists/Checklist.vue'),
+	// 					meta: {
+	// 						requiresAuth: true
+	// 					}
+	// 				}
+	// 			]
+	// 		}
+	// 	]
+	// },
+	{
+		path: '/user/checklists',
+		component: () => import(/* webpackPrefetch: true */ /* webpackChunkName: "group-layouts" */ './layouts/MainLayout.vue'),
+		children: [
+			{
+				path: '',
+				name: 'content_checklists',
+				component: () => import(/* webpackPrefetch: true */ /* webpackChunkName: "group-layouts" */ './layouts/ContentLayout.vue'),
+				children: [
+					{
+						path: '',
+						name: 'content_checklists',
+						component: () => import(/* webpackPrefetch: true */ /* webpackChunkName: "group-content-info" */ './components/checklists/Checklists.vue'),
+						meta: {
+							requiresAuth: true
 						}
 					}
 				]
@@ -403,7 +445,7 @@ const routes = [
 		]
 	},{
 		path: '/auth',
-		component: () => import(/* webpackPrefetch: true */ /* webpackChunkName: "group-layouts" */ '@/library_vue_vuetify/layouts/AuthLayout.vue'),
+		component: () => import(/* webpackPrefetch: true */ /* webpackChunkName: "group-layouts" */ '@thzero/library_client_vue3_vuetify3/layouts/AuthLayout.vue'),
 		children: [
 			{
 				path: '',
@@ -417,12 +459,12 @@ const routes = [
 	},
 	{
 		path: '/:catchAll(.*)*',
-		component: () => import(/* webpackChunkName: "group-layouts" */ '@/library_vue_vuetify/layouts/BlankLayout.vue'),
+		component: () => import(/* webpackChunkName: "group-layouts" */ '@thzero/library_client_vue3_vuetify3/layouts/BlankLayout.vue'),
 		children: [
 			{
 				path: '',
 				name: 'notFound',
-				component: () => import(/* webpackChunkName: "group-main" */ '@/library_vue_vuetify/components/VNotFound.vue'),
+				component: () => import(/* webpackChunkName: "group-main" */ '@thzero/library_client_vue3_vuetify3/components/VNotFound.vue'),
 				meta: {
 					requiresAuth: false
 				}
@@ -431,12 +473,12 @@ const routes = [
 	},
 	// {
 	// 	path: '/:catchAll(.*)*',
-	// 	component: () => import(/* webpackPrefetch: true */ /* webpackChunkName: "group-catchAll" */ '@/library_vue_vuetify/layouts/BlankLayout.vue'),
+	// 	component: () => import(/* webpackPrefetch: true */ /* webpackChunkName: "group-catchAll" */ '@thzero/library_client_vue3_vuetify3/layouts/BlankLayout.vue'),
 	// 	children: [
 	// 		{
 	// 			path: '',
 	// 			name: 'notFound',
-	// 			component: () => import(/* webpackPrefetch: true */ /* webpackChunkName: "group-catchAll" */ '@/library_vue_vuetify/components/VNotFound.vue'),
+	// 			component: () => import(/* webpackPrefetch: true */ /* webpackChunkName: "group-catchAll" */ '@thzero/library_client_vue3_vuetify3/components/VNotFound.vue'),
 	// 			meta: {
 	// 				requiresAuth: false
 	// 			}

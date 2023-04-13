@@ -11,6 +11,58 @@ export function useDependenciesClientBase () { return [  () => {
         },
         {
             category: 'client',
+            name: '@thzero/library_client_vue3',
+            url: 'https://github.com/thzero/library_client_vue3',
+            licenseName: 'MIT',
+            licenseUrl: 'https://github.com/thzero/library_client_vue3/blob/master/license.md'
+        },
+        {
+            category: 'client',
+            name: '@thzero/library_client_vue3_store_pinia',
+            url: 'https://github.com/thzero/library_client_vue3_store_pinia',
+            licenseName: 'MIT',
+            licenseUrl: 'https://github.com/thzero/library_client_vue3_store_pinia/blob/master/license.md'
+        },
+        {
+            category: 'client',
+            name: '@thzero/library_common',
+            url: 'https://github.com/thzero/library_common',
+            licenseName: 'MIT',
+            licenseUrl: 'https://github.com/thzero/library_common/blob/master/license.md'
+        },
+        {
+            category: 'client',
+            name: 'pinia',
+            url: 'https://github.com/vuejs/pinia',
+            licenseName: 'MIT',
+            licenseUrl: 'https://github.com/vuejs/pinia/blob/v2/LICENSE'
+        },
+        {
+            category: 'client',
+            name: 'pinia-plugin-persistedstate-2',
+            url: 'https://github.com/iendeavor/pinia-plugin-persistedstate-2',
+            licenseName: 'MIT',
+            licenseUrl: 'https://github.com/iendeavor/pinia-plugin-persistedstate-2/blob/main/LICENSE'
+        },
+        {
+            category: 'client',
+            name: 'vue',
+            url: 'https://github.com/vuejs/vue',
+            licenseName: 'MIT',
+            licenseUrl: 'https://github.com/vuejs/vue/blob/dev/LICENSE'
+        }
+    ];
+},  () => {
+    return [
+        {
+            category: 'client',
+            name: '@thzero/library_client',
+            url: 'https://github.com/thzero/library_client',
+            licenseName: 'MIT',
+            licenseUrl: 'https://github.com/thzero/library_client/blob/master/license.md'
+        },
+        {
+            category: 'client',
             name: '@thzero/library_common',
             url: 'https://github.com/thzero/library_common',
             licenseName: 'MIT',
@@ -278,6 +330,100 @@ export function useDependenciesClientBase () { return [  () => {
 },  () => {
     return [
         {
+            category: 'client',
+            name: '@thzero/library_client',
+            url: 'https://github.com/thzero/library_client',
+            licenseName: 'MIT',
+            licenseUrl: 'https://github.com/thzero/library_client/blob/master/license.md'
+        },
+        {
+            category: 'client',
+            name: '@thzero/library_client_vue3',
+            url: 'https://github.com/thzero/library_client_vue3',
+            licenseName: 'MIT',
+            licenseUrl: 'https://github.com/thzero/library_client_vue3/blob/master/license.md'
+        },
+        {
+            category: 'client',
+            name: '@thzero/library_client_vue3_vuetify3',
+            url: 'https://github.com/thzero/library_client_vue3_vuetify3',
+            licenseName: 'MIT',
+            licenseUrl: 'https://github.com/thzero/library_client_vue3_vuetify3/blob/master/license.md'
+        },
+        {
+            category: 'client',
+            name: '@thzero/library_common',
+            url: 'https://github.com/thzero/library_common',
+            licenseName: 'MIT',
+            licenseUrl: 'https://github.com/thzero/library_common/blob/master/license.md'
+        },
+        {
+            category: 'client',
+            name: 'vee-validate',
+            url: 'https://github.com/logaretm/vee-validate',
+            licenseName: 'MIT',
+            licenseUrl: 'https://github.com/logaretm/vee-validate/blob/master/LICENSE'
+        },
+        {
+            category: 'client',
+            name: 'vue',
+            url: 'https://github.com/vuejs/vue',
+            licenseName: 'MIT',
+            licenseUrl: 'https://github.com/vuejs/vue/blob/dev/LICENSE'
+        },
+        {
+            category: 'client',
+            name: 'vue-cookie-comply',
+            url: 'https://github.com/yaiks/vue-cookie-comply',
+            licenseName: 'MIT',
+            licenseUrl: 'https://github.com/yaiks/vue-cookie-comply/blob/main/LICENSE'
+        },
+        {
+            category: 'client',
+            name: 'vuetify',
+            url: 'https://github.com/vuetifyjs/vuetify',
+            licenseName: 'MIT',
+            licenseUrl: 'https://github.com/vuetifyjs/vuetify/blob/master/LICENSE.md'
+        },
+    ];
+},  () => {
+    return [
+        {
+            category: 'client',
+            name: '@thzero/library_common',
+            url: 'https://github.com/thzero/library_common',
+            licenseName: 'MIT',
+            licenseUrl: 'https://github.com/thzero/library_common/blob/master/license.md'
+        },
+        {
+            category: 'client',
+            name: 'dayjs',
+            url: 'https://github.com/iamkun/dayjs',
+            licenseName: 'MIT',
+            licenseUrl: 'https://github.com/iamkun/dayjs/blob/dev/LICENSE'
+        },
+        {
+            category: 'client',
+            name: 'dayjs-plugin-utc',
+            url: 'https://github.com/guisturdy/dayjs-plugin-utc',
+            licenseName: '??',
+            licenseUrl: ''
+        },
+        {
+            category: 'client',
+            name: 'lodash-es',
+            url: 'https://github.com/lodash/lodash',
+            licenseName: 'MIT',
+            licenseUrl: 'https://github.com/lodash/lodash/blob/master/LICENSE'
+        },
+        {
+            category: 'client',
+            name: 'uuid',
+            url: 'https://github.com/kelektiv/node-uuid',
+            licenseName: 'MIT',
+            licenseUrl: 'https://github.com/kelektiv/node-uuid/blob/master/LICENSE.md'
+        },
+        {
             category: 'server',
             name: '@thzero/library_common',
             url: 'https://github.com/thzero/library_common',
@@ -307,17 +453,41 @@ export function useDependenciesClientBase () { return [  () => {
         },
         {
             category: 'server',
-            name: 'short-uuid',
-            url: 'https://github.com/oculus42/short-uuid',
-            licenseName: 'MIT',
-            licenseUrl: 'https://github.com/oculus42/short-uuid/blob/develop/LICENSE'
-        },
-        {
-            category: 'server',
             name: 'uuid',
             url: 'https://github.com/kelektiv/node-uuid',
             licenseName: 'MIT',
             licenseUrl: 'https://github.com/kelektiv/node-uuid/blob/master/LICENSE.md'
         }
+    ];
+},  () => {
+    return [
+        {
+            category: 'client',
+            name: '@thzero/library_id_nanoid',
+            url: 'https://github.com/thzero/library_id_nanoid',
+            licenseName: 'MIT',
+            licenseUrl: 'https://github.com/thzero/library_id_nanoid/blob/master/license.md'
+        },
+        {
+            category: 'client',
+            name: 'nanoid',
+            url: 'https://github.com/ai/nanoid',
+            licenseName: 'MIT',
+            licenseUrl: 'https://github.com/ai/nanoid/blob/main/LICENSE'
+        },
+        {
+            category: 'server',
+            name: '@thzero/library_id_nanoid',
+            url: 'https://github.com/thzero/library_id_nanoid',
+            licenseName: 'MIT',
+            licenseUrl: 'https://github.com/thzero/library_id_nanoid/blob/master/license.md'
+        },
+        {
+            category: 'server',
+            name: 'nanoid',
+            url: 'https://github.com/ai/nanoid',
+            licenseName: 'MIT',
+            licenseUrl: 'https://github.com/ai/nanoid/blob/main/LICENSE'
+        },
     ];
 } ]; }
