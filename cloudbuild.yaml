@@ -5,7 +5,15 @@ steps:
     args:
     - '-c'
     - |
-      git config -f .gitmodules submodule."src/common".url https://source.developers.google.com/p/rocketsidekick/r/github_thzero_rocket_sidekick-common
+      git config -f .gitmodules submodule."src/boot".url https://source.developers.google.com/p/rocketsidekick/r/github_thzero_rocket_sidekick-boot
+      git config -f .gitmodules submodule."src/components".url https://source.developers.google.com/p/rocketsidekick/r/github_thzero_rocket_sidekick-components
+      git config -f .gitmodules submodule."src/layouts".url https://source.developers.google.com/p/rocketsidekick/r/github_thzero_rocket_sidekick-layouts
+      git config -f .gitmodules submodule."src/locales".url https://source.developers.google.com/p/rocketsidekick/r/github_thzero_rocket_sidekick-locales
+      git config -f .gitmodules submodule."src/service".url https://source.developers.google.com/p/rocketsidekick/r/github_thzero_rocket_sidekick-service
+      git config -f .gitmodules submodule."src/store".url https://source.developers.google.com/p/rocketsidekick/r/github_thzero_rocket_sidekick-store
+      git config -f .gitmodules submodule."src/utility".url https://source.developers.google.com/p/rocketsidekick/r/github_thzero_rocket_sidekick-utility
+      git config -f .gitmodules submodule."images".url https://source.developers.google.com/p/rocketsidekick/r/github_thzero_rocket_sidekick-images
+      git config -f .gitmodules submodule."public".url https://source.developers.google.com/p/rocketsidekick/r/github_thzero_rocket_sidekick-public
       git submodule init
       git submodule update --remote
       echo "one up..."
