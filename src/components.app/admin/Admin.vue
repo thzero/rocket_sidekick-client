@@ -2,7 +2,7 @@
 	<v-row dense>
 		<v-col cols="12">
 			<v-btn
-				v-if="!hasDetailItem"
+				v-if="canContentReset"
 				color="blue"
 				variant="flat"
 				@click="handleContentReset(item)"
@@ -11,6 +11,13 @@
 			</v-btn>
 		</v-col>
 	</v-row>
+	<v-snackbar
+		v-model="notifySignal"
+		:color="notifyColor"
+		:timeout="notifyTimeout"
+    >
+		{{ notifyMessage }}
+    </v-snackbar>
 </template>
 
 <script>
@@ -29,6 +36,12 @@ export default {
 			noBreakingSpaces,
 			notImplementedError,
 			success,
+			notifyColor,
+			notifyMessage,
+			notifySignal,
+			notifyTimeout,
+			setNotify,
+			canContentReset,
 			handleContentReset
 		} = useAdminBaseComponent(props, context);
 
@@ -42,6 +55,12 @@ export default {
 			noBreakingSpaces,
 			notImplementedError,
 			success,
+			notifyColor,
+			notifyMessage,
+			notifySignal,
+			notifyTimeout,
+			setNotify,
+			canContentReset,
 			handleContentReset
 		};
 	}
