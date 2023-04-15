@@ -362,7 +362,8 @@ const routes = [
 				name: 'admin',
 				component: () => import(/* webpackPrefetch: true */ /* webpackChunkName: "group-admin" */ './components.app/admin/Admin.vue'),
 				meta: {
-					requiresAuth: true
+					requiresAuth: true,
+					requiresAuthRoles: [ 'admin' ]
 				}
 			}
 		]

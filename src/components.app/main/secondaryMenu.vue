@@ -43,6 +43,17 @@
 				<v-list-item-title>{{ $t('titles.openSource') }}</v-list-item-title>
 			</v-list-item>
 			<v-list-item
+				v-if="isLoggedIn"
+				to="/admin"
+			>
+				<template v-slot:prepend>
+					<v-icon color="red darken-2">
+						mdi-security
+					</v-icon>
+				</template>
+				<v-list-item-title>{{ $t('titles.admin') }}</v-list-item-title>
+			</v-list-item>
+			<v-list-item
 				v-if="displaySignIn"
 				@click="clickSignIn"
 			>
