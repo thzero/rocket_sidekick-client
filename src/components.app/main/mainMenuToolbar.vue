@@ -121,9 +121,7 @@ export default {
 			isLoggedIn,
 			contentLink,
 			contentTitle
-		} = useBaseMenuComponent(props, context, {
-			features: AppSharedConstants.Features
-		});
+		} = useBaseMenuComponent(props, context);
 
 		return {
 			correlationId,
