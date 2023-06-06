@@ -26,7 +26,7 @@
     "@mdi/font": "^7.2.96",
     "@thzero/library_client": "^0.17.23",
     "@thzero/library_client_firebase": "^0.17.10",
-    "@thzero/library_client_firebase_vue": "^0.17.8",
+    "@thzero/library_client_firebase_vue": "^0.17.9",
     "@thzero/library_client_service_rest_fetch": "^0.17.2",
     "@thzero/library_client_vue3": "^0.17.31",
     "@thzero/library_client_vue3_store_pinia": "^0.17.7",
