@@ -3,7 +3,7 @@ import { onMounted, ref } from 'vue';
 
 import useVuelidate from '@vuelidate/core';
 
-import AppSharedConstants from '@/utility/constants';
+import AppConstants from '@/constants';
 
 import LibraryClientUtility from '@thzero/library_client/utility/index';
 
@@ -77,7 +77,7 @@ export function useFoamBaseComponent(props, context) {
 		measurementUnitsWeightType
 	} = useToolsMeasurementBaseComponent(props, context);
 
-	const serviceToolsFoam = LibraryClientUtility.$injector.getService(AppSharedConstants.InjectorKeys.SERVICE_TOOLS_FOAM);
+	const serviceToolsFoam = LibraryClientUtility.$injector.getService(AppConstants.InjectorKeys.SERVICE_TOOLS_FOAM);
 
 	const calculationData = ref(null);
 	const calculationResults = initCalculationResults(correlationId(), ref({}));
