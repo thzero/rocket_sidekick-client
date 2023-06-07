@@ -99,7 +99,7 @@ export function useFlightInfoBaseComponent(props, context) {
 
 			flightProcessors.value = LibraryClientVueUtility.selectOptions(serviceFlightInfo.serviceProcessors, LibraryClientUtility.$trans.t, 'forms.content.tools.flightInfo.processors', (l) => { return l.id; }, null, (l) => { return l.id; });
 
-			resolution.value = serviceStore.getters.getFlightInfoResolution(correlationIdI) ?? AppConstants2.FlightInfo.Resolution;
+			resolution.value = serviceStore.getters.getFlightInfoResolution(correlationIdI) ?? AppConstants.FlightInfo.Resolution;
 		},
 		title: LibraryClientUtility.$trans.t('titles.content.tools.flightInfo')
 	});
@@ -156,7 +156,7 @@ export function useFlightInfoBaseComponent(props, context) {
 	const flightInfoStyleEventMainBorderColor = ref(null);
 	const flightInfoStyleVelocityColor = ref(null);
 	const flightInfoStyleVelocityFColor = ref(null);
-	const resolution = ref(AppConstants2.FlightInfo.Resolution);
+	const resolution = ref(AppConstants.FlightInfo.Resolution);
 
 	const checkFlightInfoDataTypeUse = () => {
 		flightInfoDataTypeUseDisabled.value = true;
