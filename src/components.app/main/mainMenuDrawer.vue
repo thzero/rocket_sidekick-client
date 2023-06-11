@@ -1,5 +1,10 @@
 <template>
 	<v-list density="compact">
+		<v-list-item
+			to="/"
+		>
+			<v-list-item-title>{{ $t('titles.home') }}</v-list-item-title>
+		</v-list-item>
 		<v-list-item>
 			{{ $t('menu.content.info.title') }}
 			<v-list density="compact">
