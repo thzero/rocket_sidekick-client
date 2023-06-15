@@ -5,6 +5,12 @@
 		>
 			<v-list-item-title>{{ $t('titles.home') }}</v-list-item-title>
 		</v-list-item>
+		<v-list-item
+			v-if="features.Rockets"
+			to="/rockets"
+		>
+			<v-list-item-title>{{ $t('menu.content.rockets.title') }}</v-list-item-title>
+		</v-list-item>
 		<v-list-item>
 			{{ $t('menu.content.info.title') }}
 			<v-list density="compact">
