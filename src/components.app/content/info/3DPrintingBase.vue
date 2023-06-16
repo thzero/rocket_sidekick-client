@@ -5,6 +5,7 @@ import AppSharedConstants from '@/utility/constants';
 
 import LibraryClientUtility from '@thzero/library_client/utility/index';
 
+import { useContentSignalComponent } from '@/components/content/contentSignal';
 import { useInfoBaseComponent } from '@/components/content/info/infoBase';
 
 export function use3DPrintingBaseComponent(props, context, options) {
@@ -26,8 +27,14 @@ export function use3DPrintingBaseComponent(props, context, options) {
 		contentDefinition,
 		contentMarkup,
 		handleAttribution,
-		hasAttribution,
+		hasAttribution
 	} = useInfoBaseComponent(props, context, options);
+	
+	const {
+		contentLoadSignal,
+		contentLoadStart,
+		contentLoadStop,
+	} = useContentSignalComponent(props, context, options);
 
 	const contentChartDesc = ref(null);
 	const contentTitle = ref(LibraryClientUtility.$trans.t('titles.content.info.3dprinting') + ' ' + LibraryClientUtility.$trans.t('titles.content.info.title'));
@@ -86,15 +93,22 @@ export function use3DPrintingBaseComponent(props, context, options) {
 	};
 
 	onMounted(async () => {
-		const response = await serviceStore.dispatcher.requestContentMarkup(correlationId(), 'info.3dprinting');
-		if (hasFailed(response))
-			return;
-		content.value = response.results;
+		contentLoadStart();
 
-		contentChartDesc.value = response.results.descriptionChart;
-		contentDesc.value = response.results.description;
-		contentDefinition.value = response.results.definition;
-		contentMarkup.value = response.results.markup;
+		try {
+			const response = await serviceStore.dispatcher.requestContentMarkup(correlationId(), 'info.3dprinting');
+			if (hasFailed(response))
+				return;
+			content.value = response.results;
+
+			contentChartDesc.value = response.results.descriptionChart;
+			contentDesc.value = response.results.description;
+			contentDefinition.value = response.results.definition;
+			contentMarkup.value = response.results.markup;
+		}
+		finally {
+			contentLoadStop();
+		}
 	});
 
 	return {
@@ -117,6 +131,7 @@ export function use3DPrintingBaseComponent(props, context, options) {
 		contentTitle,
 		handleAttribution,
 		hasAttribution,
+		contentLoadSignal,
 		contentChartDesc,
 		data,
 		hasLinks,

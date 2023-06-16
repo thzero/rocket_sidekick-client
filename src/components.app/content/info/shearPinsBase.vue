@@ -3,6 +3,7 @@ import { computed, onMounted, ref } from 'vue';
 
 import LibraryClientUtility from '@thzero/library_client/utility/index';
 
+import { useContentSignalComponent } from '@/components/content/contentSignal';
 import { useInfoBaseComponent } from '@/components/content/info/infoBase';
 
 export function useShearPinsBaseComponent(props, context, options) {
@@ -26,6 +27,12 @@ export function useShearPinsBaseComponent(props, context, options) {
 		handleAttribution,
 		hasAttribution
 	} = useInfoBaseComponent(props, context, options);
+	
+	const {
+		contentLoadSignal,
+		contentLoadStart,
+		contentLoadStop,
+	} = useContentSignalComponent(props, context, options);
 
 	const contentTitle = ref(LibraryClientUtility.$trans.t('titles.content.info.shearPins') + ' ' + LibraryClientUtility.$trans.t('titles.content.info.title'));
 	
@@ -46,12 +53,19 @@ export function useShearPinsBaseComponent(props, context, options) {
 	});
 
 	onMounted(async () => {
-		const response = await serviceStore.dispatcher.requestContentMarkup(correlationId(), 'info.shearPins');
-		if (hasFailed(response))
-			return;
-		content.value = response.results;
+		contentLoadStart();
 
-		contentMarkup.value = response.results.markup;
+		try {
+			const response = await serviceStore.dispatcher.requestContentMarkup(correlationId(), 'info.shearPins');
+			if (hasFailed(response))
+				return;
+			content.value = response.results;
+
+			contentMarkup.value = response.results.markup;
+		}
+		finally {
+			contentLoadStop();
+		}
 	});
 
 	return {
@@ -74,6 +88,7 @@ export function useShearPinsBaseComponent(props, context, options) {
 		contentTitle,
 		handleAttribution,
 		hasAttribution,
+		contentLoadSignal,
 		data,
 		hasLinks,
 		links

@@ -15,6 +15,9 @@
 <VMarkdown v-model="contentMarkup2" :use-github=false />
 
 					</v-card-text>
+					<LoadingOverlay
+						:signal="contentLoadSignal"
+					/>
 				</v-card>
 			</v-col>
 			<v-col cols="12" class="text-center">
@@ -41,6 +44,10 @@
 							</v-carousel-item>
 						</v-carousel>
 					</v-card-text>
+					<LoadingOverlay
+						:signal="contentLoadSignal"
+						:progress="false"
+					/>
 				</v-card>
 			</v-col>
 			<v-col cols="12" class="text-center text-h5 pt-4 pb-2">
@@ -150,6 +157,10 @@
 					<v-card-text class="float: right">
 <ContentAttribution :value="content" @has-attribution="handleAttribution" />
 					</v-card-text>
+					<LoadingOverlay
+						:signal="contentLoadSignal"
+						:progress="false"
+					/>
 				</v-card>
 			</v-col>
 		</v-row>
@@ -162,6 +173,7 @@ import { useHighPowerBaseComponent } from '@/components.app/content/info/highPow
 import AdditionalLinks from '@/components/content/info/AdditionalLinks';
 import ContentAttribution from '@/components/content/Attribution';
 import ContentHeader from '@/components/content/Header';
+import LoadingOverlay from '@/components/LoadingOverlay';
 import VMarkdown from '@thzero/library_client_vue3_vuetify3/components/markup/VMarkdown';
 
 export default {
@@ -170,6 +182,7 @@ export default {
 		AdditionalLinks,
 		ContentAttribution,
 		ContentHeader,
+		LoadingOverlay,
 		VMarkdown
 	},
 	setup(props, context) {
@@ -192,6 +205,7 @@ export default {
 			contentMarkup,
 			contentTitle,
 			handleAttribution,
+			contentLoadSignal,
 			hasAttribution,
 			contentChartDesc,
 			contentMarkup2,
@@ -231,6 +245,7 @@ export default {
 			contentMarkup,
 			contentTitle,
 			handleAttribution,
+			contentLoadSignal,
 			hasAttribution,
 			contentChartDesc,
 			contentMarkup2,

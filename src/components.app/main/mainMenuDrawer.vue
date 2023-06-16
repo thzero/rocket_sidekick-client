@@ -109,8 +109,6 @@
 </template>
 
 <script>
-import AppSharedConstants from '@/utility/constants';
-
 import { useBaseMenuComponent } from '@/components/main/baseMenu';
 import { baseBaseMenuProps } from '@/components/main/baseBaseMenuProps';
 
