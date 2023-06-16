@@ -1,5 +1,16 @@
 <template>
 	<v-list density="compact">
+		<v-list-item
+			to="/"
+		>
+			<v-list-item-title>{{ $t('titles.home') }}</v-list-item-title>
+		</v-list-item>
+		<v-list-item
+			v-if="features.Rockets"
+			to="/rockets"
+		>
+			<v-list-item-title>{{ $t('menu.content.rockets.title') }}</v-list-item-title>
+		</v-list-item>
 		<v-list-item>
 			{{ $t('menu.content.info.title') }}
 			<v-list density="compact">
@@ -98,8 +109,6 @@
 </template>
 
 <script>
-import AppSharedConstants from '@/utility/constants';
-
 import { useBaseMenuComponent } from '@/components/main/baseMenu';
 import { baseBaseMenuProps } from '@/components/main/baseBaseMenuProps';
 

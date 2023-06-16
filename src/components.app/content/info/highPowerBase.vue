@@ -5,6 +5,7 @@ import AppSharedConstants from '@/utility/constants';
 
 import LibraryClientUtility from '@thzero/library_client/utility/index';
 
+import { useContentLoadSignalComponent } from '@/components/content/contentLoadSignal';
 import { useInfoBaseComponent } from '@/components/content/info/infoBase';
 
 export function useHighPowerBaseComponent(props, context, options) {
@@ -28,6 +29,12 @@ export function useHighPowerBaseComponent(props, context, options) {
 		handleAttribution,
 		hasAttribution
 	} = useInfoBaseComponent(props, context, options);
+	
+	const {
+		contentLoadSignal,
+		contentLoadStart,
+		contentLoadStop,
+	} = useContentLoadSignalComponent(props, context, options);
 
 	const contentChartDesc = ref(null);
 	const contentMarkup2 = ref(null);
@@ -116,16 +123,23 @@ export function useHighPowerBaseComponent(props, context, options) {
 	};
 
 	onMounted(async () => {
-		const response = await serviceStore.dispatcher.requestContentMarkup(correlationId(), 'info.highPower');
-		if (hasFailed(response))
-			return;
-		content.value = response.results;
+		contentLoadStart();
 
-		contentChartDesc.value = response.results.descriptionChart;
-		contentDefinition.value = response.results.definition;
-		contentDesc.value = response.results.description;
-		contentMarkup.value = response.results.markup;
-		contentMarkup2.value = response.results.markup2;
+		try {
+			const response = await serviceStore.dispatcher.requestContentMarkup(correlationId(), 'info.highPower');
+			if (hasFailed(response))
+				return;
+			content.value = response.results;
+
+			contentChartDesc.value = response.results.descriptionChart;
+			contentDefinition.value = response.results.definition;
+			contentDesc.value = response.results.description;
+			contentMarkup.value = response.results.markup;
+			contentMarkup2.value = response.results.markup2;
+		}
+		finally {
+			contentLoadStop();
+		}
 	});
 
 	return {
@@ -147,6 +161,7 @@ export function useHighPowerBaseComponent(props, context, options) {
 		contentMarkup,
 		contentTitle,
 		handleAttribution,
+		contentLoadSignal,
 		hasAttribution,
 		contentChartDesc,
 		contentMarkup2,

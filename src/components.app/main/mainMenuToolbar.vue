@@ -54,7 +54,7 @@
 				v-if="features.Yours.Launches"
 				to="/user/launches"
 			>
-				<v-list-item-title>{{ $t('menu.yours.rockets') }}</v-list-item-title>
+				<v-list-item-title>{{ $t('menu.yours.launches') }}</v-list-item-title>
 			</v-list-item>
 			<v-divider
 				v-if="features.Yours.Checklists && features.Yours.Launches"
@@ -94,8 +94,6 @@
 </template>
 
 <script>
-import AppSharedConstants from '@/utility/constants';
-
 import { useBaseMenuComponent } from '@/components/main/baseMenu';
 import { baseBaseMenuProps } from '@/components/main/baseBaseMenuProps';
 
