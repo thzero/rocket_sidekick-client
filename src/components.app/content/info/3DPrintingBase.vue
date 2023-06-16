@@ -5,7 +5,7 @@ import AppSharedConstants from '@/utility/constants';
 
 import LibraryClientUtility from '@thzero/library_client/utility/index';
 
-import { useContentSignalComponent } from '@/components/content/contentSignal';
+import { useContentLoadSignalComponent } from '@/components/content/contentLoadSignal';
 import { useInfoBaseComponent } from '@/components/content/info/infoBase';
 
 export function use3DPrintingBaseComponent(props, context, options) {
@@ -34,7 +34,7 @@ export function use3DPrintingBaseComponent(props, context, options) {
 		contentLoadSignal,
 		contentLoadStart,
 		contentLoadStop,
-	} = useContentSignalComponent(props, context, options);
+	} = useContentLoadSignalComponent(props, context, options);
 
 	const contentChartDesc = ref(null);
 	const contentTitle = ref(LibraryClientUtility.$trans.t('titles.content.info.3dprinting') + ' ' + LibraryClientUtility.$trans.t('titles.content.info.title'));

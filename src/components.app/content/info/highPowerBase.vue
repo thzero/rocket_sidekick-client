@@ -5,7 +5,7 @@ import AppSharedConstants from '@/utility/constants';
 
 import LibraryClientUtility from '@thzero/library_client/utility/index';
 
-import { useContentSignalComponent } from '@/components/content/contentSignal';
+import { useContentLoadSignalComponent } from '@/components/content/contentLoadSignal';
 import { useInfoBaseComponent } from '@/components/content/info/infoBase';
 
 export function useHighPowerBaseComponent(props, context, options) {
@@ -34,7 +34,7 @@ export function useHighPowerBaseComponent(props, context, options) {
 		contentLoadSignal,
 		contentLoadStart,
 		contentLoadStop,
-	} = useContentSignalComponent(props, context, options);
+	} = useContentLoadSignalComponent(props, context, options);
 
 	const contentChartDesc = ref(null);
 	const contentMarkup2 = ref(null);
