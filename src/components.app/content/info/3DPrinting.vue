@@ -233,6 +233,7 @@ export default {
 			contentTitle,
 			handleAttribution,
 			hasAttribution,
+			slideUrl,
 			contentLoadSignal,
 			contentChartDesc,
 			data,
@@ -243,7 +244,6 @@ export default {
 			linksModeling,
 			linksTools,
 			slides,
-			slideUrl,
 			temperature
 		} = use3DPrintingBaseComponent(props, context);
 
@@ -267,6 +267,7 @@ export default {
 			contentTitle,
 			handleAttribution,
 			hasAttribution,
+			slideUrl,
 			contentLoadSignal,
 			contentChartDesc,
 			data,
@@ -277,7 +278,6 @@ export default {
 			linksModeling,
 			linksTools,
 			slides,
-			slideUrl,
 			temperature
 		};
 	}

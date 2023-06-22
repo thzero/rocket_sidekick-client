@@ -23,8 +23,7 @@
 			<v-col cols="12" class="text-center">
 				<v-card>
 					<v-card-text>
-						<v-carousel
-							cycle
+						<!-- <v-carousel
 							height="800"
 							hide-delimiter-background
 							show-arrows="hover"
@@ -32,15 +31,38 @@
 							<v-carousel-item
 								v-for="(slide, i) in slides"
 									:key="i"
+									eager
 								>
 								<v-sheet
 									height="100%"
 								>
-									<div class="d-flex fill-height justify-center align-center">
-										<img :src="slideUrl(slide.url)" v-if="slide.type==='image'" style="height: 800px;" />
-										<div v-if="slide.type==='video'" v-html="slide.embed"></div>
-									</div>
-							</v-sheet>
+									[[ {{  slide }} ]]
+										<div class="d-flex fill-height justify-center align-center">
+											<img :src="slideUrl(slide.url)" v-if="slide.type==='image'" style="height: 800px;" 
+										eager />
+											<div v-if="slide.type==='video'" v-html="slide.embed"></div>
+										</div>
+								</v-sheet>
+							</v-carousel-item>
+						</v-carousel> -->
+						<v-carousel
+							cycle
+							mandatory
+						>
+							<v-carousel-item
+								v-for="(slide, i) in slides"
+									:key="i"
+									eager
+								>
+								<v-sheet
+									height="100%"
+								>
+										<div class="d-flex fill-height justify-center align-center">
+											<img :src="slideUrl(slide.url)" v-if="slide.type==='image'" style="height: 800px;" 
+										eager />
+											<div v-if="slide.type==='video'" v-html="slide.embed"></div>
+										</div>
+								</v-sheet>
 							</v-carousel-item>
 						</v-carousel>
 					</v-card-text>
@@ -207,6 +229,7 @@ export default {
 			handleAttribution,
 			contentLoadSignal,
 			hasAttribution,
+			slideUrl,
 			contentChartDesc,
 			contentMarkup2,
 			highPowerLinks,
@@ -222,8 +245,7 @@ export default {
 			linksTools,
 			linksVendors,
 			linksVideos,
-			slides,
-			slideUrl
+			slides
 		} = useHighPowerBaseComponent(props, context);
 
 		return {
@@ -245,6 +267,7 @@ export default {
 			contentMarkup,
 			contentTitle,
 			handleAttribution,
+			slideUrl,
 			contentLoadSignal,
 			hasAttribution,
 			contentChartDesc,
@@ -262,8 +285,7 @@ export default {
 			linksTools,
 			linksVendors,
 			linksVideos,
-			slides,
-			slideUrl
+			slides
 		};
 	}
 };
