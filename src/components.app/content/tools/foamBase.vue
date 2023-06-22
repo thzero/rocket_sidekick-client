@@ -53,6 +53,16 @@ export function useFoamBaseComponent(props, context) {
 		toFixed
 	} = useToolsBaseComponent(props, context, {
 		id: 'foam',
+		resetForm: (correlationId) => {
+			calculationResults.value.foams = [];
+
+			bodyTubeID.value = null;
+			finRootLength.value = null;
+			finTabLength.value = null;
+			finWidth.value = null;
+			motorTubeOD.value = null;
+			numberFins .value = null;
+		},
 		title: LibraryClientUtility.$trans.t('titles.content.tools.foam')
 	});
 
@@ -153,18 +163,6 @@ export function useFoamBaseComponent(props, context) {
 	const reset = async (correlationId) => {
 		await formFoamRef.value.reset(correlationId, false);
 	};
-	const resetForm = (correlationId) => {
-		resetFormI(correlationId, calculationResults, (correlationId) => {
-			calculationResults.value.foams = [];
-
-			bodyTubeID.value = null;
-			finRootLength.value = null;
-			finTabLength.value = null;
-			finWidth.value = null;
-			motorTubeOD.value = null;
-			numberFins .value = null;
-		});
-	};
 
 	onMounted(async () => {
 		reset(false);
@@ -234,8 +232,6 @@ export function useFoamBaseComponent(props, context) {
 		numberFins,
 		calculationOk,
 		initCalculationData,
-		reset,
-		resetForm,
 		scope: 'Foam',
 		validation: useVuelidate({ $scope: 'Foam' })
 	};

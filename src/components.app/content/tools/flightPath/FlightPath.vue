@@ -20,10 +20,10 @@
 				<VFormControl
 					ref="formFlightPathRef"
 					:validation="validation"
-					:resetForm="resetInput"
-					buttonClearName="buttons.reset"
-					buttonOkName="buttons.process"
-					notifyMessageSaved=""
+					:reset-additional="resetInput"
+					button-clear-name="buttons.reset"
+					button-ok-name="buttons.process"
+					notify-message-saved=""
 					@ok="flightPathProcess"
 				>
 					<template v-slot:default>

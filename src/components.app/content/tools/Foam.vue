@@ -9,10 +9,10 @@
 				<VFormControl
 					ref="formFoamRef"
 					:validation="validation"
-					:resetForm="resetForm"
-					buttonClearName="buttons.reset"
-					buttonOkName="buttons.calculate"
-					notifyMessageSaved="messages.calculated"
+					:reset-additional="resetFormI"
+					button-clear-name="buttons.reset"
+					button-ok-name="buttons.calculate"
+					notify-message-saved="messages.calculated"
 					@ok="calculationOk"
 				>
 					<template v-slot:default>
@@ -306,8 +306,6 @@ export default {
 			numberFins,
 			calculationOk,
 			initCalculationData,
-			reset,
-			resetForm,
 			scope,
 			validation
 		} = useFoamBaseComponent(props, context);
@@ -370,8 +368,6 @@ export default {
 			numberFins,
 			calculationOk,
 			initCalculationData,
-			reset,
-			resetForm,
 			scope,
 			validation
 		};
