@@ -27,7 +27,8 @@ export function use3DPrintingBaseComponent(props, context, options) {
 		contentDefinition,
 		contentMarkup,
 		handleAttribution,
-		hasAttribution
+		hasAttribution,
+		slideUrl
 	} = useInfoBaseComponent(props, context, options);
 	
 	const {
@@ -76,13 +77,10 @@ export function use3DPrintingBaseComponent(props, context, options) {
 	});
 	const slides = computed(() => {
 		if (!content.value || !content.value.supplemental || !content.value.supplemental.slides)
-			return [];
+			return [ {} ];
 		return content.value.supplemental.slides;
 	});
-
-	const slideUrl = (url) => {
-		return AppSharedConstants.External.imnages + url;
-	};
+	
 	const temperature = (tempF, tempC) => {
 		if (String.isNullOrEmpty(tempC))
 			return null;
@@ -131,6 +129,7 @@ export function use3DPrintingBaseComponent(props, context, options) {
 		contentTitle,
 		handleAttribution,
 		hasAttribution,
+		slideUrl,
 		contentLoadSignal,
 		contentChartDesc,
 		data,
@@ -141,7 +140,6 @@ export function use3DPrintingBaseComponent(props, context, options) {
 		linksModeling,
 		linksTools,
 		slides,
-		slideUrl,
 		temperature
 	};
 };

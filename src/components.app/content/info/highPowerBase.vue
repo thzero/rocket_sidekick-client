@@ -1,8 +1,6 @@
 <script>
 import { computed, onMounted, ref } from 'vue';
 
-import AppSharedConstants from '@/utility/constants';
-
 import LibraryClientUtility from '@thzero/library_client/utility/index';
 
 import { useContentLoadSignalComponent } from '@/components/content/contentLoadSignal';
@@ -27,7 +25,8 @@ export function useHighPowerBaseComponent(props, context, options) {
 		contentDefinition,
 		contentMarkup,
 		handleAttribution,
-		hasAttribution
+		hasAttribution,
+		slideUrl
 	} = useInfoBaseComponent(props, context, options);
 	
 	const {
@@ -114,13 +113,9 @@ export function useHighPowerBaseComponent(props, context, options) {
 	});
 	const slides = computed(() => {
 		if (!content.value || !content.value.supplemental || !content.value.supplemental.slides)
-			return [];
+			return [ {} ];
 		return content.value.supplemental.slides;
 	});
-
-	const slideUrl = (url) => {
-		return AppSharedConstants.External.imnages + url;
-	};
 
 	onMounted(async () => {
 		contentLoadStart();
@@ -161,6 +156,7 @@ export function useHighPowerBaseComponent(props, context, options) {
 		contentMarkup,
 		contentTitle,
 		handleAttribution,
+		slideUrl,
 		contentLoadSignal,
 		hasAttribution,
 		contentChartDesc,
@@ -178,8 +174,7 @@ export function useHighPowerBaseComponent(props, context, options) {
 		linksTools,
 		linksVendors,
 		linksVideos,
-		slides,
-		slideUrl
+		slides
 	};
 };
 </script>
