@@ -12,7 +12,7 @@
 			</v-banner>
 		</div>
 		<ContentHeader
-			v-model="contentTitle"
+			:value="contentTitle"
 		/>
 		<!-- <ContentDescription id="strings.content.tools.flightInfo" /> -->
 		<v-row dense>
@@ -584,8 +584,6 @@ export default {
 			errorMessage,
 			errorTimer,
 			hasAttribution,
-			measurementUnitsIdOutput,
-			measurementUnitsIdSettings,
 			notifyColor,
 			notifyMessage,
 			notifySignal,
@@ -694,8 +692,6 @@ export default {
 			errorMessage,
 			errorTimer,
 			hasAttribution,
-			measurementUnitsIdOutput,
-			measurementUnitsIdSettings,
 			notifyColor,
 			notifyMessage,
 			notifySignal,

@@ -9,6 +9,7 @@ import LibraryClientUtility from '@thzero/library_client/utility/index';
 
 import { useToolsBaseComponent } from '@/components/content/tools/toolsBase';
 import { useToolsMeasurementBaseComponent } from '@/components/content/tools/toolsMeasurementBase';
+import { useToolsMeasurementSettingsComponent } from '@/components/content/tools/toolsMeasurementSettings';
 
 export function useFoamBaseComponent(props, context) {
 	const {
@@ -21,7 +22,10 @@ export function useFoamBaseComponent(props, context) {
 		noBreakingSpaces,
 		notImplementedError,
 		success,
+		contentLoadSignal,
 		serviceStore,
+		contentLoadStart,
+		contentLoadStop,
 		sortByOrder,
 		target,
 		calculationOutput,
@@ -31,8 +35,6 @@ export function useFoamBaseComponent(props, context) {
 		errorMessage,
 		errorTimer,
 		hasAttribution,
-		measurementUnitsIdOutput,
-		measurementUnitsIdSettings,
 		notifyColor,
 		notifyMessage,
 		notifySignal,
@@ -65,6 +67,11 @@ export function useFoamBaseComponent(props, context) {
 		},
 		title: LibraryClientUtility.$trans.t('titles.content.tools.foam')
 	});
+
+	const {
+		measurementUnitsIdOutput,
+		measurementUnitsIdSettings
+	} = useToolsMeasurementSettingsComponent(props, context);
 
 	const {
 		measurementUnitsAccelerationDefaultId,
@@ -184,7 +191,10 @@ export function useFoamBaseComponent(props, context) {
 		noBreakingSpaces,
 		notImplementedError,
 		success,
+		contentLoadSignal,
 		serviceStore,
+		contentLoadStart,
+		contentLoadStop,
 		sortByOrder,
 		target,
 		calculationOutput,
@@ -194,8 +204,6 @@ export function useFoamBaseComponent(props, context) {
 		errorMessage,
 		errorTimer,
 		hasAttribution,
-		measurementUnitsIdOutput,
-		measurementUnitsIdSettings,
 		notifyColor,
 		notifyMessage,
 		notifySignal,
@@ -214,6 +222,8 @@ export function useFoamBaseComponent(props, context) {
 		setErrorTimer,
 		setNotify,
 		toFixed,
+		measurementUnitsIdOutput,
+		measurementUnitsIdSettings,
 		measurementUnitsFluidType,
 		measurementUnitslengthType,
 		serviceToolsFoam,

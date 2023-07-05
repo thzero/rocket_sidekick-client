@@ -5,11 +5,11 @@ import { Chart, registerables } from 'chart.js';
 
 import LibraryClientUtility from '@thzero/library_client/utility/index';
 
-import { useToolsBaseComponent } from '@/components/content/tools/toolsBase';
+import { useFlightToolsBaseComponent } from '@/components.app/content/tools/flightToolBase';
 
 Chart.register(...registerables);
 
-export function useFlightInfoChartCBaseomponent(props, context, options) {
+export function useFlightInfoChartBaseComponent(props, context, options) {
 	const {
 		correlationId,
 		error,
@@ -20,7 +20,10 @@ export function useFlightInfoChartCBaseomponent(props, context, options) {
 		noBreakingSpaces,
 		notImplementedError,
 		success,
+		contentLoadSignal,
 		serviceStore,
+		contentLoadStart,
+		contentLoadStop,
 		sortByOrder,
 		target,
 		calculationOutput,
@@ -30,8 +33,6 @@ export function useFlightInfoChartCBaseomponent(props, context, options) {
 		errorMessage,
 		errorTimer,
 		hasAttribution,
-		measurementUnitsIdOutput,
-		measurementUnitsIdSettings,
 		notifyColor,
 		notifyMessage,
 		notifySignal,
@@ -49,8 +50,8 @@ export function useFlightInfoChartCBaseomponent(props, context, options) {
 		setErrorMessage,
 		setErrorTimer,
 		setNotify,
-		toFixed,
-	} = useToolsBaseComponent(props, context, options);
+		toFixed
+	} = useFlightToolsBaseComponent(props, context, options);
 	
 	const chart = ref(null);
 	const chartContext = ref(null);
@@ -210,7 +211,10 @@ export function useFlightInfoChartCBaseomponent(props, context, options) {
 		noBreakingSpaces,
 		notImplementedError,
 		success,
+		contentLoadSignal,
 		serviceStore,
+		contentLoadStart,
+		contentLoadStop,
 		sortByOrder,
 		target,
 		calculationOutput,
@@ -220,8 +224,6 @@ export function useFlightInfoChartCBaseomponent(props, context, options) {
 		errorMessage,
 		errorTimer,
 		hasAttribution,
-		measurementUnitsIdOutput,
-		measurementUnitsIdSettings,
 		notifyColor,
 		notifyMessage,
 		notifySignal,

@@ -13,6 +13,7 @@ import { useToolsMeasurementBaseComponent } from '@/components/content/tools/too
 
 export function useFlightToolsBaseComponent(props, context, options) {
 	const {
+		
 		correlationId,
 		error,
 		hasFailed,
@@ -22,7 +23,10 @@ export function useFlightToolsBaseComponent(props, context, options) {
 		noBreakingSpaces,
 		notImplementedError,
 		success,
+		contentLoadSignal,
 		serviceStore,
+		contentLoadStart,
+		contentLoadStop,
 		sortByOrder,
 		target,
 		calculationOutput,
@@ -32,8 +36,6 @@ export function useFlightToolsBaseComponent(props, context, options) {
 		errorMessage,
 		errorTimer,
 		hasAttribution,
-		measurementUnitsIdOutput,
-		measurementUnitsIdSettings,
 		notifyColor,
 		notifyMessage,
 		notifySignal,
@@ -241,7 +243,10 @@ export function useFlightToolsBaseComponent(props, context, options) {
 		noBreakingSpaces,
 		notImplementedError,
 		success,
+		contentLoadSignal,
 		serviceStore,
+		contentLoadStart,
+		contentLoadStop,
 		sortByOrder,
 		target,
 		calculationOutput,
@@ -251,8 +256,6 @@ export function useFlightToolsBaseComponent(props, context, options) {
 		errorMessage,
 		errorTimer,
 		hasAttribution,
-		measurementUnitsIdOutput,
-		measurementUnitsIdSettings,
 		notifyColor,
 		notifyMessage,
 		notifySignal,

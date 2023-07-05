@@ -18,7 +18,10 @@ export function useFlightInfoDataBaseComponent(props, context, options) {
 		noBreakingSpaces,
 		notImplementedError,
 		success,
+		contentLoadSignal,
 		serviceStore,
+		contentLoadStart,
+		contentLoadStop,
 		sortByOrder,
 		target,
 		calculationOutput,
@@ -28,8 +31,6 @@ export function useFlightInfoDataBaseComponent(props, context, options) {
 		errorMessage,
 		errorTimer,
 		hasAttribution,
-		measurementUnitsIdOutput,
-		measurementUnitsIdSettings,
 		notifyColor,
 		notifyMessage,
 		notifySignal,
@@ -47,7 +48,7 @@ export function useFlightInfoDataBaseComponent(props, context, options) {
 		setErrorMessage,
 		setErrorTimer,
 		setNotify,
-		toFixed,
+		toFixed
 	} = useToolsBaseComponent(props, context, options);
 
 	const flightInfoInner = ref(null);
@@ -88,7 +89,10 @@ export function useFlightInfoDataBaseComponent(props, context, options) {
 		noBreakingSpaces,
 		notImplementedError,
 		success,
+		contentLoadSignal,
 		serviceStore,
+		contentLoadStart,
+		contentLoadStop,
 		sortByOrder,
 		target,
 		calculationOutput,
@@ -98,8 +102,6 @@ export function useFlightInfoDataBaseComponent(props, context, options) {
 		errorMessage,
 		errorTimer,
 		hasAttribution,
-		measurementUnitsIdOutput,
-		measurementUnitsIdSettings,
 		notifyColor,
 		notifyMessage,
 		notifySignal,

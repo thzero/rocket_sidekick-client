@@ -12,7 +12,7 @@
 			</v-banner>
 		</div>
 		<ContentHeader
-			v-model="contentTitle"
+			:value="contentTitle"
 		/>
 		<!-- <ContentDescription id="strings.content.tools.flightPath" /> -->
 		<v-row dense>
@@ -433,7 +433,10 @@ export default {
 			noBreakingSpaces,
 			notImplementedError,
 			success,
+			contentLoadSignal,
 			serviceStore,
+			contentLoadStart,
+			contentLoadStop,
 			sortByOrder,
 			target,
 			calculationOutput,
@@ -443,8 +446,6 @@ export default {
 			errorMessage,
 			errorTimer,
 			hasAttribution,
-			measurementUnitsIdOutput,
-			measurementUnitsIdSettings,
 			notifyColor,
 			notifyMessage,
 			notifySignal,
@@ -536,7 +537,10 @@ export default {
 			noBreakingSpaces,
 			notImplementedError,
 			success,
+			contentLoadSignal,
 			serviceStore,
+			contentLoadStart,
+			contentLoadStop,
 			sortByOrder,
 			target,
 			calculationOutput,
@@ -546,8 +550,6 @@ export default {
 			errorMessage,
 			errorTimer,
 			hasAttribution,
-			measurementUnitsIdOutput,
-			measurementUnitsIdSettings,
 			notifyColor,
 			notifyMessage,
 			notifySignal,

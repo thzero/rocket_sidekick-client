@@ -1,7 +1,7 @@
 <template>
 	<div>
 		<ContentHeader
-			v-model="contentTitle"
+			:value="contentTitle"
 		/>
 		<ContentDescription id="strings.content.tools.foam" />
 		<v-row dense>
@@ -258,7 +258,10 @@ export default {
 			noBreakingSpaces,
 			notImplementedError,
 			success,
+			contentLoadSignal,
 			serviceStore,
+			contentLoadStart,
+			contentLoadStop,
 			sortByOrder,
 			target,
 			calculationOutput,
@@ -268,8 +271,6 @@ export default {
 			errorMessage,
 			errorTimer,
 			hasAttribution,
-			measurementUnitsIdOutput,
-			measurementUnitsIdSettings,
 			notifyColor,
 			notifyMessage,
 			notifySignal,
@@ -288,6 +289,8 @@ export default {
 			setErrorTimer,
 			setNotify,
 			toFixed,
+			measurementUnitsIdOutput,
+			measurementUnitsIdSettings,
 			measurementUnitsFluidType,
 			measurementUnitslengthType,
 			serviceToolsFoam,
@@ -299,7 +302,7 @@ export default {
 			finTabLength,
 			finWidth,
 			fluidMeasurementUnitId,
-			fluidMeasurementUnitsId,
+			fluidMeasurementUnitsId ,
 			lengthMeasurementUnitId,
 			lengthMeasurementUnitsId,
 			motorTubeOD,
@@ -320,7 +323,10 @@ export default {
 			noBreakingSpaces,
 			notImplementedError,
 			success,
+			contentLoadSignal,
 			serviceStore,
+			contentLoadStart,
+			contentLoadStop,
 			sortByOrder,
 			target,
 			calculationOutput,
@@ -330,8 +336,6 @@ export default {
 			errorMessage,
 			errorTimer,
 			hasAttribution,
-			measurementUnitsIdOutput,
-			measurementUnitsIdSettings,
 			notifyColor,
 			notifyMessage,
 			notifySignal,
@@ -350,6 +354,8 @@ export default {
 			setErrorTimer,
 			setNotify,
 			toFixed,
+			measurementUnitsIdOutput,
+			measurementUnitsIdSettings,
 			measurementUnitsFluidType,
 			measurementUnitslengthType,
 			serviceToolsFoam,
@@ -361,7 +367,7 @@ export default {
 			finTabLength,
 			finWidth,
 			fluidMeasurementUnitId,
-			fluidMeasurementUnitsId,
+			fluidMeasurementUnitsId ,
 			lengthMeasurementUnitId,
 			lengthMeasurementUnitsId,
 			motorTubeOD,

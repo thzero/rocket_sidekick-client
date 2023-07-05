@@ -14,6 +14,7 @@ import LibraryClientVueUtility from '@thzero/library_client_vue3/utility/index';
 
 import { useFlightToolsBaseComponent } from '@/components.app/content/tools/flightToolBase';
 import { useToolsMeasurementBaseComponent } from '@/components/content/tools/toolsMeasurementBase';
+import { useToolsMeasurementSettingsComponent } from '@/components/content/tools/toolsMeasurementSettings';
 
 export function useFlightInfoBaseComponent(props, context) {
 	const {
@@ -36,8 +37,6 @@ export function useFlightInfoBaseComponent(props, context) {
 		errorMessage,
 		errorTimer,
 		hasAttribution,
-		measurementUnitsIdOutput,
-		measurementUnitsIdSettings,
 		notifyColor,
 		notifyMessage,
 		notifySignal,
@@ -103,6 +102,11 @@ export function useFlightInfoBaseComponent(props, context) {
 		},
 		title: LibraryClientUtility.$trans.t('titles.content.tools.flightInfo')
 	});
+
+	const {
+		measurementUnitsIdOutput,
+		measurementUnitsIdSettings
+	} = useToolsMeasurementSettingsComponent(props, context);
 
 	const {
 		measurementUnitsAccelerationDefaultId,
@@ -519,8 +523,6 @@ export function useFlightInfoBaseComponent(props, context) {
 		errorMessage,
 		errorTimer,
 		hasAttribution,
-		measurementUnitsIdOutput,
-		measurementUnitsIdSettings,
 		notifyColor,
 		notifyMessage,
 		notifySignal,
@@ -539,7 +541,6 @@ export function useFlightInfoBaseComponent(props, context) {
 		setErrorTimer,
 		setNotify,
 		toFixed,
-		settings,
 		flightDataDate,
 		flightDataLocation,
 		flightDataTitle,
