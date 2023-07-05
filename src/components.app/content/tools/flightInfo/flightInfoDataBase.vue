@@ -6,6 +6,7 @@ import AppCommonConstants from 'rocket_sidekick_common/constants';
 import LibraryClientUtility from '@thzero/library_client/utility/index';
 
 import { useToolsBaseComponent } from '@/components/content/tools/toolsBase';
+import { useToolsFormattingComponent } from '@/components/content/tools/toolsFormatting';
 
 export function useFlightInfoDataBaseComponent(props, context, options) {
 	const {
@@ -36,10 +37,7 @@ export function useFlightInfoDataBaseComponent(props, context, options) {
 		notifySignal,
 		notifyTimeout,
 		settings,
-		dateFormat,
-		dateFormatMask,
 		calculateI,
-		formatNumber,
 		handleListener,
 		handleAttribution,
 		initCalculationOutput,
@@ -47,9 +45,15 @@ export function useFlightInfoDataBaseComponent(props, context, options) {
 		resetFormI,
 		setErrorMessage,
 		setErrorTimer,
-		setNotify,
-		toFixed
+		setNotify
 	} = useToolsBaseComponent(props, context, options);
+	
+	const {
+		dateFormat,
+		dateFormatMask,
+		formatNumber,
+		toFixed
+	} = useToolsFormattingComponent(props, context, options);
 
 	const flightInfoInner = ref(null);
 
@@ -107,10 +111,7 @@ export function useFlightInfoDataBaseComponent(props, context, options) {
 		notifySignal,
 		notifyTimeout,
 		settings,
-		dateFormat,
-		dateFormatMask,
 		calculateI,
-		formatNumber,
 		handleListener,
 		handleAttribution,
 		initCalculationOutput,
@@ -119,6 +120,9 @@ export function useFlightInfoDataBaseComponent(props, context, options) {
 		setErrorMessage,
 		setErrorTimer,
 		setNotify,
+		dateFormat,
+		dateFormatMask,
+		formatNumber,
 		toFixed,
 		flightInfoInner,
 		measurementUnits,

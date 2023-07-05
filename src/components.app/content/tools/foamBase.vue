@@ -40,10 +40,7 @@ export function useFoamBaseComponent(props, context) {
 		notifySignal,
 		notifyTimeout,
 		settings,
-		dateFormat,
-		dateFormatMask,
 		calculateI,
-		formatNumber,
 		handleListener,
 		handleAttribution,
 		initCalculationOutput,
@@ -51,8 +48,7 @@ export function useFoamBaseComponent(props, context) {
 		resetFormI,
 		setErrorMessage,
 		setErrorTimer,
-		setNotify,
-		toFixed
+		setNotify
 	} = useToolsBaseComponent(props, context, {
 		id: 'foam',
 		resetForm: (correlationId) => {
@@ -209,10 +205,7 @@ export function useFoamBaseComponent(props, context) {
 		notifySignal,
 		notifyTimeout,
 		settings,
-		dateFormat,
-		dateFormatMask,
 		calculateI,
-		formatNumber,
 		handleListener,
 		handleAttribution,
 		initCalculationOutput,
@@ -221,7 +214,6 @@ export function useFoamBaseComponent(props, context) {
 		setErrorMessage,
 		setErrorTimer,
 		setNotify,
-		toFixed,
 		measurementUnitsIdOutput,
 		measurementUnitsIdSettings,
 		measurementUnitsFluidType,

@@ -13,7 +13,6 @@ import { useToolsMeasurementBaseComponent } from '@/components/content/tools/too
 
 export function useFlightToolsBaseComponent(props, context, options) {
 	const {
-		
 		correlationId,
 		error,
 		hasFailed,
@@ -41,10 +40,7 @@ export function useFlightToolsBaseComponent(props, context, options) {
 		notifySignal,
 		notifyTimeout,
 		settings,
-		dateFormat,
-		dateFormatMask,
 		calculateI,
-		formatNumber,
 		handleListener,
 		handleAttribution,
 		initCalculationOutput,
@@ -52,8 +48,7 @@ export function useFlightToolsBaseComponent(props, context, options) {
 		resetFormI,
 		setErrorMessage,
 		setErrorTimer,
-		setNotify,
-		toFixed
+		setNotify
 	} = useToolsBaseComponent(props, context, options);
 
 	const {
@@ -261,10 +256,7 @@ export function useFlightToolsBaseComponent(props, context, options) {
 		notifySignal,
 		notifyTimeout,
 		settings,
-		dateFormat,
-		dateFormatMask,
 		calculateI,
-		formatNumber,
 		handleListener,
 		handleAttribution,
 		initCalculationOutput,
@@ -273,7 +265,6 @@ export function useFlightToolsBaseComponent(props, context, options) {
 		setErrorMessage,
 		setErrorTimer,
 		setNotify,
-		toFixed,
 		flightDataDate,
 		flightDataLocation,
 		flightDataTitle,
