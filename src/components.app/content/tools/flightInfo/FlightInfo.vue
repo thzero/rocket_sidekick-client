@@ -12,7 +12,7 @@
 			</v-banner>
 		</div>
 		<ContentHeader
-			v-model="contentTitle"
+			:value="contentTitle"
 		/>
 		<!-- <ContentDescription id="strings.content.tools.flightInfo" /> -->
 		<v-row dense>
@@ -584,17 +584,12 @@ export default {
 			errorMessage,
 			errorTimer,
 			hasAttribution,
-			measurementUnitsIdOutput,
-			measurementUnitsIdSettings,
 			notifyColor,
 			notifyMessage,
 			notifySignal,
 			notifyTimeout,
 			settings,
-			dateFormat,
-			dateFormatMask,
 			calculateI,
-			formatNumber,
 			handleListener,
 			handleAttribution,
 			initCalculationOutput,
@@ -603,7 +598,6 @@ export default {
 			setErrorMessage,
 			setErrorTimer,
 			setNotify,
-			toFixed,
 			flightDataDate,
 			flightDataLocation,
 			flightDataTitle,
@@ -694,17 +688,12 @@ export default {
 			errorMessage,
 			errorTimer,
 			hasAttribution,
-			measurementUnitsIdOutput,
-			measurementUnitsIdSettings,
 			notifyColor,
 			notifyMessage,
 			notifySignal,
 			notifyTimeout,
 			settings,
-			dateFormat,
-			dateFormatMask,
 			calculateI,
-			formatNumber,
 			handleListener,
 			handleAttribution,
 			initCalculationOutput,
@@ -713,7 +702,6 @@ export default {
 			setErrorMessage,
 			setErrorTimer,
 			setNotify,
-			toFixed,
 			flightDataDate,
 			flightDataLocation,
 			flightDataTitle,

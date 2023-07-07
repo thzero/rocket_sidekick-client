@@ -36,7 +36,7 @@
 <script>
 import { Chart, registerables } from 'chart.js';
 
-import { useFlightInfoChartCBaseomponent } from '@/components.app/content/tools/flightInfo/charts/flightInfoChartBase';
+import { useFlightInfoChartBaseComponent } from '@/components.app/content/tools/flightInfo/charts/flightInfoChartBase';
 import { useFlightInfoChartBaseProps } from '@/components.app/content/tools/flightInfo/charts/flightInfoChartBaseProps';
 
 Chart.register(...registerables);
@@ -58,7 +58,10 @@ export default {
 			noBreakingSpaces,
 			notImplementedError,
 			success,
+			contentLoadSignal,
 			serviceStore,
+			contentLoadStart,
+			contentLoadStop,
 			sortByOrder,
 			target,
 			calculationOutput,
@@ -68,17 +71,12 @@ export default {
 			errorMessage,
 			errorTimer,
 			hasAttribution,
-			measurementUnitsIdOutput,
-			measurementUnitsIdSettings,
 			notifyColor,
 			notifyMessage,
 			notifySignal,
 			notifyTimeout,
 			settings,
-			dateFormat,
-			dateFormatMask,
 			calculateI,
-			formatNumber,
 			handleListener,
 			handleAttribution,
 			initCalculationOutput,
@@ -87,14 +85,13 @@ export default {
 			setErrorMessage,
 			setErrorTimer,
 			setNotify,
-			toFixed,
 			chart,
 			chartContext,
 			date,
 			location,
 			otionsChart,
 			title
-		} = useFlightInfoChartCBaseomponent(props, context);
+		} = useFlightInfoChartBaseComponent(props, context);
 
 		return {
 			correlationId,
@@ -106,7 +103,10 @@ export default {
 			noBreakingSpaces,
 			notImplementedError,
 			success,
+			contentLoadSignal,
 			serviceStore,
+			contentLoadStart,
+			contentLoadStop,
 			sortByOrder,
 			target,
 			calculationOutput,
@@ -116,17 +116,12 @@ export default {
 			errorMessage,
 			errorTimer,
 			hasAttribution,
-			measurementUnitsIdOutput,
-			measurementUnitsIdSettings,
 			notifyColor,
 			notifyMessage,
 			notifySignal,
 			notifyTimeout,
 			settings,
-			dateFormat,
-			dateFormatMask,
 			calculateI,
-			formatNumber,
 			handleListener,
 			handleAttribution,
 			initCalculationOutput,
@@ -135,7 +130,6 @@ export default {
 			setErrorMessage,
 			setErrorTimer,
 			setNotify,
-			toFixed,
 			chart,
 			chartContext,
 			date,

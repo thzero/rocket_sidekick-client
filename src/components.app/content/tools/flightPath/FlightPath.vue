@@ -12,7 +12,7 @@
 			</v-banner>
 		</div>
 		<ContentHeader
-			v-model="contentTitle"
+			:value="contentTitle"
 		/>
 		<!-- <ContentDescription id="strings.content.tools.flightPath" /> -->
 		<v-row dense>
@@ -398,7 +398,7 @@ import { useFlightPathBaseComponent } from '@/components.app/content/tools/fligh
 import ContentAttribution from '@/components/content/Attribution';
 import ContentDescription from '@/components/content/Description';
 import ContentHeader from '@/components/content/Header';
-import VCheckboxWithValidation from '@thzero/library_client_vue3_vuetify3/components/form//VCheckboxWithValidation';
+import VCheckboxWithValidation from '@thzero/library_client_vue3_vuetify3/components/form/VCheckboxWithValidation';
 import VColorWithValidation from '@thzero/library_client_vue3_vuetify3/components/form/VColorWithValidation';
 import VDateTimeField from '@thzero/library_client_vue3_vuetify3/components/form/VDateTimeFieldTemp';
 import VFormControl from '@thzero/library_client_vue3_vuetify3/components/form/VFormControl';
@@ -433,7 +433,10 @@ export default {
 			noBreakingSpaces,
 			notImplementedError,
 			success,
+			contentLoadSignal,
 			serviceStore,
+			contentLoadStart,
+			contentLoadStop,
 			sortByOrder,
 			target,
 			calculationOutput,
@@ -443,17 +446,12 @@ export default {
 			errorMessage,
 			errorTimer,
 			hasAttribution,
-			measurementUnitsIdOutput,
-			measurementUnitsIdSettings,
 			notifyColor,
 			notifyMessage,
 			notifySignal,
 			notifyTimeout,
 			settings,
-			dateFormat,
-			dateFormatMask,
 			calculateI,
-			formatNumber,
 			handleListener,
 			handleAttribution,
 			initCalculationOutput,
@@ -462,7 +460,6 @@ export default {
 			setErrorMessage,
 			setErrorTimer,
 			setNotify,
-			toFixed,
 			flightDataDate,
 			flightDataLocation,
 			flightDataTitle,
@@ -536,7 +533,10 @@ export default {
 			noBreakingSpaces,
 			notImplementedError,
 			success,
+			contentLoadSignal,
 			serviceStore,
+			contentLoadStart,
+			contentLoadStop,
 			sortByOrder,
 			target,
 			calculationOutput,
@@ -546,17 +546,12 @@ export default {
 			errorMessage,
 			errorTimer,
 			hasAttribution,
-			measurementUnitsIdOutput,
-			measurementUnitsIdSettings,
 			notifyColor,
 			notifyMessage,
 			notifySignal,
 			notifyTimeout,
 			settings,
-			dateFormat,
-			dateFormatMask,
 			calculateI,
-			formatNumber,
 			handleListener,
 			handleAttribution,
 			initCalculationOutput,
@@ -565,7 +560,6 @@ export default {
 			setErrorMessage,
 			setErrorTimer,
 			setNotify,
-			toFixed,
 			flightDataDate,
 			flightDataLocation,
 			flightDataTitle,

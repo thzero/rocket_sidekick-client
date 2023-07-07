@@ -14,6 +14,7 @@ import LibraryCommonUtility from '@thzero/library_common/utility/index';
 
 import { useFlightToolsBaseComponent } from '@/components.app/content/tools/flightToolBase';
 import { useToolsMeasurementBaseComponent } from '@/components/content/tools/toolsMeasurementBase';
+import { useToolsMeasurementSettingsComponent } from '@/components/content/tools/toolsMeasurementSettings';
 
 export function useFlightPathBaseComponent(props, context) {
 	const {
@@ -26,7 +27,10 @@ export function useFlightPathBaseComponent(props, context) {
 		noBreakingSpaces,
 		notImplementedError,
 		success,
+		contentLoadSignal,
 		serviceStore,
+		contentLoadStart,
+		contentLoadStop,
 		sortByOrder,
 		target,
 		calculationOutput,
@@ -36,17 +40,12 @@ export function useFlightPathBaseComponent(props, context) {
 		errorMessage,
 		errorTimer,
 		hasAttribution,
-		measurementUnitsIdOutput,
-		measurementUnitsIdSettings,
 		notifyColor,
 		notifyMessage,
 		notifySignal,
 		notifyTimeout,
 		settings,
-		dateFormat,
-		dateFormatMask,
 		calculateI,
-		formatNumber,
 		handleListener,
 		handleAttribution,
 		initCalculationOutput,
@@ -55,7 +54,6 @@ export function useFlightPathBaseComponent(props, context) {
 		setErrorMessage,
 		setErrorTimer,
 		setNotify,
-		toFixed,
 		flightDataDate,
 		flightDataLocation,
 		flightDataTitle,
@@ -98,6 +96,11 @@ export function useFlightPathBaseComponent(props, context) {
 		},
 		title: LibraryClientUtility.$trans.t('titles.content.tools.flightPath')
 	});
+
+	const {
+		measurementUnitsIdOutput,
+		measurementUnitsIdSettings
+	} = useToolsMeasurementSettingsComponent(props, context);
 
 	const {
 		measurementUnitsAccelerationDefaultId,
@@ -407,7 +410,10 @@ export function useFlightPathBaseComponent(props, context) {
 		noBreakingSpaces,
 		notImplementedError,
 		success,
+		contentLoadSignal,
 		serviceStore,
+		contentLoadStart,
+		contentLoadStop,
 		sortByOrder,
 		target,
 		calculationOutput,
@@ -417,17 +423,12 @@ export function useFlightPathBaseComponent(props, context) {
 		errorMessage,
 		errorTimer,
 		hasAttribution,
-		measurementUnitsIdOutput,
-		measurementUnitsIdSettings,
 		notifyColor,
 		notifyMessage,
 		notifySignal,
 		notifyTimeout,
 		settings,
-		dateFormat,
-		dateFormatMask,
 		calculateI,
-		formatNumber,
 		handleListener,
 		handleAttribution,
 		initCalculationOutput,
@@ -436,8 +437,6 @@ export function useFlightPathBaseComponent(props, context) {
 		setErrorMessage,
 		setErrorTimer,
 		setNotify,
-		toFixed,
-		settings,
 		flightDataDate,
 		flightDataLocation,
 		flightDataTitle,
