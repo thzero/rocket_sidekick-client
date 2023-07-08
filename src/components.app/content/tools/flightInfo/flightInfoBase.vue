@@ -47,7 +47,7 @@ export function useFlightInfoBaseComponent(props, context) {
 		handleAttribution,
 		initCalculationOutput,
 		initCalculationResults,
-		resetFormI,
+		resetAdditional,
 		setErrorMessage,
 		setErrorTimer,
 		setNotify,
@@ -461,7 +461,7 @@ export function useFlightInfoBaseComponent(props, context) {
 		flightInfoChartData.value = null;
 		processing.value = false;
 	};
-	const resetInput = () => {
+	const resetAdditionalInput = () => {
 		const correlationIdI = correlationId();
 		reset(correlationIdI);
 		flightDataReset(correlationIdI);
@@ -529,7 +529,7 @@ export function useFlightInfoBaseComponent(props, context) {
 		handleAttribution,
 		initCalculationOutput,
 		initCalculationResults,
-		resetFormI,
+		resetAdditional,
 		setErrorMessage,
 		setErrorTimer,
 		setNotify,
@@ -598,7 +598,7 @@ export function useFlightInfoBaseComponent(props, context) {
 		flightInfoProcess,
 		getScreenshotOfElement,
 		reset,
-		resetInput,
+		resetAdditionalInput,
 		scope: 'FlightInfo',
 		validation: useVuelidate({ $scope: 'FlightInfo' })
 	};

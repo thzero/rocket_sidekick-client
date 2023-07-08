@@ -45,13 +45,13 @@ export function useFoamBaseComponent(props, context) {
 		handleAttribution,
 		initCalculationOutput,
 		initCalculationResults,
-		resetFormI,
+		resetAdditional,
 		setErrorMessage,
 		setErrorTimer,
 		setNotify
 	} = useToolsBaseComponent(props, context, {
 		id: 'foam',
-		resetForm: (correlationId) => {
+		resetAdditional: (correlationId) => {
 			calculationResults.value.foams = [];
 
 			bodyTubeID.value = null;
@@ -210,7 +210,7 @@ export function useFoamBaseComponent(props, context) {
 		handleAttribution,
 		initCalculationOutput,
 		initCalculationResults,
-		resetFormI,
+		resetAdditional,
 		setErrorMessage,
 		setErrorTimer,
 		setNotify,

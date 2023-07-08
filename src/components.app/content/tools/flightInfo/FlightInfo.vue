@@ -20,7 +20,7 @@
 				<VFormControl
 					ref="formFlightInfoRef"
 					:validation="validation"
-					:reset-additional="resetInput"
+					:reset-additional="resetAdditionalInput"
 					button-clear-name="buttons.reset"
 					button-ok-name="buttons.process"
 					notify-message-saved=""
@@ -594,7 +594,7 @@ export default {
 			handleAttribution,
 			initCalculationOutput,
 			initCalculationResults,
-			resetFormI,
+			resetAdditional,
 			setErrorMessage,
 			setErrorTimer,
 			setNotify,
@@ -663,7 +663,7 @@ export default {
 			flightInfoProcess,
 			getScreenshotOfElement,
 			reset,
-			resetInput,
+			resetAdditionalInput,
 			scope,
 			validation
 		} = useFlightInfoBaseComponent(props, context, { id: 'flightInfo' });
@@ -698,7 +698,7 @@ export default {
 			handleAttribution,
 			initCalculationOutput,
 			initCalculationResults,
-			resetFormI,
+			resetAdditional,
 			setErrorMessage,
 			setErrorTimer,
 			setNotify,
@@ -767,7 +767,7 @@ export default {
 			flightInfoProcess,
 			getScreenshotOfElement,
 			reset,
-			resetInput,
+			resetAdditionalInput,
 			scope,
 			validation
 		}
