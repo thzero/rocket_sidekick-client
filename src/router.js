@@ -380,7 +380,7 @@ const routes = [
 					{
 						path: '',
 						name: 'content_parachutes',
-						component: () => import(/* webpackPrefetch: true */ /* webpackChunkName: "group-content-info" */ './components/content/parts/Parachutes.vue'),
+						component: () => import(/* webpackPrefetch: true */ /* webpackChunkName: "group-content-info" */ './components/content/parts/parachutes/Parachutes.vue'),
 						meta: {
 							requiresAuth: true
 						}
