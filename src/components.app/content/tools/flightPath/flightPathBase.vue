@@ -376,7 +376,7 @@ export function useFlightPathBaseComponent(props, context) {
 		flightPathData.value = null;
 		processing.value = false;
 	};
-	const resetInput = () => {
+	const resetAdditionalInput = () => {
 		const correlationIdI = correlationId();
 		reset(correlationIdI);
 		flightDataReset(correlationIdI);
@@ -495,7 +495,7 @@ export function useFlightPathBaseComponent(props, context) {
 		flightPathExport,
 		flightPathProcess,
 		reset,
-		resetInput,
+		resetAdditionalInput,
 		scope: 'FlightPath',
 		validation: useVuelidate({ $scope: 'FlightPath' })
 	};

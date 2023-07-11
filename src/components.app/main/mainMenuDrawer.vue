@@ -58,14 +58,53 @@
 				>
 					<v-list-item-title>{{ $t('menu.yours.launches') }}</v-list-item-title>
 				</v-list-item>
+				<v-list-item
+					v-if="features.Yours.Rockets"
+					to="/user/rockets"
+				>
+					<v-list-item-title>{{ $t('menu.yours.rockets') }}</v-list-item-title>
+				</v-list-item>
 				<v-divider
-					v-if="features.Yours.Checklists && features.Yours.Launches"
+					v-if="features.Yours.Checklists || features.Yours.Launches || features.Yours.Rockets"
 				></v-divider>
+				<v-list-subheader>
+					{{ $t('menu.yours.parts') }}
+				</v-list-subheader>
 				<v-list-item
 					v-if="features.Yours.Altimeters"
 					to="/user/altimeters"
 				>
 					<v-list-item-title>{{ $t('menu.yours.altimeters') }}</v-list-item-title>
+				</v-list-item>
+				<v-list-item
+					v-if="features.Yours.ChuteProtectors"
+					to="/user/chuteProtectors"
+				>
+					<v-list-item-title>{{ $t('menu.yours.chuteProtectors') }}</v-list-item-title>
+				</v-list-item>
+				<v-list-item
+					v-if="features.Yours.ChuteReleases"
+					to="/user/chuteReleases"
+				>
+					<v-list-item-title>{{ $t('menu.yours.chuteReleases') }}</v-list-item-title>
+				</v-list-item>
+				<v-list-item
+					v-if="features.Yours.DeploymentBags"
+					to="/user/deploymentBags"
+				>
+					<v-list-item-title>{{ $t('menu.yours.deploymentBags') }}</v-list-item-title>
+				</v-list-item>
+				<v-list-item
+					v-if="features.Yours.Motors"
+					to="/user/motors"
+				>
+					<v-list-item-title>{{ $t('menu.yours.motors') }}</v-list-item-title>
+				</v-list-item>
+				<v-list-item
+					v-if="features.Yours.MotorCases"
+					to="/user/motorCases"
+				>
+					<v-list-item-title>{{ $t('menu.yours.motorCases') }}</v-list-item-title>
 				</v-list-item>
 				<v-list-item
 					v-if="features.Yours.Parachutes"
@@ -74,10 +113,16 @@
 					<v-list-item-title>{{ $t('menu.yours.parachutes') }}</v-list-item-title>
 				</v-list-item>
 				<v-list-item
-					v-if="features.Yours.Rockets"
-					to="/user/rockets"
+					v-if="features.Yours.Streamers"
+					to="/user/streamers"
 				>
-					<v-list-item-title>{{ $t('menu.yours.rockets') }}</v-list-item-title>
+					<v-list-item-title>{{ $t('menu.yours.streamers') }}</v-list-item-title>
+				</v-list-item>
+				<v-list-item
+					v-if="features.Yours.Trackers"
+					to="/user/trackers"
+				>
+					<v-list-item-title>{{ $t('menu.yours.trackers') }}</v-list-item-title>
 				</v-list-item>
 			</v-list>
 		</v-list-item>

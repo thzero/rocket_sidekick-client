@@ -369,6 +369,69 @@ const routes = [
 		]
 	},
 	{
+		path: '/user/chuteProtectors',
+		component: () => import(/* webpackPrefetch: true */ /* webpackChunkName: "group-layouts" */ './layouts/MainLayout.vue'),
+		children: [
+			{
+				path: '',
+				name: 'content_chute_protectors',
+				component: () => import(/* webpackPrefetch: true */ /* webpackChunkName: "group-layouts" */ './layouts/ContentLayout.vue'),
+				children: [
+					{
+						path: '',
+						name: 'content_chute_protectors',
+						component: () => import(/* webpackPrefetch: true */ /* webpackChunkName: "group-content-info" */ './components/content/parts/chuteProtectors/ChuteProtectors.vue'),
+						meta: {
+							requiresAuth: true
+						}
+					}
+				]
+			}
+		]
+	},
+	{
+		path: '/user/chuteReleases',
+		component: () => import(/* webpackPrefetch: true */ /* webpackChunkName: "group-layouts" */ './layouts/MainLayout.vue'),
+		children: [
+			{
+				path: '',
+				name: 'content_chute_releases',
+				component: () => import(/* webpackPrefetch: true */ /* webpackChunkName: "group-layouts" */ './layouts/ContentLayout.vue'),
+				children: [
+					{
+						path: '',
+						name: 'content_chute_releases',
+						component: () => import(/* webpackPrefetch: true */ /* webpackChunkName: "group-content-info" */ './components/content/parts/chuteReleases/ChuteReleases.vue'),
+						meta: {
+							requiresAuth: true
+						}
+					}
+				]
+			}
+		]
+	},
+	{
+		path: '/user/deploymentBags',
+		component: () => import(/* webpackPrefetch: true */ /* webpackChunkName: "group-layouts" */ './layouts/MainLayout.vue'),
+		children: [
+			{
+				path: '',
+				name: 'content_deployment_bags',
+				component: () => import(/* webpackPrefetch: true */ /* webpackChunkName: "group-layouts" */ './layouts/ContentLayout.vue'),
+				children: [
+					{
+						path: '',
+						name: 'content_deployment_bags',
+						component: () => import(/* webpackPrefetch: true */ /* webpackChunkName: "group-content-info" */ './components/content/parts/deploymentBags/DeploymentBags.vue'),
+						meta: {
+							requiresAuth: true
+						}
+					}
+				]
+			}
+		]
+	},
+	{
 		path: '/user/parachutes',
 		component: () => import(/* webpackPrefetch: true */ /* webpackChunkName: "group-layouts" */ './layouts/MainLayout.vue'),
 		children: [
@@ -380,7 +443,7 @@ const routes = [
 					{
 						path: '',
 						name: 'content_parachutes',
-						component: () => import(/* webpackPrefetch: true */ /* webpackChunkName: "group-content-info" */ './components/content/parts/Parachutes.vue'),
+						component: () => import(/* webpackPrefetch: true */ /* webpackChunkName: "group-content-info" */ './components/content/parts/parachutes/Parachutes.vue'),
 						meta: {
 							requiresAuth: true
 						}

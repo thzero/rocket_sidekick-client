@@ -20,7 +20,7 @@
 				<VFormControl
 					ref="formFlightPathRef"
 					:validation="validation"
-					:reset-additional="resetInput"
+					:reset-additional="resetAdditionalInput"
 					button-clear-name="buttons.reset"
 					button-ok-name="buttons.process"
 					notify-message-saved=""
@@ -456,7 +456,7 @@ export default {
 			handleAttribution,
 			initCalculationOutput,
 			initCalculationResults,
-			resetFormI,
+			resetAdditional,
 			setErrorMessage,
 			setErrorTimer,
 			setNotify,
@@ -518,7 +518,7 @@ export default {
 			flightPathExport,
 			flightPathProcess,
 			reset,
-			resetInput,
+			resetAdditionalInput,
 			scope,
 			validation
 		} = useFlightPathBaseComponent(props, context);
@@ -556,7 +556,7 @@ export default {
 			handleAttribution,
 			initCalculationOutput,
 			initCalculationResults,
-			resetFormI,
+			resetAdditional,
 			setErrorMessage,
 			setErrorTimer,
 			setNotify,
@@ -618,7 +618,7 @@ export default {
 			flightPathExport,
 			flightPathProcess,
 			reset,
-			resetInput,
+			resetAdditionalInput,
 			scope,
 			validation
 		}
