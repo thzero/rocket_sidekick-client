@@ -369,6 +369,27 @@ const routes = [
 		]
 	},
 	{
+		path: '/user/altimeters',
+		component: () => import(/* webpackPrefetch: true */ /* webpackChunkName: "group-layouts" */ './layouts/MainLayout.vue'),
+		children: [
+			{
+				path: '',
+				name: 'content_altimeters',
+				component: () => import(/* webpackPrefetch: true */ /* webpackChunkName: "group-layouts" */ './layouts/ContentLayout.vue'),
+				children: [
+					{
+						path: '',
+						name: 'content_altimeters',
+						component: () => import(/* webpackPrefetch: true */ /* webpackChunkName: "group-content-info" */ './components/content/parts/altimeters/Altimeters.vue'),
+						meta: {
+							requiresAuth: true
+						}
+					}
+				]
+			}
+		]
+	},
+	{
 		path: '/user/chuteProtectors',
 		component: () => import(/* webpackPrefetch: true */ /* webpackChunkName: "group-layouts" */ './layouts/MainLayout.vue'),
 		children: [
@@ -444,6 +465,48 @@ const routes = [
 						path: '',
 						name: 'content_parachutes',
 						component: () => import(/* webpackPrefetch: true */ /* webpackChunkName: "group-content-info" */ './components/content/parts/parachutes/Parachutes.vue'),
+						meta: {
+							requiresAuth: true
+						}
+					}
+				]
+			}
+		]
+	},
+	{
+		path: '/user/streamers',
+		component: () => import(/* webpackPrefetch: true */ /* webpackChunkName: "group-layouts" */ './layouts/MainLayout.vue'),
+		children: [
+			{
+				path: '',
+				name: 'content_streamers',
+				component: () => import(/* webpackPrefetch: true */ /* webpackChunkName: "group-layouts" */ './layouts/ContentLayout.vue'),
+				children: [
+					{
+						path: '',
+						name: 'content_streamers',
+						component: () => import(/* webpackPrefetch: true */ /* webpackChunkName: "group-content-info" */ './components/content/parts/streamers/Streamers.vue'),
+						meta: {
+							requiresAuth: true
+						}
+					}
+				]
+			}
+		]
+	},
+	{
+		path: '/user/trackers',
+		component: () => import(/* webpackPrefetch: true */ /* webpackChunkName: "group-layouts" */ './layouts/MainLayout.vue'),
+		children: [
+			{
+				path: '',
+				name: 'content_trackers',
+				component: () => import(/* webpackPrefetch: true */ /* webpackChunkName: "group-layouts" */ './layouts/ContentLayout.vue'),
+				children: [
+					{
+						path: '',
+						name: 'content_trackers',
+						component: () => import(/* webpackPrefetch: true */ /* webpackChunkName: "group-content-info" */ './components/content/parts/trackers/Trackers.vue'),
 						meta: {
 							requiresAuth: true
 						}
