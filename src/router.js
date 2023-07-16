@@ -302,7 +302,7 @@ const routes = [
 					{
 						path: '',
 						name: 'content_rocket_info',
-						component: () => import(/* webpackPrefetch: true */ /* webpackChunkName: "group-content-info" */ './components/content/rockets/rocket/Gallery.vue'),
+						component: () => import(/* webpackPrefetch: true */ /* webpackChunkName: "group-content-info" */ './components/content/rockets/gallery/rocket/Gallery.vue'),
 						meta: {
 							requiresAuth: false
 						}
@@ -323,7 +323,7 @@ const routes = [
 					{
 						path: '',
 						name: 'content_rockets',
-						component: () => import(/* webpackPrefetch: true */ /* webpackChunkName: "group-content-info" */ './components/content/rockets/Gallery.vue'),
+						component: () => import(/* webpackPrefetch: true */ /* webpackChunkName: "group-content-info" */ './components/content/rockets/gallery/Gallery.vue'),
 						meta: {
 							requiresAuth: false
 						}
@@ -360,6 +360,27 @@ const routes = [
 						path: '',
 						name: 'content_checklists',
 						component: () => import(/* webpackPrefetch: true */ /* webpackChunkName: "group-content-info" */ './components/content/checklists/Checklists.vue'),
+						meta: {
+							requiresAuth: true
+						}
+					}
+				]
+			}
+		]
+	},
+	{
+		path: '/user/altimeters',
+		component: () => import(/* webpackPrefetch: true */ /* webpackChunkName: "group-layouts" */ './layouts/MainLayout.vue'),
+		children: [
+			{
+				path: '',
+				name: 'content_altimeters',
+				component: () => import(/* webpackPrefetch: true */ /* webpackChunkName: "group-layouts" */ './layouts/ContentLayout.vue'),
+				children: [
+					{
+						path: '',
+						name: 'content_altimeters',
+						component: () => import(/* webpackPrefetch: true */ /* webpackChunkName: "group-content-info" */ './components/content/parts/altimeters/Altimeters.vue'),
 						meta: {
 							requiresAuth: true
 						}
@@ -453,26 +474,68 @@ const routes = [
 		]
 	},
 	{
-		path: '/user/rocket/:id',
+		path: '/user/streamers',
 		component: () => import(/* webpackPrefetch: true */ /* webpackChunkName: "group-layouts" */ './layouts/MainLayout.vue'),
 		children: [
 			{
 				path: '',
-				name: 'content_rocket_info_user',
+				name: 'content_streamers',
 				component: () => import(/* webpackPrefetch: true */ /* webpackChunkName: "group-layouts" */ './layouts/ContentLayout.vue'),
 				children: [
 					{
 						path: '',
-						name: 'content_rocket_info_user',
-						component: () => import(/* webpackPrefetch: true */ /* webpackChunkName: "group-content-info" */ './components/content/rockets/rocket/User.vue'),
+						name: 'content_streamers',
+						component: () => import(/* webpackPrefetch: true */ /* webpackChunkName: "group-content-info" */ './components/content/parts/streamers/Streamers.vue'),
 						meta: {
-							requiresAuth: false
+							requiresAuth: true
 						}
 					}
 				]
 			}
 		]
 	},
+	{
+		path: '/user/trackers',
+		component: () => import(/* webpackPrefetch: true */ /* webpackChunkName: "group-layouts" */ './layouts/MainLayout.vue'),
+		children: [
+			{
+				path: '',
+				name: 'content_trackers',
+				component: () => import(/* webpackPrefetch: true */ /* webpackChunkName: "group-layouts" */ './layouts/ContentLayout.vue'),
+				children: [
+					{
+						path: '',
+						name: 'content_trackers',
+						component: () => import(/* webpackPrefetch: true */ /* webpackChunkName: "group-content-info" */ './components/content/parts/trackers/Trackers.vue'),
+						meta: {
+							requiresAuth: true
+						}
+					}
+				]
+			}
+		]
+	},
+	// {
+	// 	path: '/user/rocket/:id',
+	// 	component: () => import(/* webpackPrefetch: true */ /* webpackChunkName: "group-layouts" */ './layouts/MainLayout.vue'),
+	// 	children: [
+	// 		{
+	// 			path: '',
+	// 			name: 'content_rocket_info_user',
+	// 			component: () => import(/* webpackPrefetch: true */ /* webpackChunkName: "group-layouts" */ './layouts/ContentLayout.vue'),
+	// 			children: [
+	// 				{
+	// 					path: '',
+	// 					name: 'content_rocket_info_user',
+	// 					component: () => import(/* webpackPrefetch: true */ /* webpackChunkName: "group-content-info" */ './components/content/rockets/gallery/rocket/User.vue'),
+	// 					meta: {
+	// 						requiresAuth: false
+	// 					}
+	// 				}
+	// 			]
+	// 		}
+	// 	]
+	// },
 	{
 		path: '/user/rockets',
 		component: () => import(/* webpackPrefetch: true */ /* webpackChunkName: "group-layouts" */ './layouts/MainLayout.vue'),
@@ -485,7 +548,7 @@ const routes = [
 					{
 						path: '',
 						name: 'content_rockets_user',
-						component: () => import(/* webpackPrefetch: true */ /* webpackChunkName: "group-content-info" */ './components/content/rockets/User.vue'),
+						component: () => import(/* webpackPrefetch: true */ /* webpackChunkName: "group-content-info" */ './components/content/rockets/user/Rockets.vue'),
 						meta: {
 							requiresAuth: true
 						}
