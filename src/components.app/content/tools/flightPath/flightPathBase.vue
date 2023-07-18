@@ -114,7 +114,7 @@ export function useFlightPathBaseComponent(props, context) {
 		measurementUnitsFluidDefaultId,
 		measurementUnitsFluidType,
 		measurementUnitsLengthDefaultId,
-		measurementUnitslengthType,
+		measurementUnitsLengthType,
 		measurementUnitsVelocityDefaultId,
 		measurementUnitsVelocityType,
 		measurementUnitsVolumeDefaultId,
