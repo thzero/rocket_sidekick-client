@@ -7,15 +7,15 @@ import AppStore from '@/store/pinia';
 
 class WebAppStore extends AppStore {
 	_initPluginPersistConfigPaths() {
-		return[
-			'flightInfoDataTypeUse',
-			'flightInfoProcessor',
-			'flightInfoResolution',
-			'flightInfoStyle',
-			'flightMeasurementUnits',
-			'flightPathProcessor',
-			'flightPathStyle'
-		];
+		const results = super._initPluginPersistConfigPaths();
+		results.push('flightInfoDataTypeUse');
+		results.push('flightInfoProcessor');
+		results.push('flightInfoResolution');
+		results.push('flightInfoStyle');
+		results.push('flightMeasurementUnits');
+		results.push('flightPathProcessor');
+		results.push('flightPathStyle');
+		return results;
 	}
 
 	_initStoreConfigActionsAdditional() {
