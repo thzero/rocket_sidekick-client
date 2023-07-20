@@ -3,7 +3,6 @@ import { computed, ref, watch } from 'vue';
 
 import AppCommonConstants from 'rocket_sidekick_common/constants';
 
-import AppUtility from '@/utility/app';
 import LibraryClientUtility from '@thzero/library_client/utility/index';
 
 import { useToolsBaseComponent } from '@/components/content/tools/toolsBase';
