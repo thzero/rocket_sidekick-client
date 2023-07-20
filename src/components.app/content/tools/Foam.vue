@@ -44,7 +44,7 @@
 												vid="lengthMeasurementUnitId"
 												v-model="lengthMeasurementUnitId"
 												:measurementUnitsId="lengthMeasurementUnitsId"
-												:measurementUnitsType="measurementUnitslengthType"
+												:measurementUnitsType="measurementUnitsLengthType"
 												:validation="validation"
 												:label="$t('forms.settings.measurementUnits.length')"
 											/>
@@ -288,7 +288,7 @@ export default {
 			measurementUnitsIdOutput,
 			measurementUnitsIdSettings,
 			measurementUnitsFluidType,
-			measurementUnitslengthType,
+			measurementUnitsLengthType,
 			serviceToolsFoam,
 			calculationData,
 			calculationResults,
@@ -349,7 +349,7 @@ export default {
 			measurementUnitsIdOutput,
 			measurementUnitsIdSettings,
 			measurementUnitsFluidType,
-			measurementUnitslengthType,
+			measurementUnitsLengthType,
 			serviceToolsFoam,
 			calculationData,
 			calculationResults,

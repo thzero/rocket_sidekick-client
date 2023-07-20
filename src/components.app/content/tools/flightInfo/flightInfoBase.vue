@@ -116,7 +116,7 @@ export function useFlightInfoBaseComponent(props, context) {
 		measurementUnitsFluidDefaultId,
 		measurementUnitsFluidType,
 		measurementUnitsLengthDefaultId,
-		measurementUnitslengthType,
+		measurementUnitsLengthType,
 		measurementUnitsVelocityDefaultId,
 		measurementUnitsVelocityType,
 		measurementUnitsVolumeDefaultId,
@@ -266,7 +266,7 @@ export function useFlightInfoBaseComponent(props, context) {
 				const name = flightInfoExportName('png');
 				downloadProgress.value = true;
 
-				serviceDownload.downloadUrl(correlationIdI, 'data:image/png;base64,' + data,
+				serviceDownload.downloadUrl(correlationId, 'data:image/png;base64,' + data,
 					name,
 					() => {
 						AppUtility.debug2('download', 'completed');
@@ -316,9 +316,7 @@ export function useFlightInfoBaseComponent(props, context) {
 		}
 	};
 	const flightInfoExportImage = () => {
-		const correlationIdI = correlationId();
-		const output = serviceFlightInfo.processOutputJson(correlationIdI, flightInfo.value);
-		flightInfoExportDownload(correlationIdI, output, 'json');
+		flightInfoExport(correlationId());
 	};
 	const flightInfoExportJson = () => {
 		const correlationIdI = correlationId();
