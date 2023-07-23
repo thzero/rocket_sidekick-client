@@ -23,8 +23,8 @@
 										<td>
 											<VNumberFieldWithValidation
 												ref="bodyTubeIDRef"
-												vid="bodyTubeID"
 												v-model="bodyTubeID"
+												vid="bodyTubeID"
 												:validation="validation"
 												:label="$t('forms.content.tools.foam.bodyTubeID')"
 											/>
@@ -32,8 +32,8 @@
 										<td class="measurementUnits">
 											<MeasurementUnitsSelect
 												ref="lengthMeasurementUnitsIdRef"
-												vid="lengthMeasurementUnitsId"
 												v-model="lengthMeasurementUnitsId"
+												vid="lengthMeasurementUnitsId"
 												:validation="validation"
 												:label="$t('forms.settings.measurementUnits.title')"
 											/>
@@ -41,8 +41,8 @@
 										<td class="measurementUnits">
 											<MeasurementUnitSelect
 												ref="lengthMeasurementUnitRef"
-												vid="lengthMeasurementUnitId"
 												v-model="lengthMeasurementUnitId"
+												vid="lengthMeasurementUnitId"
 												:measurementUnitsId="lengthMeasurementUnitsId"
 												:measurementUnitsType="measurementUnitsLengthType"
 												:validation="validation"
@@ -55,8 +55,8 @@
 							<v-col cols="12" sm="6" >
 								<VNumberFieldWithValidation
 									ref="motorTubeODRef"
-									vid="motorTubeOD"
 									v-model="motorTubeOD"
+									vid="motorTubeOD"
 									:validation="validation"
 									:label="$t('forms.content.tools.foam.motorTubeOD')"
 									:placeholder="$t('forms.content.tools.foam.motorTubeOD_hint')"
@@ -65,8 +65,8 @@
 							<v-col cols="12" sm="6" >
 								<VNumberFieldWithValidation
 									ref="finRootLengthRef"
-									vid="finRootLength"
 									v-model="finRootLength"
+									vid="finRootLength"
 									:validation="validation"
 									:label="$t('forms.content.tools.foam.finRootLength')"
 									:placeholder="$t('forms.content.tools.foam.finRootLength_hint')"
@@ -75,8 +75,8 @@
 							<v-col cols="12" sm="6" >
 								<VNumberFieldWithValidation
 									ref="finTabLengthRef"
-									vid="finTabLength"
 									v-model="finTabLength"
+									vid="finTabLength"
 									:validation="validation"
 									:label="$t('forms.content.tools.foam.finTabLength')"
 									:placeholder="$t('forms.content.tools.foam.finTabLength_hint')"
@@ -85,8 +85,8 @@
 							<v-col cols="12" sm="6" >
 								<VNumberFieldWithValidation
 									ref="finWidthRef"
-									vid="finWidth"
 									v-model="finWidth"
+									vid="finWidth"
 									:validation="validation"
 									:label="$t('forms.content.tools.foam.finWidth')"
 									:placeholder="$t('forms.content.tools.foam.finWidth_hint')"
@@ -95,8 +95,8 @@
 							<v-col cols="12" sm="6" >
 								<VNumberFieldWithValidation
 									ref="numberFinsRef"
-									vid="numberFins"
 									v-model="numberFins"
+									vid="numberFins"
 									:validation="validation"
 									:label="$t('forms.content.tools.foam.numberFins')"
 									:placeholder="$t('forms.content.tools.foam.numberFins_hint')"
@@ -110,8 +110,8 @@
 										<td class="measurementUnits">
 											<MeasurementUnitsSelect
 												ref="fluidMeasurementUnitsIdRef"
-												vid="fluidMeasurementUnitsId"
 												v-model="fluidMeasurementUnitsId"
+												vid="fluidMeasurementUnitsId"
 												:validation="validation"
 												:label="$t('forms.settings.measurementUnits.title')"
 											/>
@@ -119,8 +119,8 @@
 										<td class="measurementUnits">
 											<MeasurementUnitSelect
 												ref="fluidMeasurementUnitIdRef"
-												vid="fluidMeasurementUnitId"
 												v-model="fluidMeasurementUnitId"
+												vid="fluidMeasurementUnitId"
 												:measurementUnitsId="fluidMeasurementUnitsId"
 												:measurementUnitsType="measurementUnitsFluidType"
 												:validation="validation"

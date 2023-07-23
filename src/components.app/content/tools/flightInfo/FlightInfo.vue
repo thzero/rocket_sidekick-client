@@ -38,8 +38,8 @@
 										<v-col cols="12">
 											<VTextFieldWithValidation
 												ref="flightDataTitleRef"
-												vid="flightDataTitle"
 												v-model="flightDataTitle"
+												vid="flightDataTitle"
 												:validation="validation"
 												:label="$t('forms.content.tools.flightInfo.title')"
 											/>
@@ -47,8 +47,8 @@
 										<v-col cols="12">
 											<VTextFieldWithValidation
 												ref="flightDataLocationRef"
-												vid="flightDataLocation"
 												v-model="flightDataLocation"
+												vid="flightDataLocation"
 												:validation="validation"
 												:label="$t('forms.content.tools.flightInfo.location')"
 											/>
@@ -56,8 +56,8 @@
 										<v-col cols="12">
 											<VDateTimeField
 												ref="flightDataDateRef"
-												vid="flightDataDate"
 												v-model="flightDataDate"
+												vid="flightDataDate"
 												:validation="validation"
 												:label="$t('forms.content.tools.flightInfo.date')"
 											/>
@@ -342,8 +342,8 @@
 						<div class="pt-4">
 							<VTextAreaWithValidation
 								ref="flightInfoInputRef"
-								vid="flightInfoInput"
 								v-model="flightInfoInput"
+								vid="flightInfoInput"
 								:validation="validation"
 								:blur="flightInfoInputChange"
 								:label="$t('forms.content.tools.flightInfo.csv')"
