@@ -38,8 +38,8 @@
 										<v-col cols="12">
 											<VTextFieldWithValidation
 												ref="flightDataTitleRef"
-												vid="flightDataTitle"
 												v-model="flightDataTitle"
+												vid="flightDataTitle"
 												:validation="validation"
 												:label="$t('forms.content.tools.flightPath.title')"
 											/>
@@ -47,8 +47,8 @@
 										<v-col cols="12">
 											<VTextFieldWithValidation
 												ref="flightDataLocationRef"
-												vid="flightDataLocation"
 												v-model="flightDataLocation"
+												vid="flightDataLocation"
 												:validation="validation"
 												:label="$t('forms.content.tools.flightPath.location')"
 											/>
@@ -56,8 +56,8 @@
 										<v-col cols="12">
 											<VDateTimeField
 												ref="flightDataDateRef"
-												vid="flightDataDate"
 												v-model="flightDataDate"
+												vid="flightDataDate"
 												:validation="validation"
 												:label="$t('forms.content.tools.flightPath.date')"
 											/>
@@ -221,15 +221,15 @@
 												<v-col cols="12" lg="6">
 													<VCheckboxWithValidation
 														ref="flightPathStylePinMaxVelocitySelectedRef"
-														vid="flightPathStylePinLaunchSelected"
 														v-model="flightPathStylePinLaunchSelected"
+														vid="flightPathStylePinLaunchSelected"
 														:validation="validation"
 														:label="$t('forms.content.tools.flightPath.style.launch.color')"
 													/>
 													<VCheckboxWithValidation
 														ref="flightPathStylePinMaxAltitudeSelectedRef"
-														vid="flightPathStylePinMaxAltitudeSelected"
 														v-model="flightPathStylePinMaxAltitudeSelected"
+														vid="flightPathStylePinMaxAltitudeSelected"
 														:validation="validation"
 														:label="$t('forms.content.tools.flightPath.style.maxAltitude.color')"
 													/>
@@ -237,15 +237,15 @@
 												<v-col cols="12" lg="6">
 													<VCheckboxWithValidation
 														ref="flightPathStylePinMaxVelocitySelectedRef"
-														vid="flightPathStylePinMaxVelocitySelected"
 														v-model="flightPathStylePinMaxVelocitySelected"
+														vid="flightPathStylePinMaxVelocitySelected"
 														:validation="validation"
 														:label="$t('forms.content.tools.flightPath.style.maxVelocity.color')"
 													/>
 													<VCheckboxWithValidation
 														ref="flightPathStylePinTouchdownSelectedRef"
-														vid="flightPathStylePinTouchdownSelected"
 														v-model="flightPathStylePinTouchdownSelected"
+														vid="flightPathStylePinTouchdownSelected"
 														:validation="validation"
 														:label="$t('forms.content.tools.flightPath.style.touchdown.color')"
 													/>
@@ -291,8 +291,8 @@
 						<div class="pt-4">
 							<VTextAreaWithValidation
 								ref="flightPathInputRef"
-								vid="flightPathInput"
 								v-model="flightPathInput"
+								vid="flightPathInput"
 								:validation="validation"
 								:blur="flightPathInputChange"
 								:label="$t('forms.content.tools.flightPath.csv')"
@@ -332,8 +332,8 @@
 						<div class="pt-4">
 							<VTextAreaWithValidation
 								ref="templateMainRef"
-								vid="templateMain"
 								v-model="templateMain"
+								vid="templateMain"
 								:validation="validation"
 								:label="$t('forms.content.tools.flightPath.templates.main')"
 							/>
@@ -341,8 +341,8 @@
 						<div class="pt-4">
 							<VTextAreaWithValidation
 								ref="templatePinLaunchRef"
-								vid="templatePinLaunch"
 								v-model="templatePinLaunch"
+								vid="templatePinLaunch"
 								:validation="validation"
 								:label="$t('forms.content.tools.flightPath.templates.pins.launch')"
 							/>
@@ -350,8 +350,8 @@
 						<div class="pt-4">
 							<VTextAreaWithValidation
 								ref="templatePinTouchdownRef"
-								vid="templatePinTouchdown"
 								v-model="templatePinTouchdown"
+								vid="templatePinTouchdown"
 								:validation="validation"
 								:label="$t('forms.content.tools.flightPath.templates.pins.touchdown')"
 							/>
@@ -359,8 +359,8 @@
 						<div class="pt-4">
 							<VTextAreaWithValidation
 								ref="templatePinsAdditionalRef"
-								vid="templatePinsAdditional"
 								v-model="templatePinsAdditional"
+								vid="templatePinsAdditional"
 								:validation="validation"
 								:label="$t('forms.content.tools.flightPath.templates.pins.additional')"
 							/>
