@@ -3,6 +3,7 @@ import configureMeasurements, { length, speed } from 'convert-units';
 import AppConstants from '@/constants';
 import AppCommonConstants from 'rocket_sidekick_common/constants';
 
+import AppUtility from '@/utility/app';
 import LibraryClientUtility from '@thzero/library_client/utility/index';
 import LibraryCommonUtility from '@thzero/library_common/utility';
 
@@ -106,8 +107,8 @@ class FlightPathProcessorService extends ToolsService {
 		results.maxVelocity = this._convert(results.maxVelocity)
 			.from(AppCommonConstants.MeasurementUnits[measurementUnits.measurementUnitsId].velocity[measurementUnits.measurementUnitsVelocityId])
 			.to(AppCommonConstants.MeasurementUnits[measurementUnits.measurementUnitsOutputId].velocity[measurementUnits.measurementUnitsVelocityOutputId]);
-		results.maxAltitude = Number(results.maxAltitude).toLocaleString();
-		results.maxVelocity = Number(results.maxVelocity).toLocaleString();
+		results.maxAltitude = AppUtility.convertNumber(results.maxAltitude).toLocaleString();
+		results.maxVelocity = AppUtility.convertNumber(results.maxVelocity).toLocaleString();
 
 		results.translations = {};
 		results.translations.launch = LibraryClientUtility.$trans.t('forms.content.tools.flightPath.launch');
@@ -148,7 +149,7 @@ class FlightPathProcessorService extends ToolsService {
 	}
 
 	_round(value, places = 2) {
-		return Number(value.toFixed(places));
+		return AppUtility.convertNumber(value.toFixed(places));
 	}
 
 	_sort(correlationId, func) {
@@ -167,13 +168,13 @@ class FlightPath {
 
 	publish(correlationId, time, altitude, latitude, longitude, velocityH, velocityV) {
 		this._rows.push({
-			altitude: Number(altitude),
-			latitude: Number(latitude),
-			longitude: Number(longitude),
+			altitude: AppUtility.convertNumber(altitude),
+			latitude: AppUtility.convertNumber(latitude),
+			longitude: AppUtility.convertNumber(longitude),
 			seconds: null,
-			time: Number(time),
-			velocityV: Number(velocityV),
-			velocityH: velocityH ? Number(velocityH) : null
+			time: AppUtility.convertNumber(time),
+			velocityV: AppUtility.convertNumber(velocityV),
+			velocityH: velocityH ? AppUtility.convertNumber(velocityH) : null
 		});
 	}
 
