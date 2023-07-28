@@ -1,5 +1,7 @@
 import NotImplementedError from '@thzero/library_common/errors/notImplemented';
 
+import AppUtility from '@/utility/app';
+
 import BaseService from '@thzero/library_client/service/index';
 
 class FlightPathOutputService extends BaseService {
@@ -12,7 +14,7 @@ class FlightPathOutputService extends BaseService {
 	}
 
 	_round(value, places = 2) {
-		return Number(value.toFixed(places));
+		return AppUtility.convertNumber(value.toFixed(places));
 	}
 
 	_reverseRgb(str) {

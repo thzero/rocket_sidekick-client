@@ -222,6 +222,7 @@
 <script>
 import { between, decimal, integer, helpers, required } from '@vuelidate/validators';
 
+import AppUtility from '@/utility/app';
 import LibraryClientUtility from '@thzero/library_client/utility/index';
 
 import { useFoamBaseComponent } from '@/components.app/content/tools/foamBase';
@@ -399,17 +400,17 @@ export default {
 };
 
 const finTabFinRoot = (value, siblings, vm) => {
-	value = Number(value);
-	if (siblings.finRootLength && (value > Number(siblings.finRootLength)))
+	value = AppUtility.convertNumber(value);
+	if (siblings.finRootLength && (value > AppUtility.convertNumber(siblings.finRootLength)))
 		return false;
 	return true;
 }
 
 const finWidth = (value, siblings, vm) => {
-	value = Number(value);
+	value = AppUtility.convertNumber(value);
 	if (!siblings.motorTubeOD)
 		return true;
-	const motorTubeOD = Number(siblings.motorTubeOD);
+	const motorTubeOD = AppUtility.convertNumber(siblings.motorTubeOD);
 	const delta = value / motorTubeOD;
 	if (delta > 0.5)
 		return false;
@@ -417,8 +418,8 @@ const finWidth = (value, siblings, vm) => {
 }
 
 const motorTubeBodyTube = (value, siblings, vm) => {
-	value = Number(value);
-	if (siblings.bodyTubeID && (value >= Number(siblings.bodyTubeID)))
+	value = AppUtility.convertNumber(value);
+	if (siblings.bodyTubeID && (value >= AppUtility.convertNumber(siblings.bodyTubeID)))
 		return false;
 	return true;
 }

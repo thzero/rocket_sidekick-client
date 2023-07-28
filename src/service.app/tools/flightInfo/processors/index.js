@@ -2,6 +2,7 @@ import configureMeasurements, { length, speed } from 'convert-units';
 
 import AppCommonConstants from 'rocket_sidekick_common/constants';
 
+import AppUtility from '@/utility/app';
 import LibraryCommonUtility from '@thzero/library_common/utility/index';
 
 import ToolsService from '@/service/tools/index';
@@ -518,7 +519,7 @@ class FlightInfoProcessorService extends ToolsService {
 	}
 
 	_round(value, places = 2) {
-		return Number(value.toFixed(places));
+		return AppUtility.convertNumber(value.toFixed(places));
 	}
 }
 
@@ -533,16 +534,16 @@ class FlightData {
 
 	publish(correlationId, time, altitude, altitudeF, velocity, velocityF, apogee, noseOver, drogue, main, ground) {
 		this._rows.push({
-			altitude: Number(altitude),
-			altitudeF: altitudeF ? Number(altitudeF) : null,
-			apogee: apogee ? Number(apogee) : null,
-			drogue: drogue ? Number(drogue) : null,
+			altitude: AppUtility.convertNumber(altitude),
+			altitudeF: altitudeF ? AppUtility.convertNumber(altitudeF) : null,
+			apogee: apogee ? AppUtility.convertNumber(apogee) : null,
+			drogue: drogue ? AppUtility.convertNumber(drogue) : null,
 			ground: ground || false,
-			main: main ? Number(main) : null,
-			noseOver: noseOver ? Number(noseOver) : null,
-			time: Number(time),
-			velocity: Number(velocity),
-			velocityF: velocityF ? Number(velocityF) : null
+			main: main ? AppUtility.convertNumber(main) : null,
+			noseOver: noseOver ? AppUtility.convertNumber(noseOver) : null,
+			time: AppUtility.convertNumber(time),
+			velocity: AppUtility.convertNumber(velocity),
+			velocityF: velocityF ? AppUtility.convertNumber(velocityF) : null
 		});
 	}
 

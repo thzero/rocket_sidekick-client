@@ -1,3 +1,5 @@
+import AppUtility from '@/utility/app';
+
 import FlightPathProcessorService from './index';
 
 class FeatherweightFlightPathProcessorService extends FlightPathProcessorService {
@@ -15,7 +17,7 @@ class FeatherweightFlightPathProcessorService extends FlightPathProcessorService
 
 		let verticalV;
 		for (const data of input.data) {
-			verticalV = Number(data[8]);
+			verticalV = AppUtility.convertNumber(data[8]);
 			if (verticalV >= 0 && verticalV < 10)
 				continue;
 			if (verticalV > -10 && verticalV <= 0)
