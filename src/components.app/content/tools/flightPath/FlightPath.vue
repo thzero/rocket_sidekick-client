@@ -255,15 +255,17 @@
 												<v-col cols="12">
 													<div style="float: right;">
 														<v-btn
+															:variant="buttonsForms.variant.clear"
+															:color="buttonsForms.color.clear"
 															class="ml-2"
-															color="primary"
 															@click="clickFlightPathStylesReset"
 														>
 															{{ $t('buttons.reset') }}
 														</v-btn>
 														<!-- <v-btn
+															:variant="buttonsForms.variant.ok"
+															:color="buttonsForms.color.ok"
 															class="ml-2"
-															color="green"
 															@click="saveStyles"
 														>
 															{{ $t('buttons.save') }}
@@ -280,8 +282,8 @@
 					<template v-slot:buttons_post>
 						<v-btn
 							v-if="!buttons.export.disabled"
+							:color="buttonsForms.color.default"
 							class="ml-2"
-							color="primary"
 							@click="flightPathExport"
 						>
 							{{ $t('buttons.export') }}
@@ -456,7 +458,7 @@ export default {
 			handleAttribution,
 			initCalculationOutput,
 			initCalculationResults,
-			resetAdditional,
+			resetFormI,
 			setErrorMessage,
 			setErrorTimer,
 			setNotify,
@@ -487,6 +489,8 @@ export default {
 			flightMeasurementUnitsLoadOptions,
 			flightMeasurementUnitsReset,
 			flightMeasurementUnitsSave,
+			buttonsDialog,
+			buttonsForms,
 			serviceDownload,
 			serviceFlightPath,
 			buttons,
@@ -556,7 +560,7 @@ export default {
 			handleAttribution,
 			initCalculationOutput,
 			initCalculationResults,
-			resetAdditional,
+			resetFormI,
 			setErrorMessage,
 			setErrorTimer,
 			setNotify,
@@ -587,6 +591,8 @@ export default {
 			flightMeasurementUnitsLoadOptions,
 			flightMeasurementUnitsReset,
 			flightMeasurementUnitsSave,
+			buttonsDialog,
+			buttonsForms,
 			serviceDownload,
 			serviceFlightPath,
 			buttons,

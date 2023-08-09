@@ -12,6 +12,7 @@ import LibraryClientUtility from '@thzero/library_client/utility/index';
 import LibraryClientVueUtility from '@thzero/library_client_vue3/utility/index';
 import LibraryCommonUtility from '@thzero/library_common/utility/index';
 
+import { useButtonComponent } from '@thzero/library_client_vue3_vuetify3/components/buttonComponent';
 import { useFlightToolsBaseComponent } from '@/components.app/content/tools/flightToolBase';
 import { useToolsMeasurementBaseComponent } from '@/components/content/tools/toolsMeasurementBase';
 import { useToolsMeasurementSettingsComponent } from '@/components/content/tools/toolsMeasurementSettings';
@@ -96,6 +97,11 @@ export function useFlightPathBaseComponent(props, context) {
 		},
 		title: LibraryClientUtility.$trans.t('titles.content.tools.flightPath')
 	});
+
+	const {
+		buttonsDialog,
+		buttonsForms
+	} = useButtonComponent(props, context);
 
 	const {
 		measurementUnitsIdOutput,
@@ -464,6 +470,8 @@ export function useFlightPathBaseComponent(props, context) {
 		flightMeasurementUnitsLoadOptions,
 		flightMeasurementUnitsReset,
 		flightMeasurementUnitsSave,
+		buttonsDialog,
+		buttonsForms,
 		serviceDownload,
 		serviceFlightPath,
 		buttons,
