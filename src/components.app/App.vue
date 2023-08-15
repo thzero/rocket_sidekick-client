@@ -57,6 +57,10 @@ export default {
 		text-decoration: underline;
 	}
 
+	.measurementUnit {
+		width: 90px;
+	}
+
 	.measurementUnits {
 		width: 125px;
 	}
