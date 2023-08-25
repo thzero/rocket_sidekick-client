@@ -29,9 +29,9 @@
     "@thzero/library_client_firebase": "^0.17.13",
     "@thzero/library_client_firebase_vue": "^0.17.9",
     "@thzero/library_client_service_rest_fetch": "^0.17.2",
-    "@thzero/library_client_vue3": "^0.17.48",
+    "@thzero/library_client_vue3": "^0.17.51",
     "@thzero/library_client_vue3_store_pinia": "^0.17.10",
-    "@thzero/library_client_vue3_vuetify3": "^0.17.39",
+    "@thzero/library_client_vue3_vuetify3": "^0.17.41",
     "@thzero/library_common": "^0.17.9",
     "@vuepic/vue-datepicker": "^3.6.7",
     "async-mutex": "^0.4.0",
@@ -42,10 +42,10 @@
     "html2canvas": "^1.4.1",
     "mathjs": "^11.9.1",
     "papaparse": "^5.4.1",
-    "rocket_sidekick_common": "^0.0.37",
+    "rocket_sidekick_common": "^0.0.40",
     "thenby": "^1.3.4",
     "vue-dndrop": "^1.3.1",
-    "vuetify": "^3.3.12"
+    "vuetify": "^3.3.14"
   },
   "devDependencies": {
     "@alienfast/i18next-loader": "^2.0.1",
