@@ -285,15 +285,17 @@
 												<v-col cols="12">
 													<div style="float: right;">
 														<v-btn
+															:variant="buttonsForms.variant.clear"
+															:color="buttonsForms.color.clear"
 															class="ml-2"
-															color="primary"
 															@click="clickStylesReset"
 														>
 															{{ $t('buttons.reset') }}
 														</v-btn>
 														<!-- <v-btn
+															:variant="buttonsForms.variant.ok"
+															:color="buttonsForms.color.ok"
 															class="ml-2"
-															color="green"
 															@click="saveStyles"
 														>
 															{{ $t('buttons.save') }}
@@ -314,8 +316,8 @@
 							<template v-slot:activator="{ props }">
 								<v-btn
 									append-icon="mdi-menu-down"
+									:color="buttonsForms.color.default"
 									class="ml-2"
-									color="primary"
 									v-bind="props"
 								>
 									{{ $t('buttons.export') }}
@@ -373,7 +375,7 @@
 								<v-btn
 									class="ml-2"
 									size="small"
-									color="primary"
+									:color="buttonsForms.color.default"
 									@click="clickResolution(720)"
 								>
 									720
@@ -381,7 +383,7 @@
 								<v-btn
 									class="ml-2"
 									size="small"
-									color="primary"
+									:color="buttonsForms.color.default"
 									@click="clickResolution(1080)"
 								>
 									1080
@@ -389,7 +391,7 @@
 								<v-btn
 									class="ml-2"
 									size="small"
-									color="primary"
+									:color="buttonsForms.color.default"
 									@click="clickResolution(1440)"
 								>
 									1440
@@ -397,7 +399,7 @@
 								<v-btn
 									class="ml-2"
 									size="small"
-									color="primary"
+									:color="buttonsForms.color.default"
 									@click="clickResolution(1920)"
 								>
 									1920
@@ -405,7 +407,7 @@
 								<v-btn
 									class="ml-2"
 									size="small"
-									color="primary"
+									:color="buttonsForms.color.default"
 									@click="clickResolution(2048)"
 								>
 									2048
@@ -432,7 +434,7 @@
 											<v-btn
 												class="ml-8 ml-4"
         										size="small"
-												color="primary"
+												:color="buttonsForms.color.default"
 												@click="clickResolution(this.resolution)"
 											>
 												{{ $t('forms.content.tools.flightInfo.set') }}
@@ -465,7 +467,7 @@
 											<v-btn
 												class="ml-8 ml-4"
         										size="small"
-												color="primary"
+												:color="buttonsForms.color.default"
 												@click="clickResolution(this.resolution)"
 											>
 												{{ $t('forms.content.tools.flightInfo.set') }}
@@ -625,6 +627,8 @@ export default {
 			flightMeasurementUnitsLoadOptions,
 			flightMeasurementUnitsReset,
 			flightMeasurementUnitsSave,
+			buttonsDialog,
+			buttonsForms,
 			buttons,
 			downloadProgress,
 			expanded,
@@ -729,6 +733,8 @@ export default {
 			flightMeasurementUnitsLoadOptions,
 			flightMeasurementUnitsReset,
 			flightMeasurementUnitsSave,
+			buttonsDialog,
+			buttonsForms,
 			buttons,
 			downloadProgress,
 			expanded,

@@ -62,6 +62,12 @@
 			>
 				<v-list-item-title>{{ $t('menu.yours.rockets') }}</v-list-item-title>
 			</v-list-item>
+			<v-list-item
+				v-if="features.Yours.Rockets"
+				to="/user/rocketsetups"
+			>
+				<v-list-item-title>{{ $t('menu.yours.rocketsetups') }}</v-list-item-title>
+			</v-list-item>
 			<v-divider
 				v-if="features.Yours.Checklists || features.Yours.Launches || features.Yours.Rockets"
 			></v-divider>

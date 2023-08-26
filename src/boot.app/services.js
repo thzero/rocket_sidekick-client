@@ -6,6 +6,7 @@ import featuresService from '@/service.app/features';
 import manufacturersService from '@/service/manufacturers';
 import partsService from '@/service/parts';
 import rocketsService from '@/service/rockets';
+import rocketSetupsService from '@/service/rocketSetups';
 import flightInfoProcessorToolsService from '@/service.app/tools/flightInfo/index';
 import flightInfoProcessorEggtimerToolsService from '@/service.app/tools/flightInfo/processors/eggtimer';
 import flightPathOutputToolsService from '@/service.app/tools/flightPath/output/index';
@@ -60,6 +61,10 @@ class AppServiceBoot extends BaseServiceBoot {
 
 	_initializeRockets() {
 		return new rocketsService();
+	}
+
+	_initializeRocketSetups() {
+		return new rocketSetupsService();
 	}
 
 	_initializeUtility() {

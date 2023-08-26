@@ -38,7 +38,7 @@
 												:label="$t('forms.settings.measurementUnits.title')"
 											/>
 										</td>
-										<td class="measurementUnits">
+										<td class="measurementUnit">
 											<MeasurementUnitSelect
 												ref="lengthMeasurementUnitRef"
 												v-model="lengthMeasurementUnitId"
@@ -116,7 +116,7 @@
 												:label="$t('forms.settings.measurementUnits.title')"
 											/>
 										</td>
-										<td class="measurementUnits">
+										<td class="measurementUnit">
 											<MeasurementUnitSelect
 												ref="fluidMeasurementUnitIdRef"
 												v-model="fluidMeasurementUnitId"
