@@ -1,9 +1,9 @@
 {
   "name": "rocket_sidekick_client",
-  "version": "0.1.27",
+  "version": "0.1.28",
   "version_major": 0,
   "version_minor": 1,
-  "version_patch": 27,
+  "version_patch": 28,
   "version_date": "08/27/2023",
   "description": "A web application with some tools for rocketry",
   "author": "thZero.com",
@@ -25,7 +25,7 @@
   },
   "dependencies": {
     "@mdi/font": "^7.2.96",
-    "@thzero/library_client": "^0.17.28",
+    "@thzero/library_client": "^0.17.29",
     "@thzero/library_client_firebase": "^0.17.13",
     "@thzero/library_client_firebase_vue": "^0.17.9",
     "@thzero/library_client_service_rest_fetch": "^0.17.2",
