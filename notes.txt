@@ -12,4 +12,10 @@ Tools
         Lookup to the atompsheric chart based on altitude entry
         Allow selection of parachute and rocket once enabled
     Thrust2Weight
-        Allow selection of rocket once enabled
+        Allow selection of rocket/setup once enabled
+
+Setups
+    parts should show both rocket and setup parts
+        rocket parts should not be able to be delete
+    
+    
