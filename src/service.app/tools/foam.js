@@ -56,6 +56,16 @@ class FoamToolsService extends ToolsService {
 
 	async initializeCalculation(correlationId, data, outputMeasurementUnitsId) {
 		this._enforceNotNull('FoamToolsService', 'initializeCalculation', data, 'data', correlationId);
+		this._enforceNotNull('FoamToolsService', 'initializeCalculation', data.bodyTubeID, 'data.bodyTubeID', correlationId);
+		this._enforceNotNull('FoamToolsService', 'initializeCalculation', data.fluidMeasurementUnitId, 'data.fluidMeasurementUnitId', correlationId);
+		this._enforceNotNull('FoamToolsService', 'initializeCalculation', data.fluidMeasurementUnitsId, 'data.fluidMeasurementUnitsId', correlationId);
+		this._enforceNotNull('FoamToolsService', 'initializeCalculation', data.finRootLength, 'data.finRootLength', correlationId);
+		this._enforceNotNull('FoamToolsService', 'initializeCalculation', data.finTabLength, 'data.finTabLength', correlationId);
+		this._enforceNotNull('FoamToolsService', 'initializeCalculation', data.finWidth, 'data.finWidth', correlationId);
+		this._enforceNotNull('FoamToolsService', 'initializeCalculation', data.lengthMeasurementUnitId, 'data.lengthMeasurementUnitId', correlationId);
+		this._enforceNotNull('FoamToolsService', 'initializeCalculation', data.lengthMeasurementUnitsId, 'data.lengthMeasurementUnitsId', correlationId);
+		this._enforceNotNull('FoamToolsService', 'initializeCalculation', data.motorTubeOD, 'data.motorTubeOD', correlationId);
+		this._enforceNotNull('FoamToolsService', 'initializeCalculation', data.numberFins, 'data.numberFins', correlationId);
 		this._enforceNotEmpty('FoamToolsService', 'initializeCalculation', outputMeasurementUnitsId, 'outputMeasurementUnitsId', correlationId);
 
 		const fluidMeasurementUnit = this._measurementUnitFromId(correlationId, data.fluidMeasurementUnitsId, AppCommonConstants.MeasurementUnits.fluid.id, data.fluidMeasurementUnitId);
