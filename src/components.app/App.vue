@@ -60,7 +60,9 @@ export default {
 	.measurementUnit {
 		width: 90px;
 	}
-
+	.measurementUnit2 {
+		width: 125px;
+	}
 	.measurementUnits {
 		width: 125px;
 	}
