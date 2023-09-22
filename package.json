@@ -1,10 +1,10 @@
 {
   "name": "rocket_sidekick_client",
-  "version": "0.1.34",
+  "version": "0.1.36",
   "version_major": 0,
   "version_minor": 1,
-  "version_patch": 34,
-  "version_date": "09/21/2023",
+  "version_patch": 36,
+  "version_date": "09/22/2023",
   "description": "A web application with some tools for rocketry",
   "author": "thZero.com",
   "author_url": "https://www.thzero.com",
@@ -40,12 +40,12 @@
     "decimal.js-light": "^2.5.1",
     "handlebars": "^4.7.8",
     "html2canvas": "^1.4.1",
-    "mathjs": "^11.11.0",
+    "mathjs": "^11.11.1",
     "papaparse": "^5.4.1",
     "rocket_sidekick_common": "^0.0.50",
     "thenby": "^1.3.4",
     "vue-dndrop": "^1.3.1",
-    "vuetify": "^3.3.16"
+    "vuetify": "^3.3.17"
   },
   "devDependencies": {
     "@alienfast/i18next-loader": "^2.0.1",
