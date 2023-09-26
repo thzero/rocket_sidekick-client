@@ -4,6 +4,7 @@ import { onMounted, ref } from 'vue';
 import useVuelidate from '@vuelidate/core';
 
 import AppConstants from '@/constants';
+import AppCommonConstants from 'rocket_sidekick_common/constants';
 
 import LibraryClientUtility from '@thzero/library_client/utility/index';
 
@@ -70,6 +71,7 @@ export function useFoamBaseComponent(props, context) {
 	} = useToolsMeasurementSettingsComponent(props, context);
 
 	const {
+		// measurementUnitsIdSettings,
 		measurementUnitsAccelerationDefaultId,
 		measurementUnitsAccelerationType,
 		measurementUnitsAreaDefaultId,
@@ -87,7 +89,11 @@ export function useFoamBaseComponent(props, context) {
 		measurementUnitsVolumeDefaultId,
 		measurementUnitsVolumeType,
 		measurementUnitsWeightDefaultId,
-		measurementUnitsWeightType
+		measurementUnitsWeightType,
+		displayItemMeasurement,
+		displayItemMeasurementLength,
+		displayItemMeasurementWeight,
+		measurementUnitsFromUnitId
 	} = useToolsMeasurementBaseComponent(props, context);
 
 	const serviceToolsFoam = LibraryClientUtility.$injector.getService(AppConstants.InjectorKeys.SERVICE_TOOLS_FOAM);
@@ -154,12 +160,14 @@ export function useFoamBaseComponent(props, context) {
 	const initCalculationData = (correlationId) => {
 		calculationData.value.bodyTubeID = bodyTubeID.value;
 		calculationData.value.fluidMeasurementUnitId = fluidMeasurementUnitId.value;
-		calculationData.value.fluidMeasurementUnitsId = fluidMeasurementUnitsId.value;
+		// calculationData.value.fluidMeasurementUnitsId = fluidMeasurementUnitsId.value;
+		calculationData.value.fluidMeasurementUnitsId = measurementUnitsFromUnitId(correlationId, AppCommonConstants.MeasurementUnits.fluid.id, fluidMeasurementUnitId.value);
 		calculationData.value.finRootLength = finRootLength.value;
 		calculationData.value.finTabLength = finTabLength.value;
 		calculationData.value.finWidth = finWidth.value;
 		calculationData.value.lengthMeasurementUnitId = lengthMeasurementUnitId.value;
-		calculationData.value.lengthMeasurementUnitsId = lengthMeasurementUnitsId.value;
+		// calculationData.value.lengthMeasurementUnitsId = lengthMeasurementUnitsId.value;
+		calculationData.value.lengthMeasurementUnitsId = measurementUnitsFromUnitId(correlationId, AppCommonConstants.MeasurementUnits.length.id, lengthMeasurementUnitId.value);
 		calculationData.value.motorTubeOD = motorTubeOD.value;
 		calculationData.value.numberFins = numberFins.value;
 	};

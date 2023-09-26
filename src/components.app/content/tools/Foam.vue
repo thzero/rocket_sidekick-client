@@ -17,7 +17,87 @@
 				>
 					<template v-slot:default>
 						<v-row dense>
-							<v-col cols="12" sm="6" >
+							<v-col cols="6" >
+								<table style="width: 100%">
+									<tr>
+										<td class="measurementUnits">
+											{{ $t('forms.content.tools.foam.inputUnits') }}
+										</td>
+										<!-- <td class="measurementUnits">
+											<MeasurementUnitsSelect
+												ref="lengthMeasurementUnitsIdRef"
+												v-model="lengthMeasurementUnitsId"
+												vid="lengthMeasurementUnitsId"
+												:validation="validation"
+												:label="$t('forms.settings.measurementUnits.title')"
+											/>
+										</td>
+										<td class="measurementUnit">
+											<MeasurementUnitSelect
+												ref="lengthMeasurementUnitRef"
+												v-model="lengthMeasurementUnitId"
+												vid="lengthMeasurementUnitId"
+												:measurementUnitsId="lengthMeasurementUnitsId"
+												:measurementUnitsType="measurementUnitsLengthType"
+												:validation="validation"
+												:label="$t('forms.settings.measurementUnits.length')"
+											/>
+										</td> -->
+										<td class="measurementUnit3">
+											<MeasurementUnitSelect2
+												ref="lengthMeasurementUnitRef"
+												v-model="lengthMeasurementUnitId"
+												vid="lengthMeasurementUnitId"
+												:measurementUnitsType="measurementUnitsLengthType"
+												:validation="validation"
+												:label="$t('forms.settings.measurementUnits.length')"
+											/>
+										</td>
+									</tr>
+								</table>
+							</v-col>
+							<v-col cols="6">
+								<table style="width: 100%">
+									<tr>
+										<td class="measurementUnits">
+											{{ $t('forms.content.tools.foam.outputUnits') }}
+										</td>
+										<!-- <td class="measurementUnits">
+											<MeasurementUnitsSelect
+												ref="fluidMeasurementUnitsIdRef"
+												v-model="fluidMeasurementUnitsId"
+												vid="fluidMeasurementUnitsId"
+												:validation="validation"
+												:label="$t('forms.settings.measurementUnits.title')"
+											/>
+										</td>
+										<td class="measurementUnit">
+											<MeasurementUnitSelect
+												ref="fluidMeasurementUnitIdRef"
+												v-model="fluidMeasurementUnitId"
+												vid="fluidMeasurementUnitId"
+												:measurementUnitsId="fluidMeasurementUnitsId"
+												:measurementUnitsType="measurementUnitsFluidType"
+												:validation="validation"
+												:label="$t('forms.settings.measurementUnits.fluid')"
+											/>
+										</td> -->
+										<td class="measurementUnit3">
+											<measurement-unit-select-2
+												ref="fluidMeasurementUnitIdRef"
+												v-model="fluidMeasurementUnitId"
+												vid="fluidMeasurementUnitId"
+												:measurementUnitsType="measurementUnitsFluidType"
+												:validation="validation"
+												:label="$t('forms.settings.measurementUnits.fluid')"
+											/>
+										</td>
+									</tr>
+								</table>
+							</v-col>
+						</v-row>
+						<v-row dense>
+							<!-- <v-col cols="12" sm="6" >
 								<table style="width: 100%">
 									<tr>
 										<td>
@@ -49,10 +129,20 @@
 												:label="$t('forms.settings.measurementUnits.length')"
 											/>
 										</td>
+										<td class="measurementUnit3">
+											<MeasurementUnitSelect2
+												ref="lengthMeasurementUnitRef"
+												v-model="lengthMeasurementUnitId"
+												vid="lengthMeasurementUnitId"
+												:measurementUnitsType="measurementUnitsLengthType"
+												:validation="validation"
+												:label="$t('forms.settings.measurementUnits.length')"
+											/>
+										</td>
 									</tr>
 								</table>
-							</v-col>
-							<v-col cols="12" sm="6" >
+							</v-col> -->
+							<v-col cols="6" >
 								<VNumberFieldWithValidation
 									ref="motorTubeODRef"
 									v-model="motorTubeOD"
@@ -62,7 +152,7 @@
 									:placeholder="$t('forms.content.tools.foam.motorTubeOD_hint')"
 								/>
 							</v-col>
-							<v-col cols="12" sm="6" >
+							<v-col cols="6" >
 								<VNumberFieldWithValidation
 									ref="finRootLengthRef"
 									v-model="finRootLength"
@@ -72,7 +162,7 @@
 									:placeholder="$t('forms.content.tools.foam.finRootLength_hint')"
 								/>
 							</v-col>
-							<v-col cols="12" sm="6" >
+							<v-col cols="6" >
 								<VNumberFieldWithValidation
 									ref="finTabLengthRef"
 									v-model="finTabLength"
@@ -82,7 +172,7 @@
 									:placeholder="$t('forms.content.tools.foam.finTabLength_hint')"
 								/>
 							</v-col>
-							<v-col cols="12" sm="6" >
+							<v-col cols="6" >
 								<VNumberFieldWithValidation
 									ref="finWidthRef"
 									v-model="finWidth"
@@ -92,7 +182,7 @@
 									:placeholder="$t('forms.content.tools.foam.finWidth_hint')"
 								/>
 							</v-col>
-							<v-col cols="12" sm="6" >
+							<v-col cols="6" >
 								<VNumberFieldWithValidation
 									ref="numberFinsRef"
 									v-model="numberFins"
@@ -101,34 +191,6 @@
 									:label="$t('forms.content.tools.foam.numberFins')"
 									:placeholder="$t('forms.content.tools.foam.numberFins_hint')"
 								/>
-							</v-col>
-						</v-row>
-						<v-row dense>
-							<v-col cols="12">
-								<table style="width: 100%">
-									<tr>
-										<td class="measurementUnits">
-											<MeasurementUnitsSelect
-												ref="fluidMeasurementUnitsIdRef"
-												v-model="fluidMeasurementUnitsId"
-												vid="fluidMeasurementUnitsId"
-												:validation="validation"
-												:label="$t('forms.settings.measurementUnits.title')"
-											/>
-										</td>
-										<td class="measurementUnit">
-											<MeasurementUnitSelect
-												ref="fluidMeasurementUnitIdRef"
-												v-model="fluidMeasurementUnitId"
-												vid="fluidMeasurementUnitId"
-												:measurementUnitsId="fluidMeasurementUnitsId"
-												:measurementUnitsType="measurementUnitsFluidType"
-												:validation="validation"
-												:label="$t('forms.settings.measurementUnits.fluid')"
-											/>
-										</td>
-									</tr>
-								</table>
 							</v-col>
 						</v-row>
 					</template>
@@ -232,6 +294,7 @@ import CalculatedOuput from '@/components/content/tools//CalculatedOuput';
 import ContentDescription from '@/components/content/Description';
 import ContentHeader from '@/components/content/Header';
 import MeasurementUnitSelect from '@/components/content/MeasurementUnitSelect.vue';
+import MeasurementUnitSelect2 from '@/components/content/MeasurementUnitSelect2';
 import MeasurementUnitsSelect from '@/components/content/MeasurementUnitsSelect';
 import VFormControl from '@thzero/library_client_vue3_vuetify3/components/form/VFormControl';
 import VNumberFieldWithValidation from '@thzero/library_client_vue3_vuetify3/components/form/VNumberFieldWithValidation';
@@ -244,6 +307,7 @@ export default {
 		ContentDescription,
 		ContentHeader,
 		MeasurementUnitSelect,
+		MeasurementUnitSelect2,
 		MeasurementUnitsSelect,
 		VFormControl,
 		VNumberFieldWithValidation

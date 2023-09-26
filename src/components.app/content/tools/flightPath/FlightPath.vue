@@ -400,6 +400,7 @@ import { useFlightPathBaseComponent } from '@/components.app/content/tools/fligh
 import ContentAttribution from '@/components/content/Attribution';
 import ContentDescription from '@/components/content/Description';
 import ContentHeader from '@/components/content/Header';
+import MeasurementUnitSelect2 from '@/components/content/MeasurementUnitSelect2';
 import VCheckboxWithValidation from '@thzero/library_client_vue3_vuetify3/components/form/VCheckboxWithValidation';
 import VColorWithValidation from '@thzero/library_client_vue3_vuetify3/components/form/VColorWithValidation';
 import VDateTimeField from '@thzero/library_client_vue3_vuetify3/components/form/VDateTimeFieldTemp';
@@ -415,6 +416,7 @@ export default {
 		ContentAttribution,
 		ContentDescription,
 		ContentHeader,
+		MeasurementUnitSelect2,
 		VCheckboxWithValidation,
 		VColorWithValidation,
 		VDateTimeField,
@@ -491,6 +493,8 @@ export default {
 			flightMeasurementUnitsSave,
 			buttonsDialog,
 			buttonsForms,
+			measurementUnitsDistanceType,
+			measurementUnitsVelocityType,
 			serviceDownload,
 			serviceFlightPath,
 			buttons,
@@ -593,6 +597,8 @@ export default {
 			flightMeasurementUnitsSave,
 			buttonsDialog,
 			buttonsForms,
+			measurementUnitsDistanceType,
+			measurementUnitsVelocityType,
 			serviceDownload,
 			serviceFlightPath,
 			buttons,
