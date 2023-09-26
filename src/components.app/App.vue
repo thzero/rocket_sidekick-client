@@ -66,4 +66,7 @@ export default {
 	.measurementUnits {
 		width: 125px;
 	}
+	.measurementUnit3 {
+		width: 125px;
+	}
 </style>

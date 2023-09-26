@@ -26,13 +26,17 @@
 			>{{ $t('menu.content.tools.title') }}</v-btn>
 		</template>
 		<v-list density="compact">
-			<v-list-item
+			<template
 				v-for="item in tools"
 				:key="item.name"
-				:to="contentLink(item)"
 			>
-				<v-list-item-title>{{ contentTitle(item) }}</v-list-item-title>
-			</v-list-item>
+				<v-list-item
+					v-if="($vuetify.display.xs && item.mobile) || !$vuetify.display.xs"
+					:to="contentLink(item)"
+				>
+					<v-list-item-title>{{ contentTitle(item) }}</v-list-item-title>
+				</v-list-item>
+			</template>
 		</v-list>
 	</v-menu>
 	<v-menu

@@ -5,6 +5,7 @@ import useVuelidate from '@vuelidate/core';
 
 import Papa from 'papaparse';
 
+import AppCommonConstants from 'rocket_sidekick_common/constants';
 import AppConstants from '@/constants';
 
 import AppUtility from '@/utility/app';
@@ -109,6 +110,7 @@ export function useFlightPathBaseComponent(props, context) {
 	} = useToolsMeasurementSettingsComponent(props, context);
 
 	const {
+		// measurementUnitsIdSettings,
 		measurementUnitsAccelerationDefaultId,
 		measurementUnitsAccelerationType,
 		measurementUnitsAreaDefaultId,
@@ -126,7 +128,11 @@ export function useFlightPathBaseComponent(props, context) {
 		measurementUnitsVolumeDefaultId,
 		measurementUnitsVolumeType,
 		measurementUnitsWeightDefaultId,
-		measurementUnitsWeightType
+		measurementUnitsWeightType,
+		displayItemMeasurement,
+		displayItemMeasurementLength,
+		displayItemMeasurementWeight,
+		measurementUnitsFromUnitId
 	} = useToolsMeasurementBaseComponent(props, context);
 
 	const serviceDownload = LibraryClientUtility.$injector.getService(AppConstants.InjectorKeys.SERVICE_DOWNLOAD);
@@ -472,6 +478,8 @@ export function useFlightPathBaseComponent(props, context) {
 		flightMeasurementUnitsSave,
 		buttonsDialog,
 		buttonsForms,
+		measurementUnitsDistanceType,
+		measurementUnitsVelocityType,
 		serviceDownload,
 		serviceFlightPath,
 		buttons,

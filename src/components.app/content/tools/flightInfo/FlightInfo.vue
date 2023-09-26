@@ -541,6 +541,7 @@ import { useFlightInfoBaseComponent } from '@/components.app/content/tools/fligh
 import ContentAttribution from '@/components/content/Attribution';
 import ContentHeader from '@/components/content/Header';
 import ContentDescription from '@/components/content/Description';
+import MeasurementUnitSelect2 from '@/components/content/MeasurementUnitSelect2';
 import VColorWithValidation from '@thzero/library_client_vue3_vuetify3/components/form/VColorWithValidation';
 import VDateTimeField from '@thzero/library_client_vue3_vuetify3/components/form/VDateTimeFieldTemp';
 import VFormControl from '@thzero/library_client_vue3_vuetify3/components/form/VFormControl';
@@ -557,6 +558,7 @@ export default {
 		ContentHeader,
 		FlightInfoData,
 		FlightInfoChart,
+		MeasurementUnitSelect2,
 		VColorWithValidation,
 		VDateTimeField,
 		VFormControl,
