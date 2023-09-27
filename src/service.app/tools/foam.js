@@ -57,39 +57,100 @@ class FoamToolsService extends ToolsService {
 	async initializeCalculation(correlationId, data, outputMeasurementUnitsId) {
 		this._enforceNotNull('FoamToolsService', 'initializeCalculation', data, 'data', correlationId);
 		this._enforceNotNull('FoamToolsService', 'initializeCalculation', data.bodyTubeID, 'data.bodyTubeID', correlationId);
+		this._enforceNotNull('FoamToolsService', 'initializeCalculation', data.bodyTubeIDLengthMeasurementUnitId, 'data.bodyTubeIDLengthMeasurementUnitId', correlationId);
+		this._enforceNotNull('FoamToolsService', 'initializeCalculation', data.bodyTubeIDLengthMeasurementUnitsId, 'data.bodyTubeIDLengthMeasurementUnitsId', correlationId);
+		this._enforceNotNull('FoamToolsService', 'initializeCalculation', data.finRootLength, 'data.finRootLength', correlationId);
+		this._enforceNotNull('FoamToolsService', 'initializeCalculation', data.finRootLengthMeasurementUnitId, 'data.finRootLengthMeasurementUnitId', correlationId);
+		this._enforceNotNull('FoamToolsService', 'initializeCalculation', data.finRootLengthMeasurementUnitsId, 'data.finRootLengthMeasurementUnitsId', correlationId);
+		this._enforceNotNull('FoamToolsService', 'initializeCalculation', data.finTabLength, 'data.finTabLength', correlationId);
+		this._enforceNotNull('FoamToolsService', 'initializeCalculation', data.finTabLengthMeasurementUnitId, 'data.finTabLengthMeasurementUnitId', correlationId);
+		this._enforceNotNull('FoamToolsService', 'initializeCalculation', data.finTabLengthMeasurementUnitsId, 'data.finTabLengthMeasurementUnitsId', correlationId);
+		this._enforceNotNull('FoamToolsService', 'initializeCalculation', data.finWidth, 'data.finWidth', correlationId);
+		this._enforceNotNull('FoamToolsService', 'initializeCalculation', data.finWidthLengthMeasurementUnitId, 'data.finWidthLengthMeasurementUnitId', correlationId);
+		this._enforceNotNull('FoamToolsService', 'initializeCalculation', data.finWidthLengthMeasurementUnitsId, 'data.finWidthLengthMeasurementUnitsId', correlationId);
 		this._enforceNotNull('FoamToolsService', 'initializeCalculation', data.fluidMeasurementUnitId, 'data.fluidMeasurementUnitId', correlationId);
 		this._enforceNotNull('FoamToolsService', 'initializeCalculation', data.fluidMeasurementUnitsId, 'data.fluidMeasurementUnitsId', correlationId);
-		this._enforceNotNull('FoamToolsService', 'initializeCalculation', data.finRootLength, 'data.finRootLength', correlationId);
-		this._enforceNotNull('FoamToolsService', 'initializeCalculation', data.finTabLength, 'data.finTabLength', correlationId);
-		this._enforceNotNull('FoamToolsService', 'initializeCalculation', data.finWidth, 'data.finWidth', correlationId);
 		this._enforceNotNull('FoamToolsService', 'initializeCalculation', data.lengthMeasurementUnitId, 'data.lengthMeasurementUnitId', correlationId);
 		this._enforceNotNull('FoamToolsService', 'initializeCalculation', data.lengthMeasurementUnitsId, 'data.lengthMeasurementUnitsId', correlationId);
 		this._enforceNotNull('FoamToolsService', 'initializeCalculation', data.motorTubeOD, 'data.motorTubeOD', correlationId);
+		this._enforceNotNull('FoamToolsService', 'initializeCalculation', data.motorTubeODLengthMeasurementUnitId, 'data.motorTubeODLengthMeasurementUnitId', correlationId);
+		this._enforceNotNull('FoamToolsService', 'initializeCalculation', data.motorTubeODLengthMeasurementUnitsId, 'data.motorTubeODLengthMeasurementUnitsId', correlationId);
 		this._enforceNotNull('FoamToolsService', 'initializeCalculation', data.numberFins, 'data.numberFins', correlationId);
 		this._enforceNotEmpty('FoamToolsService', 'initializeCalculation', outputMeasurementUnitsId, 'outputMeasurementUnitsId', correlationId);
 
+		const bodyTubeIDLengthMeasurementUnit = this._measurementUnitFromId(correlationId, data.bodyTubeIDLengthMeasurementUnitsId, AppCommonConstants.MeasurementUnits.length.id, data.bodyTubeIDLengthMeasurementUnitId);
+		let response = this._enforceNotNullResponse('FoamToolsService', 'initializeCalculation', bodyTubeIDLengthMeasurementUnit, 'bodyTubeIDLengthMeasurementUnit', correlationId);
+		if (this._hasFailed(response))
+			return response;
+		const finRootLengthMeasurementUnit = this._measurementUnitFromId(correlationId, data.finRootLengthMeasurementUnitsId, AppCommonConstants.MeasurementUnits.length.id, data.finRootLengthMeasurementUnitId);
+		response = this._enforceNotNullResponse('FoamToolsService', 'initializeCalculation', finRootLengthMeasurementUnit, 'finRootLengthMeasurementUnit', correlationId);
+		if (this._hasFailed(response))
+			return response;
+		const finTabLengthMeasurementUnit = this._measurementUnitFromId(correlationId, data.finTabLengthMeasurementUnitsId, AppCommonConstants.MeasurementUnits.length.id, data.finTabLengthMeasurementUnitId);
+		response = this._enforceNotNullResponse('FoamToolsService', 'initializeCalculation', finTabLengthMeasurementUnit, 'finTabLengthMeasurementUnit', correlationId);
+		if (this._hasFailed(response))
+			return response;
+		const finWidthLengthMeasurementUnit = this._measurementUnitFromId(correlationId, data.finWidthLengthMeasurementUnitsId, AppCommonConstants.MeasurementUnits.length.id, data.finWidthLengthMeasurementUnitId);
+		response = this._enforceNotNullResponse('FoamToolsService', 'initializeCalculation', finWidthLengthMeasurementUnit, 'finWidthLengthMeasurementUnit', correlationId);
+		if (this._hasFailed(response))
+			return response;
 		const fluidMeasurementUnit = this._measurementUnitFromId(correlationId, data.fluidMeasurementUnitsId, AppCommonConstants.MeasurementUnits.fluid.id, data.fluidMeasurementUnitId);
-		let response = this._enforceNotNullResponse('FoamToolsService', 'initializeCalculation', fluidMeasurementUnit, 'fluidMeasurementUnit', correlationId);
+		response = this._enforceNotNullResponse('FoamToolsService', 'initializeCalculation', fluidMeasurementUnit, 'fluidMeasurementUnit', correlationId);
 		if (this._hasFailed(response))
 			return response;
 		const lengthMeasurementUnit = this._measurementUnitFromId(correlationId, data.lengthMeasurementUnitsId, AppCommonConstants.MeasurementUnits.length.id, data.lengthMeasurementUnitId);
 		response = this._enforceNotNullResponse('FoamToolsService', 'initializeCalculation', lengthMeasurementUnit, 'lengthMeasurementUnit', correlationId);
 		if (this._hasFailed(response))
 			return response;
+		const motorTubeODLengthMeasurementUnit = this._measurementUnitFromId(correlationId, data.motorTubeODLengthMeasurementUnitsId, AppCommonConstants.MeasurementUnits.length.id, data.motorTubeODLengthMeasurementUnitId);
+		response = this._enforceNotNullResponse('FoamToolsService', 'initializeCalculation', motorTubeODLengthMeasurementUnit, 'motorTubeODLengthMeasurementUnit', correlationId);
+		if (this._hasFailed(response))
+			return response;
 
 		const calculationSteps = [
 			{
 				type: this._serviceCalculationEngine.symTypeSet,
-				data: {
-					bodyTubeID: data.bodyTubeID,
-					finRootLength: data.finRootLength,
-					finTabLength: data.finTabLength,
-					finWidth: data.finWidth,
-					motorTubeOD: data.motorTubeOD
-				},
+				var: 'bodyTubeID',
+				value: data.bodyTubeID,
 				units: {
-					from: lengthMeasurementUnit,
-					to: AppCommonConstants.MeasurementUnits.metrics.length.mm
+					from: bodyTubeIDLengthMeasurementUnit,
+					to: AppCommonConstants.MeasurementUnits.metrics.length.m
+				}
+			},
+			{
+				type: this._serviceCalculationEngine.symTypeSet,
+				var: 'finRootLength',
+				value: data.finRootLength,
+				units: {
+					from: finRootLengthMeasurementUnit,
+					to: AppCommonConstants.MeasurementUnits.metrics.length.m
+				}
+			},
+			{
+				type: this._serviceCalculationEngine.symTypeSet,
+				var: 'finTabLength',
+				value: data.finTabLength,
+				units: {
+					from: finTabLengthMeasurementUnit,
+					to: AppCommonConstants.MeasurementUnits.metrics.length.m
+				}
+			},
+			{
+				type: this._serviceCalculationEngine.symTypeSet,
+				var: 'finWidth',
+				value: data.finWidth,
+				units: {
+					from: finWidthLengthMeasurementUnit,
+					to: AppCommonConstants.MeasurementUnits.metrics.length.m
+				}
+			},
+			{
+				type: this._serviceCalculationEngine.symTypeSet,
+				var: 'motorTubeOD',
+				value: data.motorTubeOD,
+				units: {
+					from: motorTubeODLengthMeasurementUnit,
+					to: AppCommonConstants.MeasurementUnits.metrics.length.m
 				}
 			},
 			{

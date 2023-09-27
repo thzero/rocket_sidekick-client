@@ -57,16 +57,16 @@ export default {
 		text-decoration: underline;
 	}
 
-	.measurementUnit {
-		width: 90px;
+	.measurementUnitExtraLong {
+		width: 120px;
 	}
-	.measurementUnit2 {
-		width: 125px;
+	.measurementUnitLong {
+		width: 105px;
 	}
-	.measurementUnits {
-		width: 125px;
+	.measurementUnitMedium {
+		width: 100px;
 	}
-	.measurementUnit3 {
+	.measurementUnitsMedium {
 		width: 125px;
 	}
 </style>
