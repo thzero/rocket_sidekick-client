@@ -17,7 +17,7 @@
 		<!-- <ContentDescription id="strings.content.tools.flightInfo" /> -->
 		<v-row dense>
 			<v-col cols="12" lg="3">
-				<VFormControl
+				<VtFormControl
 					ref="formFlightInfoRef"
 					:validation="validation"
 					:reset-additional="resetAdditionalInput"
@@ -54,7 +54,7 @@
 											/>
 										</v-col>
 										<v-col cols="12">
-											<VDateTimeField
+											<VtDateTimePickerField
 												ref="flightDataDateRef"
 												v-model="flightDataDate"
 												vid="flightDataDate"
@@ -63,7 +63,7 @@
 											/>
 										</v-col>
 										<v-col cols="12">
-											<VSelectWithValidation
+											<VtSelectWithValidation
 												ref="flightProcessorRef"
 												v-model="flightProcessor"
 												vid="flightProcessor"
@@ -79,7 +79,7 @@
 												<v-card-text>
 													<v-row dense>
 														<v-col cols="6">
-															<VSelectWithValidation
+															<VtSelectWithValidation
 																ref="flightMeasurementUnitsIdRef"
 																v-model="flightMeasurementUnitsId"
 																vid="flightMeasurementUnitsId"
@@ -89,7 +89,7 @@
 															/>
 														</v-col>
 														<v-col cols="6">
-															<VSelectWithValidation
+															<VtSelectWithValidation
 																ref="flightMeasurementUnitsAccelerationIdRef"
 																v-model="flightMeasurementUnitsAccelerationId"
 																vid="flightMeasurementUnitsAccelerationId"
@@ -99,7 +99,7 @@
 															/>
 														</v-col>
 														<v-col cols="6">
-															<VSelectWithValidation
+															<VtSelectWithValidation
 																ref="flightMeasurementUnitsDistanceIdRef"
 																v-model="flightMeasurementUnitsDistanceId"
 																vid="flightMeasurementUnitsDistanceId"
@@ -109,7 +109,7 @@
 															/>
 														</v-col>
 														<v-col cols="6">
-															<VSelectWithValidation
+															<VtSelectWithValidation
 																ref="flightMeasurementUnitsVelocityIdRef"
 																v-model="flightMeasurementUnitsVelocityId"
 																vid="flightMeasurementUnitsVelocityId"
@@ -129,7 +129,7 @@
 												<v-card-text>
 													<v-row dense>
 														<v-col cols="6">
-															<VSelectWithValidation
+															<VtSelectWithValidation
 																ref="flightMeasurementUnitsOutputIdRef"
 																v-model="flightMeasurementUnitsOutputId"
 																vid="flightMeasurementUnitsOutputId"
@@ -139,7 +139,7 @@
 															/>
 														</v-col>
 														<v-col cols="6">
-															<VSelectWithValidation
+															<VtSelectWithValidation
 																ref="flightMeasurementUnitsAccelerationOutputIdRef"
 																v-model="flightMeasurementUnitsAccelerationOutputId"
 																vid="flightMeasurementUnitsAccelerationOutputId"
@@ -149,7 +149,7 @@
 															/>
 														</v-col>
 														<v-col cols="6">
-															<VSelectWithValidation
+															<VtSelectWithValidation
 																ref="flightMeasurementUnitsDistanceOutputIdRef"
 																v-model="flightMeasurementUnitsDistanceOutputId"
 																vid="flightMeasurementUnitsDistanceOutputId"
@@ -159,7 +159,7 @@
 															/>
 														</v-col>
 														<v-col cols="6">
-															<VSelectWithValidation
+															<VtSelectWithValidation
 																ref="flightMeasurementUnitsVelocityOutputIdRef"
 																v-model="flightMeasurementUnitsVelocityOutputId"
 																vid="flightMeasurementUnitsVelocityOutputId"
@@ -184,7 +184,7 @@
 															</span>
 														</v-col>
 														<v-col cols="4">
-															<VSwitchWithValidation
+															<VtSwitchWithValidation
 																ref="flightInfoDataTypeUseRef"
 																v-model="flightInfoDataTypeUse"
 																vid="flightInfoDataTypeUse"
@@ -219,14 +219,14 @@
 										<v-expansion-panel-text>
 											<v-row dense>
 												<v-col cols="12" lg="6">
-													<VColorWithValidation
+													<VtColorWithValidation
 													 	class="mb-2"
 														v-model="flightInfoStyleAltitudeFColor"
 														vid="flightInfoStyleAltitudeFColor"
 														:validation="validation"
 														:label="$t('forms.content.tools.flightInfo.style.altitude.filtered')"
 													/>
-													<VColorWithValidation
+													<VtColorWithValidation
 													 	class="mb-2"
 														v-model="flightInfoStyleAltitudeColor"
 														vid="flightInfoStyleAltitudeColor"
@@ -235,14 +235,14 @@
 													/>
 												</v-col>
 												<v-col cols="12" lg="6">
-													<VColorWithValidation
+													<VtColorWithValidation
 													 	class="mb-2"
 														v-model="flightInfoStyleVelocityFColor"
 														vid="flightInfoStyleVelocityFColor"
 														:validation="validation"
 														:label="$t('forms.content.tools.flightInfo.style.velocity.filtered')"
 													/>
-													<VColorWithValidation
+													<VtColorWithValidation
 													 	class="mb-2"
 														v-model="flightInfoStyleVelocityColor"
 														vid="flightInfoStyleVelocityColor"
@@ -251,14 +251,14 @@
 													/>
 												</v-col>
 												<v-col cols="12" lg="6">
-													<VColorWithValidation
+													<VtColorWithValidation
 													 	class="mb-2"
 														v-model="flightInfoStyleEventApogeeColor"
 														vid="flightInfoStyleEventApogeeColor"
 														:validation="validation"
 														:label="$t('forms.content.tools.flightInfo.style.event.apogee.title')"
 													/>
-													<VColorWithValidation
+													<VtColorWithValidation
 														v-model="flightInfoStyleEventApogeeBorderColor"
 														vid="flightInfoStyleEventApogeeBorderColor"
 														:validation="validation"
@@ -266,14 +266,14 @@
 													/>
 												</v-col>
 												<v-col cols="12" lg="6">
-													<VColorWithValidation
+													<VtColorWithValidation
 													 	class="mb-2"
 														v-model="flightInfoStyleEventDrogueColor"
 														vid="flightInfoStyleEventDrogueColor"
 														:validation="validation"
 														:label="$t('forms.content.tools.flightInfo.style.event.drogue.title')"
 													/>
-													<VColorWithValidation
+													<VtColorWithValidation
 														v-model="flightInfoStyleEventDrogueBorderColor"
 														vid="flightInfoStyleEventDrogueBorderColor"
 														:validation="validation"
@@ -360,7 +360,7 @@
 							</v-btn>
 						</div>
 					</template>
-				</VFormControl>
+				</VtFormControl>
 			</v-col>
 			<v-col cols="12" lg="9" class="pl-4">
 				<div>
@@ -542,11 +542,11 @@ import ContentAttribution from '@/components/content/Attribution';
 import ContentHeader from '@/components/content/Header';
 import ContentDescription from '@/components/content/Description';
 import MeasurementUnitSelect2 from '@/components/content/MeasurementUnitSelect2';
-import VColorWithValidation from '@thzero/library_client_vue3_vuetify3/components/form/VColorWithValidation';
-import VDateTimeField from '@thzero/library_client_vue3_vuetify3/components/form/VDateTimeFieldTemp';
-import VFormControl from '@thzero/library_client_vue3_vuetify3/components/form/VFormControl';
-import VSelectWithValidation from '@thzero/library_client_vue3_vuetify3/components/form/VSelectWithValidation';
-import VSwitchWithValidation from '@thzero/library_client_vue3_vuetify3/components/form/VSwitchWithValidation';
+import VtColorWithValidation from '@thzero/library_client_vue3_vuetify3/components/form/VtColorWithValidation';
+import VtDateTimePickerField from '@thzero/library_client_vue3_vuetify3/components/form/VtDateTimePickerFieldTemp';
+import VtFormControl from '@thzero/library_client_vue3_vuetify3/components/form/VtFormControl';
+import VtSelectWithValidation from '@thzero/library_client_vue3_vuetify3/components/form/VtSelectWithValidation';
+import VtSwitchWithValidation from '@thzero/library_client_vue3_vuetify3/components/form/VtSwitchWithValidation';
 import VTextAreaWithValidation from '@thzero/library_client_vue3_vuetify3/components/form/VTextAreaWithValidation';
 import VTextFieldWithValidation from '@thzero/library_client_vue3_vuetify3/components/form/VTextFieldWithValidation';
 
@@ -559,11 +559,11 @@ export default {
 		FlightInfoData,
 		FlightInfoChart,
 		MeasurementUnitSelect2,
-		VColorWithValidation,
-		VDateTimeField,
-		VFormControl,
-		VSelectWithValidation,
-		VSwitchWithValidation,
+		VtColorWithValidation,
+		VtDateTimePickerField,
+		VtFormControl,
+		VtSelectWithValidation,
+		VtSwitchWithValidation,
 		VTextAreaWithValidation,
 		VTextFieldWithValidation
 	},

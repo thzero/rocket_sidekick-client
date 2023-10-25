@@ -710,7 +710,7 @@ const routes = [
 			{
 				path: '',
 				name: 'notFound',
-				component: () => import(/* webpackChunkName: "group-main" */ '@thzero/library_client_vue3_vuetify3/components/VNotFound.vue'),
+				component: () => import(/* webpackChunkName: "group-main" */ '@thzero/library_client_vue3_vuetify3/components/VtNotFound.vue'),
 				meta: {
 					requiresAuth: false
 				}

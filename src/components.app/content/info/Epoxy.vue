@@ -7,17 +7,17 @@
 					<v-card-text>
 						<v-row dense>
 							<v-col cols="12">
-				<VMarkdown v-model="contentDesc" :use-github=false />
+				<VtMarkdown v-model="contentDesc" :use-github=false />
 							</v-col>
 						</v-row>
 						<v-row dense>
 							<v-col cols="12">
-				<VMarkdown v-model="contentMarkup" :use-github=false />
+				<VtMarkdown v-model="contentMarkup" :use-github=false />
 							</v-col>
 						</v-row>
 						<v-row dense>
 							<v-col cols="12">
-				<VMarkdown v-model="contentMarkup2" :use-github=false />
+				<VtMarkdown v-model="contentMarkup2" :use-github=false />
 							</v-col>
 						</v-row>
 					</v-card-text>
@@ -36,7 +36,7 @@
 			<v-col cols="12">
 				<v-card>
 					<v-card-text>
-<VMarkdown v-model="contentChartDesc" :use-github=false />
+<VtMarkdown v-model="contentChartDesc" :use-github=false />
 				<v-table
 					fixed-header
 				>
@@ -204,7 +204,7 @@ import AdditionalLinks from '@/components/content/info/AdditionalLinks';
 import ContentAttribution from '@/components/content/Attribution';
 import ContentHeader from '@/components/content/Header';
 import LoadingOverlay from '@/components/LoadingOverlay';
-import VMarkdown from '@thzero/library_client_vue3_vuetify3/components/markup/VMarkdown';
+import VtMarkdown from '@thzero/library_client_vue3_vuetify3/components/markup/VtMarkdown';
 
 export default {
 	name: 'Epxoy',
@@ -213,7 +213,7 @@ export default {
 		ContentAttribution,
 		ContentHeader,
 		LoadingOverlay,
-		VMarkdown
+		VtMarkdown
 	},
 	setup(props, context) {
 		const {

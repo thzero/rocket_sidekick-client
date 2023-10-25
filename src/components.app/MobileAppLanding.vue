@@ -6,7 +6,7 @@
 <p class="text-h6 text-center pb-4">Mobile App</p>
 				</v-card-title>
 				<v-card-text >
-<VMarkdown v-model="text" :use-github=false />
+<VtMarkdown v-model="text" :use-github=false />
 
 <p class="text-h6 text-center pt-4 pb-4">Download it today!</p>
 
@@ -48,12 +48,12 @@ import LibraryClientUtility from '@thzero/library_client/utility/index';
 
 import { useBaseComponent } from '@thzero/library_client_vue3/components/base';
 
-import VMarkdown from '@thzero/library_client_vue3_vuetify3/components/markup/VMarkdown';
+import VtMarkdown from '@thzero/library_client_vue3_vuetify3/components/markup/VtMarkdown';
 
 export default {
 	name: 'MobileApp',
 	components: {
-		VMarkdown
+		VtMarkdown
 	},
 	setup(props, context) {
 		const {

@@ -58,13 +58,13 @@ export default {
 	}
 
 	.measurementUnitExtraLong {
-		width: 120px;
+		width: 140px;
 	}
 	.measurementUnitLong {
-		width: 105px;
+		width: 125px;
 	}
 	.measurementUnitMedium {
-		width: 100px;
+		width: 115px;
 	}
 	.measurementUnitsMedium {
 		width: 125px;

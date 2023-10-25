@@ -6,7 +6,7 @@
 		<ContentDescription id="strings.content.tools.foam" />
 		<v-row dense>
 			<v-col cols="12">
-				<VFormControl
+				<VtFormControl
 					ref="formFoamRef"
 					:validation="validation"
 					:reset-additional="resetAdditional"
@@ -101,7 +101,7 @@
 								<table style="width: 100%">
 									<tr>
 										<td>
-											<VNumberFieldWithValidation
+											<VtNumberFieldWithValidation
 												ref="bodyTubeIDRef"
 												v-model="bodyTubeID"
 												vid="bodyTubeID"
@@ -146,7 +146,7 @@
 								<table style="width: 100%">
 									<tr>
 										<td>
-											<VNumberFieldWithValidation
+											<VtNumberFieldWithValidation
 												ref="bodyTubeIDRef"
 												v-model="bodyTubeID"
 												vid="bodyTubeID"
@@ -171,7 +171,7 @@
 								<table style="width: 100%">
 									<tr>
 										<td>
-											<VNumberFieldWithValidation
+											<VtNumberFieldWithValidation
 												ref="motorTubeODRef"
 												v-model="motorTubeOD"
 												vid="motorTubeOD"
@@ -197,7 +197,7 @@
 								<table style="width: 100%">
 									<tr>
 										<td>
-											<VNumberFieldWithValidation
+											<VtNumberFieldWithValidation
 												ref="finRootLengthRef"
 												v-model="finRootLength"
 												vid="finRootLength"
@@ -223,7 +223,7 @@
 								<table style="width: 100%">
 									<tr>
 										<td>
-											<VNumberFieldWithValidation
+											<VtNumberFieldWithValidation
 												ref="finTabLengthRef"
 												v-model="finTabLength"
 												vid="finTabLength"
@@ -249,7 +249,7 @@
 								<table style="width: 100%">
 									<tr>
 										<td>
-											<VNumberFieldWithValidation
+											<VtNumberFieldWithValidation
 												ref="finWidthRef"
 												v-model="finWidth"
 												vid="finWidth"
@@ -272,7 +272,7 @@
 								</table>
 							</v-col>
 							<v-col cols="6" >
-								<VNumberFieldWithValidation
+								<VtNumberFieldWithValidation
 									ref="numberFinsRef"
 									v-model="numberFins"
 									vid="numberFins"
@@ -283,7 +283,7 @@
 							</v-col>
 						</v-row>
 					</template>
-				</VFormControl>
+				</VtFormControl>
 			</v-col>
 		</v-row>
 		<v-row class="pt-4" dense>
@@ -381,8 +381,8 @@ import ContentHeader from '@/components/content/Header';
 import MeasurementUnitSelect from '@/components/content/MeasurementUnitSelect.vue';
 import MeasurementUnitSelect2 from '@/components/content/MeasurementUnitSelect2';
 import MeasurementUnitsSelect from '@/components/content/MeasurementUnitsSelect';
-import VFormControl from '@thzero/library_client_vue3_vuetify3/components/form/VFormControl';
-import VNumberFieldWithValidation from '@thzero/library_client_vue3_vuetify3/components/form/VNumberFieldWithValidation';
+import VtFormControl from '@thzero/library_client_vue3_vuetify3/components/form/VtFormControl';
+import VtNumberFieldWithValidation from '@thzero/library_client_vue3_vuetify3/components/form/VtNumberFieldWithValidation';
 
 export default {
 	name: 'Foam',
@@ -394,8 +394,8 @@ export default {
 		MeasurementUnitSelect,
 		MeasurementUnitSelect2,
 		MeasurementUnitsSelect,
-		VFormControl,
-		VNumberFieldWithValidation
+		VtFormControl,
+		VtNumberFieldWithValidation
 	},
 	setup (props, context) {
 		const {
