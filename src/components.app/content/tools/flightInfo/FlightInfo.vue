@@ -36,7 +36,7 @@
 								<v-card-item>
 									<v-row dense>
 										<v-col cols="12">
-											<VTextFieldWithValidation
+											<VtTextFieldWithValidation
 												ref="flightDataTitleRef"
 												v-model="flightDataTitle"
 												vid="flightDataTitle"
@@ -45,7 +45,7 @@
 											/>
 										</v-col>
 										<v-col cols="12">
-											<VTextFieldWithValidation
+											<VtTextFieldWithValidation
 												ref="flightDataLocationRef"
 												v-model="flightDataLocation"
 												vid="flightDataLocation"
@@ -342,7 +342,7 @@
 					</template>
 					<template v-slot:after>
 						<div class="pt-4">
-							<VTextAreaWithValidation
+							<VtTextAreaWithValidation
 								ref="flightInfoInputRef"
 								v-model="flightInfoInput"
 								vid="flightInfoInput"
@@ -547,8 +547,8 @@ import VtDateTimePickerField from '@thzero/library_client_vue3_vuetify3/componen
 import VtFormControl from '@thzero/library_client_vue3_vuetify3/components/form/VtFormControl';
 import VtSelectWithValidation from '@thzero/library_client_vue3_vuetify3/components/form/VtSelectWithValidation';
 import VtSwitchWithValidation from '@thzero/library_client_vue3_vuetify3/components/form/VtSwitchWithValidation';
-import VTextAreaWithValidation from '@thzero/library_client_vue3_vuetify3/components/form/VTextAreaWithValidation';
-import VTextFieldWithValidation from '@thzero/library_client_vue3_vuetify3/components/form/VTextFieldWithValidation';
+import VtTextAreaWithValidation from '@thzero/library_client_vue3_vuetify3/components/form/VtTextAreaWithValidation';
+import VtTextFieldWithValidation from '@thzero/library_client_vue3_vuetify3/components/form/VtTextFieldWithValidation';
 
 export default {
 	name: 'FlightInfo',
@@ -564,8 +564,8 @@ export default {
 		VtFormControl,
 		VtSelectWithValidation,
 		VtSwitchWithValidation,
-		VTextAreaWithValidation,
-		VTextFieldWithValidation
+		VtTextAreaWithValidation,
+		VtTextFieldWithValidation
 	},
 	setup(props, context) {
 		const {
