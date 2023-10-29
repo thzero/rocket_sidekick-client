@@ -31,7 +31,7 @@
     "@thzero/library_client_service_rest_fetch": "^0.17.2",
     "@thzero/library_client_vue3": "^0.17.57",
     "@thzero/library_client_vue3_store_pinia": "^0.17.10",
-    "@thzero/library_client_vue3_vuetify3": "^0.17.55",
+    "@thzero/library_client_vue3_vuetify3": "^0.17.56",
     "@thzero/library_common": "^0.17.11",
     "@vue-leaflet/vue-leaflet": "^0.10.1",
     "@vuepic/vue-datepicker": "^3.6.7",
