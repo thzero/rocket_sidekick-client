@@ -57,6 +57,8 @@ export function useFlightToolsBaseComponent(props, context, options) {
 		measurementUnitsAccelerationType,
 		measurementUnitsAreaDefaultId,
 		measurementUnitsAreaType,
+		measurementUnitsAltitudeDefaultId,
+		measurementUnitsAltitudeType,
 		measurementUnitsDensityDefaultId,
 		measurementUnitsDensityType,
 		measurementUnitsDistanceType,
@@ -82,10 +84,12 @@ export function useFlightToolsBaseComponent(props, context, options) {
 	const flightDataTitle = ref(null);
 	const flightMeasurementUnitsId = ref(null);
 	const flightMeasurementUnitsAccelerationId = ref(null);
+	const flightMeasurementUnitsAltitudeId = ref(null);
 	const flightMeasurementUnitsDistanceId = ref(null);
 	const flightMeasurementUnitsVelocityId = ref(null);
 	const flightMeasurementUnitsOutputId = ref(null);
 	const flightMeasurementUnitsAccelerationOutputId = ref(null);
+	const flightMeasurementUnitsAltitudeOutputId = ref(null);
 	const flightMeasurementUnitsDistanceOutputId = ref(null);
 	const flightMeasurementUnitsVelocityOutputId = ref(null);
 	const flightMeasurementUnitsOptions = ref([]);
@@ -109,6 +113,12 @@ export function useFlightToolsBaseComponent(props, context, options) {
 			return [];
 		const object = AppCommonConstants.MeasurementUnits[flightMeasurementUnitsId.value].acceleration;
 		return Object.getOwnPropertyNames(object).filter(l => l !== keyword).map((item) => { return { id: item, name: LibraryClientUtility.$trans.t('measurementUnits.' + flightMeasurementUnitsId.value + '.acceleration.' + item + 'Abbr') }; });
+	});
+	const flightMeasurementUnitsOptionsAltitude = computed(() => {
+		if (String.isNullOrEmpty(flightMeasurementUnitsId.value))
+			return [];
+		const object = AppCommonConstants.MeasurementUnits[flightMeasurementUnitsId.value].altitude;
+		return Object.getOwnPropertyNames(object).filter(l => l !== keyword).map((item) => { return { id: item, name: LibraryClientUtility.$trans.t('measurementUnits.' + flightMeasurementUnitsId.value + '.altitude.' + item + 'Abbr') }; });
 	});
 	const flightMeasurementUnitsOptionsDistance = computed(() => {
 		if (String.isNullOrEmpty(flightMeasurementUnitsId.value))
@@ -147,42 +157,79 @@ export function useFlightToolsBaseComponent(props, context, options) {
 			title: flightDataTitle.value
 		});
 	};
+	const flightMeasurementUnitsLoading = ref(false);
 	const flightMeasurementUnitsLoad = (correlationId, processor) => {
-		if (String.isNullOrEmpty(processor))
-			return;
+		try {
+			flightMeasurementUnitsLoading.value = true;
+				
+			if (String.isNullOrEmpty(processor))
+				return;
 
-		const measurementUnits = serviceStore.getters.getFlightMeasurementUnits(correlationId);
+			const measurementUnits = serviceStore.getters.getFlightMeasurementUnits(correlationId);
 
-		const input = measurementUnits && measurementUnits.input ? measurementUnits.input.find(l => l.id === processor) : null;
-		flightMeasurementUnitsId.value = input ? input.unitsId : null;
-		flightMeasurementUnitsAccelerationId.value = input ? input.accelerationId : null;
-		flightMeasurementUnitsDistanceId.value = input ? input.distanceId : null;
-		flightMeasurementUnitsVelocityId.value = input ? input.velocityId : null;
+			let input = measurementUnits && measurementUnits.input ? measurementUnits.input.find(l => l.id === processor) : null;
+			if (!input) {
+				if (processor === 'featherweight') {
+					input = {
+						id: 'featherweight',
+						unitsId: 'english',
+						accelerationId: 'fts2',
+						altitudeId: 'ft',
+						distanceId: 'ft',
+						velocityId: 'fts'
+					}
+				}
+				else if (processor === 'eggtimer') {
+					input = {
+						id: 'eggtimer',
+						unitsId: 'english',
+						accelerationId: 'fts2',
+						altitudeId: 'ft',
+						distanceId: 'ft',
+						velocityId: 'fts'
+					}
+				}
+			}
+			flightMeasurementUnitsId.value = input ? input.unitsId : null;
+			flightMeasurementUnitsAccelerationId.value = input ? input.accelerationId : null;
+			flightMeasurementUnitsAltitudeId.value = input ? input.altitudeId : null;
+			flightMeasurementUnitsDistanceId.value = input ? input.distanceId : null;
+			flightMeasurementUnitsVelocityId.value = input ? input.velocityId : null;
 
-		flightMeasurementUnitsOutputId.value = measurementUnits && measurementUnits.output ? measurementUnits.output.units : null;
-		if (String.isNullOrEmpty(flightMeasurementUnitsOutputId.value))
-			flightMeasurementUnitsOutputId.value = AppUtility.measurementUnitsId(correlationId, settings.value);
+			flightMeasurementUnitsOutputId.value = measurementUnits && measurementUnits.output ? measurementUnits.output.units : null;
+			if (String.isNullOrEmpty(flightMeasurementUnitsOutputId.value))
+				flightMeasurementUnitsOutputId.value = AppUtility.measurementUnitsIdDefault(correlationId, settings.value);
 
-		flightMeasurementUnitsAccelerationOutputId.value = measurementUnits && measurementUnits.output ? measurementUnits.output.accelerationId : null;
-		if (String.isNullOrEmpty(flightMeasurementUnitsAccelerationOutputId.value))
-			flightMeasurementUnitsAccelerationOutputId.value = AppUtility.measurementUnitsAccelerationId(correlationId, settings.value);
-		flightMeasurementUnitsDistanceOutputId.value = measurementUnits && measurementUnits.output ? measurementUnits.output.distanceId : null;
-		if (String.isNullOrEmpty(flightMeasurementUnitsDistanceOutputId.value))
-			flightMeasurementUnitsDistanceOutputId.value = AppUtility.measurementUnitDistanceId(correlationId, settings.value);
-		flightMeasurementUnitsVelocityOutputId.value = measurementUnits && measurementUnits.output ? measurementUnits.output.velocityId : null;
-		if (String.isNullOrEmpty(flightMeasurementUnitsVelocityOutputId.value))
-			flightMeasurementUnitsVelocityOutputId.value = AppUtility.measurementUnitVelocityId(correlationId, settings.value);
+			flightMeasurementUnitsAccelerationOutputId.value = measurementUnits && measurementUnits.output ? measurementUnits.output.accelerationId : null;
+			if (String.isNullOrEmpty(flightMeasurementUnitsAccelerationOutputId.value))
+				flightMeasurementUnitsAccelerationOutputId.value = AppUtility.measurementUnitAccelerationId(correlationId, settings.value);
+			if (String.isNullOrEmpty(flightMeasurementUnitsAltitudeOutputId.value))
+				flightMeasurementUnitsAltitudeOutputId.value = AppUtility.measurementUnitAltitudeId(correlationId, settings.value);
+			flightMeasurementUnitsDistanceOutputId.value = measurementUnits && measurementUnits.output ? measurementUnits.output.distanceId : null;
+			if (String.isNullOrEmpty(flightMeasurementUnitsDistanceOutputId.value))
+				flightMeasurementUnitsDistanceOutputId.value = AppUtility.measurementUnitDistanceId(correlationId, settings.value);
+			flightMeasurementUnitsVelocityOutputId.value = measurementUnits && measurementUnits.output ? measurementUnits.output.velocityId : null;
+			if (String.isNullOrEmpty(flightMeasurementUnitsVelocityOutputId.value))
+				flightMeasurementUnitsVelocityOutputId.value = AppUtility.measurementUnitVelocityId(correlationId, settings.value);
+		}
+		finally {
+			setTimeout(() => {
+				flightMeasurementUnitsLoading.value = false;
+			}, 50);
+		}
 	};
 	const flightMeasurementUnitsLoadOptions = (correlationId) => {
 		flightMeasurementUnitsOptions.value = LibraryClientVueUtility.selectOptions(AppUtility.measurementUnitsOptions(), LibraryClientUtility.$trans.t, 'measurementUnits');
 	};
 	const flightMeasurementUnitsReset = (correlationId) => {
-		flightMeasurementUnitsAccelerationId.value = AppUtility.measurementUnitsAccelerationId(correlationId, settings.value, flightMeasurementUnitsId.value);
+		flightMeasurementUnitsAccelerationId.value = AppUtility.measurementUnitAccelerationId(correlationId, settings.value, flightMeasurementUnitsId.value);
+		flightMeasurementUnitsAltitudeId.value = AppUtility.measurementUnitAltitudeId(correlationId, settings.value, flightMeasurementUnitsId.value);
 		flightMeasurementUnitsDistanceId.value = AppUtility.measurementUnitDistanceId(correlationId, settings.value, flightMeasurementUnitsId.value);
 		flightMeasurementUnitsVelocityId.value = AppUtility.measurementUnitVelocityId(correlationId, settings.value, flightMeasurementUnitsId.value);
 
-		flightMeasurementUnitsOutputId.value = AppUtility.measurementUnitsId(correlationId, settings.value);
-		flightMeasurementUnitsAccelerationOutputId.value = AppUtility.measurementUnitsAccelerationId(correlationId, settings.value);
+		flightMeasurementUnitsOutputId.value = AppUtility.measurementUnitsIdDefault(correlationId, settings.value);
+		flightMeasurementUnitsAccelerationOutputId.value = AppUtility.measurementUnitAccelerationId(correlationId, settings.value);
+		flightMeasurementUnitsAltitudeOutputId.value = AppUtility.measurementUnitAltitudeId(correlationId, settings.value);
 		flightMeasurementUnitsDistanceOutputId.value = AppUtility.measurementUnitDistanceId(correlationId, settings.value);
 		flightMeasurementUnitsVelocityOutputId.value = AppUtility.measurementUnitVelocityId(correlationId, settings.value);
 	};
@@ -204,6 +251,7 @@ export function useFlightToolsBaseComponent(props, context, options) {
 		measurementUnits.output = {
 			unitsId: flightMeasurementUnitsOutputId.value,
 			accelerationId: flightMeasurementUnitsAccelerationOutputId.value,
+			altitudeId: flightMeasurementUnitsAltitudeOutputId.value,
 			distanceId: flightMeasurementUnitsDistanceOutputId.value,
 			velocityId: flightMeasurementUnitsVelocityOutputId.value,
 		};
@@ -241,15 +289,22 @@ export function useFlightToolsBaseComponent(props, context, options) {
 		(value) => {
 			if (!initialized.value)
 				return;
-			flightMeasurementUnitsAccelerationId.value = null;
-			flightMeasurementUnitsDistanceId.value = null;
-			flightMeasurementUnitsVelocityId.value = null;
+
+			if (!flightMeasurementUnitsLoading.value) {
+				flightMeasurementUnitsAccelerationId.value = null;
+				flightMeasurementUnitsAltitudeId.value = null;
+				flightMeasurementUnitsDistanceId.value = null;
+				flightMeasurementUnitsVelocityId.value = null;
+			}
 		}
 	);
 	watch(() => flightMeasurementUnitsOutputId.value,
 		(value) => {
 			if (!initialized.value)
 				return;
+			
+			flightMeasurementUnitsAccelerationOutputId.value = AppUtility.measurementUnitAccelerationId(correlationId, settings.value, value);
+			flightMeasurementUnitsAltitudeOutputId.value = AppUtility.measurementUnitAccelerationId(correlationId, settings.value, value);
 			flightMeasurementUnitsDistanceOutputId.value = AppUtility.measurementUnitDistanceId(correlationId, settings.value, value);
 			flightMeasurementUnitsVelocityOutputId.value = AppUtility.measurementUnitVelocityId(correlationId, settings.value, value);
 		}
@@ -297,10 +352,12 @@ export function useFlightToolsBaseComponent(props, context, options) {
 		flightDataTitle,
 		flightMeasurementUnitsId,
 		flightMeasurementUnitsAccelerationId,
+		flightMeasurementUnitsAltitudeId,
 		flightMeasurementUnitsDistanceId,
 		flightMeasurementUnitsVelocityId,
 		flightMeasurementUnitsOutputId,
 		flightMeasurementUnitsAccelerationOutputId,
+		flightMeasurementUnitsAltitudeOutputId,
 		flightMeasurementUnitsDistanceOutputId,
 		flightMeasurementUnitsVelocityOutputId,
 		flightMeasurementUnitsOptions,
@@ -311,6 +368,7 @@ export function useFlightToolsBaseComponent(props, context, options) {
 		initialized,
 		flightInstructions,
 		flightMeasurementUnitsOptionsAcceleration,
+		flightMeasurementUnitsOptionsAltitude,
 		flightMeasurementUnitsOptionsDistance,
 		flightMeasurementUnitsOptionsVelocity,
 		flightDataLoad,

@@ -60,10 +60,12 @@ export function useFlightPathBaseComponent(props, context) {
 		flightDataTitle,
 		flightMeasurementUnitsId,
 		flightMeasurementUnitsAccelerationId,
+		flightMeasurementUnitsAltitudeId,
 		flightMeasurementUnitsDistanceId,
 		flightMeasurementUnitsVelocityId,
 		flightMeasurementUnitsOutputId,
 		flightMeasurementUnitsAccelerationOutputId,
+		flightMeasurementUnitsAltitudeOutputId,
 		flightMeasurementUnitsDistanceOutputId,
 		flightMeasurementUnitsVelocityOutputId,
 		flightMeasurementUnitsOptions,
@@ -74,6 +76,7 @@ export function useFlightPathBaseComponent(props, context) {
 		initialized,
 		flightInstructions,
 		flightMeasurementUnitsOptionsAcceleration,
+		flightMeasurementUnitsOptionsAltitude,
 		flightMeasurementUnitsOptionsDistance,
 		flightMeasurementUnitsOptionsVelocity,
 		flightDataLoad,
@@ -116,6 +119,8 @@ export function useFlightPathBaseComponent(props, context) {
 		measurementUnitsAccelerationType,
 		measurementUnitsAreaDefaultId,
 		measurementUnitsAreaType,
+		measurementUnitsAltitudeDefaultId,
+		measurementUnitsAltitudeType,
 		measurementUnitsDensityDefaultId,
 		measurementUnitsDensityType,
 		measurementUnitsDistanceType,
@@ -368,10 +373,10 @@ export function useFlightPathBaseComponent(props, context) {
 				flightPath,
 				{
 					measurementUnitsId: flightMeasurementUnitsId.value,
-					measurementUnitsDistanceId: flightMeasurementUnitsDistanceId.value,
+					measurementUnitsAltitudeId: flightMeasurementUnitsAltitudeId.value,
 					measurementUnitsVelocityId: flightMeasurementUnitsVelocityId.value,
 					measurementUnitsOutputId: flightMeasurementUnitsOutputId.value,
-					measurementUnitsDistanceOutputId: flightMeasurementUnitsDistanceOutputId.value,
+					measurementUnitsAltitudeOutputId: flightMeasurementUnitsAltitudeOutputId.value,
 					measurementUnitsVelocityOutputId: flightMeasurementUnitsVelocityOutputId.value,
 				},
 				templateMain.value, templatePinLaunch.value, templatePinTouchdown.value, templatePinsAdditional.value);
@@ -391,6 +396,7 @@ export function useFlightPathBaseComponent(props, context) {
 
 			setNotify(correlationIdI, 'messages.processed');
 
+			panelInstructions.value = [];
 			buttons.value.export.disabled = false;
 			processing.value = false;
 
@@ -479,10 +485,12 @@ export function useFlightPathBaseComponent(props, context) {
 		flightDataTitle,
 		flightMeasurementUnitsId,
 		flightMeasurementUnitsAccelerationId,
+		flightMeasurementUnitsAltitudeId,
 		flightMeasurementUnitsDistanceId,
 		flightMeasurementUnitsVelocityId,
 		flightMeasurementUnitsOutputId,
 		flightMeasurementUnitsAccelerationOutputId,
+		flightMeasurementUnitsAltitudeOutputId,
 		flightMeasurementUnitsDistanceOutputId,
 		flightMeasurementUnitsVelocityOutputId,
 		flightMeasurementUnitsOptions,
@@ -493,6 +501,7 @@ export function useFlightPathBaseComponent(props, context) {
 		initialized,
 		flightInstructions,
 		flightMeasurementUnitsOptionsAcceleration,
+		flightMeasurementUnitsOptionsAltitude,
 		flightMeasurementUnitsOptionsDistance,
 		flightMeasurementUnitsOptionsVelocity,
 		flightDataLoad,
@@ -504,7 +513,7 @@ export function useFlightPathBaseComponent(props, context) {
 		flightMeasurementUnitsSave,
 		buttonsDialog,
 		buttonsForms,
-		measurementUnitsDistanceType,
+		measurementUnitsAltitudeType,
 		measurementUnitsVelocityType,
 		serviceDownload,
 		serviceFlightPath,

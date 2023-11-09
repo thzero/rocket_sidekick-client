@@ -60,10 +60,12 @@ export function useFlightInfoBaseComponent(props, context) {
 		flightDataTitle,
 		flightMeasurementUnitsId,
 		flightMeasurementUnitsAccelerationId,
+		flightMeasurementUnitsAltitudeId,
 		flightMeasurementUnitsDistanceId,
 		flightMeasurementUnitsVelocityId,
 		flightMeasurementUnitsOutputId,
 		flightMeasurementUnitsAccelerationOutputId,
+		flightMeasurementUnitsAltitudeOutputId,
 		flightMeasurementUnitsDistanceOutputId,
 		flightMeasurementUnitsVelocityOutputId,
 		flightMeasurementUnitsOptions,
@@ -74,6 +76,7 @@ export function useFlightInfoBaseComponent(props, context) {
 		initialized,
 		flightInstructions,
 		flightMeasurementUnitsOptionsAcceleration,
+		flightMeasurementUnitsOptionsAltitude,
 		flightMeasurementUnitsOptionsDistance,
 		flightMeasurementUnitsOptionsVelocity,
 		flightDataLoad,
@@ -121,6 +124,8 @@ export function useFlightInfoBaseComponent(props, context) {
 		measurementUnitsAccelerationType,
 		measurementUnitsAreaDefaultId,
 		measurementUnitsAreaType,
+		measurementUnitsAltitudeDefaultId,
+		measurementUnitsAltitudeType,
 		measurementUnitsDensityDefaultId,
 		measurementUnitsDensityType,
 		measurementUnitsDistanceType,
@@ -400,11 +405,11 @@ export function useFlightInfoBaseComponent(props, context) {
 				const flightInfoResults = serviceFlightInfo.process(correlationIdI, data, flightProcessor.value, {
 						id: flightMeasurementUnitsId.value,
 						accelerationId: flightMeasurementUnitsAccelerationId.value,
-						distanceId: flightMeasurementUnitsDistanceId.value,
+						altitudeId: flightMeasurementUnitsAltitudeId.value,
 						velocityId: flightMeasurementUnitsVelocityId.value,
 						outputId: flightMeasurementUnitsOutputId.value,
 						accelerationtId: flightMeasurementUnitsAccelerationId.value,
-						distanceOutputId: flightMeasurementUnitsDistanceOutputId.value,
+						altitudeOutputId: flightMeasurementUnitsAltitudeOutputId.value,
 						velocityOutputId: flightMeasurementUnitsVelocityOutputId.value,
 					},
 					flightInfoDataTypes);
@@ -449,7 +454,8 @@ export function useFlightInfoBaseComponent(props, context) {
 				flightMeasurementUnitsSave(correlationIdI, flightProcessor.value);
 
 				setNotify(correlationIdI, 'messages.processed');
-
+				
+				panelInstructions.value = [];
 				buttons.value.export.disabled = false;
 				processing.value = false;
 
@@ -570,10 +576,12 @@ export function useFlightInfoBaseComponent(props, context) {
 		flightDataTitle,
 		flightMeasurementUnitsId,
 		flightMeasurementUnitsAccelerationId,
+		flightMeasurementUnitsAltitudeId,
 		flightMeasurementUnitsDistanceId,
 		flightMeasurementUnitsVelocityId,
 		flightMeasurementUnitsOutputId,
 		flightMeasurementUnitsAccelerationOutputId,
+		flightMeasurementUnitsAltitudeOutputId,
 		flightMeasurementUnitsDistanceOutputId,
 		flightMeasurementUnitsVelocityOutputId,
 		flightMeasurementUnitsOptions,
@@ -584,6 +592,7 @@ export function useFlightInfoBaseComponent(props, context) {
 		initialized,
 		flightInstructions,
 		flightMeasurementUnitsOptionsAcceleration,
+		flightMeasurementUnitsOptionsAltitude,
 		flightMeasurementUnitsOptionsDistance,
 		flightMeasurementUnitsOptionsVelocity,
 		flightDataLoad,

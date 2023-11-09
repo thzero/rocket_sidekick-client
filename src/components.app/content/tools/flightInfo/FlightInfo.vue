@@ -100,10 +100,10 @@
 														</v-col>
 														<v-col cols="6">
 															<VtSelectWithValidation
-																ref="flightMeasurementUnitsDistanceIdRef"
-																v-model="flightMeasurementUnitsDistanceId"
-																vid="flightMeasurementUnitsDistanceId"
-																:items="flightMeasurementUnitsOptionsDistance"
+																ref="flightMeasurementUnitsAltitudeIdRef"
+																v-model="flightMeasurementUnitsAltitudeId"
+																vid="flightMeasurementUnitsAltitudeId"
+																:items="flightMeasurementUnitsOptionsAltitude"
 																:validation="validation"
 																:label="$t('forms.content.tools.flightInfo.measurementUnits.altitude')"
 															/>
@@ -150,10 +150,10 @@
 														</v-col>
 														<v-col cols="6">
 															<VtSelectWithValidation
-																ref="flightMeasurementUnitsDistanceOutputIdRef"
-																v-model="flightMeasurementUnitsDistanceOutputId"
-																vid="flightMeasurementUnitsDistanceOutputId"
-																:items="flightMeasurementUnitsOptionsDistance"
+																ref="flightMeasurementUnitsAltitudeOutputIdRef"
+																v-model="flightMeasurementUnitsAltitudeOutputId"
+																vid="flightMeasurementUnitsAltitudeOutputId"
+																:items="flightMeasurementUnitsOptionsAltitude"
 																:validation="validation"
 																:label="$t('forms.content.tools.flightInfo.measurementUnits.altitude')"
 															/>
@@ -609,10 +609,12 @@ export default {
 			flightDataTitle,
 			flightMeasurementUnitsId,
 			flightMeasurementUnitsAccelerationId,
+			flightMeasurementUnitsAltitudeId,
 			flightMeasurementUnitsDistanceId,
 			flightMeasurementUnitsVelocityId,
 			flightMeasurementUnitsOutputId,
 			flightMeasurementUnitsAccelerationOutputId,
+			flightMeasurementUnitsAltitudeOutputId,
 			flightMeasurementUnitsDistanceOutputId,
 			flightMeasurementUnitsVelocityOutputId,
 			flightMeasurementUnitsOptions,
@@ -623,6 +625,7 @@ export default {
 			initialized,
 			flightInstructions,
 			flightMeasurementUnitsOptionsAcceleration,
+			flightMeasurementUnitsOptionsAltitude,
 			flightMeasurementUnitsOptionsDistance,
 			flightMeasurementUnitsOptionsVelocity,
 			flightDataLoad,
@@ -719,10 +722,12 @@ export default {
 			flightDataTitle,
 			flightMeasurementUnitsId,
 			flightMeasurementUnitsAccelerationId,
+			flightMeasurementUnitsAltitudeId,
 			flightMeasurementUnitsDistanceId,
 			flightMeasurementUnitsVelocityId,
 			flightMeasurementUnitsOutputId,
 			flightMeasurementUnitsAccelerationOutputId,
+			flightMeasurementUnitsAltitudeOutputId,
 			flightMeasurementUnitsDistanceOutputId,
 			flightMeasurementUnitsVelocityOutputId,
 			flightMeasurementUnitsOptions,
@@ -733,6 +738,7 @@ export default {
 			initialized,
 			flightInstructions,
 			flightMeasurementUnitsOptionsAcceleration,
+			flightMeasurementUnitsOptionsAltitude,
 			flightMeasurementUnitsOptionsDistance,
 			flightMeasurementUnitsOptionsVelocity,
 			flightDataLoad,
