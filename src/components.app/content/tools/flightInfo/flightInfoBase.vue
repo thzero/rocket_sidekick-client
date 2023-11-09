@@ -1,5 +1,5 @@
 <script>
-import { nextTick, ref, watch } from 'vue';
+import { computed, nextTick, ref, watch } from 'vue';
 
 import useVuelidate from '@vuelidate/core';
 
@@ -172,7 +172,22 @@ export function useFlightInfoBaseComponent(props, context) {
 	const flightInfoStyleEventMainBorderColor = ref(null);
 	const flightInfoStyleVelocityColor = ref(null);
 	const flightInfoStyleVelocityFColor = ref(null);
+	const panelInstructions = ref(['instructions']);
 	const resolution = ref(AppConstants.FlightInfo.Resolution);
+
+	const flightInfoInstructions = computed(() => {
+		if (!content.value || !content.value.processors)
+			return '';
+
+		if (String.isNullOrEmpty(flightProcessor.value))
+			return '';
+
+		const processor = content.value.processors.find(l => l.id === flightProcessor.value);
+		if (!processor)
+			return general;
+
+		return processor.markup;
+	});
 
 	const checkFlightInfoDataTypeUse = () => {
 		flightInfoDataTypeUseDisabled.value = true;
@@ -601,7 +616,9 @@ export function useFlightInfoBaseComponent(props, context) {
 		flightInfoStyleEventMainBorderColor,
 		flightInfoStyleVelocityColor,
 		flightInfoStyleVelocityFColor,
+		panelInstructions,
 		resolution,
+		flightInfoInstructions,
 		checkFlightInfoDataTypeUse,
 		clickResolution,
 		clickStylesReset,

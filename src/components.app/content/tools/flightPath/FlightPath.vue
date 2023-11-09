@@ -318,8 +318,24 @@
 					<v-col
 						cols="12"
 					>
-				<VtMarkdown v-model="flightInstructions" :use-github=false />
-				<VtMarkdown v-model="flightPathInstructions" :use-github=false />
+						<v-expansion-panels
+      						v-model="panelInstructions"
+							class="mb-2"
+						>
+							<v-expansion-panel
+								value="instructions"
+							>
+								<v-expansion-panel-title
+									color="secondary"
+								>
+									{{ $t(`forms.content.tools.instructions.title`) }}
+								</v-expansion-panel-title>
+								<v-expansion-panel-text>
+											<VtMarkdown v-model="flightInstructions" :use-github=false />
+											<VtMarkdown v-model="flightPathInstructions" :use-github=false />
+								</v-expansion-panel-text>
+							</v-expansion-panel>
+						</v-expansion-panels>
 					</v-col>
 				</v-row>
 				<v-row
@@ -529,7 +545,6 @@ export default {
 			flightPathData,
 			flightPathDataExport,
 			flightPathInput,
-			flightPathInstructions,
 			flightPathOutput,
 			flightPathStylePathFlightColor,
 			flightPathStylePathGroundColor,
@@ -544,10 +559,12 @@ export default {
 			clickFlightPathStylesReset,
 			flightPathInputChange,
 			flightPathStyleLoad,
+			panelInstructions,
 			templateMain,
 			templatePinLaunch,
 			templatePinsAdditional,
 			templatePinTouchdown,
+			flightPathInstructions,
 			flightPathStyleReset,
 			flightPathStyleSave,
 			flightPathExport,
@@ -636,7 +653,6 @@ export default {
 			flightPathData,
 			flightPathDataExport,
 			flightPathInput,
-			flightPathInstructions,
 			flightPathOutput,
 			flightPathStylePathFlightColor,
 			flightPathStylePathGroundColor,
@@ -651,10 +667,12 @@ export default {
 			clickFlightPathStylesReset,
 			flightPathInputChange,
 			flightPathStyleLoad,
+			panelInstructions,
 			templateMain,
 			templatePinLaunch,
 			templatePinsAdditional,
 			templatePinTouchdown,
+			flightPathInstructions,
 			flightPathStyleReset,
 			flightPathStyleSave,
 			flightPathExport,

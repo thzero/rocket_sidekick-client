@@ -164,6 +164,7 @@ export function useFlightPathBaseComponent(props, context) {
 	const flightPathStylePinMaxVelocitySelected = ref(true);
 	const flightPathStylePinTouchdownColor = ref(null);
 	const flightPathStylePinTouchdownSelected = ref(true);
+	const panelInstructions = ref(['instructions']);
 	const templateMain = ref(serviceFlightPath.templateMainDefault);
 	const templatePinLaunch = ref(serviceFlightPath.templatePinLaunchDefault);
 	const templatePinsAdditional = ref('');
@@ -514,7 +515,6 @@ export function useFlightPathBaseComponent(props, context) {
 		flightPathData,
 		flightPathDataExport,
 		flightPathInput,
-		flightPathInstructions,
 		flightPathOutput,
 		flightPathStylePathFlightColor,
 		flightPathStylePathGroundColor,
@@ -529,10 +529,12 @@ export function useFlightPathBaseComponent(props, context) {
 		clickFlightPathStylesReset,
 		flightPathInputChange,
 		flightPathStyleLoad,
+		panelInstructions,
 		templateMain,
 		templatePinLaunch,
 		templatePinsAdditional,
 		templatePinTouchdown,
+		flightPathInstructions,
 		flightPathStyleReset,
 		flightPathStyleSave,
 		flightPathExport,
