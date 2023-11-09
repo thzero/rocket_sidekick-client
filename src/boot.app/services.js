@@ -1,8 +1,11 @@
 import AppConstants from '@/constants';
 
 import checklistsService from '@/service/checklists';
+import countriesService from '@/service/countries';
 import downloadService from '@/service.app/download';
 import featuresService from '@/service.app/features';
+import launchesService from '@/service/launches';
+import locationsService from '@/service/locations';
 import manufacturersService from '@/service/manufacturers';
 import partsService from '@/service/parts';
 import rocketsService from '@/service/rockets';
@@ -47,8 +50,20 @@ class AppServiceBoot extends BaseServiceBoot {
 		return new restCommunicationService();
 	}
 
+	_initializeCountries() {
+		return new countriesService();
+	}
+
 	_initializeFeatures() {
 		return new featuresService();
+	}
+
+	_initializeLaunches() {
+		return new launchesService();
+	}
+
+	_initializeLocations() {
+		return new locationsService();
 	}
 
 	_initializeManufacturers() {

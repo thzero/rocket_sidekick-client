@@ -5,14 +5,14 @@
 			<v-col cols="12">
 				<v-card>
 					<v-card-text>
-<VMarkdown v-model="contentMarkup" :use-github=false />
+<VtMarkdown v-model="contentMarkup" :use-github=false />
 
 		<q class="font-italic" cite="https://www.nar.org/high-power-rocketry-info">
-<VMarkdown v-model="contentDefinition" :use-github=false tag="span" />
+<VtMarkdown v-model="contentDefinition" :use-github=false tag="span" />
 		</q> -- <a href="https://www.nar.org" target="_blank">National Association of Rocketry (NAR)</a>
 <br><br>
 
-<VMarkdown v-model="contentMarkup2" :use-github=false />
+<VtMarkdown v-model="contentMarkup2" :use-github=false />
 
 					</v-card-text>
 					<LoadingOverlay
@@ -196,7 +196,7 @@ import AdditionalLinks from '@/components/content/info/AdditionalLinks';
 import ContentAttribution from '@/components/content/Attribution';
 import ContentHeader from '@/components/content/Header';
 import LoadingOverlay from '@/components/LoadingOverlay';
-import VMarkdown from '@thzero/library_client_vue3_vuetify3/components/markup/VMarkdown';
+import VtMarkdown from '@thzero/library_client_vue3_vuetify3/components/markup/VtMarkdown';
 
 export default {
 	name: 'HighPower',
@@ -205,7 +205,7 @@ export default {
 		ContentAttribution,
 		ContentHeader,
 		LoadingOverlay,
-		VMarkdown
+		VtMarkdown
 	},
 	setup(props, context) {
 		const {

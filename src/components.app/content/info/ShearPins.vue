@@ -7,7 +7,7 @@
 					<v-card-text>
 						<v-row dense>
 							<v-col cols="12">
-				<VMarkdown v-model="contentMarkup" :use-github=false />
+				<VtMarkdown v-model="contentMarkup" :use-github=false />
 							</v-col>
 						</v-row>
 					</v-card-text>
@@ -54,7 +54,7 @@ import AdditionalLinks from '@/components/content/info/AdditionalLinks';
 import ContentAttribution from '@/components/content/Attribution';
 import ContentHeader from '@/components/content/Header';
 import LoadingOverlay from '@/components/LoadingOverlay';
-import VMarkdown from '@thzero/library_client_vue3_vuetify3/components/markup/VMarkdown';
+import VtMarkdown from '@thzero/library_client_vue3_vuetify3/components/markup/VtMarkdown';
 
 export default {
 	name: 'ShearPins',
@@ -63,7 +63,7 @@ export default {
 		ContentAttribution,
 		ContentHeader,
 		LoadingOverlay,
-		VMarkdown
+		VtMarkdown
 	},
 	setup(props, context) {
 		const {

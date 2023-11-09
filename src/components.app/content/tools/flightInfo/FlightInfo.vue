@@ -17,7 +17,7 @@
 		<!-- <ContentDescription id="strings.content.tools.flightInfo" /> -->
 		<v-row dense>
 			<v-col cols="12" lg="3">
-				<VFormControl
+				<VtFormControl
 					ref="formFlightInfoRef"
 					:validation="validation"
 					:reset-additional="resetAdditionalInput"
@@ -36,7 +36,7 @@
 								<v-card-item>
 									<v-row dense>
 										<v-col cols="12">
-											<VTextFieldWithValidation
+											<VtTextFieldWithValidation
 												ref="flightDataTitleRef"
 												v-model="flightDataTitle"
 												vid="flightDataTitle"
@@ -45,7 +45,7 @@
 											/>
 										</v-col>
 										<v-col cols="12">
-											<VTextFieldWithValidation
+											<VtTextFieldWithValidation
 												ref="flightDataLocationRef"
 												v-model="flightDataLocation"
 												vid="flightDataLocation"
@@ -54,7 +54,7 @@
 											/>
 										</v-col>
 										<v-col cols="12">
-											<VDateTimeField
+											<VtDateTimePickerField
 												ref="flightDataDateRef"
 												v-model="flightDataDate"
 												vid="flightDataDate"
@@ -63,7 +63,7 @@
 											/>
 										</v-col>
 										<v-col cols="12">
-											<VSelectWithValidation
+											<VtSelectWithValidation
 												ref="flightProcessorRef"
 												v-model="flightProcessor"
 												vid="flightProcessor"
@@ -79,7 +79,7 @@
 												<v-card-text>
 													<v-row dense>
 														<v-col cols="6">
-															<VSelectWithValidation
+															<VtSelectWithValidation
 																ref="flightMeasurementUnitsIdRef"
 																v-model="flightMeasurementUnitsId"
 																vid="flightMeasurementUnitsId"
@@ -89,7 +89,7 @@
 															/>
 														</v-col>
 														<v-col cols="6">
-															<VSelectWithValidation
+															<VtSelectWithValidation
 																ref="flightMeasurementUnitsAccelerationIdRef"
 																v-model="flightMeasurementUnitsAccelerationId"
 																vid="flightMeasurementUnitsAccelerationId"
@@ -99,17 +99,17 @@
 															/>
 														</v-col>
 														<v-col cols="6">
-															<VSelectWithValidation
-																ref="flightMeasurementUnitsDistanceIdRef"
-																v-model="flightMeasurementUnitsDistanceId"
-																vid="flightMeasurementUnitsDistanceId"
-																:items="flightMeasurementUnitsOptionsDistance"
+															<VtSelectWithValidation
+																ref="flightMeasurementUnitsAltitudeIdRef"
+																v-model="flightMeasurementUnitsAltitudeId"
+																vid="flightMeasurementUnitsAltitudeId"
+																:items="flightMeasurementUnitsOptionsAltitude"
 																:validation="validation"
 																:label="$t('forms.content.tools.flightInfo.measurementUnits.altitude')"
 															/>
 														</v-col>
 														<v-col cols="6">
-															<VSelectWithValidation
+															<VtSelectWithValidation
 																ref="flightMeasurementUnitsVelocityIdRef"
 																v-model="flightMeasurementUnitsVelocityId"
 																vid="flightMeasurementUnitsVelocityId"
@@ -129,7 +129,7 @@
 												<v-card-text>
 													<v-row dense>
 														<v-col cols="6">
-															<VSelectWithValidation
+															<VtSelectWithValidation
 																ref="flightMeasurementUnitsOutputIdRef"
 																v-model="flightMeasurementUnitsOutputId"
 																vid="flightMeasurementUnitsOutputId"
@@ -139,7 +139,7 @@
 															/>
 														</v-col>
 														<v-col cols="6">
-															<VSelectWithValidation
+															<VtSelectWithValidation
 																ref="flightMeasurementUnitsAccelerationOutputIdRef"
 																v-model="flightMeasurementUnitsAccelerationOutputId"
 																vid="flightMeasurementUnitsAccelerationOutputId"
@@ -149,17 +149,17 @@
 															/>
 														</v-col>
 														<v-col cols="6">
-															<VSelectWithValidation
-																ref="flightMeasurementUnitsDistanceOutputIdRef"
-																v-model="flightMeasurementUnitsDistanceOutputId"
-																vid="flightMeasurementUnitsDistanceOutputId"
-																:items="flightMeasurementUnitsOptionsDistance"
+															<VtSelectWithValidation
+																ref="flightMeasurementUnitsAltitudeOutputIdRef"
+																v-model="flightMeasurementUnitsAltitudeOutputId"
+																vid="flightMeasurementUnitsAltitudeOutputId"
+																:items="flightMeasurementUnitsOptionsAltitude"
 																:validation="validation"
 																:label="$t('forms.content.tools.flightInfo.measurementUnits.altitude')"
 															/>
 														</v-col>
 														<v-col cols="6">
-															<VSelectWithValidation
+															<VtSelectWithValidation
 																ref="flightMeasurementUnitsVelocityOutputIdRef"
 																v-model="flightMeasurementUnitsVelocityOutputId"
 																vid="flightMeasurementUnitsVelocityOutputId"
@@ -184,7 +184,7 @@
 															</span>
 														</v-col>
 														<v-col cols="4">
-															<VSwitchWithValidation
+															<VtSwitchWithValidation
 																ref="flightInfoDataTypeUseRef"
 																v-model="flightInfoDataTypeUse"
 																vid="flightInfoDataTypeUse"
@@ -219,14 +219,14 @@
 										<v-expansion-panel-text>
 											<v-row dense>
 												<v-col cols="12" lg="6">
-													<VColorWithValidation
+													<VtColorWithValidation
 													 	class="mb-2"
 														v-model="flightInfoStyleAltitudeFColor"
 														vid="flightInfoStyleAltitudeFColor"
 														:validation="validation"
 														:label="$t('forms.content.tools.flightInfo.style.altitude.filtered')"
 													/>
-													<VColorWithValidation
+													<VtColorWithValidation
 													 	class="mb-2"
 														v-model="flightInfoStyleAltitudeColor"
 														vid="flightInfoStyleAltitudeColor"
@@ -235,14 +235,14 @@
 													/>
 												</v-col>
 												<v-col cols="12" lg="6">
-													<VColorWithValidation
+													<VtColorWithValidation
 													 	class="mb-2"
 														v-model="flightInfoStyleVelocityFColor"
 														vid="flightInfoStyleVelocityFColor"
 														:validation="validation"
 														:label="$t('forms.content.tools.flightInfo.style.velocity.filtered')"
 													/>
-													<VColorWithValidation
+													<VtColorWithValidation
 													 	class="mb-2"
 														v-model="flightInfoStyleVelocityColor"
 														vid="flightInfoStyleVelocityColor"
@@ -251,14 +251,14 @@
 													/>
 												</v-col>
 												<v-col cols="12" lg="6">
-													<VColorWithValidation
+													<VtColorWithValidation
 													 	class="mb-2"
 														v-model="flightInfoStyleEventApogeeColor"
 														vid="flightInfoStyleEventApogeeColor"
 														:validation="validation"
 														:label="$t('forms.content.tools.flightInfo.style.event.apogee.title')"
 													/>
-													<VColorWithValidation
+													<VtColorWithValidation
 														v-model="flightInfoStyleEventApogeeBorderColor"
 														vid="flightInfoStyleEventApogeeBorderColor"
 														:validation="validation"
@@ -266,14 +266,14 @@
 													/>
 												</v-col>
 												<v-col cols="12" lg="6">
-													<VColorWithValidation
+													<VtColorWithValidation
 													 	class="mb-2"
 														v-model="flightInfoStyleEventDrogueColor"
 														vid="flightInfoStyleEventDrogueColor"
 														:validation="validation"
 														:label="$t('forms.content.tools.flightInfo.style.event.drogue.title')"
 													/>
-													<VColorWithValidation
+													<VtColorWithValidation
 														v-model="flightInfoStyleEventDrogueBorderColor"
 														vid="flightInfoStyleEventDrogueBorderColor"
 														:validation="validation"
@@ -342,7 +342,7 @@
 					</template>
 					<template v-slot:after>
 						<div class="pt-4">
-							<VTextAreaWithValidation
+							<VtTextAreaWithValidation
 								ref="flightInfoInputRef"
 								v-model="flightInfoInput"
 								vid="flightInfoInput"
@@ -360,7 +360,7 @@
 							</v-btn>
 						</div>
 					</template>
-				</VFormControl>
+				</VtFormControl>
 			</v-col>
 			<v-col cols="12" lg="9" class="pl-4">
 				<div>
@@ -531,24 +531,23 @@
 </template>
 
 <script>
-import { required, requiredUnless } from '@vuelidate/validators';
-
 import FlightInfoData from '@/components.app/content/tools/flightInfo/FlightInfoData';
 import FlightInfoChart from '@/components.app/content/tools/flightInfo/charts/FlightInfo';
 
 import { useFlightInfoBaseComponent } from '@/components.app/content/tools/flightInfo/flightInfoBase';
+import { useFlightInfoValidation } from '@/components.app/content/tools/flightInfo/flightInfoValidation';
 
 import ContentAttribution from '@/components/content/Attribution';
 import ContentHeader from '@/components/content/Header';
 import ContentDescription from '@/components/content/Description';
 import MeasurementUnitSelect2 from '@/components/content/MeasurementUnitSelect2';
-import VColorWithValidation from '@thzero/library_client_vue3_vuetify3/components/form/VColorWithValidation';
-import VDateTimeField from '@thzero/library_client_vue3_vuetify3/components/form/VDateTimeFieldTemp';
-import VFormControl from '@thzero/library_client_vue3_vuetify3/components/form/VFormControl';
-import VSelectWithValidation from '@thzero/library_client_vue3_vuetify3/components/form/VSelectWithValidation';
-import VSwitchWithValidation from '@thzero/library_client_vue3_vuetify3/components/form/VSwitchWithValidation';
-import VTextAreaWithValidation from '@thzero/library_client_vue3_vuetify3/components/form/VTextAreaWithValidation';
-import VTextFieldWithValidation from '@thzero/library_client_vue3_vuetify3/components/form/VTextFieldWithValidation';
+import VtColorWithValidation from '@thzero/library_client_vue3_vuetify3/components/form/VtColorWithValidation';
+import VtDateTimePickerField from '@thzero/library_client_vue3_vuetify3/components/form/VtDateTimePickerFieldTemp';
+import VtFormControl from '@thzero/library_client_vue3_vuetify3/components/form/VtFormControl';
+import VtSelectWithValidation from '@thzero/library_client_vue3_vuetify3/components/form/VtSelectWithValidation';
+import VtSwitchWithValidation from '@thzero/library_client_vue3_vuetify3/components/form/VtSwitchWithValidation';
+import VtTextAreaWithValidation from '@thzero/library_client_vue3_vuetify3/components/form/VtTextAreaWithValidation';
+import VtTextFieldWithValidation from '@thzero/library_client_vue3_vuetify3/components/form/VtTextFieldWithValidation';
 
 export default {
 	name: 'FlightInfo',
@@ -559,13 +558,13 @@ export default {
 		FlightInfoData,
 		FlightInfoChart,
 		MeasurementUnitSelect2,
-		VColorWithValidation,
-		VDateTimeField,
-		VFormControl,
-		VSelectWithValidation,
-		VSwitchWithValidation,
-		VTextAreaWithValidation,
-		VTextFieldWithValidation
+		VtColorWithValidation,
+		VtDateTimePickerField,
+		VtFormControl,
+		VtSelectWithValidation,
+		VtSwitchWithValidation,
+		VtTextAreaWithValidation,
+		VtTextFieldWithValidation
 	},
 	setup(props, context) {
 		const {
@@ -581,6 +580,9 @@ export default {
 			serviceStore,
 			sortByOrder,
 			target,
+			contentLoadSignal,
+			contentLoadStart,
+			contentLoadStop,
 			calculationOutput,
 			content,
 			contentTitle,
@@ -607,10 +609,12 @@ export default {
 			flightDataTitle,
 			flightMeasurementUnitsId,
 			flightMeasurementUnitsAccelerationId,
+			flightMeasurementUnitsAltitudeId,
 			flightMeasurementUnitsDistanceId,
 			flightMeasurementUnitsVelocityId,
 			flightMeasurementUnitsOutputId,
 			flightMeasurementUnitsAccelerationOutputId,
+			flightMeasurementUnitsAltitudeOutputId,
 			flightMeasurementUnitsDistanceOutputId,
 			flightMeasurementUnitsVelocityOutputId,
 			flightMeasurementUnitsOptions,
@@ -619,7 +623,9 @@ export default {
 			processing,
 			styles,
 			initialized,
+			flightInstructions,
 			flightMeasurementUnitsOptionsAcceleration,
+			flightMeasurementUnitsOptionsAltitude,
 			flightMeasurementUnitsOptionsDistance,
 			flightMeasurementUnitsOptionsVelocity,
 			flightDataLoad,
@@ -687,6 +693,9 @@ export default {
 			serviceStore,
 			sortByOrder,
 			target,
+			contentLoadSignal,
+			contentLoadStart,
+			contentLoadStop,
 			calculationOutput,
 			content,
 			contentTitle,
@@ -713,10 +722,12 @@ export default {
 			flightDataTitle,
 			flightMeasurementUnitsId,
 			flightMeasurementUnitsAccelerationId,
+			flightMeasurementUnitsAltitudeId,
 			flightMeasurementUnitsDistanceId,
 			flightMeasurementUnitsVelocityId,
 			flightMeasurementUnitsOutputId,
 			flightMeasurementUnitsAccelerationOutputId,
+			flightMeasurementUnitsAltitudeOutputId,
 			flightMeasurementUnitsDistanceOutputId,
 			flightMeasurementUnitsVelocityOutputId,
 			flightMeasurementUnitsOptions,
@@ -725,7 +736,9 @@ export default {
 			processing,
 			styles,
 			initialized,
+			flightInstructions,
 			flightMeasurementUnitsOptionsAcceleration,
+			flightMeasurementUnitsOptionsAltitude,
 			flightMeasurementUnitsOptionsDistance,
 			flightMeasurementUnitsOptionsVelocity,
 			flightDataLoad,
@@ -781,24 +794,7 @@ export default {
 		}
 	},
 	validations () {
-		return {
-			flightDataDate: { $autoDirty: true },
-			flightDataLocation: { $autoDirty: true },
-			flightDataTitle: { $autoDirty: true },
-			flightInfoInput: { required, $autoDirty: true },
-			flightInfoDataTypeActual: { requiredIfFiltered: requiredUnless(this.flightInfoDataTypeFiltered), $autoDirty: true },
-			flightInfoDataTypeFiltered: { requiredIfActual: requiredUnless(this.flightInfoDataTypeActual), $autoDirty: true },
-			flightInfoDataTypeUse: { required, $autoDirty: true },
-			flightMeasurementUnitsId: { required, $autoDirty: true },
-			flightMeasurementUnitsAccelerationId: { required, $autoDirty: true },
-			flightMeasurementUnitsDistanceId: { required, $autoDirty: true },
-			flightMeasurementUnitsVelocityId: { required, $autoDirty: true },
-			flightMeasurementUnitsOutputId: { required, $autoDirty: true },
-			flightMeasurementUnitsAccelerationOutputId: { required, $autoDirty: true },
-			flightMeasurementUnitsDistanceOutputId: { required, $autoDirty: true },
-			flightMeasurementUnitsVelocityOutputId: { required, $autoDirty: true },
-			flightProcessor: { required, $autoDirty: true },
-		};
+		return useFlightInfoValidation(this.flightInfoDataTypeFiltered, this.flightInfoDataTypeActual);
 	}
 };
 </script>

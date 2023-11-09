@@ -61,6 +61,12 @@
 				<v-list-item-title>{{ $t('menu.yours.launches') }}</v-list-item-title>
 			</v-list-item>
 			<v-list-item
+				v-if="features.Yours.Locations"
+				to="/user/locations"
+			>
+				<v-list-item-title>{{ $t('menu.yours.locations') }}</v-list-item-title>
+			</v-list-item>
+			<v-list-item
 				v-if="features.Yours.Rockets"
 				to="/user/rockets"
 			>

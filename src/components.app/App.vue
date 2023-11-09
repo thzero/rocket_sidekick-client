@@ -57,16 +57,24 @@ export default {
 		text-decoration: underline;
 	}
 
-	.measurementUnit {
-		width: 90px;
+	.measurementUnitExtraLong {
+		width: 140px;
 	}
-	.measurementUnit2 {
+	.measurementUnitLong {
 		width: 125px;
 	}
-	.measurementUnits {
+	.measurementUnitMedium {
+		width: 115px;
+	}
+	.measurementUnitsMedium {
 		width: 125px;
 	}
-	.measurementUnit3 {
-		width: 125px;
+	.v-expansion-panel-text__wrapper {
+		padding-bottom: 0px !important;
+		padding-left: 12px !important;
+		padding-right: 0px !important;
+	}
+	.v-expansion-panel--active > .v-expansion-panel-title {
+		min-height: 0px !important;
 	}
 </style>

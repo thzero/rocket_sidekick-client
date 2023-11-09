@@ -17,7 +17,7 @@
 		<!-- <ContentDescription id="strings.content.tools.flightPath" /> -->
 		<v-row dense>
 			<v-col cols="12" lg="3">
-				<VFormControl
+				<VtFormControl
 					ref="formFlightPathRef"
 					:validation="validation"
 					:reset-additional="resetAdditionalInput"
@@ -36,7 +36,7 @@
 								<v-card-item>
 									<v-row dense>
 										<v-col cols="12">
-											<VTextFieldWithValidation
+											<VtTextFieldWithValidation
 												ref="flightDataTitleRef"
 												v-model="flightDataTitle"
 												vid="flightDataTitle"
@@ -45,7 +45,7 @@
 											/>
 										</v-col>
 										<v-col cols="12">
-											<VTextFieldWithValidation
+											<VtTextFieldWithValidation
 												ref="flightDataLocationRef"
 												v-model="flightDataLocation"
 												vid="flightDataLocation"
@@ -54,7 +54,7 @@
 											/>
 										</v-col>
 										<v-col cols="12">
-											<VDateTimeField
+											<VtDateTimePickerFieldTemp
 												ref="flightDataDateRef"
 												v-model="flightDataDate"
 												vid="flightDataDate"
@@ -63,7 +63,7 @@
 											/>
 										</v-col>
 										<v-col cols="12">
-											<VSelectWithValidation
+											<VtSelectWithValidation
 												ref="flightProcessorRef"
 												v-model="flightProcessor"
 												vid="flightProcessor"
@@ -79,7 +79,7 @@
 												<v-card-text>
 													<v-row dense>
 														<v-col cols="12">
-															<VSelectWithValidation
+															<VtSelectWithValidation
 																ref="flightMeasurementUnitsIdRef"
 																v-model="flightMeasurementUnitsId"
 																vid="flightMeasurementUnitsId"
@@ -91,7 +91,7 @@
 													</v-row>
 													<v-row dense>
 														<v-col cols="6">
-															<VSelectWithValidation
+															<VtSelectWithValidation
 																ref="flightMeasurementUnitsDistanceIdRef"
 																v-model="flightMeasurementUnitsDistanceId"
 																vid="flightMeasurementUnitsDistanceId"
@@ -101,7 +101,7 @@
 															/>
 														</v-col>
 														<v-col cols="6">
-															<VSelectWithValidation
+															<VtSelectWithValidation
 																ref="flightMeasurementUnitsVelocityIdRef"
 																v-model="flightMeasurementUnitsVelocityId"
 																vid="flightMeasurementUnitsVelocityId"
@@ -121,7 +121,7 @@
 												<v-card-text>
 													<v-row dense>
 														<v-col cols="12">
-															<VSelectWithValidation
+															<VtSelectWithValidation
 																ref="flightMeasurementUnitsOutputIdRef"
 																v-model="flightMeasurementUnitsOutputId"
 																vid="flightMeasurementUnitsOutputId"
@@ -133,7 +133,7 @@
 													</v-row>
 													<v-row dense>
 														<v-col cols="6">
-															<VSelectWithValidation
+															<VtSelectWithValidation
 																ref="flightMeasurementUnitsDistanceOutputIdRef"
 																v-model="flightMeasurementUnitsDistanceOutputId"
 																vid="flightMeasurementUnitsDistanceOutputId"
@@ -143,7 +143,7 @@
 															/>
 														</v-col>
 														<v-col cols="6">
-															<VSelectWithValidation
+															<VtSelectWithValidation
 																ref="flightMeasurementUnitsVelocityOutputIdRef"
 																v-model="flightMeasurementUnitsVelocityOutputId"
 																vid="flightMeasurementUnitsVelocityOutputId"
@@ -173,21 +173,21 @@
 										<v-expansion-panel-text>
 											<v-row dense>
 												<v-col cols="12" lg="6">
-													<VColorWithValidation
+													<VtColorWithValidation
 													 	class="mb-2"
 														v-model="flightPathStylePinLaunchColor"
 														vid="flightPathStylePinLaunchColor"
 														:validation="validation"
 														:label="$t('forms.content.tools.flightPath.style.launch.color')"
 													/>
-													<VColorWithValidation
+													<VtColorWithValidation
 													 	class="mb-2"
 														v-model="flightPathStylePathGroundColor"
 														vid="flightPathStylePathGroundColor"
 														:validation="validation"
 														:label="$t('forms.content.tools.flightPath.style.ground.color')"
 													/>
-													<VColorWithValidation
+													<VtColorWithValidation
 													 	class="mb-2"
 														v-model="flightPathStylePathFlightColor"
 														vid="flightPathStylePathFlightColor"
@@ -196,21 +196,21 @@
 													/>
 												</v-col>
 												<v-col cols="12" lg="6">
-													<VColorWithValidation
+													<VtColorWithValidation
 													 	class="mb-2"
 														v-model="flightPathStylePinMaxAltitudeColor"
 														vid="flightPathStylePinMaxAltitudeColor"
 														:validation="validation"
 														:label="$t('forms.content.tools.flightPath.style.maxAltitude.color')"
 													/>
-													<VColorWithValidation
+													<VtColorWithValidation
 													 	class="mb-2"
 														v-model="flightPathStylePinMaxVelocityColor"
 														vid="flightPathStylePinMaxVelocityColor"
 														:validation="validation"
 														:label="$t('forms.content.tools.flightPath.style.maxVelocity.color')"
 													/>
-													<VColorWithValidation
+													<VtColorWithValidation
 													 	class="mb-2"
 														v-model="flightPathStylePinTouchdownColor"
 														vid="flightPathStylePinTouchdownColor"
@@ -219,14 +219,14 @@
 													/>
 												</v-col>
 												<v-col cols="12" lg="6">
-													<VCheckboxWithValidation
+													<VtCheckboxWithValidation
 														ref="flightPathStylePinMaxVelocitySelectedRef"
 														v-model="flightPathStylePinLaunchSelected"
 														vid="flightPathStylePinLaunchSelected"
 														:validation="validation"
 														:label="$t('forms.content.tools.flightPath.style.launch.color')"
 													/>
-													<VCheckboxWithValidation
+													<VtCheckboxWithValidation
 														ref="flightPathStylePinMaxAltitudeSelectedRef"
 														v-model="flightPathStylePinMaxAltitudeSelected"
 														vid="flightPathStylePinMaxAltitudeSelected"
@@ -235,14 +235,14 @@
 													/>
 												</v-col>
 												<v-col cols="12" lg="6">
-													<VCheckboxWithValidation
+													<VtCheckboxWithValidation
 														ref="flightPathStylePinMaxVelocitySelectedRef"
 														v-model="flightPathStylePinMaxVelocitySelected"
 														vid="flightPathStylePinMaxVelocitySelected"
 														:validation="validation"
 														:label="$t('forms.content.tools.flightPath.style.maxVelocity.color')"
 													/>
-													<VCheckboxWithValidation
+													<VtCheckboxWithValidation
 														ref="flightPathStylePinTouchdownSelectedRef"
 														v-model="flightPathStylePinTouchdownSelected"
 														vid="flightPathStylePinTouchdownSelected"
@@ -291,7 +291,7 @@
 					</template>
 					<template v-slot:after>
 						<div class="pt-4">
-							<VTextAreaWithValidation
+							<VtTextAreaWithValidation
 								ref="flightPathInputRef"
 								v-model="flightPathInput"
 								vid="flightPathInput"
@@ -309,9 +309,35 @@
 							</v-btn>
 						</div>
 					</template>
-				</VFormControl>
+				</VtFormControl>
 			</v-col>
 			<v-col cols="12" lg="9" class="pl-4">
+				<v-row
+					dense
+				>
+					<v-col
+						cols="12"
+					>
+						<v-expansion-panels
+      						v-model="panelInstructions"
+							class="mb-2"
+						>
+							<v-expansion-panel
+								value="instructions"
+							>
+								<v-expansion-panel-title
+									color="secondary"
+								>
+									{{ $t(`forms.content.tools.instructions.title`) }}
+								</v-expansion-panel-title>
+								<v-expansion-panel-text>
+											<VtMarkdown v-model="flightInstructions" :use-github=false />
+											<VtMarkdown v-model="flightPathInstructions" :use-github=false />
+								</v-expansion-panel-text>
+							</v-expansion-panel>
+						</v-expansion-panels>
+					</v-col>
+				</v-row>
 				<v-row
 					id="flight-path"
 					dense
@@ -322,7 +348,20 @@
 						ref="outputRef"
 					>
 						<pre>
-{{ output }}
+{{ flightPathOutput ? flightPathOutput.join('\n') : '' }}
+						</pre>
+					</v-col>
+				</v-row>
+				<v-row
+					dense
+					style="color: black; background-color: lightgray"
+					class="mt-8"
+				>
+					<v-col
+						cols="12"
+					>
+						<pre>
+{{ flightPathData ? JSON.stringify(flightPathData, null, 4) : '' }}
 						</pre>
 					</v-col>
 				</v-row>
@@ -332,7 +371,7 @@
 				>
 					<v-col cols="12">
 						<div class="pt-4">
-							<VTextAreaWithValidation
+							<VtTextAreaWithValidation
 								ref="templateMainRef"
 								v-model="templateMain"
 								vid="templateMain"
@@ -341,7 +380,7 @@
 							/>
 						</div>
 						<div class="pt-4">
-							<VTextAreaWithValidation
+							<VtTextAreaWithValidation
 								ref="templatePinLaunchRef"
 								v-model="templatePinLaunch"
 								vid="templatePinLaunch"
@@ -350,7 +389,7 @@
 							/>
 						</div>
 						<div class="pt-4">
-							<VTextAreaWithValidation
+							<VtTextAreaWithValidation
 								ref="templatePinTouchdownRef"
 								v-model="templatePinTouchdown"
 								vid="templatePinTouchdown"
@@ -359,7 +398,7 @@
 							/>
 						</div>
 						<div class="pt-4">
-							<VTextAreaWithValidation
+							<VtTextAreaWithValidation
 								ref="templatePinsAdditionalRef"
 								v-model="templatePinsAdditional"
 								vid="templatePinsAdditional"
@@ -393,22 +432,22 @@
 </template>
 
 <script>
-import { required } from '@vuelidate/validators';
-
 import { useFlightPathBaseComponent } from '@/components.app/content/tools/flightPath/flightPathBase';
+import { useFlightPathValidation } from '@/components.app/content/tools/flightPath/flightPathValidation';
 
 import ContentAttribution from '@/components/content/Attribution';
 import ContentDescription from '@/components/content/Description';
 import ContentHeader from '@/components/content/Header';
 import MeasurementUnitSelect2 from '@/components/content/MeasurementUnitSelect2';
-import VCheckboxWithValidation from '@thzero/library_client_vue3_vuetify3/components/form/VCheckboxWithValidation';
-import VColorWithValidation from '@thzero/library_client_vue3_vuetify3/components/form/VColorWithValidation';
-import VDateTimeField from '@thzero/library_client_vue3_vuetify3/components/form/VDateTimeFieldTemp';
-import VFormControl from '@thzero/library_client_vue3_vuetify3/components/form/VFormControl';
-import VSelectWithValidation from '@thzero/library_client_vue3_vuetify3/components/form/VSelectWithValidation';
-import VSwitchWithValidation from '@thzero/library_client_vue3_vuetify3/components/form/VSwitchWithValidation';
-import VTextAreaWithValidation from '@thzero/library_client_vue3_vuetify3/components/form/VTextAreaWithValidation';
-import VTextFieldWithValidation from '@thzero/library_client_vue3_vuetify3/components/form/VTextFieldWithValidation';
+import VtCheckboxWithValidation from '@thzero/library_client_vue3_vuetify3/components/form/VtCheckboxWithValidation';
+import VtColorWithValidation from '@thzero/library_client_vue3_vuetify3/components/form/VtColorWithValidation';
+import VtDateTimePickerFieldTemp from '@thzero/library_client_vue3_vuetify3/components/form/VtDateTimePickerFieldTemp';
+import VtFormControl from '@thzero/library_client_vue3_vuetify3/components/form/VtFormControl';
+import VtMarkdown from '@thzero/library_client_vue3_vuetify3/components/markup/VtMarkdown';
+import VtSelectWithValidation from '@thzero/library_client_vue3_vuetify3/components/form/VtSelectWithValidation';
+import VtSwitchWithValidation from '@thzero/library_client_vue3_vuetify3/components/form/VtSwitchWithValidation';
+import VtTextAreaWithValidation from '@thzero/library_client_vue3_vuetify3/components/form/VtTextAreaWithValidation';
+import VtTextFieldWithValidation from '@thzero/library_client_vue3_vuetify3/components/form/VtTextFieldWithValidation';
 
 export default {
 	name: 'FlightPath',
@@ -417,14 +456,15 @@ export default {
 		ContentDescription,
 		ContentHeader,
 		MeasurementUnitSelect2,
-		VCheckboxWithValidation,
-		VColorWithValidation,
-		VDateTimeField,
-		VFormControl,
-		VSelectWithValidation,
-		VSwitchWithValidation,
-		VTextAreaWithValidation,
-		VTextFieldWithValidation
+		VtCheckboxWithValidation,
+		VtColorWithValidation,
+		VtDateTimePickerFieldTemp,
+		VtFormControl,
+		VtMarkdown,
+		VtSelectWithValidation,
+		VtSwitchWithValidation,
+		VtTextAreaWithValidation,
+		VtTextFieldWithValidation
 	},
 	setup(props, context) {
 		const {
@@ -437,12 +477,12 @@ export default {
 			noBreakingSpaces,
 			notImplementedError,
 			success,
-			contentLoadSignal,
 			serviceStore,
-			contentLoadStart,
-			contentLoadStop,
 			sortByOrder,
 			target,
+			contentLoadSignal,
+			contentLoadStart,
+			contentLoadStop,
 			calculationOutput,
 			content,
 			contentTitle,
@@ -460,7 +500,7 @@ export default {
 			handleAttribution,
 			initCalculationOutput,
 			initCalculationResults,
-			resetFormI,
+			resetAdditional,
 			setErrorMessage,
 			setErrorTimer,
 			setNotify,
@@ -481,6 +521,7 @@ export default {
 			processing,
 			styles,
 			initialized,
+			flightInstructions,
 			flightMeasurementUnitsOptionsAcceleration,
 			flightMeasurementUnitsOptionsDistance,
 			flightMeasurementUnitsOptionsVelocity,
@@ -502,7 +543,9 @@ export default {
 			expanded,
 			flightPath,
 			flightPathData,
+			flightPathDataExport,
 			flightPathInput,
+			flightPathOutput,
 			flightPathStylePathFlightColor,
 			flightPathStylePathGroundColor,
 			flightPathStylePinLaunchColor,
@@ -513,14 +556,15 @@ export default {
 			flightPathStylePinMaxVelocitySelected,
 			flightPathStylePinTouchdownColor,
 			flightPathStylePinTouchdownSelected,
-			output,
 			clickFlightPathStylesReset,
 			flightPathInputChange,
 			flightPathStyleLoad,
+			panelInstructions,
 			templateMain,
 			templatePinLaunch,
 			templatePinsAdditional,
 			templatePinTouchdown,
+			flightPathInstructions,
 			flightPathStyleReset,
 			flightPathStyleSave,
 			flightPathExport,
@@ -541,12 +585,12 @@ export default {
 			noBreakingSpaces,
 			notImplementedError,
 			success,
-			contentLoadSignal,
 			serviceStore,
-			contentLoadStart,
-			contentLoadStop,
 			sortByOrder,
 			target,
+			contentLoadSignal,
+			contentLoadStart,
+			contentLoadStop,
 			calculationOutput,
 			content,
 			contentTitle,
@@ -564,7 +608,7 @@ export default {
 			handleAttribution,
 			initCalculationOutput,
 			initCalculationResults,
-			resetFormI,
+			resetAdditional,
 			setErrorMessage,
 			setErrorTimer,
 			setNotify,
@@ -585,6 +629,7 @@ export default {
 			processing,
 			styles,
 			initialized,
+			flightInstructions,
 			flightMeasurementUnitsOptionsAcceleration,
 			flightMeasurementUnitsOptionsDistance,
 			flightMeasurementUnitsOptionsVelocity,
@@ -606,7 +651,9 @@ export default {
 			expanded,
 			flightPath,
 			flightPathData,
+			flightPathDataExport,
 			flightPathInput,
+			flightPathOutput,
 			flightPathStylePathFlightColor,
 			flightPathStylePathGroundColor,
 			flightPathStylePinLaunchColor,
@@ -617,14 +664,15 @@ export default {
 			flightPathStylePinMaxVelocitySelected,
 			flightPathStylePinTouchdownColor,
 			flightPathStylePinTouchdownSelected,
-			output,
 			clickFlightPathStylesReset,
 			flightPathInputChange,
 			flightPathStyleLoad,
+			panelInstructions,
 			templateMain,
 			templatePinLaunch,
 			templatePinsAdditional,
 			templatePinTouchdown,
+			flightPathInstructions,
 			flightPathStyleReset,
 			flightPathStyleSave,
 			flightPathExport,
@@ -636,27 +684,7 @@ export default {
 		}
 	},
 	validations () {
-		return {
-			flightDataDate: { $autoDirty: true },
-			flightDataLocation: { $autoDirty: true },
-			flightDataTitle: { $autoDirty: true },
-			flightPathInput: { required, $autoDirty: true },
-			flightMeasurementUnitsId: { required, $autoDirty: true },
-			flightMeasurementUnitsDistanceId: { required, $autoDirty: true },
-			flightMeasurementUnitsVelocityId: { required, $autoDirty: true },
-			flightMeasurementUnitsOutputId: { required, $autoDirty: true },
-			flightMeasurementUnitsDistanceOutputId: { required, $autoDirty: true },
-			flightMeasurementUnitsVelocityOutputId: { required, $autoDirty: true },
-			flightProcessor: { required, $autoDirty: true },
-			flightPathStylePinLaunchColor: { required, $autoDirty: true },
-			flightPathStylePinLaunchSelected: { required, $autoDirty: true },
-			flightPathStylePinMaxAltitudeColor: { required, $autoDirty: true },
-			flightPathStylePinMaxAltitudeSelected: { required, $autoDirty: true },
-			flightPathStylePinMaxVelocityColor: { required, $autoDirty: true },
-			flightPathStylePinMaxVelocitySelected: { required, $autoDirty: true },
-			flightPathStylePinTouchdownColor: { required, $autoDirty: true },
-			flightPathStylePinTouchdownSelected: { required, $autoDirty: true }
-		};
+		return useFlightPathValidation;
 	}
 };
 </script>

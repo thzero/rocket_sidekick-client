@@ -23,12 +23,12 @@ export function useFoamBaseComponent(props, context) {
 		noBreakingSpaces,
 		notImplementedError,
 		success,
-		contentLoadSignal,
 		serviceStore,
-		contentLoadStart,
-		contentLoadStop,
 		sortByOrder,
 		target,
+		contentLoadSignal,
+		contentLoadStart,
+		contentLoadStop,
 		calculationOutput,
 		content,
 		contentTitle,
@@ -76,6 +76,8 @@ export function useFoamBaseComponent(props, context) {
 		measurementUnitsAccelerationType,
 		measurementUnitsAreaDefaultId,
 		measurementUnitsAreaType,
+		measurementUnitsAltitudeDefaultId,
+		measurementUnitsAltitudeType,
 		measurementUnitsDensityDefaultId,
 		measurementUnitsDensityType,
 		measurementUnitsDistanceType,
@@ -102,14 +104,24 @@ export function useFoamBaseComponent(props, context) {
 	const calculationResults = initCalculationResults(correlationId(), ref({}));
 	const formFoamRef = ref(null);
 	const bodyTubeID = ref(null);
+	const bodyTubeIDLengthMeasurementUnitId = ref(null);
+	const bodyTubeIDLengthMeasurementUnitsId = ref(null);
 	const finRootLength = ref(null);
+	const finRootLengthMeasurementUnitId = ref(null);
+	const finRootLengthMeasurementUnitsId = ref(null);
 	const finTabLength = ref(0.3);
+	const finTabLengthMeasurementUnitId = ref(null);
+	const finTabLengthMeasurementUnitsId = ref(null);
 	const finWidth = ref(null);
+	const finWidthLengthMeasurementUnitId = ref(null);
+	const finWidthLengthMeasurementUnitsId = ref(null);
 	const fluidMeasurementUnitId = ref(null);
 	const fluidMeasurementUnitsId = ref(null);
 	const lengthMeasurementUnitId = ref(null);
 	const lengthMeasurementUnitsId = ref(null);
 	const motorTubeOD = ref(null);
+	const motorTubeODLengthMeasurementUnitId = ref(null);
+	const motorTubeODLengthMeasurementUnitsId = ref(null);
 	const numberFins = ref(null);
 
 	const calculationOk = async () => {
@@ -159,16 +171,38 @@ export function useFoamBaseComponent(props, context) {
 	};
 	const initCalculationData = (correlationId) => {
 		calculationData.value.bodyTubeID = bodyTubeID.value;
+		calculationData.value.bodyTubeIDLengthMeasurementUnitId = bodyTubeIDLengthMeasurementUnitId.value;
+		// calculationData.value.bodyTubeIDLengthMeasurementUnitsId = bodyTubeIDLengthMeasurementUnitsId.value;
+		calculationData.value.bodyTubeIDLengthMeasurementUnitsId = measurementUnitsFromUnitId(correlationId, AppCommonConstants.MeasurementUnits.length.id, bodyTubeIDLengthMeasurementUnitId.value);
+		
+		calculationData.value.finRootLength = finRootLength.value;
+		calculationData.value.finRootLengthMeasurementUnitId = finRootLengthMeasurementUnitId.value;
+		// calculationData.value.finRootLengthMeasurementUnitsId = finRootLengthMeasurementUnitsId.value;
+		calculationData.value.finRootLengthMeasurementUnitsId = measurementUnitsFromUnitId(correlationId, AppCommonConstants.MeasurementUnits.length.id, finRootLengthMeasurementUnitId.value);
+		
+		calculationData.value.finTabLength = finTabLength.value;
+		calculationData.value.finTabLengthMeasurementUnitId = finTabLengthMeasurementUnitId.value;
+		// calculationData.value.finTabLengthMeasurementUnitsId = finTabLengthMeasurementUnitsId.value;
+		calculationData.value.finTabLengthMeasurementUnitsId = measurementUnitsFromUnitId(correlationId, AppCommonConstants.MeasurementUnits.length.id, finTabLengthMeasurementUnitId.value);
+		
+		calculationData.value.finWidth = finWidth.value;
+		calculationData.value.finWidthLengthMeasurementUnitId = finWidthLengthMeasurementUnitId.value;
+		// calculationData.value.finWidthLengthMeasurementUnitsId = finWidthLengthMeasurementUnitsId.value;
+		calculationData.value.finWidthLengthMeasurementUnitsId = measurementUnitsFromUnitId(correlationId, AppCommonConstants.MeasurementUnits.length.id, finWidthLengthMeasurementUnitId.value);
+		
 		calculationData.value.fluidMeasurementUnitId = fluidMeasurementUnitId.value;
 		// calculationData.value.fluidMeasurementUnitsId = fluidMeasurementUnitsId.value;
 		calculationData.value.fluidMeasurementUnitsId = measurementUnitsFromUnitId(correlationId, AppCommonConstants.MeasurementUnits.fluid.id, fluidMeasurementUnitId.value);
-		calculationData.value.finRootLength = finRootLength.value;
-		calculationData.value.finTabLength = finTabLength.value;
-		calculationData.value.finWidth = finWidth.value;
+		
 		calculationData.value.lengthMeasurementUnitId = lengthMeasurementUnitId.value;
 		// calculationData.value.lengthMeasurementUnitsId = lengthMeasurementUnitsId.value;
 		calculationData.value.lengthMeasurementUnitsId = measurementUnitsFromUnitId(correlationId, AppCommonConstants.MeasurementUnits.length.id, lengthMeasurementUnitId.value);
+		
 		calculationData.value.motorTubeOD = motorTubeOD.value;
+		calculationData.value.motorTubeODLengthMeasurementUnitId = motorTubeODLengthMeasurementUnitId.value;
+		// calculationData.value.motorTubeODLengthMeasurementUnitsId = motorTubeODLengthMeasurementUnitsId.value;
+		calculationData.value.motorTubeODLengthMeasurementUnitsId = measurementUnitsFromUnitId(correlationId, AppCommonConstants.MeasurementUnits.length.id, motorTubeODLengthMeasurementUnitId.value);
+		
 		calculationData.value.numberFins = numberFins.value;
 	};
 	const reset = async (correlationId) => {
@@ -179,10 +213,22 @@ export function useFoamBaseComponent(props, context) {
 		reset(false);
 
 		calculationData.value = serviceToolsFoam.initialize(correlationId());
+		
+		bodyTubeIDLengthMeasurementUnitId.value = measurementUnitsLengthDefaultId.value;
+		finRootLengthMeasurementUnitId.value = measurementUnitsLengthDefaultId.value;
+		finTabLengthMeasurementUnitId.value = measurementUnitsLengthDefaultId.value;
+		finWidthLengthMeasurementUnitId.value = measurementUnitsLengthDefaultId.value;
 		fluidMeasurementUnitId.value = measurementUnitsFluidDefaultId.value;
-		fluidMeasurementUnitsId.value = measurementUnitsIdSettings.value;
 		lengthMeasurementUnitId.value = measurementUnitsLengthDefaultId.value;
+		motorTubeODLengthMeasurementUnitId.value = measurementUnitsLengthDefaultId.value;
+
+		bodyTubeIDLengthMeasurementUnitsId.value = measurementUnitsIdSettings.value;
+		finRootLengthMeasurementUnitsId.value = measurementUnitsIdSettings.value;
+		finTabLengthMeasurementUnitsId.value = measurementUnitsIdSettings.value;
+		finWidthLengthMeasurementUnitsId.value = measurementUnitsIdSettings.value;
+		fluidMeasurementUnitsId.value = measurementUnitsIdSettings.value;
 		lengthMeasurementUnitsId.value = measurementUnitsIdSettings.value;
+		motorTubeODLengthMeasurementUnitsId.value = measurementUnitsIdSettings.value;
 	});
 
 	return {
@@ -195,12 +241,12 @@ export function useFoamBaseComponent(props, context) {
 		noBreakingSpaces,
 		notImplementedError,
 		success,
-		contentLoadSignal,
 		serviceStore,
-		contentLoadStart,
-		contentLoadStop,
 		sortByOrder,
 		target,
+		contentLoadSignal,
+		contentLoadStart,
+		contentLoadStop,
 		calculationOutput,
 		content,
 		contentTitle,
@@ -231,14 +277,24 @@ export function useFoamBaseComponent(props, context) {
 		calculationResults,
 		formFoamRef,
 		bodyTubeID,
+		bodyTubeIDLengthMeasurementUnitId,
+		bodyTubeIDLengthMeasurementUnitsId,
 		finRootLength,
+		finRootLengthMeasurementUnitId,
+		finRootLengthMeasurementUnitsId,
 		finTabLength,
+		finTabLengthMeasurementUnitId,
+		finTabLengthMeasurementUnitsId,
 		finWidth,
+		finWidthLengthMeasurementUnitId,
+		finWidthLengthMeasurementUnitsId,
 		fluidMeasurementUnitId,
-		fluidMeasurementUnitsId ,
+		fluidMeasurementUnitsId,
 		lengthMeasurementUnitId,
 		lengthMeasurementUnitsId,
 		motorTubeOD,
+		motorTubeODLengthMeasurementUnitId,
+		motorTubeODLengthMeasurementUnitsId,
 		numberFins,
 		calculationOk,
 		initCalculationData,

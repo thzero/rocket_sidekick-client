@@ -91,9 +91,9 @@ export function use3DPrintingBaseComponent(props, context, options) {
 	};
 
 	onMounted(async () => {
-		contentLoadStart();
-
 		try {
+			contentLoadStart();
+
 			const response = await serviceStore.dispatcher.requestContentMarkup(correlationId(), 'info.3dprinting');
 			if (hasFailed(response))
 				return;

@@ -1,11 +1,10 @@
 <script>
-import { nextTick, onMounted, ref, watch } from 'vue';
+import { computed, nextTick, ref, watch } from 'vue';
 
 import useVuelidate from '@vuelidate/core';
 
 import Papa from 'papaparse';
 
-import AppCommonConstants from 'rocket_sidekick_common/constants';
 import AppConstants from '@/constants';
 
 import AppUtility from '@/utility/app';
@@ -29,12 +28,12 @@ export function useFlightPathBaseComponent(props, context) {
 		noBreakingSpaces,
 		notImplementedError,
 		success,
-		contentLoadSignal,
 		serviceStore,
-		contentLoadStart,
-		contentLoadStop,
 		sortByOrder,
 		target,
+		contentLoadSignal,
+		contentLoadStart,
+		contentLoadStop,
 		calculationOutput,
 		content,
 		contentTitle,
@@ -52,7 +51,7 @@ export function useFlightPathBaseComponent(props, context) {
 		handleAttribution,
 		initCalculationOutput,
 		initCalculationResults,
-		resetFormI,
+		resetAdditional,
 		setErrorMessage,
 		setErrorTimer,
 		setNotify,
@@ -61,10 +60,12 @@ export function useFlightPathBaseComponent(props, context) {
 		flightDataTitle,
 		flightMeasurementUnitsId,
 		flightMeasurementUnitsAccelerationId,
+		flightMeasurementUnitsAltitudeId,
 		flightMeasurementUnitsDistanceId,
 		flightMeasurementUnitsVelocityId,
 		flightMeasurementUnitsOutputId,
 		flightMeasurementUnitsAccelerationOutputId,
+		flightMeasurementUnitsAltitudeOutputId,
 		flightMeasurementUnitsDistanceOutputId,
 		flightMeasurementUnitsVelocityOutputId,
 		flightMeasurementUnitsOptions,
@@ -73,7 +74,9 @@ export function useFlightPathBaseComponent(props, context) {
 		processing,
 		styles,
 		initialized,
+		flightInstructions,
 		flightMeasurementUnitsOptionsAcceleration,
+		flightMeasurementUnitsOptionsAltitude,
 		flightMeasurementUnitsOptionsDistance,
 		flightMeasurementUnitsOptionsVelocity,
 		flightDataLoad,
@@ -84,7 +87,8 @@ export function useFlightPathBaseComponent(props, context) {
 		flightMeasurementUnitsReset,
 		flightMeasurementUnitsSave
 	} = useFlightToolsBaseComponent(props, context, {
-		id: 'flightPath',
+		// id: 'flightPath',
+		markupId: 'tools.flightPath',
 		onMounted: async (correlationIdI) => {
 			reset(correlationIdI);
 
@@ -115,6 +119,8 @@ export function useFlightPathBaseComponent(props, context) {
 		measurementUnitsAccelerationType,
 		measurementUnitsAreaDefaultId,
 		measurementUnitsAreaType,
+		measurementUnitsAltitudeDefaultId,
+		measurementUnitsAltitudeType,
 		measurementUnitsDensityDefaultId,
 		measurementUnitsDensityType,
 		measurementUnitsDistanceType,
@@ -150,7 +156,9 @@ export function useFlightPathBaseComponent(props, context) {
 	const expanded = ref(false);
 	const flightPath = ref(null);
 	const flightPathData = ref(null);
+	const flightPathDataExport = ref(null);
 	const flightPathInput = ref(null);
+	const flightPathOutput = ref(null);
 	const flightPathStylePathFlightColor = ref(null);
 	const flightPathStylePathGroundColor = ref(null);
 	const flightPathStylePinLaunchColor = ref(null);
@@ -161,11 +169,25 @@ export function useFlightPathBaseComponent(props, context) {
 	const flightPathStylePinMaxVelocitySelected = ref(true);
 	const flightPathStylePinTouchdownColor = ref(null);
 	const flightPathStylePinTouchdownSelected = ref(true);
-	const output = ref(null);
+	const panelInstructions = ref(['instructions']);
 	const templateMain = ref(serviceFlightPath.templateMainDefault);
 	const templatePinLaunch = ref(serviceFlightPath.templatePinLaunchDefault);
 	const templatePinsAdditional = ref('');
 	const templatePinTouchdown = ref(serviceFlightPath.templatePinTouchdownDefault);
+
+	const flightPathInstructions = computed(() => {
+		if (!content.value || !content.value.processors)
+			return '';
+
+		if (String.isNullOrEmpty(flightProcessor.value))
+			return '';
+
+		const processor = content.value.processors.find(l => l.id === flightProcessor.value);
+		if (!processor)
+			return general;
+
+		return processor.markup;
+	});
 
 	const clickFlightPathStylesReset = () => {
 		flightPathStyleReset(correlationId(), false);
@@ -251,7 +273,7 @@ export function useFlightPathBaseComponent(props, context) {
 	const flightPathExport = () => {
 		try {
 			const correlationIdI = correlationId();
-			if (LibraryCommonUtility.isNull(flightPathData.value))
+			if (LibraryCommonUtility.isNull(flightPathDataExport.value))
 				return;
 
 			downloadProgress.value = true;
@@ -261,23 +283,28 @@ export function useFlightPathBaseComponent(props, context) {
 			const month = currentDate.getMonth() + 1;
 			const year = currentDate.getFullYear();
 
-			const name = 'flight-path-' + day + '-' + month + '-' + year + '.kml';
+			let namePrefix = 'flight-path';
+			let nameDate = day + '-' + month + '-' + year;
+			const extension = '.kml';
 
-			serviceDownload.download(correlationIdI, flightPathData.value,
-				name,
-				() => {
-					AppUtility.debug2('download', 'completed');
-							downloadProgress.value = false;
-				},
-				() => {
-					AppUtility.debug2('download', 'cancelled');
-							downloadProgress.value = false;
-				},
-				(arg) => {
-					AppUtility.debug2('download', 'progress');
-					AppUtility.debug2(arg);
-				}
-			);
+			let index = 0;
+			for (const item of flightPathDataExport.value) {
+				serviceDownload.download(correlationIdI, item,
+					namePrefix + (index++) + '-' + nameDate + extension,
+					() => {
+						AppUtility.debug2('download', 'completed');
+						downloadProgress.value = false;
+					},
+					() => {
+						AppUtility.debug2('download', 'cancelled');
+						downloadProgress.value = false;
+					},
+					(arg) => {
+						AppUtility.debug2('download', 'progress');
+						AppUtility.debug2(arg);
+					}
+				);
+			}
 		}
 		catch (err) {
 			downloadProgress.value = false;
@@ -290,7 +317,7 @@ export function useFlightPathBaseComponent(props, context) {
 
 		const correlationIdI = correlationId();
 		reset(correlationIdI);
-		output.value = '';
+		flightPathOutput.value = '';
 
 		processing.value = true;
 
@@ -346,19 +373,20 @@ export function useFlightPathBaseComponent(props, context) {
 				flightPath,
 				{
 					measurementUnitsId: flightMeasurementUnitsId.value,
-					measurementUnitsDistanceId: flightMeasurementUnitsDistanceId.value,
+					measurementUnitsAltitudeId: flightMeasurementUnitsAltitudeId.value,
 					measurementUnitsVelocityId: flightMeasurementUnitsVelocityId.value,
 					measurementUnitsOutputId: flightMeasurementUnitsOutputId.value,
-					measurementUnitsDistanceOutputId: flightMeasurementUnitsDistanceOutputId.value,
+					measurementUnitsAltitudeOutputId: flightMeasurementUnitsAltitudeOutputId.value,
 					measurementUnitsVelocityOutputId: flightMeasurementUnitsVelocityOutputId.value,
 				},
 				templateMain.value, templatePinLaunch.value, templatePinTouchdown.value, templatePinsAdditional.value);
 			if (hasFailed(flightPathResponse))
 				return; // TODO: error...
 
-			flightPathData.value = flightPathResponse.results.flightPath;
+			flightPathData.value = flightPathResponse.results.flightPaths;
+			flightPathDataExport.value = flightPathResponse.results.flightPathsOutput;
 			// this.output = JSON.stringify(flightPathResponse.results, null, 2);
-			output.value = flightPathResponse.results.flightPath;
+			flightPathOutput.value = flightPathResponse.results.flightPathsOutput;
 
 			serviceStore.dispatcher.setFlightPathProcessor(correlationIdI, flightProcessor.value);
 
@@ -368,6 +396,7 @@ export function useFlightPathBaseComponent(props, context) {
 
 			setNotify(correlationIdI, 'messages.processed');
 
+			panelInstructions.value = [];
 			buttons.value.export.disabled = false;
 			processing.value = false;
 
@@ -386,6 +415,8 @@ export function useFlightPathBaseComponent(props, context) {
 		setErrorTimer(null);
 		flightPath.value = null;
 		flightPathData.value = null;
+		flightPathDataExport.value = null;
+		flightPathOutput.value = '';
 		processing.value = false;
 	};
 	const resetAdditionalInput = () => {
@@ -422,12 +453,12 @@ export function useFlightPathBaseComponent(props, context) {
 		noBreakingSpaces,
 		notImplementedError,
 		success,
-		contentLoadSignal,
 		serviceStore,
-		contentLoadStart,
-		contentLoadStop,
 		sortByOrder,
 		target,
+		contentLoadSignal,
+		contentLoadStart,
+		contentLoadStop,
 		calculationOutput,
 		content,
 		contentTitle,
@@ -445,7 +476,7 @@ export function useFlightPathBaseComponent(props, context) {
 		handleAttribution,
 		initCalculationOutput,
 		initCalculationResults,
-		resetFormI,
+		resetAdditional,
 		setErrorMessage,
 		setErrorTimer,
 		setNotify,
@@ -454,10 +485,12 @@ export function useFlightPathBaseComponent(props, context) {
 		flightDataTitle,
 		flightMeasurementUnitsId,
 		flightMeasurementUnitsAccelerationId,
+		flightMeasurementUnitsAltitudeId,
 		flightMeasurementUnitsDistanceId,
 		flightMeasurementUnitsVelocityId,
 		flightMeasurementUnitsOutputId,
 		flightMeasurementUnitsAccelerationOutputId,
+		flightMeasurementUnitsAltitudeOutputId,
 		flightMeasurementUnitsDistanceOutputId,
 		flightMeasurementUnitsVelocityOutputId,
 		flightMeasurementUnitsOptions,
@@ -466,7 +499,9 @@ export function useFlightPathBaseComponent(props, context) {
 		processing,
 		styles,
 		initialized,
+		flightInstructions,
 		flightMeasurementUnitsOptionsAcceleration,
+		flightMeasurementUnitsOptionsAltitude,
 		flightMeasurementUnitsOptionsDistance,
 		flightMeasurementUnitsOptionsVelocity,
 		flightDataLoad,
@@ -478,7 +513,7 @@ export function useFlightPathBaseComponent(props, context) {
 		flightMeasurementUnitsSave,
 		buttonsDialog,
 		buttonsForms,
-		measurementUnitsDistanceType,
+		measurementUnitsAltitudeType,
 		measurementUnitsVelocityType,
 		serviceDownload,
 		serviceFlightPath,
@@ -487,7 +522,9 @@ export function useFlightPathBaseComponent(props, context) {
 		expanded,
 		flightPath,
 		flightPathData,
+		flightPathDataExport,
 		flightPathInput,
+		flightPathOutput,
 		flightPathStylePathFlightColor,
 		flightPathStylePathGroundColor,
 		flightPathStylePinLaunchColor,
@@ -498,14 +535,15 @@ export function useFlightPathBaseComponent(props, context) {
 		flightPathStylePinMaxVelocitySelected,
 		flightPathStylePinTouchdownColor,
 		flightPathStylePinTouchdownSelected,
-		output,
 		clickFlightPathStylesReset,
 		flightPathInputChange,
 		flightPathStyleLoad,
+		panelInstructions,
 		templateMain,
 		templatePinLaunch,
 		templatePinsAdditional,
 		templatePinTouchdown,
+		flightPathInstructions,
 		flightPathStyleReset,
 		flightPathStyleSave,
 		flightPathExport,

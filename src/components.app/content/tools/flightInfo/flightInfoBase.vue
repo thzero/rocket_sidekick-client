@@ -1,5 +1,5 @@
 <script>
-import { nextTick, ref, watch } from 'vue';
+import { computed, nextTick, ref, watch } from 'vue';
 
 import useVuelidate from '@vuelidate/core';
 
@@ -31,6 +31,9 @@ export function useFlightInfoBaseComponent(props, context) {
 		serviceStore,
 		sortByOrder,
 		target,
+		contentLoadSignal,
+		contentLoadStart,
+		contentLoadStop,
 		calculationOutput,
 		content,
 		contentTitle,
@@ -57,10 +60,12 @@ export function useFlightInfoBaseComponent(props, context) {
 		flightDataTitle,
 		flightMeasurementUnitsId,
 		flightMeasurementUnitsAccelerationId,
+		flightMeasurementUnitsAltitudeId,
 		flightMeasurementUnitsDistanceId,
 		flightMeasurementUnitsVelocityId,
 		flightMeasurementUnitsOutputId,
 		flightMeasurementUnitsAccelerationOutputId,
+		flightMeasurementUnitsAltitudeOutputId,
 		flightMeasurementUnitsDistanceOutputId,
 		flightMeasurementUnitsVelocityOutputId,
 		flightMeasurementUnitsOptions,
@@ -69,7 +74,9 @@ export function useFlightInfoBaseComponent(props, context) {
 		processing,
 		styles,
 		initialized,
+		flightInstructions,
 		flightMeasurementUnitsOptionsAcceleration,
+		flightMeasurementUnitsOptionsAltitude,
 		flightMeasurementUnitsOptionsDistance,
 		flightMeasurementUnitsOptionsVelocity,
 		flightDataLoad,
@@ -80,7 +87,8 @@ export function useFlightInfoBaseComponent(props, context) {
 		flightMeasurementUnitsReset,
 		flightMeasurementUnitsSave
 	} = useFlightToolsBaseComponent(props, context, {
-		id: 'flightInfo',
+		// id: 'flightInfo',
+		markupId: 'tools.flightInfo',
 		onMounted: async (correlationIdI) => {
 			reset(correlationIdI);
 
@@ -116,6 +124,8 @@ export function useFlightInfoBaseComponent(props, context) {
 		measurementUnitsAccelerationType,
 		measurementUnitsAreaDefaultId,
 		measurementUnitsAreaType,
+		measurementUnitsAltitudeDefaultId,
+		measurementUnitsAltitudeType,
 		measurementUnitsDensityDefaultId,
 		measurementUnitsDensityType,
 		measurementUnitsDistanceType,
@@ -167,7 +177,22 @@ export function useFlightInfoBaseComponent(props, context) {
 	const flightInfoStyleEventMainBorderColor = ref(null);
 	const flightInfoStyleVelocityColor = ref(null);
 	const flightInfoStyleVelocityFColor = ref(null);
+	const panelInstructions = ref(['instructions']);
 	const resolution = ref(AppConstants.FlightInfo.Resolution);
+
+	const flightInfoInstructions = computed(() => {
+		if (!content.value || !content.value.processors)
+			return '';
+
+		if (String.isNullOrEmpty(flightProcessor.value))
+			return '';
+
+		const processor = content.value.processors.find(l => l.id === flightProcessor.value);
+		if (!processor)
+			return general;
+
+		return processor.markup;
+	});
 
 	const checkFlightInfoDataTypeUse = () => {
 		flightInfoDataTypeUseDisabled.value = true;
@@ -380,11 +405,11 @@ export function useFlightInfoBaseComponent(props, context) {
 				const flightInfoResults = serviceFlightInfo.process(correlationIdI, data, flightProcessor.value, {
 						id: flightMeasurementUnitsId.value,
 						accelerationId: flightMeasurementUnitsAccelerationId.value,
-						distanceId: flightMeasurementUnitsDistanceId.value,
+						altitudeId: flightMeasurementUnitsAltitudeId.value,
 						velocityId: flightMeasurementUnitsVelocityId.value,
 						outputId: flightMeasurementUnitsOutputId.value,
 						accelerationtId: flightMeasurementUnitsAccelerationId.value,
-						distanceOutputId: flightMeasurementUnitsDistanceOutputId.value,
+						altitudeOutputId: flightMeasurementUnitsAltitudeOutputId.value,
 						velocityOutputId: flightMeasurementUnitsVelocityOutputId.value,
 					},
 					flightInfoDataTypes);
@@ -429,7 +454,8 @@ export function useFlightInfoBaseComponent(props, context) {
 				flightMeasurementUnitsSave(correlationIdI, flightProcessor.value);
 
 				setNotify(correlationIdI, 'messages.processed');
-
+				
+				panelInstructions.value = [];
 				buttons.value.export.disabled = false;
 				processing.value = false;
 
@@ -521,6 +547,9 @@ export function useFlightInfoBaseComponent(props, context) {
 		serviceStore,
 		sortByOrder,
 		target,
+		contentLoadSignal,
+		contentLoadStart,
+		contentLoadStop,
 		calculationOutput,
 		content,
 		contentTitle,
@@ -547,10 +576,12 @@ export function useFlightInfoBaseComponent(props, context) {
 		flightDataTitle,
 		flightMeasurementUnitsId,
 		flightMeasurementUnitsAccelerationId,
+		flightMeasurementUnitsAltitudeId,
 		flightMeasurementUnitsDistanceId,
 		flightMeasurementUnitsVelocityId,
 		flightMeasurementUnitsOutputId,
 		flightMeasurementUnitsAccelerationOutputId,
+		flightMeasurementUnitsAltitudeOutputId,
 		flightMeasurementUnitsDistanceOutputId,
 		flightMeasurementUnitsVelocityOutputId,
 		flightMeasurementUnitsOptions,
@@ -559,7 +590,9 @@ export function useFlightInfoBaseComponent(props, context) {
 		processing,
 		styles,
 		initialized,
+		flightInstructions,
 		flightMeasurementUnitsOptionsAcceleration,
+		flightMeasurementUnitsOptionsAltitude,
 		flightMeasurementUnitsOptionsDistance,
 		flightMeasurementUnitsOptionsVelocity,
 		flightDataLoad,
@@ -592,7 +625,9 @@ export function useFlightInfoBaseComponent(props, context) {
 		flightInfoStyleEventMainBorderColor,
 		flightInfoStyleVelocityColor,
 		flightInfoStyleVelocityFColor,
+		panelInstructions,
 		resolution,
+		flightInfoInstructions,
 		checkFlightInfoDataTypeUse,
 		clickResolution,
 		clickStylesReset,

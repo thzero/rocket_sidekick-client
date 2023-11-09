@@ -69,47 +69,6 @@ class FlightPathProcessorService extends ToolsService {
 		if (this._hasFailed(responseProcessDataPost))
 			return responseProcessDataPost;
 
-		const divisor = this._convert(1).from(measurementUnits.measurementUnitsDistanceId).to('m');
-		let coords;
-		const path = [];
-		let previous = null;
-		let temp = this._data.rows.shift();
-		results.maxAltitude = 0;
-		results.maxVelocity = 0;
-		results.launchCoords = `${temp.longitude},${temp.latitude}`;
-		while (temp) {
-			previous = temp;
-			coords = `${temp.longitude},${temp.latitude},${this._round(temp.altitude * divisor)}`;
-
-			// add coords to the path...
-			path.push(coords);
-
-			// is this the max altitude?
-			if (temp && temp.altitude && (temp.altitude > 0) && (temp.altitude > results.maxAltitude)) {
-				results.maxAltitude = this._round(temp.altitude);
-				results.maxAltitudeCoords = coords;
-			}
-
-			// is this the max velocity?
-			if (temp && temp.velocityV && (temp.velocityV > 0) && (temp.velocityV > results.maxVelocity)) {
-				results.maxVelocity = this._round(temp.velocityV);
-				results.maxVelocityCoords = coords;
-			}
-
-			temp = this._data.rows.shift();
-			if (!temp)
-				results.touchdownCoords = `${previous.longitude},${previous.latitude}`;
-		}
-
-		results.maxAltitude = this._convert(results.maxAltitude)
-			.from(AppCommonConstants.MeasurementUnits[measurementUnits.measurementUnitsId].distance[measurementUnits.measurementUnitsDistanceId])
-			.to(AppCommonConstants.MeasurementUnits[measurementUnits.measurementUnitsOutputId].distance[measurementUnits.measurementUnitsDistanceOutputId]);
-		results.maxVelocity = this._convert(results.maxVelocity)
-			.from(AppCommonConstants.MeasurementUnits[measurementUnits.measurementUnitsId].velocity[measurementUnits.measurementUnitsVelocityId])
-			.to(AppCommonConstants.MeasurementUnits[measurementUnits.measurementUnitsOutputId].velocity[measurementUnits.measurementUnitsVelocityOutputId]);
-		results.maxAltitude = AppUtility.convertNumber(results.maxAltitude).toLocaleString();
-		results.maxVelocity = AppUtility.convertNumber(results.maxVelocity).toLocaleString();
-
 		results.translations = {};
 		results.translations.launch = LibraryClientUtility.$trans.t('forms.content.tools.flightPath.launch');
 		results.translations.maxAltitude = LibraryClientUtility.$trans.t('forms.content.tools.flightPath.maxAltitude');
@@ -120,13 +79,150 @@ class FlightPathProcessorService extends ToolsService {
 		results.translations.measurementUnits = {};
 		results.translations.measurementUnits.distance = AppCommonConstants.MeasurementUnits[measurementUnits.measurementUnitsOutputId].distance[measurementUnits.measurementUnitsDistanceOutputId];
 		results.translations.measurementUnits.velocity = AppCommonConstants.MeasurementUnits[measurementUnits.measurementUnitsOutputId].velocity[measurementUnits.measurementUnitsVelocityOutputId];
+		const flightPaths = [];
+		const flightPathsOutput = [];
 
-		results.flightPathCoords = path;
-		// results.flightPath = this._kml(correlationId, results, path.join('\n'));
-		const responseFlightPath = this._serviceFlightPathOutput.output(correlationId, results, path.join('\n'), this._serviceFlightPathOutputTemplate);
-		if (this._hasFailed(responseFlightPath))
-			return responseFlightPath;
-		results.flightPath = responseFlightPath.results;
+		const divisor = this._convert(1).from(measurementUnits.measurementUnitsDistanceId).to('m');
+		let coords;
+		let path = [];
+		let previous = null;
+		let temp = null;
+		let flight = {};
+		for (const [key, value] of Object.entries(this._data.flights)) {
+			coords = null;
+			path = [];
+			previous = null;
+
+			flight = {};
+			temp = value.data.shift(); // get first row...
+
+			flight.tracker = 
+			
+			flight.maxAltitude = 0;
+			flight.maxVelocity = 0;
+			flight.launchCoords = `${temp.longitude},${temp.latitude}`;
+			flight.tracker = value.tracker;
+			flight.flightEnd = value.flightEnd;
+			flight.flightStart = value.flightStart;
+			while (temp) {
+				previous = temp;
+
+				coords = `${temp.longitude},${temp.latitude},${this._round(temp.altitude * divisor)}`;
+
+				// add coords to the path...
+				path.push(coords);
+
+				// is this the max altitude?
+				if (temp && temp.altitude && (temp.altitude > 0) && (temp.altitude > flight.maxAltitude)) {
+					flight.maxAltitude = this._round(temp.altitude);
+					flight.maxAltitudeCoords = coords;
+				}
+
+				// is this the max velocity?
+				if (temp && temp.velocityV && (temp.velocityV > 0) && (temp.velocityV > flight.maxVelocity)) {
+					flight.maxVelocity = this._round(temp.velocityV);
+					flight.maxVelocityCoords = coords;
+				}
+
+				temp = value.data.shift(); // get next row...
+				if (!temp)
+				flight.touchdownCoords = `${previous.longitude},${previous.latitude}`;
+			}
+
+			flight.maxAltitude = this._convert(flight.maxAltitude)
+				.from(AppCommonConstants.MeasurementUnits[measurementUnits.measurementUnitsId].distance[measurementUnits.measurementUnitsDistanceId])
+				.to(AppCommonConstants.MeasurementUnits[measurementUnits.measurementUnitsOutputId].distance[measurementUnits.measurementUnitsDistanceOutputId]);
+			flight.maxVelocity = this._convert(flight.maxVelocity)
+				.from(AppCommonConstants.MeasurementUnits[measurementUnits.measurementUnitsId].velocity[measurementUnits.measurementUnitsVelocityId])
+				.to(AppCommonConstants.MeasurementUnits[measurementUnits.measurementUnitsOutputId].velocity[measurementUnits.measurementUnitsVelocityOutputId]);
+			flight.maxAltitude = AppUtility.convertNumber(flight.maxAltitude).toLocaleString();
+			flight.maxVelocity = AppUtility.convertNumber(flight.maxVelocity).toLocaleString();
+
+			flight.translations = results.translations;
+			flight.style = results.style;
+			// flight.translations = {};
+			// flight.translations.launch = LibraryClientUtility.$trans.t('forms.content.tools.flightPath.launch');
+			// flight.translations.maxAltitude = LibraryClientUtility.$trans.t('forms.content.tools.flightPath.maxAltitude');
+			// flight.translations.maxVelocity = LibraryClientUtility.$trans.t('forms.content.tools.flightPath.maxVelocity');
+			// flight.translations.touchdown = LibraryClientUtility.$trans.t('forms.content.tools.flightPath.touchdown');
+			// flight.translations.flightPath = LibraryClientUtility.$trans.t('forms.content.tools.flightPath.flightPath');
+			// flight.translations.groundPath = LibraryClientUtility.$trans.t('forms.content.tools.flightPath.groundPath');
+			// flight.translations.measurementUnits = {};
+			// flight.translations.measurementUnits.distance = AppCommonConstants.MeasurementUnits[measurementUnits.measurementUnitsOutputId].distance[measurementUnits.measurementUnitsDistanceOutputId];
+			// flight.translations.measurementUnits.velocity = AppCommonConstants.MeasurementUnits[measurementUnits.measurementUnitsOutputId].velocity[measurementUnits.measurementUnitsVelocityOutputId];
+
+			flight.flightPathCoords = path;
+			flightPaths.push(flight);
+
+			// results.flightPath = this._kml(correlationId, results, path.join('\n'));
+			const responseFlightPath = this._serviceFlightPathOutput.output(correlationId, results, flight, path.join('\n'), this._serviceFlightPathOutputTemplate);
+			if (this._hasFailed(responseFlightPath))
+				return responseFlightPath;
+			
+			// results.flight.flightPath = responseFlightPath.results;
+			flightPathsOutput.push(responseFlightPath.results);
+		}
+
+		results.flightPathsOutput = flightPathsOutput;
+		results.flightPaths = flightPaths;
+
+		// let coords;
+		// let path = [];
+		// let previous = null;
+		// let temp = this._data.rows.shift(); // get first row...
+		// results.maxAltitude = 0;
+		// results.maxVelocity = 0;
+		// results.launchCoords = `${temp.longitude},${temp.latitude}`;
+		// while (temp) {
+		// 	previous = temp;
+		// 	coords = `${temp.longitude},${temp.latitude},${this._round(temp.altitude * divisor)}`;
+
+		// 	// add coords to the path...
+		// 	path.push(coords);
+
+		// 	// is this the max altitude?
+		// 	if (temp && temp.altitude && (temp.altitude > 0) && (temp.altitude > results.maxAltitude)) {
+		// 		results.maxAltitude = this._round(temp.altitude);
+		// 		results.maxAltitudeCoords = coords;
+		// 	}
+
+		// 	// is this the max velocity?
+		// 	if (temp && temp.velocityV && (temp.velocityV > 0) && (temp.velocityV > results.maxVelocity)) {
+		// 		results.maxVelocity = this._round(temp.velocityV);
+		// 		results.maxVelocityCoords = coords;
+		// 	}
+
+		// 	temp = this._data.rows.shift();
+		// 	if (!temp)
+		// 		results.touchdownCoords = `${previous.longitude},${previous.latitude}`;
+		// }
+
+		// results.maxAltitude = this._convert(results.maxAltitude)
+		// 	.from(AppCommonConstants.MeasurementUnits[measurementUnits.measurementUnitsId].distance[measurementUnits.measurementUnitsDistanceId])
+		// 	.to(AppCommonConstants.MeasurementUnits[measurementUnits.measurementUnitsOutputId].distance[measurementUnits.measurementUnitsDistanceOutputId]);
+		// results.maxVelocity = this._convert(results.maxVelocity)
+		// 	.from(AppCommonConstants.MeasurementUnits[measurementUnits.measurementUnitsId].velocity[measurementUnits.measurementUnitsVelocityId])
+		// 	.to(AppCommonConstants.MeasurementUnits[measurementUnits.measurementUnitsOutputId].velocity[measurementUnits.measurementUnitsVelocityOutputId]);
+		// results.maxAltitude = AppUtility.convertNumber(results.maxAltitude).toLocaleString();
+		// results.maxVelocity = AppUtility.convertNumber(results.maxVelocity).toLocaleString();
+
+		// results.translations = {};
+		// results.translations.launch = LibraryClientUtility.$trans.t('forms.content.tools.flightPath.launch');
+		// results.translations.maxAltitude = LibraryClientUtility.$trans.t('forms.content.tools.flightPath.maxAltitude');
+		// results.translations.maxVelocity = LibraryClientUtility.$trans.t('forms.content.tools.flightPath.maxVelocity');
+		// results.translations.touchdown = LibraryClientUtility.$trans.t('forms.content.tools.flightPath.touchdown');
+		// results.translations.flightPath = LibraryClientUtility.$trans.t('forms.content.tools.flightPath.flightPath');
+		// results.translations.groundPath = LibraryClientUtility.$trans.t('forms.content.tools.flightPath.groundPath');
+		// results.translations.measurementUnits = {};
+		// results.translations.measurementUnits.distance = AppCommonConstants.MeasurementUnits[measurementUnits.measurementUnitsOutputId].distance[measurementUnits.measurementUnitsDistanceOutputId];
+		// results.translations.measurementUnits.velocity = AppCommonConstants.MeasurementUnits[measurementUnits.measurementUnitsOutputId].velocity[measurementUnits.measurementUnitsVelocityOutputId];
+
+		// results.flightPathCoords = path;
+		// // results.flightPath = this._kml(correlationId, results, path.join('\n'));
+		// const responseFlightPath = this._serviceFlightPathOutput.output(correlationId, results, path.join('\n'), this._serviceFlightPathOutputTemplate);
+		// if (this._hasFailed(responseFlightPath))
+		// 	return responseFlightPath;
+		// results.flightPath = responseFlightPath.results;
 
 		return this._successResponse(results, correlationId);
 	}
@@ -144,8 +240,8 @@ class FlightPathProcessorService extends ToolsService {
 		return this._success(correlationId);
 	}
 
-	_publish(correlationId, time, altitude, altitudeF, velocity, velocityF, apogee, noseOver, drogue, main, ground) {
-		this._data.publish(correlationId, time, altitude, altitudeF, velocity, velocityF, apogee, noseOver, drogue, main, ground);
+	_publish(correlationId, flightId, time, altitude, latitude, longitude, velocityH, velocityV, apogee, noseOver, drogue, main, ground, index, tracker, flightStart, flightEnd) {
+		this._data.publish(correlationId, flightId, time, altitude, latitude, longitude, velocityH, velocityV, apogee, noseOver, drogue, main, ground, index, tracker, flightStart, flightEnd);
 	}
 
 	_round(value, places = 2) {
@@ -159,15 +255,34 @@ class FlightPathProcessorService extends ToolsService {
 
 class FlightPath {
 	constructor() {
-		this._rows = [];
+		this._flights = {};
+		// this._rows = [];
 	}
 
-	get rows() {
-		return this._rows;
+	get flights() {
+		return this._flights;
 	}
+	// get rows() {
+	// 	return this._rows;
+	// }
 
-	publish(correlationId, time, altitude, latitude, longitude, velocityH, velocityV) {
-		this._rows.push({
+	publish(correlationId, flightId, time, altitude, latitude, longitude, velocityH, velocityV, apogee, noseOver, drogue, main, ground, index, tracker, flightStart, flightEnd) {
+		// this._rows.push({
+		this._flights[flightId] = this._flights[flightId] ?? {
+			tracker: null,
+			flightStart: null,
+			flightEnd: null,
+			data: []
+		};
+
+		this._flights[flightId].tracker = tracker;
+		if (flightStart)
+			this._flights[flightId].flightStart = index;
+		if (flightEnd)
+			this._flights[flightId].flightEnd = index;
+
+		this._flights[flightId].data.push({
+			index: index,
 			altitude: AppUtility.convertNumber(altitude),
 			latitude: AppUtility.convertNumber(latitude),
 			longitude: AppUtility.convertNumber(longitude),
@@ -181,24 +296,43 @@ class FlightPath {
 	process(correlationId) {
 		let start = 0;
 		let started = false;
-		for (const item of this._rows) {
-			if (!started && (item.velocityV <= 0))
-				continue;
+		for (const [key, value] of Object.entries(this._flights)) {
+			start = 0;
+			started = false;
+			
+			for (const item of value.data) {
+				if (!started && (item.velocityV <= 0))
+					continue;
 
-			item.seconds = (item.time - start);
+				item.seconds = (item.time - start);
 
-			if (!started) {
-				start = item.time;
-				started = true;
+				if (!started) {
+					start = item.time;
+					started = true;
+				}
 			}
+
 		}
+		// for (const item of this._rows) {
+		// 	if (!started && (item.velocityV <= 0))
+		// 		continue;
+
+		// 	item.seconds = (item.time - start);
+
+		// 	if (!started) {
+		// 		start = item.time;
+		// 		started = true;
+		// 	}
+		// }
 	}
 
 	sort(correlationId, func) {
 		if (!func)
 			return;
 
-		this._rows = this.data().sort(func);
+		for (const [key, value] of Object.entries(this._flights))
+			this._flights[key] = value.sort(func);
+		// this._rows = this._rows.sort(func);
 	}
 }
 

@@ -14,6 +14,23 @@ Tools
 
     https://www.translatorscafe.com/unit-converter/en-US/calculator/rocket-max-altitude/
 
+Launch
+	allow selection of rocket setup after selecting rocket
+
+Checklist
+	potentially record a launch from a checklist...
+
 Setups
     parts should show both rocket and setup parts
         rocket parts should not be able to be delete
+
+Lists
+    // TODO: SECURITY: Admin can...
+    isOwner - allow for any admin to delete and edit if 'public'
+        need to also check on the back end if 'public'
+    hasAdmin - needs a check...
+        need to ask check on the back end if someone can set the public flag...
+        started....
+    edit open
+        leave page
+            check if dirty, and trap navigation
