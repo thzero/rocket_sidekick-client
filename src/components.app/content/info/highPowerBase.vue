@@ -118,9 +118,9 @@ export function useHighPowerBaseComponent(props, context, options) {
 	});
 
 	onMounted(async () => {
-		contentLoadStart();
-
 		try {
+			contentLoadStart();
+			
 			const response = await serviceStore.dispatcher.requestContentMarkup(correlationId(), 'info.highPower');
 			if (hasFailed(response))
 				return;

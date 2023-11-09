@@ -63,9 +63,9 @@ export function useEpoxyBaseComponent(props, context, options) {
 	};
 
 	onMounted(async () => {
-		contentLoadStart();
-
 		try {
+			contentLoadStart();
+
 			const response = await serviceStore.dispatcher.requestContentMarkup(correlationId(), 'info.epoxy');
 			if (hasFailed(response))
 				return;

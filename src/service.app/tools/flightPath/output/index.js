@@ -9,7 +9,7 @@ class FlightPathOutputService extends BaseService {
 		return this._success(correlationId);
 	}
 
-	output(correlationId, flightInfo, data, serviceTemplate) {
+	output(correlationId, results, flightInfo, data, serviceTemplate) {
 		throw NotImplementedError();
 	}
 

@@ -22,12 +22,12 @@ export function useFlightToolsBaseComponent(props, context, options) {
 		noBreakingSpaces,
 		notImplementedError,
 		success,
-		contentLoadSignal,
 		serviceStore,
-		contentLoadStart,
-		contentLoadStop,
 		sortByOrder,
 		target,
+		contentLoadSignal,
+		contentLoadStart,
+		contentLoadStop,
 		calculationOutput,
 		content,
 		contentTitle,
@@ -45,7 +45,7 @@ export function useFlightToolsBaseComponent(props, context, options) {
 		handleAttribution,
 		initCalculationOutput,
 		initCalculationResults,
-		resetFormI,
+		resetAdditional,
 		setErrorMessage,
 		setErrorTimer,
 		setNotify
@@ -98,6 +98,12 @@ export function useFlightToolsBaseComponent(props, context, options) {
 
 	const keyword = 'Default'.toLowerCase(); // otherwise gives a '_sfc_main is not defined' error as Vite is looking for lower case version of the keyword
 
+	const flightInstructions = computed(() => {
+		if (!content.value)
+			return '';
+
+		return content.value.markup;
+	});
 	const flightMeasurementUnitsOptionsAcceleration = computed(() => {
 		if (String.isNullOrEmpty(flightMeasurementUnitsId.value))
 			return [];
@@ -213,6 +219,22 @@ export function useFlightToolsBaseComponent(props, context, options) {
 		setTimeout(() => {
 			initialized.value = true;
 		}, 50);
+
+		try {
+			contentLoadStart();
+	
+			const contentId = options ? options.markupId : null;
+			if (contentId) {
+				const response = await serviceStore.dispatcher.requestContentMarkup(correlationId(), contentId);
+				if (hasFailed(response))
+					return;
+
+				content.value = response.results;
+			}
+		}
+		finally {
+			contentLoadStop();
+		}
 	});
 
 	watch(() => flightMeasurementUnitsId.value,
@@ -243,12 +265,12 @@ export function useFlightToolsBaseComponent(props, context, options) {
 		noBreakingSpaces,
 		notImplementedError,
 		success,
-		contentLoadSignal,
 		serviceStore,
-		contentLoadStart,
-		contentLoadStop,
 		sortByOrder,
 		target,
+		contentLoadSignal,
+		contentLoadStart,
+		contentLoadStop,
 		calculationOutput,
 		content,
 		contentTitle,
@@ -266,7 +288,7 @@ export function useFlightToolsBaseComponent(props, context, options) {
 		handleAttribution,
 		initCalculationOutput,
 		initCalculationResults,
-		resetFormI,
+		resetAdditional,
 		setErrorMessage,
 		setErrorTimer,
 		setNotify,
@@ -287,6 +309,7 @@ export function useFlightToolsBaseComponent(props, context, options) {
 		processing,
 		styles,
 		initialized,
+		flightInstructions,
 		flightMeasurementUnitsOptionsAcceleration,
 		flightMeasurementUnitsOptionsDistance,
 		flightMeasurementUnitsOptionsVelocity,

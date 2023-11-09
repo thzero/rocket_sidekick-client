@@ -313,6 +313,16 @@
 			</v-col>
 			<v-col cols="12" lg="9" class="pl-4">
 				<v-row
+					dense
+				>
+					<v-col
+						cols="12"
+					>
+				<VtMarkdown v-model="flightInstructions" :use-github=false />
+				<VtMarkdown v-model="flightPathInstructions" :use-github=false />
+					</v-col>
+				</v-row>
+				<v-row
 					id="flight-path"
 					dense
 					style="color: black; background-color: white"
@@ -322,7 +332,20 @@
 						ref="outputRef"
 					>
 						<pre>
-{{ output }}
+{{ flightPathOutput ? flightPathOutput.join('\n') : '' }}
+						</pre>
+					</v-col>
+				</v-row>
+				<v-row
+					dense
+					style="color: black; background-color: lightgray"
+					class="mt-8"
+				>
+					<v-col
+						cols="12"
+					>
+						<pre>
+{{ flightPathData ? JSON.stringify(flightPathData, null, 4) : '' }}
 						</pre>
 					</v-col>
 				</v-row>
@@ -393,9 +416,8 @@
 </template>
 
 <script>
-import { required } from '@vuelidate/validators';
-
 import { useFlightPathBaseComponent } from '@/components.app/content/tools/flightPath/flightPathBase';
+import { useFlightPathValidation } from '@/components.app/content/tools/flightPath/flightPathValidation';
 
 import ContentAttribution from '@/components/content/Attribution';
 import ContentDescription from '@/components/content/Description';
@@ -405,6 +427,7 @@ import VtCheckboxWithValidation from '@thzero/library_client_vue3_vuetify3/compo
 import VtColorWithValidation from '@thzero/library_client_vue3_vuetify3/components/form/VtColorWithValidation';
 import VtDateTimePickerFieldTemp from '@thzero/library_client_vue3_vuetify3/components/form/VtDateTimePickerFieldTemp';
 import VtFormControl from '@thzero/library_client_vue3_vuetify3/components/form/VtFormControl';
+import VtMarkdown from '@thzero/library_client_vue3_vuetify3/components/markup/VtMarkdown';
 import VtSelectWithValidation from '@thzero/library_client_vue3_vuetify3/components/form/VtSelectWithValidation';
 import VtSwitchWithValidation from '@thzero/library_client_vue3_vuetify3/components/form/VtSwitchWithValidation';
 import VtTextAreaWithValidation from '@thzero/library_client_vue3_vuetify3/components/form/VtTextAreaWithValidation';
@@ -421,6 +444,7 @@ export default {
 		VtColorWithValidation,
 		VtDateTimePickerFieldTemp,
 		VtFormControl,
+		VtMarkdown,
 		VtSelectWithValidation,
 		VtSwitchWithValidation,
 		VtTextAreaWithValidation,
@@ -437,12 +461,12 @@ export default {
 			noBreakingSpaces,
 			notImplementedError,
 			success,
-			contentLoadSignal,
 			serviceStore,
-			contentLoadStart,
-			contentLoadStop,
 			sortByOrder,
 			target,
+			contentLoadSignal,
+			contentLoadStart,
+			contentLoadStop,
 			calculationOutput,
 			content,
 			contentTitle,
@@ -460,7 +484,7 @@ export default {
 			handleAttribution,
 			initCalculationOutput,
 			initCalculationResults,
-			resetFormI,
+			resetAdditional,
 			setErrorMessage,
 			setErrorTimer,
 			setNotify,
@@ -481,6 +505,7 @@ export default {
 			processing,
 			styles,
 			initialized,
+			flightInstructions,
 			flightMeasurementUnitsOptionsAcceleration,
 			flightMeasurementUnitsOptionsDistance,
 			flightMeasurementUnitsOptionsVelocity,
@@ -502,7 +527,10 @@ export default {
 			expanded,
 			flightPath,
 			flightPathData,
+			flightPathDataExport,
 			flightPathInput,
+			flightPathInstructions,
+			flightPathOutput,
 			flightPathStylePathFlightColor,
 			flightPathStylePathGroundColor,
 			flightPathStylePinLaunchColor,
@@ -513,7 +541,6 @@ export default {
 			flightPathStylePinMaxVelocitySelected,
 			flightPathStylePinTouchdownColor,
 			flightPathStylePinTouchdownSelected,
-			output,
 			clickFlightPathStylesReset,
 			flightPathInputChange,
 			flightPathStyleLoad,
@@ -541,12 +568,12 @@ export default {
 			noBreakingSpaces,
 			notImplementedError,
 			success,
-			contentLoadSignal,
 			serviceStore,
-			contentLoadStart,
-			contentLoadStop,
 			sortByOrder,
 			target,
+			contentLoadSignal,
+			contentLoadStart,
+			contentLoadStop,
 			calculationOutput,
 			content,
 			contentTitle,
@@ -564,7 +591,7 @@ export default {
 			handleAttribution,
 			initCalculationOutput,
 			initCalculationResults,
-			resetFormI,
+			resetAdditional,
 			setErrorMessage,
 			setErrorTimer,
 			setNotify,
@@ -585,6 +612,7 @@ export default {
 			processing,
 			styles,
 			initialized,
+			flightInstructions,
 			flightMeasurementUnitsOptionsAcceleration,
 			flightMeasurementUnitsOptionsDistance,
 			flightMeasurementUnitsOptionsVelocity,
@@ -606,7 +634,10 @@ export default {
 			expanded,
 			flightPath,
 			flightPathData,
+			flightPathDataExport,
 			flightPathInput,
+			flightPathInstructions,
+			flightPathOutput,
 			flightPathStylePathFlightColor,
 			flightPathStylePathGroundColor,
 			flightPathStylePinLaunchColor,
@@ -617,7 +648,6 @@ export default {
 			flightPathStylePinMaxVelocitySelected,
 			flightPathStylePinTouchdownColor,
 			flightPathStylePinTouchdownSelected,
-			output,
 			clickFlightPathStylesReset,
 			flightPathInputChange,
 			flightPathStyleLoad,
@@ -636,27 +666,7 @@ export default {
 		}
 	},
 	validations () {
-		return {
-			flightDataDate: { $autoDirty: true },
-			flightDataLocation: { $autoDirty: true },
-			flightDataTitle: { $autoDirty: true },
-			flightPathInput: { required, $autoDirty: true },
-			flightMeasurementUnitsId: { required, $autoDirty: true },
-			flightMeasurementUnitsDistanceId: { required, $autoDirty: true },
-			flightMeasurementUnitsVelocityId: { required, $autoDirty: true },
-			flightMeasurementUnitsOutputId: { required, $autoDirty: true },
-			flightMeasurementUnitsDistanceOutputId: { required, $autoDirty: true },
-			flightMeasurementUnitsVelocityOutputId: { required, $autoDirty: true },
-			flightProcessor: { required, $autoDirty: true },
-			flightPathStylePinLaunchColor: { required, $autoDirty: true },
-			flightPathStylePinLaunchSelected: { required, $autoDirty: true },
-			flightPathStylePinMaxAltitudeColor: { required, $autoDirty: true },
-			flightPathStylePinMaxAltitudeSelected: { required, $autoDirty: true },
-			flightPathStylePinMaxVelocityColor: { required, $autoDirty: true },
-			flightPathStylePinMaxVelocitySelected: { required, $autoDirty: true },
-			flightPathStylePinTouchdownColor: { required, $autoDirty: true },
-			flightPathStylePinTouchdownSelected: { required, $autoDirty: true }
-		};
+		return useFlightPathValidation;
 	}
 };
 </script>

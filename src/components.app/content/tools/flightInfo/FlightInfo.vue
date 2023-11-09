@@ -531,12 +531,11 @@
 </template>
 
 <script>
-import { required, requiredUnless } from '@vuelidate/validators';
-
 import FlightInfoData from '@/components.app/content/tools/flightInfo/FlightInfoData';
 import FlightInfoChart from '@/components.app/content/tools/flightInfo/charts/FlightInfo';
 
 import { useFlightInfoBaseComponent } from '@/components.app/content/tools/flightInfo/flightInfoBase';
+import { useFlightInfoValidation } from '@/components.app/content/tools/flightInfo/flightInfoValidation';
 
 import ContentAttribution from '@/components/content/Attribution';
 import ContentHeader from '@/components/content/Header';
@@ -581,6 +580,9 @@ export default {
 			serviceStore,
 			sortByOrder,
 			target,
+			contentLoadSignal,
+			contentLoadStart,
+			contentLoadStop,
 			calculationOutput,
 			content,
 			contentTitle,
@@ -619,6 +621,7 @@ export default {
 			processing,
 			styles,
 			initialized,
+			flightInstructions,
 			flightMeasurementUnitsOptionsAcceleration,
 			flightMeasurementUnitsOptionsDistance,
 			flightMeasurementUnitsOptionsVelocity,
@@ -687,6 +690,9 @@ export default {
 			serviceStore,
 			sortByOrder,
 			target,
+			contentLoadSignal,
+			contentLoadStart,
+			contentLoadStop,
 			calculationOutput,
 			content,
 			contentTitle,
@@ -725,6 +731,7 @@ export default {
 			processing,
 			styles,
 			initialized,
+			flightInstructions,
 			flightMeasurementUnitsOptionsAcceleration,
 			flightMeasurementUnitsOptionsDistance,
 			flightMeasurementUnitsOptionsVelocity,
@@ -781,24 +788,7 @@ export default {
 		}
 	},
 	validations () {
-		return {
-			flightDataDate: { $autoDirty: true },
-			flightDataLocation: { $autoDirty: true },
-			flightDataTitle: { $autoDirty: true },
-			flightInfoInput: { required, $autoDirty: true },
-			flightInfoDataTypeActual: { requiredIfFiltered: requiredUnless(this.flightInfoDataTypeFiltered), $autoDirty: true },
-			flightInfoDataTypeFiltered: { requiredIfActual: requiredUnless(this.flightInfoDataTypeActual), $autoDirty: true },
-			flightInfoDataTypeUse: { required, $autoDirty: true },
-			flightMeasurementUnitsId: { required, $autoDirty: true },
-			flightMeasurementUnitsAccelerationId: { required, $autoDirty: true },
-			flightMeasurementUnitsDistanceId: { required, $autoDirty: true },
-			flightMeasurementUnitsVelocityId: { required, $autoDirty: true },
-			flightMeasurementUnitsOutputId: { required, $autoDirty: true },
-			flightMeasurementUnitsAccelerationOutputId: { required, $autoDirty: true },
-			flightMeasurementUnitsDistanceOutputId: { required, $autoDirty: true },
-			flightMeasurementUnitsVelocityOutputId: { required, $autoDirty: true },
-			flightProcessor: { required, $autoDirty: true },
-		};
+		return useFlightInfoValidation(this.flightInfoDataTypeFiltered, this.flightInfoDataTypeActual);
 	}
 };
 </script>

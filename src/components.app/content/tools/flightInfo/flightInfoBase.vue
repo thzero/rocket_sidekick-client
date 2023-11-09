@@ -31,6 +31,9 @@ export function useFlightInfoBaseComponent(props, context) {
 		serviceStore,
 		sortByOrder,
 		target,
+		contentLoadSignal,
+		contentLoadStart,
+		contentLoadStop,
 		calculationOutput,
 		content,
 		contentTitle,
@@ -69,6 +72,7 @@ export function useFlightInfoBaseComponent(props, context) {
 		processing,
 		styles,
 		initialized,
+		flightInstructions,
 		flightMeasurementUnitsOptionsAcceleration,
 		flightMeasurementUnitsOptionsDistance,
 		flightMeasurementUnitsOptionsVelocity,
@@ -80,7 +84,8 @@ export function useFlightInfoBaseComponent(props, context) {
 		flightMeasurementUnitsReset,
 		flightMeasurementUnitsSave
 	} = useFlightToolsBaseComponent(props, context, {
-		id: 'flightInfo',
+		// id: 'flightInfo',
+		markupId: 'tools.flightInfo',
 		onMounted: async (correlationIdI) => {
 			reset(correlationIdI);
 
@@ -521,6 +526,9 @@ export function useFlightInfoBaseComponent(props, context) {
 		serviceStore,
 		sortByOrder,
 		target,
+		contentLoadSignal,
+		contentLoadStart,
+		contentLoadStop,
 		calculationOutput,
 		content,
 		contentTitle,
@@ -559,6 +567,7 @@ export function useFlightInfoBaseComponent(props, context) {
 		processing,
 		styles,
 		initialized,
+		flightInstructions,
 		flightMeasurementUnitsOptionsAcceleration,
 		flightMeasurementUnitsOptionsDistance,
 		flightMeasurementUnitsOptionsVelocity,

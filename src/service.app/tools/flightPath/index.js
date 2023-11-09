@@ -95,7 +95,7 @@ class FlightPathProcessorService extends BaseService {
 	_initialize(correlationId, flightInfo) {
 		this._enforceNotNull('FlightPathProcessorService', '_initialize', flightInfo, 'flightInfo', correlationId);
 
-		flightInfo.flightPath = [];
+		flightInfo.flightPaths = [];
 		return flightInfo;
 	}
 }

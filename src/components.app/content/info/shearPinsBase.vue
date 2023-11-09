@@ -53,9 +53,9 @@ export function useShearPinsBaseComponent(props, context, options) {
 	});
 
 	onMounted(async () => {
-		contentLoadStart();
-
 		try {
+			contentLoadStart();
+
 			const response = await serviceStore.dispatcher.requestContentMarkup(correlationId(), 'info.shearPins');
 			if (hasFailed(response))
 				return;
