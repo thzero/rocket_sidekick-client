@@ -1,9 +1,9 @@
 {
   "name": "rocket_sidekick_client",
-  "version": "0.1.46",
+  "version": "0.1.47",
   "version_major": 0,
   "version_minor": 1,
-  "version_patch": 46,
+  "version_patch": 47,
   "version_date": "11/09/2023",
   "description": "A web application with some tools for rocketry",
   "author": "thZero.com",
