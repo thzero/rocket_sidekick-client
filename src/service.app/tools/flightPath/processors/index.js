@@ -43,10 +43,10 @@ class FlightPathProcessorService extends ToolsService {
 		this._enforceNotNull('FlightPathProcessorService', 'process', data, 'data', correlationId);
 		this._enforceNotNull('FlightPathProcessorService', 'process', measurementUnits, 'measurementUnits', correlationId);
 		this._enforceNotEmpty('FlightPathProcessorService', 'process', measurementUnits.measurementUnitsId, 'measurementUnitsId', correlationId);
-		this._enforceNotEmpty('FlightPathProcessorService', 'process', measurementUnits.measurementUnitsDistanceId, 'measurementUnitsDistanceId', correlationId);
+		this._enforceNotEmpty('FlightPathProcessorService', 'process', measurementUnits.measurementUnitsAltitudeId, 'measurementUnitsAltitudeId', correlationId);
 		this._enforceNotEmpty('FlightPathProcessorService', 'process', measurementUnits.measurementUnitsVelocityId, 'measurementUnitsVelocityId', correlationId);
 		this._enforceNotEmpty('FlightPathProcessorService', 'process', measurementUnits.measurementUnitsOutputId, 'measurementUnitsOutputId', correlationId);
-		this._enforceNotEmpty('FlightPathProcessorService', 'process', measurementUnits.measurementUnitsDistanceOutputId, 'measurementUnitsDistanceOutputId', correlationId);
+		this._enforceNotEmpty('FlightPathProcessorService', 'process', measurementUnits.measurementUnitsAltitudeOutputId, 'measurementUnitsAltitudeOutputId', correlationId);
 		this._enforceNotEmpty('FlightPathProcessorService', 'process', measurementUnits.measurementUnitsVelocityOutputId, 'measurementUnitsVelocityOutputId', correlationId);
 
 		this._serviceFlightPathOutput.initialize(correlationId);
@@ -77,12 +77,12 @@ class FlightPathProcessorService extends ToolsService {
 		results.translations.flightPath = LibraryClientUtility.$trans.t('forms.content.tools.flightPath.flightPath');
 		results.translations.groundPath = LibraryClientUtility.$trans.t('forms.content.tools.flightPath.groundPath');
 		results.translations.measurementUnits = {};
-		results.translations.measurementUnits.distance = AppCommonConstants.MeasurementUnits[measurementUnits.measurementUnitsOutputId].distance[measurementUnits.measurementUnitsDistanceOutputId];
+		results.translations.measurementUnits.altitude = AppCommonConstants.MeasurementUnits[measurementUnits.measurementUnitsOutputId].altitude[measurementUnits.measurementUnitsAltitudeOutputId];
 		results.translations.measurementUnits.velocity = AppCommonConstants.MeasurementUnits[measurementUnits.measurementUnitsOutputId].velocity[measurementUnits.measurementUnitsVelocityOutputId];
 		const flightPaths = [];
 		const flightPathsOutput = [];
 
-		const divisor = this._convert(1).from(measurementUnits.measurementUnitsDistanceId).to('m');
+		const divisor = this._convert(1).from(measurementUnits.measurementUnitsAltitudeId).to('m');
 		let coords;
 		let path = [];
 		let previous = null;
@@ -130,8 +130,8 @@ class FlightPathProcessorService extends ToolsService {
 			}
 
 			flight.maxAltitude = this._convert(flight.maxAltitude)
-				.from(AppCommonConstants.MeasurementUnits[measurementUnits.measurementUnitsId].distance[measurementUnits.measurementUnitsDistanceId])
-				.to(AppCommonConstants.MeasurementUnits[measurementUnits.measurementUnitsOutputId].distance[measurementUnits.measurementUnitsDistanceOutputId]);
+				.from(AppCommonConstants.MeasurementUnits[measurementUnits.measurementUnitsId].altitude[measurementUnits.measurementUnitsAltitudeId])
+				.to(AppCommonConstants.MeasurementUnits[measurementUnits.measurementUnitsOutputId].altitude[measurementUnits.measurementUnitsAltitudeOutputId]);
 			flight.maxVelocity = this._convert(flight.maxVelocity)
 				.from(AppCommonConstants.MeasurementUnits[measurementUnits.measurementUnitsId].velocity[measurementUnits.measurementUnitsVelocityId])
 				.to(AppCommonConstants.MeasurementUnits[measurementUnits.measurementUnitsOutputId].velocity[measurementUnits.measurementUnitsVelocityOutputId]);
@@ -148,7 +148,7 @@ class FlightPathProcessorService extends ToolsService {
 			// flight.translations.flightPath = LibraryClientUtility.$trans.t('forms.content.tools.flightPath.flightPath');
 			// flight.translations.groundPath = LibraryClientUtility.$trans.t('forms.content.tools.flightPath.groundPath');
 			// flight.translations.measurementUnits = {};
-			// flight.translations.measurementUnits.distance = AppCommonConstants.MeasurementUnits[measurementUnits.measurementUnitsOutputId].distance[measurementUnits.measurementUnitsDistanceOutputId];
+			// flight.translations.measurementUnits.altitude = AppCommonConstants.MeasurementUnits[measurementUnits.measurementUnitsOutputId].altitude[measurementUnits.measurementUnitsAltitudeOutputId];
 			// flight.translations.measurementUnits.velocity = AppCommonConstants.MeasurementUnits[measurementUnits.measurementUnitsOutputId].velocity[measurementUnits.measurementUnitsVelocityOutputId];
 
 			flight.flightPathCoords = path;
@@ -198,8 +198,8 @@ class FlightPathProcessorService extends ToolsService {
 		// }
 
 		// results.maxAltitude = this._convert(results.maxAltitude)
-		// 	.from(AppCommonConstants.MeasurementUnits[measurementUnits.measurementUnitsId].distance[measurementUnits.measurementUnitsDistanceId])
-		// 	.to(AppCommonConstants.MeasurementUnits[measurementUnits.measurementUnitsOutputId].distance[measurementUnits.measurementUnitsDistanceOutputId]);
+		// 	.from(AppCommonConstants.MeasurementUnits[measurementUnits.measurementUnitsId].altitude[measurementUnits.measurementUnitsAltitudeId])
+		// 	.to(AppCommonConstants.MeasurementUnits[measurementUnits.measurementUnitsOutputId].altitude[measurementUnits.measurementUnitsAltitudeOutputId]);
 		// results.maxVelocity = this._convert(results.maxVelocity)
 		// 	.from(AppCommonConstants.MeasurementUnits[measurementUnits.measurementUnitsId].velocity[measurementUnits.measurementUnitsVelocityId])
 		// 	.to(AppCommonConstants.MeasurementUnits[measurementUnits.measurementUnitsOutputId].velocity[measurementUnits.measurementUnitsVelocityOutputId]);
@@ -214,7 +214,7 @@ class FlightPathProcessorService extends ToolsService {
 		// results.translations.flightPath = LibraryClientUtility.$trans.t('forms.content.tools.flightPath.flightPath');
 		// results.translations.groundPath = LibraryClientUtility.$trans.t('forms.content.tools.flightPath.groundPath');
 		// results.translations.measurementUnits = {};
-		// results.translations.measurementUnits.distance = AppCommonConstants.MeasurementUnits[measurementUnits.measurementUnitsOutputId].distance[measurementUnits.measurementUnitsDistanceOutputId];
+		// results.translations.measurementUnits.altitude = AppCommonConstants.MeasurementUnits[measurementUnits.measurementUnitsOutputId].altitude[measurementUnits.measurementUnitsAltitudeOutputId];
 		// results.translations.measurementUnits.velocity = AppCommonConstants.MeasurementUnits[measurementUnits.measurementUnitsOutputId].velocity[measurementUnits.measurementUnitsVelocityOutputId];
 
 		// results.flightPathCoords = path;

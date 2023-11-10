@@ -213,7 +213,7 @@ class HandlebarsFlightPathOutputTemplateService extends FlightPathOutputTemmplat
 	get templatePinMaxAltitudeDefault() {
 		return `
 	<Placemark>
-	<name><![CDATA[{{flightInfo.translations.maxAltitude}} ({{flightInfo.maxAltitude}} {{flightInfo.translations.measurementUnits.distance}})]]></name>
+	<name><![CDATA[{{flightInfo.translations.maxAltitude}} ({{flightInfo.maxAltitude}} {{flightInfo.translations.measurementUnits.altitude}})]]></name>
 		<Style id="highlightPlacemark">
 			<IconStyle>
 				<Icon>

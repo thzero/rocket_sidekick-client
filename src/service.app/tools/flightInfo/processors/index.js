@@ -27,11 +27,11 @@ class FlightInfoProcessorService extends ToolsService {
 		this._enforceNotNull('FlightInfoProcessorService', 'process', measurementUnits, 'measurementUnits', correlationId);
 		this._enforceNotEmpty('FlightInfoProcessorService', 'process', measurementUnits.id, 'measurementUnits.id', correlationId);
 		this._enforceNotEmpty('FlightInfoProcessorService', 'process', measurementUnits.accelerationId, 'measurementUnits.accelerationId', correlationId);
-		this._enforceNotEmpty('FlightInfoProcessorService', 'process', measurementUnits.distanceId, 'measurementUnits.distanceId', correlationId);
+		this._enforceNotEmpty('FlightInfoProcessorService', 'process', measurementUnits.altitudeId, 'measurementUnits.altitudeId', correlationId);
 		this._enforceNotEmpty('FlightInfoProcessorService', 'process', measurementUnits.velocityId, 'measurementUnits.velocityId', correlationId);
 		this._enforceNotEmpty('FlightInfoProcessorService', 'process', measurementUnits.outputId, 'measurementUnits.outputId', correlationId);
 		this._enforceNotEmpty('FlightInfoProcessorService', 'process', measurementUnits.accelerationtId, 'measurementUnits.accelerationtId', correlationId);
-		this._enforceNotEmpty('FlightInfoProcessorService', 'process', measurementUnits.distanceOutputId, 'measurementUnits.distanceOutputId', correlationId);
+		this._enforceNotEmpty('FlightInfoProcessorService', 'process', measurementUnits.altitudeOutputId, 'measurementUnits.altitudeOutputId', correlationId);
 		this._enforceNotEmpty('FlightInfoProcessorService', 'process', measurementUnits.velocityOutputId, 'measurementUnits.velocityOutputId', correlationId);
 
 		this._data = new FlightData();
@@ -480,8 +480,8 @@ class FlightInfoProcessorService extends ToolsService {
 		// return value;
 
 		value = this._convert(value)
-			.from(AppCommonConstants.MeasurementUnits[measurementUnits.id].distance[measurementUnits.distanceId])
-			.to(AppCommonConstants.MeasurementUnits[measurementUnits.outputId].distance[measurementUnits.distanceOutputId]);
+			.from(AppCommonConstants.MeasurementUnits[measurementUnits.id].altitude[measurementUnits.altitudeId])
+			.to(AppCommonConstants.MeasurementUnits[measurementUnits.outputId].altitude[measurementUnits.altitudeOutputId]);
 		return value;
 	}
 

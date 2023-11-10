@@ -304,7 +304,7 @@ export function useFlightToolsBaseComponent(props, context, options) {
 				return;
 			
 			flightMeasurementUnitsAccelerationOutputId.value = AppUtility.measurementUnitAccelerationId(correlationId, settings.value, value);
-			flightMeasurementUnitsAltitudeOutputId.value = AppUtility.measurementUnitAccelerationId(correlationId, settings.value, value);
+			flightMeasurementUnitsAltitudeOutputId.value = AppUtility.measurementUnitAltitudeId(correlationId, settings.value, value);
 			flightMeasurementUnitsDistanceOutputId.value = AppUtility.measurementUnitDistanceId(correlationId, settings.value, value);
 			flightMeasurementUnitsVelocityOutputId.value = AppUtility.measurementUnitVelocityId(correlationId, settings.value, value);
 		}
