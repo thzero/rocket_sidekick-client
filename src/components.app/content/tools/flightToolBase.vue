@@ -243,6 +243,7 @@ export function useFlightToolsBaseComponent(props, context, options) {
 			id: processor,
 			unitsId: flightMeasurementUnitsId.value,
 			accelerationId: flightMeasurementUnitsAccelerationId.value,
+			altitudeId: flightMeasurementUnitsAltitudeId.value,
 			distanceId: flightMeasurementUnitsDistanceId.value,
 			velocityId: flightMeasurementUnitsVelocityId.value,
 		};
