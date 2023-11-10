@@ -17,10 +17,12 @@ export function useFlightInfoValidation(flightInfoDataTypeFiltered, flightInfoDa
 		flightInfoDataTypeUse: { required, $autoDirty: true },
 		flightMeasurementUnitsId: { required, $autoDirty: true },
 		flightMeasurementUnitsAccelerationId: { required, $autoDirty: true },
+		flightMeasurementUnitsAltitudeId: { required, $autoDirty: true },
 		flightMeasurementUnitsDistanceId: { required, $autoDirty: true },
 		flightMeasurementUnitsVelocityId: { required, $autoDirty: true },
 		flightMeasurementUnitsOutputId: { required, $autoDirty: true },
 		flightMeasurementUnitsAccelerationOutputId: { required, $autoDirty: true },
+		flightMeasurementUnitsAltitudeOutputId: { required, $autoDirty: true },
 		flightMeasurementUnitsDistanceOutputId: { required, $autoDirty: true },
 		flightMeasurementUnitsVelocityOutputId: { required, $autoDirty: true },
 		flightProcessor: { required, $autoDirty: true }
