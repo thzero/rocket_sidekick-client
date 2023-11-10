@@ -12,7 +12,6 @@ export const useFlightPathValidation = {
 	flightPathInput: { required, $autoDirty: true },
 	flightMeasurementUnitsId: { required, $autoDirty: true },
 	flightMeasurementUnitsAltitudeId: { required, $autoDirty: true },
-	flightMeasurementUnitsDistanceId: { required, $autoDirty: true },
 	flightMeasurementUnitsVelocityId: { required, $autoDirty: true },
 	flightMeasurementUnitsOutputId: { required, $autoDirty: true },
 	flightMeasurementUnitsAltitudeOutputId: { required, $autoDirty: true },
