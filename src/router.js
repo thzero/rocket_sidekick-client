@@ -333,21 +333,6 @@ const routes = [
 		]
 	},
 	{
-		path: '/admin',
-		component: () => import(/* webpackPrefetch: true */ /* webpackChunkName: "group-admin" */ '@thzero/library_client_vue3_vuetify3/layouts/AdminLayout.vue'),
-		children: [
-			{
-				path: '',
-				name: 'admin',
-				component: () => import(/* webpackPrefetch: true */ /* webpackChunkName: "group-admin" */ './components.app/admin/Admin.vue'),
-				meta: {
-					requiresAuth: true,
-					requiresAuthRoles: [ 'admin' ]
-				}
-			}
-		]
-	},
-	{
 		path: '/user/checklists',
 		component: () => import(/* webpackPrefetch: true */ /* webpackChunkName: "group-layouts" */ './layouts/MainLayout.vue'),
 		children: [
@@ -699,6 +684,21 @@ const routes = [
 				component: () => import('./components/Auth.vue'),
 				meta: {
 					requiresAuth: false
+				}
+			}
+		]
+	},
+	{
+		path: '/admin',
+		component: () => import(/* webpackPrefetch: true */ /* webpackChunkName: "group-admin" */ '@thzero/library_client_vue3_vuetify3/layouts/AdminLayout.vue'),
+		children: [
+			{
+				path: '',
+				name: 'admin',
+				component: () => import(/* webpackPrefetch: true */ /* webpackChunkName: "group-admin" */ './components.app/admin/Admin.vue'),
+				meta: {
+					requiresAuth: true,
+					requiresAuthRoles: [ 'admin' ]
 				}
 			}
 		]
