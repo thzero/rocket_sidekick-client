@@ -29,7 +29,7 @@
     "@thzero/library_client_firebase": "^0.17.19",
     "@thzero/library_client_firebase_vue": "^0.17.10",
     "@thzero/library_client_service_rest_fetch": "^0.17.2",
-    "@thzero/library_client_vue3": "^0.17.59",
+    "@thzero/library_client_vue3": "^0.17.60",
     "@thzero/library_client_vue3_store_pinia": "^0.17.11",
     "@thzero/library_client_vue3_vuetify3": "^0.17.58",
     "@thzero/library_common": "^0.17.12",
