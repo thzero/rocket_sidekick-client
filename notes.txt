@@ -16,6 +16,11 @@ Tools
 
 Launch
 	allow selection of rocket setup after selecting rocket
+    allow video and album urls for a flight
+    allow upload
+
+Rockets
+    show flight logs on rockets
 
 Checklist
 	potentially record a launch from a checklist...
