@@ -20,7 +20,7 @@ Launch
     allow upload
 
 Rockets
-    show flight logs on rockets
+    show flight logs on rockets if marked
 
 Checklist
 	potentially record a launch from a checklist...
