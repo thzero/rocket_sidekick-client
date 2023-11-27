@@ -78,7 +78,7 @@ export default defineConfig({optimizeDeps: {
     rollupOptions: {
       output: {
         manualChunks: (id) => {
-          if (id.includes('client/src/')) {
+          if (id.includes('/src/')) {
             return 'app';
           }
           if (id.includes('/async-mutex')) {
