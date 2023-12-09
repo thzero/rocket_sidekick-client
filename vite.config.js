@@ -76,205 +76,205 @@ export default defineConfig({optimizeDeps: {
   ],
   build: {
     rollupOptions: {
-      output: {
-        manualChunks: (id) => {
-          if (id.includes('/src/')) {
-            return 'app';
-          }
-          if (id.includes('/async-mutex')) {
-            return 'app';
-          }
-          if (id.includes('/decimal.js-light')) {
-            return 'app';
-          }
-          if (id.includes('/thenby')) {
-            return 'app';
-          }
-          if (id.includes('/chart.js')) {
-            return 'app-flight';
-          }
-          if (id.includes('/html2canvas')) {
-            return 'app-flight';
-          }
-          if (id.includes('/papaparse')) {
-            return 'app-flight';
-          }
+      // output: {
+      //   manualChunks: (id) => {
+      //     if (id.includes('/src/')) {
+      //       return 'app';
+      //     }
+      //     if (id.includes('/async-mutex')) {
+      //       return 'app';
+      //     }
+      //     if (id.includes('/decimal.js-light')) {
+      //       return 'app';
+      //     }
+      //     if (id.includes('/thenby')) {
+      //       return 'app';
+      //     }
+      //     if (id.includes('/chart.js')) {
+      //       return 'app-flight';
+      //     }
+      //     if (id.includes('/html2canvas')) {
+      //       return 'app-flight';
+      //     }
+      //     if (id.includes('/papaparse')) {
+      //       return 'app-flight';
+      //     }
 
-          // // if (id.includes('client/src/library_vue_vuetify')) {
-          // //   return 'app';
-          // //   return 'thzero.vue.vuetify';
-          // // }
-          // // if (id.includes('client/src/library_vue')) {
-          // //   return 'app';
-          // //   return 'thzero.vue';
-          // // }
-          // if (id.includes('/@thzero')) {
-          //   return 'thzero';
-          // }
-          // if (id.includes('/axios')) {
-          //   // 28.33 kB
-          //   // return 'axios';
-          //   return 'thzero';
-          // }
-          // if (id.includes('/form-data')) {
-          //   // used with axios
-          //   // 0.08 kB
-          //   // return 'form-data';
-          //   return 'thzero';
-          // }
-          // if (id.includes('/dayjs')) {
-          //   // 11.83 kB
-          //   // return 'dayjs';
-          //   return 'thzero';
-          // }
-          // if (id.includes('/easy-rbac')) {
-          //   // 3.11 kB
-          //   // return 'easy-rbac';
-          //   return 'thzero';
-          // }
-          // if (id.includes('/marked')) {
-          //   // 36.93 kB
-          //   // return 'marked';
-          //   return 'thzero';
-          // }
-          // if (id.includes('/lodash')) {
-          //   // 17.67 kB
-          //   // return 'lodash';
-          //   return 'thzero';
-          // }
-          // if (id.includes('/mitt')) {
-          //   // 0.32 kB
-          //   // return 'mitt';
-          //   return 'thzero';
-          // }
-          // if (id.includes('/short-uuid')) {
-          //   // 9.25 kB
-          //   // return 'short-uuid';
-          //   return 'thzero';
-          // }
-          // if (id.includes('/any-base')) {
-          //   // used with short-uuid
-          //   // 1.65 kB
-          //   // return 'any-base';
-          //   return 'thzero';
-          // }
-          // if (id.includes('/uuid')) {
-          //   // 0.88 kB
-          //   // return 'uuid';
-          //   return 'thzero';
-          // }
-          // if (id.includes('/firebase')) {
-          //   // 0.68 kB
-          //   // return 'firebase2';
-          //   return 'thzero';
-          // }
-          // if (id.includes('/idb')) {
-          //   // 2.99 kB
-          //   // return 'idb';
-          //   return 'thzero';
-          // }
+      //     // // if (id.includes('client/src/library_vue_vuetify')) {
+      //     // //   return 'app';
+      //     // //   return 'thzero.vue.vuetify';
+      //     // // }
+      //     // // if (id.includes('client/src/library_vue')) {
+      //     // //   return 'app';
+      //     // //   return 'thzero.vue';
+      //     // // }
+      //     // if (id.includes('/@thzero')) {
+      //     //   return 'thzero';
+      //     // }
+      //     // if (id.includes('/axios')) {
+      //     //   // 28.33 kB
+      //     //   // return 'axios';
+      //     //   return 'thzero';
+      //     // }
+      //     // if (id.includes('/form-data')) {
+      //     //   // used with axios
+      //     //   // 0.08 kB
+      //     //   // return 'form-data';
+      //     //   return 'thzero';
+      //     // }
+      //     // if (id.includes('/dayjs')) {
+      //     //   // 11.83 kB
+      //     //   // return 'dayjs';
+      //     //   return 'thzero';
+      //     // }
+      //     // if (id.includes('/easy-rbac')) {
+      //     //   // 3.11 kB
+      //     //   // return 'easy-rbac';
+      //     //   return 'thzero';
+      //     // }
+      //     // if (id.includes('/marked')) {
+      //     //   // 36.93 kB
+      //     //   // return 'marked';
+      //     //   return 'thzero';
+      //     // }
+      //     // if (id.includes('/lodash')) {
+      //     //   // 17.67 kB
+      //     //   // return 'lodash';
+      //     //   return 'thzero';
+      //     // }
+      //     // if (id.includes('/mitt')) {
+      //     //   // 0.32 kB
+      //     //   // return 'mitt';
+      //     //   return 'thzero';
+      //     // }
+      //     // if (id.includes('/short-uuid')) {
+      //     //   // 9.25 kB
+      //     //   // return 'short-uuid';
+      //     //   return 'thzero';
+      //     // }
+      //     // if (id.includes('/any-base')) {
+      //     //   // used with short-uuid
+      //     //   // 1.65 kB
+      //     //   // return 'any-base';
+      //     //   return 'thzero';
+      //     // }
+      //     // if (id.includes('/uuid')) {
+      //     //   // 0.88 kB
+      //     //   // return 'uuid';
+      //     //   return 'thzero';
+      //     // }
+      //     // if (id.includes('/firebase')) {
+      //     //   // 0.68 kB
+      //     //   // return 'firebase2';
+      //     //   return 'thzero';
+      //     // }
+      //     // if (id.includes('/idb')) {
+      //     //   // 2.99 kB
+      //     //   // return 'idb';
+      //     //   return 'thzero';
+      //     // }
 
-          if (id.includes('/mathjs')) {
-            // 528.96 kB
-            return 'mathjs';
-          }
-          if (id.includes('/@babel/runtime')) {
-            // return 'babel';
-            return 'mathjs';
-          }
-          if (id.includes('/complex.js')) {
-            // 9.88 kB
-            // return 'complex';
-            return 'mathjs';
-          }
-          if (id.includes('/decimal.js')) {
-            // 32.12 kB
-            // return 'decimaljs';
-            return 'mathjs';
-          }
-          if (id.includes('/escape-latex')) {
-            // 0.89 kB
-            // return 'escape-latex';
-            return 'mathjs';
-          }
-          if (id.includes('/fraction.js')) {
-            // return 'fraction';
-            return 'mathjs';
-          }
-          if (id.includes('/javascript-natural-sort')) {
-            // 0.98 kB
-            // return 'javascript-natural-sort';
-            return 'mathjs';
-          }
-          if (id.includes('/seedrandom')) {
-            // 7.53 k
-            // return 'seedrandom';
-            return 'mathjs';
-          }
-          if (id.includes('/tiny-emitter')) {
-            // 0.67 kB
-            // return 'tiny-emitter';
-            return 'mathjs';
-          }
-          if (id.includes('/typed-function')) {
-            // 19.12 kB
-            // return 'typed-function';
-            return 'mathjs';
-          }
+      //     if (id.includes('/mathjs')) {
+      //       // 528.96 kB
+      //       return 'mathjs';
+      //     }
+      //     if (id.includes('/@babel/runtime')) {
+      //       // return 'babel';
+      //       return 'mathjs';
+      //     }
+      //     if (id.includes('/complex.js')) {
+      //       // 9.88 kB
+      //       // return 'complex';
+      //       return 'mathjs';
+      //     }
+      //     if (id.includes('/decimal.js')) {
+      //       // 32.12 kB
+      //       // return 'decimaljs';
+      //       return 'mathjs';
+      //     }
+      //     if (id.includes('/escape-latex')) {
+      //       // 0.89 kB
+      //       // return 'escape-latex';
+      //       return 'mathjs';
+      //     }
+      //     if (id.includes('/fraction.js')) {
+      //       // return 'fraction';
+      //       return 'mathjs';
+      //     }
+      //     if (id.includes('/javascript-natural-sort')) {
+      //       // 0.98 kB
+      //       // return 'javascript-natural-sort';
+      //       return 'mathjs';
+      //     }
+      //     if (id.includes('/seedrandom')) {
+      //       // 7.53 k
+      //       // return 'seedrandom';
+      //       return 'mathjs';
+      //     }
+      //     if (id.includes('/tiny-emitter')) {
+      //       // 0.67 kB
+      //       // return 'tiny-emitter';
+      //       return 'mathjs';
+      //     }
+      //     if (id.includes('/typed-function')) {
+      //       // 19.12 kB
+      //       // return 'typed-function';
+      //       return 'mathjs';
+      //     }
 
-          // if (id.includes('/convert-units')) {
-          //   // 5.35 kB
-          //   // return 'convert-units';
-          //   return 'tools';
-          // }
+      //     // if (id.includes('/convert-units')) {
+      //     //   // 5.35 kB
+      //     //   // return 'convert-units';
+      //     //   return 'tools';
+      //     // }
 
-          // if (id.includes('/@vue')) {
-          //   // 176.94 kB
-          //   // 15.13 kB css
-          //   // return '@vue';
-          //   // return 'vue';
-          //   return 'vue';
-          // }
-          // if (id.includes('/@intlify')) {
-          //   // 29.75 kB
-          //   // return 'intlify';
-          //   // return 'vue';
-          //   return 'vue';
-          // }
-          // if (id.includes('/pinia')) {
-          //   // 6.91 kB
-          //   // return 'pinia';
-          //   // return 'vue';
-          //   return 'vue';
-          // }
-          // if (id.includes('/vue')) {
-          //   // 176.94 kB
-          //   // 15.13 kB css
-          //   // return 'vue';
-          //   return 'vue';
-          // }
+      //     // if (id.includes('/@vue')) {
+      //     //   // 176.94 kB
+      //     //   // 15.13 kB css
+      //     //   // return '@vue';
+      //     //   // return 'vue';
+      //     //   return 'vue';
+      //     // }
+      //     // if (id.includes('/@intlify')) {
+      //     //   // 29.75 kB
+      //     //   // return 'intlify';
+      //     //   // return 'vue';
+      //     //   return 'vue';
+      //     // }
+      //     // if (id.includes('/pinia')) {
+      //     //   // 6.91 kB
+      //     //   // return 'pinia';
+      //     //   // return 'vue';
+      //     //   return 'vue';
+      //     // }
+      //     // if (id.includes('/vue')) {
+      //     //   // 176.94 kB
+      //     //   // 15.13 kB css
+      //     //   // return 'vue';
+      //     //   return 'vue';
+      //     // }
 
-          // if (id.includes('/vuetify')) {
-          //   // 196.51 kB
-          //   // 363.40 kB css
-          //   // return 'vuetify';
-          //   // return 'vuetify';
-          //   return 'vue';
-          // }
-          // if (id.includes('date-fns')) {
-          //   // 122.38 kB
-          //   // return 'date-fns';
-          //   // because its used by the date picker componente
-          //   // return 'vuetify';
-          //   return 'vue';
-          // }
+      //     // if (id.includes('/vuetify')) {
+      //     //   // 196.51 kB
+      //     //   // 363.40 kB css
+      //     //   // return 'vuetify';
+      //     //   // return 'vuetify';
+      //     //   return 'vue';
+      //     // }
+      //     // if (id.includes('date-fns')) {
+      //     //   // 122.38 kB
+      //     //   // return 'date-fns';
+      //     //   // because its used by the date picker componente
+      //     //   // return 'vuetify';
+      //     //   return 'vue';
+      //     // }
 
-          // console.log(id);
-          // if (id.includes('node_modules')) {
-          //   return 'vendor';
-          // }
-        }
-      },
+      //     // console.log(id);
+      //     // if (id.includes('node_modules')) {
+      //     //   return 'vendor';
+      //     // }
+      //   }
+      // },
     },
   },
   define: { 'process.env': {} },
