@@ -114,31 +114,8 @@ export function useFlightPathBaseComponent(props, context) {
 	} = useToolsMeasurementSettingsComponent(props, context);
 
 	const {
-		// measurementUnitsIdSettings,
-		measurementUnitsAccelerationDefaultId,
-		measurementUnitsAccelerationType,
-		measurementUnitsAreaDefaultId,
-		measurementUnitsAreaType,
-		measurementUnitsAltitudeDefaultId,
 		measurementUnitsAltitudeType,
-		measurementUnitsDensityDefaultId,
-		measurementUnitsDensityType,
-		measurementUnitsDistanceType,
-		measurementUnitsDistanceDefaultId,
-		measurementUnitsFluidDefaultId,
-		measurementUnitsFluidType,
-		measurementUnitsLengthDefaultId,
-		measurementUnitsLengthType,
-		measurementUnitsVelocityDefaultId,
-		measurementUnitsVelocityType,
-		measurementUnitsVolumeDefaultId,
-		measurementUnitsVolumeType,
-		measurementUnitsWeightDefaultId,
-		measurementUnitsWeightType,
-		displayItemMeasurement,
-		displayItemMeasurementLength,
-		displayItemMeasurementWeight,
-		measurementUnitsFromUnitId
+		measurementUnitsVelocityType
 	} = useToolsMeasurementBaseComponent(props, context);
 
 	const serviceDownload = LibraryClientUtility.$injector.getService(AppConstants.InjectorKeys.SERVICE_DOWNLOAD);

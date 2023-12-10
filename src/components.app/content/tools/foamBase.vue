@@ -71,30 +71,10 @@ export function useFoamBaseComponent(props, context) {
 	} = useToolsMeasurementSettingsComponent(props, context);
 
 	const {
-		// measurementUnitsIdSettings,
-		measurementUnitsAccelerationDefaultId,
-		measurementUnitsAccelerationType,
-		measurementUnitsAreaDefaultId,
-		measurementUnitsAreaType,
-		measurementUnitsAltitudeDefaultId,
-		measurementUnitsAltitudeType,
-		measurementUnitsDensityDefaultId,
-		measurementUnitsDensityType,
-		measurementUnitsDistanceType,
-		measurementUnitsDistanceDefaultId,
 		measurementUnitsFluidDefaultId,
 		measurementUnitsFluidType,
 		measurementUnitsLengthDefaultId,
 		measurementUnitsLengthType,
-		measurementUnitsVelocityDefaultId,
-		measurementUnitsVelocityType,
-		measurementUnitsVolumeDefaultId,
-		measurementUnitsVolumeType,
-		measurementUnitsWeightDefaultId,
-		measurementUnitsWeightType,
-		displayItemMeasurement,
-		displayItemMeasurementLength,
-		displayItemMeasurementWeight,
 		measurementUnitsFromUnitId
 	} = useToolsMeasurementBaseComponent(props, context);
 
