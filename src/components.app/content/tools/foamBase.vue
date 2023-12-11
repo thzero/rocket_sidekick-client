@@ -9,7 +9,7 @@ import AppCommonConstants from 'rocket_sidekick_common/constants';
 import LibraryClientUtility from '@thzero/library_client/utility/index';
 
 import { useToolsBaseComponent } from '@/components/content/tools/toolsBase';
-import { useToolsMeasurementBaseComponent } from '@/components/content/tools/toolsMeasurementBase';
+import { useToolsMeasurementUtilityComponent } from '@/components/content/tools/toolsMeasurementBase';
 import { useToolsMeasurementSettingsComponent } from '@/components/content/tools/toolsMeasurementSettings';
 
 export function useFoamBaseComponent(props, context) {
@@ -76,7 +76,7 @@ export function useFoamBaseComponent(props, context) {
 		measurementUnitsLengthDefaultId,
 		measurementUnitsLengthType,
 		measurementUnitsFromUnitId
-	} = useToolsMeasurementBaseComponent(props, context);
+	} = useToolsMeasurementUtilityComponent(props, context);
 
 	const serviceToolsFoam = LibraryClientUtility.$injector.getService(AppConstants.InjectorKeys.SERVICE_TOOLS_FOAM);
 
