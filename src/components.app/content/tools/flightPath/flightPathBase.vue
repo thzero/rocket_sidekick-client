@@ -14,7 +14,7 @@ import LibraryCommonUtility from '@thzero/library_common/utility/index';
 
 import { useButtonComponent } from '@thzero/library_client_vue3_vuetify3/components/buttonComponent';
 import { useFlightToolsBaseComponent } from '@/components.app/content/tools/flightToolBase';
-import { useToolsMeasurementBaseComponent } from '@/components/content/tools/toolsMeasurementBase';
+import { useToolsMeasurementUtilityComponent } from '@/components/content/tools/toolsMeasurementBase';
 import { useToolsMeasurementSettingsComponent } from '@/components/content/tools/toolsMeasurementSettings';
 
 export function useFlightPathBaseComponent(props, context) {
@@ -114,32 +114,9 @@ export function useFlightPathBaseComponent(props, context) {
 	} = useToolsMeasurementSettingsComponent(props, context);
 
 	const {
-		// measurementUnitsIdSettings,
-		measurementUnitsAccelerationDefaultId,
-		measurementUnitsAccelerationType,
-		measurementUnitsAreaDefaultId,
-		measurementUnitsAreaType,
-		measurementUnitsAltitudeDefaultId,
 		measurementUnitsAltitudeType,
-		measurementUnitsDensityDefaultId,
-		measurementUnitsDensityType,
-		measurementUnitsDistanceType,
-		measurementUnitsDistanceDefaultId,
-		measurementUnitsFluidDefaultId,
-		measurementUnitsFluidType,
-		measurementUnitsLengthDefaultId,
-		measurementUnitsLengthType,
-		measurementUnitsVelocityDefaultId,
-		measurementUnitsVelocityType,
-		measurementUnitsVolumeDefaultId,
-		measurementUnitsVolumeType,
-		measurementUnitsWeightDefaultId,
-		measurementUnitsWeightType,
-		displayItemMeasurement,
-		displayItemMeasurementLength,
-		displayItemMeasurementWeight,
-		measurementUnitsFromUnitId
-	} = useToolsMeasurementBaseComponent(props, context);
+		measurementUnitsVelocityType
+	} = useToolsMeasurementUtilityComponent(props, context);
 
 	const serviceDownload = LibraryClientUtility.$injector.getService(AppConstants.InjectorKeys.SERVICE_DOWNLOAD);
 	const serviceFlightPath = LibraryClientUtility.$injector.getService(AppConstants.InjectorKeys.SERVICE_TOOLS_FLIGHT_PATH_PROCESSOR);

@@ -9,7 +9,7 @@ import LibraryClientVueUtility from '@thzero/library_client_vue3/utility/index';
 import LibraryCommonUtility from '@thzero/library_common/utility/index';
 
 import { useToolsBaseComponent } from '@/components/content/tools/toolsBase';
-import { useToolsMeasurementBaseComponent } from '@/components/content/tools/toolsMeasurementBase';
+import { useToolsMeasurementUtilityComponent } from '@/components/content/tools/toolsMeasurementBase';
 
 export function useFlightToolsBaseComponent(props, context, options) {
 	const {
@@ -77,7 +77,7 @@ export function useFlightToolsBaseComponent(props, context, options) {
 		displayItemMeasurementLength,
 		displayItemMeasurementWeight,
 		measurementUnitsFromUnitId
-	} = useToolsMeasurementBaseComponent(props, context, options);
+	} = useToolsMeasurementUtilityComponent(props, context, options);
 
 	const flightDataDate = ref(null);
 	const flightDataLocation = ref(null);
