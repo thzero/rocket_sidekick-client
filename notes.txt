@@ -14,16 +14,31 @@ Tools
 
     https://www.translatorscafe.com/unit-converter/en-US/calculator/rocket-max-altitude/
 
+Checklists
+	potentially record a launch from a checklist...
+
 Launch
 	allow selection of rocket setup after selecting rocket
+    show button on view to the rocket
+    show link on listing to the rocket
+    show button on readonly view to the rocket setup
+    show link on listing to the rocket setup 
+    show rocket/rocket setup information on motors on readonly view and listing
     allow video and album urls for a flight
     allow upload
 
-Rockets
-    show flight logs on rockets if marked
+Rocket Gallery
+    show launches on rockets if marked
 
-Checklist
-	potentially record a launch from a checklist...
+Rockets
+    need to deal with different units for the tubes when calculating overall measurements
+
+Rocket Setups
+    need to deal with different units for the tubes when calculating overall measurements
+    resolve issues with specifications?!?!
+    finish
+    show button on readonly view to the rocket
+    show link on listing to the rocket
 
 Setups
     parts should show both rocket and setup parts
