@@ -31,9 +31,11 @@ Rocket Gallery
     show launches on rockets if marked
 
 Rockets
+    other components (altimeter, etc.) aren't showing?
     need to deal with different units for the stages when calculating overall measurements
 
 Rocket Setups
+    other components (altimeter, etc.) aren't showing?
     need to deal with different units for the stages and rocket when calculating overall measurements
     resolve issues with specifications?!?!
     finish

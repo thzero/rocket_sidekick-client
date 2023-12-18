@@ -52,6 +52,10 @@ export default {
 			background-attachment: fixed;
 	} */
 
+	.text-contrast {
+		color: rgb(var(--v-theme-contrast))
+	}
+
 	.displayLink {
 		cursor: pointer;
 		text-decoration: underline;
