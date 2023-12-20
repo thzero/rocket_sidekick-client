@@ -9,7 +9,7 @@ import LibraryClientVueUtility from '@thzero/library_client_vue3/utility/index';
 import LibraryCommonUtility from '@thzero/library_common/utility/index';
 
 import { useToolsBaseComponent } from '@/components/content/tools/toolsBase';
-import { useToolsMeasurementUtilityComponent } from '@/components/content/tools/toolsMeasurementBase';
+import { useToolsMeasurementUtilityComponent } from '@/components/content/tools/toolsMeasurementUtilityComponent';
 
 export function useFlightToolsBaseComponent(props, context, options) {
 	const {
