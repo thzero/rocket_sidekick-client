@@ -9,7 +9,7 @@ import AppCommonConstants from 'rocket_sidekick_common/constants';
 import LibraryClientUtility from '@thzero/library_client/utility/index';
 
 import { useToolsBaseComponent } from '@/components/content/tools/toolsBase';
-import { useToolsMeasurementUtilityComponent } from '@/components/content/tools/toolsMeasurementBase';
+import { useToolsMeasurementUtilityComponent } from '@/components/content/tools/toolsMeasurementUtilityComponent';
 import { useToolsMeasurementSettingsComponent } from '@/components/content/tools/toolsMeasurementSettings';
 
 export function useFoamBaseComponent(props, context) {

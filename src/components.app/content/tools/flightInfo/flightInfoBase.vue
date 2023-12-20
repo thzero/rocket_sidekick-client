@@ -14,7 +14,7 @@ import LibraryClientVueUtility from '@thzero/library_client_vue3/utility/index';
 
 import { useButtonComponent } from '@thzero/library_client_vue3_vuetify3/components/buttonComponent';
 import { useFlightToolsBaseComponent } from '@/components.app/content/tools/flightToolBase';
-import { useToolsMeasurementUtilityComponent } from '@/components/content/tools/toolsMeasurementBase';
+import { useToolsMeasurementUtilityComponent } from '@/components/content/tools/toolsMeasurementUtilityComponent';
 import { useToolsMeasurementSettingsComponent } from '@/components/content/tools/toolsMeasurementSettings';
 
 export function useFlightInfoBaseComponent(props, context) {
