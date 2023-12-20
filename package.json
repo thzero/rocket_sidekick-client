@@ -56,9 +56,7 @@
     "vite-plugin-vuetify": "^2.0.1",
     "vite-plugin-webpackchunkname": "^0.2.4"
   },
-  "overrides": {
-    "vite": {
-      "rollup": "npm:@rollup/wasm-node"
-    }
+  "optionalDependencies": {
+    "@rollup/rollup-linux-x64-gnu": "*"
   }
 }
