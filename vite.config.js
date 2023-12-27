@@ -1,16 +1,16 @@
+import fs from 'fs';
+import path from 'path';
+import { fileURLToPath, URL } from 'node:url'
+
+// Utilities
+import { defineConfig } from 'vite'
+
 // Plugins
 import vue from '@vitejs/plugin-vue'
 import vuetify from 'vite-plugin-vuetify'
 import { splitVendorChunkPlugin } from 'vite'
 
 import { manualChunksPlugin } from 'vite-plugin-webpackchunkname'
-
-// Utilities
-import { defineConfig } from 'vite'
-import { fileURLToPath, URL } from 'node:url'
-
-import fs from 'fs';
-import path from 'path';
 
 let configEnv = process.env.NODE_ENV;
 console.log('vue.config.NODE_ENV', configEnv);

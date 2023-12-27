@@ -24,7 +24,7 @@
     "id": "library-cli --nano"
   },
   "dependencies": {
-    "@mdi/font": "^7.3.67",
+    "@mdi/font": "^7.4.47",
     "@thzero/library_client": "^0.17.34",
     "@thzero/library_client_firebase": "^0.17.20",
     "@thzero/library_client_firebase_vue": "^0.17.10",
