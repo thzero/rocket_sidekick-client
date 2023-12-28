@@ -1,20 +1,19 @@
 import { between, decimal, integer, helpers, required } from '@vuelidate/validators';
 
-import AppUtility from '@/utility/app';
 import LibraryClientUtility from '@thzero/library_client/utility/index';
 
 const finTabFinRoot = (value, siblings, vm) => {
-	value = AppUtility.convertNumber(value);
-	if (siblings.finRootLength && (value > AppUtility.convertNumber(siblings.finRootLength)))
+	value = LibraryClientUtility.convertNumber(value);
+	if (siblings.finRootLength && (value > LibraryClientUtility.convertNumber(siblings.finRootLength)))
 		return false;
 	return true;
 }
 
 const finWidth = (value, siblings, vm) => {
-	value = AppUtility.convertNumber(value);
+	value = LibraryClientUtility.convertNumber(value);
 	if (!siblings.motorTubeOD)
 		return true;
-	const motorTubeOD = AppUtility.convertNumber(siblings.motorTubeOD);
+	const motorTubeOD = LibraryClientUtility.convertNumber(siblings.motorTubeOD);
 	const delta = value / motorTubeOD;
 	if (delta > 0.5)
 		return false;
@@ -22,8 +21,8 @@ const finWidth = (value, siblings, vm) => {
 }
 
 const motorTubeBodyTube = (value, siblings, vm) => {
-	value = AppUtility.convertNumber(value);
-	if (siblings.bodyTubeID && (value >= AppUtility.convertNumber(siblings.bodyTubeID)))
+	value = LibraryClientUtility.convertNumber(value);
+	if (siblings.bodyTubeID && (value >= LibraryClientUtility.convertNumber(siblings.bodyTubeID)))
 		return false;
 	return true;
 }

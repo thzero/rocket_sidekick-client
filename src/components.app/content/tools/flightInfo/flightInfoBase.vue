@@ -8,7 +8,6 @@ import html2canvas from 'html2canvas';
 
 import AppConstants from '@/constants';
 
-import AppUtility from '@/utility/app';
 import LibraryClientUtility from '@thzero/library_client/utility/index';
 import LibraryClientVueUtility from '@thzero/library_client_vue3/utility/index';
 
@@ -306,16 +305,16 @@ export function useFlightInfoBaseComponent(props, context) {
 				serviceDownload.downloadUrl(correlationId, 'data:image/png;base64,' + data,
 					name,
 					() => {
-						AppUtility.debug2('download', 'completed');
+						LibraryClientUtility.debug2('download', 'completed');
 						downloadProgress.value = false;
 					},
 					() => {
-						AppUtility.debug2('download', 'cancelled');
+						LibraryClientUtility.debug2('download', 'cancelled');
 						downloadProgress.value = false;
 					},
 					(arg) => {
-						AppUtility.debug2('download', 'progress');
-						AppUtility.debug2(arg);
+						LibraryClientUtility.debug2('download', 'progress');
+						LibraryClientUtility.debug2(arg);
 					}
 				);
 			// eslint-disable-next-line
@@ -334,16 +333,16 @@ export function useFlightInfoBaseComponent(props, context) {
 			serviceDownload.download(correlationId, output,
 				name,
 				() => {
-					AppUtility.debug2('download', 'completed');
+					LibraryClientUtility.debug2('download', 'completed');
 					downloadProgress.value = false;
 				},
 				() => {
-					AppUtility.debug2('download', 'cancelled');
+					LibraryClientUtility.debug2('download', 'cancelled');
 					downloadProgress.value = false;
 				},
 				(arg) => {
-					AppUtility.debug2('download', 'progress');
-					AppUtility.debug2(arg);
+					LibraryClientUtility.debug2('download', 'progress');
+					LibraryClientUtility.debug2(arg);
 				}
 			);
 		}
@@ -414,7 +413,7 @@ export function useFlightInfoBaseComponent(props, context) {
 						velocityOutputId: flightMeasurementUnitsVelocityOutputId.value,
 					},
 					flightInfoDataTypes);
-				AppUtility.debug2('flightInfoResults', flightInfoResults);
+				LibraryClientUtility.debug2('flightInfoResults', flightInfoResults);
 				if (flightInfoResults.errors && data.errors.length > 0) {
 					const errors = flightInfoResults.errors.map(e => LibraryClientUtility.$trans.t(e) + '<br/>');
 					setError(errors);

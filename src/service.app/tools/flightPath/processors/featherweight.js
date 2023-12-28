@@ -64,7 +64,7 @@ class FeatherweightFlightPathProcessorService extends FlightPathProcessorService
 			length = value.length;
 			for (const data of value) {
 				index++;
-				verticalV = AppUtility.convertNumber(data[8]);
+				verticalV = LibraryClientUtility.convertNumber(data[8]);
 				flightEnded = false;
 				flightStarted = false;
 				

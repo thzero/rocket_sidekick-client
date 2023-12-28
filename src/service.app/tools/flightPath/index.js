@@ -72,7 +72,7 @@ class FlightPathProcessorService extends BaseService {
 
 		const results = this._initialize(correlationId, flightInfo);
 		processor.process(correlationId, this, results, data, measurementUnits, templateMain, templatePinLaunch, templatePinTouchdown, templatePinsAdditional);
-		AppUtility.debug2('results.info', results.info);
+		LibraryClientUtility.debug2('results.info', results.info);
 
 		return this._successResponse(results, correlationId);
 	}

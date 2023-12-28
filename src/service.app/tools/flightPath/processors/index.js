@@ -3,7 +3,6 @@ import configureMeasurements, { length, speed } from 'convert-units';
 import AppConstants from '@/constants';
 import AppCommonConstants from 'rocket_sidekick_common/constants';
 
-import AppUtility from '@/utility/app';
 import LibraryClientUtility from '@thzero/library_client/utility/index';
 import LibraryCommonUtility from '@thzero/library_common/utility';
 
@@ -135,8 +134,8 @@ class FlightPathProcessorService extends ToolsService {
 			flight.maxVelocity = this._convert(flight.maxVelocity)
 				.from(AppCommonConstants.MeasurementUnits[measurementUnits.measurementUnitsId].velocity[measurementUnits.measurementUnitsVelocityId])
 				.to(AppCommonConstants.MeasurementUnits[measurementUnits.measurementUnitsOutputId].velocity[measurementUnits.measurementUnitsVelocityOutputId]);
-			flight.maxAltitude = AppUtility.convertNumber(flight.maxAltitude).toLocaleString();
-			flight.maxVelocity = AppUtility.convertNumber(flight.maxVelocity).toLocaleString();
+			flight.maxAltitude = LibraryClientUtility.convertNumber(flight.maxAltitude).toLocaleString();
+			flight.maxVelocity = LibraryClientUtility.convertNumber(flight.maxVelocity).toLocaleString();
 
 			flight.translations = results.translations;
 			flight.style = results.style;
@@ -203,8 +202,8 @@ class FlightPathProcessorService extends ToolsService {
 		// results.maxVelocity = this._convert(results.maxVelocity)
 		// 	.from(AppCommonConstants.MeasurementUnits[measurementUnits.measurementUnitsId].velocity[measurementUnits.measurementUnitsVelocityId])
 		// 	.to(AppCommonConstants.MeasurementUnits[measurementUnits.measurementUnitsOutputId].velocity[measurementUnits.measurementUnitsVelocityOutputId]);
-		// results.maxAltitude = AppUtility.convertNumber(results.maxAltitude).toLocaleString();
-		// results.maxVelocity = AppUtility.convertNumber(results.maxVelocity).toLocaleString();
+		// results.maxAltitude = LibraryClientUtility.convertNumber(results.maxAltitude).toLocaleString();
+		// results.maxVelocity = LibraryClientUtility.convertNumber(results.maxVelocity).toLocaleString();
 
 		// results.translations = {};
 		// results.translations.launch = LibraryClientUtility.$trans.t('forms.content.tools.flightPath.launch');
@@ -245,7 +244,7 @@ class FlightPathProcessorService extends ToolsService {
 	}
 
 	_round(value, places = 2) {
-		return AppUtility.convertNumber(value.toFixed(places));
+		return LibraryClientUtility.convertNumber(value.toFixed(places));
 	}
 
 	_sort(correlationId, func) {
@@ -283,13 +282,13 @@ class FlightPath {
 
 		this._flights[flightId].data.push({
 			index: index,
-			altitude: AppUtility.convertNumber(altitude),
-			latitude: AppUtility.convertNumber(latitude),
-			longitude: AppUtility.convertNumber(longitude),
+			altitude: LibraryClientUtility.convertNumber(altitude),
+			latitude: LibraryClientUtility.convertNumber(latitude),
+			longitude: LibraryClientUtility.convertNumber(longitude),
 			seconds: null,
-			time: AppUtility.convertNumber(time),
-			velocityV: AppUtility.convertNumber(velocityV),
-			velocityH: velocityH ? AppUtility.convertNumber(velocityH) : null
+			time: LibraryClientUtility.convertNumber(time),
+			velocityV: LibraryClientUtility.convertNumber(velocityV),
+			velocityH: velocityH ? LibraryClientUtility.convertNumber(velocityH) : null
 		});
 	}
 
