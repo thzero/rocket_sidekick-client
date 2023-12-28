@@ -87,7 +87,7 @@ export function useFlightInfoChartBaseComponent(props, context, options) {
 
 	watch(() => props.chartData,
 		(flightInfo) => {
-			// AppUtility.debug2(flightInfo);
+			// LibraryClientUtility.debug2(flightInfo);
 			if (chart.value) {
 				chart.value.destroy();
 				chart.value = null;

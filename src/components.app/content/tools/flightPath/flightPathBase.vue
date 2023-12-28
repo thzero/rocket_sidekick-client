@@ -7,7 +7,6 @@ import Papa from 'papaparse';
 
 import AppConstants from '@/constants';
 
-import AppUtility from '@/utility/app';
 import LibraryClientUtility from '@thzero/library_client/utility/index';
 import LibraryClientVueUtility from '@thzero/library_client_vue3/utility/index';
 import LibraryCommonUtility from '@thzero/library_common/utility/index';
@@ -269,16 +268,16 @@ export function useFlightPathBaseComponent(props, context) {
 				serviceDownload.download(correlationIdI, item,
 					namePrefix + (index++) + '-' + nameDate + extension,
 					() => {
-						AppUtility.debug2('download', 'completed');
+						LibraryClientUtility.debug2('download', 'completed');
 						downloadProgress.value = false;
 					},
 					() => {
-						AppUtility.debug2('download', 'cancelled');
+						LibraryClientUtility.debug2('download', 'cancelled');
 						downloadProgress.value = false;
 					},
 					(arg) => {
-						AppUtility.debug2('download', 'progress');
-						AppUtility.debug2(arg);
+						LibraryClientUtility.debug2('download', 'progress');
+						LibraryClientUtility.debug2(arg);
 					}
 				);
 			}

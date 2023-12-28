@@ -1,6 +1,5 @@
 import AppConstants from '@/constants';
 
-import AppUtility from '@/utility/app';
 import LibraryCommonUtility from '@thzero/library_common/utility/index';
 
 import Results from '@/service/tools/results';
@@ -96,7 +95,7 @@ class FlightInfoProcessorService extends BaseService {
 		results.info = this._initialize();
 		results.info.dataTypes = dataTypes;
 		processor.process(correlationId, results, data, measurementUnits);
-		AppUtility.debug2(results.info);
+		LibraryClientUtility.debug2(results.info);
 
 		return results;
 	}
