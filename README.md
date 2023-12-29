@@ -2,7 +2,7 @@
 ![David](https://img.shields.io/david/thzero/rocket_sidekick_-client)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-# RocketTools
+# RocketSidekick
 
 A web application with some tools for rocketry.  The following features are available currently
 
