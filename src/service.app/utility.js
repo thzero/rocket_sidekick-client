@@ -8,6 +8,7 @@ class WebUtilityService extends AppUtilityService {
 		const response = super.initialize(correlationId);
 
 		(async () => {
+			await this._serviceStore.dispatcher.requestCountries(correlationId);
 			await this._serviceStore.dispatcher.requestManufacturers(correlationId);
 		})();
 
