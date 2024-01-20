@@ -7,8 +7,6 @@ import 'vuetify/styles';
 
 import AppSharedConstants from 'rocket_sidekick_common/constants';
 
-import LibraryCommonUtility from '@thzero/library_common/utility/index';
-
 import bootStarter from '@thzero/library_client_firebase_vue/boot/starter';
 // import bootAsyncComputed from '@thzero/library_client_vue3/boot/asyncComputed';
 import bootEventBus from '@thzero/library_client_vue3/boot/eventBus';
