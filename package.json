@@ -1,14 +1,14 @@
 {
   "name": "rocket_sidekick_client",
-  "version": "0.1.66",
+  "version": "0.1.67",
   "version_major": 0,
   "version_minor": 1,
-  "version_patch": 66,
-  "version_date": "01/19/2024",
+  "version_patch": 67,
+  "version_date": "01/20/2024",
   "description": "A web application with some tools for rocketry",
   "author": "thZero.com",
   "author_url": "https://www.thzero.com",
-  "copyright": "2020-2023",
+  "copyright": "2020-2024",
   "license": "MIT",
   "repository": {
     "type": "git",
