@@ -94,12 +94,16 @@ Enable the following APIs
 * Firebase Hosting API
 * Cloud Resource Manager API
 
-#### Cloud Build Account
+### Cloud Build
 
-* Open the IAM page
-* Select your project and click Open.
-* In the permissions table, locate the email ending with @cloudbuild.gserviceaccount.com, and click on the pencil icon. This is the Cloud Build service account.
-* Add, if missiong, the Cloud Build Service Account, Firebase Admin and API Keys Admin roles.
+#### Cloud Build Settings
+
+In Cloud Build, set the Settings page and make sure the following are enabled
+
+* Cloud Run
+* Firebase
+* Cloud KMS
+* Service Accounts
 
 #### Cloud Build Trigger
 
