@@ -33,12 +33,12 @@ export function useAdminBaseComponent(props, context) {
 	const serviceUtilities = LibraryClientUtility.$injector.getService(LibraryClientConstants.InjectorKeys.SERVICE_UTILITY);
 	const serviceUser = LibraryClientUtility.$injector.getService(LibraryClientConstants.InjectorKeys.SERVICE_USER);
 
-	const canContentReset = computed(async () => {
+	const canResetContent = computed(async () => {
 		return await serviceSecurity.authorizationCheckRoles(correlationId, serviceUser.user, ['content:reset']);
 	});
-	const handleContentReset = async () => {
+	const handleResetContent = async () => {
 		const response = await serviceUtilities.contentReset(correlationId());
-		setNotify(correlationId, hasFailed(response) ? 'messages.checklists.content_reset_failed' : 'messages.checklists.content_reset_success');
+		setNotify(correlationId, hasFailed(response) ? 'messages.content.reset_failed' : 'messages.content.reset_success');
 	};
 
 	return {
@@ -56,8 +56,8 @@ export function useAdminBaseComponent(props, context) {
 		notifySignal,
 		notifyTimeout,
 		setNotify,
-		canContentReset,
-		handleContentReset
+		canResetContent,
+		handleResetContent
 	};
 };
 </script>
