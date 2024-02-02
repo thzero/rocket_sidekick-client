@@ -2,10 +2,10 @@
 	<v-row dense>
 		<v-col cols="12">
 			<v-btn
-				v-if="canContentReset"
+				v-if="canResetContent"
 				color="blue"
 				variant="flat"
-				@click="handleContentReset(item)"
+				@click="handleResetContent(item)"
 			>
 				{{ $t('buttons.reset') }} {{ $t('titles.content.name') }}
 			</v-btn>
@@ -41,8 +41,8 @@ export default {
 			notifySignal,
 			notifyTimeout,
 			setNotify,
-			canContentReset,
-			handleContentReset
+			canResetContent,
+			handleResetContent
 		} = useAdminBaseComponent(props, context);
 
 		return {
@@ -60,8 +60,8 @@ export default {
 			notifySignal,
 			notifyTimeout,
 			setNotify,
-			canContentReset,
-			handleContentReset
+			canResetContent,
+			handleResetContent
 		};
 	}
 };
