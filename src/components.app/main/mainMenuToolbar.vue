@@ -4,8 +4,12 @@
 	>
 		<template v-slot:activator="{ props }">
 			<v-btn append-icon="mdi-menu-down"
+				variant="tonal"
+				class="mr-2"
 				v-bind="props"
-			>{{ $t('menu.content.info.title') }}</v-btn>
+			>
+				<span class="toolbar-button">{{ $t('menu.content.info.title') }}</span>
+			</v-btn>
 		</template>
 		<v-list density="compact">
 			<v-list-item
@@ -22,8 +26,12 @@
 	>
 		<template v-slot:activator="{ props }">
 			<v-btn append-icon="mdi-menu-down"
+				variant="tonal"
+				class="mr-2"
 				v-bind="props"
-			>{{ $t('menu.content.tools.title') }}</v-btn>
+			>
+				<span class="toolbar-button">{{ $t('menu.content.tools.title') }}</span>
+			</v-btn>
 		</template>
 		<v-list density="compact">
 			<template
@@ -44,8 +52,12 @@
 	>
 		<template v-slot:activator="{ props }">
 			<v-btn append-icon="mdi-menu-down"
+				variant="tonal"
+				class="mr-2"
 				v-bind="props"
-			>{{ $t('menu.yours.title') }}</v-btn>
+			>
+				<span class="toolbar-button">{{ $t('menu.yours.title') }}</span>
+			</v-btn>
 		</template>
 		<v-list density="compact">
 			<v-list-item
@@ -142,15 +154,19 @@
 	</v-menu>
 	<v-btn
 		v-if="$vuetify.display.mdAndUp"
+		variant="tonal"
+		class="mr-2"
 		to="/content/links"
 	>
-		{{ $t('menu.content.links.title') }}
+		<span class="toolbar-button">{{ $t('menu.content.links.title') }}</span>
 	</v-btn>
 	<v-btn
 		v-if="$vuetify.display.mdAndUp && features.MobileAppLanding"
+		variant="tonal"
+		class="mr-2"
 		to="/landing"
 	>
-		{{ $t('menu.content.app') }}
+		<span class="toolbar-button">{{ $t('menu.content.app') }}</span>
 	</v-btn>
 </template>
 

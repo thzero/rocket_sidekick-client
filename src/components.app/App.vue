@@ -76,6 +76,13 @@ export default {
 	.measurementUnitsMedium {
 		width: 125px;
 	}
+	.router-link {
+	}
+	.toolbar-button {
+	}
+	.toolbar-title {
+		text-decoration: none;
+	}
 	.v-expansion-panel-text__wrapper {
 		padding-bottom: 0px !important;
 		padding-left: 12px !important;
