@@ -459,6 +459,27 @@ const routes = [
 		]
 	},
 	{
+		path: '/user/locations/:id',
+		component: () => import(/* webpackPrefetch: true */ /* webpackChunkName: "group-layouts" */ './layouts/MainLayout.vue'),
+		children: [
+			{
+				path: '',
+				name: 'content_location_user',
+				component: () => import(/* webpackPrefetch: true */ /* webpackChunkName: "group-layouts" */ './layouts/ContentLayout.vue'),
+				children: [
+					{
+						path: '',
+						name: 'content_location_user',
+						component: () => import(/* webpackPrefetch: true */ /* webpackChunkName: "group-content-info" */ './components/content/locations/Locations.vue'),
+						meta: {
+							requiresAuth: false
+						}
+					}
+				]
+			}
+		]
+	},
+	{
 		path: '/user/locations',
 		component: () => import(/* webpackPrefetch: true */ /* webpackChunkName: "group-layouts" */ './layouts/MainLayout.vue'),
 		children: [
@@ -542,27 +563,27 @@ const routes = [
 			}
 		]
 	},
-	// {
-	// 	path: '/user/rocket/:id',
-	// 	component: () => import(/* webpackPrefetch: true */ /* webpackChunkName: "group-layouts" */ './layouts/MainLayout.vue'),
-	// 	children: [
-	// 		{
-	// 			path: '',
-	// 			name: 'content_rocket_info_user',
-	// 			component: () => import(/* webpackPrefetch: true */ /* webpackChunkName: "group-layouts" */ './layouts/ContentLayout.vue'),
-	// 			children: [
-	// 				{
-	// 					path: '',
-	// 					name: 'content_rocket_info_user',
-	// 					component: () => import(/* webpackPrefetch: true */ /* webpackChunkName: "group-content-info" */ './components/content/rockets/gallery/rocket/User.vue'),
-	// 					meta: {
-	// 						requiresAuth: false
-	// 					}
-	// 				}
-	// 			]
-	// 		}
-	// 	]
-	// },
+	{
+		path: '/user/rockets/:id',
+		component: () => import(/* webpackPrefetch: true */ /* webpackChunkName: "group-layouts" */ './layouts/MainLayout.vue'),
+		children: [
+			{
+				path: '',
+				name: 'content_rocket_user',
+				component: () => import(/* webpackPrefetch: true */ /* webpackChunkName: "group-layouts" */ './layouts/ContentLayout.vue'),
+				children: [
+					{
+						path: '',
+						name: 'content_rocket_user',
+						component: () => import(/* webpackPrefetch: true */ /* webpackChunkName: "group-content-info" */ './components/content/rockets/library/Rockets.vue'),
+						meta: {
+							requiresAuth: false
+						}
+					}
+				]
+			}
+		]
+	},
 	{
 		path: '/user/rockets',
 		component: () => import(/* webpackPrefetch: true */ /* webpackChunkName: "group-layouts" */ './layouts/MainLayout.vue'),
@@ -578,6 +599,27 @@ const routes = [
 						component: () => import(/* webpackPrefetch: true */ /* webpackChunkName: "group-content-info" */ './components/content/rockets/library/Rockets.vue'),
 						meta: {
 							requiresAuth: true
+						}
+					}
+				]
+			}
+		]
+	},
+	{
+		path: '/user/rocketsetups/:id',
+		component: () => import(/* webpackPrefetch: true */ /* webpackChunkName: "group-layouts" */ './layouts/MainLayout.vue'),
+		children: [
+			{
+				path: '',
+				name: 'content_rocketsetup_user',
+				component: () => import(/* webpackPrefetch: true */ /* webpackChunkName: "group-layouts" */ './layouts/ContentLayout.vue'),
+				children: [
+					{
+						path: '',
+						name: 'content_rocketsetup_user',
+						component: () => import(/* webpackPrefetch: true */ /* webpackChunkName: "group-content-info" */ './components/content/rockets/setups/RocketSetups.vue'),
+						meta: {
+							requiresAuth: false
 						}
 					}
 				]
