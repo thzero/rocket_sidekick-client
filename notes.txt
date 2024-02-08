@@ -15,15 +15,9 @@ Tools
     https://www.translatorscafe.com/unit-converter/en-US/calculator/rocket-max-altitude/
 
 Checklists
-	potentially record a launch from a checklist...
+	potentially create a launch from a checklist...
 
 Launch
-	allow selection of rocket setup after selecting rocket
-    show button on view to the rocket
-    show link on listing to the rocket
-    show button on readonly view to the rocket setup
-    show link on listing to the rocket setup 
-    show rocket/rocket setup information on motors on readonly view and listing
     allow video and album urls for a flight
     allow upload
 
@@ -31,16 +25,12 @@ Rocket Gallery
     show launches on rockets if marked
 
 Rockets
-    other components (altimeter, etc.) aren't showing?
     need to deal with different units for the stages when calculating overall measurements
 
 Rocket Setups
-    other components (altimeter, etc.) aren't showing?
     need to deal with different units for the stages and rocket when calculating overall measurements
     resolve issues with specifications?!?!
     finish
-    show button on readonly view to the rocket
-    show link on listing to the rocket
 
 Setups
     parts should show both rocket and setup parts
