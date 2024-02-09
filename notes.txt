@@ -46,3 +46,7 @@ Lists
     edit open
         leave page
             check if dirty, and trap navigation
+
+delete/delete confirmation is not working
+
+if creating a new launch from checklist, should see about going over to it?
