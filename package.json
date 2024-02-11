@@ -53,8 +53,8 @@
   },
   "devDependencies": {
     "@alienfast/i18next-loader": "^2.0.2",
-    "@vitejs/plugin-vue": "^5.0.3",
-    "vite": "^5.1.0",
+    "@vitejs/plugin-vue": "^5.0.4",
+    "vite": "^5.1.1",
     "vite-plugin-vuetify": "^2.0.1",
     "vite-plugin-webpackchunkname": "^1.0.1"
   },
