@@ -47,8 +47,11 @@ Lists
         leave page
             check if dirty, and trap navigation
 
-delete/delete confirmation is not working
-
 if creating a new launch from checklist, should see about going over to it?
 
-https://www.npmjs.com/package/vue-json-excel3
+Deleting
+    When getting a false due to item used in another object, make sure to display issue...
+
+Export to excel
+
+    https://www.npmjs.com/package/vue-json-excel3
