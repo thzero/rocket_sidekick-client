@@ -438,6 +438,27 @@ const routes = [
 		]
 	},
 	{
+		path: '/user/inventory',
+		component: () => import(/* webpackPrefetch: true */ /* webpackChunkName: "group-layouts" */ './layouts/MainLayout.vue'),
+		children: [
+			{
+				path: '',
+				name: 'content_inventory_user',
+				component: () => import(/* webpackPrefetch: true */ /* webpackChunkName: "group-layouts" */ './layouts/ContentLayout.vue'),
+				children: [
+					{
+						path: '',
+						name: 'content_inventory_user',
+						component: () => import(/* webpackPrefetch: true */ /* webpackChunkName: "group-content-info" */ './components/content/inventory/Inventory.vue'),
+						meta: {
+							requiresAuth: true
+						}
+					}
+				]
+			}
+		]
+	},
+	{
 		path: '/user/launches',
 		component: () => import(/* webpackPrefetch: true */ /* webpackChunkName: "group-layouts" */ './layouts/MainLayout.vue'),
 		children: [
