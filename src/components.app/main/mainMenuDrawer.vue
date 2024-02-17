@@ -57,6 +57,12 @@
 					<v-list-item-title>{{ $t('menu.yours.checklists') }}</v-list-item-title>
 				</v-list-item>
 				<v-list-item
+					v-if="features.Yours.Inventory"
+					to="/user/inventory"
+				>
+					<v-list-item-title>{{ $t('menu.yours.inventory') }}</v-list-item-title>
+				</v-list-item>
+				<v-list-item
 					v-if="features.Yours.Launches"
 					to="/user/launches"
 				>
