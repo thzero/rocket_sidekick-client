@@ -47,7 +47,6 @@
     "rocket_sidekick_common": "^0.0.80",
     "sheetjs": "https://cdn.sheetjs.com/xlsx-0.20.1/xlsx-0.20.1.tgz",
     "thenby": "^1.3.4",
-    "vue-dndrop": "^1.3.1",
     "vuetify": "^3.5.4",
     "xlsx": "https://cdn.sheetjs.com/xlsx-0.20.1/xlsx-0.20.1.tgz"
   },
