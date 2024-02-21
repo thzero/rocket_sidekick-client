@@ -59,7 +59,4 @@ Export to excel
 
 Inventory
 
-    Motors?
-    Motor Cases?
-    Parachutes?
-    Blankets?
+    Dialog selection - be able to select multiple items
