@@ -56,7 +56,3 @@ Export to excel
 
     does this give a better result?
     https://www.npmjs.com/package/vue-json-excel3
-
-Parts lookup
-
-    Check inventory and see if they have that in inventory...
