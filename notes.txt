@@ -61,4 +61,5 @@ Searching
     text not working on motor?
 
 Inventory
-    Maybe FAB for adding?
+    add a copy button?
+    bp chip
