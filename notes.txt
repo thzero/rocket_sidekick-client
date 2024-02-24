@@ -56,3 +56,9 @@ Export to excel
 
     does this give a better result?
     https://www.npmjs.com/package/vue-json-excel3
+
+Searching
+    text not working on motor?
+
+Inventory
+    Maybe FAB for adding?
