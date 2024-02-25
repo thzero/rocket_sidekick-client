@@ -3,7 +3,9 @@
 		v-if="$vuetify.display.mdAndUp"
 	>
 		<template v-slot:activator="{ props }">
-			<v-btn append-icon="mdi-menu-down"
+			<v-btn 
+				append-icon="mdi-menu-down"
+				prepend-icon=" mdi-information-outline"
 				variant="tonal"
 				class="mr-2"
 				v-bind="props"
@@ -25,7 +27,9 @@
 		v-if="$vuetify.display.mdAndUp"
 	>
 		<template v-slot:activator="{ props }">
-			<v-btn append-icon="mdi-menu-down"
+			<v-btn 
+				append-icon="mdi-menu-down"
+				prepend-icon="mdi-tools"
 				variant="tonal"
 				class="mr-2"
 				v-bind="props"
@@ -51,7 +55,9 @@
 		v-if="$vuetify.display.mdAndUp && features.Yours.value && isLoggedIn"
 	>
 		<template v-slot:activator="{ props }">
-			<v-btn append-icon="mdi-menu-down"
+			<v-btn 
+				append-icon="mdi-menu-down"
+				prepend-icon="mdi-account"
 				variant="tonal"
 				class="mr-2"
 				v-bind="props"
@@ -160,6 +166,7 @@
 	</v-menu>
 	<v-btn
 		v-if="$vuetify.display.mdAndUp"
+		prepend-icon="mdi-link"
 		variant="tonal"
 		class="mr-2"
 		to="/content/links"
