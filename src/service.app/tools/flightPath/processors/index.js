@@ -1,4 +1,6 @@
-import configureMeasurements, { length, speed } from 'convert-units';
+import configureMeasurements from 'convert-units';
+import length from 'convert-units/definitions/length';
+import speed from 'convert-units/definitions/speed';
 
 import AppConstants from '@/constants';
 import AppCommonConstants from 'rocket_sidekick_common/constants';

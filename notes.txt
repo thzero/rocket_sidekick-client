@@ -60,6 +60,5 @@ Export to excel
 Searching
     text not working on motor?
 
-Inventory
-    add a copy button?
-    bp chip
+Add Rocket Part Dialog
+    When canceling, ask if ok if dirty... need to remove
