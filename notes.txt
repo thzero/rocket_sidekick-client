@@ -16,10 +16,10 @@ Tools
 
 Checklists
 	potentially create a launch from a checklist...
+        if creating a new launch from checklist, should navigate to it
 
 Launch
     allow video and album urls for a flight
-    allow upload
 
 Rocket Gallery
     show launches on rockets if marked
@@ -46,8 +46,6 @@ Lists
     edit open
         leave page
             check if dirty, and trap navigation
-
-if creating a new launch from checklist, should see about going over to it?
 
 Deleting
     When getting a false due to item used in another object, make sure to display issue...
