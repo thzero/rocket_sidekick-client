@@ -28,8 +28,6 @@ Rocket Setups
     need to deal with different units for the stages and rocket when calculating overall measurements
     resolve issues with specifications?!?!
     finish
-    parts should show both rocket and setup parts
-        rocket parts should not be able to be delete
 
 Lists
     // TODO: SECURITY: Admin can...
