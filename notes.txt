@@ -18,9 +18,6 @@ Checklists
 	potentially create a launch from a checklist...
         if creating a new launch from checklist, should navigate to it
 
-Launch
-    allow video and album urls for a flight
-
 Rocket Gallery
     show launches on rockets if marked
 
@@ -31,8 +28,6 @@ Rocket Setups
     need to deal with different units for the stages and rocket when calculating overall measurements
     resolve issues with specifications?!?!
     finish
-
-Setups
     parts should show both rocket and setup parts
         rocket parts should not be able to be delete
 
@@ -57,3 +52,8 @@ Export to excel
 
 Searching
     text not working on motor?
+
+Inventory
+    Delay does not let 'P' get set
+        probably a custom control since can't use alpha with the input type attribute of 'number'
+    Grid output of the inventory in the browser?
