@@ -1,7 +1,3 @@
-import configureMeasurements from 'convert-units';
-import length from 'convert-units/definitions/length';
-import speed from 'convert-units/definitions/speed';
-
 import AppConstants from '@/constants';
 import AppCommonConstants from 'rocket_sidekick_common/constants';
 
@@ -16,11 +12,6 @@ class FlightPathProcessorService extends ToolsService {
 
 		this._serviceFlightPathOutput = null;
 		this._serviceFlightPathOutputTemplate = null;
-
-		this._convert = configureMeasurements({
-			length,
-			speed
-		});
 	}
 
 	init(injector) {
@@ -83,7 +74,10 @@ class FlightPathProcessorService extends ToolsService {
 		const flightPaths = [];
 		const flightPathsOutput = [];
 
-		const divisor = this._convert(1).from(measurementUnits.measurementUnitsAltitudeId).to('m');
+		const divisor = ConvertUtility.convertValue(
+			value, 
+			measurementUnits.measurementUnitsAltitudeId,
+			'm');
 		let coords;
 		let path = [];
 		let previous = null;
@@ -130,12 +124,20 @@ class FlightPathProcessorService extends ToolsService {
 				flight.touchdownCoords = `${previous.longitude},${previous.latitude}`;
 			}
 
-			flight.maxAltitude = this._convert(flight.maxAltitude)
-				.from(AppCommonConstants.MeasurementUnits[measurementUnits.measurementUnitsId].altitude[measurementUnits.measurementUnitsAltitudeId])
-				.to(AppCommonConstants.MeasurementUnits[measurementUnits.measurementUnitsOutputId].altitude[measurementUnits.measurementUnitsAltitudeOutputId]);
-			flight.maxVelocity = this._convert(flight.maxVelocity)
-				.from(AppCommonConstants.MeasurementUnits[measurementUnits.measurementUnitsId].velocity[measurementUnits.measurementUnitsVelocityId])
-				.to(AppCommonConstants.MeasurementUnits[measurementUnits.measurementUnitsOutputId].velocity[measurementUnits.measurementUnitsVelocityOutputId]);
+			// flight.maxAltitude = this._convert(flight.maxAltitude)
+			// 	.from(AppCommonConstants.MeasurementUnits[measurementUnits.measurementUnitsId].altitude[measurementUnits.measurementUnitsAltitudeId])
+			// 	.to(AppCommonConstants.MeasurementUnits[measurementUnits.measurementUnitsOutputId].altitude[measurementUnits.measurementUnitsAltitudeOutputId]);
+			flight.maxAltitude = ConvertUtility.convertValue(
+				flight.maxAltitude, 
+				AppCommonConstants.MeasurementUnits[measurementUnits.measurementUnitsId].altitude[measurementUnits.measurementUnitsAltitudeId],
+				AppCommonConstants.MeasurementUnits[measurementUnits.measurementUnitsOutputId].altitude[measurementUnits.measurementUnitsAltitudeOutputId]);
+			// flight.maxVelocity = this._convert(flight.maxVelocity)
+			// 	.from(AppCommonConstants.MeasurementUnits[measurementUnits.measurementUnitsId].velocity[measurementUnits.measurementUnitsVelocityId])
+			// 	.to(AppCommonConstants.MeasurementUnits[measurementUnits.measurementUnitsOutputId].velocity[measurementUnits.measurementUnitsVelocityOutputId]);
+			flight.maxVelocity = ConvertUtility.convertValue(
+				flight.maxVelocity, 
+				AppCommonConstants.MeasurementUnits[measurementUnits.measurementUnitsId].velocity[measurementUnits.measurementUnitsVelocityId],
+				AppCommonConstants.MeasurementUnits[measurementUnits.measurementUnitsOutputId].velocity[measurementUnits.measurementUnitsVelocityOutputId]);
 			flight.maxAltitude = LibraryClientUtility.convertNumber(flight.maxAltitude).toLocaleString();
 			flight.maxVelocity = LibraryClientUtility.convertNumber(flight.maxVelocity).toLocaleString();
 

@@ -16,25 +16,13 @@ Tools
 
 Checklists
 	potentially create a launch from a checklist...
-
-Launch
-    allow video and album urls for a flight
-    allow upload
+        if creating a new launch from checklist, should navigate to it
 
 Rocket Gallery
     show launches on rockets if marked
 
-Rockets
-    need to deal with different units for the stages when calculating overall measurements
-
 Rocket Setups
-    need to deal with different units for the stages and rocket when calculating overall measurements
-    resolve issues with specifications?!?!
     finish
-
-Setups
-    parts should show both rocket and setup parts
-        rocket parts should not be able to be delete
 
 Lists
     // TODO: SECURITY: Admin can...
@@ -47,8 +35,6 @@ Lists
         leave page
             check if dirty, and trap navigation
 
-if creating a new launch from checklist, should see about going over to it?
-
 Deleting
     When getting a false due to item used in another object, make sure to display issue...
 
@@ -60,5 +46,7 @@ Export to excel
 Searching
     text not working on motor?
 
-Add Rocket Part Dialog
-    When canceling, ask if ok if dirty... need to remove
+Inventory
+    Delay does not let 'P' get set
+        probably a custom control since can't use alpha with the input type attribute of 'number'
+    Grid output of the inventory in the browser?

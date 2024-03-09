@@ -1,9 +1,6 @@
-import configureMeasurements from 'convert-units';
-import length from 'convert-units/definitions/length';
-import speed from 'convert-units/definitions/speed';
-
 import AppCommonConstants from 'rocket_sidekick_common/constants';
 
+import ConvertUtility from 'rocket_sidekick_common/utility/convert.js';
 import LibraryClientUtility from '@thzero/library_client/utility/index';
 import LibraryCommonUtility from '@thzero/library_common/utility/index';
 
@@ -12,11 +9,6 @@ import ToolsService from '@/service/tools/index';
 class FlightInfoProcessorService extends ToolsService {
 	constructor() {
 		super();
-
-		this._convert = configureMeasurements({
-			length,
-			speed
-		});
 	}
 
 	get id() {
@@ -465,9 +457,13 @@ class FlightInfoProcessorService extends ToolsService {
 		// value = this._round(value * 0.3048);
 		// return value;
 
-		value = this._convert(value)
-			.from(AppCommonConstants.MeasurementUnits[measurementUnits.id].cceleration[measurementUnits.acceleration])
-			.to(AppCommonConstants.MeasurementUnits[measurementUnits.outputId].acceleration[measurementUnits.accelerationOutputId]);
+		// value = this._convert(value)
+		// 	.from(AppCommonConstants.MeasurementUnits[measurementUnits.id].cceleration[measurementUnits.acceleration])
+		// 	.to(AppCommonConstants.MeasurementUnits[measurementUnits.outputId].acceleration[measurementUnits.accelerationOutputId]);
+		value = ConvertUtility.convertValue(
+			value, 
+			AppCommonConstants.MeasurementUnits[measurementUnits.id].acceleration[measurementUnits.accelerationId],
+			AppCommonConstants.MeasurementUnits[measurementUnits.outputId].acceleration[measurementUnits.accelerationOutputId]);
 		return value;
 	}
 
@@ -481,9 +477,13 @@ class FlightInfoProcessorService extends ToolsService {
 		// value = this._round(value * 0.3048);
 		// return value;
 
-		value = this._convert(value)
-			.from(AppCommonConstants.MeasurementUnits[measurementUnits.id].altitude[measurementUnits.altitudeId])
-			.to(AppCommonConstants.MeasurementUnits[measurementUnits.outputId].altitude[measurementUnits.altitudeOutputId]);
+		// value = this._convert(value)
+		// 	.from(AppCommonConstants.MeasurementUnits[measurementUnits.id].altitude[measurementUnits.altitudeId])
+		// 	.to(AppCommonConstants.MeasurementUnits[measurementUnits.outputId].altitude[measurementUnits.altitudeOutputId]);
+		value = ConvertUtility.convertValue(
+			value, 
+			AppCommonConstants.MeasurementUnits[measurementUnits.id].altitude[measurementUnits.altitudeId],
+			AppCommonConstants.MeasurementUnits[measurementUnits.outputId].altitude[measurementUnits.altitudeOutputId]);
 		return value;
 	}
 
@@ -497,9 +497,13 @@ class FlightInfoProcessorService extends ToolsService {
 		// value = this._round(value * 0.3048);
 		// return value;
 
-		value = this._convert(value)
-			.from(AppCommonConstants.MeasurementUnits[measurementUnits.id].velocity[measurementUnits.velocityId])
-			.to(AppCommonConstants.MeasurementUnits[measurementUnits.outputId].velocity[measurementUnits.velocityOutputId]);
+		// value = this._convert(value)
+		// 	.from(AppCommonConstants.MeasurementUnits[measurementUnits.id].velocity[measurementUnits.velocityId])
+		// 	.to(AppCommonConstants.MeasurementUnits[measurementUnits.outputId].velocity[measurementUnits.velocityOutputId]);
+		value = ConvertUtility.convertValue(
+			value, 
+			AppCommonConstants.MeasurementUnits[measurementUnits.id].velocity[measurementUnits.velocityId],
+			AppCommonConstants.MeasurementUnits[measurementUnits.outputId].velocity[measurementUnits.velocityOutputId]);
 		return value;
 	}
 
