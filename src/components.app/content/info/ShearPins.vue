@@ -6,8 +6,11 @@
 				<v-card>
 					<v-card-text>
 						<v-row dense>
-							<v-col cols="12">
+							<v-col cols="12" md="6">
 				<VtMarkdown v-model="contentMarkup" :use-github=false />
+							</v-col>
+							<v-col cols="12" md="6">
+								<v-img src="/images/551977-9f9c6a3626f890490367f97d5088f831.png"/>
 							</v-col>
 						</v-row>
 					</v-card-text>
