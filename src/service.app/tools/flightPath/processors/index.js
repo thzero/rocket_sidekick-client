@@ -1,6 +1,7 @@
 import AppConstants from '@/constants';
 import AppCommonConstants from 'rocket_sidekick_common/constants';
 
+import ConvertUtility from 'rocket_sidekick_common/utility/convert.js';
 import LibraryClientUtility from '@thzero/library_client/utility/index';
 import LibraryCommonUtility from '@thzero/library_common/utility';
 
@@ -74,8 +75,8 @@ class FlightPathProcessorService extends ToolsService {
 		const flightPaths = [];
 		const flightPathsOutput = [];
 
-		const divisor = ConvertUtility.convertValue(
-			value, 
+		const divisor = ConvertUtility.convert(
+			1, 
 			measurementUnits.measurementUnitsAltitudeId,
 			'm');
 		let coords;
@@ -91,8 +92,6 @@ class FlightPathProcessorService extends ToolsService {
 			flight = {};
 			temp = value.data.shift(); // get first row...
 
-			flight.tracker = 
-			
 			flight.maxAltitude = 0;
 			flight.maxVelocity = 0;
 			flight.launchCoords = `${temp.longitude},${temp.latitude}`;
@@ -127,14 +126,14 @@ class FlightPathProcessorService extends ToolsService {
 			// flight.maxAltitude = this._convert(flight.maxAltitude)
 			// 	.from(AppCommonConstants.MeasurementUnits[measurementUnits.measurementUnitsId].altitude[measurementUnits.measurementUnitsAltitudeId])
 			// 	.to(AppCommonConstants.MeasurementUnits[measurementUnits.measurementUnitsOutputId].altitude[measurementUnits.measurementUnitsAltitudeOutputId]);
-			flight.maxAltitude = ConvertUtility.convertValue(
+			flight.maxAltitude = ConvertUtility.convert(
 				flight.maxAltitude, 
 				AppCommonConstants.MeasurementUnits[measurementUnits.measurementUnitsId].altitude[measurementUnits.measurementUnitsAltitudeId],
 				AppCommonConstants.MeasurementUnits[measurementUnits.measurementUnitsOutputId].altitude[measurementUnits.measurementUnitsAltitudeOutputId]);
 			// flight.maxVelocity = this._convert(flight.maxVelocity)
 			// 	.from(AppCommonConstants.MeasurementUnits[measurementUnits.measurementUnitsId].velocity[measurementUnits.measurementUnitsVelocityId])
 			// 	.to(AppCommonConstants.MeasurementUnits[measurementUnits.measurementUnitsOutputId].velocity[measurementUnits.measurementUnitsVelocityOutputId]);
-			flight.maxVelocity = ConvertUtility.convertValue(
+			flight.maxVelocity = ConvertUtility.convert(
 				flight.maxVelocity, 
 				AppCommonConstants.MeasurementUnits[measurementUnits.measurementUnitsId].velocity[measurementUnits.measurementUnitsVelocityId],
 				AppCommonConstants.MeasurementUnits[measurementUnits.measurementUnitsOutputId].velocity[measurementUnits.measurementUnitsVelocityOutputId]);
@@ -230,6 +229,10 @@ class FlightPathProcessorService extends ToolsService {
 		return this._successResponse(results, correlationId);
 	}
 
+	columnIndexOf(col) {
+		return FlightPathProcessorService.alpha.indexOf(col);
+	}
+
 	_processData(correlationId, input) {
 		throw Error('Not Implemented');
 	}
@@ -243,8 +246,8 @@ class FlightPathProcessorService extends ToolsService {
 		return this._success(correlationId);
 	}
 
-	_publish(correlationId, flightId, time, altitude, latitude, longitude, velocityH, velocityV, apogee, noseOver, drogue, main, ground, index, tracker, flightStart, flightEnd) {
-		this._data.publish(correlationId, flightId, time, altitude, latitude, longitude, velocityH, velocityV, apogee, noseOver, drogue, main, ground, index, tracker, flightStart, flightEnd);
+	_publish(correlationId, flightId, time, altitudeASL, altitudeAGL, latitude, longitude, velocityH, velocityV, apogee, noseOver, drogue, main, ground, index, tracker, flightStart, flightEnd) {
+		this._data.publish(correlationId, flightId, time, altitudeASL, altitudeAGL, latitude, longitude, velocityH, velocityV, apogee, noseOver, drogue, main, ground, index, tracker, flightStart, flightEnd);
 	}
 
 	_round(value, places = 2) {
@@ -254,6 +257,8 @@ class FlightPathProcessorService extends ToolsService {
 	_sort(correlationId, func) {
 		this._data.sort(correlationId, func());
 	}
+
+	static alpha = 'ABCDEFGHIJKLMNOPQRSTUVWYXZ';
 }
 
 class FlightPath {
@@ -269,7 +274,7 @@ class FlightPath {
 	// 	return this._rows;
 	// }
 
-	publish(correlationId, flightId, time, altitude, latitude, longitude, velocityH, velocityV, apogee, noseOver, drogue, main, ground, index, tracker, flightStart, flightEnd) {
+	publish(correlationId, flightId, time, altitudeASL, altitudeAGL, latitude, longitude, velocityH, velocityV, apogee, noseOver, drogue, main, ground, index, tracker, flightStart, flightEnd) {
 		// this._rows.push({
 		this._flights[flightId] = this._flights[flightId] ?? {
 			tracker: null,
@@ -286,7 +291,9 @@ class FlightPath {
 
 		this._flights[flightId].data.push({
 			index: index,
-			altitude: LibraryClientUtility.convertNumber(altitude),
+			altitude: LibraryClientUtility.convertNumber(altitudeASL) + LibraryClientUtility.convertNumber(altitudeAGL),
+			altitudeAGL: LibraryClientUtility.convertNumber(altitudeAGL),
+			altitudeASL: LibraryClientUtility.convertNumber(altitudeASL),
 			latitude: LibraryClientUtility.convertNumber(latitude),
 			longitude: LibraryClientUtility.convertNumber(longitude),
 			seconds: null,

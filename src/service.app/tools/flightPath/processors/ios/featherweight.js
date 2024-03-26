@@ -1,10 +1,20 @@
-import AppUtility from '@/utility/app';
+import LibraryClientUtility from '@thzero/library_client/utility/index';
 
-import FlightPathProcessorService from './index';
+import FlightPathProcessorService from '../index';
 
 class FeatherweightFlightPathProcessorService extends FlightPathProcessorService {
 	get id() {
-		return 'featherweight';
+		return 'featherweightIOS';
+	}
+
+	get measurementUnitDefaults() {
+		return {
+			unitsId: 'english',
+			accelerationId: 'fts2',
+			altitudeId: 'ft',
+			distanceId: 'ft',
+			velocityId: 'fts'
+		}
 	}
 
 	_processData(correlationId, input) {
@@ -13,7 +23,7 @@ class FeatherweightFlightPathProcessorService extends FlightPathProcessorService
 		const regex = /^[a-z]+$/i;
 		const temp = input.data[0][0];
 		if ((regex.exec(temp)) === null)
-			return this._error('FeatherweightFlightPathProcessorService', '_processData', 'unknown Featherweight file type without headers', null, null, null, correlationId);
+			return this._error('FeatherweightFlightPathProcessorService', '_processData', 'unknown Featherweight iOS file type without headers', null, null, null, correlationId);
 
 		let type = null;
 		if (temp === 'TRACKER')
@@ -21,7 +31,7 @@ class FeatherweightFlightPathProcessorService extends FlightPathProcessorService
 		else if (temp === 'UTCTIME')
 			type = 'tracker';
 		if (type === null)
-			return this._error('FeatherweightFlightPathProcessorService', '_processData', 'unknown Featherweight file type detected', null, null, null, correlationId);
+			return this._error('FeatherweightFlightPathProcessorService', '_processData', 'unknown Featherweight iOS file type detected', null, null, null, correlationId);
 
 		input.data.shift();
 
@@ -180,7 +190,8 @@ class FeatherweightFlightPathProcessorService extends FlightPathProcessorService
 				// data[7], // verticalH
 				// verticalV // verticalV
 				data[2], // time
-				data[5], // altitude
+				0, // altitude ASL
+				data[5], // altitude AGL
 				data[3], // latitude
 				data[4], // longitude
 				data[7], // verticalH
