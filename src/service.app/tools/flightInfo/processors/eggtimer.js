@@ -5,6 +5,17 @@ class EggtimerFlightInfoProcessorService extends FlightInfoProcessorService {
 		return 'eggtimer';
 	}
 
+	get measurementUnitDefaults() {
+		return {
+			unitsId: 'english',
+			accelerationId: 'fts2',
+			altitudeId: 'ft',
+			distanceId: 'ft',
+			velocityId: 'fts'
+		}
+	}
+
+
 	_processInput(correlationId, input) {
 		this._enforceNotNull('EggtimerFlightInfoProcessor', '_processInput', input, 'input', correlationId);
 

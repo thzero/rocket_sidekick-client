@@ -17,7 +17,8 @@ import flightPathOutputKmlToolsService from '@/service.app/tools/flightPath/outp
 import flightPathOutputTemplateToolsService from '@/service.app/tools/flightPath/output/template/index';
 import flightPathOutputTemplateHandlebarsToolsService from '@/service.app/tools/flightPath/output/template/handlebars';
 import flightPathProcessorToolsService from '@/service.app/tools/flightPath/index';
-import flightPathProcessorFeatherweightToolsService from '@/service.app/tools/flightPath/processors/featherweight';
+import flightPathProcessorFeatherweightToolsServiceBR from '@/service.app/tools/flightPath/processors/br/featherweight';
+import flightPathProcessorFeatherweightToolsServicIOS from '@/service.app/tools/flightPath/processors/ios/featherweight';
 import foamToolsService from '@/service.app/tools/foam';
 import restCommunicationService from '@thzero/library_client_service_rest_fetch';
 import utilityService from '@/service.app/utility';
@@ -37,7 +38,8 @@ class AppServiceBoot extends BaseServiceBoot {
 		this._injectService(AppConstants.InjectorKeys.SERVICE_TOOLS_FLIGHT_PATH_OUTPUT_TEMPLATE, new flightPathOutputTemplateToolsService());
 		this._injectService(AppConstants.InjectorKeys.SERVICE_TOOLS_FLIGHT_PATH_OUTPUT_TEMPLATE_HANDLEBARS, new flightPathOutputTemplateHandlebarsToolsService());
 		this._injectService(AppConstants.InjectorKeys.SERVICE_TOOLS_FLIGHT_PATH_PROCESSOR, new flightPathProcessorToolsService());
-		this._injectService(AppConstants.InjectorKeys.SERVICE_TOOLS_FLIGHT_PATH_PROCESSOR_FEATHERWEIGHT, new flightPathProcessorFeatherweightToolsService());
+		this._injectService(AppConstants.InjectorKeys.SERVICE_TOOLS_FLIGHT_PATH_PROCESSOR_FEATHERWEIGHT_BR, new flightPathProcessorFeatherweightToolsServiceBR());
+		this._injectService(AppConstants.InjectorKeys.SERVICE_TOOLS_FLIGHT_PATH_PROCESSOR_FEATHERWEIGHT_IOS, new flightPathProcessorFeatherweightToolsServicIOS());
 
 		this._injectService(AppConstants.InjectorKeys.SERVICE_TOOLS_FOAM, new foamToolsService());
 	}

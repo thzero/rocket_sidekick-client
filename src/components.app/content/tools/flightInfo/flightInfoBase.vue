@@ -189,7 +189,7 @@ export function useFlightInfoBaseComponent(props, context) {
 
 		const processor = content.value.processors.find(l => l.id === flightProcessor.value);
 		if (!processor)
-			return general;
+			return null;
 
 		return processor.markup;
 	});
@@ -214,6 +214,9 @@ export function useFlightInfoBaseComponent(props, context) {
 	};
 	const clickStylesReset = () => {
 		flightInfoStyleReset(correlationId(), false);
+	};
+	const dropOutput = (value) => {
+		flightInfoInput.value = value;
 	};
 	const flightInfoInputChange = () => {
 		document.getElementById('top').scrollIntoView({behavior: 'smooth'});
@@ -530,7 +533,9 @@ export function useFlightInfoBaseComponent(props, context) {
 
 			const correlationIdI = correlationId();
 			flightInfoStyleLoad(correlationIdI, value);
-			flightMeasurementUnitsLoad(correlationIdI, value);
+
+			const processor = serviceFlightInfo.serviceProcessors.find(l => l.id === value);
+			flightMeasurementUnitsLoad(correlationIdI, processor);
 		}
 	);
 
@@ -631,6 +636,7 @@ export function useFlightInfoBaseComponent(props, context) {
 		checkFlightInfoDataTypeUse,
 		clickResolution,
 		clickStylesReset,
+		dropOutput,
 		flightInfoInputChange,
 		flightInfoStyleLoad,
 		flightInfoStyleReset,

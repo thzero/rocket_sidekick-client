@@ -95,7 +95,7 @@ export function useFlightPathBaseComponent(props, context) {
 
 			flightPathStyleReset(correlationIdI, true);
 			flightDataLoad(correlationIdI);
-			flightMeasurementUnitsLoad(correlationIdI, flightProcessor.value);
+			// flightMeasurementUnitsLoad(correlationIdI, flightProcessor.value);
 
 			flightProcessors.value = LibraryClientVueUtility.selectOptions(serviceFlightPath.serviceProcessors, LibraryClientUtility.$trans.t, 'forms.content.tools.flightPath.processors', (l) => { return l.id; }, null, (l) => { return l.id; });
 		},
@@ -160,13 +160,16 @@ export function useFlightPathBaseComponent(props, context) {
 
 		const processor = content.value.processors.find(l => l.id === flightProcessor.value);
 		if (!processor)
-			return general;
+			return null;
 
 		return processor.markup;
 	});
 
 	const clickFlightPathStylesReset = () => {
 		flightPathStyleReset(correlationId(), false);
+	};
+	const dropOutput = (value) => {
+		flightPathInput.value = value;
 	};
 	const flightPathInputChange = () => {
 		document.getElementById('top').scrollIntoView({behavior: 'smooth'});
@@ -415,7 +418,9 @@ export function useFlightPathBaseComponent(props, context) {
 
 			const correlationIdI = correlationId();
 			flightPathStyleLoad(correlationIdI, value);
-			flightMeasurementUnitsLoad(correlationIdI, value);
+
+			const processor = serviceFlightPath.serviceProcessors.find(l => l.id === value);
+			flightMeasurementUnitsLoad(correlationIdI, processor);
 		}
 	);
 
@@ -512,6 +517,7 @@ export function useFlightPathBaseComponent(props, context) {
 		flightPathStylePinTouchdownColor,
 		flightPathStylePinTouchdownSelected,
 		clickFlightPathStylesReset,
+		dropOutput,
 		flightPathInputChange,
 		flightPathStyleLoad,
 		panelInstructions,

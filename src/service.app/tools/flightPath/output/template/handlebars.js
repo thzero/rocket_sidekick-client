@@ -157,7 +157,7 @@ class HandlebarsFlightPathOutputTemplateService extends FlightPathOutputTemmplat
 					</LineStyle>
 				</Style>
 				<MultiGeometry>
-					<LineString>
+					<LineString extrude="1">
 						<tessellate>0</tessellate>
 						<altitudeMode>absolute</altitudeMode>
 						<coordinates>

@@ -460,7 +460,7 @@ class FlightInfoProcessorService extends ToolsService {
 		// value = this._convert(value)
 		// 	.from(AppCommonConstants.MeasurementUnits[measurementUnits.id].cceleration[measurementUnits.acceleration])
 		// 	.to(AppCommonConstants.MeasurementUnits[measurementUnits.outputId].acceleration[measurementUnits.accelerationOutputId]);
-		value = ConvertUtility.convertValue(
+		value = ConvertUtility.convert(
 			value, 
 			AppCommonConstants.MeasurementUnits[measurementUnits.id].acceleration[measurementUnits.accelerationId],
 			AppCommonConstants.MeasurementUnits[measurementUnits.outputId].acceleration[measurementUnits.accelerationOutputId]);
@@ -480,7 +480,7 @@ class FlightInfoProcessorService extends ToolsService {
 		// value = this._convert(value)
 		// 	.from(AppCommonConstants.MeasurementUnits[measurementUnits.id].altitude[measurementUnits.altitudeId])
 		// 	.to(AppCommonConstants.MeasurementUnits[measurementUnits.outputId].altitude[measurementUnits.altitudeOutputId]);
-		value = ConvertUtility.convertValue(
+		value = ConvertUtility.convert(
 			value, 
 			AppCommonConstants.MeasurementUnits[measurementUnits.id].altitude[measurementUnits.altitudeId],
 			AppCommonConstants.MeasurementUnits[measurementUnits.outputId].altitude[measurementUnits.altitudeOutputId]);
@@ -500,7 +500,7 @@ class FlightInfoProcessorService extends ToolsService {
 		// value = this._convert(value)
 		// 	.from(AppCommonConstants.MeasurementUnits[measurementUnits.id].velocity[measurementUnits.velocityId])
 		// 	.to(AppCommonConstants.MeasurementUnits[measurementUnits.outputId].velocity[measurementUnits.velocityOutputId]);
-		value = ConvertUtility.convertValue(
+		value = ConvertUtility.convert(
 			value, 
 			AppCommonConstants.MeasurementUnits[measurementUnits.id].velocity[measurementUnits.velocityId],
 			AppCommonConstants.MeasurementUnits[measurementUnits.outputId].velocity[measurementUnits.velocityOutputId]);

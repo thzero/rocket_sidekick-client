@@ -1,6 +1,6 @@
 import AppConstants from '@/constants';
 
-import AppUtility from '@/utility/app';
+import LibraryClientUtility from '@thzero/library_client/utility/index';
 import LibraryCommonUtility from '@thzero/library_common/utility/index';
 
 import BaseService from '@thzero/library_client/service/index';
@@ -13,8 +13,10 @@ class FlightPathProcessorService extends BaseService {
 	}
 
 	init(injector) {
-		const serviceFlightPathProcessorFeatherweight = injector.getService(AppConstants.InjectorKeys.SERVICE_TOOLS_FLIGHT_PATH_PROCESSOR_FEATHERWEIGHT);
-		this.registerProcessor(serviceFlightPathProcessorFeatherweight);
+		const serviceFlightPathProcessorFeatherweightBR = injector.getService(AppConstants.InjectorKeys.SERVICE_TOOLS_FLIGHT_PATH_PROCESSOR_FEATHERWEIGHT_BR);
+		this.registerProcessor(serviceFlightPathProcessorFeatherweightBR);
+		const serviceFlightPathProcessorFeatherweightIOS = injector.getService(AppConstants.InjectorKeys.SERVICE_TOOLS_FLIGHT_PATH_PROCESSOR_FEATHERWEIGHT_IOS);
+		this.registerProcessor(serviceFlightPathProcessorFeatherweightIOS);
 	}
 
 	get styleDefault() {

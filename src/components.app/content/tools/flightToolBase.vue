@@ -162,33 +162,15 @@ export function useFlightToolsBaseComponent(props, context, options) {
 		try {
 			flightMeasurementUnitsLoading.value = true;
 				
-			if (String.isNullOrEmpty(processor))
-				return;
+			if (!processor)
+				throw Error('Invalid processor.');
 
 			const measurementUnits = serviceStore.getters.getFlightMeasurementUnits(correlationId);
 
-			let input = measurementUnits && measurementUnits.input ? measurementUnits.input.find(l => l.id === processor) : null;
+			let input = measurementUnits && measurementUnits.input ? measurementUnits.input.find(l => l.id === processor.id) : null;
 			if (!input) {
-				if (processor === 'featherweight') {
-					input = {
-						id: 'featherweight',
-						unitsId: 'english',
-						accelerationId: 'fts2',
-						altitudeId: 'ft',
-						distanceId: 'ft',
-						velocityId: 'fts'
-					}
-				}
-				else if (processor === 'eggtimer') {
-					input = {
-						id: 'eggtimer',
-						unitsId: 'english',
-						accelerationId: 'fts2',
-						altitudeId: 'ft',
-						distanceId: 'ft',
-						velocityId: 'fts'
-					}
-				}
+				input = processor.measurementUnitDefaults;
+				input.id = processor.id;
 			}
 			flightMeasurementUnitsId.value = input ? input.unitsId : null;
 			flightMeasurementUnitsAccelerationId.value = input ? input.accelerationId : null;

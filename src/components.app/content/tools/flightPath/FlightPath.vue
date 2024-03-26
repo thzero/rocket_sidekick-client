@@ -291,14 +291,23 @@
 					</template>
 					<template v-slot:after>
 						<div class="pt-4">
-							<VtTextAreaWithValidation
-								ref="flightPathInputRef"
-								v-model="flightPathInput"
-								vid="flightPathInput"
-								:validation="validation"
-								:blur="flightPathInputChange"
-								:label="$t('forms.content.tools.flightPath.csv')"
-							/>
+							<v-row dense>
+								<v-col cols="12" md="8" lg="12">
+									<VtTextAreaWithValidation
+										ref="flightPathInputRef"
+										v-model="flightPathInput"
+										vid="flightPathInput"
+										:validation="validation"
+										:blur="flightPathInputChange"
+										:label="$t('forms.content.tools.flightPath.csv')"
+									/>
+								</v-col>
+								<v-col cols="12" md="4" lg="12">
+									<DropFile 
+										@selected="dropOutput"
+									/>
+								</v-col>
+							</v-row>
 						</div>
 						<div class="pt-4" style="float: right">
 							<v-btn
@@ -438,6 +447,7 @@ import { useFlightPathValidation } from '@/components.app/content/tools/flightPa
 import ContentAttribution from '@/components/content/Attribution';
 import ContentDescription from '@/components/content/Description';
 import ContentHeader from '@/components/content/Header';
+import DropFile from '@/components.app/content/tools/dropFile';
 import MeasurementUnitSelect2 from '@/components/content/MeasurementUnitSelect2';
 import VtCheckboxWithValidation from '@thzero/library_client_vue3_vuetify3/components/form/VtCheckboxWithValidation';
 import VtColorWithValidation from '@thzero/library_client_vue3_vuetify3/components/form/VtColorWithValidation';
@@ -455,6 +465,7 @@ export default {
 		ContentAttribution,
 		ContentDescription,
 		ContentHeader,
+		DropFile,
 		MeasurementUnitSelect2,
 		VtCheckboxWithValidation,
 		VtColorWithValidation,
@@ -560,6 +571,7 @@ export default {
 			flightPathStylePinTouchdownColor,
 			flightPathStylePinTouchdownSelected,
 			clickFlightPathStylesReset,
+			dropOutput,
 			flightPathInputChange,
 			flightPathStyleLoad,
 			panelInstructions,
@@ -671,6 +683,7 @@ export default {
 			flightPathStylePinTouchdownColor,
 			flightPathStylePinTouchdownSelected,
 			clickFlightPathStylesReset,
+			dropOutput,
 			flightPathInputChange,
 			flightPathStyleLoad,
 			panelInstructions,

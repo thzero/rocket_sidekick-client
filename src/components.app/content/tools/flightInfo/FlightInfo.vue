@@ -342,14 +342,23 @@
 					</template>
 					<template v-slot:after>
 						<div class="pt-4">
-							<VtTextAreaWithValidation
-								ref="flightInfoInputRef"
-								v-model="flightInfoInput"
-								vid="flightInfoInput"
-								:validation="validation"
-								:blur="flightInfoInputChange"
-								:label="$t('forms.content.tools.flightInfo.csv')"
-							/>
+							<v-row dense>
+								<v-col cols="12" md="8" lg="12">
+									<VtTextAreaWithValidation
+										ref="flightInfoInputRef"
+										v-model="flightInfoInput"
+										vid="flightInfoInput"
+										:validation="validation"
+										:blur="flightInfoInputChange"
+										:label="$t('forms.content.tools.flightInfo.csv')"
+									/>
+								</v-col>
+								<v-col cols="12" md="4" lg="12">
+									<DropFile 
+										@selected="dropOutput"
+									/>
+								</v-col>
+							</v-row>
 						</div>
 						<div class="pt-4" style="float: right">
 							<v-btn
@@ -540,6 +549,7 @@ import { useFlightInfoValidation } from '@/components.app/content/tools/flightIn
 import ContentAttribution from '@/components/content/Attribution';
 import ContentHeader from '@/components/content/Header';
 import ContentDescription from '@/components/content/Description';
+import DropFile from '@/components.app/content/tools/dropFile';
 import MeasurementUnitSelect2 from '@/components/content/MeasurementUnitSelect2';
 import VtColorWithValidation from '@thzero/library_client_vue3_vuetify3/components/form/VtColorWithValidation';
 import VtDateTimePickerField from '@thzero/library_client_vue3_vuetify3/components/form/VtDateTimePickerFieldTemp';
@@ -555,6 +565,7 @@ export default {
 		ContentAttribution,
 		ContentDescription,
 		ContentHeader,
+		DropFile,
 		FlightInfoData,
 		FlightInfoChart,
 		MeasurementUnitSelect2,
@@ -662,6 +673,7 @@ export default {
 			checkFlightInfoDataTypeUse,
 			clickResolution,
 			clickStylesReset,
+			dropOutput,
 			flightInfoInputChange,
 			flightInfoStyleLoad,
 			flightInfoStyleReset,
@@ -775,6 +787,7 @@ export default {
 			checkFlightInfoDataTypeUse,
 			clickResolution,
 			clickStylesReset,
+			dropOutput,
 			flightInfoInputChange,
 			flightInfoStyleLoad,
 			flightInfoStyleReset,

@@ -18,6 +18,10 @@ Checklists
 	potentially create a launch from a checklist...
         if creating a new launch from checklist, should navigate to it
 
+    templates
+        all defaults are templates
+        boolean to turned a copied template/default into a template
+
 Rocket Gallery
     show launches on rockets if marked
 
@@ -50,3 +54,7 @@ Inventory
     Delay does not let 'P' get set
         probably a custom control since can't use alpha with the input type attribute of 'number'
     Grid output of the inventory in the browser?
+
+Markup
+    https://github.com/github/markup
+    https://gist.github.com/ChrisTollefson/a3af6d902a74a0afd1c2d79aadc9bb3f

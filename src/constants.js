@@ -12,7 +12,15 @@ const Constants = {
 		SERVICE_TOOLS_FLIGHT_PATH_OUTPUT_TEMPLATE: 'serviceToolsFlightPathOutputTemplate',
 		SERVICE_TOOLS_FLIGHT_PATH_OUTPUT_TEMPLATE_HANDLEBARS: 'serviceToolsFlightPathOutputTemplateHandlebars',
 		SERVICE_TOOLS_FLIGHT_PATH_PROCESSOR: 'serviceToolsFlightPathProcessor',
-		SERVICE_TOOLS_FLIGHT_PATH_PROCESSOR_FEATHERWEIGHT: 'serviceToolsFlightPathProcessorFeatherweight',
+		SERVICE_TOOLS_FLIGHT_PATH_PROCESSOR_FEATHERWEIGHT_IOS: 'serviceToolsFlightPathProcessorFeatherweightIOS',
+		SERVICE_TOOLS_FLIGHT_PATH_PROCESSOR_FEATHERWEIGHT_BR: 'serviceToolsFlightPathProcessorFeatherweightBR',
+	},
+	ChecklistMoveDirection: {
+		down: 'down',
+		left: 'left',
+		in: 'in',
+		out: 'out',
+		up: 'up'
 	}
 };
 
