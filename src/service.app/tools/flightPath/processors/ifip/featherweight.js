@@ -4,7 +4,7 @@ import FlightPathProcessorService from '../index';
 
 class FeatherweightFlightPathProcessorService extends FlightPathProcessorService {
 	get id() {
-		return 'featherweightIOS';
+		return 'featherweightIFIP';
 	}
 
 	get measurementUnitDefaults() {
@@ -23,7 +23,7 @@ class FeatherweightFlightPathProcessorService extends FlightPathProcessorService
 		const regex = /^[a-z]+$/i;
 		const temp = input.data[0][0];
 		if ((regex.exec(temp)) === null)
-			return this._error('FeatherweightFlightPathProcessorService', '_processData', 'unknown Featherweight iOS file type without headers', null, null, null, correlationId);
+			return this._error('FeatherweightFlightPathProcessorService', '_processData', 'unknown Featherweight IFIP file type without headers', null, null, null, correlationId);
 
 		let type = null;
 		if (temp === 'TRACKER')
@@ -31,7 +31,7 @@ class FeatherweightFlightPathProcessorService extends FlightPathProcessorService
 		else if (temp === 'UTCTIME')
 			type = 'tracker';
 		if (type === null)
-			return this._error('FeatherweightFlightPathProcessorService', '_processData', 'unknown Featherweight iOS file type detected', null, null, null, correlationId);
+			return this._error('FeatherweightFlightPathProcessorService', '_processData', 'unknown Featherweight IFIP file type detected', null, null, null, correlationId);
 
 		input.data.shift();
 

@@ -15,8 +15,8 @@ class FlightPathProcessorService extends BaseService {
 	init(injector) {
 		const serviceFlightPathProcessorFeatherweightBR = injector.getService(AppConstants.InjectorKeys.SERVICE_TOOLS_FLIGHT_PATH_PROCESSOR_FEATHERWEIGHT_BR);
 		this.registerProcessor(serviceFlightPathProcessorFeatherweightBR);
-		const serviceFlightPathProcessorFeatherweightIOS = injector.getService(AppConstants.InjectorKeys.SERVICE_TOOLS_FLIGHT_PATH_PROCESSOR_FEATHERWEIGHT_IOS);
-		this.registerProcessor(serviceFlightPathProcessorFeatherweightIOS);
+		const serviceFlightPathProcessorFeatherweightIFIP = injector.getService(AppConstants.InjectorKeys.SERVICE_TOOLS_FLIGHT_PATH_PROCESSOR_FEATHERWEIGHT_IFIP);
+		this.registerProcessor(serviceFlightPathProcessorFeatherweightIFIP);
 	}
 
 	get styleDefault() {

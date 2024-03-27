@@ -340,8 +340,8 @@
 									{{ $t(`forms.content.tools.instructions.title`) }}
 								</v-expansion-panel-title>
 								<v-expansion-panel-text>
-											<VtMarkdown v-model="flightInstructions" :use-github=false />
-											<VtMarkdown v-model="flightPathInstructions" :use-github=false />
+									<VtMarkdown v-model="flightInstructions" :use-github=false />
+									<VtMarkdown v-model="flightPathInstructions" :use-github=false />
 								</v-expansion-panel-text>
 							</v-expansion-panel>
 						</v-expansion-panels>
