@@ -1,8 +1,6 @@
 <script>
 import { computed, onMounted, ref } from 'vue';
 
-import AppSharedConstants from '@/utility/constants';
-
 import LibraryClientUtility from '@thzero/library_client/utility/index';
 
 import { useContentLoadSignalComponent } from '@/components/content/contentLoadSignal';
