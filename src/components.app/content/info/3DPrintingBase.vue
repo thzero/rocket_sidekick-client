@@ -24,6 +24,7 @@ export function use3DPrintingBaseComponent(props, context, options) {
 		contentDesc,
 		contentDefinition,
 		contentMarkup,
+		contentId,
 		handleAttribution,
 		hasAttribution,
 		slideUrl
@@ -125,6 +126,7 @@ export function use3DPrintingBaseComponent(props, context, options) {
 		contentDefinition,
 		contentMarkup,
 		contentTitle,
+		contentId,
 		handleAttribution,
 		hasAttribution,
 		slideUrl,
