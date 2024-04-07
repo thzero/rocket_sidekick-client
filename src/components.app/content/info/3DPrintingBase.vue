@@ -1,8 +1,6 @@
 <script>
 import { computed, onMounted, ref } from 'vue';
 
-import AppSharedConstants from '@/utility/constants';
-
 import LibraryClientUtility from '@thzero/library_client/utility/index';
 
 import { useContentLoadSignalComponent } from '@/components/content/contentLoadSignal';
@@ -26,6 +24,7 @@ export function use3DPrintingBaseComponent(props, context, options) {
 		contentDesc,
 		contentDefinition,
 		contentMarkup,
+		contentId,
 		handleAttribution,
 		hasAttribution,
 		slideUrl
@@ -127,6 +126,7 @@ export function use3DPrintingBaseComponent(props, context, options) {
 		contentDefinition,
 		contentMarkup,
 		contentTitle,
+		contentId,
 		handleAttribution,
 		hasAttribution,
 		slideUrl,
