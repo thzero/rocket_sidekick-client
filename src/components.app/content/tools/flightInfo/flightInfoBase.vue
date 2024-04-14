@@ -96,7 +96,7 @@ export function useFlightInfoBaseComponent(props, context) {
 			flightInfoStyleReset(correlationIdI, false);
 
 			flightDataLoad(correlationIdI);
-			flightMeasurementUnitsLoad(correlationIdI, flightProcessor.value);
+			// flightMeasurementUnitsLoad(correlationIdI, flightProcessor.value);
 
 			flightInfoDataTypeUse.value = serviceStore.getters.getFlightInfoDataTypeUse();
 

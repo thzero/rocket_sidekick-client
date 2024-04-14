@@ -86,7 +86,7 @@ class FeatherweightFlightPathProcessorService extends FlightPathProcessorService
 						continue;
 
 					// as soon as we get a above min. vertical then we have a "flight"
-					if (verticalV > verticalVThreshold) {
+					if (verticalV >= verticalVThreshold) {
 						flightDetected = true;
 						flightEnded = false;
 						flightStarted = true;
@@ -108,6 +108,17 @@ class FeatherweightFlightPathProcessorService extends FlightPathProcessorService
 					flightEnded = true;
 					consectutiveZeros = 0;
 					this._publishI(correlationId, type, flightId, data, verticalV, index, flightStarted, flightEnded);
+					continue;
+				}
+				if (consectutiveZeros >= 1) {
+					// if its not zero again...
+					if ((verticalV <= -1 || verticalV >= 1)) {
+						// reset
+						consectutiveZeros = 0;
+					}
+				}
+				if (consectutiveZeros > 0) {
+					// if its a consecutiveZero count, then ignore it...
 					continue;
 				}
 
@@ -218,7 +229,8 @@ class FeatherweightFlightPathProcessorService extends FlightPathProcessorService
 				// data[7], // verticalH
 				// verticalV // verticalV
 				data[1], // time
-				data[2], // altitude
+				data[2], // altitude ASL
+				0, // altitude AGL
 				data[3], // latitude
 				data[4], // longitude
 				data[7], // verticalH

@@ -115,6 +115,17 @@ class FeatherweightFlightPathProcessorService extends FlightPathProcessorService
 					this._publishI(correlationId, flightId, data, verticalV, index, flightStarted, flightEnded);
 					continue;
 				}
+				if (consectutiveZeros >= 1) {
+					// if its not zero again...
+					if ((verticalV <= -1 || verticalV >= 1)) {
+						// reset
+						consectutiveZeros = 0;
+					}
+				}
+				if (consectutiveZeros > 0) {
+					// if its a consecutiveZero count, then ignore it...
+					continue;
+				}
 
 				if (index+1 === length) {
 					this._publishI(correlationId, flightId, data, verticalV, index, flightStarted, true);
