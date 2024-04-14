@@ -505,7 +505,7 @@ export function useFlightInfoBaseComponent(props, context) {
 		flightDataReset(correlationIdI);
 		flightMeasurementUnitsReset(correlationIdI);
 
-		flightInfoDataTypeActual.value = true;
+		flightInfoDataTypeActual.value = false;
 		flightInfoDataTypeFiltered.value = true;
 		flightInfoDataTypeUse.value = true;
 		flightInfoDataTypeUseDisabled.value = false;

@@ -74,7 +74,7 @@ export function useFlightInfoDataBaseComponent(props, context, options) {
 	});
 
 	const valueType = (value, valueF) => {
-		return props.flightInfoInner?.dataTypes?.use ? valueF : value;
+		return (flightInfoInner.value?.dataTypes?.use ? valueF : value);
 	};
 
 	watch(() => props.modelValue,
