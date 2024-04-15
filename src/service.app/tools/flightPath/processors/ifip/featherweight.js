@@ -63,7 +63,7 @@ class FeatherweightFlightPathProcessorService extends FlightPathProcessorService
 		if (this._hasFailed(checkResponse))
 			return checkResponse;
 
-		const type = testResponse.results;
+		const type = checkResponse.results;
 		input.data.shift();
 
 		const internalData = {};
