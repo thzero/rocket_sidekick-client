@@ -1,16 +1,5 @@
 <template>
 	<div>
-		<div class="pb-4"
-			v-if="errors"
-		>
-			<v-banner
-				color="error"
-			>
-				<v-banner-text>
-					<span v-html="errorMessage"></span>
-				</v-banner-text>
-			</v-banner>
-		</div>
 		<ContentHeader
 			:value="contentTitle"
 		/>
@@ -28,6 +17,30 @@
 				>
 					<template v-slot:default>
 						<div class="pb-4">
+							<div class="pb-4"
+								v-if="errors"
+							>
+								<v-banner
+									bg-color="error"
+									rounded
+								>
+									<v-banner-text>
+										<span v-html="errorMessage"></span>
+									</v-banner-text>
+								</v-banner>
+							</div>
+							<div class="pb-4"
+								v-if="notifySignal"
+							>
+								<v-banner
+									:bg-color="notifyColor"
+									rounded
+								>
+									<v-banner-text>
+										<span v-html="notifyMessage"></span>
+									</v-banner-text>
+								</v-banner>
+							</div>
 							<v-card
 								class="mb-4"
 								flat
@@ -499,7 +512,6 @@ export default {
 			contentTitle,
 			errors,
 			errorMessage,
-			errorTimer,
 			hasAttribution,
 			notifyColor,
 			notifyMessage,
@@ -513,8 +525,8 @@ export default {
 			initCalculationResults,
 			resetAdditional,
 			setErrorMessage,
-			setErrorTimer,
 			setNotify,
+			setSuccessMessage,
 			flightDataDate,
 			flightDataLocation,
 			flightDataTitle,
@@ -611,7 +623,6 @@ export default {
 			contentTitle,
 			errors,
 			errorMessage,
-			errorTimer,
 			hasAttribution,
 			notifyColor,
 			notifyMessage,
@@ -625,8 +636,8 @@ export default {
 			initCalculationResults,
 			resetAdditional,
 			setErrorMessage,
-			setErrorTimer,
 			setNotify,
+			setSuccessMessage,
 			flightDataDate,
 			flightDataLocation,
 			flightDataTitle,

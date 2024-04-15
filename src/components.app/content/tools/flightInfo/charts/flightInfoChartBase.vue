@@ -30,7 +30,6 @@ export function useFlightInfoChartBaseComponent(props, context, options) {
 		contentTitle,
 		errors,
 		errorMessage,
-		errorTimer,
 		hasAttribution,
 		notifyColor,
 		notifyMessage,
@@ -44,8 +43,8 @@ export function useFlightInfoChartBaseComponent(props, context, options) {
 		initCalculationResults,
 		resetFormI,
 		setErrorMessage,
-		setErrorTimer,
-		setNotify
+		setNotify,
+		setSuccessMessage
 	} = useFlightToolsBaseComponent(props, context, options);
 	
 	const chart = ref(null);
@@ -216,7 +215,6 @@ export function useFlightInfoChartBaseComponent(props, context, options) {
 		contentTitle,
 		errors,
 		errorMessage,
-		errorTimer,
 		hasAttribution,
 		notifyColor,
 		notifyMessage,
@@ -230,8 +228,8 @@ export function useFlightInfoChartBaseComponent(props, context, options) {
 		initCalculationResults,
 		resetFormI,
 		setErrorMessage,
-		setErrorTimer,
 		setNotify,
+		setSuccessMessage,
 		chart,
 		chartContext,
 		date,

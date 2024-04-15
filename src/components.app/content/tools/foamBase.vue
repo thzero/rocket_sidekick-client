@@ -34,7 +34,6 @@ export function useFoamBaseComponent(props, context) {
 		contentTitle,
 		errors,
 		errorMessage,
-		errorTimer,
 		hasAttribution,
 		notifyColor,
 		notifyMessage,
@@ -48,8 +47,8 @@ export function useFoamBaseComponent(props, context) {
 		initCalculationResults,
 		resetAdditional,
 		setErrorMessage,
-		setErrorTimer,
-		setNotify
+		setNotify,
+		setSuccessMessage
 	} = useToolsBaseComponent(props, context, {
 		id: 'foam',
 		resetAdditional: (correlationId) => {
@@ -232,7 +231,6 @@ export function useFoamBaseComponent(props, context) {
 		contentTitle,
 		errors,
 		errorMessage,
-		errorTimer,
 		hasAttribution,
 		notifyColor,
 		notifyMessage,
@@ -246,8 +244,8 @@ export function useFoamBaseComponent(props, context) {
 		initCalculationResults,
 		resetAdditional,
 		setErrorMessage,
-		setErrorTimer,
 		setNotify,
+		setSuccessMessage,
 		measurementUnitsIdOutput,
 		measurementUnitsIdSettings,
 		measurementUnitsFluidType,

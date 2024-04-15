@@ -38,7 +38,6 @@ export function useFlightInfoBaseComponent(props, context) {
 		contentTitle,
 		errors,
 		errorMessage,
-		errorTimer,
 		hasAttribution,
 		notifyColor,
 		notifyMessage,
@@ -52,8 +51,8 @@ export function useFlightInfoBaseComponent(props, context) {
 		initCalculationResults,
 		resetAdditional,
 		setErrorMessage,
-		setErrorTimer,
 		setNotify,
+		setSuccessMessage,
 		flightDataDate,
 		flightDataLocation,
 		flightDataTitle,
@@ -202,12 +201,12 @@ export function useFlightInfoBaseComponent(props, context) {
 				let errors = [];
 				for(let item of response.errors) 
 					errors.push(LibraryClientUtility.$trans.t(`errors.content.tools.flightInfo.${item.code}`));
-				setErrorMessage(errors.join('<br>'));
+				setErrorMessage(correlationId, errors.join('<br>'));
 
 				return response;
 			}
 
-			setErrorMessage(null);
+			setErrorMessage(correlationId, null);
 			return success(correlationId);
 	};
 	const checkFlightInfoDataTypeUse = () => {
@@ -235,7 +234,7 @@ export function useFlightInfoBaseComponent(props, context) {
 		const correlationIdI = correlationId();
 
 		flightInfoInput.value = null;
-		setErrorMessage(null);
+		setErrorMessage(correlationId, null);
 		
 		if (value) {
 			const data = Papa.parse(value.trim());
@@ -485,7 +484,8 @@ export function useFlightInfoBaseComponent(props, context) {
 				flightDataSave(correlationIdI);
 				flightMeasurementUnitsSave(correlationIdI, flightProcessor.value);
 
-				setNotify(correlationIdI, 'messages.processed');
+				// setNotify(correlationIdI, 'messages.processed');
+				setSuccessMessage(correlationIdI, LibraryClientUtility.$trans.t('messages.processed'));
 				
 				panelInstructions.value = [];
 				buttons.value.export.disabled = false;
@@ -522,8 +522,7 @@ export function useFlightInfoBaseComponent(props, context) {
 	};
 	const reset = (correlationId) => {
 		buttons.value.export.disabled = true;
-		setErrorMessage(null);
-		setErrorTimer(null);
+		setErrorMessage(correlationId, null);
 		flightInfo.value = null;
 		flightInfoChartData.value = null;
 		processing.value = false;
@@ -598,7 +597,6 @@ export function useFlightInfoBaseComponent(props, context) {
 		contentTitle,
 		errors,
 		errorMessage,
-		errorTimer,
 		hasAttribution,
 		notifyColor,
 		notifyMessage,
@@ -612,8 +610,8 @@ export function useFlightInfoBaseComponent(props, context) {
 		initCalculationResults,
 		resetAdditional,
 		setErrorMessage,
-		setErrorTimer,
 		setNotify,
+		setSuccessMessage,
 		flightDataDate,
 		flightDataLocation,
 		flightDataTitle,
