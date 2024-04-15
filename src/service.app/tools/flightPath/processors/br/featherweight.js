@@ -77,11 +77,11 @@ class FeatherweightFlightPathProcessorService extends FlightPathProcessorService
 		if (this._hasFailed(checkResponse))
 			return checkResponse;
 
-		// const colAltitude = testResponse.colAltitude;
-		// const colLat = testResponse.colLat;
-		// const colLong = testResponse.colLong;
-		// const colHVert = testResponse.colHVert;
-		const colVVert = testResponse.colVVert;
+		// const colAltitude = checkResponse.colAltitude;
+		// const colLat = checkResponse.colLat;
+		// const colLong = checkResponse.colLong;
+		// const colHVert = checkResponse.colHVert;
+		const colVVert = checkResponse.colVVert;
 
 		input.data.shift();
 
