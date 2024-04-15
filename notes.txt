@@ -13,10 +13,10 @@ Tools
         Allow selection of rocket/setup once enabled
 
     https://www.translatorscafe.com/unit-converter/en-US/calculator/rocket-max-altitude/
-
     
     Flight Path
-        Track previous, see about detecting spikes
+        Simple filter based on distance between two coords implemented
+            is kalman filter better?
             https://www.npmjs.com/package/kalman-filter?
 
 Checklists

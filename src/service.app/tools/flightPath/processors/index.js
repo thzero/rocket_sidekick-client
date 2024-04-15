@@ -83,15 +83,18 @@ class FlightPathProcessorService extends ToolsService {
 		const flightPaths = [];
 		const flightPathsOutput = [];
 
+		const filter = new Filter();
+
 		const divisor = ConvertUtility.convert(
 			1, 
 			measurementUnits.measurementUnitsAltitudeId,
 			'm');
 		let coords;
+		let filterResults  = null;
+		let flight = {};
 		let path = [];
 		let previous = null;
 		let temp = null;
-		let flight = {};
 		for (const [key, value] of Object.entries(this._data.flights)) {
 			coords = null;
 			path = [];
@@ -109,26 +112,29 @@ class FlightPathProcessorService extends ToolsService {
 			while (temp) {
 				previous = temp;
 
-				coords = `${temp.longitude},${temp.latitude},${this._round(temp.altitude * divisor)}`;
+				filterResults = filter.filter({ lat: temp.latitude, long: temp.longitude });
+				if (!filterResults.ignore) {
+					coords = `${temp.longitude},${temp.latitude},${this._round(temp.altitude * divisor)}`;
 
-				// add coords to the path...
-				path.push(coords);
-
-				// is this the max altitude?
-				if (temp && temp.altitude && (temp.altitude > 0) && (temp.altitude > flight.maxAltitude)) {
-					flight.maxAltitude = this._round(temp.altitude);
-					flight.maxAltitudeCoords = coords;
-				}
-
-				// is this the max velocity?
-				if (temp && temp.velocityV && (temp.velocityV > 0) && (temp.velocityV > flight.maxVelocity)) {
-					flight.maxVelocity = this._round(temp.velocityV);
-					flight.maxVelocityCoords = coords;
+					// add coords to the path...
+					path.push(coords);
+	
+					// is this the max altitude?
+					if (temp && temp.altitude && (temp.altitude > 0) && (temp.altitude > flight.maxAltitude)) {
+						flight.maxAltitude = this._round(temp.altitude);
+						flight.maxAltitudeCoords = coords;
+					}
+	
+					// is this the max velocity?
+					if (temp && temp.velocityV && (temp.velocityV > 0) && (temp.velocityV > flight.maxVelocity)) {
+						flight.maxVelocity = this._round(temp.velocityV);
+						flight.maxVelocityCoords = coords;
+					}
 				}
 
 				temp = value.data.shift(); // get next row...
 				if (!temp)
-				flight.touchdownCoords = `${previous.longitude},${previous.latitude}`;
+					flight.touchdownCoords = `${previous.longitude},${previous.latitude}`;
 			}
 
 			// flight.maxAltitude = this._convert(flight.maxAltitude)
@@ -175,6 +181,18 @@ class FlightPathProcessorService extends ToolsService {
 
 		results.flightPathsOutput = flightPathsOutput;
 		results.flightPaths = flightPaths;
+
+		console.log();
+		console.log();
+		console.log();
+		console.log(filter.results);
+		console.log(filter.results);
+		console.log(filter.results);
+		console.log(filter.results);
+		console.log(filter.results);
+		console.log();
+		console.log();
+		console.log();
 
 		// let coords;
 		// let path = [];
@@ -351,6 +369,73 @@ class FlightPath {
 		for (const [key, value] of Object.entries(this._flights))
 			this._flights[key] = value.sort(func);
 		// this._rows = this._rows.sort(func);
+	}
+}
+
+class Filter {
+	constructor() {
+		this._max = 10;
+		this._previous = null;
+
+		this.results = {
+			maxDistnace: 0,
+			count: 0,
+			total: 0
+		};
+	}
+
+	filter(data) {
+		try {
+			this.results.total++;
+
+			if (!this._previous)
+				return { ignore: false, distance: 0 };
+
+			// console.log();
+			// console.log(this._previous);
+			// console.log(data);
+			const distance = this._getDistanceFromLatLon(data.lat, data.long, this._previous.lat, this._previous.long);
+			if (distance > this.results.maxDistnace)
+			this.results.maxDistnace = distance;
+			// console.log(distance);
+			const delta = (distance > this._max);
+			if (delta)
+				this.results.count++;
+			// console.log(distance - this._max);
+			// console.log(delta);
+			return { ignore: delta, distance: distance };
+		}
+		finally {
+			this._previous = data;
+		}
+	}
+
+	// _getDistanceFromLatLon(lat1,lon1,lat2,lon2) {
+	// 	const R = 6371000; // Radius of the earth in m
+	// 	const dLat = this._deg2rad(lat2-lat1);
+	// 	const dLon = this._deg2rad(lon2-lon1); 
+	// 	const a = Math.sin(dLat/2) * Math.sin(dLat/2) +
+	// 		Math.cos(this._deg2rad(lat1)) * Math.cos(this._deg2rad(lat2)) * 
+	// 		Math.sin(dLon/2) * Math.sin(dLon/2); 
+	// 	const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)); 
+	// 	const d = R * c; // Distance in km
+	// 	return d;
+	//   }
+	_getDistanceFromLatLon(lat1, lon1, lat2, lon2) {
+		const r = 6371000; // m
+		const p = Math.PI / 180;
+
+		const a = 0.5 - 
+			Math.cos((lat2 - lat1) * p) / 2 + 
+			Math.cos(lat1 * p) * Math.cos(lat2 * p) *
+			(1 - Math.cos((lon2 - lon1) * p)) / 
+			2;
+
+		return 2 * r * Math.asin(Math.sqrt(a));
+	}
+	  
+	_deg2rad(deg) {
+		return deg * (Math.PI/180)
 	}
 }
 

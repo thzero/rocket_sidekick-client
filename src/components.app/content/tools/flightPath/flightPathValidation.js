@@ -9,6 +9,12 @@ export const useFlightPathValidation = {
 		maxLength: maxLength(50),
 		$autoDirty: true
 	},
+	flightPathFilterDistance: { 
+		required,
+		decimal, 
+		between: between(0, 50),
+		$autoDirty: true 
+	},
 	flightPathInput: { required, $autoDirty: true },
 	flightMeasurementUnitsId: { required, $autoDirty: true },
 	flightMeasurementUnitsAltitudeId: { required, $autoDirty: true },

@@ -75,7 +75,7 @@
 												:label="$t('forms.content.tools.flightPath.date')"
 											/>
 										</v-col>
-										<v-col cols="12">
+										<v-col cols="6">
 											<VtSelectWithValidation
 												ref="flightProcessorRef"
 												v-model="flightProcessor"
@@ -83,6 +83,15 @@
 												:items="flightProcessors"
 												:validation="validation"
 												:label="$t('forms.content.tools.flightPath.processors.title')"
+											/>
+										</v-col>
+										<v-col cols="6">
+											<VtNumberFieldWithValidation
+												ref="flightPathFilterDistanceRef"
+												v-model="flightPathFilterDistance"
+												vid="flightPathFilterDistance"
+												:validation="validation"
+												:label="$t('forms.content.tools.flightPath.filter.distance')"
 											/>
 										</v-col>
 										<v-col cols="12">
@@ -467,6 +476,7 @@ import VtColorWithValidation from '@thzero/library_client_vue3_vuetify3/componen
 import VtDateTimePickerFieldTemp from '@thzero/library_client_vue3_vuetify3/components/form/VtDateTimePickerFieldTemp';
 import VtFormControl from '@thzero/library_client_vue3_vuetify3/components/form/VtFormControl';
 import VtMarkdown from '@thzero/library_client_vue3_vuetify3/components/markup/VtMarkdown';
+import VtNumberFieldWithValidation from '@thzero/library_client_vue3_vuetify3/components/form/VtNumberFieldWithValidation';
 import VtSelectWithValidation from '@thzero/library_client_vue3_vuetify3/components/form/VtSelectWithValidation';
 import VtSwitchWithValidation from '@thzero/library_client_vue3_vuetify3/components/form/VtSwitchWithValidation';
 import VtTextAreaWithValidation from '@thzero/library_client_vue3_vuetify3/components/form/VtTextAreaWithValidation';
@@ -485,6 +495,7 @@ export default {
 		VtDateTimePickerFieldTemp,
 		VtFormControl,
 		VtMarkdown,
+		VtNumberFieldWithValidation,
 		VtSelectWithValidation,
 		VtSwitchWithValidation,
 		VtTextAreaWithValidation,
@@ -570,6 +581,7 @@ export default {
 			flightPath,
 			flightPathData,
 			flightPathDataExport,
+			flightPathFilterDistance,
 			flightPathInput,
 			flightPathOutput,
 			flightPathStylePathFlightColor,
@@ -582,16 +594,16 @@ export default {
 			flightPathStylePinMaxVelocitySelected,
 			flightPathStylePinTouchdownColor,
 			flightPathStylePinTouchdownSelected,
-			clickFlightPathStylesReset,
-			dropOutput,
-			flightPathInputChange,
-			flightPathStyleLoad,
 			panelInstructions,
 			templateMain,
 			templatePinLaunch,
 			templatePinsAdditional,
 			templatePinTouchdown,
 			flightPathInstructions,
+			clickFlightPathStylesReset,
+			dropOutput,
+			flightPathInputChange,
+			flightPathStyleLoad,
 			flightPathStyleReset,
 			flightPathStyleSave,
 			flightPathExport,
@@ -681,6 +693,7 @@ export default {
 			flightPath,
 			flightPathData,
 			flightPathDataExport,
+			flightPathFilterDistance,
 			flightPathInput,
 			flightPathOutput,
 			flightPathStylePathFlightColor,
@@ -693,16 +706,16 @@ export default {
 			flightPathStylePinMaxVelocitySelected,
 			flightPathStylePinTouchdownColor,
 			flightPathStylePinTouchdownSelected,
-			clickFlightPathStylesReset,
-			dropOutput,
-			flightPathInputChange,
-			flightPathStyleLoad,
 			panelInstructions,
 			templateMain,
 			templatePinLaunch,
 			templatePinsAdditional,
 			templatePinTouchdown,
 			flightPathInstructions,
+			clickFlightPathStylesReset,
+			dropOutput,
+			flightPathInputChange,
+			flightPathStyleLoad,
 			flightPathStyleReset,
 			flightPathStyleSave,
 			flightPathExport,
