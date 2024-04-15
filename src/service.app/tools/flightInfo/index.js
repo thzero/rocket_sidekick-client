@@ -1,5 +1,6 @@
 import AppConstants from '@/constants';
 
+import LibraryClientUtility from '@thzero/library_client/utility/index';
 import LibraryCommonUtility from '@thzero/library_common/utility/index';
 
 import Results from '@/service/tools/results';
@@ -13,7 +14,9 @@ class FlightInfoProcessorService extends BaseService {
 		this._serviceProcessors = [];
 	}
 
-	init(injector) {
+	async init(injector) {
+		await super.init(injector);
+
 		// TODO: Convert to library
 		const serviceFlightInfoProcessorEggtimer = injector.getService(AppConstants.InjectorKeys.SERVICE_TOOLS_FLIGHT_INFO_PROCESSOR_EGGTIMER);
 		this.registerProcessor(serviceFlightInfoProcessorEggtimer);
@@ -60,6 +63,20 @@ class FlightInfoProcessorService extends BaseService {
 		return this._serviceProcessors;
 	}
 
+	check(correlationId, data, processorId) {
+		this._enforceNotNull('FlightInfoProcessorService', 'check', data, 'data', correlationId);
+		// this._enforceNotEmpty('FlightInfoProcessorService', 'check', processorId, 'processorId', correlationId);
+
+		if (String.isNullOrEmpty(processorId))
+			return this._error('FlightInfoProcessorService', 'check', 'No processor id', null, AppConstants.FlightInfo.Errors.NoProcessor, null, correlationId);
+
+		const processor = this._determineProcessor(correlationId, processorId);
+		if (!processor)
+			return this._error('FlightInfoProcessorService', 'check', 'Invalid processor', null, AppConstants.FlightInfo.Errors.NoProcessor, null, correlationId);
+
+		return processor.check(correlationId, data);
+	}
+
 	process(correlationId, data, processorId, measurementUnits, dataTypes) {
 		this._enforceNotNull('FlightInfoProcessorService', 'process', data, 'data', correlationId);
 		this._enforceNotEmpty('FlightInfoProcessorService', 'process', processorId, 'processorId', correlationId);
@@ -76,20 +93,9 @@ class FlightInfoProcessorService extends BaseService {
 
 		const results = new Results();
 
-		if (LibraryCommonUtility.isNull(data)) {
-			results.errors.push('errors.process.noInput');
-			return results;
-		}
-
-		if (String.isNullOrEmpty(processorId)) {
-			results.setError('errors.process.noProcessor');
-			return results;
-		}
-
 		const processor = this._determineProcessor(correlationId, processorId);
 		if (!processor) {
-			results.setError('errors.process.noProcessor');
-			return results;
+			return this._error('FlightInfoProcessorService', 'process', 'Invalid processor', null, AppConstants.FlightInfo.Errors.NoProcessor, null, correlationId);
 		}
 
 		results.info = this._initialize();

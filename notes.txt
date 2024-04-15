@@ -14,6 +14,11 @@ Tools
 
     https://www.translatorscafe.com/unit-converter/en-US/calculator/rocket-max-altitude/
 
+    
+    Flight Path
+        Track previous, see about detecting spikes
+            https://www.npmjs.com/package/kalman-filter?
+
 Checklists
 	potentially create a launch from a checklist...
         if creating a new launch from checklist, should navigate to it

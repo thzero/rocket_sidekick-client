@@ -15,9 +15,9 @@ class FlightPathProcessorService extends ToolsService {
 		this._serviceFlightPathOutputTemplate = null;
 	}
 
-	init(injector) {
-		super.init(injector);
-
+	async init(injector) {
+		await super.init(injector);
+		
 		this._serviceFlightPathOutput = injector.getService(AppConstants.InjectorKeys.SERVICE_TOOLS_FLIGHT_PATH_OUTPUT_KML);
 		this._serviceFlightPathOutputTemplate = injector.getService(AppConstants.InjectorKeys.SERVICE_TOOLS_FLIGHT_PATH_OUTPUT_TEMPLATE_HANDLEBARS);
 	}
@@ -28,6 +28,14 @@ class FlightPathProcessorService extends ToolsService {
 
 	get data() {
 		return this._data;
+	}
+
+	check(correlationId, data) {
+		return this._check(correlationId, data);
+	}
+
+	columnIndexOf(col) {
+		return FlightPathProcessorService.alpha.indexOf(col);
 	}
 
 	process(correlationId, engine, results, data, measurementUnits, templateMain, templatePinLaunch, templatePinTouchdown, templatePinsAdditional) {
@@ -229,8 +237,8 @@ class FlightPathProcessorService extends ToolsService {
 		return this._successResponse(results, correlationId);
 	}
 
-	columnIndexOf(col) {
-		return FlightPathProcessorService.alpha.indexOf(col);
+	_check(correlationId, data) {
+		throw Error('Not Implemented');
 	}
 
 	_processData(correlationId, input) {

@@ -15,6 +15,10 @@ class FlightInfoProcessorService extends ToolsService {
 		throw Error('Not Implemented');
 	}
 
+	check(correlationId, data) {
+		return this._check(correlationId, data);
+	}
+
 	process(correlationId, results, data, measurementUnits) {
 		this._enforceNotNull('FlightInfoProcessorService', 'process', results, 'results', correlationId);
 		this._enforceNotNull('FlightInfoProcessorService', 'process', data, 'data', correlationId);

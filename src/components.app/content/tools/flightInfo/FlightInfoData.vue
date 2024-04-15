@@ -130,7 +130,7 @@
 			v-if="flightInfoInner?.events?.main?.fired"
 		>
 			<th class="subSep3">{{ $t('charts.flightInfo.min.abbr') }}</th>
-			<td><span>{{ formatNumber(valueType(flightInfoInner?.velocity?.min?.main?.min?.value, flightInfoInner?.velocity?.min?.main?.min?.valueF)) }}</span>{{ measurementVelocity }}&nbsp;@&nbsp;<span>{{ valueType(flightInfoInner?.velocity?.min?.main?.min?.time, flightInfoInner?.velocity?.min?.main?.min?.timeF) }}</span>{{ measurementTime }},&nbsp;<span>{{ formatNumber(valueType(flightInfoInner?.velocity?.min?.main?.min?.altitude, flightInfoInner?.velocity?.min?.main?.min?.altitude)) }}</span>{{ measurementAltitude }}</td>
+			<td><span>{{ formatNumber(valueType(flightInfoInner?.velocityF?.min?.main?.min?.value, flightInfoInner?.velocity?.min?.main?.min?.valueF)) }}</span>{{ measurementVelocity }}&nbsp;@&nbsp;<span>{{ valueType(flightInfoInner?.velocity?.min?.main?.min?.time, flightInfoInner?.velocity?.min?.main?.min?.timeF) }}</span>{{ measurementTime }},&nbsp;<span>{{ formatNumber(valueType(flightInfoInner?.velocity?.min?.main?.min?.altitude, flightInfoInner?.velocity?.min?.main?.min?.altitude)) }}</span>{{ measurementAltitude }}</td>
 		</tr>
 		<tr
 			v-if="flightInfoInner?.events?.main?.fired"
@@ -146,12 +146,12 @@
 		</tr>
 		<tr>
 			<th class="subTitleSep">{{ $t('charts.flightInfo.max.abbr') }}</th>
-			<td><span>{{ formatNumber(valueType(flightInfoInner?.acceleration?.max?.value, flightInfoInner?.acceleration?.max?.value)) }}</span>{{ measurementAcceleration }}&nbsp;@&nbsp;<span>{{ valueType(flightInfoInner?.acceleration?.max?.time, flightInfoInner?.acceleration?.max?.time) }}</span>{{ measurementTime }},&nbsp;<span>{{ formatNumber(valueType(flightInfoInner?.acceleration?.max?.altitude, flightInfoInner?.acceleration?.max?.altitudeF)) }}</span>{{ measurementAltitude }}</td>
+			<td><span>{{ formatNumber(valueType(flightInfoInner?.acceleration?.max?.value, flightInfoInner?.acceleration?.max?.valueF)) }}</span>{{ measurementAcceleration }}&nbsp;@&nbsp;<span>{{ valueType(flightInfoInner?.acceleration?.max?.time, flightInfoInner?.acceleration?.max?.timeF) }}</span>{{ measurementTime }},&nbsp;<span>{{ formatNumber(valueType(flightInfoInner?.acceleration?.max?.altitude, flightInfoInner?.acceleration?.max?.altitudeF)) }}</span>{{ measurementAltitude }}</td>
 		</tr>
-		<tr>
+		<!-- <tr>
 			<th class="subTitleSep">{{ $t('charts.flightInfo.min.abbr') }}</th>
-			<td><span>{{ formatNumber(valueType(flightInfoInner?.acceleration?.min?.value, flightInfoInner?.acceleration?.min?.value)) }}</span>{{ measurementAcceleration }}&nbsp;@&nbsp;<span>{{ valueType(flightInfoInner?.acceleration?.min?.time, flightInfoInner?.acceleration?.min?.timeF) }}</span>{{ measurementTime }},&nbsp;<span>{{ formatNumber(valueType(flightInfoInner?.acceleration?.min?.altitude, flightInfoInner?.acceleration?.min?.altitudeF)) }}</span>{{ measurementAltitude }}</td>
-		</tr>
+			<td><span>{{ formatNumber(valueType(flightInfoInner?.acceleration?.min?.value, flightInfoInner?.acceleration?.min?.valueF)) }}</span>{{ measurementAcceleration }}&nbsp;@&nbsp;<span>{{ valueType(flightInfoInner?.acceleration?.min?.time, flightInfoInner?.acceleration?.min?.timeF) }}</span>{{ measurementTime }},&nbsp;<span>{{ formatNumber(valueType(flightInfoInner?.acceleration?.min?.altitude, flightInfoInner?.acceleration?.min?.altitudeF)) }}</span>{{ measurementAltitude }}</td>
+		</tr> -->
 		<tr>
 			<th class="subTitleSep" colspan="2">{{ $t('charts.flightInfo.descent') }}</th>
 		</tr>
@@ -174,12 +174,12 @@
 			<th class="subSep3">{{ $t('charts.flightInfo.max.abbr') }}</th>
 			<td><span>{{ formatNumber(valueType(flightInfoInner?.acceleration?.min?.drogue?.max?.value, flightInfoInner?.acceleration?.min?.drogue?.max?.valueF)) }}</span>{{ measurementAcceleration }}&nbsp;@&nbsp;<span>{{ valueType(flightInfoInner?.acceleration?.min?.drogue?.max?.time, flightInfoInner?.acceleration?.min?.drogue?.max?.timeF) }}</span>{{ measurementTime }},&nbsp;<span>{{ formatNumber(valueType(flightInfoInner?.acceleration?.min?.drogue?.max?.altitude, flightInfoInner?.acceleration?.min?.drogue?.max?.altitudeF)) }}</span>{{ measurementAltitude }}</td>
 		</tr>
-		<tr
+		<!-- <tr
 			v-if="flightInfoInner?.events?.drogue?.fired"
 		>
 			<th class="subSep3">{{ $t('charts.flightInfo.min.abbr') }}</th>
 			<td><span>{{ formatNumber(valueType(flightInfoInner?.acceleration?.min?.drogue?.min?.value, flightInfoInner?.acceleration?.min?.drogue?.min?.valueF)) }}</span>{{ measurementAcceleration }}&nbsp;@&nbsp;<span>{{ valueType(flightInfoInner?.acceleration?.min?.drogue?.min?.time, flightInfoInner?.acceleration?.min?.drogue?.min?.timeF) }}</span>{{ measurementTime }},&nbsp;<span>{{ formatNumber(valueType(flightInfoInner?.acceleration?.min?.drogue?.min?.altitude, flightInfoInner?.acceleration?.min?.drogue?.min?.altitudeF)) }}</span>{{ measurementAltitude }}</td>
-		</tr>
+		</tr> -->
 		<tr
 			v-if="flightInfoInner?.events?.drogue?.fired"
 		>
@@ -205,12 +205,12 @@
 			<th class="subSep3">{{ $t('charts.flightInfo.max.abbr') }}</th>
 			<td><span>{{ formatNumber(valueType(flightInfoInner?.acceleration?.min?.main?.max?.value, flightInfoInner?.acceleration?.min?.main?.max?.valueF)) }}</span>{{ measurementAcceleration }}&nbsp;@&nbsp;<span>{{ valueType(flightInfoInner?.acceleration?.min?.main?.max?.time, flightInfoInner?.acceleration?.min?.main?.max?.timeF) }}</span>{{ measurementTime }},&nbsp;<span>{{ formatNumber(valueType(flightInfoInner?.acceleration?.min?.main?.max?.altitude, flightInfoInner?.acceleration?.min?.main?.max?.altitudeF)) }}</span>{{ measurementAltitude }}</td>
 		</tr>
-		<tr
+		<!-- <tr
 			v-if="flightInfoInner?.events?.main?.fired"
 		>
 			<th class="subSep3">{{ $t('charts.flightInfo.min.abbr') }}</th>
 			<td><span>{{ formatNumber(valueType(flightInfoInner?.acceleration?.min?.main?.min?.value, flightInfoInner?.acceleration?.min?.main?.min?.valueF)) }}</span>{{ measurementAcceleration }}&nbsp;@&nbsp;<span>{{ valueType(flightInfoInner?.acceleration?.min?.main?.min?.time, flightInfoInner?.acceleration?.min?.main?.min?.timeF) }}</span>{{ measurementTime }},&nbsp;<span>{{ formatNumber(valueType(flightInfoInner?.acceleration?.min?.main?.min?.altitude, flightInfoInner?.acceleration?.min?.main?.min?.altitudeF)) }}</span>{{ measurementAltitude }}</td>
-		</tr>
+		</tr> -->
 		<tr
 			v-if="flightInfoInner?.events?.main?.fired"
 		>
