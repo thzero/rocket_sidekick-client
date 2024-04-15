@@ -4,7 +4,9 @@ import AppSharedConstants from '@/utility/constants';
 import ToolsService from '@/service/tools/index';
 
 class FoamToolsService extends ToolsService {
-    init(injector) {
+    async init(injector) {
+		await super.init(injector);
+		
 		this._serviceCalculationEngine = injector.getService(AppSharedConstants.InjectorKeys.SERVICE_TOOLS_CALCULATION_ENGINE);
     }
 

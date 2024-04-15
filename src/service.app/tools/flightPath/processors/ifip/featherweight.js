@@ -1,5 +1,6 @@
 import LibraryClientUtility from '@thzero/library_client/utility/index';
 
+import AppConstants from '@/constants';
 import FlightPathProcessorService from '../index';
 
 class FeatherweightFlightPathProcessorService extends FlightPathProcessorService {
@@ -17,22 +18,52 @@ class FeatherweightFlightPathProcessorService extends FlightPathProcessorService
 		}
 	}
 
+	_check(correlationId, input) {
+		this._enforceNotNull('FeatherweightFlightPathProcessorService', '_check', input, 'input', correlationId);
+
+		try {
+			const regex = /^[a-z]+$/i;
+			const temp = input.data[0][0];
+			if ((regex.exec(temp)) === null)
+				return this._error('FeatherweightFlightPathProcessorService', '_check', 'Featherweight IFIP file type without headers', null, AppConstants.FlightPath.Errors.WithoutHeaders, null, correlationId);
+
+			let type = null;
+			if (temp === 'TRACKER')
+				type = 'gs';
+			else if (temp === 'UTCTIME')
+				type = 'tracker';
+			if (type === null)
+				return this._error('FeatherweightFlightPathProcessorService', '_check', 'Non Featherweight IFIP file type detected', null, AppConstants.FlightPath.Errors.NonIFIP, null, correlationId);
+
+			return this._successResponse(type, correlationId);
+		}
+		catch (err) {
+			return this._error('FeatherweightFlightPathProcessorService', '_check', 'Non Featherweight IFIP file detected', null, AppConstants.FlightPath.Errors.NonIFIP, null, correlationId);
+
+		}
+	}
+
 	_processData(correlationId, input) {
 		this._enforceNotNull('FeatherweightFlightPathProcessorService', '_processData', input, 'input', correlationId);
 
-		const regex = /^[a-z]+$/i;
-		const temp = input.data[0][0];
-		if ((regex.exec(temp)) === null)
-			return this._error('FeatherweightFlightPathProcessorService', '_processData', 'unknown Featherweight IFIP file type without headers', null, null, null, correlationId);
+		// const regex = /^[a-z]+$/i;
+		// const temp = input.data[0][0];
+		// if ((regex.exec(temp)) === null)
+		// 	return this._error('FeatherweightFlightPathProcessorService', '_processData', 'unknown Featherweight IFIP file type without headers', null, null, null, correlationId);
 
-		let type = null;
-		if (temp === 'TRACKER')
-			type = 'gs';
-		else if (temp === 'UTCTIME')
-			type = 'tracker';
-		if (type === null)
-			return this._error('FeatherweightFlightPathProcessorService', '_processData', 'unknown Featherweight IFIP file type detected', null, null, null, correlationId);
+		// let type = null;
+		// if (temp === 'TRACKER')
+		// 	type = 'gs';
+		// else if (temp === 'UTCTIME')
+		// 	type = 'tracker';
+		// if (type === null)
+		// 	return this._error('FeatherweightFlightPathProcessorService', '_processData', 'unknown Featherweight IFIP file type detected', null, null, null, correlationId);
 
+		const checkResponse = this._check(correlationId, input);
+		if (this._hasFailed(checkResponse))
+			return checkResponse;
+
+		const type = testResponse.results;
 		input.data.shift();
 
 		const internalData = {};

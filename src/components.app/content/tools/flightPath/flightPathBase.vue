@@ -165,11 +165,44 @@ export function useFlightPathBaseComponent(props, context) {
 		return processor.markup;
 	});
 
+	const checkDataForProcessor = (correlationId, data) => {
+		const response = serviceFlightPath.check(correlationId, data, flightProcessor.value);
+			if (hasFailed(response)) {
+				resetAdditionalInput2(correlationId);
+
+				let errors = [];
+				for(let item of response.errors) 
+					errors.push(LibraryClientUtility.$trans.t(`errors.content.tools.flightPath.${item.code}`));
+				setErrorMessage(errors.join('<br>'));
+				
+				return response;
+			}
+
+			setErrorMessage(null);
+			return success(correlationId);
+	};
 	const clickFlightPathStylesReset = () => {
 		flightPathStyleReset(correlationId(), false);
 	};
 	const dropOutput = (value) => {
-		flightPathInput.value = value;
+		const correlationIdI = correlationId();
+
+		flightPathInput.value = null;
+		flightPath.value = null;
+		flightPathData.value = null;
+		flightPathDataExport.value = null;
+		flightPathOutput.value = '';
+		setErrorMessage(null);
+		
+		if (value) {
+			const data = Papa.parse(value.trim());
+			const response = checkDataForProcessor(correlationIdI, data);
+			if (hasFailed(response))
+				return response;
+			
+			flightPathInput.value = value.trim();
+			return success(correlationIdI);
+		}
 	};
 	const flightPathInputChange = () => {
 		document.getElementById('top').scrollIntoView({behavior: 'smooth'});
@@ -400,15 +433,25 @@ export function useFlightPathBaseComponent(props, context) {
 	};
 	const resetAdditionalInput = () => {
 		const correlationIdI = correlationId();
+		resetAdditionalInput2(correlationIdI);
+		flightDataTitle.value = null;
+
+		setNotify(correlationIdI, 'messages.reset');
+	};
+	const resetAdditionalInput2 = () => {
+		const correlationIdI = correlationId();
 		reset(correlationIdI);
 		flightDataReset(correlationIdI);
 		flightMeasurementUnitsReset(correlationIdI);
 
 		flightPathInput.value = null;
-		flightDataTitle.value = null;
-		buttons.value.process.disabled = true;
+		flightPath.value = null;
+		flightPathData.value = null;
+		flightPathDataExport.value = null;
+		flightPathInput.value = null;
+		flightPathOutput.value = '';
 
-		setNotify(correlationIdI, 'messages.reset');
+		buttons.value.process.disabled = true;
 	}
 
 	watch(() => flightProcessor.value,
@@ -416,11 +459,18 @@ export function useFlightPathBaseComponent(props, context) {
 			if (!value)
 				return;
 
+			setErrorMessage(null);
+			
 			const correlationIdI = correlationId();
 			flightPathStyleLoad(correlationIdI, value);
 
 			const processor = serviceFlightPath.serviceProcessors.find(l => l.id === value);
 			flightMeasurementUnitsLoad(correlationIdI, processor);
+
+			if (flightPathInput.value) {
+				const data = Papa.parse(flightPathInput.value.trim());
+				checkDataForProcessor(correlationIdI, data);
+			}
 		}
 	);
 

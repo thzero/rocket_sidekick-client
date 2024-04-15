@@ -1,3 +1,4 @@
+import AppConstants from '@/constants';
 
 import LibraryClientUtility from '@thzero/library_client/utility/index';
 
@@ -18,25 +19,69 @@ class FeatherweightFlightPathProcessorService extends FlightPathProcessorService
 		}
 	}
 
+	_check(correlationId, input) {
+		this._enforceNotNull('FeatherweightFlightPathProcessorService', '_check', input, 'input', correlationId);
+
+		try {
+			if (!input.data || input.data.length <= 0 || input.data[0].length <= 0)
+				return this._error('FeatherweightFlightPathProcessorService', '_check', 'Featherweight BlueRaven file is without headers', null, AppConstants.FlightPath.Errors.WithoutHeaders, null, correlationId);
+
+			const colAltitude = this.columnIndexOf('V');
+			const colLat = this.columnIndexOf('H');
+			const colLong = this.columnIndexOf('I');
+			const colHVert = this.columnIndexOf('K');
+			const colVVert = this.columnIndexOf('L');
+			if (
+				input.data[0][colAltitude] === 'Alt AGL (ft)' && 
+				input.data[0][colLat] === 'TRACKER Lat' && 
+				input.data[0][colLong] === 'TRACKER Lon' && 
+				input.data[0][colHVert] === 'HORZV' && 
+				input.data[0][colVVert] === 'VERTV'
+			)
+				return this._successResponse({
+					colAltitude: colAltitude,
+					colLat: colLat,
+					colLong: colLong,
+					colHVert: colHVert,
+					colVVert: colVVert,
+				}, correlationId);
+
+			return this._error('FeatherweightFlightPathProcessorService', '_check', 'Non Featherweight BlueRaven file detected', null, AppConstants.FlightPath.Errors.NonBR, null, correlationId);
+		}
+		catch (err) {
+			return this._error('FeatherweightFlightPathProcessorService', '_check', 'Non Featherweight BlueRaven file detected', null, AppConstants.FlightPath.Errors.NonIFIP, null, correlationId);
+		}
+	}
+
 	_processData(correlationId, input) {
 		this._enforceNotNull('FeatherweightFlightPathProcessorService', '_processData', input, 'input', correlationId);
 
-		if (!input.data || input.data.length <= 0 || input.data[0].length <= 0)
-			return this._error('FeatherweightFlightPathProcessorService', '_processData', 'Unknown Featherweight BlueRaven file is without headers', null, null, null, correlationId);
+		// if (!input.data || input.data.length <= 0 || input.data[0].length <= 0)
+		// 	return this._error('FeatherweightFlightPathProcessorService', '_processData', 'Unknown Featherweight BlueRaven file is without headers', null, null, null, correlationId);
 
-		const colAltitude = this.columnIndexOf('V');
-		const colLat = this.columnIndexOf('H');
-		const colLong = this.columnIndexOf('I');
-		const colHVert = this.columnIndexOf('K');
-		const colVVert = this.columnIndexOf('L');
-		if (
-			input.data[0][colAltitude] === 'Alt AGL (ft)' && 
-			input.data[0][colLat] === 'TRACKER Lat' && 
-			input.data[0][colLong] === 'TRACKER Lon' && 
-			input.data[0][colHVert] === 'HORZV' && 
-			input.data[0][colVVert] === 'VERTV'
-		)
-			return this._error('FeatherweightFlightPathProcessorService', '_processData', 'Unknown Featherweight BlueRaven file detected', null, null, null, correlationId);
+		// const colAltitude = this.columnIndexOf('V');
+		// const colLat = this.columnIndexOf('H');
+		// const colLong = this.columnIndexOf('I');
+		// const colHVert = this.columnIndexOf('K');
+		// const colVVert = this.columnIndexOf('L');
+		// if (
+		// 	input.data[0][colAltitude] === 'Alt AGL (ft)' && 
+		// 	input.data[0][colLat] === 'TRACKER Lat' && 
+		// 	input.data[0][colLong] === 'TRACKER Lon' && 
+		// 	input.data[0][colHVert] === 'HORZV' && 
+		// 	input.data[0][colVVert] === 'VERTV'
+		// )
+		// 	return this._error('FeatherweightFlightPathProcessorService', '_processData', 'Unknown Featherweight BlueRaven file detected', null, null, null, correlationId);
+
+		const checkResponse = this._check(correlationId, input);
+		if (this._hasFailed(checkResponse))
+			return checkResponse;
+
+		// const colAltitude = testResponse.colAltitude;
+		// const colLat = testResponse.colLat;
+		// const colLong = testResponse.colLong;
+		// const colHVert = testResponse.colHVert;
+		const colVVert = testResponse.colVVert;
 
 		input.data.shift();
 

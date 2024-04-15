@@ -1,6 +1,19 @@
 const Constants = {
 	FlightInfo: {
+		Errors: {
+			NonQuantum: 'nonQuantum',
+			NoProcessor: 'noProcessor',
+			WithoutHeaders: 'withoutHeaders'
+		},
 		Resolution: 1024
+	},
+	FlightPath: {
+		Errors: {
+			NonBR: 'nonBR',
+			NonIFIP: 'nonIFIP',
+			NoProcessor: 'noProcessor',
+			WithoutHeaders: 'withoutHeaders'
+		}
 	},
 	InjectorKeys: {
 		SERVICE_DOWNLOAD: 'serviceDownload',

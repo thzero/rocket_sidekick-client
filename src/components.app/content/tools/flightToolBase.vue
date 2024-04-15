@@ -145,7 +145,7 @@ export function useFlightToolsBaseComponent(props, context, options) {
 	const flightDataReset = (correlationId) => {
 		flightDataDate.value = null;
 		flightDataLocation.value = null;
-		flightPathProcessor.value = null;
+		flightProcessor.value = null;
 	};
 	const flightDataSave = (correlationId) => {
 		// serviceStore.dispatcher.setFlightDate(correlationIdI, flightDataDate.value);

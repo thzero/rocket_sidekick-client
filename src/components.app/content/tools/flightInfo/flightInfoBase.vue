@@ -194,6 +194,22 @@ export function useFlightInfoBaseComponent(props, context) {
 		return processor.markup;
 	});
 
+	const checkDataForProcessor = (correlationId, data) => {
+		const response = serviceFlightInfo.check(correlationId, data, flightProcessor.value);
+			if (hasFailed(response)) {
+				resetAdditionalInput2(correlationId);
+
+				let errors = [];
+				for(let item of response.errors) 
+					errors.push(LibraryClientUtility.$trans.t(`errors.content.tools.flightInfo.${item.code}`));
+				setErrorMessage(errors.join('<br>'));
+
+				return response;
+			}
+
+			setErrorMessage(null);
+			return success(correlationId);
+	};
 	const checkFlightInfoDataTypeUse = () => {
 		flightInfoDataTypeUseDisabled.value = true;
 		if (flightInfoDataTypeActual.value  && flightInfoDataTypeFiltered.value )
@@ -216,7 +232,20 @@ export function useFlightInfoBaseComponent(props, context) {
 		flightInfoStyleReset(correlationId(), false);
 	};
 	const dropOutput = (value) => {
-		flightInfoInput.value = value;
+		const correlationIdI = correlationId();
+
+		flightInfoInput.value = null;
+		setErrorMessage(null);
+		
+		if (value) {
+			const data = Papa.parse(value.trim());
+			const response = checkDataForProcessor(correlationIdI, data);
+			if (hasFailed(response))
+				return response;
+			
+			flightInfoInput.value = value.trim();
+			return success(correlationIdI);
+		}
 	};
 	const flightInfoInputChange = () => {
 		document.getElementById('top').scrollIntoView({behavior: 'smooth'});
@@ -501,19 +530,23 @@ export function useFlightInfoBaseComponent(props, context) {
 	};
 	const resetAdditionalInput = () => {
 		const correlationIdI = correlationId();
-		reset(correlationIdI);
-		flightDataReset(correlationIdI);
-		flightMeasurementUnitsReset(correlationIdI);
+		resetAdditionalInput2(correlationId);
+		flightProcessor.value = null;
+
+		setNotify(correlationIdI, 'messages.reset');
+	};
+	const resetAdditionalInput2 = (correlationId) => {
+		reset(correlationId);
+		flightDataReset(correlationId);
+		flightMeasurementUnitsReset(correlationId);
 
 		flightInfoDataTypeActual.value = false;
 		flightInfoDataTypeFiltered.value = true;
 		flightInfoDataTypeUse.value = true;
 		flightInfoDataTypeUseDisabled.value = false;
 		flightInfoInput.value = null;
-		flightProcessor.value = null;
+		
 		buttons.value.process.disabled = true;
-
-		setNotify(correlationIdI, 'messages.reset');
 	};
 
 	watch(() => flightInfoDataTypeActual.value,
@@ -536,6 +569,11 @@ export function useFlightInfoBaseComponent(props, context) {
 
 			const processor = serviceFlightInfo.serviceProcessors.find(l => l.id === value);
 			flightMeasurementUnitsLoad(correlationIdI, processor);
+
+			if (flightInfoInput.value) {
+				const data = Papa.parse(flightInfoInput.value.trim());
+				checkDataForProcessor(correlationIdI, data);
+			}
 		}
 	);
 
