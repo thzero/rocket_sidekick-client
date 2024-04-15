@@ -30,7 +30,6 @@ export function useFlightInfoDataBaseComponent(props, context, options) {
 		contentTitle,
 		errors,
 		errorMessage,
-		errorTimer,
 		hasAttribution,
 		notifyColor,
 		notifyMessage,
@@ -44,8 +43,8 @@ export function useFlightInfoDataBaseComponent(props, context, options) {
 		initCalculationResults,
 		resetAdditional,
 		setErrorMessage,
-		setErrorTimer,
-		setNotify
+		setNotify,
+		setSuccessMessage
 	} = useToolsBaseComponent(props, context, options);
 	
 	const {
@@ -104,7 +103,6 @@ export function useFlightInfoDataBaseComponent(props, context, options) {
 		contentTitle,
 		errors,
 		errorMessage,
-		errorTimer,
 		hasAttribution,
 		notifyColor,
 		notifyMessage,
@@ -118,8 +116,8 @@ export function useFlightInfoDataBaseComponent(props, context, options) {
 		initCalculationResults,
 		resetAdditional,
 		setErrorMessage,
-		setErrorTimer,
 		setNotify,
+		setSuccessMessage,
 		dateFormat,
 		dateFormatMask,
 		formatNumber,

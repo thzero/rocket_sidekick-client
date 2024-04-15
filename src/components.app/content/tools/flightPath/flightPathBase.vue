@@ -38,7 +38,6 @@ export function useFlightPathBaseComponent(props, context) {
 		contentTitle,
 		errors,
 		errorMessage,
-		errorTimer,
 		hasAttribution,
 		notifyColor,
 		notifyMessage,
@@ -52,8 +51,8 @@ export function useFlightPathBaseComponent(props, context) {
 		initCalculationResults,
 		resetAdditional,
 		setErrorMessage,
-		setErrorTimer,
 		setNotify,
+		setSuccessMessage,
 		flightDataDate,
 		flightDataLocation,
 		flightDataTitle,
@@ -146,6 +145,7 @@ export function useFlightPathBaseComponent(props, context) {
 	const flightPathStylePinTouchdownColor = ref(null);
 	const flightPathStylePinTouchdownSelected = ref(true);
 	const panelInstructions = ref(['instructions']);
+	const successMessage = ref(null);
 	const templateMain = ref(serviceFlightPath.templateMainDefault);
 	const templatePinLaunch = ref(serviceFlightPath.templatePinLaunchDefault);
 	const templatePinsAdditional = ref('');
@@ -173,12 +173,12 @@ export function useFlightPathBaseComponent(props, context) {
 				let errors = [];
 				for(let item of response.errors) 
 					errors.push(LibraryClientUtility.$trans.t(`errors.content.tools.flightPath.${item.code}`));
-				setErrorMessage(errors.join('<br>'));
+				setErrorMessage(correlationId, errors.join('<br>'));
 				
 				return response;
 			}
 
-			setErrorMessage(null);
+			setErrorMessage(correlationId, null);
 			return success(correlationId);
 	};
 	const clickFlightPathStylesReset = () => {
@@ -192,7 +192,7 @@ export function useFlightPathBaseComponent(props, context) {
 		flightPathData.value = null;
 		flightPathDataExport.value = null;
 		flightPathOutput.value = '';
-		setErrorMessage(null);
+		setErrorMessage(correlationId, null);
 		
 		if (value) {
 			const data = Papa.parse(value.trim());
@@ -406,7 +406,8 @@ export function useFlightPathBaseComponent(props, context) {
 			flightDataSave(correlationIdI);
 			flightMeasurementUnitsSave(correlationIdI, flightProcessor.value);
 
-			setNotify(correlationIdI, 'messages.processed');
+			// setNotify(correlationIdI, 'messages.processed');
+			setSuccessMessage(correlationIdI, LibraryClientUtility.$trans.t('messages.processed'));
 
 			panelInstructions.value = [];
 			buttons.value.export.disabled = false;
@@ -423,8 +424,7 @@ export function useFlightPathBaseComponent(props, context) {
 	};
 	const reset = (correlationId) => {
 		buttons.value.export.disabled = true;
-		setErrorMessage(null);
-		setErrorTimer(null);
+		setErrorMessage(correlationId, null);
 		flightPath.value = null;
 		flightPathData.value = null;
 		flightPathDataExport.value = null;
@@ -459,7 +459,7 @@ export function useFlightPathBaseComponent(props, context) {
 			if (!value)
 				return;
 
-			setErrorMessage(null);
+			setErrorMessage(correlationId, null);
 			
 			const correlationIdI = correlationId();
 			flightPathStyleLoad(correlationIdI, value);
@@ -495,7 +495,6 @@ export function useFlightPathBaseComponent(props, context) {
 		contentTitle,
 		errors,
 		errorMessage,
-		errorTimer,
 		hasAttribution,
 		notifyColor,
 		notifyMessage,
@@ -509,8 +508,8 @@ export function useFlightPathBaseComponent(props, context) {
 		initCalculationResults,
 		resetAdditional,
 		setErrorMessage,
-		setErrorTimer,
 		setNotify,
+		setSuccessMessage,
 		flightDataDate,
 		flightDataLocation,
 		flightDataTitle,
