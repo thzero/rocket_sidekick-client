@@ -15,11 +15,7 @@ Tools
     https://www.translatorscafe.com/unit-converter/en-US/calculator/rocket-max-altitude/
 
     
-    Flight Path/Info
-        when file is loaded, try and detect and change the flight processor...
-
     Flight Path
-        when wrong processor, or invalid file, need to show on UI better....
         Track previous, see about detecting spikes
             https://www.npmjs.com/package/kalman-filter?
 
