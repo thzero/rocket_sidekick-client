@@ -16,6 +16,7 @@ import flightPathOutputToolsService from '@/service.app/tools/flightPath/output/
 import flightPathOutputKmlToolsService from '@/service.app/tools/flightPath/output/kml';
 import flightPathOutputTemplateToolsService from '@/service.app/tools/flightPath/output/template/index';
 import flightPathOutputTemplateHandlebarsToolsService from '@/service.app/tools/flightPath/output/template/handlebars';
+import flightPathProcessorFilterToolsService from '@/service.app/tools/flightPath/processors/filter/simple';
 import flightPathProcessorToolsService from '@/service.app/tools/flightPath/index';
 import flightPathProcessorFeatherweightToolsServiceBR from '@/service.app/tools/flightPath/processors/br/featherweight';
 import flightPathProcessorFeatherweightToolsServicIFIP from '@/service.app/tools/flightPath/processors/ifip/featherweight';
@@ -38,6 +39,7 @@ class AppServiceBoot extends BaseServiceBoot {
 		this._injectService(AppConstants.InjectorKeys.SERVICE_TOOLS_FLIGHT_PATH_OUTPUT_TEMPLATE, new flightPathOutputTemplateToolsService());
 		this._injectService(AppConstants.InjectorKeys.SERVICE_TOOLS_FLIGHT_PATH_OUTPUT_TEMPLATE_HANDLEBARS, new flightPathOutputTemplateHandlebarsToolsService());
 		this._injectService(AppConstants.InjectorKeys.SERVICE_TOOLS_FLIGHT_PATH_PROCESSOR, new flightPathProcessorToolsService());
+		this._injectService(AppConstants.InjectorKeys.SERVICE_TOOLS_FLIGHT_INFO_PROCESSOR_FILTER, new flightPathProcessorFilterToolsService());
 		this._injectService(AppConstants.InjectorKeys.SERVICE_TOOLS_FLIGHT_PATH_PROCESSOR_FEATHERWEIGHT_BR, new flightPathProcessorFeatherweightToolsServiceBR());
 		this._injectService(AppConstants.InjectorKeys.SERVICE_TOOLS_FLIGHT_PATH_PROCESSOR_FEATHERWEIGHT_IFIP, new flightPathProcessorFeatherweightToolsServicIFIP());
 

@@ -13,6 +13,7 @@ class FlightPathProcessorService extends ToolsService {
 
 		this._serviceFlightPathOutput = null;
 		this._serviceFlightPathOutputTemplate = null;
+		this._serviceFlightPathProcessorFilter = null;
 	}
 
 	async init(injector) {
@@ -20,6 +21,7 @@ class FlightPathProcessorService extends ToolsService {
 		
 		this._serviceFlightPathOutput = injector.getService(AppConstants.InjectorKeys.SERVICE_TOOLS_FLIGHT_PATH_OUTPUT_KML);
 		this._serviceFlightPathOutputTemplate = injector.getService(AppConstants.InjectorKeys.SERVICE_TOOLS_FLIGHT_PATH_OUTPUT_TEMPLATE_HANDLEBARS);
+		this._serviceFlightPathProcessorFilter = injector.getService(AppConstants.InjectorKeys.SERVICE_TOOLS_FLIGHT_INFO_PROCESSOR_FILTER);
 	}
 
 	get id() {
@@ -83,8 +85,6 @@ class FlightPathProcessorService extends ToolsService {
 		const flightPaths = [];
 		const flightPathsOutput = [];
 
-		const filter = new Filter();
-
 		const divisor = ConvertUtility.convert(
 			1, 
 			measurementUnits.measurementUnitsAltitudeId,
@@ -103,6 +103,8 @@ class FlightPathProcessorService extends ToolsService {
 			flight = {};
 			temp = value.data.shift(); // get first row...
 
+			this._serviceFlightPathProcessorFilter.initialize();
+
 			flight.maxAltitude = 0;
 			flight.maxVelocity = 0;
 			flight.launchCoords = `${temp.longitude},${temp.latitude}`;
@@ -112,7 +114,7 @@ class FlightPathProcessorService extends ToolsService {
 			while (temp) {
 				previous = temp;
 
-				filterResults = filter.filter({ lat: temp.latitude, long: temp.longitude });
+				filterResults = this._serviceFlightPathProcessorFilter.filter({ latitude: temp.latitude, longitude: temp.longitude, altitude: temp.altitude });
 				if (!filterResults.ignore) {
 					coords = `${temp.longitude},${temp.latitude},${this._round(temp.altitude * divisor)}`;
 
@@ -136,6 +138,8 @@ class FlightPathProcessorService extends ToolsService {
 				if (!temp)
 					flight.touchdownCoords = `${previous.longitude},${previous.latitude}`;
 			}
+
+			this._logger.debug('FlightPathProcessorService', 'process', 'filter.results', this._serviceFlightPathProcessorFilter.results, correlationId);
 
 			// flight.maxAltitude = this._convert(flight.maxAltitude)
 			// 	.from(AppCommonConstants.MeasurementUnits[measurementUnits.measurementUnitsId].altitude[measurementUnits.measurementUnitsAltitudeId])
@@ -181,18 +185,6 @@ class FlightPathProcessorService extends ToolsService {
 
 		results.flightPathsOutput = flightPathsOutput;
 		results.flightPaths = flightPaths;
-
-		console.log();
-		console.log();
-		console.log();
-		console.log(filter.results);
-		console.log(filter.results);
-		console.log(filter.results);
-		console.log(filter.results);
-		console.log(filter.results);
-		console.log();
-		console.log();
-		console.log();
 
 		// let coords;
 		// let path = [];
@@ -369,73 +361,6 @@ class FlightPath {
 		for (const [key, value] of Object.entries(this._flights))
 			this._flights[key] = value.sort(func);
 		// this._rows = this._rows.sort(func);
-	}
-}
-
-class Filter {
-	constructor() {
-		this._max = 10;
-		this._previous = null;
-
-		this.results = {
-			maxDistnace: 0,
-			count: 0,
-			total: 0
-		};
-	}
-
-	filter(data) {
-		try {
-			this.results.total++;
-
-			if (!this._previous)
-				return { ignore: false, distance: 0 };
-
-			// console.log();
-			// console.log(this._previous);
-			// console.log(data);
-			const distance = this._getDistanceFromLatLon(data.lat, data.long, this._previous.lat, this._previous.long);
-			if (distance > this.results.maxDistnace)
-			this.results.maxDistnace = distance;
-			// console.log(distance);
-			const delta = (distance > this._max);
-			if (delta)
-				this.results.count++;
-			// console.log(distance - this._max);
-			// console.log(delta);
-			return { ignore: delta, distance: distance };
-		}
-		finally {
-			this._previous = data;
-		}
-	}
-
-	// _getDistanceFromLatLon(lat1,lon1,lat2,lon2) {
-	// 	const R = 6371000; // Radius of the earth in m
-	// 	const dLat = this._deg2rad(lat2-lat1);
-	// 	const dLon = this._deg2rad(lon2-lon1); 
-	// 	const a = Math.sin(dLat/2) * Math.sin(dLat/2) +
-	// 		Math.cos(this._deg2rad(lat1)) * Math.cos(this._deg2rad(lat2)) * 
-	// 		Math.sin(dLon/2) * Math.sin(dLon/2); 
-	// 	const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)); 
-	// 	const d = R * c; // Distance in km
-	// 	return d;
-	//   }
-	_getDistanceFromLatLon(lat1, lon1, lat2, lon2) {
-		const r = 6371000; // m
-		const p = Math.PI / 180;
-
-		const a = 0.5 - 
-			Math.cos((lat2 - lat1) * p) / 2 + 
-			Math.cos(lat1 * p) * Math.cos(lat2 * p) *
-			(1 - Math.cos((lon2 - lon1) * p)) / 
-			2;
-
-		return 2 * r * Math.asin(Math.sqrt(a));
-	}
-	  
-	_deg2rad(deg) {
-		return deg * (Math.PI/180)
 	}
 }
 

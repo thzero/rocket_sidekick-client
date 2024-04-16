@@ -25,6 +25,7 @@ const Constants = {
 		SERVICE_TOOLS_FLIGHT_PATH_OUTPUT_TEMPLATE: 'serviceToolsFlightPathOutputTemplate',
 		SERVICE_TOOLS_FLIGHT_PATH_OUTPUT_TEMPLATE_HANDLEBARS: 'serviceToolsFlightPathOutputTemplateHandlebars',
 		SERVICE_TOOLS_FLIGHT_PATH_PROCESSOR: 'serviceToolsFlightPathProcessor',
+		SERVICE_TOOLS_FLIGHT_INFO_PROCESSOR_FILTER: 'serviceToolsFlightPathProcessorFilter',
 		SERVICE_TOOLS_FLIGHT_PATH_PROCESSOR_FEATHERWEIGHT_IFIP: 'serviceToolsFlightPathProcessorFeatherweightIFIP',
 		SERVICE_TOOLS_FLIGHT_PATH_PROCESSOR_FEATHERWEIGHT_BR: 'serviceToolsFlightPathProcessorFeatherweightBR',
 	},
