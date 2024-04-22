@@ -57,15 +57,6 @@
 											/>
 										</v-col>
 										<v-col cols="12">
-											<VtTextFieldWithValidation
-												ref="flightDataLocationRef"
-												v-model="flightDataLocation"
-												vid="flightDataLocation"
-												:validation="validation"
-												:label="$t('forms.content.tools.flightInfo.location')"
-											/>
-										</v-col>
-										<v-col cols="12">
 											<VtDateTimePickerField
 												ref="flightDataDateRef"
 												v-model="flightDataDate"
@@ -75,14 +66,102 @@
 											/>
 										</v-col>
 										<v-col cols="12">
-											<VtSelectWithValidation
-												ref="flightProcessorRef"
-												v-model="flightProcessor"
-												vid="flightProcessor"
-												:items="flightProcessors"
+											<VtTextFieldWithValidation
+												ref="flightDataLocationRef"
+												v-model="flightDataLocation"
+												vid="flightDataLocation"
 												:validation="validation"
-												:label="$t('forms.content.tools.flightInfo.processors.title')"
+												:label="$t('forms.content.tools.flightInfo.location')"
 											/>
+										</v-col>
+										<v-col cols="12">
+											<v-row
+												dense
+												nougtters
+											>
+												<v-col
+													cols="6" lg="12"
+												>
+														<VtSelectWithValidation
+															ref="flightProcessorRef"
+															v-model="flightProcessor"
+															vid="flightProcessor"
+															:items="flightProcessors"
+															:validation="validation"
+															:label="$t('forms.content.tools.flightInfo.processors.title')"
+														/>
+												</v-col>
+												<v-col
+													v-if="$vuetify.display.mdAndDown"
+													cols="6"
+												>
+													<table>
+														<tr>
+															<td>
+																<span
+																	:class="!flightInfoDataTypeActual ? 'disabled' : ''"
+																>
+																	{{ $t('forms.content.tools.flightInfo.actual') }}
+																</span>
+															</td>
+															<td style="width: 50px;">
+																<VtSwitchWithValidation
+																	ref="flightInfoDataTypeUseRef"
+																	v-model="flightInfoDataTypeUse"
+																	vid="flightInfoDataTypeUse"
+																	:validation="validation"
+																/>
+															</td>
+															<td>
+																<span
+																	:class="!flightInfoDataTypeFiltered ? 'disabled' : ''"
+																>
+																	{{ $t('forms.content.tools.flightInfo.filtered') }}
+																</span>
+															</td>
+														</tr>
+													</table>
+												</v-col>
+											</v-row>
+										</v-col>
+										<v-col cols="12">
+											<v-row dense>
+												<v-col cols="12">
+													<v-row 
+														v-if="$vuetify.display.lgAndUp"
+														dense 
+														no-gutters 
+														align="center"
+													>
+														<table>
+															<tr>
+																<td>
+																	<span
+																		:class="!flightInfoDataTypeActual ? 'disabled' : ''"
+																	>
+																		{{ $t('forms.content.tools.flightInfo.actual') }}
+																	</span>
+																</td>
+																<td style="width: 50px;">
+																	<VtSwitchWithValidation
+																		ref="flightInfoDataTypeUseRef"
+																		v-model="flightInfoDataTypeUse"
+																		vid="flightInfoDataTypeUse"
+																		:validation="validation"
+																	/>
+																</td>
+																<td>
+																	<span
+																		:class="!flightInfoDataTypeFiltered ? 'disabled' : ''"
+																	>
+																		{{ $t('forms.content.tools.flightInfo.filtered') }}
+																	</span>
+																</td>
+															</tr>
+														</table>
+													</v-row>
+												</v-col>
+											</v-row>
 										</v-col>
 										<v-col cols="12">
 											<v-card
@@ -183,36 +262,6 @@
 													</v-row>
 												</v-card-text>
 											</v-card>
-										</v-col>
-										<v-col cols="12">
-											<v-row dense>
-												<v-col cols="12">
-													<v-row dense no-gutters align="center" class="fill-height">
-														<v-col cols="4">
-															<span
-																:class="!flightInfoDataTypeActual ? 'disabled' : ''"
-															>
-																{{ $t('forms.content.tools.flightInfo.actual') }}
-															</span>
-														</v-col>
-														<v-col cols="4">
-															<VtSwitchWithValidation
-																ref="flightInfoDataTypeUseRef"
-																v-model="flightInfoDataTypeUse"
-																vid="flightInfoDataTypeUse"
-																:validation="validation"
-															/>
-														</v-col>
-														<v-col cols="4" class="align-center justify-center">
-															<span
-																:class="!flightInfoDataTypeFiltered ? 'disabled' : ''"
-															>
-																{{ $t('forms.content.tools.flightInfo.filtered') }}
-															</span>
-														</v-col>
-													</v-row>
-												</v-col>
-											</v-row>
 										</v-col>
 									</v-row>
 								</v-card-item>
