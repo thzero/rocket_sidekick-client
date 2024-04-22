@@ -58,21 +58,21 @@
 											/>
 										</v-col>
 										<v-col cols="12">
+											<VtDateTimePickerField
+												ref="flightDataDateRef"
+												v-model="flightDataDate"
+												vid="flightDataDate"
+												:validation="validation"
+												:label="$t('forms.content.tools.flightPath.date')"
+											/>
+										</v-col>
+										<v-col cols="12">
 											<VtTextFieldWithValidation
 												ref="flightDataLocationRef"
 												v-model="flightDataLocation"
 												vid="flightDataLocation"
 												:validation="validation"
 												:label="$t('forms.content.tools.flightPath.location')"
-											/>
-										</v-col>
-										<v-col cols="12">
-											<VtDateTimePickerFieldTemp
-												ref="flightDataDateRef"
-												v-model="flightDataDate"
-												vid="flightDataDate"
-												:validation="validation"
-												:label="$t('forms.content.tools.flightPath.date')"
 											/>
 										</v-col>
 										<v-col cols="6">
@@ -473,7 +473,7 @@ import DropFile from '@/components.app/content/tools/dropFile';
 import MeasurementUnitSelect2 from '@/components/content/MeasurementUnitSelect2';
 import VtCheckboxWithValidation from '@thzero/library_client_vue3_vuetify3/components/form/VtCheckboxWithValidation';
 import VtColorWithValidation from '@thzero/library_client_vue3_vuetify3/components/form/VtColorWithValidation';
-import VtDateTimePickerFieldTemp from '@thzero/library_client_vue3_vuetify3/components/form/VtDateTimePickerFieldTemp';
+import VtDateTimePickerField from '@thzero/library_client_vue3_vuetify3/components/form/VtDateTimePickerFieldTemp';
 import VtFormControl from '@thzero/library_client_vue3_vuetify3/components/form/VtFormControl';
 import VtMarkdown from '@thzero/library_client_vue3_vuetify3/components/markup/VtMarkdown';
 import VtNumberFieldWithValidation from '@thzero/library_client_vue3_vuetify3/components/form/VtNumberFieldWithValidation';
@@ -492,7 +492,7 @@ export default {
 		MeasurementUnitSelect2,
 		VtCheckboxWithValidation,
 		VtColorWithValidation,
-		VtDateTimePickerFieldTemp,
+		VtDateTimePickerField,
 		VtFormControl,
 		VtMarkdown,
 		VtNumberFieldWithValidation,
