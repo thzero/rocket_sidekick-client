@@ -1,5 +1,5 @@
 <template>
-	<div>
+	<ToolsLayout>
 		<ContentHeader
 			:value="contentTitle"
 		/>
@@ -452,14 +452,14 @@
 				</v-card>
 			</v-col>
 		</v-row>
-	</div>
+	</ToolsLayout>
 	<v-snackbar
 		v-model="notifySignal"
 		:color="notifyColor"
 		:timeout="notifyTimeout"
-    >
+	>
 		{{ notifyMessage }}
-    </v-snackbar>
+	</v-snackbar>
 </template>
 
 <script>
@@ -471,6 +471,7 @@ import ContentDescription from '@/components/content/Description';
 import ContentHeader from '@/components/content/Header';
 import DropFile from '@/components.app/content/tools/dropFile';
 import MeasurementUnitSelect2 from '@/components/content/MeasurementUnitSelect2';
+import ToolsLayout from '@/components/content/tools/Layout.vue';
 import VtCheckboxWithValidation from '@thzero/library_client_vue3_vuetify3/components/form/VtCheckboxWithValidation';
 import VtColorWithValidation from '@thzero/library_client_vue3_vuetify3/components/form/VtColorWithValidation';
 import VtDateTimePickerField from '@thzero/library_client_vue3_vuetify3/components/form/VtDateTimePickerFieldTemp';
@@ -490,6 +491,7 @@ export default {
 		ContentHeader,
 		DropFile,
 		MeasurementUnitSelect2,
+		ToolsLayout,
 		VtCheckboxWithValidation,
 		VtColorWithValidation,
 		VtDateTimePickerField,

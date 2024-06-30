@@ -1,5 +1,5 @@
 <template>
-	<div>
+	<ContentLayout>
 		<ContentHeader :value="contentTitle" />
 		<v-row dense>
 			<v-col cols="12">
@@ -186,7 +186,7 @@
 				</v-card>
 			</v-col>
 		</v-row>
-	</div>
+	</ContentLayout>
 </template>
 
 <script>
@@ -195,6 +195,7 @@ import { useHighPowerBaseComponent } from '@/components.app/content/info/highPow
 import AdditionalLinks from '@/components/content/info/AdditionalLinks';
 import ContentAttribution from '@/components/content/Attribution';
 import ContentHeader from '@/components/content/Header';
+import ContentLayout from '@/components/content/Layout';
 import LoadingOverlay from '@/components/LoadingOverlay';
 import VtMarkdown from '@thzero/library_client_vue3_vuetify3/components/markup/VtMarkdown';
 
@@ -204,6 +205,7 @@ export default {
 		AdditionalLinks,
 		ContentAttribution,
 		ContentHeader,
+		ContentLayout,
 		LoadingOverlay,
 		VtMarkdown
 	},
