@@ -24,17 +24,10 @@ const routes = [
 			{
 				path: '',
 				name: 'content_info_3dprinting',
-				component: () => import(/* webpackPrefetch: true */ /* webpackChunkName: "group-layouts" */ './layouts/ContentLayout.vue'),
-				children: [
-					{
-						path: '',
-						name: 'content_info_3dprinting',
-						component: () => import(/* webpackPrefetch: true */ /* webpackChunkName: "group-content-info" */ './components.app/content/info/3DPrinting.vue'),
-						meta: {
-							requiresAuth: false
-						}
-					}
-				]
+				component: () => import(/* webpackPrefetch: true */ /* webpackChunkName: "group-content-info" */ './components.app/content/info/3DPrinting.vue'),
+				meta: {
+					requiresAuth: false
+				}
 			}
 		]
 	},
@@ -45,17 +38,10 @@ const routes = [
 			{
 				path: '',
 				name: 'content_info_epoxy',
-				component: () => import(/* webpackPrefetch: true */ /* webpackChunkName: "group-layouts" */ './layouts/ContentLayout.vue'),
-				children: [
-					{
-						path: '',
-						name: 'content_info_epoxy',
-						component: () => import(/* webpackPrefetch: true */ /* webpackChunkName: "group-content-info" */ './components.app/content/info/Epoxy.vue'),
-						meta: {
-							requiresAuth: false
-						}
-					}
-				]
+				component: () => import(/* webpackPrefetch: true */ /* webpackChunkName: "group-content-info" */ './components.app/content/info/Epoxy.vue'),
+				meta: {
+					requiresAuth: false
+				}
 			}
 		]
 	},
@@ -66,17 +52,10 @@ const routes = [
 			{
 				path: '',
 				name: 'content_info_highPower',
-				component: () => import(/* webpackPrefetch: true */ /* webpackChunkName: "group-layouts" */ './layouts/ContentLayout.vue'),
-				children: [
-					{
-						path: '',
-						name: 'content_info_highPower',
-						component: () => import(/* webpackPrefetch: true */ /* webpackChunkName: "group-content-info" */ './components.app/content/info/HighPower.vue'),
-						meta: {
-							requiresAuth: false
-						}
-					}
-				]
+				component: () => import(/* webpackPrefetch: true */ /* webpackChunkName: "group-content-info" */ './components.app/content/info/HighPower.vue'),
+				meta: {
+					requiresAuth: false
+				}
 			}
 		]
 	},
@@ -87,17 +66,10 @@ const routes = [
 			{
 				path: '',
 				name: 'content_info_shear_pins',
-				component: () => import(/* webpackPrefetch: true */ /* webpackChunkName: "group-layouts" */ './layouts/ContentLayout.vue'),
-				children: [
-					{
-						path: '',
-						name: 'content_info_shear_pins',
-						component: () => import(/* webpackPrefetch: true */ /* webpackChunkName: "group-content-info" */ './components.app/content/info/ShearPins.vue'),
-						meta: {
-							requiresAuth: false
-						}
-					}
-				]
+				component: () => import(/* webpackPrefetch: true */ /* webpackChunkName: "group-content-info" */ './components.app/content/info/ShearPins.vue'),
+				meta: {
+					requiresAuth: false
+				}
 			}
 		]
 	},
@@ -108,17 +80,10 @@ const routes = [
 			{
 				path: '',
 				name: 'content_info',
-				component: () => import(/* webpackPrefetch: true */ /* webpackChunkName: "group-layouts" */ './layouts/ContentLayout.vue'),
-				children: [
-					{
-						path: '',
-						name: 'content_info',
-						component: () => import(/* webpackPrefetch: true */ /* webpackChunkName: "group-content-info" */ './components/content/info/InfoMarkup.vue'),
-						meta: {
-							requiresAuth: false
-						}
-					}
-				]
+				component: () => import(/* webpackPrefetch: true */ /* webpackChunkName: "group-content-info" */ './components/content/info/InfoMarkup.vue'),
+				meta: {
+					requiresAuth: false
+				}
 			}
 		]
 	},
@@ -129,17 +94,10 @@ const routes = [
 			{
 				path: '',
 				name: 'content_links',
-				component: () => import(/* webpackPrefetch: true */ /* webpackChunkName: "group-layouts" */ './layouts/ContentLayout.vue'),
-				children: [
-					{
-						path: '',
-						name: 'content_links',
-						component: () => import(/* webpackPrefetch: true */ /* webpackChunkName: "group-content-info" */ './components/content/Links.vue'),
-						meta: {
-							requiresAuth: false
-						}
-					}
-				]
+				component: () => import(/* webpackPrefetch: true */ /* webpackChunkName: "group-content-info" */ './components/content/Links.vue'),
+				meta: {
+					requiresAuth: false
+				}
 			}
 		]
 	},
@@ -150,17 +108,10 @@ const routes = [
 			{
 				path: '',
 				name: 'content_tools_flightInfo',
-				component: () => import(/* webpackPrefetch: true */ /* webpackChunkName: "group-layouts" */ './layouts/ToolsLayout.vue'),
-				children: [
-					{
-						path: '',
-						name: 'content_tools_flightInfo',
-						component: () => import(/* webpackPrefetch: true */ /* webpackChunkName: "group-content-tools" */ './components.app/content/tools/flightInfo/FlightInfo.vue'),
-						meta: {
-							requiresAuth: false
-						}
-					}
-				]
+				component: () => import(/* webpackPrefetch: true */ /* webpackChunkName: "group-content-tools" */ './components.app/content/tools/flightInfo/FlightInfo.vue'),
+				meta: {
+					requiresAuth: false
+				}
 			}
 		]
 	},
@@ -171,17 +122,10 @@ const routes = [
 			{
 				path: '',
 				name: 'content_tools_flightPath',
-				component: () => import(/* webpackPrefetch: true */ /* webpackChunkName: "group-layouts" */ './layouts/ToolsLayout.vue'),
-				children: [
-					{
-						path: '',
-						name: 'content_tools_flightPath',
-						component: () => import(/* webpackPrefetch: true */ /* webpackChunkName: "group-content-tools" */ './components.app/content/tools/flightPath/FlightPath.vue'),
-						meta: {
-							requiresAuth: false
-						}
-					}
-				]
+				component: () => import(/* webpackPrefetch: true */ /* webpackChunkName: "group-content-tools" */ './components.app/content/tools/flightPath/FlightPath.vue'),
+				meta: {
+					requiresAuth: false
+				}
 			}
 		]
 	},
@@ -192,17 +136,10 @@ const routes = [
 			{
 				path: '',
 				name: 'content_tools_foam',
-				component: () => import(/* webpackPrefetch: true */  /* webpackChunkName: "group-layouts" */'./layouts/ContentLayout.vue'),
-				children: [
-					{
-						path: '',
-						name: 'content_tools_foam',
-						component: () => import(/* webpackPrefetch: true */ /* webpackChunkName: "group-content-tools" */ './components.app/content/tools/Foam.vue'),
-						meta: {
-							requiresAuth: false
-						}
-					}
-				]
+				component: () => import(/* webpackPrefetch: true */ /* webpackChunkName: "group-content-tools" */ './components.app/content/tools/Foam.vue'),
+				meta: {
+					requiresAuth: false
+				}
 			}
 		]
 	},
@@ -213,17 +150,10 @@ const routes = [
 			{
 				path: '',
 				name: 'content_tools_parachuteSizing',
-				component: () => import(/* webpackPrefetch: true */ /* webpackChunkName: "group-layouts" */ './layouts/ContentLayout.vue'),
-				children: [
-					{
-						path: '',
-						name: 'content_tools_parachuteSizing',
-						component: () => import(/* webpackPrefetch: true */ /* webpackChunkName: "group-content-tools" */ './components/content/tools/ParachuteSizing.vue'),
-						meta: {
-							requiresAuth: false
-						}
-					}
-				]
+				component: () => import(/* webpackPrefetch: true */ /* webpackChunkName: "group-content-tools" */ './components/content/tools/ParachuteSizing.vue'),
+				meta: {
+					requiresAuth: false
+				}
 			}
 		]
 	},
@@ -234,17 +164,10 @@ const routes = [
 			{
 				path: '',
 				name: 'content_tools_thrust2Weight',
-				component: () => import(/* webpackPrefetch: true */ /* webpackChunkName: "group-layouts" */ './layouts/ContentLayout.vue'),
-				children: [
-					{
-						path: '',
-						name: 'content_tools_thrust2Weight',
-						component: () => import(/* webpackPrefetch: true */ /* webpackChunkName: "group-content-tools" */ './components/content/tools/Thrust2Weight.vue'),
-						meta: {
-							requiresAuth: false
-						}
-					}
-				]
+				component: () => import(/* webpackPrefetch: true */ /* webpackChunkName: "group-content-tools" */ './components/content/tools/Thrust2Weight.vue'),
+				meta: {
+					requiresAuth: false
+				}
 			}
 		]
 	},
@@ -255,17 +178,10 @@ const routes = [
 			{
 				path: '',
 				name: 'content_tools_weahtercocking',
-				component: () => import(/* webpackPrefetch: true */  /* webpackChunkName: "group-layouts" */'./layouts/ContentLayout.vue'),
-				children: [
-					{
-						path: '',
-						name: 'content_tools_weahtercocking',
-						component: () => import(/* webpackPrefetch: true */ /* webpackChunkName: "group-content-tools" */ './components/content/tools/Weathercocking.vue'),
-						meta: {
-							requiresAuth: false
-						}
-					}
-				]
+				component: () => import(/* webpackPrefetch: true */ /* webpackChunkName: "group-content-tools" */ './components/content/tools/Weathercocking.vue'),
+				meta: {
+					requiresAuth: false
+				}
 			}
 		]
 	},

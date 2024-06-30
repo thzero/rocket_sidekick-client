@@ -1,5 +1,5 @@
 <template>
-	<div>
+	<ToolsLayout>
 		<ContentHeader
 			:value="contentTitle"
 		/>
@@ -367,7 +367,7 @@
 				</v-card>
 			</v-col>
 		</v-row>
-	</div>
+	</ToolsLayout>
 </template>
 
 <script>
@@ -381,6 +381,7 @@ import ContentHeader from '@/components/content/Header';
 import MeasurementUnitSelect from '@/components/content/MeasurementUnitSelect.vue';
 import MeasurementUnitSelect2 from '@/components/content/MeasurementUnitSelect2';
 import MeasurementUnitsSelect from '@/components/content/MeasurementUnitsSelect';
+import ToolsLayout from '@/components/content/tools/Layout.vue';
 import VtFormControl from '@thzero/library_client_vue3_vuetify3/components/form/VtFormControl';
 import VtNumberFieldWithValidation from '@thzero/library_client_vue3_vuetify3/components/form/VtNumberFieldWithValidation';
 
@@ -394,6 +395,7 @@ export default {
 		MeasurementUnitSelect,
 		MeasurementUnitSelect2,
 		MeasurementUnitsSelect,
+		ToolsLayout,
 		VtFormControl,
 		VtNumberFieldWithValidation
 	},

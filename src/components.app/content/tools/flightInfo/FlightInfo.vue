@@ -1,5 +1,5 @@
 <template>
-	<div>
+	<ToolsLayout>
 		<ContentHeader
 			:value="contentTitle"
 		/>
@@ -590,7 +590,7 @@
 				</v-card>
 			</v-col>
 		</v-row>
-	</div>
+	</ToolsLayout>
 	<v-snackbar
 		v-model="notifySignal"
 		:color="notifyColor"
@@ -612,6 +612,7 @@ import ContentHeader from '@/components/content/Header';
 import ContentDescription from '@/components/content/Description';
 import DropFile from '@/components.app/content/tools/dropFile';
 import MeasurementUnitSelect2 from '@/components/content/MeasurementUnitSelect2';
+import ToolsLayout from '@/components/content/tools/Layout.vue';
 import VtColorWithValidation from '@thzero/library_client_vue3_vuetify3/components/form/VtColorWithValidation';
 import VtDateTimePickerField from '@thzero/library_client_vue3_vuetify3/components/form/VtDateTimePickerFieldTemp';
 import VtFormControl from '@thzero/library_client_vue3_vuetify3/components/form/VtFormControl';
@@ -630,6 +631,7 @@ export default {
 		FlightInfoData,
 		FlightInfoChart,
 		MeasurementUnitSelect2,
+		ToolsLayout,
 		VtColorWithValidation,
 		VtDateTimePickerField,
 		VtFormControl,
