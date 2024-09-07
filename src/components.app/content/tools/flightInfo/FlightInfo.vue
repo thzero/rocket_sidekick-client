@@ -96,44 +96,7 @@
 													cols="6"
 												>
 													<table>
-														<tr>
-															<td>
-																<span
-																	:class="!flightInfoDataTypeActual ? 'disabled' : ''"
-																>
-																	{{ $t('forms.content.tools.flightInfo.actual') }}
-																</span>
-															</td>
-															<td style="width: 50px;">
-																<VtSwitchWithValidation
-																	ref="flightInfoDataTypeUseRef"
-																	v-model="flightInfoDataTypeUse"
-																	vid="flightInfoDataTypeUse"
-																	:validation="validation"
-																/>
-															</td>
-															<td>
-																<span
-																	:class="!flightInfoDataTypeFiltered ? 'disabled' : ''"
-																>
-																	{{ $t('forms.content.tools.flightInfo.filtered') }}
-																</span>
-															</td>
-														</tr>
-													</table>
-												</v-col>
-											</v-row>
-										</v-col>
-										<v-col cols="12">
-											<v-row dense>
-												<v-col cols="12">
-													<v-row 
-														v-if="$vuetify.display.lgAndUp"
-														dense 
-														no-gutters 
-														align="center"
-													>
-														<table>
+														<tbody>
 															<tr>
 																<td>
 																	<span
@@ -158,6 +121,47 @@
 																	</span>
 																</td>
 															</tr>
+														</tbody>
+													</table>
+												</v-col>
+											</v-row>
+										</v-col>
+										<v-col cols="12">
+											<v-row dense>
+												<v-col cols="12">
+													<v-row 
+														v-if="$vuetify.display.lgAndUp"
+														dense 
+														no-gutters 
+														align="center"
+													>
+														<table>
+															<tbody>
+																<tr>
+																	<td>
+																		<span
+																			:class="!flightInfoDataTypeActual ? 'disabled' : ''"
+																		>
+																			{{ $t('forms.content.tools.flightInfo.actual') }}
+																		</span>
+																	</td>
+																	<td style="width: 50px;">
+																		<VtSwitchWithValidation
+																			ref="flightInfoDataTypeUseRef"
+																			v-model="flightInfoDataTypeUse"
+																			vid="flightInfoDataTypeUse"
+																			:validation="validation"
+																		/>
+																	</td>
+																	<td>
+																		<span
+																			:class="!flightInfoDataTypeFiltered ? 'disabled' : ''"
+																		>
+																			{{ $t('forms.content.tools.flightInfo.filtered') }}
+																		</span>
+																	</td>
+																</tr>
+															</tbody>
 														</table>
 													</v-row>
 												</v-col>
@@ -435,118 +439,124 @@
 			<v-col cols="12" lg="9" class="pl-4">
 				<div>
 					<table style="width: 100%;">
-						<tr>
-							<td style="white-space: nowrap;">
-								<v-chip
-									color="secondary"
+						<tbody>
+							<tr>
+								<td style="white-space: nowrap;">
+									<v-chip
+										color="secondary"
+									>
+										{{ $t('forms.content.tools.flightInfo.resolution')}}: {{ resolution }}
+									</v-chip>
+									<v-btn
+										class="ml-2"
+										size="small"
+										:color="buttonsForms.color.default"
+										@click="clickResolution(720)"
+									>
+										720
+									</v-btn>
+									<v-btn
+										class="ml-2"
+										size="small"
+										:color="buttonsForms.color.default"
+										@click="clickResolution(1080)"
+									>
+										1080
+									</v-btn>
+									<v-btn
+										class="ml-2"
+										size="small"
+										:color="buttonsForms.color.default"
+										@click="clickResolution(1440)"
+									>
+										1440
+									</v-btn>
+									<v-btn
+										class="ml-2"
+										size="small"
+										:color="buttonsForms.color.default"
+										@click="clickResolution(1920)"
+									>
+										1920
+									</v-btn>
+									<v-btn
+										class="ml-2"
+										size="small"
+										:color="buttonsForms.color.default"
+										@click="clickResolution(2048)"
+									>
+										2048
+									</v-btn>
+								</td>
+								<td
+									v-if="$vuetify.display.lgAndUp"
+									style="width: 100%;"
 								>
-									{{ $t('forms.content.tools.flightInfo.resolution')}}: {{ resolution }}
-								</v-chip>
-								<v-btn
-									class="ml-2"
-									size="small"
-									:color="buttonsForms.color.default"
-									@click="clickResolution(720)"
-								>
-									720
-								</v-btn>
-								<v-btn
-									class="ml-2"
-									size="small"
-									:color="buttonsForms.color.default"
-									@click="clickResolution(1080)"
-								>
-									1080
-								</v-btn>
-								<v-btn
-									class="ml-2"
-									size="small"
-									:color="buttonsForms.color.default"
-									@click="clickResolution(1440)"
-								>
-									1440
-								</v-btn>
-								<v-btn
-									class="ml-2"
-									size="small"
-									:color="buttonsForms.color.default"
-									@click="clickResolution(1920)"
-								>
-									1920
-								</v-btn>
-								<v-btn
-									class="ml-2"
-									size="small"
-									:color="buttonsForms.color.default"
-									@click="clickResolution(2048)"
-								>
-									2048
-								</v-btn>
-							</td>
-							<td
-								v-if="$vuetify.display.lgAndUp"
-								style="width: 100%;"
+									<table style="width: 100%;">
+										<tbody>
+											<tr>
+												<td style="width: 100%;">
+													<v-slider
+														v-model="resolution"
+														:min="720"
+														:max="2048"
+														step="1"
+														class="ml-4"
+														style="width: 100%;"
+														dense
+													/>
+												</td>
+												<td style="white-space: nowrap;">
+													<v-btn
+														class="ml-8 ml-4"
+														size="small"
+														:color="buttonsForms.color.default"
+														@click="clickResolution(this.resolution)"
+													>
+														{{ $t('forms.content.tools.flightInfo.set') }}
+													</v-btn>
+												</td>
+											</tr>
+										</tbody>
+									</table>
+								</td>
+							</tr>
+							<tr
+								v-if="$vuetify.display.mdAndDown"
 							>
-								<table style="width: 100%;">
-									<tr>
-										<td style="width: 100%;">
-											<v-slider
-												v-model="resolution"
-												:min="720"
-												:max="2048"
-												step="1"
-												class="ml-4"
-												style="width: 100%;"
-												dense
-											/>
-										</td>
-										<td style="white-space: nowrap;">
-											<v-btn
-												class="ml-8 ml-4"
-        										size="small"
-												:color="buttonsForms.color.default"
-												@click="clickResolution(this.resolution)"
-											>
-												{{ $t('forms.content.tools.flightInfo.set') }}
-											</v-btn>
-										</td>
-									</tr>
-								</table>
-							</td>
-						</tr>
-						<tr
-							v-if="$vuetify.display.mdAndDown"
-						>
-							<td
-								style="width: 100%;"
-							>
-								<table style="width: 100%;">
-									<tr>
-										<td style="width: 100%;">
-											<v-slider
-												v-model="resolution"
-												:min="720"
-												:max="2048"
-												step="1"
-												class="ml-4"
-												style="width: 100%;"
-												dense
-											/>
-										</td>
-										<td style="white-space: nowrap;">
-											<v-btn
-												class="ml-8 ml-4"
-        										size="small"
-												:color="buttonsForms.color.default"
-												@click="clickResolution(this.resolution)"
-											>
-												{{ $t('forms.content.tools.flightInfo.set') }}
-											</v-btn>
-										</td>
-									</tr>
-								</table>
-							</td>
-						</tr>
+								<td
+									style="width: 100%;"
+								>
+									<table style="width: 100%;">
+										<tbody>
+											<tr>
+												<td style="width: 100%;">
+													<v-slider
+														v-model="resolution"
+														:min="720"
+														:max="2048"
+														step="1"
+														class="ml-4"
+														style="width: 100%;"
+														dense
+													/>
+												</td>
+												<td style="white-space: nowrap;">
+													<v-btn
+														class="ml-8 ml-4"
+														size="small"
+														:color="buttonsForms.color.default"
+														@click="clickResolution(this.resolution)"
+													>
+														{{ $t('forms.content.tools.flightInfo.set') }}
+													</v-btn>
+												</td>
+											</tr>
+										</tbody>
+									</table>
+								</td>
+							</tr>
+						</tbody>
 					</table>
 				</div>
 				<table

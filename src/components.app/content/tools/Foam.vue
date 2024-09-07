@@ -19,256 +19,272 @@
 						<v-row dense>
 							<v-col cols="12" sm="6">
 								<table style="width: 100%">
-									<tr>
-										<td>
-											{{ $t('forms.content.tools.foam.inputUnits') }}
-										</td>
-										<!-- <td class="measurementUnitsMedium">
-											<MeasurementUnitsSelect
-												ref="lengthMeasurementUnitsIdRef"
-												v-model="lengthMeasurementUnitsId"
-												vid="lengthMeasurementUnitsId"
-												:validation="validation"
-												:label="$t('forms.settings.measurementUnits.title')"
-											/>
-										</td>
-										<td class="measurementUnitMedium">
-											<MeasurementUnitSelect
-												ref="lengthMeasurementUnitRef"
-												v-model="lengthMeasurementUnitId"
-												vid="lengthMeasurementUnitId"
-												:measurementUnitsId="lengthMeasurementUnitsId"
-												:measurementUnitsType="measurementUnitsLengthType"
-												:validation="validation"
-												:label="$t('forms.settings.measurementUnits.length')"
-											/>
-										</td> -->
-										<td class="measurementUnitMedium">
-											<MeasurementUnitSelect2
-												ref="lengthMeasurementUnitRef"
-												v-model="lengthMeasurementUnitId"
-												vid="lengthMeasurementUnitId"
-												:measurementUnitsType="measurementUnitsLengthType"
-												:validation="validation"
-												:label="$t('forms.settings.measurementUnits.length')"
-											/>
-										</td>
-									</tr>
+									<tbody>
+										<tr>
+											<td>
+												{{ $t('forms.content.tools.foam.inputUnits') }}
+											</td>
+											<!-- <td class="measurementUnitsMedium">
+												<MeasurementUnitsSelect
+													ref="lengthMeasurementUnitsIdRef"
+													v-model="lengthMeasurementUnitsId"
+													vid="lengthMeasurementUnitsId"
+													:validation="validation"
+													:label="$t('forms.settings.measurementUnits.title')"
+												/>
+											</td>
+											<td class="measurementUnitMedium">
+												<MeasurementUnitSelect
+													ref="lengthMeasurementUnitRef"
+													v-model="lengthMeasurementUnitId"
+													vid="lengthMeasurementUnitId"
+													:measurementUnitsId="lengthMeasurementUnitsId"
+													:measurementUnitsType="measurementUnitsLengthType"
+													:validation="validation"
+													:label="$t('forms.settings.measurementUnits.length')"
+												/>
+											</td> -->
+											<td class="measurementUnitMedium">
+												<MeasurementUnitSelect2
+													ref="lengthMeasurementUnitRef"
+													v-model="lengthMeasurementUnitId"
+													vid="lengthMeasurementUnitId"
+													:measurementUnitsType="measurementUnitsLengthType"
+													:validation="validation"
+													:label="$t('forms.settings.measurementUnits.length')"
+												/>
+											</td>
+										</tr>
+									</tbody>
 								</table>
 							</v-col>
 							<v-col cols="12" sm="6">
 								<table style="width: 100%">
-									<tr>
-										<td>
-											{{ $t('forms.content.tools.foam.outputUnits') }}
-										</td>
-										<!-- <td class="measurementUnitsMedium">
-											<MeasurementUnitsSelect
-												ref="fluidMeasurementUnitsIdRef"
-												v-model="fluidMeasurementUnitsId"
-												vid="fluidMeasurementUnitsId"
-												:validation="validation"
-												:label="$t('forms.settings.measurementUnits.title')"
-											/>
-										</td>
-										<td class="measurementUnitMedium">
-											<MeasurementUnitSelect
-												ref="fluidMeasurementUnitIdRef"
-												v-model="fluidMeasurementUnitId"
-												vid="fluidMeasurementUnitId"
-												:measurementUnitsId="fluidMeasurementUnitsId"
-												:measurementUnitsType="measurementUnitsFluidType"
-												:validation="validation"
-												:label="$t('forms.settings.measurementUnits.fluid')"
-											/>
-										</td> -->
-										<td class="measurementUnitLong">
-											<measurement-unit-select-2
-												ref="fluidMeasurementUnitIdRef"
-												v-model="fluidMeasurementUnitId"
-												vid="fluidMeasurementUnitId"
-												:measurementUnitsType="measurementUnitsFluidType"
-												:validation="validation"
-												:label="$t('forms.settings.measurementUnits.fluid')"
-											/>
-										</td>
-									</tr>
+									<tbody>
+										<tr>
+											<td>
+												{{ $t('forms.content.tools.foam.outputUnits') }}
+											</td>
+											<!-- <td class="measurementUnitsMedium">
+												<MeasurementUnitsSelect
+													ref="fluidMeasurementUnitsIdRef"
+													v-model="fluidMeasurementUnitsId"
+													vid="fluidMeasurementUnitsId"
+													:validation="validation"
+													:label="$t('forms.settings.measurementUnits.title')"
+												/>
+											</td>
+											<td class="measurementUnitMedium">
+												<MeasurementUnitSelect
+													ref="fluidMeasurementUnitIdRef"
+													v-model="fluidMeasurementUnitId"
+													vid="fluidMeasurementUnitId"
+													:measurementUnitsId="fluidMeasurementUnitsId"
+													:measurementUnitsType="measurementUnitsFluidType"
+													:validation="validation"
+													:label="$t('forms.settings.measurementUnits.fluid')"
+												/>
+											</td> -->
+											<td class="measurementUnitLong">
+												<measurement-unit-select-2
+													ref="fluidMeasurementUnitIdRef"
+													v-model="fluidMeasurementUnitId"
+													vid="fluidMeasurementUnitId"
+													:measurementUnitsType="measurementUnitsFluidType"
+													:validation="validation"
+													:label="$t('forms.settings.measurementUnits.fluid')"
+												/>
+											</td>
+										</tr>
+									</tbody>
 								</table>
 							</v-col>
 						</v-row>
 						<v-row dense>
 							<!-- <v-col cols="12" sm="6" >
 								<table style="width: 100%">
-									<tr>
-										<td>
-											<VtNumberFieldWithValidation
-												ref="bodyTubeIDRef"
-												v-model="bodyTubeID"
-												vid="bodyTubeID"
-												:validation="validation"
-												:label="$t('forms.content.tools.foam.bodyTubeID')"
-											/>
-										</td>
-										<td class="measurementUnitsMedium">
-											<MeasurementUnitsSelect
-												ref="lengthMeasurementUnitsIdRef"
-												v-model="lengthMeasurementUnitsId"
-												vid="lengthMeasurementUnitsId"
-												:validation="validation"
-												:label="$t('forms.settings.measurementUnits.title')"
-											/>
-										</td>
-										<td class="measurementUnitMedium">
-											<MeasurementUnitSelect
-												ref="lengthMeasurementUnitRef"
-												v-model="lengthMeasurementUnitId"
-												vid="lengthMeasurementUnitId"
-												:measurementUnitsId="lengthMeasurementUnitsId"
-												:measurementUnitsType="measurementUnitsLengthType"
-												:validation="validation"
-												:label="$t('forms.settings.measurementUnits.length')"
-											/>
-										</td>
-										<td class="measurementUnitMedium">
-											<MeasurementUnitSelect2
-												ref="lengthMeasurementUnitRef"
-												v-model="lengthMeasurementUnitId"
-												vid="lengthMeasurementUnitId"
-												:measurementUnitsType="measurementUnitsLengthType"
-												:validation="validation"
-												:label="$t('forms.settings.measurementUnits.length')"
-											/>
-										</td>
-									</tr>
+									<tbody>
+										<tr>
+											<td>
+												<VtNumberFieldWithValidation
+													ref="bodyTubeIDRef"
+													v-model="bodyTubeID"
+													vid="bodyTubeID"
+													:validation="validation"
+													:label="$t('forms.content.tools.foam.bodyTubeID')"
+												/>
+											</td>
+											<td class="measurementUnitsMedium">
+												<MeasurementUnitsSelect
+													ref="lengthMeasurementUnitsIdRef"
+													v-model="lengthMeasurementUnitsId"
+													vid="lengthMeasurementUnitsId"
+													:validation="validation"
+													:label="$t('forms.settings.measurementUnits.title')"
+												/>
+											</td>
+											<td class="measurementUnitMedium">
+												<MeasurementUnitSelect
+													ref="lengthMeasurementUnitRef"
+													v-model="lengthMeasurementUnitId"
+													vid="lengthMeasurementUnitId"
+													:measurementUnitsId="lengthMeasurementUnitsId"
+													:measurementUnitsType="measurementUnitsLengthType"
+													:validation="validation"
+													:label="$t('forms.settings.measurementUnits.length')"
+												/>
+											</td>
+											<td class="measurementUnitMedium">
+												<MeasurementUnitSelect2
+													ref="lengthMeasurementUnitRef"
+													v-model="lengthMeasurementUnitId"
+													vid="lengthMeasurementUnitId"
+													:measurementUnitsType="measurementUnitsLengthType"
+													:validation="validation"
+													:label="$t('forms.settings.measurementUnits.length')"
+												/>
+											</td>
+										</tr>
+									</tbody>
 								</table>
 							</v-col> -->
 							<v-col cols="12" sm="6">
 								<table style="width: 100%">
-									<tr>
-										<td>
-											<VtNumberFieldWithValidation
-												ref="bodyTubeIDRef"
-												v-model="bodyTubeID"
-												vid="bodyTubeID"
-												:validation="validation"
-												:label="$t('forms.content.tools.foam.bodyTubeID')"
-											/>
-										</td>
-										<td class="measurementUnitMedium">
-											<MeasurementUnitSelect2
-												ref="bodyTubeIDLengthMeasurementUnitIdRef"
-												v-model="bodyTubeIDLengthMeasurementUnitId"
-												vid="bodyTubeIDLengthMeasurementUnitId"
-												:measurementUnitsType="measurementUnitsLengthType"
-												:validation="validation"
-												:label="$t('forms.sfettings.measurementUnits.diameter')"
-											/>
-										</td>
-									</tr>
+									<tbody>
+										<tr>
+											<td>
+												<VtNumberFieldWithValidation
+													ref="bodyTubeIDRef"
+													v-model="bodyTubeID"
+													vid="bodyTubeID"
+													:validation="validation"
+													:label="$t('forms.content.tools.foam.bodyTubeID')"
+												/>
+											</td>
+											<td class="measurementUnitMedium">
+												<MeasurementUnitSelect2
+													ref="bodyTubeIDLengthMeasurementUnitIdRef"
+													v-model="bodyTubeIDLengthMeasurementUnitId"
+													vid="bodyTubeIDLengthMeasurementUnitId"
+													:measurementUnitsType="measurementUnitsLengthType"
+													:validation="validation"
+													:label="$t('forms.sfettings.measurementUnits.diameter')"
+												/>
+											</td>
+										</tr>
+									</tbody>
 								</table>
 							</v-col>
 							<v-col cols="12" sm="6">
 								<table style="width: 100%">
-									<tr>
-										<td>
-											<VtNumberFieldWithValidation
-												ref="motorTubeODRef"
-												v-model="motorTubeOD"
-												vid="motorTubeOD"
-												:validation="validation"
-												:label="$t('forms.content.tools.foam.motorTubeOD')"
-												:placeholder="$t('forms.content.tools.foam.motorTubeOD_hint')"
-											/>
-										</td>
-										<td class="measurementUnitMedium">
-											<MeasurementUnitSelect2
-												ref="motorTubeODLengthMeasurementUnitIdRef"
-												v-model="motorTubeODLengthMeasurementUnitId"
-												vid="motorTubeODLengthMeasurementUnitId"
-												:measurementUnitsType="measurementUnitsLengthType"
-												:validation="validation"
-												:label="$t('forms.settings.measurementUnits.diameter')"
-											/>
-										</td>
-									</tr>
+									<tbody>
+										<tr>
+											<td>
+												<VtNumberFieldWithValidation
+													ref="motorTubeODRef"
+													v-model="motorTubeOD"
+													vid="motorTubeOD"
+													:validation="validation"
+													:label="$t('forms.content.tools.foam.motorTubeOD')"
+													:placeholder="$t('forms.content.tools.foam.motorTubeOD_hint')"
+												/>
+											</td>
+											<td class="measurementUnitMedium">
+												<MeasurementUnitSelect2
+													ref="motorTubeODLengthMeasurementUnitIdRef"
+													v-model="motorTubeODLengthMeasurementUnitId"
+													vid="motorTubeODLengthMeasurementUnitId"
+													:measurementUnitsType="measurementUnitsLengthType"
+													:validation="validation"
+													:label="$t('forms.settings.measurementUnits.diameter')"
+												/>
+											</td>
+										</tr>
+									</tbody>
 								</table>
 							</v-col>
 							<v-col cols="12" sm="6">
 								<table style="width: 100%">
-									<tr>
-										<td>
-											<VtNumberFieldWithValidation
-												ref="finRootLengthRef"
-												v-model="finRootLength"
-												vid="finRootLength"
-												:validation="validation"
-												:label="$t('forms.content.tools.foam.finRootLength')"
-												:placeholder="$t('forms.content.tools.foam.finRootLength_hint')"
-											/>
-										</td>
-										<td class="measurementUnitMedium">
-											<MeasurementUnitSelect2
-												ref="finRootLengthMeasurementUnitIdRef"
-												v-model="finRootLengthMeasurementUnitId"
-												vid="finRootLengthMeasurementUnitId"
-												:measurementUnitsType="measurementUnitsLengthType"
-												:validation="validation"
-												:label="$t('forms.settings.measurementUnits.length')"
-											/>
-										</td>
-									</tr>
+									<tbody>
+										<tr>
+											<td>
+												<VtNumberFieldWithValidation
+													ref="finRootLengthRef"
+													v-model="finRootLength"
+													vid="finRootLength"
+													:validation="validation"
+													:label="$t('forms.content.tools.foam.finRootLength')"
+													:placeholder="$t('forms.content.tools.foam.finRootLength_hint')"
+												/>
+											</td>
+											<td class="measurementUnitMedium">
+												<MeasurementUnitSelect2
+													ref="finRootLengthMeasurementUnitIdRef"
+													v-model="finRootLengthMeasurementUnitId"
+													vid="finRootLengthMeasurementUnitId"
+													:measurementUnitsType="measurementUnitsLengthType"
+													:validation="validation"
+													:label="$t('forms.settings.measurementUnits.length')"
+												/>
+											</td>
+										</tr>
+									</tbody>
 								</table>
 							</v-col>
 							<v-col cols="12" sm="6">
 								<table style="width: 100%">
-									<tr>
-										<td>
-											<VtNumberFieldWithValidation
-												ref="finTabLengthRef"
-												v-model="finTabLength"
-												vid="finTabLength"
-												:validation="validation"
-												:label="$t('forms.content.tools.foam.finTabLength')"
-												:placeholder="$t('forms.content.tools.foam.finTabLength_hint')"
-											/>
-										</td>
-										<td class="measurementUnitMedium">
-											<MeasurementUnitSelect2
-												ref="finTabLengthMeasurementUnitIdRef"
-												v-model="finTabLengthMeasurementUnitId"
-												vid="finTabLengthMeasurementUnitId"
-												:measurementUnitsType="measurementUnitsLengthType"
-												:validation="validation"
-												:label="$t('forms.settings.measurementUnits.length')"
-											/>
-										</td>
-									</tr>
+									<tbody>
+										<tr>
+											<td>
+												<VtNumberFieldWithValidation
+													ref="finTabLengthRef"
+													v-model="finTabLength"
+													vid="finTabLength"
+													:validation="validation"
+													:label="$t('forms.content.tools.foam.finTabLength')"
+													:placeholder="$t('forms.content.tools.foam.finTabLength_hint')"
+												/>
+											</td>
+											<td class="measurementUnitMedium">
+												<MeasurementUnitSelect2
+													ref="finTabLengthMeasurementUnitIdRef"
+													v-model="finTabLengthMeasurementUnitId"
+													vid="finTabLengthMeasurementUnitId"
+													:measurementUnitsType="measurementUnitsLengthType"
+													:validation="validation"
+													:label="$t('forms.settings.measurementUnits.length')"
+												/>
+											</td>
+										</tr>
+									</tbody>
 								</table>
 							</v-col>
 							<v-col cols="12" sm="6">
 								<table style="width: 100%">
-									<tr>
-										<td>
-											<VtNumberFieldWithValidation
-												ref="finWidthRef"
-												v-model="finWidth"
-												vid="finWidth"
-												:validation="validation"
-												:label="$t('forms.content.tools.foam.finWidth')"
-												:placeholder="$t('forms.content.tools.foam.finWidth_hint')"
-											/>
-										</td>
-										<td class="measurementUnitMedium">
-											<MeasurementUnitSelect2
-												ref="finWidthLengthMeasurementUnitIdRef"
-												v-model="finWidthLengthMeasurementUnitId"
-												vid="finWidthLengthMeasurementUnitId"
-												:measurementUnitsType="measurementUnitsLengthType"
-												:validation="validation"
-												:label="$t('forms.settings.measurementUnits.width')"
-											/>
-										</td>
-									</tr>
+									<tbody>
+										<tr>
+											<td>
+												<VtNumberFieldWithValidation
+													ref="finWidthRef"
+													v-model="finWidth"
+													vid="finWidth"
+													:validation="validation"
+													:label="$t('forms.content.tools.foam.finWidth')"
+													:placeholder="$t('forms.content.tools.foam.finWidth_hint')"
+												/>
+											</td>
+											<td class="measurementUnitMedium">
+												<MeasurementUnitSelect2
+													ref="finWidthLengthMeasurementUnitIdRef"
+													v-model="finWidthLengthMeasurementUnitId"
+													vid="finWidthLengthMeasurementUnitId"
+													:measurementUnitsType="measurementUnitsLengthType"
+													:validation="validation"
+													:label="$t('forms.settings.measurementUnits.width')"
+												/>
+											</td>
+										</tr>
+									</tbody>
 								</table>
 							</v-col>
 							<v-col cols="6" >
