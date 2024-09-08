@@ -563,29 +563,33 @@
 					id="flight-info"
 					:style="'color: black; background-color: white; width: ' + resolution + 'px;'"
 				>
-					<tr><td colspan="2">
-						<v-progress-linear
-							v-if="downloadProgress"
-							indeterminate
-							height="10"
-							color="primary"
-						/>
-					</td></tr>
-					<tr>
-						<td>
-							<FlightInfoChart
-								ref="flightInfoChartRef"
-								:chart-data="flightInfoChartData"
-							/>
-						</td>
-						<td >
-							<FlightInfoData
-								id="flight-info"
-								ref="flightInfoRef"
-								v-model="flightInfo"
-							/>
-						</td>
-					</tr>
+					<tbody>
+						<tr>
+							<td colspan="2">
+								<v-progress-linear
+									v-if="downloadProgress"
+									indeterminate
+									height="10"
+									color="primary"
+								/>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<FlightInfoChart
+									ref="flightInfoChartRef"
+									:chart-data="flightInfoChartData"
+								/>
+							</td>
+							<td >
+								<FlightInfoData
+									id="flight-info"
+									ref="flightInfoRef"
+									v-model="flightInfo"
+								/>
+							</td>
+						</tr>
+					</tbody>
 				</table>
 			</v-col>
 		</v-row>
