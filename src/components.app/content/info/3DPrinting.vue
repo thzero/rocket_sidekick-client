@@ -33,15 +33,21 @@
 		>
 			<div class="d-flex fill-height justify-center align-center">
 				<table>
-					<tr><td>
-						<img :src="slideUrl(slide.url)" style="width: 600px" />
-					</td></tr>
-					<tr><td
-						v-if="slide.desc"
-						class="text-center"
-					>
-						{{ slide.desc }}
-					</td></tr>
+					<tbody>
+						<tr>
+							<td>
+								<img :src="slideUrl(slide.url)" style="width: 600px" />
+							</td>
+						</tr>
+						<tr>
+							<td
+							v-if="slide.desc"
+								class="text-center"
+							>
+								{{ slide.desc }}
+							</td>
+						</tr>	
+					</tbody>
 				</table>
 			</div>
 		</v-sheet>
