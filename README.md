@@ -89,7 +89,7 @@ Compiles the application for deployment to cloud provider.
 npm run build
 ```
 
-### Google Cloud Hosting
+## Google Cloud Hosting
 
 Login to Google Cloud hosting, select the same account that was setup for Firebase.
 
