@@ -8,13 +8,11 @@ A web application with some tools for rocketry.  The following features are avai
 
 * Social login authentication via Google
 
-## Project setup
+## Requirements
 
-The client application is a VueJS single page application.   It requires the companion server application (https://github.com/thzero/rocket_sidekick-server) installed and running first.  The server application provides the API for use by the SPA.
+RocketSidekick client requires the companion server application (https://github.com/thzero/rocket_sidekick-server) installed and running first.  The server application provides the API for use by the SPA.
 
-### Requirements
-
-#### Firebase
+### Firebase
 
 Google Firebase (https://firebase.google.com) provides the social based authentication; currently only Google social accounts are supported.
 
@@ -28,7 +26,27 @@ Google Firebase (https://firebase.google.com) provides the social based authenti
     * Click *Firebase SDK snippet*, select **Config*
     * Select the JSON object and store it for later use.
 
-#### Setup Config
+#### NPM Dependencies
+
+Install the NPM dependencies for the client.
+
+```
+npm install
+```
+
+## Project setup
+
+#### Submodules
+
+Install the submodule dependencies for the client.
+
+```
+git submodule add https://github.com/thzero/rocket_sidekick-common "src/common" 
+git submodule add https://github.com/thzero/library_client_vue3_components "src/library_vue" 
+git submodule add https://github.com/thzero/library_client_vue3_vuetify3_components "src/library_vue_vuetify" 
+```
+
+### Setup Config
 
 * Setup the configuration found in the config\development.json
   * Note that this is ignored in the .gitignore
@@ -49,23 +67,7 @@ Google Firebase (https://firebase.google.com) provides the social based authenti
 }
 ```
 
-#### NPM Dependencies
-
-Install the NPM dependencies for the client.
-
-```
-npm install
-```
-
-#### Submodules
-
-Install the submodule dependencies for the client.
-
-```
-git submodule add https://github.com/thzero/rocket_sidekick-common "src/common" 
-git submodule add https://github.com/thzero/library_client_vue3_components "src/library_vue" 
-git submodule add https://github.com/thzero/library_client_vue3_vuetify3_components "src/library_vue_vuetify" 
-```
+## Development
 
 ### Compiles and hot-reloads for development
 
@@ -75,6 +77,8 @@ Run the application locally using the VueJs development server; requires the ser
 npm run serve
 ```
 
+## Hosting
+
 ### Compiles and minifies for production
 
 Compiles the application for deployment to cloud provider.
@@ -83,7 +87,7 @@ Compiles the application for deployment to cloud provider.
 npm run build
 ```
 
-## Google Cloud Hosting
+### Google Cloud Hosting
 
 Login to Google Cloud hosting, select the same account that was setup for Firebase.
 
