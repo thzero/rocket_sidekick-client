@@ -1,5 +1,5 @@
-![GitHub package.json version](https://img.shields.io/github/package-json/v/thzero/rocket_sidekick_-client)
-![David](https://img.shields.io/david/thzero/rocket_sidekick_-client)
+![GitHub package.json version](https://img.shields.io/github/package-json/v/thzero/rocket_sidekick-client)
+![David](https://img.shields.io/david/thzero/rocket_sidekick-client)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 # RocketSidekick
@@ -26,25 +26,27 @@ Google Firebase (https://firebase.google.com) provides the social based authenti
     * Click *Firebase SDK snippet*, select **Config*
     * Select the JSON object and store it for later use.
 
+### Installation
+
+[![NPM](https://nodei.co/npm/@thzero/rocket_sidekick-client.png?compact=true)](https://npmjs.org/package/@thzero/rocket_sidekick-client)
+
 #### NPM Dependencies
 
-Install the NPM dependencies for the client.
+Install the NPM dependencies for the server.
 
 ```
 npm install
 ```
-
-## Project setup
 
 #### Submodules
 
 Install the submodule dependencies for the client.
 
 ```
-git submodule add https://github.com/thzero/rocket_sidekick-common "src/common" 
-git submodule add https://github.com/thzero/library_client_vue3_components "src/library_vue" 
-git submodule add https://github.com/thzero/library_client_vue3_vuetify3_components "src/library_vue_vuetify" 
+git submodule add https://github.com/thzero/rocket_sidekick-common "common"
 ```
+
+## Project setup
 
 ### Setup Config
 
