@@ -4,13 +4,17 @@
 
 # RocketSidekick
 
-A web application with some tools for rocketry.  The following features are available currently
+A web application with some tools for rocketry.  The client application is a VueJS single page application.  The following features are available currently
 
 * Social login authentication via Google
 
 ## Requirements
 
 RocketSidekick client requires the companion server application (https://github.com/thzero/rocket_sidekick-server) installed and running first.  The server application provides the API for use by the SPA.
+
+### NodeJs
+
+Requires [NodeJs ](https://nodejs.org) version 18+.
 
 ### Firebase
 
@@ -30,7 +34,7 @@ Google Firebase (https://firebase.google.com) provides the social based authenti
 
 [![NPM](https://nodei.co/npm/@thzero/rocket_sidekick-client.png?compact=true)](https://npmjs.org/package/@thzero/rocket_sidekick-client)
 
-#### NPM Dependencies
+### NPM Dependencies
 
 Install the NPM dependencies for the server.
 
@@ -38,7 +42,7 @@ Install the NPM dependencies for the server.
 npm install
 ```
 
-#### Submodules
+### Submodules
 
 Install the submodule dependencies for the client.
 
