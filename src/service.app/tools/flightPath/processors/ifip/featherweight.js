@@ -232,6 +232,7 @@ class FeatherweightFlightPathProcessorService extends FlightPathProcessorService
 				// data[7], // verticalH
 				// verticalV // verticalV
 				data[2], // time
+				data[5], // altitude AGL
 				0, // altitude ASL
 				data[5], // altitude AGL
 				data[3], // latitude
