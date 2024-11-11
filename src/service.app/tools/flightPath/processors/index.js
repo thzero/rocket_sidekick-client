@@ -292,7 +292,7 @@ class FlightPath {
 	// 	return this._rows;
 	// }
 
-	publish(correlationId, flightId, time, altitudeASL, altitudeAGL, latitude, longitude, velocityH, velocityV, apogee, noseOver, drogue, main, ground, index, tracker, flightStart, flightEnd) {
+	publish(correlationId, flightId, time, altitude, altitudeASL, altitudeAGL, latitude, longitude, velocityH, velocityV, apogee, noseOver, drogue, main, ground, index, tracker, flightStart, flightEnd) {
 		// this._rows.push({
 		this._flights[flightId] = this._flights[flightId] ?? {
 			tracker: null,
@@ -309,7 +309,7 @@ class FlightPath {
 
 		this._flights[flightId].data.push({
 			index: index,
-			altitude: LibraryClientUtility.convertNumber(altitudeASL) + LibraryClientUtility.convertNumber(altitudeAGL),
+			altitude: LibraryClientUtility.convertNumber(altitude),
 			altitudeAGL: LibraryClientUtility.convertNumber(altitudeAGL),
 			altitudeASL: LibraryClientUtility.convertNumber(altitudeASL),
 			latitude: LibraryClientUtility.convertNumber(latitude),

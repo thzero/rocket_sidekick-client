@@ -1,5 +1,3 @@
-import LibraryCommonUtility from '@thzero/library_common/utility/index';
-
 import FlightPathOutputService from './index';
 
 class KmlFlightPathOutputService extends FlightPathOutputService {

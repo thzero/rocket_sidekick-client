@@ -26,24 +26,28 @@ class FeatherweightFlightPathProcessorService extends FlightPathProcessorService
 			if (!input.data || input.data.length <= 0 || input.data[0].length <= 0)
 				return this._error('FeatherweightFlightPathProcessorService', '_check', 'Featherweight BlueRaven file is without headers', null, AppConstants.FlightPath.Errors.WithoutHeaders, null, correlationId);
 
-			const colAltitude = this.columnIndexOf('V');
-			const colLat = this.columnIndexOf('H');
-			const colLong = this.columnIndexOf('I');
-			const colHVert = this.columnIndexOf('K');
-			const colVVert = this.columnIndexOf('L');
+			const colAltitudeGL = this.columnIndexOf('Q');
+			const colAltitudeSL = this.columnIndexOf('C');
+			const colLat = this.columnIndexOf('D');
+			const colLong = this.columnIndexOf('E');
+			const colTime = this.columnIndexOf('B');
+			const colVelH = this.columnIndexOf('H');
+			const colVelV = this.columnIndexOf('I');
 			if (
-				input.data[0][colAltitude] === 'Alt AGL (ft)' && 
-				input.data[0][colLat] === 'TRACKER Lat' && 
-				input.data[0][colLong] === 'TRACKER Lon' && 
-				input.data[0][colHVert] === 'HORZV' && 
-				input.data[0][colVVert] === 'VERTV'
+				input.data[0][colAltitudeSL] === 'ALT' && 
+				input.data[0][colLat] === 'LAT' && 
+				input.data[0][colLong] === 'LON' && 
+				input.data[0][colVelH] === 'HORZV' && 
+				input.data[0][colVelV] === 'VERTV'
 			)
 				return this._successResponse({
-					colAltitude: colAltitude,
+					colAltitudeGL: colAltitudeGL,
+					colAltitudeSL: colAltitudeSL,
 					colLat: colLat,
 					colLong: colLong,
-					colHVert: colHVert,
-					colVVert: colVVert,
+					colTime: colTime,
+					colVelH: colVelH,
+					colVelV: colVelV,
 				}, correlationId);
 
 			return this._error('FeatherweightFlightPathProcessorService', '_check', 'Non Featherweight BlueRaven file detected', null, AppConstants.FlightPath.Errors.NonBR, null, correlationId);
@@ -62,14 +66,14 @@ class FeatherweightFlightPathProcessorService extends FlightPathProcessorService
 		// const colAltitude = this.columnIndexOf('V');
 		// const colLat = this.columnIndexOf('H');
 		// const colLong = this.columnIndexOf('I');
-		// const colHVert = this.columnIndexOf('K');
-		// const colVVert = this.columnIndexOf('L');
+		// const colVelH = this.columnIndexOf('K');
+		// const colVelV = this.columnIndexOf('L');
 		// if (
 		// 	input.data[0][colAltitude] === 'Alt AGL (ft)' && 
 		// 	input.data[0][colLat] === 'TRACKER Lat' && 
 		// 	input.data[0][colLong] === 'TRACKER Lon' && 
-		// 	input.data[0][colHVert] === 'HORZV' && 
-		// 	input.data[0][colVVert] === 'VERTV'
+		// 	input.data[0][colVelH] === 'HORZV' && 
+		// 	input.data[0][colVelV] === 'VERTV'
 		// )
 		// 	return this._error('FeatherweightFlightPathProcessorService', '_processData', 'Unknown Featherweight BlueRaven file detected', null, null, null, correlationId);
 
@@ -80,29 +84,30 @@ class FeatherweightFlightPathProcessorService extends FlightPathProcessorService
 		// const colAltitude = checkResponse.colAltitude;
 		// const colLat = checkResponse.colLat;
 		// const colLong = checkResponse.colLong;
-		// const colHVert = checkResponse.colHVert;
-		const colVVert = checkResponse.colVVert;
+		// const colVelH = checkResponse.colVelH;
+		const colVelV = checkResponse.results.colVelV;
 
 		input.data.shift();
 
 		const internalData = {};
-		let tracker = null;
-		let temp;
+		// let tracker = null;
+		// let temp;
 		let index = 0;
-		for (const data of input.data) {
-			temp = data[0].trim();
+		// for (const data of input.data) {
+		// 	temp = data[0].trim();
 
-			// For some reason the BlueRaven (3/25/2024) is dumping out the same set of data twice.
-			if (temp === 'TRACKER')
-				break;
+		// 	// For some reason the BlueRaven (3/25/2024) is dumping out the same set of data twice.
+		// 	if (temp === 'TRACKER')
+		// 		break;
 
-			if (tracker !== temp)
-				internalData[temp] = internalData[temp] ?? [];
+		// 	if (tracker !== temp)
+		// 		internalData[temp] = internalData[temp] ?? [];
 
-			data[data.length] = index++;
-			internalData[temp].push(data);
-			tracker = temp;
-		}
+		// 	data[data.length] = index++;
+		// 	internalData[temp].push(data);
+		// 	tracker = temp;
+		// }
+		internalData['tracker'] = input.data;
 
 		// how many consecutive 0s qualifies as a end of flight?
 		let consectutiveZeros = 0;
@@ -124,7 +129,7 @@ class FeatherweightFlightPathProcessorService extends FlightPathProcessorService
 
 			length = value.length;
 			for (const data of value) {
-				verticalV = LibraryClientUtility.convertNumber(data[colVVert]);
+				verticalV = LibraryClientUtility.convertNumber(data[colVelV]);
 				flightEnded = false;
 				flightStarted = false;
 				
@@ -157,7 +162,7 @@ class FeatherweightFlightPathProcessorService extends FlightPathProcessorService
 					flightDetected = false;
 					flightEnded = true;
 					consectutiveZeros = 0;
-					this._publishI(correlationId, flightId, data, verticalV, index, flightStarted, flightEnded);
+					this._publishI(correlationId, flightId, data, verticalV, flightStarted, flightEnded, checkResponse.results);
 					continue;
 				}
 				if (consectutiveZeros >= 1) {
@@ -173,18 +178,18 @@ class FeatherweightFlightPathProcessorService extends FlightPathProcessorService
 				}
 
 				if (index+1 === length) {
-					this._publishI(correlationId, flightId, data, verticalV, index, flightStarted, true);
+					this._publishI(correlationId, flightId, data, verticalV, flightStarted, true, checkResponse.results);
 					continue;
 				}
 				
-				this._publishI(correlationId, flightId, data, verticalV, index, flightStarted, flightEnded);
+				this._publishI(correlationId, flightId, data, verticalV, flightStarted, flightEnded, checkResponse.results);
 			}
 		}
 
 		return this._success(correlationId);
 	}
 
-	_publishI(correlationId, flightId, data, verticalV, index, flightStart, flightEnd) {
+	_publishI(correlationId, flightId, data, verticalV, flightStart, flightEnd, indexes) {
 		this._publish(
 			correlationId,
 			flightId,
@@ -194,12 +199,13 @@ class FeatherweightFlightPathProcessorService extends FlightPathProcessorService
 			// data[4], // longitude
 			// data[7], // verticalH
 			// verticalV // verticalV
-			data[this.columnIndexOf('C')], // time
-			data[this.columnIndexOf('F')], // altitude ASL
-			data[this.columnIndexOf('V')], // altitude AGL
-			data[this.columnIndexOf('G')], // latitude
-			data[this.columnIndexOf('H')], // longitude
-			data[this.columnIndexOf('K')], // verticalH
+			data[indexes.colTime], // time
+			data[indexes.colAltitudeGL], // altitude AGL
+			data[indexes.colAltitudeSL], // altitude ASL
+			data[indexes.colAltitudeGL], // altitude AGL
+			data[indexes.colLat], // latitude
+			data[indexes.colLong], // longitude
+			data[indexes.colVelH], // verticalH
 			verticalV, // verticalV
 			null,
 			null,
