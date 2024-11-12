@@ -49,21 +49,90 @@ class EggtimerFlightInfoProcessorService extends FlightInfoProcessorService {
 		const checkResponse = this._check(correlationId, input);
 		if (this._hasFailed(checkResponse))
 			return checkResponse;
+		
+		const colAltitude = input.data[0].findIndex(l => l === 'Alt');
+		const colAltitudeF = input.data[0].findIndex(l => l === 'FAlt');
+		const colApogee = input.data[0].findIndex(l => l === 'Apogee');
+		const colDrogue = input.data[0].findIndex(l => l === 'Drogue');
+		const colMain = input.data[0].findIndex(l => l === 'Main');
+		const colNoseOver = input.data[0].findIndex(l => l === 'N-O');
+		const colTime = input.data[0].findIndex(l => l === 'T');
+		const colVelocity = input.data[0].findIndex(l => l === 'Veloc');
+		const colVelocityF = input.data[0].findIndex(l => l === 'FVeloc');
+
+		let valid = true;
+		let errors = [];
+		// if (colAltitude === -1) {
+		// 	valid = false;
+		// 	errors.push('Altitude');
+		// }
+		valid &= this._checkField(correlationId, colAltitude, 'Altitude', errors);
+		// if (colAltitudeF === -1) {
+		// 	valid = false;
+		// 	errors.push('Altitude Filtered');
+		// }
+		valid &= this._checkField(correlationId, colAltitudeF, 'Altitude Filtered', errors);
+		// if (colApogee === -1) {
+		// 	valid = false;
+		// 	errors.push('Apogee');
+		// }
+		valid &= this._checkField(correlationId, colApogee, 'Apogee', errors);
+		// if (colDrogue === -1) {
+		// 	valid = false;
+		// 	errors.push('Drogue');
+		// }
+		valid &= this._checkField(correlationId, colDrogue, 'Drogue', errors);
+		// if (colMain === -1) {
+		// 	valid = false;
+		// 	errors.push('Main');
+		// }
+		valid &= this._checkField(correlationId, colMain, 'Main', errors);
+		// if (colNoseOver === -1) {
+		// 	valid = false;
+		// 	errors.push('Nose Over');
+		// }
+		valid &= this._checkField(correlationId, colNoseOver, 'Nose Over', errors);
+		// if (colTime === -1) {
+		// 	valid = false;
+		// 	errors.push('Timestamp');
+		// }
+		valid &= this._checkField(correlationId, colTime, 'Timestamp', errors);
+		// if (colVelocity === -1) {
+		// 	valid = false;
+		// 	errors.push('Velocity');
+		// }
+		valid &= this._checkField(correlationId, colVelocity, 'Velocity', errors);
+		// if (colVelocityF === -1) {
+		// 	valid = false;
+		// 	errors.push('Velocity Filtered');
+		// }
+		valid &= this._checkField(correlationId, colVelocityF, 'Velocity Filtered', errors);
+		if (!valid)
+			return this._error('EggtimerFlightInfoProcessorService', '_processInput', 'Non Eggtimer Quantum file detected', errors, AppConstants.FlightInfo.Errors.NonQuantum, null, correlationId);
 
 		input.data.shift();
 
 		for (const data of input.data) {
 			this._publish(
 				correlationId,
-				data[0], // time
-				data[1], // altitude
-				data[3], // altitudeF
-				data[2], // velocity
-				data[4], // velocityF
-				data[7], // apogee
-				data[8], // noseOver
-				data[9], // drogue
-				data[10], // main
+				// data[0], // time
+				// data[1], // altitude
+				// data[3], // altitudeF
+				// data[2], // velocity
+				// data[4], // velocityF
+				// data[7], // apogee
+				// data[8], // noseOver
+				// data[9], // drogue
+				// data[10], // main
+				data[colTime], // time
+				data[colAltitude], // altitude
+				data[colAltitudeF], // altitudeF
+				data[colVelocity], // velocity
+				data[colVelocityF], // velocityF
+				data[colApogee], // apogee
+				data[colNoseOver], // noseOver
+				data[colDrogue], // drogue
+				data[colMain], // main
 				data.length < 1 // ground
 			);
 		}

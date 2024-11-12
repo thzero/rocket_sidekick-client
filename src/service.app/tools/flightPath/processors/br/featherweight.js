@@ -26,34 +26,38 @@ class FeatherweightFlightPathProcessorService extends FlightPathProcessorService
 			if (!input.data || input.data.length <= 0 || input.data[0].length <= 0)
 				return this._error('FeatherweightFlightPathProcessorService', '_check', 'Featherweight BlueRaven file is without headers', null, AppConstants.FlightPath.Errors.WithoutHeaders, null, correlationId);
 
-			const colAltitudeGL = this.columnIndexOf('Q');
-			const colAltitudeSL = this.columnIndexOf('C');
-			const colLat = this.columnIndexOf('D');
-			const colLong = this.columnIndexOf('E');
-			const colTime = this.columnIndexOf('B');
-			const colVelH = this.columnIndexOf('H');
-			const colVelV = this.columnIndexOf('I');
-			if (
-				input.data[0][colAltitudeSL] === 'ALT' && 
-				input.data[0][colLat] === 'LAT' && 
-				input.data[0][colLong] === 'LON' && 
-				input.data[0][colVelH] === 'HORZV' && 
-				input.data[0][colVelV] === 'VERTV'
-			)
-				return this._successResponse({
-					colAltitudeGL: colAltitudeGL,
-					colAltitudeSL: colAltitudeSL,
-					colLat: colLat,
-					colLong: colLong,
-					colTime: colTime,
-					colVelH: colVelH,
-					colVelV: colVelV,
-				}, correlationId);
+			const colAltitudeGL = input.data[0].findIndex(l => l === 'Altitude AGL');
+			const colAltitudeSL = input.data[0].findIndex(l => l === 'ALT');
+			const colLatitude = input.data[0].findIndex(l => l === 'LAT');
+			const colLongitude = input.data[0].findIndex(l => l === 'LON');
+			const colTime = input.data[0].findIndex(l => l === 'UNIXTIME');
+			const colVelocityH = input.data[0].findIndex(l => l === 'HORZV');
+			const colVelocityV = input.data[0].findIndex(l => l === 'VERTV');
 
-			return this._error('FeatherweightFlightPathProcessorService', '_check', 'Non Featherweight BlueRaven file detected', null, AppConstants.FlightPath.Errors.NonBR, null, correlationId);
+			let valid = true;
+			let errors = [];
+			valid &= this._checkField(correlationId, colAltitudeGL, 'Altitude Ground Level', errors);
+			valid &= this._checkField(correlationId, colAltitudeSL, 'Altitude Sea Level', errors);
+			valid &= this._checkField(correlationId, colLatitude, 'Latitude', errors);
+			valid &= this._checkField(correlationId, colLongitude, 'Longitude', errors);
+			valid &= this._checkField(correlationId, colTime, 'Timestamp', errors);
+			valid &= this._checkField(correlationId, colVelocityH, 'Horizontal Velocity', errors);
+			valid &= this._checkField(correlationId, colVelocityV, 'Vertical Velocity', errors);
+			if (!valid)
+				return this._error('FeatherweightFlightPathProcessorService', '_check', 'Non Featherweight BlueRaven file detected', errors, AppConstants.FlightPath.Errors.NonBR, null, correlationId);
+		
+			return this._successResponse({
+				colAltitudeGL: colAltitudeGL,
+				colAltitudeSL: colAltitudeSL,
+				colLatitude: colLatitude,
+				colLongitude: colLongitude,
+				colTime: colTime,
+				colVelocityH: colVelocityH,
+				colVelocityV: colVelocityV,
+			}, correlationId);
 		}
 		catch (err) {
-			return this._error('FeatherweightFlightPathProcessorService', '_check', 'Non Featherweight BlueRaven file detected', null, AppConstants.FlightPath.Errors.NonIFIP, null, correlationId);
+			return this._error('FeatherweightFlightPathProcessorService', '_check', 'Non Featherweight BlueRaven file detected', null, AppConstants.FlightPath.Errors.NonBR, null, correlationId);
 		}
 	}
 
@@ -64,16 +68,16 @@ class FeatherweightFlightPathProcessorService extends FlightPathProcessorService
 		// 	return this._error('FeatherweightFlightPathProcessorService', '_processData', 'Unknown Featherweight BlueRaven file is without headers', null, null, null, correlationId);
 
 		// const colAltitude = this.columnIndexOf('V');
-		// const colLat = this.columnIndexOf('H');
+		// const colLatitude = this.columnIndexOf('H');
 		// const colLong = this.columnIndexOf('I');
-		// const colVelH = this.columnIndexOf('K');
-		// const colVelV = this.columnIndexOf('L');
+		// const colVelocityH = this.columnIndexOf('K');
+		// const colVelocityV = this.columnIndexOf('L');
 		// if (
 		// 	input.data[0][colAltitude] === 'Alt AGL (ft)' && 
-		// 	input.data[0][colLat] === 'TRACKER Lat' && 
-		// 	input.data[0][colLong] === 'TRACKER Lon' && 
-		// 	input.data[0][colVelH] === 'HORZV' && 
-		// 	input.data[0][colVelV] === 'VERTV'
+		// 	input.data[0][colLatitude] === 'TRACKER Lat' && 
+		// 	input.data[0][colLongitude] === 'TRACKER Lon' && 
+		// 	input.data[0][colVelocityH] === 'HORZV' && 
+		// 	input.data[0][colVelocityV] === 'VERTV'
 		// )
 		// 	return this._error('FeatherweightFlightPathProcessorService', '_processData', 'Unknown Featherweight BlueRaven file detected', null, null, null, correlationId);
 
@@ -82,10 +86,10 @@ class FeatherweightFlightPathProcessorService extends FlightPathProcessorService
 			return checkResponse;
 
 		// const colAltitude = checkResponse.colAltitude;
-		// const colLat = checkResponse.colLat;
-		// const colLong = checkResponse.colLong;
-		// const colVelH = checkResponse.colVelH;
-		const colVelV = checkResponse.results.colVelV;
+		// const colLatitude = checkResponse.colLatitude;
+		// const colLongitude = checkResponse.colLongitude;
+		// const colVelocityH = checkResponse.colVelocityH;
+		const colVelocityV = checkResponse.results.colVelocityV;
 
 		input.data.shift();
 
@@ -129,7 +133,7 @@ class FeatherweightFlightPathProcessorService extends FlightPathProcessorService
 
 			length = value.length;
 			for (const data of value) {
-				verticalV = LibraryClientUtility.convertNumber(data[colVelV]);
+				verticalV = LibraryClientUtility.convertNumber(data[colVelocityV]);
 				flightEnded = false;
 				flightStarted = false;
 				
@@ -203,9 +207,9 @@ class FeatherweightFlightPathProcessorService extends FlightPathProcessorService
 			data[indexes.colAltitudeGL], // altitude AGL
 			data[indexes.colAltitudeSL], // altitude ASL
 			data[indexes.colAltitudeGL], // altitude AGL
-			data[indexes.colLat], // latitude
-			data[indexes.colLong], // longitude
-			data[indexes.colVelH], // verticalH
+			data[indexes.colLatitude], // latitude
+			data[indexes.colLongitude], // longitude
+			data[indexes.colVelocityH], // verticalH
 			verticalV, // verticalV
 			null,
 			null,
