@@ -212,12 +212,12 @@ const routes = [
 		children: [
 			{
 				path: '',
-				name: 'content_rocket_info',
+				name: 'content_rockets_rocket',
 				component: () => import(/* webpackPrefetch: true */ /* webpackChunkName: "group-layouts" */ './layouts/ContentLayout.vue'),
 				children: [
 					{
 						path: '',
-						name: 'content_rocket_info',
+						name: 'content_rockets_rocket_info',
 						component: () => import(/* webpackPrefetch: true */ /* webpackChunkName: "group-content-info" */ './components/content/rockets/gallery/rocket/Gallery.vue'),
 						meta: {
 							requiresAuth: false
@@ -238,7 +238,7 @@ const routes = [
 				children: [
 					{
 						path: '',
-						name: 'content_rockets',
+						name: 'content_rockets2',
 						component: () => import(/* webpackPrefetch: true */ /* webpackChunkName: "group-content-info" */ './components/content/rockets/gallery/Gallery.vue'),
 						meta: {
 							requiresAuth: false
@@ -511,7 +511,7 @@ const routes = [
 				children: [
 					{
 						path: '',
-						name: 'content_rocket_user',
+						name: 'content_rocket_user2',
 						component: () => import(/* webpackPrefetch: true */ /* webpackChunkName: "group-content-info" */ './components/content/rockets/library/Rockets.vue'),
 						meta: {
 							requiresAuth: false
@@ -532,7 +532,7 @@ const routes = [
 				children: [
 					{
 						path: '',
-						name: 'content_rockets_user',
+						name: 'content_rockets_user2',
 						component: () => import(/* webpackPrefetch: true */ /* webpackChunkName: "group-content-info" */ './components/content/rockets/library/Rockets.vue'),
 						meta: {
 							requiresAuth: true
