@@ -51,7 +51,7 @@
   "devDependencies": {
     "@alienfast/i18next-loader": "^2.0.2",
     "@vitejs/plugin-vue": "^5.2.1",
-    "vite": "^5.4.10",
+    "vite": "^6.0.1",
     "vite-plugin-vuetify": "^2.0.4",
     "vite-plugin-webpackchunkname": "^1.0.3"
   },
