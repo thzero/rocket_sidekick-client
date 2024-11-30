@@ -259,7 +259,7 @@ const routes = [
 				children: [
 					{
 						path: '',
-						name: 'content_checklists',
+						name: 'content_checklists2',
 						component: () => import(/* webpackPrefetch: true */ /* webpackChunkName: "group-content-info" */ './components/content/checklists/Checklists.vue'),
 						meta: {
 							requiresAuth: true
@@ -280,7 +280,7 @@ const routes = [
 				children: [
 					{
 						path: '',
-						name: 'content_altimeters',
+						name: 'content_altimeters2',
 						component: () => import(/* webpackPrefetch: true */ /* webpackChunkName: "group-content-info" */ './components/content/parts/altimeters/Altimeters.vue'),
 						meta: {
 							requiresAuth: true
@@ -301,7 +301,7 @@ const routes = [
 				children: [
 					{
 						path: '',
-						name: 'content_chute_protectors',
+						name: 'content_chute_protectors2',
 						component: () => import(/* webpackPrefetch: true */ /* webpackChunkName: "group-content-info" */ './components/content/parts/chuteProtectors/ChuteProtectors.vue'),
 						meta: {
 							requiresAuth: true
@@ -322,7 +322,7 @@ const routes = [
 				children: [
 					{
 						path: '',
-						name: 'content_chute_releases',
+						name: 'content_chute_releases2',
 						component: () => import(/* webpackPrefetch: true */ /* webpackChunkName: "group-content-info" */ './components/content/parts/chuteReleases/ChuteReleases.vue'),
 						meta: {
 							requiresAuth: true
@@ -343,7 +343,7 @@ const routes = [
 				children: [
 					{
 						path: '',
-						name: 'content_deployment_bags',
+						name: 'content_deployment_bags2',
 						component: () => import(/* webpackPrefetch: true */ /* webpackChunkName: "group-content-info" */ './components/content/parts/deploymentBags/DeploymentBags.vue'),
 						meta: {
 							requiresAuth: true
@@ -364,7 +364,7 @@ const routes = [
 				children: [
 					{
 						path: '',
-						name: 'content_inventory_user',
+						name: 'content_inventory_user2',
 						component: () => import(/* webpackPrefetch: true */ /* webpackChunkName: "group-content-info" */ './components/content/inventory/Inventory.vue'),
 						meta: {
 							requiresAuth: true
@@ -385,7 +385,7 @@ const routes = [
 				children: [
 					{
 						path: '',
-						name: 'content_launches_user',
+						name: 'content_launches_user2',
 						component: () => import(/* webpackPrefetch: true */ /* webpackChunkName: "group-content-info" */ './components/content/launches/Launches.vue'),
 						meta: {
 							requiresAuth: true
@@ -406,7 +406,7 @@ const routes = [
 				children: [
 					{
 						path: '',
-						name: 'content_location_user',
+						name: 'content_location_user2',
 						component: () => import(/* webpackPrefetch: true */ /* webpackChunkName: "group-content-info" */ './components/content/locations/Locations.vue'),
 						meta: {
 							requiresAuth: false
@@ -427,7 +427,7 @@ const routes = [
 				children: [
 					{
 						path: '',
-						name: 'content_locations_user',
+						name: 'content_locations_user2',
 						component: () => import(/* webpackPrefetch: true */ /* webpackChunkName: "group-content-info" */ './components/content/locations/Locations.vue'),
 						meta: {
 							requiresAuth: true
@@ -448,7 +448,7 @@ const routes = [
 				children: [
 					{
 						path: '',
-						name: 'content_parachutes',
+						name: 'content_parachutes2',
 						component: () => import(/* webpackPrefetch: true */ /* webpackChunkName: "group-content-info" */ './components/content/parts/parachutes/Parachutes.vue'),
 						meta: {
 							requiresAuth: true
@@ -469,7 +469,7 @@ const routes = [
 				children: [
 					{
 						path: '',
-						name: 'content_streamers',
+						name: 'content_streamers2',
 						component: () => import(/* webpackPrefetch: true */ /* webpackChunkName: "group-content-info" */ './components/content/parts/streamers/Streamers.vue'),
 						meta: {
 							requiresAuth: true
@@ -490,7 +490,7 @@ const routes = [
 				children: [
 					{
 						path: '',
-						name: 'content_trackers',
+						name: 'content_trackers2',
 						component: () => import(/* webpackPrefetch: true */ /* webpackChunkName: "group-content-info" */ './components/content/parts/trackers/Trackers.vue'),
 						meta: {
 							requiresAuth: true
@@ -553,7 +553,7 @@ const routes = [
 				children: [
 					{
 						path: '',
-						name: 'content_rocketsetup_user',
+						name: 'content_rocketsetup_user2',
 						component: () => import(/* webpackPrefetch: true */ /* webpackChunkName: "group-content-info" */ './components/content/rockets/setups/RocketSetups.vue'),
 						meta: {
 							requiresAuth: false
@@ -574,7 +574,7 @@ const routes = [
 				children: [
 					{
 						path: '',
-						name: 'content_rocketsetups_user',
+						name: 'content_rocketsetups_user2',
 						component: () => import(/* webpackPrefetch: true */ /* webpackChunkName: "group-content-info" */ './components/content/rockets/setups/RocketSetups.vue'),
 						meta: {
 							requiresAuth: true
