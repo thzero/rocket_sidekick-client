@@ -196,7 +196,7 @@ const routes = [
 				children: [
 					{
 						path: '',
-						name: 'mobileapp',
+						name: 'mobileapp2',
 						component: () => import(/* webpackPrefetch: true */ /* webpackChunkName: "group-mobile-app" */ './components.app/MobileAppLanding.vue'),
 						meta: {
 							requiresAuth: false
