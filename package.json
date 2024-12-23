@@ -1,5 +1,6 @@
 {
   "name": "rocket_sidekick_client",
+  "type": "module",
   "version": "0.2.25",
   "version_major": 0,
   "version_minor": 2,
