@@ -62,50 +62,14 @@ class EggtimerFlightInfoProcessorService extends FlightInfoProcessorService {
 
 		let valid = true;
 		let errors = [];
-		// if (colAltitude === -1) {
-		// 	valid = false;
-		// 	errors.push('Altitude');
-		// }
 		valid &= this._checkField(correlationId, colAltitude, 'Altitude', errors);
-		// if (colAltitudeF === -1) {
-		// 	valid = false;
-		// 	errors.push('Altitude Filtered');
-		// }
 		valid &= this._checkField(correlationId, colAltitudeF, 'Altitude Filtered', errors);
-		// if (colApogee === -1) {
-		// 	valid = false;
-		// 	errors.push('Apogee');
-		// }
 		valid &= this._checkField(correlationId, colApogee, 'Apogee', errors);
-		// if (colDrogue === -1) {
-		// 	valid = false;
-		// 	errors.push('Drogue');
-		// }
 		valid &= this._checkField(correlationId, colDrogue, 'Drogue', errors);
-		// if (colMain === -1) {
-		// 	valid = false;
-		// 	errors.push('Main');
-		// }
 		valid &= this._checkField(correlationId, colMain, 'Main', errors);
-		// if (colNoseOver === -1) {
-		// 	valid = false;
-		// 	errors.push('Nose Over');
-		// }
 		valid &= this._checkField(correlationId, colNoseOver, 'Nose Over', errors);
-		// if (colTime === -1) {
-		// 	valid = false;
-		// 	errors.push('Timestamp');
-		// }
 		valid &= this._checkField(correlationId, colTime, 'Timestamp', errors);
-		// if (colVelocity === -1) {
-		// 	valid = false;
-		// 	errors.push('Velocity');
-		// }
 		valid &= this._checkField(correlationId, colVelocity, 'Velocity', errors);
-		// if (colVelocityF === -1) {
-		// 	valid = false;
-		// 	errors.push('Velocity Filtered');
-		// }
 		valid &= this._checkField(correlationId, colVelocityF, 'Velocity Filtered', errors);
 		if (!valid)
 			return this._error('EggtimerFlightInfoProcessorService', '_processInput', 'Non Eggtimer Quantum file detected', errors, AppConstants.FlightInfo.Errors.NonQuantum, null, correlationId);
