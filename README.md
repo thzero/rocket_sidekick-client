@@ -22,7 +22,7 @@ Google Firebase (https://firebase.google.com) provides the social based authenti
 
 * Add a new project
   * If not already completed when setting up the server application
-* Setup **Authentication**, enabled Google in the **Sign-in method**.
+* Setup **Authentication**, enable Google in the **Sign-in method**.
   * If not already completed when setting up the server application
 * Get the Firebase SDK configuration
   * Go to Project Overview->Settings->General
