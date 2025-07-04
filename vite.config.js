@@ -8,7 +8,6 @@ import { defineConfig } from 'vite'
 // Plugins
 import vue from '@vitejs/plugin-vue'
 import vuetify from 'vite-plugin-vuetify'
-import { splitVendorChunkPlugin } from 'vite'
 
 import { manualChunksPlugin } from 'vite-plugin-webpackchunkname'
 
@@ -72,7 +71,6 @@ export default defineConfig({optimizeDeps: {
       autoImport: true,
     }),
     // manualChunksPlugin(),
-    // splitVendorChunkPlugin()
   ],
   build: {
     rollupOptions: {
