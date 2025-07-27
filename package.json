@@ -32,7 +32,7 @@
     "@thzero/library_client_service_rest_fetch": "^0.18.3",
     "@thzero/library_client_vue3": "^0.18.22",
     "@thzero/library_client_vue3_store_pinia": "^0.18.19",
-    "@thzero/library_client_vue3_vuetify3": "^0.18.18",
+    "@thzero/library_client_vue3_vuetify3": "^0.18.19",
     "@thzero/library_common": "^0.18.10",
     "@vue-leaflet/vue-leaflet": "^0.10.1",
     "async-mutex": "^0.5.0",
