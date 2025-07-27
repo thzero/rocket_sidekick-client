@@ -249,18 +249,36 @@ const routes = [
 		]
 	},
 	{
-		path: '/user/checklists',
+		path: '/gallery/:user',
 		component: () => import(/* webpackPrefetch: true */ /* webpackChunkName: "group-layouts" */ './layouts/MainLayout.vue'),
 		children: [
 			{
 				path: '',
-				name: 'content_checklists',
+				name: 'content_gallery_external',
 				component: () => import(/* webpackPrefetch: true */ /* webpackChunkName: "group-layouts" */ './layouts/ContentLayout.vue'),
 				children: [
 					{
 						path: '',
-						name: 'content_checklists2',
-						component: () => import(/* webpackPrefetch: true */ /* webpackChunkName: "group-content-info" */ './components/content/checklists/Checklists.vue'),
+						name: 'content_gallery_external2',
+						component: () => import(/* webpackPrefetch: true */ /* webpackChunkName: "group-content-info" */ './components/content/gallery/External.vue')
+					}
+				]
+			}
+		]
+	},
+	{
+		path: '/user/gallery',
+		component: () => import(/* webpackPrefetch: true */ /* webpackChunkName: "group-layouts" */ './layouts/MainLayout.vue'),
+		children: [
+			{
+				path: '',
+				name: 'content_gallery',
+				component: () => import(/* webpackPrefetch: true */ /* webpackChunkName: "group-layouts" */ './layouts/ContentLayout.vue'),
+				children: [
+					{
+						path: '',
+						name: 'content_gallery2',
+						component: () => import(/* webpackPrefetch: true */ /* webpackChunkName: "group-content-info" */ './components/content/gallery/User.vue'),
 						meta: {
 							requiresAuth: true
 						}
@@ -282,6 +300,27 @@ const routes = [
 						path: '',
 						name: 'content_altimeters2',
 						component: () => import(/* webpackPrefetch: true */ /* webpackChunkName: "group-content-info" */ './components/content/parts/altimeters/Altimeters.vue'),
+						meta: {
+							requiresAuth: true
+						}
+					}
+				]
+			}
+		]
+	},
+	{
+		path: '/user/checklists',
+		component: () => import(/* webpackPrefetch: true */ /* webpackChunkName: "group-layouts" */ './layouts/MainLayout.vue'),
+		children: [
+			{
+				path: '',
+				name: 'content_checklists',
+				component: () => import(/* webpackPrefetch: true */ /* webpackChunkName: "group-layouts" */ './layouts/ContentLayout.vue'),
+				children: [
+					{
+						path: '',
+						name: 'content_checklists2',
+						component: () => import(/* webpackPrefetch: true */ /* webpackChunkName: "group-content-info" */ './components/content/checklists/Checklists.vue'),
 						meta: {
 							requiresAuth: true
 						}

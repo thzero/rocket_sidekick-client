@@ -67,6 +67,12 @@
 		</template>
 		<v-list density="compact">
 			<v-list-item
+				v-if="features.Yours.Gallery"
+				to="/user/gallery"
+			>
+				<v-list-item-title>{{ $t('menu.yours.gallery') }}</v-list-item-title>
+			</v-list-item>
+			<v-list-item
 				v-if="features.Yours.Checklists"
 				to="/user/checklists"
 			>
