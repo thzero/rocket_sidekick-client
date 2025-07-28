@@ -67,8 +67,8 @@
 		</template>
 		<v-list density="compact">
 			<v-list-item
-				v-if="features.Yours.Gallery"
-				to="/user/gallery"
+				v-if="features.Yours.Gallery && userGamerTag"
+				:to="`/gallery/${userGamerTag}`"
 			>
 				<v-list-item-title>{{ $t('menu.yours.gallery') }}</v-list-item-title>
 			</v-list-item>
