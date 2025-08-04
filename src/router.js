@@ -284,27 +284,27 @@ const routes = [
 			}
 		]
 	},
-	{
-		path: '/user/gallery',
-		component: () => import(/* webpackPrefetch: true */ /* webpackChunkName: "group-layouts" */ './layouts/MainLayout.vue'),
-		children: [
-			{
-				path: '',
-				name: 'content_gallery',
-				component: () => import(/* webpackPrefetch: true */ /* webpackChunkName: "group-layouts" */ './layouts/ContentLayout.vue'),
-				children: [
-					{
-						path: '',
-						name: 'content_gallery2',
-						component: () => import(/* webpackPrefetch: true */ /* webpackChunkName: "group-content-info" */ './components/content/gallery/User.vue'),
-						meta: {
-							requiresAuth: true
-						}
-					}
-				]
-			}
-		]
-	},
+	// {
+	// 	path: '/user/gallery',
+	// 	component: () => import(/* webpackPrefetch: true */ /* webpackChunkName: "group-layouts" */ './layouts/MainLayout.vue'),
+	// 	children: [
+	// 		{
+	// 			path: '',
+	// 			name: 'content_gallery',
+	// 			component: () => import(/* webpackPrefetch: true */ /* webpackChunkName: "group-layouts" */ './layouts/ContentLayout.vue'),
+	// 			children: [
+	// 				{
+	// 					path: '',
+	// 					name: 'content_gallery2',
+	// 					component: () => import(/* webpackPrefetch: true */ /* webpackChunkName: "group-content-info" */ './components/content/gallery/User.vue'),
+	// 					meta: {
+	// 						requiresAuth: true
+	// 					}
+	// 				}
+	// 			]
+	// 		}
+	// 	]
+	// },
 	{
 		path: '/user/altimeters',
 		component: () => import(/* webpackPrefetch: true */ /* webpackChunkName: "group-layouts" */ './layouts/MainLayout.vue'),
