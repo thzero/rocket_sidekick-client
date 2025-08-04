@@ -260,7 +260,7 @@ const routes = [
 					{
 						path: '',
 						name: 'content_gallery_external_rocket2',
-						component: () => import(/* webpackPrefetch: true */ /* webpackChunkName: "group-content-info" */ './components/content/gallery/Rocket.vue'),
+						component: () => import(/* webpackPrefetch: true */ /* webpackChunkName: "group-content-info" */ './components/content/gallery/rockets/Rocket.vue'),
 					}
 				]
 			}
