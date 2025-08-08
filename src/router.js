@@ -249,6 +249,24 @@ const routes = [
 		]
 	},
 	{
+		path: '/gallery/:user/launch/:id',
+		component: () => import(/* webpackPrefetch: true */ /* webpackChunkName: "group-layouts" */ './layouts/MainLayout.vue'),
+		children: [
+			{
+				path: '',
+				name: 'content_gallery_external_launch',
+				component: () => import(/* webpackPrefetch: true */ /* webpackChunkName: "group-layouts" */ './layouts/ContentLayout.vue'),
+				children: [
+					{
+						path: '',
+						name: 'content_gallery_external_launch2',
+						component: () => import(/* webpackPrefetch: true */ /* webpackChunkName: "group-content-info" */ './components/content/gallery/launches/Launch.vue'),
+					}
+				]
+			}
+		]
+	},
+	{
 		path: '/gallery/:user/rocket/:id',
 		component: () => import(/* webpackPrefetch: true */ /* webpackChunkName: "group-layouts" */ './layouts/MainLayout.vue'),
 		children: [
