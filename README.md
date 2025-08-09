@@ -115,10 +115,20 @@ In Cloud Build, set the Settings page and make sure the following are enabled
 * Cloud KMS
 * Service Accounts
 
+#### Cloud Source Repository
+
+This should have already been setup with the server application.
+
 #### Cloud Build Trigger
 
 ##### Event
 * Push to branch
+
+###### Region
+* Select the same region as used with the Cloud Source Repository
+
+###### Repository Generation
+* Select 2nd
 
 ##### Source
 * Select the repository
