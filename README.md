@@ -14,7 +14,7 @@ RocketSidekick client requires the companion server application (https://github.
 
 ### NodeJs
 
-Requires [NodeJs ](https://nodejs.org) version 18+.
+Requires [NodeJs ](https://nodejs.org) version 22+.
 
 ### Firebase
 
