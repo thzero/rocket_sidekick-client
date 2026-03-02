@@ -46,8 +46,8 @@
 							</v-carousel-item>
 						</v-carousel> -->
 						<v-carousel
+							height="800"
 							cycle
-							mandatory
 						>
 							<v-carousel-item
 								v-for="(slide, i) in slides"
