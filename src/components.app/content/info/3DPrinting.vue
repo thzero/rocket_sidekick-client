@@ -21,8 +21,6 @@
 <v-carousel
 	cycle
 	height="800"
-	hide-delimiter-background
-	show-arrows="hover"
 >
 	<v-carousel-item
 		v-for="(slide, i) in slides"
