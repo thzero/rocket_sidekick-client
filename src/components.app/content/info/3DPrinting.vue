@@ -1,19 +1,19 @@
 <template>
 	<ContentLayout>
 		<ContentHeader :value="contentTitle"/>
-		<v-row dense>
+		<v-row density="compact">
 			<v-col cols="12">
 				<v-card>
 					<v-card-text>
 <VtMarkdown v-model="contentDesc" :use-github=false />
-		<v-row dense>
+		<v-row density="compact">
 			<v-col cols="12">
 				<q class="font-italic" cite="https://3dprinting.com/what-is-3d-printing">
 <VtMarkdown v-model="contentDefinition" :use-github=false tag="span" />
 				</q> -- <a href="https://3dprinting.com/what-is-3d-printing" target="_blank">3D printing.com)</a>
 			</v-col>
 		</v-row>
-		<v-row dense>
+		<v-row density="compact">
 			<v-col cols="12" md="6">
 <VtMarkdown v-model="contentMarkup" :use-github=false />
 			</v-col>
@@ -60,7 +60,7 @@
 				</v-card>
 			</v-col>
 		</v-row>
-		<v-row dense>
+		<v-row density="compact">
 			<v-col cols="12">
 				<div class="text-center text-h5 pb-2">
 		{{ $t('strings.content.info.3dprinting.chart') }}
@@ -69,7 +69,7 @@
 			<v-col cols="12">
 				<v-card>
 					<v-card-text>
-				<v-row dense>
+				<v-row density="compact">
 					<v-col cols="12">
 		<VtMarkdown v-model="contentChartDesc" :use-github=false />
 					</v-col>
@@ -149,7 +149,7 @@
 				</v-card>
 			</v-col>
 		</v-row>
-		<v-row dense
+		<v-row density="compact"
 			v-if="hasLinks"
 		>
 			<v-col cols="12" class="text-center text-h5 pt-4 pb-2">
@@ -180,7 +180,7 @@
 				/>
 			</v-col>
 		</v-row>
-		<v-row dense
+		<v-row density="compact"
 			v-show="hasAttribution"
 		>
 			<v-col cols="12" class="text-center text-h5 pb-2; float: right">

@@ -1,7 +1,7 @@
 <template>
 	<div>
 		<v-row
-			dense
+			density="compact"
 			v-if="date"
 		>
 			<v-col cols="6" class="text-h6 text-left pl-2">
@@ -12,7 +12,7 @@
 			</v-col>
 		</v-row>
 		<v-row
-			dense
+			density="compact"
 			v-if="!date"
 		>
 			<v-col cols="12" class="text-h6 text-left pl-2">
@@ -20,7 +20,7 @@
 			</v-col>
 		</v-row>
 		<v-row
-			dense
+			density="compact"
 			v-if="location"
 		>
 			<v-col cols="12" class="text-center text-subtitle1 text-left pl-2">

@@ -1,21 +1,21 @@
 <template>
 	<ContentLayout>
 		<ContentHeader :value="contentTitle" />
-		<v-row dense>
+		<v-row density="compact">
 			<v-col cols="12">
 				<v-card>
 					<v-card-text>
-						<v-row dense>
+						<v-row density="compact">
 							<v-col cols="12">
 <VtMarkdown v-model="contentDesc" :use-github=false />
 							</v-col>
 						</v-row>
-						<v-row dense>
+						<v-row density="compact">
 							<v-col cols="12">
 <VtMarkdown v-model="contentMarkup" :use-github=false />
 							</v-col>
 						</v-row>
-						<v-row dense>
+						<v-row density="compact">
 							<v-col cols="12">
 <VtMarkdown v-model="contentMarkup2" :use-github=false />
 							</v-col>
@@ -27,7 +27,7 @@
 				</v-card>
 			</v-col>
 		</v-row>
-		<v-row dense>
+		<v-row density="compact">
 			<v-col cols="12">
 				<div class="text-center text-h5 pb-2">
 					{{ $t('strings.content.info.epoxy.chart') }}
@@ -167,7 +167,7 @@
 				</v-card>
 			</v-col>
 		</v-row>
-		<v-row dense
+		<v-row density="compact"
 			v-if="hasLinks"
 		>
 			<v-col cols="12" class="text-center text-h5 pt-4 pb-2">
@@ -179,7 +179,7 @@
 				/>
 			</v-col>
 		</v-row>
-		<v-row dense
+		<v-row density="compact"
 			v-show="hasAttribution"
 		>
 			<v-col cols="12" class="text-center text-h5 pb-2; float: right">

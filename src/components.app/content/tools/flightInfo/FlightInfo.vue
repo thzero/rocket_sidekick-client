@@ -4,7 +4,7 @@
 			:value="contentTitle"
 		/>
 		<!-- <ContentDescription id="strings.content.tools.flightInfo" /> -->
-		<v-row dense>
+		<v-row density="compact">
 			<v-col cols="12" lg="3">
 				<VtFormControl
 					ref="formFlightInfoRef"
@@ -44,9 +44,9 @@
 								class="mb-4"
 								flat
 								bordered
-								dense>
+								density="compact">
 								<v-card-item>
-									<v-row dense>
+									<v-row density="compact">
 										<v-col cols="12">
 											<VtTextFieldWithValidation
 												ref="flightDataTitleRef"
@@ -76,7 +76,7 @@
 										</v-col>
 										<v-col cols="12">
 											<v-row
-												dense
+												density="compact"
 												nougtters
 											>
 												<v-col
@@ -127,11 +127,11 @@
 											</v-row>
 										</v-col>
 										<v-col cols="12">
-											<v-row dense>
+											<v-row density="compact">
 												<v-col cols="12">
 													<v-row 
 														v-if="$vuetify.display.lgAndUp"
-														dense 
+														density="compact" 
 														no-gutters 
 														align="center"
 													>
@@ -172,7 +172,7 @@
 												variant="outlined"
 											>
 												<v-card-text>
-													<v-row dense>
+													<v-row density="compact">
 														<v-col cols="6">
 															<VtSelectWithValidation
 																ref="flightMeasurementUnitsIdRef"
@@ -222,7 +222,7 @@
 												variant="outlined"
 											>
 												<v-card-text>
-													<v-row dense>
+													<v-row density="compact">
 														<v-col cols="6">
 															<VtSelectWithValidation
 																ref="flightMeasurementUnitsOutputIdRef"
@@ -273,7 +273,7 @@
 							<v-card
 								flat
 								bordered
-								dense>
+								density="compact">
 								<v-expansion-panels
 									v-model="styles"
 								>
@@ -282,7 +282,7 @@
 										value="foo"
 									>
 										<v-expansion-panel-text>
-											<v-row dense>
+											<v-row density="compact">
 												<v-col cols="12" lg="6">
 													<VtColorWithValidation
 													 	class="mb-2"
@@ -346,7 +346,7 @@
 													/>
 												</v-col>
 											</v-row>
-											<v-row dense>
+											<v-row density="compact">
 												<v-col cols="12">
 													<div style="float: right;">
 														<v-btn
@@ -407,7 +407,7 @@
 					</template>
 					<template v-slot:after>
 						<div class="pt-4">
-							<v-row dense>
+							<v-row density="compact">
 								<v-col cols="12" md="8" lg="12">
 									<VtTextAreaWithValidation
 										ref="flightInfoInputRef"
@@ -503,7 +503,7 @@
 														step="1"
 														class="ml-4"
 														style="width: 100%;"
-														dense
+														density="compact"
 													/>
 												</td>
 												<td style="white-space: nowrap;">
@@ -538,7 +538,7 @@
 														step="1"
 														class="ml-4"
 														style="width: 100%;"
-														dense
+														density="compact"
 													/>
 												</td>
 												<td style="white-space: nowrap;">
@@ -593,7 +593,7 @@
 				</table>
 			</v-col>
 		</v-row>
-		<v-row dense
+		<v-row density="compact"
 			v-show="hasAttribution"
 		>
 			<v-col cols="12" class="text-center text-h5 pb-2; float: right">

@@ -1,7 +1,7 @@
 <template>
 	<ContentLayout>
 		<ContentHeader :value="contentTitle" />
-		<v-row dense>
+		<v-row density="compact">
 			<v-col cols="12">
 				<v-card>
 					<v-card-text>
@@ -171,7 +171,7 @@
 				/>
 			</v-col>
 		</v-row>
-		<v-row dense
+		<v-row density="compact"
 			v-show="hasAttribution"
 		>
 			<v-col cols="12" class="text-center text-h5 pb-2; float: right">

@@ -4,7 +4,7 @@
 			:value="contentTitle"
 		/>
 		<ContentDescription id="strings.content.tools.foam" />
-		<v-row dense>
+		<v-row density="compact">
 			<v-col cols="12">
 				<VtFormControl
 					ref="formFoamRef"
@@ -16,7 +16,7 @@
 					@ok="calculationOk"
 				>
 					<template v-slot:default>
-						<v-row dense>
+						<v-row density="compact">
 							<v-col cols="12" sm="6">
 								<table style="width: 100%">
 									<tbody>
@@ -100,7 +100,7 @@
 								</table>
 							</v-col>
 						</v-row>
-						<v-row dense>
+						<v-row density="compact">
 							<!-- <v-col cols="12" sm="6" >
 								<table style="width: 100%">
 									<tbody>
@@ -302,18 +302,18 @@
 				</VtFormControl>
 			</v-col>
 		</v-row>
-		<v-row class="pt-4" dense>
+		<v-row class="pt-4" density="compact">
 			<v-col cols="12">
 				<v-card>
 					<v-card-text>
-						<v-row dense class="pb-2">
+						<v-row density="compact" class="pb-2">
 							<v-col class="text-center text-h5">
 								{{ $t('strings.content.tools.foam.calculated') }}
 							</v-col>
 						</v-row>
-						<v-row dense class="pb-2" v-if="calculationResults.calculated">
+						<v-row density="compact" class="pb-2" v-if="calculationResults.calculated">
 							<v-col>
-								<v-row class="pb-2" dense>
+								<v-row class="pb-2" density="compact">
 									<v-col cols="4">
 										<span class="text-h6 text-bold">{{ $t('forms.content.tools.foam.totalVolume') }}</span>&nbsp;&nbsp;
 										<span class="text-h6 text-bold" v-if="calculationResults.totalVolume">{{ calculationResults.totalVolume }}</span>
@@ -321,7 +321,7 @@
 								</v-row>
 								<v-row
 									class="pb-2"
-									dense
+									density="compact"
 									no-gutters
 								>
 									<v-col cols="3" style="text-h6 ">
@@ -342,7 +342,7 @@
 								</v-row>
 								<v-row
 									class="pb-2"
-									dense
+									density="compact"
 									no-gutters
 									v-for="item in calculationResults.foams"
 									:key="item.manufacturer"
@@ -372,7 +372,7 @@
 				</v-card>
 			</v-col>
 		</v-row>
-		<v-row dense
+		<v-row density="compact"
 			v-show="hasAttribution"
 		>
 			<v-col cols="12" class="text-center text-h5 pb-2; float: right">
