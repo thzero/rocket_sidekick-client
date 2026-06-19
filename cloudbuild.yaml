@@ -26,75 +26,23 @@ steps:
       ls -a ./src/common
       echo "recursive"
       ls -R
-  # Firebase
-#   - name: 'gcr.io/cloud-builders/git'
-#     entrypoint: 'bash'
-#     args:
-#     - '-c'
-#     - |
-#       echo "one up..."
-#       ls -a ../
-#       echo "current..."
-#       ls -a
-#       echo "src..."
-#       ls -a ./src
-#       echo "src/common..."
-#       ls -a ./src/common
-#   - name: 'docker:stable'
-#     args: [ 'build', '-t', 'gcr.io/$PROJECT_ID/firebase', '.' ]
-#   - name: 'node:lts'
-#     entrypoint: 'npm'
-#     args: ['install', '-g', 'firebase-tools']
-  # Install
-#   - name: 'gcr.io/cloud-builders/git'
-#     entrypoint: 'bash'
-#     args:
-#     - '-c'
-#     - |
-#       echo "one up..."
-#       ls -a ../
-#       echo "current..."
-#       ls -a
-#       echo "src..."
-#       ls -a ./src
-#       echo "src/common..."
-#       ls -a ./src/common
-  #- name: 'gcr.io/cloud-builders/npm:current'
+
+  # Step 2: Install dependencies
   - name: 'node:lts'
     entrypoint: 'npm'
     args: ['install']
-  # Test
-  #- name: 'gcr.io/cloud-builders/npm:current'
-  #- name: 'node:lts'
-  # entrypoint: 'npm'
-  #  args: ['run', 'test:unit']
-  # Build
-#   - name: 'gcr.io/cloud-builders/git'
-#     entrypoint: 'bash'
-#     args:
-#     - '-c'
-#     - |
-#       echo "one up..."
-#       ls -a ../
-#       echo "current..."
-#       ls -a
-#       echo "src..."
-#       ls -a ./src
-#       echo "src/common..."
-#       ls -a ./src/common
-  #- name: 'gcr.io/cloud-builders/npm:current'
+
+  # Step 3: Compile and build the Web App
   - name: 'node:lts'
     entrypoint: 'npm'
     args: ['run', 'build']
     env:
       - '_CONFIG=$_CONFIG'
-#   - name: 'docker:latest'
-#     args: [ 'build', '-t', 'gcr.io/$PROJECT_ID/firebase', '.' ]
-  - name: 'gcr.io/kaniko-project/executor:latest'
-    args:
-    - --destination=gcr.io/$PROJECT_ID/firebase
-    - --cache=true
-  # Deploy
-  - name: 'gcr.io/$PROJECT_ID/firebase'
-    #args: [ 'deploy', '--project', '$PROJECT_ID', '--token', '$_FIREBASE_TOKEN' ]
-    args: [ 'deploy', '--project', '$PROJECT_ID' ]
+      
+  # Step 4: Deploy using the pinned stable Firebase CLI image (15.21.0)
+  - name: 'us-docker.pkg.dev/firebase-cli/us/firebase:15.21.0'
+    args: ['deploy', '--project=$PROJECT_ID', '--only=hosting']
+
+# Enable logging for Custom Service Account
+options:
+  logging: CLOUD_LOGGING_ONLY
