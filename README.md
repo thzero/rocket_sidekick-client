@@ -93,7 +93,7 @@ Compiles the application for deployment to cloud provider.
 npm run build
 ```
 
-## Google Cloud Hosting
+### Google Cloud Hosting
 
 Login to Google Cloud hosting, select the same account that was setup for Firebase.
 
@@ -103,6 +103,19 @@ Enable the following APIs
 * Firebase Management API
 * Firebase Hosting API
 * Cloud Resource Manager API
+* Identity and Access Management (IAM) API
+
+##### Service Accounts
+
+* In the IAM & Admin > Service Accounts tab, click Create Service Account.
+* Name it something descriptive, like firebase-deployer.
+* Grant this new service account only the roles it absolutely needs to execute the build and deploy [1.1.4]:
+  * Cloud Build Service Account (cloudbuild.builds.builder)
+  * Firebase Admin (firebase.admin) – Gives permissions to deploy to Firebase Hosting.
+  * API Keys Admin (serviceusage.apiKeysAdmin) – Allows the Firebase CLI to query the backend endpoints for deployment.
+  * Logs Writer (logging.logWriter) – Fixes the logging error and allows you to view the build console outputs.
+  * Source Repository Reader (source.reader) – Allows the first step to pull the github_thzero_web-common Git submodule from Cloud Source Repositories.
+  * Artifact Registry Writer (artifactregistry.writer) (or Storage Object Admin if using legacy GCR) – Allows the Kaniko step to push the built Firebase CLI container image.
 
 ### Cloud Build
 
@@ -157,6 +170,24 @@ Update the following from the above configuration JSON
 * apiKey - Set to same value from the server
 * baseUrl - Set the value to be the server api's Cloud Run URL.
 
+##### Service Accounts
+
+* Select the firebase-deployer service account to run the build.
+
 ##### Deploy
 
 Run the trigger to kick of a deploy.
+
+### Cloudflare
+
+* https://cloud.google.com/storage/docs/hosting-static-website-http
+
+* Add a CNAME record
+* Go to website
+* Go to DNS
+* Add record
+ * Type: CNAME
+ * Name: filesrocketry
+ * IPv4 address: c.storage.googleapis.com
+ * Proxied: checked
+ * TTL: Auto

@@ -6,6 +6,11 @@ import LibraryCommonUtility from '@thzero/library_common/utility';
 import AppStore from '@/store/pinia';
 
 class WebAppStore extends AppStore {
+	_initModules(addModule) {
+		return [
+		];
+	}
+	
 	_initPluginPersistConfigPaths() {
 		const results = super._initPluginPersistConfigPaths();
 		results.push('flightInfoDataTypeUse');
