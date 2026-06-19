@@ -1,6 +1,6 @@
 {
   "hosting": {
-    "site": "rockettools",
+    "site": "rocketsidekick",
     "public": "dist",
     "ignore": [
       "firebase.json",
