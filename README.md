@@ -22,7 +22,7 @@ Google Firebase (https://firebase.google.com) provides the social based authenti
 
 * Add a new project
   * If not already completed when setting up the server application
-* Setup **Authentication**, enable Google in the **Sign-in method**.
+* Setup **Authentication**, enabled Google in the **Sign-in method**.
   * If not already completed when setting up the server application
 * Get the Firebase SDK configuration
   * Go to Project Overview->Settings->General
@@ -128,6 +128,13 @@ In Cloud Build, set the Settings page and make sure the following are enabled
 * Cloud KMS
 * Service Accounts
 
+##### Application Configuration
+
+Update the following from the above configuration JSON
+
+* apiKey - Set to same value from the server
+* baseUrl - Set the value to be the server api's Cloud Run URL.
+
 #### Cloud Source Repository
 
 This should have already been setup with the server application.
@@ -177,6 +184,13 @@ Update the following from the above configuration JSON
 ##### Deploy
 
 Run the trigger to kick of a deploy.
+
+### External File (images, isntructions, designs, etc.) Storage
+
+#### GCP Storage
+
+* Setup a GCP storage bucket with the name of: filesrocketry.thzero.com
+* Add 'allUsers' with 'Storage Object Viewer' to give Public access.
 
 ### Cloudflare
 
