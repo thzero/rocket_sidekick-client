@@ -262,10 +262,10 @@ export function useDependenciesClientBase () { return [  () => {
         },
         {
             category: 'client',
-            name: 'pinia-plugin-persistedstate-2',
-            url: 'https://github.com/iendeavor/pinia-plugin-persistedstate-2',
+            name: 'pinia-plugin-persistedstate',
+            url: 'https://github.com/prazdevs/pinia-plugin-persistedstate',
             licenseName: 'MIT',
-            licenseUrl: 'https://github.com/iendeavor/pinia-plugin-persistedstate-2/blob/main/LICENSE'
+            licenseUrl: 'https://github.com/prazdevs/pinia-plugin-persistedstate/blob/main/LICENSE'
         },
         {
             category: 'client',

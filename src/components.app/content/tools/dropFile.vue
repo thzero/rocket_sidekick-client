@@ -7,16 +7,16 @@
 			@drop="drop"
 		>
 			<input
-				id="fileInput"
-				name="fileInput"
+				:id="inputId"
+				:name="inputId"
 				ref="fileInput"
 				type="file"
-				accept=".csv"
+				:accept="accept"
 				@change="onChange"
 				class="hidden-input"
 			/>
 
-			<label for="fileInput" class="file-label">
+			<label :for="inputId" class="file-label">
 				<div v-if="isDragging">{{ $t('strings.content.drop.file1') }}</div>
 				<div v-else>{{ $t('strings.content.drop.file2') }} <u>{{ $t('strings.content.drop.click') }}</u> {{ $t('strings.content.drop.file3') }}</div>
 			</label>
@@ -30,6 +30,16 @@ import { ref } from 'vue';
 export default {
 	name: 'DropFile',
 	emits: ['selected'],
+	props: {
+		accept: {
+			type: String,
+			default: '.csv'
+		},
+		inputId: {
+			type: String,
+			default: 'fileInput'
+		}
+	},
 	setup(props, context) {
 		const fileInput = ref(null);
 		const files = ref([]);
@@ -52,16 +62,21 @@ export default {
 		const onChange = async () => {
 			isDragging.value = false;
 			const file = fileInput.value.files[0];
+			if (!file)
+				return;
 
 			// FileReader Object
 			const reader = new FileReader();
-			// Read file as string 
+			// Read file as string
 			reader.readAsText(file);
 			// Load event
 			reader.onload = function(event) {
 				// Read file data
 				output.value = event.target.result;
-		        context.emit('selected', output.value);
+				// The file name is metadata for some consumers (a template's name carries its extension).
+				context.emit('selected', output.value, file.name);
+				// Allow the same file to be dropped again.
+				fileInput.value.value = '';
 			};
 		};
 

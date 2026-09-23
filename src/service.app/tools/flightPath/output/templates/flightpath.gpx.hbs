@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<gpx version="1.1" creator="rocketSidekick" xmlns="http://www.topografix.com/GPX/1/1">
+	<metadata>
+		<name>{{documentName}}</name>
+{{#if includeDescriptions}}
+		<desc>{{#if date}}{{date}} {{/if}}{{#if location}}{{location}} {{/if}}{{#if summary.maxAltitude}}{{labels.maxAltitude}}: {{summary.maxAltitude}} {{altitudeUnit}} {{/if}}{{#if summary.maxRange}}{{labels.maxRange}}: {{summary.maxRange}} {{distanceUnit}}{{/if}}</desc>
+{{/if}}
+	</metadata>
+{{#each branches}}
+{{#each waypoints}}
+	<wpt lat="{{latitude}}" lon="{{longitude}}">
+{{#if altitudeMslMeters includeZero=true}}
+		<ele>{{altitudeMslMeters}}</ele>
+{{/if}}
+		<name>{{name}}</name>
+{{#if @root.includeDescriptions}}
+		<desc>{{#if time}}{{@root.labels.time}}: {{time}} s. {{/if}}{{#if altitude}}{{@root.labels.altitude}}: {{altitude}} {{@root.altitudeUnit}} AGL. {{/if}}{{@root.labels.distance}}: {{distance}} {{@root.distanceUnit}} @ {{bearing}}°. ({{latitudeStr}}, {{longitudeStr}})</desc>
+{{/if}}
+	</wpt>
+{{/each}}
+{{/each}}
+{{#each branches}}
+{{#if hasPath}}
+	<trk>
+		<name>{{name}}</name>
+		<trkseg>
+{{#each path}}
+			<trkpt lat="{{latitude}}" lon="{{longitude}}">{{#if altitudeMslMeters includeZero=true}}<ele>{{altitudeMslMeters}}</ele>{{/if}}</trkpt>
+{{/each}}
+		</trkseg>
+	</trk>
+{{/if}}
+{{/each}}
+</gpx>

@@ -22,7 +22,9 @@
     "dev": "vite --host",
     "build": "vite build",
     "preview": "vite preview",
-    "id": "library-cli --nano"
+    "id": "library-cli --nano",
+    "test": "vitest run",
+    "test:watch": "vitest"
   },
   "dependencies": {
     "@mdi/font": "^7.4.47",
@@ -51,9 +53,11 @@
   "devDependencies": {
     "@alienfast/i18next-loader": "^2.0.2",
     "@vitejs/plugin-vue": "^6.0.8",
+    "jsdom": "^30.1.1",
     "vite": "^8.2.2",
     "vite-plugin-vuetify": "^2.1.3",
-    "vite-plugin-webpackchunkname": "^1.0.3"
+    "vite-plugin-webpackchunkname": "^1.0.3",
+    "vitest": "^5.0.1"
   },
   "optionalDependencies": {
     "@rollup/rollup-linux-x64-gnu": "*"
