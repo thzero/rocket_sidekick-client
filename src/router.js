@@ -710,7 +710,7 @@ const routes = [
 				name: 'settings',
 				component: () => import(/* webpackPrefetch: true */ /* webpackChunkName: "group-support" */ './components/Settings.vue'),
 				meta: {
-					requiresAuth: false
+					requiresAuth: true
 				}
 			}
 		]
@@ -738,7 +738,7 @@ const routes = [
 				name: 'support',
 				component: () => import(/* webpackPrefetch: true */ /* webpackChunkName: "group-support" */ './components/Support.vue'),
 				meta: {
-					requiresAuth: false
+					requiresAuth: true
 				}
 			}
 		]

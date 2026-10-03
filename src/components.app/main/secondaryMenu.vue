@@ -7,7 +7,9 @@
 			></v-btn>
 		</template>
 		<v-list density="compact">
+			<!-- settings and support require a signed-in user (router.js) -->
 			<v-list-item
+				v-if="isLoggedIn"
 				to="/settings"
 			>
 				<template v-slot:prepend>
@@ -29,7 +31,10 @@
 				</template>
 				<v-list-item-title>{{ $t('titles.privacy') }}</v-list-item-title>
 			</v-list-item>
-			<!-- <v-list-item @click="clickSupport">
+			<!-- <v-list-item
+				v-if="isLoggedIn"
+				@click="clickSupport"
+			>
 				<template v-slot:prepend>
 					<v-icon>mdi-help</v-icon>
 				</template>
@@ -43,7 +48,7 @@
 				<v-list-item-title>{{ $t('titles.openSource') }}</v-list-item-title>
 			</v-list-item>
 			<v-list-item
-				v-if="isLoggedIn"
+				v-if="isAdmin"
 				to="/admin"
 			>
 				<template v-slot:prepend>
@@ -80,7 +85,12 @@
 </template>
 
 <script>
+import { ref, watch } from 'vue';
+
 import AppSharedConstants from '@/utility/constants';
+import LibraryClientConstants from '@thzero/library_client/constants';
+
+import LibraryClientUtility from '@thzero/library_client/utility/index';
 
 import { useBaseMenuComponent } from '@/components/main/baseMenu';
 import { baseBaseMenuProps } from '@/components/main/baseBaseMenuProps';
@@ -111,6 +121,18 @@ export default {
 			features: AppSharedConstants.Features
 		});
 
+		const serviceSecurity = LibraryClientUtility.$injector.getService(LibraryClientConstants.InjectorKeys.SERVICE_SECURITY);
+		const serviceStore = LibraryClientUtility.$injector.getService(LibraryClientConstants.InjectorKeys.SERVICE_STORE);
+
+		// the same check the /admin route's guard makes (router.js requiresAuthRoles)
+		const isAdmin = ref(false);
+		watch(() => [ isLoggedIn.value, serviceStore.user ],
+			async ([ loggedIn, user ]) => {
+				isAdmin.value = loggedIn ? await serviceSecurity.authorizationCheckRoles(correlationId(), user, [ 'admin' ]) : false;
+			},
+			{ immediate: true }
+		);
+
 		return {
 			correlationId,
 			error,
@@ -124,6 +146,7 @@ export default {
 			features,
 			info,
 			tools,
+			isAdmin,
 			isLoggedIn,
 			contentLink,
 			contentTitle
