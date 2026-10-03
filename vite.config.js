@@ -14,13 +14,10 @@ import { manualChunksPlugin } from 'vite-plugin-webpackchunkname'
 let configEnv = process.env.NODE_ENV;
 console.log('vue.config.NODE_ENV', configEnv);
 const config = process.env._CONFIG;
-console.log('vue.config._CONFIG', config);
 if (config) {
 	const filename = path.join(__dirname, `./src/config/${configEnv}.json`);
 	console.log('vue.config.filename', filename);
 	fs.writeFileSync(filename, config);
-	const contents = fs.readFileSync(filename, 'utf8');
-	console.log('vue.config.file', contents);
 }
 else
 	configEnv = 'development';

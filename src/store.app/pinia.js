@@ -18,8 +18,10 @@ class WebAppStore extends AppStore {
 		results.push('flightInfoResolution');
 		results.push('flightInfoStyle');
 		results.push('flightMeasurementUnits');
+		results.push('flightPathExport');
 		results.push('flightPathProcessor');
 		results.push('flightPathStyle');
+		results.push('flightPathTemplates');
 		return results;
 	}
 
@@ -53,6 +55,9 @@ class WebAppStore extends AppStore {
 			async setFlightMeasurementUnits(correlationId, value) {
 				this.flightMeasurementUnits = value;
 			},
+			async setFlightPathExport(correlationId, value) {
+				this.flightPathExport = value;
+			},
 			async setFlightPathProcessor(correlationId, value) {
 				this.flightPathProcessor = value;
 			},
@@ -62,6 +67,18 @@ class WebAppStore extends AppStore {
 				if (!this.flightPathStyle)
 					this.flightPathStyle = [];
 				this.flightPathStyle = LibraryCommonUtility.updateArrayByObject(this.flightPathStyle, value);
+			},
+			async setFlightPathTemplate(correlationId, value) {
+				if (!value || String.isNullOrEmpty(value.id))
+					return;
+				if (!this.flightPathTemplates)
+					this.flightPathTemplates = [];
+				this.flightPathTemplates = LibraryCommonUtility.updateArrayByObject(this.flightPathTemplates, { id: value.id, source: value.source });
+			},
+			async deleteFlightPathTemplate(correlationId, id) {
+				if (!this.flightPathTemplates)
+					return;
+				this.flightPathTemplates = this.flightPathTemplates.filter(l => l.id !== id);
 			},
 			async setFlightTitle(correlationId, value) {
 				this.flightTitle = value;
@@ -95,11 +112,20 @@ class WebAppStore extends AppStore {
 			async setFlightMeasurementUnits(correlationId, value) {
 				await LibraryClientUtility.$store.setFlightMeasurementUnits(correlationId, value);
 			},
+			async setFlightPathExport(correlationId, value) {
+				await LibraryClientUtility.$store.setFlightPathExport(correlationId, value);
+			},
 			async setFlightPathProcessor(correlationId, value) {
 				await LibraryClientUtility.$store.setFlightPathProcessor(correlationId, value);
 			},
 			async setFlightPathStyle(correlationId, value) {
 				await LibraryClientUtility.$store.setFlightPathStyle(correlationId, value);
+			},
+			async setFlightPathTemplate(correlationId, value) {
+				await LibraryClientUtility.$store.setFlightPathTemplate(correlationId, value);
+			},
+			async deleteFlightPathTemplate(correlationId, id) {
+				await LibraryClientUtility.$store.deleteFlightPathTemplate(correlationId, id);
 			},
 			async setFlightTitle(correlationId, value) {
 				await LibraryClientUtility.$store.setFlightTitle(correlationId, value);
@@ -136,13 +162,19 @@ class WebAppStore extends AppStore {
 			getFlightMeasurementUnits() {
 				return LibraryClientUtility.$store.flightMeasurementUnits;
 			},
+			getFlightPathExport() {
+				return LibraryClientUtility.$store.flightPathExport;
+			},
 			getFlightPathProcessor() {
 				return LibraryClientUtility.$store.flightPathProcessor;
 			},
-			getFlightPathStyle() {
+			getFlightPathStyle(id) {
 				if (!LibraryClientUtility.$store.flightPathStyle)
 					return null;
-				return LibraryClientUtility.$store.flightPathStyle.find(l => l.id);
+				return LibraryClientUtility.$store.flightPathStyle.find(l => l.id === id);
+			},
+			getFlightPathTemplates() {
+				return LibraryClientUtility.$store.flightPathTemplates ?? [];
 			},
 			getFlightTitle() {
 				return LibraryClientUtility.$store.flightTitle;
@@ -167,8 +199,10 @@ class WebAppStore extends AppStore {
 					velocity: null
 				}
 			},
+			flightPathExport: null,
 			flightPathProcessor: null,
 			flightPathStyle: [],
+			flightPathTemplates: [],
 			flightTitle: ''
 		};
 	}

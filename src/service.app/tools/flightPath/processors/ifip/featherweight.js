@@ -8,6 +8,10 @@ class FeatherweightFlightPathProcessorService extends FlightPathProcessorService
 		return 'featherweightIFIP';
 	}
 
+	get name() {
+		return 'Featherweight IFIP';
+	}
+
 	get measurementUnitDefaults() {
 		return {
 			unitsId: 'english',
@@ -39,25 +43,11 @@ class FeatherweightFlightPathProcessorService extends FlightPathProcessorService
 		}
 		catch (err) {
 			return this._error('FeatherweightFlightPathProcessorService', '_check', 'Non Featherweight IFIP file detected', null, AppConstants.FlightPath.Errors.NonIFIP, null, correlationId);
-
 		}
 	}
 
 	_processData(correlationId, input) {
 		this._enforceNotNull('FeatherweightFlightPathProcessorService', '_processData', input, 'input', correlationId);
-
-		// const regex = /^[a-z]+$/i;
-		// const temp = input.data[0][0];
-		// if ((regex.exec(temp)) === null)
-		// 	return this._error('FeatherweightFlightPathProcessorService', '_processData', 'unknown Featherweight IFIP file type without headers', null, null, null, correlationId);
-
-		// let type = null;
-		// if (temp === 'TRACKER')
-		// 	type = 'gs';
-		// else if (temp === 'UTCTIME')
-		// 	type = 'tracker';
-		// if (type === null)
-		// 	return this._error('FeatherweightFlightPathProcessorService', '_processData', 'unknown Featherweight IFIP file type detected', null, null, null, correlationId);
 
 		const checkResponse = this._check(correlationId, input);
 		if (this._hasFailed(checkResponse))
@@ -66,6 +56,7 @@ class FeatherweightFlightPathProcessorService extends FlightPathProcessorService
 		const type = checkResponse.results;
 		input.data.shift();
 
+		// A ground station file can carry several trackers; each is its own flight.
 		const internalData = {};
 		if (type === 'gs') {
 			let tracker = null;
@@ -82,139 +73,15 @@ class FeatherweightFlightPathProcessorService extends FlightPathProcessorService
 		else
 			internalData['tracker'] = input.data;
 
-		// how many consecutive 0s qualifies as a end of flight?
-		let consectutiveZeros = 0;
-		const consectutiveZerosMax = 5;
+		// Flight ids stay unique across trackers so each tracker's flights are separate branches.
 		let flightId = 0;
-		let flightDetected;
-		let flightEnded;
-		let flightStarted;
-		let index = 0;
-		let verticalV;
-		const verticalVThreshold = 10;
-		const verticalVThresholdNeg = -10;
-		let length = 0;
 		for (const [key, value] of Object.entries(internalData)) {
-			consectutiveZeros = 0;
-			flightDetected = null;
-			flightEnded = false;
-			flightStarted = false;
-			index = 0;
-			verticalV = null;
-
-			length = value.length;
-			for (const data of value) {
-				index++;
-				verticalV = LibraryClientUtility.convertNumber(data[8]);
-				flightEnded = false;
-				flightStarted = false;
-				
-				// has not detected a flight...
-				if (!flightDetected) {
-					if (verticalV > 0 && verticalV < verticalVThreshold)
-						continue;
-					if (verticalV > verticalVThresholdNeg && verticalV <= 0)
-						continue;
-
-					// as soon as we get a above min. vertical then we have a "flight"
-					if (verticalV >= verticalVThreshold) {
-						flightDetected = true;
-						flightEnded = false;
-						flightStarted = true;
-						consectutiveZeros = 0;
-						flightId++;
-					}
-				}
-
-				//if ((verticalV > verticalVThresholdNeg && verticalV < verticalVThreshold)) {
-				if ((verticalV >= -1 && verticalV <= 1)) {
-					// consecutive records at or around 0
-					// 0 is a valid value during a flight
-					consectutiveZeros++;
-				}
-				if (consectutiveZeros > consectutiveZerosMax) {
-					// consecutive records at or around 0
-					// 0 is a valid value during a flight
-					flightDetected = false;
-					flightEnded = true;
-					consectutiveZeros = 0;
-					this._publishI(correlationId, type, flightId, data, verticalV, index, flightStarted, flightEnded);
-					continue;
-				}
-				if (consectutiveZeros >= 1) {
-					// if its not zero again...
-					if ((verticalV <= -1 || verticalV >= 1)) {
-						// reset
-						consectutiveZeros = 0;
-					}
-				}
-				if (consectutiveZeros > 0) {
-					// if its a consecutiveZero count, then ignore it...
-					continue;
-				}
-
-				// if (type === 'gs') {
-				// 	this._publish(
-				// 		correlationId,
-				// 		flightId,
-				// 		// data[2], // time
-				// 		// data[5] - 595.67, // altitude
-				// 		// data[3], // latitude
-				// 		// data[4], // longitude
-				// 		// data[7], // verticalH
-				// 		// verticalV // verticalV
-				// 		data[2], // time
-				// 		data[5], // altitude
-				// 		data[3], // latitude
-				// 		data[4], // longitude
-				// 		data[7], // verticalH
-				// 		verticalV, // verticalV
-				// 		null,
-				// 		null,
-				// 		null,
-				// 		null,
-				// 		null,
-				// 		index,
-				// 		data[0].trim(),
-				// 		flightStarted,
-				// 		flightEnded
-				// 	);
-				// }
-				// else if (type === 'tracker') {
-				// 	this._publish(
-				// 		correlationId,
-				// 		flightId,
-				// 		// data[2], // time
-				// 		// data[5] - 595.67, // altitude
-				// 		// data[3], // latitude
-				// 		// data[4], // longitude
-				// 		// data[7], // verticalH
-				// 		// verticalV // verticalV
-				// 		data[1], // time
-				// 		data[2], // altitude
-				// 		data[3], // latitude
-				// 		data[4], // longitude
-				// 		data[7], // verticalH
-				// 		verticalV, // verticalV
-				// 		null,
-				// 		null,
-				// 		null,
-				// 		null,
-				// 		null,
-				// 		index,
-				// 		null,
-				// 		flightStarted,
-				// 		flightEnded
-				// 	);
-				// }
-
-				if (index+1 === length) {
-					this._publishI(correlationId, type, flightId, data, verticalV, index, flightStarted, true);
-					continue;
-				}
-				
-				this._publishI(correlationId, type, flightId, data, verticalV, index, flightStarted, flightEnded);
-			}
+			flightId = this._detectFlights(correlationId, value,
+				(data) => data[8],
+				(data, verticalV, index, id, flightStart, flightEnd) => {
+					this._publishI(correlationId, type, id, data, verticalV, index, flightStart, flightEnd);
+				},
+				flightId);
 		}
 
 		return this._success(correlationId);
@@ -222,61 +89,40 @@ class FeatherweightFlightPathProcessorService extends FlightPathProcessorService
 
 	_publishI(correlationId, type, flightId, data, verticalV, index, flightStart, flightEnd) {
 		if (type === 'gs') {
-			this._publish(
-				correlationId,
-				flightId,
-				// data[2], // time
-				// data[5] - 595.67, // altitude
-				// data[3], // latitude
-				// data[4], // longitude
-				// data[7], // verticalH
-				// verticalV // verticalV
-				data[2], // time
-				data[5], // altitude AGL
-				0, // altitude ASL
-				data[5], // altitude AGL
-				data[3], // latitude
-				data[4], // longitude
-				data[7], // verticalH
-				verticalV, // verticalV
-				null,
-				null,
-				null,
-				null,
-				null,
-				index,
-				data[0] ? data[0].trim() : null,
-				flightStart,
-				flightEnd
-			);
+			// A ground station log only reports height above the ground.
+			this._publish(correlationId, {
+				flightId: flightId,
+				time: data[2],
+				altitude: data[5],
+				altitudeASL: null,
+				altitudeAGL: data[5],
+				latitude: data[3],
+				longitude: data[4],
+				velocityH: data[7],
+				velocityV: verticalV,
+				index: index,
+				tracker: data[0] ? data[0].trim() : null,
+				flightStart: flightStart,
+				flightEnd: flightEnd
+			});
 		}
 		else if (type === 'tracker') {
-			this._publish(
-				correlationId,
-				flightId,
-				// data[2], // time
-				// data[5] - 595.67, // altitude
-				// data[3], // latitude
-				// data[4], // longitude
-				// data[7], // verticalH
-				// verticalV // verticalV
-				data[1], // time
-				data[2], // altitude ASL
-				0, // altitude AGL
-				data[3], // latitude
-				data[4], // longitude
-				data[7], // verticalH
-				verticalV, // verticalV
-				null,
-				null,
-				null,
-				null,
-				null,
-				index,
-				null,
-				flightStart,
-				flightEnd
-			);
+			// A tracker log only reports height above sea level.
+			this._publish(correlationId, {
+				flightId: flightId,
+				time: data[1],
+				altitude: data[2],
+				altitudeASL: data[2],
+				altitudeAGL: null,
+				latitude: data[3],
+				longitude: data[4],
+				velocityH: data[7],
+				velocityV: verticalV,
+				index: index,
+				tracker: null,
+				flightStart: flightStart,
+				flightEnd: flightEnd
+			});
 		}
 	}
 
