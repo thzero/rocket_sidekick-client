@@ -5,11 +5,7 @@
   "version_major": 0,
   "version_minor": 2,
   "version_patch": 87,
-<<<<<<< HEAD
   "version_date": "10/04/2026",
-=======
-  "version_date": "10/03/2026",
->>>>>>> c1cd54ab19ca4859c3bd9c4a53dcde8d382f0aa7
   "description": "A web application with some tools for rocketry",
   "author": "thZero.com",
   "author_url": "https://www.thzero.com",
