@@ -7,6 +7,8 @@ import Results from '@/service/tools/results';
 
 import BaseService from '@thzero/library_client/service/index';
 
+import { EventColors, SeriesColors } from '../palette';
+
 class FlightInfoProcessorService extends BaseService {
 	constructor() {
 		super();
@@ -23,38 +25,39 @@ class FlightInfoProcessorService extends BaseService {
 	}
 
 	get styleDefault() {
+		// Shared with the flight path export, so a flight keeps its colors from chart to map.
 		return {
 			altitude: {
-				color: '#00FFFF'
+				color: SeriesColors.altitude
 			},
 			altitudeF: {
-				color: '#0000FF'
+				color: SeriesColors.altitudeF
 			},
 			event: {
 				apogee: {
-					color: '#000000'
+					color: EventColors.apogee
 				},
 				apogeeBorder: {
-					color: '#000000'
+					color: EventColors.apogee
 				},
 				drogue: {
-					color: '#FF0000'
+					color: EventColors.drogue
 				},
 				drogueBorder: {
-					color: '#FF0000'
+					color: EventColors.drogue
 				},
 				main: {
-					color: '#FF8C00'
+					color: EventColors.main
 				},
 				mainBorder: {
-					color: '#FF8C00'
+					color: EventColors.main
 				}
 			},
 			velocity: {
-				color: '#00FF00'
+				color: SeriesColors.velocity
 			},
 			velocityF: {
-				color: '#00AA00'
+				color: SeriesColors.velocityF
 			}
 		};
 	}

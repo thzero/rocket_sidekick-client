@@ -87,11 +87,11 @@
 										</v-col>
 										<v-col cols="6">
 											<VtNumberFieldWithValidation
-												ref="flightPathFilterDistanceRef"
-												v-model="flightPathFilterDistance"
-												vid="flightPathFilterDistance"
+												ref="flightPathFilterSpeedRef"
+												v-model="flightPathFilterSpeed"
+												vid="flightPathFilterSpeed"
 												:validation="validation"
-												:label="$t('forms.content.tools.flightPath.filter.distance')"
+												:label="$t('forms.content.tools.flightPath.filter.speed')"
 											/>
 										</v-col>
 										<v-col cols="12">
@@ -156,10 +156,10 @@
 													<v-row density="compact">
 														<v-col cols="6">
 															<VtSelectWithValidation
-																ref="flightMeasurementUnitsDistanceOutputIdRef"
-																v-model="flightMeasurementUnitsDistanceOutputId"
-																vid="flightMeasurementUnitsDistanceOutputId"
-																:items="flightMeasurementUnitsOptionsDistance"
+																ref="flightMeasurementUnitsAltitudeOutputIdRef"
+																v-model="flightMeasurementUnitsAltitudeOutputId"
+																vid="flightMeasurementUnitsAltitudeOutputId"
+																:items="flightMeasurementUnitsOptionsAltitude"
 																:validation="validation"
 																:label="$t('forms.content.tools.flightPath.measurementUnits.altitude')"
 															/>
@@ -175,12 +175,287 @@
 															/>
 														</v-col>
 													</v-row>
+													<v-row density="compact">
+														<v-col cols="6">
+															<VtSelectWithValidation
+																ref="flightMeasurementUnitsDistanceOutputIdRef"
+																v-model="flightMeasurementUnitsDistanceOutputId"
+																vid="flightMeasurementUnitsDistanceOutputId"
+																:items="flightMeasurementUnitsOptionsDistance"
+																:validation="validation"
+																:label="$t('forms.content.tools.flightPath.measurementUnits.distance')"
+															/>
+														</v-col>
+														<v-col cols="6">
+															<VtSelectWithValidation
+																ref="flightMeasurementUnitsAccelerationOutputIdRef"
+																v-model="flightMeasurementUnitsAccelerationOutputId"
+																vid="flightMeasurementUnitsAccelerationOutputId"
+																:items="flightMeasurementUnitsOptionsAcceleration"
+																:validation="validation"
+																:label="$t('forms.content.tools.flightPath.measurementUnits.acceleration')"
+															/>
+														</v-col>
+													</v-row>
 												</v-card-text>
 											</v-card>
 										</v-col>
 									</v-row>
 								</v-card-item>
 							</v-card>
+							<!-- Output format -->
+							<v-card
+								class="mb-4"
+								flat
+								bordered
+								density="compact"
+								:title="$t('forms.content.tools.flightPath.export.format.title')"
+							>
+								<v-card-item>
+									<v-row density="compact">
+										<v-col cols="12">
+											<VtSelectWithValidation
+												ref="exportTemplateIdRef"
+												v-model="exportTemplateId"
+												vid="exportTemplateId"
+												:items="exportTemplates"
+												:validation="validation"
+												:label="$t('forms.content.tools.flightPath.export.format.template')"
+											/>
+										</v-col>
+										<v-col cols="12">
+											<div class="text-caption pb-1">{{ $t('forms.content.tools.flightPath.export.format.templateDrop') }}</div>
+											<DropFile
+												accept=".hbs,.handlebars,.mustache"
+												input-id="templateInput"
+												@selected="dropTemplate"
+											/>
+										</v-col>
+										<v-col cols="12"
+											v-if="exportUserTemplateItems.length > 0"
+										>
+											<div class="text-caption pb-1">{{ $t('forms.content.tools.flightPath.export.format.userTemplates') }}</div>
+											<v-chip
+												v-for="item in exportUserTemplateItems"
+												:key="item.id"
+												class="mr-1 mb-1"
+												closable
+												@click:close="exportTemplateDelete(item.id)"
+											>
+												{{ item.id }}
+											</v-chip>
+										</v-col>
+									</v-row>
+								</v-card-item>
+							</v-card>
+							<!-- Mission -->
+							<v-card
+								class="mb-4"
+								flat
+								bordered
+								density="compact"
+								:title="$t('forms.content.tools.flightPath.export.mission.title')"
+							>
+								<v-card-item>
+									<v-row density="compact">
+										<v-col cols="12">
+											<VtTextFieldWithValidation
+												ref="exportMissionNameRef"
+												v-model="exportMissionName"
+												vid="exportMissionName"
+												:validation="validation"
+												:label="$t('forms.content.tools.flightPath.export.mission.name')"
+											/>
+										</v-col>
+										<v-col cols="12">
+											<VtCheckboxWithValidation
+												v-model="exportLabelWaypointsWithMission"
+												vid="exportLabelWaypointsWithMission"
+												:validation="validation"
+												:label="$t('forms.content.tools.flightPath.export.mission.onWaypoints')"
+											/>
+										</v-col>
+									</v-row>
+								</v-card-item>
+							</v-card>
+							<!-- Placements -->
+							<v-card
+								class="mb-4"
+								flat
+								bordered
+								density="compact"
+								:title="$t('forms.content.tools.flightPath.export.placements.title')"
+							>
+								<v-card-item>
+									<v-row density="compact">
+										<v-col cols="12">
+											<v-btn-toggle
+												v-model="exportPreset"
+												color="primary"
+												density="compact"
+												divided
+												variant="outlined"
+											>
+												<v-btn
+													v-for="preset in exportPresets"
+													:key="preset.id"
+													:value="preset.id"
+													size="small"
+													@click="exportPresetApply(preset.id)"
+												>
+													{{ preset.name }}
+												</v-btn>
+											</v-btn-toggle>
+										</v-col>
+										<v-col cols="6">
+											<VtSelectWithValidation
+												ref="exportAltitudeReferenceRef"
+												v-model="exportAltitudeReference"
+												vid="exportAltitudeReference"
+												:items="exportAltitudeReferences"
+												:validation="validation"
+												:label="$t('forms.content.tools.flightPath.export.placements.altitudeReference')"
+											/>
+										</v-col>
+										<v-col cols="6">
+											<VtSelectWithValidation
+												ref="exportWaypointAltitudeReferenceRef"
+												v-model="exportWaypointAltitudeReference"
+												vid="exportWaypointAltitudeReference"
+												:items="exportAltitudeReferences"
+												:validation="validation"
+												:label="$t('forms.content.tools.flightPath.export.placements.waypointAltitudeReference')"
+											/>
+										</v-col>
+										<v-col cols="12">
+											<VtCheckboxWithValidation
+												v-model="exportDrawShadow"
+												vid="exportDrawShadow"
+												:validation="validation"
+												:disabled="!exportShadowEnabled"
+												:label="$t('forms.content.tools.flightPath.export.placements.shadow')"
+											/>
+										</v-col>
+									</v-row>
+								</v-card-item>
+							</v-card>
+							<!-- Waypoints -->
+							<v-card
+								class="mb-4"
+								flat
+								bordered
+								density="compact"
+								:title="$t('forms.content.tools.flightPath.waypoints.title')"
+							>
+								<v-card-item>
+									<v-row density="compact">
+										<v-col
+											v-for="type in exportWaypointTypes"
+											:key="type.id"
+											cols="6"
+										>
+											<v-checkbox
+												v-model="exportWaypoints[type.id]"
+												:label="type.name"
+												density="compact"
+												hide-details
+											/>
+										</v-col>
+										<v-col cols="12">
+											<v-divider class="my-2" />
+										</v-col>
+										<v-col cols="6">
+											<VtCheckboxWithValidation
+												v-model="exportShowWaypointLabels"
+												vid="exportShowWaypointLabels"
+												:validation="validation"
+												:label="$t('forms.content.tools.flightPath.export.waypoints.showLabels')"
+											/>
+										</v-col>
+										<v-col cols="6">
+											<VtCheckboxWithValidation
+												v-model="exportIncludeDescriptions"
+												vid="exportIncludeDescriptions"
+												:validation="validation"
+												:label="$t('forms.content.tools.flightPath.export.waypoints.descriptions')"
+											/>
+										</v-col>
+										<v-col cols="6">
+											<VtCheckboxWithValidation
+												v-model="exportColorWaypointPins"
+												vid="exportColorWaypointPins"
+												:validation="validation"
+												:label="$t('forms.content.tools.flightPath.export.waypoints.colorPins')"
+											/>
+										</v-col>
+										<v-col cols="6">
+											<VtCheckboxWithValidation
+												v-model="exportColorWaypointPinsByFlight"
+												vid="exportColorWaypointPinsByFlight"
+												:validation="validation"
+												:disabled="!exportColorWaypointPins"
+												:label="$t('forms.content.tools.flightPath.export.waypoints.colorPinsByFlight')"
+											/>
+										</v-col>
+									</v-row>
+								</v-card-item>
+							</v-card>
+							<!-- Flight path -->
+							<v-card
+								class="mb-4"
+								flat
+								bordered
+								density="compact"
+								:title="$t('forms.content.tools.flightPath.export.path.title')"
+							>
+								<v-card-item>
+									<v-row density="compact">
+										<v-col cols="6">
+											<VtCheckboxWithValidation
+												v-model="exportIncludeFlightPath"
+												vid="exportIncludeFlightPath"
+												:validation="validation"
+												:label="$t('forms.content.tools.flightPath.export.path.flightPath')"
+											/>
+										</v-col>
+										<v-col cols="6">
+											<VtCheckboxWithValidation
+												v-model="exportIncludeGroundTrack"
+												vid="exportIncludeGroundTrack"
+												:validation="validation"
+												:label="$t('forms.content.tools.flightPath.export.path.groundTrack')"
+											/>
+										</v-col>
+										<v-col cols="6">
+											<VtNumberFieldWithValidation
+												ref="exportPathStrideRef"
+												v-model="exportPathStride"
+												vid="exportPathStride"
+												:validation="validation"
+												:label="$t('forms.content.tools.flightPath.export.path.stride')"
+											/>
+										</v-col>
+										<v-col cols="6">
+											<VtNumberFieldWithValidation
+												ref="exportLaunchAltitudeRef"
+												v-model="exportLaunchAltitude"
+												vid="exportLaunchAltitude"
+												:validation="validation"
+												:label="$t('forms.content.tools.flightPath.export.path.launchAltitude')"
+											/>
+										</v-col>
+										<v-col cols="12">
+											<VtCheckboxWithValidation
+												v-model="exportOneFilePerFlight"
+												vid="exportOneFilePerFlight"
+												:validation="validation"
+												:label="$t('forms.content.tools.flightPath.export.path.oneFilePerFlight')"
+											/>
+										</v-col>
+									</v-row>
+								</v-card-item>
+							</v-card>
+							<!-- Colors -->
 							<v-card
 								flat
 								bordered
@@ -189,90 +464,68 @@
 									v-model="styles"
 								>
 									<v-expansion-panel
-										:title="$t('forms.content.tools.flightPath.style.title')"
-										value="foo"
+										:title="$t('forms.content.tools.flightPath.export.colors.title')"
+										value="colors"
 									>
 										<v-expansion-panel-text>
+											<div class="text-subtitle-2 pb-2">{{ $t('forms.content.tools.flightPath.export.colors.pins') }}</div>
 											<v-row density="compact">
-												<v-col cols="12" lg="6">
+												<v-col
+													v-for="type in exportWaypointTypes"
+													:key="type.id"
+													cols="12" lg="6"
+												>
 													<VtColorWithValidation
-													 	class="mb-2"
-														v-model="flightPathStylePinLaunchColor"
-														vid="flightPathStylePinLaunchColor"
+														class="mb-2"
+														v-model="exportPinColors[type.id]"
+														:vid="'exportPinColor_' + type.id"
 														:validation="validation"
-														:label="$t('forms.content.tools.flightPath.style.launch.color')"
-													/>
-													<VtColorWithValidation
-													 	class="mb-2"
-														v-model="flightPathStylePathGroundColor"
-														vid="flightPathStylePathGroundColor"
-														:validation="validation"
-														:label="$t('forms.content.tools.flightPath.style.ground.color')"
-													/>
-													<VtColorWithValidation
-													 	class="mb-2"
-														v-model="flightPathStylePathFlightColor"
-														vid="flightPathStylePathFlightColor"
-														:validation="validation"
-														:label="$t('forms.content.tools.flightPath.style.flight.color')"
-													/>
-												</v-col>
-												<v-col cols="12" lg="6">
-													<VtColorWithValidation
-													 	class="mb-2"
-														v-model="flightPathStylePinMaxAltitudeColor"
-														vid="flightPathStylePinMaxAltitudeColor"
-														:validation="validation"
-														:label="$t('forms.content.tools.flightPath.style.maxAltitude.color')"
-													/>
-													<VtColorWithValidation
-													 	class="mb-2"
-														v-model="flightPathStylePinMaxVelocityColor"
-														vid="flightPathStylePinMaxVelocityColor"
-														:validation="validation"
-														:label="$t('forms.content.tools.flightPath.style.maxVelocity.color')"
-													/>
-													<VtColorWithValidation
-													 	class="mb-2"
-														v-model="flightPathStylePinTouchdownColor"
-														vid="flightPathStylePinTouchdownColor"
-														:validation="validation"
-														:label="$t('forms.content.tools.flightPath.style.touchdown.color')"
-													/>
-												</v-col>
-												<v-col cols="12" lg="6">
-													<VtCheckboxWithValidation
-														ref="flightPathStylePinMaxVelocitySelectedRef"
-														v-model="flightPathStylePinLaunchSelected"
-														vid="flightPathStylePinLaunchSelected"
-														:validation="validation"
-														:label="$t('forms.content.tools.flightPath.style.launch.color')"
-													/>
-													<VtCheckboxWithValidation
-														ref="flightPathStylePinMaxAltitudeSelectedRef"
-														v-model="flightPathStylePinMaxAltitudeSelected"
-														vid="flightPathStylePinMaxAltitudeSelected"
-														:validation="validation"
-														:label="$t('forms.content.tools.flightPath.style.maxAltitude.color')"
-													/>
-												</v-col>
-												<v-col cols="12" lg="6">
-													<VtCheckboxWithValidation
-														ref="flightPathStylePinMaxVelocitySelectedRef"
-														v-model="flightPathStylePinMaxVelocitySelected"
-														vid="flightPathStylePinMaxVelocitySelected"
-														:validation="validation"
-														:label="$t('forms.content.tools.flightPath.style.maxVelocity.color')"
-													/>
-													<VtCheckboxWithValidation
-														ref="flightPathStylePinTouchdownSelectedRef"
-														v-model="flightPathStylePinTouchdownSelected"
-														vid="flightPathStylePinTouchdownSelected"
-														:validation="validation"
-														:label="$t('forms.content.tools.flightPath.style.touchdown.color')"
+														:label="type.name"
 													/>
 												</v-col>
 											</v-row>
+											<div
+												v-if="flightPathBranches.length > 0"
+											>
+												<div class="text-subtitle-2 py-2">{{ $t('forms.content.tools.flightPath.export.colors.flights') }}</div>
+												<v-row
+													v-for="branch in flightPathBranches"
+													:key="branch.index"
+													density="compact"
+												>
+													<v-col cols="12">
+														<div class="text-caption">{{ branch.name }}</div>
+													</v-col>
+													<v-col cols="4">
+														<VtColorWithValidation
+															class="mb-2"
+															v-model="exportBranchPathColors[branch.index]"
+															:vid="'exportBranchPathColor_' + branch.index"
+															:validation="validation"
+															:label="$t('forms.content.tools.flightPath.export.colors.path')"
+														/>
+													</v-col>
+													<v-col cols="4">
+														<VtColorWithValidation
+															class="mb-2"
+															v-model="exportBranchGroundColors[branch.index]"
+															:vid="'exportBranchGroundColor_' + branch.index"
+															:validation="validation"
+															:label="$t('forms.content.tools.flightPath.export.colors.ground')"
+														/>
+													</v-col>
+													<v-col cols="4">
+														<VtColorWithValidation
+															class="mb-2"
+															v-model="exportBranchPinColors[branch.index]"
+															:vid="'exportBranchPinColor_' + branch.index"
+															:validation="validation"
+															:label="$t('forms.content.tools.flightPath.export.colors.pin')"
+														/>
+													</v-col>
+												</v-row>
+												<div class="text-caption pb-2">{{ $t('forms.content.tools.flightPath.export.colors.reprocess') }}</div>
+											</div>
 											<v-row density="compact">
 												<v-col cols="12">
 													<div style="float: right;">
@@ -280,19 +533,11 @@
 															:variant="buttonsForms.variant.clear"
 															:color="buttonsForms.color.clear"
 															class="ml-2"
-															@click="clickFlightPathStylesReset"
+															@click="clickExportOptionsReset"
 														>
 															{{ $t('buttons.reset') }}
 														</v-btn>
-														<!-- <v-btn
-															:variant="buttonsForms.variant.ok"
-															:color="buttonsForms.color.ok"
-															class="ml-2"
-															@click="saveStyles"
-														>
-															{{ $t('buttons.save') }}
-														</v-btn> -->
-														</div>
+													</div>
 												</v-col>
 											</v-row>
 										</v-expansion-panel-text>
@@ -325,7 +570,7 @@
 									/>
 								</v-col>
 								<v-col cols="12" md="4" lg="12">
-									<DropFile 
+									<DropFile
 										@selected="dropOutput"
 									/>
 								</v-col>
@@ -364,6 +609,7 @@
 								<v-expansion-panel-text>
 									<VtMarkdown v-model="flightInstructions" :use-github=false />
 									<VtMarkdown v-model="flightPathInstructions" :use-github=false />
+									<VtMarkdown v-model="templateInstructions" :use-github=false />
 								</v-expansion-panel-text>
 							</v-expansion-panel>
 						</v-expansion-panels>
@@ -396,49 +642,6 @@
 						</pre>
 					</v-col>
 				</v-row>
-				<v-row
-					v-if="false"
-					density="compact"
-				>
-					<v-col cols="12">
-						<div class="pt-4">
-							<VtTextAreaWithValidation
-								ref="templateMainRef"
-								v-model="templateMain"
-								vid="templateMain"
-								:validation="validation"
-								:label="$t('forms.content.tools.flightPath.templates.main')"
-							/>
-						</div>
-						<div class="pt-4">
-							<VtTextAreaWithValidation
-								ref="templatePinLaunchRef"
-								v-model="templatePinLaunch"
-								vid="templatePinLaunch"
-								:validation="validation"
-								:label="$t('forms.content.tools.flightPath.templates.pins.launch')"
-							/>
-						</div>
-						<div class="pt-4">
-							<VtTextAreaWithValidation
-								ref="templatePinTouchdownRef"
-								v-model="templatePinTouchdown"
-								vid="templatePinTouchdown"
-								:validation="validation"
-								:label="$t('forms.content.tools.flightPath.templates.pins.touchdown')"
-							/>
-						</div>
-						<div class="pt-4">
-							<VtTextAreaWithValidation
-								ref="templatePinsAdditionalRef"
-								v-model="templatePinsAdditional"
-								vid="templatePinsAdditional"
-								:validation="validation"
-								:label="$t('forms.content.tools.flightPath.templates.pins.additional')"
-							/>
-						</div>
-					</v-col>
-				</v-row>
 			</v-col>
 		</v-row>
 		<v-row density="compact"
@@ -463,14 +666,17 @@
 </template>
 
 <script>
+import { ref } from 'vue';
+
 import { useFlightPathBaseComponent } from '@/components.app/content/tools/flightPath/flightPathBase';
 import { useFlightPathValidation } from '@/components.app/content/tools/flightPath/flightPathValidation';
+
+import templateInstructionsMarkdown from '@/components.app/content/tools/flightPath/templateInstructions.md?raw';
 
 import ContentAttribution from '@/components/content/Attribution';
 import ContentDescription from '@/components/content/Description';
 import ContentHeader from '@/components/content/Header';
 import DropFile from '@/components.app/content/tools/dropFile';
-import MeasurementUnitSelect2 from '@/components/content/MeasurementUnitSelect2';
 import ToolsLayout from '@/components/content/tools/Layout.vue';
 import VtCheckboxWithValidation from '@thzero/library_client_vue3_vuetify3/components/form/VtCheckboxWithValidation';
 import VtColorWithValidation from '@thzero/library_client_vue3_vuetify3/components/form/VtColorWithValidation';
@@ -479,7 +685,6 @@ import VtFormControl from '@thzero/library_client_vue3_vuetify3/components/form/
 import VtMarkdown from '@thzero/library_client_vue3_vuetify3/components/markup/VtMarkdown';
 import VtNumberFieldWithValidation from '@thzero/library_client_vue3_vuetify3/components/form/VtNumberFieldWithValidation';
 import VtSelectWithValidation from '@thzero/library_client_vue3_vuetify3/components/form/VtSelectWithValidation';
-import VtSwitchWithValidation from '@thzero/library_client_vue3_vuetify3/components/form/VtSwitchWithValidation';
 import VtTextAreaWithValidation from '@thzero/library_client_vue3_vuetify3/components/form/VtTextAreaWithValidation';
 import VtTextFieldWithValidation from '@thzero/library_client_vue3_vuetify3/components/form/VtTextFieldWithValidation';
 
@@ -490,7 +695,6 @@ export default {
 		ContentDescription,
 		ContentHeader,
 		DropFile,
-		MeasurementUnitSelect2,
 		ToolsLayout,
 		VtCheckboxWithValidation,
 		VtColorWithValidation,
@@ -499,233 +703,16 @@ export default {
 		VtMarkdown,
 		VtNumberFieldWithValidation,
 		VtSelectWithValidation,
-		VtSwitchWithValidation,
 		VtTextAreaWithValidation,
 		VtTextFieldWithValidation
 	},
 	setup(props, context) {
-		const {
-			correlationId,
-			error,
-			hasFailed,
-			hasSucceeded,
-			initialize,
-			logger,
-			noBreakingSpaces,
-			notImplementedError,
-			success,
-			serviceStore,
-			sortByOrder,
-			target,
-			contentLoadSignal,
-			contentLoadStart,
-			contentLoadStop,
-			calculationOutput,
-			content,
-			contentTitle,
-			errors,
-			errorMessage,
-			hasAttribution,
-			notifyColor,
-			notifyMessage,
-			notifySignal,
-			notifyTimeout,
-			settings,
-			calculateI,
-			handleListener,
-			handleAttribution,
-			initCalculationOutput,
-			initCalculationResults,
-			resetAdditional,
-			setErrorMessage,
-			setNotify,
-			setSuccessMessage,
-			flightDataDate,
-			flightDataLocation,
-			flightDataTitle,
-			flightMeasurementUnitsId,
-			flightMeasurementUnitsAccelerationId,
-			flightMeasurementUnitsAltitudeId,
-			flightMeasurementUnitsDistanceId,
-			flightMeasurementUnitsVelocityId,
-			flightMeasurementUnitsOutputId,
-			flightMeasurementUnitsAccelerationOutputId,
-			flightMeasurementUnitsAltitudeOutputId,
-			flightMeasurementUnitsDistanceOutputId,
-			flightMeasurementUnitsVelocityOutputId,
-			flightMeasurementUnitsOptions,
-			flightProcessor,
-			flightProcessors,
-			processing,
-			styles,
-			initialized,
-			flightInstructions,
-			flightMeasurementUnitsOptionsAcceleration,
-			flightMeasurementUnitsOptionsAltitude,
-			flightMeasurementUnitsOptionsDistance,
-			flightMeasurementUnitsOptionsVelocity,
-			flightDataLoad,
-			flightDataReset,
-			flightDataSave,
-			flightMeasurementUnitsLoad,
-			flightMeasurementUnitsLoadOptions,
-			flightMeasurementUnitsReset,
-			flightMeasurementUnitsSave,
-			buttonsDialog,
-			buttonsForms,
-			measurementUnitsAltitudeType,
-			measurementUnitsVelocityType,
-			serviceDownload,
-			serviceFlightPath,
-			buttons,
-			downloadProgress,
-			expanded,
-			flightPath,
-			flightPathData,
-			flightPathDataExport,
-			flightPathFilterDistance,
-			flightPathInput,
-			flightPathOutput,
-			flightPathStylePathFlightColor,
-			flightPathStylePathGroundColor,
-			flightPathStylePinLaunchColor,
-			flightPathStylePinLaunchSelected,
-			flightPathStylePinMaxAltitudeColor,
-			flightPathStylePinMaxAltitudeSelected,
-			flightPathStylePinMaxVelocityColor,
-			flightPathStylePinMaxVelocitySelected,
-			flightPathStylePinTouchdownColor,
-			flightPathStylePinTouchdownSelected,
-			panelInstructions,
-			templateMain,
-			templatePinLaunch,
-			templatePinsAdditional,
-			templatePinTouchdown,
-			flightPathInstructions,
-			clickFlightPathStylesReset,
-			dropOutput,
-			flightPathInputChange,
-			flightPathStyleLoad,
-			flightPathStyleReset,
-			flightPathStyleSave,
-			flightPathExport,
-			flightPathProcess,
-			reset,
-			resetAdditionalInput,
-			scope,
-			validation
-		} = useFlightPathBaseComponent(props, context);
+		const base = useFlightPathBaseComponent(props, context);
+		const templateInstructions = ref(templateInstructionsMarkdown);
 
 		return {
-			correlationId,
-			error,
-			hasFailed,
-			hasSucceeded,
-			initialize,
-			logger,
-			noBreakingSpaces,
-			notImplementedError,
-			success,
-			serviceStore,
-			sortByOrder,
-			target,
-			contentLoadSignal,
-			contentLoadStart,
-			contentLoadStop,
-			calculationOutput,
-			content,
-			contentTitle,
-			errors,
-			errorMessage,
-			hasAttribution,
-			notifyColor,
-			notifyMessage,
-			notifySignal,
-			notifyTimeout,
-			settings,
-			calculateI,
-			handleListener,
-			handleAttribution,
-			initCalculationOutput,
-			initCalculationResults,
-			resetAdditional,
-			setErrorMessage,
-			setNotify,
-			setSuccessMessage,
-			flightDataDate,
-			flightDataLocation,
-			flightDataTitle,
-			flightMeasurementUnitsId,
-			flightMeasurementUnitsAccelerationId,
-			flightMeasurementUnitsAltitudeId,
-			flightMeasurementUnitsDistanceId,
-			flightMeasurementUnitsVelocityId,
-			flightMeasurementUnitsOutputId,
-			flightMeasurementUnitsAccelerationOutputId,
-			flightMeasurementUnitsAltitudeOutputId,
-			flightMeasurementUnitsDistanceOutputId,
-			flightMeasurementUnitsVelocityOutputId,
-			flightMeasurementUnitsOptions,
-			flightProcessor,
-			flightProcessors,
-			processing,
-			styles,
-			initialized,
-			flightInstructions,
-			flightMeasurementUnitsOptionsAcceleration,
-			flightMeasurementUnitsOptionsAltitude,
-			flightMeasurementUnitsOptionsDistance,
-			flightMeasurementUnitsOptionsVelocity,
-			flightDataLoad,
-			flightDataReset,
-			flightDataSave,
-			flightMeasurementUnitsLoad,
-			flightMeasurementUnitsLoadOptions,
-			flightMeasurementUnitsReset,
-			flightMeasurementUnitsSave,
-			buttonsDialog,
-			buttonsForms,
-			measurementUnitsAltitudeType,
-			measurementUnitsVelocityType,
-			serviceDownload,
-			serviceFlightPath,
-			buttons,
-			downloadProgress,
-			expanded,
-			flightPath,
-			flightPathData,
-			flightPathDataExport,
-			flightPathFilterDistance,
-			flightPathInput,
-			flightPathOutput,
-			flightPathStylePathFlightColor,
-			flightPathStylePathGroundColor,
-			flightPathStylePinLaunchColor,
-			flightPathStylePinLaunchSelected,
-			flightPathStylePinMaxAltitudeColor,
-			flightPathStylePinMaxAltitudeSelected,
-			flightPathStylePinMaxVelocityColor,
-			flightPathStylePinMaxVelocitySelected,
-			flightPathStylePinTouchdownColor,
-			flightPathStylePinTouchdownSelected,
-			panelInstructions,
-			templateMain,
-			templatePinLaunch,
-			templatePinsAdditional,
-			templatePinTouchdown,
-			flightPathInstructions,
-			clickFlightPathStylesReset,
-			dropOutput,
-			flightPathInputChange,
-			flightPathStyleLoad,
-			flightPathStyleReset,
-			flightPathStyleSave,
-			flightPathExport,
-			flightPathProcess,
-			reset,
-			resetAdditionalInput,
-			scope,
-			validation
+			...base,
+			templateInstructions
 		}
 	},
 	validations () {

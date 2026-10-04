@@ -9,6 +9,10 @@ class FeatherweightFlightPathProcessorService extends FlightPathProcessorService
 		return 'featherweightBR';
 	}
 
+	get name() {
+		return 'Featherweight BlueRaven';
+	}
+
 	get measurementUnitDefaults() {
 		return {
 			unitsId: 'english',
@@ -33,6 +37,16 @@ class FeatherweightFlightPathProcessorService extends FlightPathProcessorService
 			const colTime = input.data[0].findIndex(l => l === 'UNIXTIME');
 			const colVelocityH = input.data[0].findIndex(l => l === 'HORZV');
 			const colVelocityV = input.data[0].findIndex(l => l === 'VERTV');
+			// Optional: the device's own detection flags and fix quality.
+			// TODO: drogue and main pins. The export has no deployment columns as of the
+			// 2024-11 firmware, so those events have no source. If a later firmware or app
+			// version adds them, find the columns here and publish a { type: 'drogue' } or
+			// { type: 'main' } event on the row where the flag turns on, as the apogee flag is
+			// handled in _detectFlightsByFlags. Everything downstream already supports them.
+			const colLaunch = input.data[0].findIndex(l => l === 'Launch detection');
+			const colApogee = input.data[0].findIndex(l => l === 'Apogee detection');
+			const colLanding = input.data[0].findIndex(l => l === 'Landing detection');
+			const colFix = input.data[0].findIndex(l => l === 'FIX');
 
 			let valid = true;
 			let errors = [];
@@ -45,7 +59,7 @@ class FeatherweightFlightPathProcessorService extends FlightPathProcessorService
 			valid &= this._checkField(correlationId, colVelocityV, 'Vertical Velocity', errors);
 			if (!valid)
 				return this._error('FeatherweightFlightPathProcessorService', '_check', 'Non Featherweight BlueRaven file detected', errors, AppConstants.FlightPath.Errors.NonBR, null, correlationId);
-		
+
 			return this._successResponse({
 				colAltitudeGL: colAltitudeGL,
 				colAltitudeSL: colAltitudeSL,
@@ -54,6 +68,10 @@ class FeatherweightFlightPathProcessorService extends FlightPathProcessorService
 				colTime: colTime,
 				colVelocityH: colVelocityH,
 				colVelocityV: colVelocityV,
+				colLaunch: colLaunch,
+				colApogee: colApogee,
+				colLanding: colLanding,
+				colFix: colFix
 			}, correlationId);
 		}
 		catch (err) {
@@ -64,163 +82,61 @@ class FeatherweightFlightPathProcessorService extends FlightPathProcessorService
 	_processData(correlationId, input) {
 		this._enforceNotNull('FeatherweightFlightPathProcessorService', '_processData', input, 'input', correlationId);
 
-		// if (!input.data || input.data.length <= 0 || input.data[0].length <= 0)
-		// 	return this._error('FeatherweightFlightPathProcessorService', '_processData', 'Unknown Featherweight BlueRaven file is without headers', null, null, null, correlationId);
-
-		// const colAltitude = this.columnIndexOf('V');
-		// const colLatitude = this.columnIndexOf('H');
-		// const colLong = this.columnIndexOf('I');
-		// const colVelocityH = this.columnIndexOf('K');
-		// const colVelocityV = this.columnIndexOf('L');
-		// if (
-		// 	input.data[0][colAltitude] === 'Alt AGL (ft)' && 
-		// 	input.data[0][colLatitude] === 'TRACKER Lat' && 
-		// 	input.data[0][colLongitude] === 'TRACKER Lon' && 
-		// 	input.data[0][colVelocityH] === 'HORZV' && 
-		// 	input.data[0][colVelocityV] === 'VERTV'
-		// )
-		// 	return this._error('FeatherweightFlightPathProcessorService', '_processData', 'Unknown Featherweight BlueRaven file detected', null, null, null, correlationId);
-
 		const checkResponse = this._check(correlationId, input);
 		if (this._hasFailed(checkResponse))
 			return checkResponse;
 
-		// const colAltitude = checkResponse.colAltitude;
-		// const colLatitude = checkResponse.colLatitude;
-		// const colLongitude = checkResponse.colLongitude;
-		// const colVelocityH = checkResponse.colVelocityH;
-		const colVelocityV = checkResponse.results.colVelocityV;
+		const indexes = checkResponse.results;
+		const colVelocityV = indexes.colVelocityV;
 
 		input.data.shift();
 
-		const internalData = {};
-		// let tracker = null;
-		// let temp;
-		let index = 0;
-		// for (const data of input.data) {
-		// 	temp = data[0].trim();
+		// A row without a GPS fix has no position worth keeping.
+		const rows = (indexes.colFix >= 0)
+			? input.data.filter(data => LibraryClientUtility.convertNumber(data[indexes.colFix]) !== 0)
+			: input.data;
 
-		// 	// For some reason the BlueRaven (3/25/2024) is dumping out the same set of data twice.
-		// 	if (temp === 'TRACKER')
-		// 		break;
+		const publish = (data, verticalV, index, flightId, flightStart, flightEnd, events) => {
+			this._publishI(correlationId, flightId, data, verticalV, index, flightStart, flightEnd, indexes, events);
+		};
 
-		// 	if (tracker !== temp)
-		// 		internalData[temp] = internalData[temp] ?? [];
-
-		// 	data[data.length] = index++;
-		// 	internalData[temp].push(data);
-		// 	tracker = temp;
-		// }
-		internalData['tracker'] = input.data;
-
-		// how many consecutive 0s qualifies as a end of flight?
-		let consectutiveZeros = 0;
-		const consectutiveZerosMax = 5;
-		let flightId = 0;
-		let flightDetected;
-		let flightEnded;
-		let flightStarted;
-		let verticalV;
-		const verticalVThreshold = 10;
-		const verticalVThresholdNeg = -10;
-		let length = 0;
-		for (const [key, value] of Object.entries(internalData)) {
-			consectutiveZeros = 0;
-			flightDetected = null;
-			flightEnded = false;
-			flightStarted = false;
-			verticalV = null;
-
-			length = value.length;
-			for (const data of value) {
-				verticalV = LibraryClientUtility.convertNumber(data[colVelocityV]);
-				flightEnded = false;
-				flightStarted = false;
-				
-				// has not detected a flight...
-				if (!flightDetected) {
-					if (verticalV > 0 && verticalV < verticalVThreshold)
-						continue;
-					if (verticalV > verticalVThresholdNeg && verticalV <= 0)
-						continue;
-
-					// as soon as we get a above min. vertical then we have a "flight"
-					if (verticalV > verticalVThreshold) {
-						flightDetected = true;
-						flightEnded = false;
-						flightStarted = true;
-						consectutiveZeros = 0;
-						flightId++;
-					}
-				}
-
-				//if ((verticalV > verticalVThresholdNeg && verticalV < verticalVThreshold)) {
-				if ((verticalV >= -1 && verticalV <= 1)) {
-					// consecutive records at or around 0
-					// 0 is a valid value during a flight
-					consectutiveZeros++;
-				}
-				if (consectutiveZeros > consectutiveZerosMax) {
-					// consecutive records at or around 0
-					// 0 is a valid value during a flight
-					flightDetected = false;
-					flightEnded = true;
-					consectutiveZeros = 0;
-					this._publishI(correlationId, flightId, data, verticalV, flightStarted, flightEnded, checkResponse.results);
-					continue;
-				}
-				if (consectutiveZeros >= 1) {
-					// if its not zero again...
-					if ((verticalV <= -1 || verticalV >= 1)) {
-						// reset
-						consectutiveZeros = 0;
-					}
-				}
-				if (consectutiveZeros > 0) {
-					// if its a consecutiveZero count, then ignore it...
-					continue;
-				}
-
-				if (index+1 === length) {
-					this._publishI(correlationId, flightId, data, verticalV, flightStarted, true, checkResponse.results);
-					continue;
-				}
-				
-				this._publishI(correlationId, flightId, data, verticalV, flightStarted, flightEnded, checkResponse.results);
-			}
+		// Newer exports carry the device's own launch, apogee and landing flags, which are
+		// more reliable than inferring the flight from vertical velocity: a file that stops a
+		// few rows after touchdown still has its landing.
+		if (indexes.colLaunch >= 0 && indexes.colLanding >= 0) {
+			const flag = (col) => (data) => String(data[col]).trim().toUpperCase() === 'TRUE';
+			this._detectFlightsByFlags(correlationId, rows,
+				(data) => data[colVelocityV],
+				{
+					launch: flag(indexes.colLaunch),
+					landing: flag(indexes.colLanding),
+					apogee: indexes.colApogee >= 0 ? flag(indexes.colApogee) : null
+				},
+				publish);
 		}
+		else
+			this._detectFlights(correlationId, rows, (data) => data[colVelocityV], publish);
 
 		return this._success(correlationId);
 	}
 
-	_publishI(correlationId, flightId, data, verticalV, flightStart, flightEnd, indexes) {
-		this._publish(
-			correlationId,
-			flightId,
-			// data[2], // time
-			// data[5] - 595.67, // altitude
-			// data[3], // latitude
-			// data[4], // longitude
-			// data[7], // verticalH
-			// verticalV // verticalV
-			data[indexes.colTime], // time
-			data[indexes.colAltitudeGL], // altitude AGL
-			data[indexes.colAltitudeSL], // altitude ASL
-			data[indexes.colAltitudeGL], // altitude AGL
-			data[indexes.colLatitude], // latitude
-			data[indexes.colLongitude], // longitude
-			data[indexes.colVelocityH], // verticalH
-			verticalV, // verticalV
-			null,
-			null,
-			null,
-			null,
-			null,
-			data[data.length-1],
-			data[0] ? data[0].trim() : null,
-			flightStart,
-			flightEnd
-		);
+	_publishI(correlationId, flightId, data, verticalV, index, flightStart, flightEnd, indexes, events) {
+		this._publish(correlationId, {
+			flightId: flightId,
+			time: data[indexes.colTime],
+			altitude: data[indexes.colAltitudeGL],
+			altitudeASL: data[indexes.colAltitudeSL],
+			altitudeAGL: data[indexes.colAltitudeGL],
+			latitude: data[indexes.colLatitude],
+			longitude: data[indexes.colLongitude],
+			velocityH: data[indexes.colVelocityH],
+			velocityV: verticalV,
+			index: index,
+			tracker: null,
+			flightStart: flightStart,
+			flightEnd: flightEnd,
+			events: events ?? []
+		});
 	}
 
 	_processDataSort(correlationId) {

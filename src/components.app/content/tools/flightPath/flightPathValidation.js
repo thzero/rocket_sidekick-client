@@ -1,6 +1,6 @@
-import { between, decimal, maxLength, minLength, required } from '@vuelidate/validators';
+import { between, decimal, integer, maxLength, minLength, required } from '@vuelidate/validators';
 
-export const useFlightPathValidation = { 
+export const useFlightPathValidation = {
 	flightDataDate: { $autoDirty: true },
 	flightDataLocation: { $autoDirty: true },
 	flightDataTitle: {
@@ -9,11 +9,11 @@ export const useFlightPathValidation = {
 		maxLength: maxLength(50),
 		$autoDirty: true
 	},
-	flightPathFilterDistance: { 
+	flightPathFilterSpeed: {
 		required,
-		decimal, 
-		between: between(0, 50),
-		$autoDirty: true 
+		decimal,
+		between: between(0, 5000),
+		$autoDirty: true
 	},
 	flightPathInput: { required, $autoDirty: true },
 	flightMeasurementUnitsId: { required, $autoDirty: true },
@@ -25,12 +25,15 @@ export const useFlightPathValidation = {
 	// flightMeasurementUnitsDistanceOutputId: { required, $autoDirty: true },
 	flightMeasurementUnitsVelocityOutputId: { required, $autoDirty: true },
 	flightProcessor: { required, $autoDirty: true },
-	flightPathStylePinLaunchColor: { required, $autoDirty: true },
-	flightPathStylePinLaunchSelected: { required, $autoDirty: true },
-	flightPathStylePinMaxAltitudeColor: { required, $autoDirty: true },
-	flightPathStylePinMaxAltitudeSelected: { required, $autoDirty: true },
-	flightPathStylePinMaxVelocityColor: { required, $autoDirty: true },
-	flightPathStylePinMaxVelocitySelected: { required, $autoDirty: true },
-	flightPathStylePinTouchdownColor: { required, $autoDirty: true },
-	flightPathStylePinTouchdownSelected: { required, $autoDirty: true }
+	exportTemplateId: { required, $autoDirty: true },
+	exportAltitudeReference: { required, $autoDirty: true },
+	exportWaypointAltitudeReference: { required, $autoDirty: true },
+	exportMissionName: { maxLength: maxLength(50), $autoDirty: true },
+	exportPathStride: {
+		required,
+		integer,
+		between: between(1, 1000),
+		$autoDirty: true
+	},
+	exportLaunchAltitude: { decimal, $autoDirty: true }
 };

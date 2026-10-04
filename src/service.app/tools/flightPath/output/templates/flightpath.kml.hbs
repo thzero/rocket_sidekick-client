@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+	<Document>
+		<name>{{documentName}}</name>
+{{#if includeDescriptions}}
+		<Snippet maxLines="0"></Snippet>
+		<description>&lt;b&gt;{{documentName}}&lt;/b&gt;&lt;br/&gt;{{#if date}}{{date}}&lt;br/&gt;{{/if}}{{#if location}}{{location}}&lt;br/&gt;{{/if}}{{#if processorName}}{{labels.source}}: {{processorName}}&lt;br/&gt;{{/if}}&lt;br/&gt;{{#if summary.maxAltitude}}{{labels.maxAltitude}}: {{summary.maxAltitude}} {{altitudeUnit}}&lt;br/&gt;{{/if}}{{#if summary.maxVelocity}}{{labels.maxVelocity}}: {{summary.maxVelocity}} {{velocityUnit}}&lt;br/&gt;{{/if}}{{#if summary.maxAcceleration}}{{labels.maxAcceleration}}: {{summary.maxAcceleration}} {{accelerationUnit}}&lt;br/&gt;{{/if}}{{#if summary.maxRange}}{{labels.maxRange}}: {{summary.maxRange}} {{distanceUnit}}&lt;br/&gt;{{/if}}{{#if summary.timeToApogee}}{{labels.timeToApogee}}: {{summary.timeToApogee}} s&lt;br/&gt;{{/if}}{{#if summary.flightTime}}{{labels.flightTime}}: {{summary.flightTime}} s&lt;br/&gt;{{/if}}{{#each branches}}{{#if hasLanding}}{{name}} {{@root.labels.landing}}: {{landingDistance}} {{@root.distanceUnit}} @ {{landingBearing}}° ({{landingLatitudeStr}}, {{landingLongitudeStr}})&lt;br/&gt;{{/if}}{{/each}}</description>
+{{/if}}
+		<open>1</open>
+{{#each branches}}
+		<Style id="flightPath{{index}}"><LineStyle><color>{{pathColorKml}}</color><width>4</width></LineStyle></Style>
+		<Style id="groundTrack{{index}}"><LineStyle><color>{{groundColorKml}}</color><width>4</width></LineStyle></Style>
+{{/each}}
+{{#each branches}}
+		<Folder>
+			<name>{{name}}</name>
+{{#if @root.includeDescriptions}}
+			<Snippet maxLines="0"></Snippet>
+			<description>&lt;b&gt;{{name}}&lt;/b&gt;&lt;br/&gt;{{#if tracker}}{{@root.labels.source}}: {{tracker}}&lt;br/&gt;{{/if}}{{#if maxRange}}{{@root.labels.maxRange}}: {{maxRange}} {{@root.distanceUnit}} @ {{maxRangeBearing}}°&lt;br/&gt;{{/if}}{{#if hasLanding}}{{@root.labels.landing}}: {{landingDistance}} {{@root.distanceUnit}} @ {{landingBearing}}° ({{landingLatitudeStr}}, {{landingLongitudeStr}})&lt;br/&gt;{{/if}}</description>
+{{/if}}
+			<open>1</open>
+{{#each waypoints}}
+			<Placemark>
+				<name>{{name}}</name>
+{{#if @root.includeDescriptions}}
+				<Snippet maxLines="0"></Snippet>
+				<description>&lt;b&gt;{{name}}&lt;/b&gt;&lt;br/&gt;{{#if time}}{{@root.labels.time}}: {{time}} s&lt;br/&gt;{{/if}}{{#if altitude}}{{@root.labels.altitude}}: {{altitude}} {{@root.altitudeUnit}} AGL&lt;br/&gt;{{/if}}{{#if altitudeMsl}}{{@root.labels.altitudeMsl}}: {{altitudeMsl}} {{@root.altitudeUnit}}&lt;br/&gt;{{/if}}{{#if velocity}}{{@root.labels.velocity}}: {{velocity}} {{@root.velocityUnit}}&lt;br/&gt;{{/if}}{{#if acceleration}}{{@root.labels.acceleration}}: {{acceleration}} {{@root.accelerationUnit}}&lt;br/&gt;{{/if}}{{@root.labels.distance}}: {{distance}} {{@root.distanceUnit}} @ {{bearing}}°&lt;br/&gt;{{#if device}}{{device}}&lt;br/&gt;{{/if}}({{latitudeStr}}, {{longitudeStr}})</description>
+{{/if}}
+				<Style>
+{{#if @root.colorWaypointPins}}
+					<IconStyle>
+						<color>{{pinColorKml}}</color>
+						<Icon><href>https://maps.google.com/mapfiles/kml/pushpin/wht-pushpin.png</href></Icon>
+						<hotSpot x="20" y="2" xunits="pixels" yunits="pixels"/>
+					</IconStyle>
+{{/if}}
+{{#unless @root.showWaypointLabels}}
+					<LabelStyle><scale>0</scale></LabelStyle>
+{{/unless}}
+				</Style>
+				<Point>
+{{#if @root.extrudeWaypoints}}
+					<extrude>1</extrude>
+{{/if}}
+					<altitudeMode>{{@root.kmlWaypointAltitudeMode}}</altitudeMode>
+					<coordinates>{{longitude}},{{latitude}},{{altitudeKmlMeters}}</coordinates>
+				</Point>
+			</Placemark>
+{{/each}}
+{{#if hasPath}}
+{{#if @root.includeFlightPath}}
+			<Placemark>
+				<name>{{@root.labels.flightPath}}</name>
+				<styleUrl>#flightPath{{index}}</styleUrl>
+				<LineString>
+{{#if @root.extrudePath}}
+					<extrude>1</extrude>
+{{/if}}
+{{#if @root.tessellatePath}}
+					<tessellate>1</tessellate>
+{{/if}}
+					<altitudeMode>{{@root.kmlAltitudeMode}}</altitudeMode>
+					<coordinates>
+{{#each path}}
+{{longitude}},{{latitude}},{{altitudeKmlMeters}}
+{{/each}}
+					</coordinates>
+				</LineString>
+			</Placemark>
+{{/if}}
+{{#if @root.includeGroundTrack}}
+			<Placemark>
+				<name>{{@root.labels.groundTrack}}</name>
+				<styleUrl>#groundTrack{{index}}</styleUrl>
+				<LineString>
+					<tessellate>1</tessellate>
+					<altitudeMode>clampToGround</altitudeMode>
+					<coordinates>
+{{#each path}}
+{{longitude}},{{latitude}},0
+{{/each}}
+					</coordinates>
+				</LineString>
+			</Placemark>
+{{/if}}
+{{/if}}
+		</Folder>
+{{/each}}
+	</Document>
+</kml>

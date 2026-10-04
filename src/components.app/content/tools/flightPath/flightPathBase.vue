@@ -6,10 +6,14 @@ import useVuelidate from '@vuelidate/core';
 import Papa from 'papaparse';
 
 import AppConstants from '@/constants';
+import AppCommonConstants from 'rocket_sidekick_common/constants';
 
+import ConvertUtility from 'rocket_sidekick_common/utility/convert.js';
 import LibraryClientUtility from '@thzero/library_client/utility/index';
 import LibraryClientVueUtility from '@thzero/library_client_vue3/utility/index';
 import LibraryCommonUtility from '@thzero/library_common/utility/index';
+
+import { isoDate, slug } from '@/service.app/tools/flightPath/model/geo';
 
 import { useButtonComponent } from '@thzero/library_client_vue3_vuetify3/components/buttonComponent';
 import { useFlightToolsBaseComponent } from '@/components.app/content/tools/flightToolBase';
@@ -85,16 +89,15 @@ export function useFlightPathBaseComponent(props, context) {
 		flightMeasurementUnitsReset,
 		flightMeasurementUnitsSave
 	} = useFlightToolsBaseComponent(props, context, {
-		// id: 'flightPath',
 		markupId: 'tools.flightPath',
 		onMounted: async (correlationIdI) => {
 			reset(correlationIdI);
 
 			flightProcessor.value = serviceStore.getters.getFlightPathProcessor();
 
-			flightPathStyleReset(correlationIdI, true);
+			exportTemplatesLoad(correlationIdI);
+			exportOptionsLoad(correlationIdI);
 			flightDataLoad(correlationIdI);
-			// flightMeasurementUnitsLoad(correlationIdI, flightProcessor.value);
 
 			flightProcessors.value = LibraryClientVueUtility.selectOptions(serviceFlightPath.serviceProcessors, LibraryClientUtility.$trans.t, 'forms.content.tools.flightPath.processors', (l) => { return l.id; }, null, (l) => { return l.id; });
 		},
@@ -119,6 +122,8 @@ export function useFlightPathBaseComponent(props, context) {
 	const serviceDownload = LibraryClientUtility.$injector.getService(AppConstants.InjectorKeys.SERVICE_DOWNLOAD);
 	const serviceFlightPath = LibraryClientUtility.$injector.getService(AppConstants.InjectorKeys.SERVICE_TOOLS_FLIGHT_PATH_PROCESSOR);
 
+	const trans = (key) => LibraryClientUtility.$trans.t(`forms.content.tools.flightPath.${key}`);
+
 	const buttons = ref({
 		export: {
 			disabled: true
@@ -129,27 +134,59 @@ export function useFlightPathBaseComponent(props, context) {
 	});
 	const downloadProgress = ref(false);
 	const expanded = ref(false);
-	const flightPath = ref(null);
 	const flightPathData = ref(null);
 	const flightPathDataExport = ref(null);
-	const flightPathFilterDistance = ref(15);
+	const flightPathFilterSpeed = ref(300);
 	const flightPathInput = ref(null);
 	const flightPathOutput = ref(null);
-	const flightPathStylePathFlightColor = ref(null);
-	const flightPathStylePathGroundColor = ref(null);
-	const flightPathStylePinLaunchColor = ref(null);
-	const flightPathStylePinLaunchSelected = ref(true);
-	const flightPathStylePinMaxAltitudeColor = ref(null);
-	const flightPathStylePinMaxAltitudeSelected = ref(true);
-	const flightPathStylePinMaxVelocityColor = ref(null);
-	const flightPathStylePinMaxVelocitySelected = ref(true);
-	const flightPathStylePinTouchdownColor = ref(null);
-	const flightPathStylePinTouchdownSelected = ref(true);
 	const panelInstructions = ref(['instructions']);
-	const templateMain = ref(serviceFlightPath.templateMainDefault);
-	const templatePinLaunch = ref(serviceFlightPath.templatePinLaunchDefault);
-	const templatePinsAdditional = ref('');
-	const templatePinTouchdown = ref(serviceFlightPath.templatePinTouchdownDefault);
+
+	// Export options. The fresh state must match the "flightPath" preset.
+	const exportAltitudeReference = ref('automatic');
+	const exportBranchGroundColors = ref({});
+	const exportBranchPathColors = ref({});
+	const exportBranchPinColors = ref({});
+	const exportColorWaypointPins = ref(true);
+	const exportColorWaypointPinsByFlight = ref(false);
+	const exportDrawShadow = ref(false);
+	const exportIncludeDescriptions = ref(true);
+	const exportIncludeFlightPath = ref(true);
+	const exportIncludeGroundTrack = ref(true);
+	const exportLabelWaypointsWithMission = ref(false);
+	const exportLaunchAltitude = ref(null);
+	// The stored value in meters, so it can be shown once the input units are known.
+	const exportLaunchAltitudeMeters = ref(null);
+	const exportMissionName = ref('');
+	const exportOneFilePerFlight = ref(false);
+	const exportPathStride = ref(1);
+	const exportPinColors = ref({ ...serviceFlightPath.pinColorsDefault });
+	const exportPreset = ref('flightPath');
+	const exportShowWaypointLabels = ref(true);
+	const exportTemplateId = ref('kml');
+	const exportTemplates = ref([]);
+	const exportUserTemplates = ref([]);
+	const exportWaypointAltitudeReference = ref('automatic');
+	const exportWaypoints = ref(Object.fromEntries(serviceFlightPath.waypointTypes.map(type => [type, true])));
+
+	const exportAltitudeReferences = computed(() => {
+		return serviceFlightPath.altitudeReferences.map(id => ({ id: id, name: trans(`export.placements.altitudeReferences.${id}`) }));
+	});
+	const exportPresets = computed(() => {
+		return serviceFlightPath.presets.map(preset => ({ id: preset.id, name: trans(`export.placements.presets.${preset.id}`) }));
+	});
+	// Nothing to extrude to once both halves of the geometry lie on the ground.
+	const exportShadowEnabled = computed(() => {
+		return exportAltitudeReference.value !== 'clamped' || exportWaypointAltitudeReference.value !== 'clamped';
+	});
+	const exportWaypointTypes = computed(() => {
+		return serviceFlightPath.waypointTypes.map(type => ({ id: type, name: trans(`waypoints.${type}`) }));
+	});
+	const exportUserTemplateItems = computed(() => {
+		return (exportUserTemplates.value ?? []).map(l => ({ id: l.id }));
+	});
+	const flightPathBranches = computed(() => {
+		return flightPathData.value ? flightPathData.value : [];
+	});
 
 	const flightPathInstructions = computed(() => {
 		if (!content.value || !content.value.processors)
@@ -165,122 +202,181 @@ export function useFlightPathBaseComponent(props, context) {
 		return processor.markup;
 	});
 
+	const inputAltitudeUnit = () => {
+		const system = AppCommonConstants.MeasurementUnits[flightMeasurementUnitsId.value];
+		if (!system)
+			return null;
+		return system.altitude[flightMeasurementUnitsAltitudeId.value] ?? system.altitude[system.altitude.default];
+	};
+
 	const checkDataForProcessor = (correlationId, data) => {
 		const response = serviceFlightPath.check(correlationId, data, flightProcessor.value);
-			if (hasFailed(response)) {
-				resetAdditionalInput2(correlationId);
+		if (hasFailed(response)) {
+			resetAdditionalInput2(correlationId);
+			setErrorMessage(correlationId, errorsFromResponse(response));
+			return response;
+		}
 
-				let errors = [];
-				for(let item of response.errors) 
-					errors.push(LibraryClientUtility.$trans.t(`errors.content.tools.flightPath.${item.code}`));
-				setErrorMessage(correlationId, errors.join('<br>'));
-				
-				return response;
-			}
-
-			setErrorMessage(correlationId, null);
-			return success(correlationId);
+		setErrorMessage(correlationId, null);
+		return success(correlationId);
 	};
-	const clickFlightPathStylesReset = () => {
-		flightPathStyleReset(correlationId(), false);
+	const errorsFromResponse = (response) => {
+		const errorsI = [];
+		for (const item of (response.errors ?? [])) {
+			const code = item && item.code ? item.code : null;
+			const key = `errors.content.tools.flightPath.${code}`;
+			const text = code ? LibraryClientUtility.$trans.t(key) : null;
+			errorsI.push(text && text !== key ? text : (item && item.message ? item.message : LibraryClientUtility.$trans.t('errors.process.unableToConvert')));
+		}
+		if (errorsI.length === 0)
+			errorsI.push(LibraryClientUtility.$trans.t('errors.process.unableToConvert'));
+		return errorsI.join('<br>');
+	};
+	const clickExportOptionsReset = () => {
+		const correlationIdI = correlationId();
+		exportOptionsApply(correlationIdI, serviceFlightPath.options(correlationIdI));
+		exportTemplateId.value = 'kml';
+		setNotify(correlationIdI, 'messages.reset');
 	};
 	const dropOutput = (value) => {
 		const correlationIdI = correlationId();
 
 		flightPathInput.value = null;
-		flightPath.value = null;
 		flightPathData.value = null;
 		flightPathDataExport.value = null;
 		flightPathOutput.value = '';
-		setErrorMessage(correlationId, null);
-		
+		setErrorMessage(correlationIdI, null);
+
 		if (value) {
 			const data = Papa.parse(value.trim());
 			const response = checkDataForProcessor(correlationIdI, data);
 			if (hasFailed(response))
 				return response;
-			
+
 			flightPathInput.value = value.trim();
 			return success(correlationIdI);
 		}
 	};
+	const dropTemplate = (value, fileName) => {
+		const correlationIdI = correlationId();
+		const response = serviceFlightPath.userTemplate(correlationIdI, fileName, value);
+		if (hasFailed(response)) {
+			setErrorMessage(correlationIdI, errorsFromResponse(response));
+			return;
+		}
+
+		serviceStore.dispatcher.setFlightPathTemplate(correlationIdI, { id: response.results.id, source: response.results.source });
+		exportTemplatesLoad(correlationIdI);
+		exportTemplateId.value = response.results.id;
+		setErrorMessage(correlationIdI, null);
+		setNotify(correlationIdI, 'messages.saved');
+	};
+	const exportOptionsApply = (correlationId, options) => {
+		const values = options.toObject();
+		exportAltitudeReference.value = values.altitudeReference;
+		exportBranchGroundColors.value = { ...values.branchGroundColors };
+		exportBranchPathColors.value = { ...values.branchColors };
+		exportBranchPinColors.value = { ...values.branchPinColors };
+		exportColorWaypointPins.value = values.colorWaypointPins;
+		exportColorWaypointPinsByFlight.value = values.colorWaypointPinsByFlight;
+		exportDrawShadow.value = values.drawShadow;
+		exportIncludeDescriptions.value = values.includeDescriptions;
+		exportIncludeFlightPath.value = values.includeFlightPath;
+		exportIncludeGroundTrack.value = values.includeGroundTrack;
+		exportLabelWaypointsWithMission.value = values.labelWaypointsWithMission;
+		exportMissionName.value = values.missionName;
+		exportOneFilePerFlight.value = values.oneFilePerFlight;
+		exportPathStride.value = values.pathStride;
+		exportPinColors.value = { ...serviceFlightPath.pinColorsDefault, ...values.pinColors };
+		exportShowWaypointLabels.value = values.showWaypointLabels;
+		exportWaypointAltitudeReference.value = values.waypointAltitudeReference;
+		exportWaypoints.value = Object.fromEntries(serviceFlightPath.waypointTypes.map(type => [type, values.waypoints.includes(type)]));
+		flightPathFilterSpeed.value = values.filterMaxSpeedMps;
+
+		exportLaunchAltitudeMeters.value = values.launchAltitudeMeters;
+		exportLaunchAltitudeDisplay();
+
+		exportPresetSync();
+	};
+	// Shows the stored launch elevation in the input altitude unit, once that unit is known.
+	const exportLaunchAltitudeDisplay = () => {
+		const unit = inputAltitudeUnit();
+		if (exportLaunchAltitudeMeters.value === null || !unit) {
+			exportLaunchAltitude.value = null;
+			return;
+		}
+		exportLaunchAltitude.value = ConvertUtility.round(ConvertUtility.convert(exportLaunchAltitudeMeters.value, 'm', unit), 2);
+	};
+	const exportOptionsBuild = (correlationId) => {
+		const unit = inputAltitudeUnit();
+		const launchAltitude = LibraryClientUtility.convertNumber(exportLaunchAltitude.value);
+		return serviceFlightPath.options(correlationId, {
+			altitudeReference: exportAltitudeReference.value,
+			branchColors: exportBranchPathColors.value,
+			branchGroundColors: exportBranchGroundColors.value,
+			branchPinColors: exportBranchPinColors.value,
+			colorWaypointPins: exportColorWaypointPins.value,
+			colorWaypointPinsByFlight: exportColorWaypointPinsByFlight.value,
+			// A ticked but disabled shadow exports false, so the file never disagrees with the panel.
+			drawShadow: exportDrawShadow.value && exportShadowEnabled.value,
+			filterMaxSpeedMps: LibraryClientUtility.convertNumber(flightPathFilterSpeed.value),
+			includeDescriptions: exportIncludeDescriptions.value,
+			includeFlightPath: exportIncludeFlightPath.value,
+			includeGroundTrack: exportIncludeGroundTrack.value,
+			labelWaypointsWithMission: exportLabelWaypointsWithMission.value,
+			// Without a known input unit the field cannot be read, so the stored value stands.
+			launchAltitudeMeters: unit ? (launchAltitude !== null ? ConvertUtility.convert(launchAltitude, unit, 'm') : null) : exportLaunchAltitudeMeters.value,
+			missionName: exportMissionName.value,
+			oneFilePerFlight: exportOneFilePerFlight.value,
+			pathStride: exportPathStride.value,
+			pinColors: exportPinColors.value,
+			showWaypointLabels: exportShowWaypointLabels.value,
+			waypointAltitudeReference: exportWaypointAltitudeReference.value,
+			waypoints: Object.entries(exportWaypoints.value).filter(([, selected]) => selected).map(([type]) => type)
+		});
+	};
+	const exportOptionsLoad = (correlationId) => {
+		const stored = serviceStore.getters.getFlightPathExport();
+		const options = serviceFlightPath.options(correlationId, stored && stored.options ? stored.options : null);
+		exportOptionsApply(correlationId, options);
+		if (stored && !String.isNullOrEmpty(stored.templateId) && exportTemplates.value.find(l => l.id === stored.templateId))
+			exportTemplateId.value = stored.templateId;
+	};
+	// Remembers how the tool is set up, never what this particular flight was called.
+	const exportOptionsSave = (correlationId) => {
+		const options = exportOptionsBuild(correlationId);
+		serviceStore.dispatcher.setFlightPathExport(correlationId, {
+			templateId: exportTemplateId.value,
+			options: options.toStored()
+		});
+	};
+	const exportPresetApply = (id) => {
+		const correlationIdI = correlationId();
+		const options = exportOptionsBuild(correlationIdI);
+		options.applyPreset(id);
+		exportOptionsApply(correlationIdI, options);
+	};
+	// Highlights the preset whose every value matches the controls, or none.
+	const exportPresetSync = () => {
+		exportPreset.value = serviceFlightPath.presetMatching(correlationId(), exportOptionsBuild(correlationId()));
+	};
+	const exportTemplateDelete = (id) => {
+		const correlationIdI = correlationId();
+		serviceStore.dispatcher.deleteFlightPathTemplate(correlationIdI, id);
+		exportTemplatesLoad(correlationIdI);
+		if (exportTemplateId.value === id)
+			exportTemplateId.value = 'kml';
+	};
+	const exportTemplatesLoad = (correlationId) => {
+		exportUserTemplates.value = serviceStore.getters.getFlightPathTemplates() ?? [];
+		exportTemplates.value = serviceFlightPath.templates(correlationId, exportUserTemplates.value).map(template => {
+			const key = `export.templates.${template.id}`;
+			const name = template.builtIn ? trans(key) : template.displayName;
+			return { id: template.id, name: (name && name !== `forms.content.tools.flightPath.${key}`) ? name : template.displayName };
+		});
+	};
 	const flightPathInputChange = () => {
 		document.getElementById('top').scrollIntoView({behavior: 'smooth'});
-	};
-	const flightPathStyleLoad = (coorrelationId) => {
-		if (String.isNullOrEmpty(flightProcessor.value))
-			return;
-
-		const style = serviceStore.getters.getFlightPathStyle(flightProcessor.value);
-		if (!style)
-			return;
-
-		flightPathStylePinLaunchSelected.value = style.pin.launch.selected;
-		flightPathStylePinMaxAltitudeSelected.value = style.pin.maxAltitude.selected;
-		flightPathStylePinMaxVelocitySelected.value = style.pin.maxVelocity.selected;
-		flightPathStylePinTouchdownSelected.value = style.pin.touchdown.selected;
-
-		flightPathStylePathFlightColor.value = style.path.flight.color;
-		flightPathStylePathGroundColor.value = style.path.ground.color;
-		flightPathStylePinLaunchColor.value = style.pin.launch.color;
-		flightPathStylePinMaxAltitudeColor.value = style.pin.maxAltitude.color;
-		flightPathStylePinMaxVelocityColor.value = style.pin.maxVelocity.color;
-		flightPathStylePinTouchdownColor.value = style.pin.touchdown.color;
-	};
-	const flightPathStyleReset = (correlationId, notify) => {
-		flightPathStylePinLaunchSelected.value = true;
-		flightPathStylePinMaxAltitudeSelected.value = true;
-		flightPathStylePinMaxVelocitySelected.value = true;
-		flightPathStylePinTouchdownSelected.value = true;
-
-		flightPathStylePathFlightColor.value = serviceFlightPath.styleDefault.path.flight.color;
-		flightPathStylePathGroundColor.value = serviceFlightPath.styleDefault.path.ground.color;
-		flightPathStylePinLaunchColor.value = serviceFlightPath.styleDefault.pin.launch.color;
-		flightPathStylePinMaxAltitudeColor.value = serviceFlightPath.styleDefault.pin.maxAltitude.color;
-		flightPathStylePinMaxVelocityColor.value = serviceFlightPath.styleDefault.pin.maxVelocity.color;
-		flightPathStylePinTouchdownColor.value = serviceFlightPath.styleDefault.pin.touchdown.color;
-
-		if (notify)
-			setNotify(correlationId, 'messages.reset');
-	};
-	const flightPathStyleSave = (correlationIdI) => {
-		// const correlationIdI = correlationId();
-		if (String.isNullOrEmpty(flightProcessor.value))
-			return;
-
-		const style = {
-			id: flightProcessor.value,
-			path: {
-				flight: {
-					color: flightPathStylePathFlightColor.value
-				},
-				ground: {
-					color: flightPathStylePathGroundColor.value
-				}
-			},
-			pin: {
-				launch: {
-					color: flightPathStylePinLaunchColor.value,
-					selected: flightPathStylePinLaunchSelected.value
-				},
-				maxAltitude: {
-					color: flightPathStylePinMaxAltitudeColor.value,
-					selected: flightPathStylePinMaxAltitudeSelected.value
-				},
-				maxVelocity: {
-					color: flightPathStylePinMaxVelocityColor.value,
-					selected: flightPathStylePinMaxVelocitySelected.value
-				},
-				touchdown: {
-					color: flightPathStylePinTouchdownColor.value,
-					selected: flightPathStylePinTouchdownSelected.value
-				}
-			}
-		};
-
-		serviceStore.dispatcher.setFlightPathStyle(correlationIdI, style);
-
-		// setNotify(correlationIdI, 'messages.saved');
 	};
 	const flightPathExport = () => {
 		try {
@@ -291,18 +387,15 @@ export function useFlightPathBaseComponent(props, context) {
 			downloadProgress.value = true;
 
 			const currentDate = flightDataDate.value ? new Date(flightDataDate.value) : new Date();
-			const day = currentDate.getDate();
-			const month = currentDate.getMonth() + 1;
-			const year = currentDate.getFullYear();
-
-			let namePrefix = 'flight-path';
-			let nameDate = day + '-' + month + '-' + year;
-			const extension = '.kml';
+			const namePrefix = slug(exportMissionName.value || flightDataTitle.value);
+			const nameDate = isoDate(currentDate);
+			const multiple = flightPathDataExport.value.length > 1;
 
 			let index = 0;
 			for (const item of flightPathDataExport.value) {
-				serviceDownload.download(correlationIdI, item,
-					namePrefix + (index++) + '-' + nameDate + extension,
+				index++;
+				const name = `${namePrefix}-${nameDate}${multiple ? '-' + index : ''}.${item.extension}`;
+				serviceDownload.download(correlationIdI, item.content, name,
 					() => {
 						LibraryClientUtility.debug2('download', 'completed');
 						downloadProgress.value = false;
@@ -335,78 +428,56 @@ export function useFlightPathBaseComponent(props, context) {
 
 		try {
 			if (String.isNullOrEmpty(flightPathInput.value)) {
-				setError(correlationIdI, LibraryClientUtility.$trans.t('errors.process.noInput'));
+				setErrorMessage(correlationIdI, LibraryClientUtility.$trans.t('errors.process.noInput'));
 				processing.value = false;
 				return;
 			}
 
 			const data = Papa.parse(flightPathInput.value.trim());
 			if (data.errors && data.errors.length > 0) {
-				setError(correlationIdI, LibraryClientUtility.$trans.t('errors.process.unableToConvert'));
+				setErrorMessage(correlationIdI, LibraryClientUtility.$trans.t('errors.process.unableToConvert'));
 				processing.value = false;
 				return;
 			}
 
 			const flightPath = {
 				date: flightDataDate.value,
-				style: {
-					path: {
-						flight: {
-							color: flightPathStylePathFlightColor.value ?? serviceFlightPath.value.styleDefault.path.flight.color
-						},
-						ground: {
-							color: flightPathStylePathGroundColor.value ?? serviceFlightPath.value.styleDefault.path.ground.color
-						}
-					},
-					pin: {
-						launch: {
-							color: flightPathStylePinLaunchColor.value ?? serviceFlightPath.value.styleDefault.pin.launch.color,
-							selected: flightPathStylePinLaunchSelected.value ?? true
-						},
-						maxAltitude: {
-							color: flightPathStylePinMaxAltitudeColor.value ?? serviceFlightPath.value.styleDefault.pin.maxAltitude.color,
-							selected: flightPathStylePinMaxAltitudeSelected.value ?? true
-						},
-						maxVelocity: {
-							color: flightPathStylePinMaxVelocityColor.value ?? serviceFlightPath.value.styleDefault.pin.maxVelocity.color,
-							selected: flightPathStylePinMaxVelocitySelected.value ?? true
-						},
-						touchdown: {
-							color: flightPathStylePinTouchdownColor.value ?? serviceFlightPath.value.styleDefault.pin.touchdown.color,
-							selected: flightPathStylePinTouchdownSelected.value ?? true
-						}
-					}
-				},
 				location: flightDataLocation.value,
 				title: flightDataTitle.value
 			};
 
+			const options = exportOptionsBuild(correlationIdI);
 			const flightPathResponse = serviceFlightPath.process(correlationIdI, data, flightProcessor.value,
 				flightPath,
 				{
 					measurementUnitsId: flightMeasurementUnitsId.value,
+					measurementUnitsAccelerationId: flightMeasurementUnitsAccelerationId.value,
 					measurementUnitsAltitudeId: flightMeasurementUnitsAltitudeId.value,
+					measurementUnitsDistanceId: flightMeasurementUnitsDistanceId.value,
 					measurementUnitsVelocityId: flightMeasurementUnitsVelocityId.value,
 					measurementUnitsOutputId: flightMeasurementUnitsOutputId.value,
+					measurementUnitsAccelerationOutputId: flightMeasurementUnitsAccelerationOutputId.value,
 					measurementUnitsAltitudeOutputId: flightMeasurementUnitsAltitudeOutputId.value,
+					measurementUnitsDistanceOutputId: flightMeasurementUnitsDistanceOutputId.value,
 					measurementUnitsVelocityOutputId: flightMeasurementUnitsVelocityOutputId.value,
 				},
-				templateMain.value, templatePinLaunch.value, templatePinTouchdown.value, templatePinsAdditional.value);
-			if (hasFailed(flightPathResponse))
-				return; // TODO: error...
+				options, exportTemplateId.value, exportUserTemplates.value);
+			if (hasFailed(flightPathResponse)) {
+				setErrorMessage(correlationIdI, errorsFromResponse(flightPathResponse));
+				processing.value = false;
+				return;
+			}
 
 			flightPathData.value = flightPathResponse.results.flightPaths;
 			flightPathDataExport.value = flightPathResponse.results.flightPathsOutput;
-			// this.output = JSON.stringify(flightPathResponse.results, null, 2);
-			flightPathOutput.value = flightPathResponse.results.flightPathsOutput;
+			flightPathOutput.value = flightPathResponse.results.flightPathsOutput.map(l => l.content);
 
+			// Settings are remembered only once a document was actually produced.
 			serviceStore.dispatcher.setFlightPathProcessor(correlationIdI, flightProcessor.value);
-
-			flightPathStyleSave(correlationIdI);
+			exportOptionsSave(correlationIdI);
 			flightDataSave(correlationIdI);
 			flightMeasurementUnitsSave(correlationIdI, flightProcessor.value);
 
-			// setNotify(correlationIdI, 'messages.processed');
 			setSuccessMessage(correlationIdI, LibraryClientUtility.$trans.t('messages.processed'));
 
 			panelInstructions.value = [];
@@ -425,7 +496,6 @@ export function useFlightPathBaseComponent(props, context) {
 	const reset = (correlationId) => {
 		buttons.value.export.disabled = true;
 		setErrorMessage(correlationId, null);
-		flightPath.value = null;
 		flightPathData.value = null;
 		flightPathDataExport.value = null;
 		flightPathOutput.value = '';
@@ -435,6 +505,7 @@ export function useFlightPathBaseComponent(props, context) {
 		const correlationIdI = correlationId();
 		resetAdditionalInput2(correlationIdI);
 		flightDataTitle.value = null;
+		exportMissionName.value = '';
 
 		setNotify(correlationIdI, 'messages.reset');
 	};
@@ -445,10 +516,8 @@ export function useFlightPathBaseComponent(props, context) {
 		flightMeasurementUnitsReset(correlationIdI);
 
 		flightPathInput.value = null;
-		flightPath.value = null;
 		flightPathData.value = null;
 		flightPathDataExport.value = null;
-		flightPathInput.value = null;
 		flightPathOutput.value = '';
 
 		buttons.value.process.disabled = true;
@@ -459,10 +528,9 @@ export function useFlightPathBaseComponent(props, context) {
 			if (!value)
 				return;
 
-			setErrorMessage(correlationId, null);
-			
+			setErrorMessage(correlationId(), null);
+
 			const correlationIdI = correlationId();
-			flightPathStyleLoad(correlationIdI, value);
 
 			const processor = serviceFlightPath.serviceProcessors.find(l => l.id === value);
 			flightMeasurementUnitsLoad(correlationIdI, processor);
@@ -472,6 +540,26 @@ export function useFlightPathBaseComponent(props, context) {
 				checkDataForProcessor(correlationIdI, data);
 			}
 		}
+	);
+	// The launch elevation is stored in meters; show it once the input unit is known.
+	watch(() => flightMeasurementUnitsAltitudeId.value,
+		() => {
+			if (exportLaunchAltitude.value === null)
+				exportLaunchAltitudeDisplay();
+		}
+	);
+	// Every control a preset covers keeps the preset highlight honest.
+	watch(
+		[
+			exportAltitudeReference,
+			exportWaypointAltitudeReference,
+			exportIncludeFlightPath,
+			exportIncludeGroundTrack,
+			exportDrawShadow,
+			() => ({ ...exportWaypoints.value })
+		],
+		() => exportPresetSync(),
+		{ deep: true }
 	);
 
 	return {
@@ -550,34 +638,48 @@ export function useFlightPathBaseComponent(props, context) {
 		buttons,
 		downloadProgress,
 		expanded,
-		flightPath,
+		flightPathBranches,
 		flightPathData,
 		flightPathDataExport,
-		flightPathFilterDistance,
+		flightPathFilterSpeed,
 		flightPathInput,
 		flightPathOutput,
-		flightPathStylePathFlightColor,
-		flightPathStylePathGroundColor,
-		flightPathStylePinLaunchColor,
-		flightPathStylePinLaunchSelected,
-		flightPathStylePinMaxAltitudeColor,
-		flightPathStylePinMaxAltitudeSelected,
-		flightPathStylePinMaxVelocityColor,
-		flightPathStylePinMaxVelocitySelected,
-		flightPathStylePinTouchdownColor,
-		flightPathStylePinTouchdownSelected,
 		panelInstructions,
-		templateMain,
-		templatePinLaunch,
-		templatePinsAdditional,
-		templatePinTouchdown,
+		exportAltitudeReference,
+		exportAltitudeReferences,
+		exportBranchGroundColors,
+		exportBranchPathColors,
+		exportBranchPinColors,
+		exportColorWaypointPins,
+		exportColorWaypointPinsByFlight,
+		exportDrawShadow,
+		exportIncludeDescriptions,
+		exportIncludeFlightPath,
+		exportIncludeGroundTrack,
+		exportLabelWaypointsWithMission,
+		exportLaunchAltitude,
+		exportMissionName,
+		exportOneFilePerFlight,
+		exportPathStride,
+		exportPinColors,
+		exportPreset,
+		exportPresets,
+		exportShadowEnabled,
+		exportShowWaypointLabels,
+		exportTemplateId,
+		exportTemplates,
+		exportUserTemplateItems,
+		exportUserTemplates,
+		exportWaypointAltitudeReference,
+		exportWaypointTypes,
+		exportWaypoints,
 		flightPathInstructions,
-		clickFlightPathStylesReset,
+		clickExportOptionsReset,
 		dropOutput,
+		dropTemplate,
+		exportPresetApply,
+		exportTemplateDelete,
 		flightPathInputChange,
-		flightPathStyleLoad,
-		flightPathStyleReset,
-		flightPathStyleSave,
 		flightPathExport,
 		flightPathProcess,
 		reset,
