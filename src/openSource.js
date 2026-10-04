@@ -18,24 +18,10 @@ export function useDependenciesClientBase () { return [  () => {
         },
         {
             category: 'client',
-            name: 'async-mutex',
-            url: 'https://github.com/DirtyHairy/async-mutex',
-            licenseName: 'MIT',
-            licenseUrl: 'https://github.com/DirtyHairy/async-mutex/blob/master/LICENSE'
-        },
-        {
-            category: 'client',
-            name: 'dayjs',
-            url: 'https://github.com/iamkun/dayjs',
-            licenseName: 'MIT',
-            licenseUrl: 'https://github.com/iamkun/dayjs/blob/dev/LICENSE'
-        },
-        {
-            category: 'client',
-            name: 'dayjs-plugin-utc',
-            url: 'https://github.com/guisturdy/dayjs-plugin-utc',
-            licenseName: '??',
-            licenseUrl: ''
+            name: '@mdi/font',
+            url: 'https://github.com/Templarian/MaterialDesign-Webfont',
+            licenseName: 'Apache-2.0',
+            licenseUrl: 'https://github.com/Templarian/MaterialDesign-Webfont/blob/HEAD/LICENSE'
         },
         {
             category: 'client',
@@ -48,7 +34,7 @@ export function useDependenciesClientBase () { return [  () => {
             category: 'client',
             name: 'highlight.js',
             url: 'https://github.com/highlightjs/highlight.js',
-            licenseName: 'BSD 3',
+            licenseName: 'BSD-3-Clause',
             licenseUrl: 'https://github.com/highlightjs/highlight.js/blob/main/LICENSE'
         },
         {
@@ -57,6 +43,13 @@ export function useDependenciesClientBase () { return [  () => {
             url: 'https://github.com/markedjs/marked',
             licenseName: 'MIT',
             licenseUrl: 'https://github.com/markedjs/marked/blob/master/LICENSE.md'
+        },
+        {
+            category: 'client',
+            name: 'material-design-icons-iconfont',
+            url: 'https://github.com/jossef/material-design-icons-iconfont',
+            licenseName: 'Apache-2.0',
+            licenseUrl: 'https://github.com/jossef/material-design-icons-iconfont/blob/HEAD/LICENSE'
         },
         {
             category: 'client',
@@ -93,8 +86,8 @@ export function useDependenciesClientBase () { return [  () => {
             category: 'client',
             name: 'firebase',
             url: 'https://github.com/firebase/firebase-js-sdk',
-            licenseName: 'MIT',
-            licenseUrl: 'https://github.com/firebase/firebase-js-sdk/blob/master/LICENSE'
+            licenseName: 'Apache-2.0',
+            licenseUrl: 'https://github.com/firebase/firebase-js-sdk/blob/HEAD/LICENSE'
         }
     ];
 },  () => {
@@ -119,13 +112,6 @@ export function useDependenciesClientBase () { return [  () => {
             url: 'https://github.com/thzero/library_client_firebase_vue',
             licenseName: 'MIT',
             licenseUrl: 'https://github.com/thzero/library_client_firebase_vue/blob/master/license.md'
-        },
-        {
-            category: 'client',
-            name: '@thzero/library_client_vue3',
-            url: 'https://github.com/thzero/library_client_vue3',
-            licenseName: 'MIT',
-            licenseUrl: 'https://github.com/thzero/library_client_vue3/blob/master/license.md'
         },
         {
             category: 'client',
@@ -184,10 +170,24 @@ export function useDependenciesClientBase () { return [  () => {
         },
         {
             category: 'client',
-            name: 'vuelidate',
+            name: '@vuelidate/core',
             url: 'https://github.com/vuelidate/vuelidate',
             licenseName: 'MIT',
-            licenseUrl: 'https://github.com/vuelidate/vuelidate/blob/next/LICENSE'
+            licenseUrl: 'https://github.com/vuelidate/vuelidate/blob/HEAD/LICENSE'
+        },
+        {
+            category: 'client',
+            name: '@vuelidate/validators',
+            url: 'https://github.com/vuelidate/vuelidate',
+            licenseName: 'MIT',
+            licenseUrl: 'https://github.com/vuelidate/vuelidate/blob/HEAD/LICENSE'
+        },
+        {
+            category: 'client',
+            name: 'mitt',
+            url: 'https://github.com/developit/mitt',
+            licenseName: 'MIT',
+            licenseUrl: 'https://github.com/developit/mitt/blob/main/LICENSE'
         },
         {
             category: 'client',
@@ -205,11 +205,6 @@ export function useDependenciesClientBase () { return [  () => {
         },
         {
             category: 'client',
-            name: 'vue3-async-computed',
-            url: 'https://github.com/mainclass/vue3-async-computed'
-        },
-        {
-            category: 'client',
             name: 'vue-i18n',
             url: 'https://github.com/kazupon/vue-i18n',
             licenseName: 'MIT',
@@ -221,6 +216,27 @@ export function useDependenciesClientBase () { return [  () => {
             url: 'https://github.com/vuejs/vue-router',
             licenseName: 'MIT',
             licenseUrl: 'https://github.com/vuejs/vue-router/blob/dev/LICENSE'
+        },
+        {
+            category: 'client',
+            name: 'vue-scrollto',
+            url: 'https://github.com/rigor789/vue-scrollto',
+            licenseName: 'MIT',
+            licenseUrl: 'https://github.com/rigor789/vue-scrollto/blob/HEAD/LICENSE'
+        },
+        {
+            category: 'client',
+            name: 'vue3-async-computed',
+            url: 'https://github.com/mainclass/vue3-async-computed',
+            licenseName: 'ISC',
+            licenseUrl: 'https://github.com/mainclass/vue3-async-computed'
+        },
+        {
+            category: 'client',
+            name: 'vuetify',
+            url: 'https://github.com/vuetifyjs/vuetify',
+            licenseName: 'MIT',
+            licenseUrl: 'https://github.com/vuetifyjs/vuetify/blob/HEAD/LICENSE.md'
         }
     ];
 },  () => {
@@ -262,10 +278,10 @@ export function useDependenciesClientBase () { return [  () => {
         },
         {
             category: 'client',
-            name: 'pinia-plugin-persistedstate-2',
-            url: 'https://github.com/iendeavor/pinia-plugin-persistedstate-2',
+            name: 'pinia-plugin-persistedstate',
+            url: 'https://github.com/prazdevs/pinia-plugin-persistedstate',
             licenseName: 'MIT',
-            licenseUrl: 'https://github.com/iendeavor/pinia-plugin-persistedstate-2/blob/main/LICENSE'
+            licenseUrl: 'https://github.com/prazdevs/pinia-plugin-persistedstate/blob/main/LICENSE'
         },
         {
             category: 'client',
@@ -307,10 +323,38 @@ export function useDependenciesClientBase () { return [  () => {
         },
         {
             category: 'client',
-            name: 'vee-validate',
-            url: 'https://github.com/logaretm/vee-validate',
+            name: '@vuelidate/core',
+            url: 'https://github.com/vuelidate/vuelidate',
             licenseName: 'MIT',
-            licenseUrl: 'https://github.com/logaretm/vee-validate/blob/master/LICENSE'
+            licenseUrl: 'https://github.com/vuelidate/vuelidate/blob/HEAD/LICENSE'
+        },
+        {
+            category: 'client',
+            name: '@vuelidate/validators',
+            url: 'https://github.com/vuelidate/vuelidate',
+            licenseName: 'MIT',
+            licenseUrl: 'https://github.com/vuelidate/vuelidate/blob/HEAD/LICENSE'
+        },
+        {
+            category: 'client',
+            name: '@vuepic/vue-datepicker',
+            url: 'https://github.com/Vuepic/vue-datepicker',
+            licenseName: 'MIT',
+            licenseUrl: 'https://github.com/Vuepic/vue-datepicker/blob/HEAD/LICENSE'
+        },
+        {
+            category: 'client',
+            name: 'date-fns',
+            url: 'https://github.com/date-fns/date-fns',
+            licenseName: 'MIT',
+            licenseUrl: 'https://github.com/date-fns/date-fns/blob/HEAD/LICENSE.md'
+        },
+        {
+            category: 'client',
+            name: 'dayjs',
+            url: 'https://github.com/iamkun/dayjs',
+            licenseName: 'MIT',
+            licenseUrl: 'https://github.com/iamkun/dayjs/blob/dev/LICENSE'
         },
         {
             category: 'client',
@@ -332,7 +376,7 @@ export function useDependenciesClientBase () { return [  () => {
             url: 'https://github.com/vuetifyjs/vuetify',
             licenseName: 'MIT',
             licenseUrl: 'https://github.com/vuetifyjs/vuetify/blob/master/LICENSE.md'
-        },
+        }
     ];
 },  () => {
     return [
@@ -345,6 +389,13 @@ export function useDependenciesClientBase () { return [  () => {
         },
         {
             category: 'client',
+            name: '@thzero/library_id_nanoid',
+            url: 'https://github.com/thzero/library_id_nanoid',
+            licenseName: 'MIT',
+            licenseUrl: 'https://github.com/thzero/library_id_nanoid/blob/master/license.md'
+        },
+        {
+            category: 'client',
             name: 'dayjs',
             url: 'https://github.com/iamkun/dayjs',
             licenseName: 'MIT',
@@ -354,8 +405,8 @@ export function useDependenciesClientBase () { return [  () => {
             category: 'client',
             name: 'dayjs-plugin-utc',
             url: 'https://github.com/guisturdy/dayjs-plugin-utc',
-            licenseName: '??',
-            licenseUrl: ''
+            licenseName: 'MIT',
+            licenseUrl: 'https://github.com/guisturdy/dayjs-plugin-utc/blob/master/LICENSE'
         },
         {
             category: 'client',
@@ -363,13 +414,6 @@ export function useDependenciesClientBase () { return [  () => {
             url: 'https://github.com/lodash/lodash',
             licenseName: 'MIT',
             licenseUrl: 'https://github.com/lodash/lodash/blob/master/LICENSE'
-        },
-        {
-            category: 'client',
-            name: 'uuid',
-            url: 'https://github.com/kelektiv/node-uuid',
-            licenseName: 'MIT',
-            licenseUrl: 'https://github.com/kelektiv/node-uuid/blob/master/LICENSE.md'
         },
         {
             category: 'server',
@@ -380,6 +424,13 @@ export function useDependenciesClientBase () { return [  () => {
         },
         {
             category: 'server',
+            name: '@thzero/library_id_nanoid',
+            url: 'https://github.com/thzero/library_id_nanoid',
+            licenseName: 'MIT',
+            licenseUrl: 'https://github.com/thzero/library_id_nanoid/blob/master/license.md'
+        },
+        {
+            category: 'server',
             name: 'dayjs',
             url: 'https://github.com/iamkun/dayjs',
             licenseName: 'MIT',
@@ -389,25 +440,19 @@ export function useDependenciesClientBase () { return [  () => {
             category: 'server',
             name: 'dayjs-plugin-utc',
             url: 'https://github.com/guisturdy/dayjs-plugin-utc',
-            licenseName: '??',
-            licenseUrl: ''
+            licenseName: 'MIT',
+            licenseUrl: 'https://github.com/guisturdy/dayjs-plugin-utc/blob/master/LICENSE'
         },
         {
-            category: 'client',
+            category: 'server',
             name: 'lodash-es',
             url: 'https://github.com/lodash/lodash',
             licenseName: 'MIT',
             licenseUrl: 'https://github.com/lodash/lodash/blob/master/LICENSE'
-        },
-        {
-            category: 'server',
-            name: 'uuid',
-            url: 'https://github.com/kelektiv/node-uuid',
-            licenseName: 'MIT',
-            licenseUrl: 'https://github.com/kelektiv/node-uuid/blob/master/LICENSE.md'
         }
     ];
-},  () => {
+}
+,  () => {
     return [
         {
             category: 'client',
