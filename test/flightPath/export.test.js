@@ -276,7 +276,7 @@ describe('rendered output', () => {
 		expect(kml).toContain('<Style id="flightPath0"><LineStyle><color>ffff0000</color>');
 		expect(kml).toContain(`${LON0},${LAT0},0`);
 		expect(kml).toContain('<altitudeMode>absolute</altitudeMode>');
-		expect(kml).toContain('<Snippet maxLines="0"></Snippet>');
+		expect(kml).not.toContain('<Snippet');
 		expect(kml).not.toContain('CDATA');
 	});
 
@@ -302,7 +302,6 @@ describe('rendered output', () => {
 	it('descriptions can be switched off', () => {
 		const kml = render(build([singleFlight()], { includeDescriptions: false }), 'kml');
 		expect(kml).not.toContain('<description>');
-		expect(kml).not.toContain('<Snippet');
 	});
 
 	it('geometry toggles gate the lines and the shadow', () => {
@@ -319,6 +318,12 @@ describe('rendered output', () => {
 		const kml = render(build([singleFlight()], { showWaypointLabels: false, colorWaypointPins: false }), 'kml');
 		expect(kml).toContain('<LabelStyle><scale>0</scale></LabelStyle>');
 		expect(kml).not.toContain('wht-pushpin');
+		expect(kml).toContain('<Style>');
+	});
+
+	it('waypoints carry no empty style when pins are plain and labels shown', () => {
+		const kml = render(build([singleFlight()], { showWaypointLabels: true, colorWaypointPins: false }), 'kml');
+		expect(kml).not.toContain('<Style>');
 	});
 
 	it('GPX always reports elevation above sea level and omits it when unknown', () => {
@@ -339,6 +344,11 @@ describe('rendered output', () => {
 		expect(lines.length).toBe(9);
 		expect(lines[1]).toContain(`"${LAT0.toFixed(6)}","${LON0.toFixed(6)}","pad"`);
 		expect(lines[1]).toContain('Say ""cheese""');
+		const pin = model.branches[0].waypoints[0].pinColorRgb;
+		expect(pin).toMatch(/^#[0-9a-f]{6}$/);
+		expect(lines[1]).toContain(`"pushpin","${pin}","white"`);
+		const plain = render(build([singleFlight()], { colorWaypointPins: false }), 'waypoints-csv');
+		expect(plain.split('\n')[1]).toContain('"pushpin","","white"');
 	});
 
 	it('one file per flight renders a document per branch', () => {

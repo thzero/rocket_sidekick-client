@@ -497,6 +497,8 @@ export function buildFlightPathModel(input) {
 		includeDescriptions: options.includeDescriptions,
 		showWaypointLabels: options.showWaypointLabels,
 		colorWaypointPins: options.colorWaypointPins,
+		// A waypoint style only has content when it tints the pin or hides the label.
+		styleWaypoints: options.colorWaypointPins || !options.showWaypointLabels,
 		altitudeReference: trackReference,
 		waypointAltitudeReference: waypointReference,
 		kmlAltitudeMode: kmlAltitudeMode(trackReference),

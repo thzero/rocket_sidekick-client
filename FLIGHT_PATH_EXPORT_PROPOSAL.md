@@ -313,9 +313,9 @@ three levels and gates the whole lot on one `includeDescriptions` toggle:
 
 Two KML details to copy:
 
-- Every feature with a description also gets `<Snippet maxLines="0"/>`. Without it Google Earth
-  prints the opening lines of the description under the name in the places tree, and a tidy
-  waypoint list becomes a wall of text.
+- Do not emit `<Snippet maxLines="0"/>`. Google Earth for web rejects the `maxLines` attribute
+  as an unsupported element, and Earth Pro still prints the opening lines of the description
+  under the name in the places tree with it in place, so it buys nothing.
 - Where a balloon opens differs by viewer. Earth Pro opens waypoint balloons from the 3D view but
   document and folder balloons only from the Places panel. Earth for web opens all of them from
   the project panel. Worth knowing before concluding a balloon is missing.
@@ -458,7 +458,7 @@ Beyond the list in section 2.9:
 - A file that ends mid-flight produces no landing waypoint and no landing line, and
   `hasLanding` is false.
 - Max range and landing distance differ on a fixture that drifts out and back.
-- Descriptions can be switched off and every `<description>` and `<Snippet>` disappears.
+- Descriptions can be switched off and every `<description>` disappears.
 - Component tests against the base composable: the starting preset is "Flight path", no preset
   turns on the shadow, the highlight clears on a manual edit and returns when it is undone, and
   no preset touches the descriptions toggle.
@@ -482,7 +482,7 @@ under a "Creating your own templates" heading:
 | Phase | Added scope |
 | --- | --- |
 | 1 | drop CDATA, fix the escaped description element, `hasLanding` |
-| 2 | descriptions at all three levels, `<Snippet>`, `includeDescriptions` toggle, six-decimal strings, `(lat, lon)` markers |
+| 2 | descriptions at all three levels, `includeDescriptions` toggle, six-decimal strings, `(lat, lon)` markers |
 | 3 | preset toggle group with `syncPresetSelection`, shadow off in every preset |
 | 4 | max range and landing as separate values, device-named recovery pins, shared palette with flight info charts, separate ground palette |
 | 5 | extension in user template display names, template author notes in the instructions panel |

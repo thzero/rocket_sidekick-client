@@ -1,3 +1,3 @@
 "altitude({{altitudeUnit}})","latitude","longitude","label","symbol","color","label_color","name"
-{{#each branches}}{{#each waypoints}}"{{altitudeValue}}","{{latitudeStr}}","{{longitudeStr}}","{{type}}","pushpin","yellow","white","{{@root.documentName}} {{name}} - {{altitude}} {{@root.altitudeUnit}} - {{distance}} {{@root.distanceUnit}} @ {{bearing}} deg"
+{{#each branches}}{{#each waypoints}}"{{altitudeValue}}","{{latitudeStr}}","{{longitudeStr}}","{{type}}","pushpin","{{#if @root.colorWaypointPins}}{{pinColorRgb}}{{/if}}","white","{{@root.documentName}} {{name}} - {{altitude}} {{@root.altitudeUnit}} - {{distance}} {{@root.distanceUnit}} @ {{bearing}} deg"
 {{/each}}{{/each}}
