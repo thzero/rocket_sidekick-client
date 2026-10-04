@@ -23,6 +23,7 @@
 {{#if @root.includeDescriptions}}
 				<description>&lt;b&gt;{{name}}&lt;/b&gt;&lt;br/&gt;{{#if time}}{{@root.labels.time}}: {{time}} s&lt;br/&gt;{{/if}}{{#if altitude}}{{@root.labels.altitude}}: {{altitude}} {{@root.altitudeUnit}} AGL&lt;br/&gt;{{/if}}{{#if altitudeMsl}}{{@root.labels.altitudeMsl}}: {{altitudeMsl}} {{@root.altitudeUnit}}&lt;br/&gt;{{/if}}{{#if velocity}}{{@root.labels.velocity}}: {{velocity}} {{@root.velocityUnit}}&lt;br/&gt;{{/if}}{{#if acceleration}}{{@root.labels.acceleration}}: {{acceleration}} {{@root.accelerationUnit}}&lt;br/&gt;{{/if}}{{@root.labels.distance}}: {{distance}} {{@root.distanceUnit}} @ {{bearing}}°&lt;br/&gt;{{#if device}}{{device}}&lt;br/&gt;{{/if}}({{latitudeStr}}, {{longitudeStr}})</description>
 {{/if}}
+{{#if @root.styleWaypoints}}
 				<Style>
 {{#if @root.colorWaypointPins}}
 					<IconStyle>
@@ -35,6 +36,7 @@
 					<LabelStyle><scale>0</scale></LabelStyle>
 {{/unless}}
 				</Style>
+{{/if}}
 				<Point>
 {{#if @root.extrudeWaypoints}}
 					<extrude>1</extrude>
