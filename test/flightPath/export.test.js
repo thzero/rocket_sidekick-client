@@ -276,7 +276,7 @@ describe('rendered output', () => {
 		expect(kml).toContain('<Style id="flightPath0"><LineStyle><color>ffff0000</color>');
 		expect(kml).toContain(`${LON0},${LAT0},0`);
 		expect(kml).toContain('<altitudeMode>absolute</altitudeMode>');
-		expect(kml).toContain('<Snippet maxLines="0"></Snippet>');
+		expect(kml).not.toContain('<Snippet');
 		expect(kml).not.toContain('CDATA');
 	});
 
@@ -302,7 +302,6 @@ describe('rendered output', () => {
 	it('descriptions can be switched off', () => {
 		const kml = render(build([singleFlight()], { includeDescriptions: false }), 'kml');
 		expect(kml).not.toContain('<description>');
-		expect(kml).not.toContain('<Snippet');
 	});
 
 	it('geometry toggles gate the lines and the shadow', () => {
